@@ -1,0 +1,252 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+\usepackage{../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL1 Math-Info}
+\fancyhead[C]{Applications linéaires}
+\fancyhead[R]{2024-2025}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Applications linéaires et matrices associées}
+
+\section{Introduction}
+
+\subsection{Définitions}
+
+Dans toute cette section, on notera \( E \) et \( F \) deux \(\mathbb{K}\)-espaces vectoriels, avec \(\mathbb{K} \in \left\{ \mathbb{R}, \mathbb{C} \right\} \).
+
+\definition{Soit \( f : E \to F \) une application. On dit que \( f \) est une \textbf{application linéaire} si pour tous \( x, y \in E \) et tout \( \lambda, \mu \in \mathbb{K} \), on a : \textbf{\[f(\lambda x + \mu y) = \lambda f(x) + \mu f(y)\]}
+On note \(\textcolor{primary}{\mathcal{L}(E, F)}\) l'ensemble des applications linéaires de \( E \) vers \( F \).
+}
+
+\remark{On a le résultat suivant : $f \in \mathcal{L}(E, F) \implies f(0) = 0$}
+\vocabulary{
+    \begin{itemize}
+        \item $f \in \mathcal{L}(E, F)$ est un \textcolor{purple}{\textbf{isomorphisme}} \(\Leftrightarrow\) \(f\) est bijective.  On note \(\textcolor{purple}{Isom(E, F)}\) l'ensemble des isomorphismes de \(E\) vers \(F\).
+        \item $f \in \mathcal{L}(E, F)$ est une \textcolor{purple}{\textbf{forme linéaire}} \(\Leftrightarrow\) \(F\) = $\mathbb{K}$
+        \item $f \in \mathcal{L}(E, F)$ est un \textcolor{purple}{\textbf{endomorphisme}} \(\Leftrightarrow\) \(E\) = \(F\)
+        \item Si $f$ est un endomorphisme et un isomorphisme, on dit que $f$ est un \textcolor{purple}{\textbf{automorphisme}} de \(E\), et on note \(\textcolor{purple}{f \in Aut(E)}\).
+    \end{itemize}
+  
+}
+
+\noindent{\text{On notera que si $f \in Isom(E, F)$, alors $dim(E) = dim(F)$.}}
+
+\theorem{Proposition}{}{true}{
+    $\mathcal{L}(E, F)$ est un sous-espace vectoriel de $F^E$ ($i.e.$ l'ensemble des applications de \(E\) vers \(F\)). 
+}
+
+\subsection{Noyau et image d'une application linéaire}
+
+\definition{Soit \( f \in \mathcal{L}(E, F) \). On appelle \textbf{noyau} de \( f \) l'ensemble des éléments de \( E \) qui sont envoyés sur \( 0_F \) par \( f \) :
+\[\textcolor{primary}{\ker(f) := f^{-1}(0)
+}\]}
+\training{Calculer le noyau de l'application linéaire \( f : \mathbb{R}^2 \to \mathbb{R}^3 \) définie par \( f(x, y) = (x + 2y, 3x - y, 4y) \).}
+\carreaux{5}
+
+\definition{On appelle \textbf{image} de \( f \) l'ensemble des éléments de \( F \) qui sont atteints par \( f \) :
+\[\textcolor{primary}{\text{Im}(f) := f(E) }
+\]}
+\training{Calculer l'image de l'application linéaire \( f : \mathbb{R}^2 \to \mathbb{R}^3 \) définie par \( f(x, y) = (x + 2y, 3x - y, 4y) \).}
+\carreaux{10}
+
+\remark{On a le résultat suivant : $\ker(f)$  et $\text{Im}(f)$ sont respectivement des sous-espaces vectoriels de \(E\) et \(F\).}
+
+\theorem{Proposition}{}{true}{
+    \begin{itemize}
+    \item $f \in \mathcal{L}(E, F)$ est \textbf{\textcolor{danger}{injective}} \(\Leftrightarrow\) \(\ker(f) = \{0_E\}\).
+
+    \item $f \in \mathcal{L}(E, F)$ est \textbf{\textcolor{danger}{surjective}} \(\Leftrightarrow\) \(\text{Im}(f) = F\).
+    \end{itemize}}
+
+\vocabulary{
+    $f \in \mathcal{L}(E, F)$ est dite \textcolor{purple}{\textbf{bijective}} si elle est injective et surjective \textit{(voir définition isomorphisme 1.A)}
+}
+
+\theorem{Proposition}{Aplication linéaire et bases}{true}{
+    Si $E$ = $Vect(u_1, \ldots, u_n)$ alors $F$ = $Vect(f(u_1), \ldots, f(u_n))$.
+}
+
+\vocabulary{On appelle le \textcolor{purple}{\textbf{rang}} de $f$ et on note \(\textcolor{primary}{\text{rg}(f)}\) la dimension de l'image de \(f\) : }
+
+\theorem{Théorème du rang}{}{true}{
+    Soit \( f \in \mathcal{L}(E, F) \). On a la relation suivante :
+    \[\textcolor{danger}{\text{dim}(\ker(f)) + \text{rg}(f) = \text{dim}(E)}
+    \]
+}
+\training{Déduire des applications précédentes la dimension de \(\mathbb{R}^2\) est bien \(2\).}
+\carreaux{3}
+\theorem{Corollaire}{Injectivité et surjectivité}{true}{
+    Si $f \in \mathcal{L}(E, F)$ telle que $dim(E) = dim(F)$, alors on a : \textcolor{danger}{$f$ injective \(\Leftrightarrow\) $f$ surjective \(\Leftrightarrow\) $f$ bijective.}
+}
+
+\subsection{Rapports géométriques}
+
+\definition{Soient \( \lambda \in \mathbb{K} \), \( E = F \oplus G \) un \(\mathbb{K}\)-espace vectoriel.
+    \begin{itemize}
+        \item[a)] \( h \in \mathcal{L}(E) \) : \( h(x) = \lambda x \quad \forall x \in E \), est une \textcolor{primary}{homothétie de rapport \( \lambda \)}.
+
+        \item[b)] \( p \in \mathcal{L}(E) \) : \( x + y \mapsto x \) 
+        avec \( x \in F \), \( y \in G \), est la \textcolor{primary}{projection sur \( F \) parallèlement à \( G \)}.
+
+        \item[c)] \( s \in \mathcal{L}(E) \) : \( x + y \mapsto x - y \)
+        avec \( x \in F \), \( y \in G \),
+        est la \textcolor{primary}{symétrie par rapport à \( F \) parallèlement à \( G \)}.
+    \end{itemize}
+}
+
+\theorem{Proposition}{Comportements des rapports}{true}{
+    Soit \( f \in \mathcal{L}(E, F) \) et \( g \in \mathcal{L}(F, G) \).
+    \begin{itemize}
+        \item[a)] Si \( \lambda = 0 \), alors \( f = 0 \) (l'application nulle).
+        \item[ ] Si \( \lambda \neq 0 \), alors \( f \in \mathrm{Isom}(E, F) \),\\
+        et son inverse est donné par : \( f^{-1} = \frac{1}{\lambda} \cdot \mathrm{Id}_E \).
+        \item[b)] \( p \circ p = p \), alors :\\
+        \hspace*{1em}\( \ker(p) = G \) et \( \operatorname{Im}(p) = F \).
+
+        \item[c)] \( s \circ s = \mathrm{Id}_E \), donc :\\
+            \hspace*{1em}\( \ker(s) = \{0\} \) et \( \operatorname{Im}(s) = E \),
+    \end{itemize}
+}
+
+\text{\\}
+
+\section{Matrices et applications linéaires}
+
+\subsection{Matrices associées à une application linéaire}
+
+\definition{
+Soit \( f \in \mathcal{L}(E, F) \), \( B = (v_1, \ldots, v_n) \) une base de \( E \) et \( C = (w_1, \ldots, w_m) \) une base de \( F \). On appelle \textbf{matrice associée} de \( f \) (relative aux bases \( B \) et \( C \)) et on note
+\[
+\textcolor{primary}{\mathrm{Mat}_{B,C}(f)}
+\]
+la matrice dont les colonnes sont les coordonnées de \( f(v_i) \) dans la base \( C \), pour tout \( i \in \{1, \ldots, n\} \).
+}
+
+\example{
+Soit \( f \in \mathcal{L}(\mathbb{R}^2, \mathbb{R}^3) \) définie par \( f(x, y) = (x + 2y, 3x - y, 4y) \).
+Soit \( B = ((1, 0), (0, 1)) \) la base canonique de \( \mathbb{R}^2 \) et \( C = ((1, 0, 0), (0, 1, 0), (0, 0, 1)) \) la base canonique de \( \mathbb{R}^3 \).
+\\
+On calcule les vecteurs \( f(v_1) \) et \( f(v_2) \) :
+\[
+f(1, 0) = (1, 3, 0) = 1 \times (1, 0, 0) + 3 \times (0, 1, 0) + 0 \times (0, 0, 1)
+\]
+\[
+f(0, 1) = (2, -1, 4) = 2 \times (1, 0, 0) - 1 \times (0, 1, 0) + 4 \times (0, 0, 1)
+\]
+
+La matrice associée de \( f \) relative aux bases \( B \) et \( C \) est donnée par :
+\(
+\textcolor{info}{\mathrm{Mat}_{B,C}(f) = \begin{pmatrix}
+1 & 2 \\
+3 & -1 \\
+0 & 4
+\end{pmatrix}}
+\)
+}
+
+\vocabulary{On note $E^{*}$ et on appelle \textcolor{purple}{\textbf{dual de \(E\)}} l'ensemble des formes linéaires sur \(E\).}
+
+\theorem{Proposition}{Base du dual}{true}{
+    Soit \( B = (v_1, \ldots, v_n) \) une base de \( E \). On note \( B^* = (v_1^*, \ldots, v_n^*) \) la base duale de \( E^* \) définie par :
+    \[
+    v_i^*(v_j) = 
+    \begin{cases}
+        1 & \text{si } i = j \\
+        0 & \text{sinon}
+    \end{cases}
+    \]
+}
+\theorem{Proposition}{Transposée de la matrice d'une application linéaire}{true}{
+    Soit \( f \in \mathcal{L}(E, F) \) et \( B = (v_1, \ldots, v_n) \) une base de \( E \), \( C = (w_1, \ldots, w_m) \) une base de \( F \).\\
+    On note \( B^* = (v_1^*, \ldots, v_n^*) \) la base duale de \( E^* \) et \( C^* = (w_1^*, \ldots, w_m^*) \) la base duale de \( F^* \).\\
+    De plus, on note \({}^{t}f \in \mathcal{L}(F^*, E^*)\) l'application linéaire définie par :
+    \[
+    {}^{t}f(w^*) = w^* \circ f \quad \forall w^* \in F^*.
+    \]
+
+    La matrice associée de \({}^{t}f\) relative aux bases \( C^* \) et \( B^* \) est la transposée de la matrice associée de \( f \) relative aux bases \( B \) et \( C \) :
+    \[
+    \textcolor{danger}{\mathrm{Mat}_{C^*, B^*}({}^{t}f) = {}^{t}\mathrm{Mat}_{B, C}(f)}.
+    \]
+}
+
+
+\subsection{Matrices de changement de base}
+
+\vocabulary{Une matrice de changement de base se dit aussi \textcolor{purple}{\textbf{matrice de passage}}.}
+
+\definition{Soit \( B = (v_1, \ldots, v_n) \) une base de \( E \) et \( C = (w_1, \ldots, w_n) \) une autre base de \( E \). On appelle \textbf{matrice de changement de base} de \( B \) vers \( C \) et on note
+\[
+\textcolor{primary}{\mathrm{P_{B \to C}} = \begin{pmatrix}
+    \text{coord}_{C}(v_1) & \text{coord}_{C}(v_2) & \ldots & \text{coord}_{C}(v_n)
+\end{pmatrix}}
+\]
+
+la matrice dont les colonnes sont les coordonnées des vecteurs de la base \( B \) dans la base \( C \).
+}
+
+\example{
+Soit \( B = ((1, 0), (0, 1)) \) la base canonique de \( \mathbb{R}^2 \) et \( C = ((1, 1), (1, -1)) \) une autre base de \( \mathbb{R}^2 \).
+
+On calcule les coordonnées des vecteurs de \( B \) dans la base \( C \) :
+
+\[
+\text{coord}_{C}(1, 0) = \frac{1}{2} \cdot (1, 1) + \frac{1}{2} \cdot (1, -1) = \begin{pmatrix}
+\frac{1}{2} \\ \frac{1}{2}
+\end{pmatrix}
+\]
+
+\[
+\text{coord}_{C}(0, 1) = \frac{1}{2} \cdot (1, 1) - \frac{1}{2} \cdot (1, -1) = \begin{pmatrix}
+\frac{1}{2} \\ -\frac{1}{2}
+\end{pmatrix}
+\]
+
+La matrice de changement de base de \( B \) vers \( C \) est donnée par :
+
+\[
+\textcolor{info}{\mathrm{P_{B \to C}} = \begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{pmatrix}}
+\]
+}
+
+\remark{
+    Une telle matrice de changement de base est toujours inversible, et son inverse est la matrice de changement de base de \( C \) vers \( B \).
+}
+
+\theorem{Théorème}{Formule de changement de base}{true}{
+    Soit \( f \in \mathcal{L}(E, F) \), \( B = (v_1, \ldots, v_n) \) une base de \( E \) et \( C = (w_1, \ldots, w_m) \) une base de \( F \).\\
+    Soit \( B' = (u_1, \ldots, u_n) \) une autre base de \( E \) et \( C' = (z_1, \ldots, z_m) \) une autre base de \( F \).\\
+    On note \( P_{B \to B'} \) la matrice de changement de base de \( B \) vers \( B' \) et \( P_{C' \to C} \) la matrice de changement de base de \( C' \) vers \( C \).\\
+    Alors :
+    \[
+    \textcolor{danger}{\mathrm{Mat}_{B', C'}(f) = P_{C' \to C} \cdot \mathrm{Mat}_{B, C}(f) \cdot P_{B \to B'}}
+    \]
+    avec $P_{C' \to C}$ = $P_{C \to C'}^{-1}$ .
+}
+
+\theorem{Corollaire}{Application aux endomorphismes}{true}{
+    Soit \( f \in \mathcal{L}(E) \) un endomorphisme de \( E \). Soit \( B = (v_1, \ldots, v_n) \) une base de \( E \) et \( B' = (w_1, \ldots, w_n) \) une autre base de \( E \).\\
+    On note \( P_{B \to B'} \) la matrice de changement de base de \( B \) vers \( B' \).\\
+    Alors :
+    \[
+    \textcolor{danger}{\mathrm{Mat}_{B', B'}(f) = P_{B \to B'}^{-1} \cdot \mathrm{Mat}_{B, B}(f) \cdot P_{B \to B'}}
+    \]
+}
+
+\end{document}

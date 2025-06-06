@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+\usepackage{./components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL Math-Info}
+\fancyhead[C]{Modèle type de document}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Modèle type de document}
+
+\section{Page Composants}
+
+\subsection{Définitions et Théorèmes}
+
+Voici un exemple d’utilisation de tes composants :
+
+\definition{Soit une suite \((u_n)_{n \in \mathbb{N}}\) quelconque. On dit que \((u_n)\) est décroissante si pour tout \(n \in \mathbb{N}\), on a \(u_n \geq u_{n+1}\).} 
+
+\theorem{Théorème}{Pythagore}{true}{
+Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.
+}
+
+\vspace{1em}
+\subsection{Carreaux}
+\vspace{1em}
+
+\noindent\textbf{Preuve :} \\[0.5em]
+\hspace{\parindent}\carreaux{5}
+
+\vspace{1em}
+\subsection{Remarques de cours}
+\vspace{1em}
+
+\remark{Lorem ipsum dolor it amet, consectetur adipiscing elit.}
+\attention{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\illustration{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\example{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\vocabulary{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\training{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+
+\end{document}

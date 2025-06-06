@@ -1,0 +1,159 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{components}[2025/06/05 v1.0 Composants personnalisés]
+
+% Chargement des packages nécessaires
+\RequirePackage{xcolor}
+\RequirePackage{tcolorbox}
+\RequirePackage{ifthen}
+\RequirePackage{amsmath,amssymb,amsfonts}
+\RequirePackage{fontawesome5}
+\RequirePackage{tikz}
+\RequirePackage{calc}
+
+% Définition des couleurs
+\definecolor{primary}{RGB}{0,71,171}
+\definecolor{danger}{RGB}{214,23,105}
+\definecolor{warning}{RGB}{255, 115, 0}
+\definecolor{success}{RGB}{0, 153, 0}
+\definecolor{info}{RGB}{0, 153, 204}
+\definecolor{purple}{RGB}{159, 47, 245}
+
+% Styles tcolorbox
+\tcbset{
+  defStyle/.style={
+    colframe=primary,
+    colback=white,
+    boxrule=0.5pt,
+    arc=0pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt,
+  },
+  theoremStyle/.style={
+    colframe=danger,
+    colback=white,
+    boxrule=0.5pt,
+    arc=0pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt,
+  }
+}
+
+\RequirePackage{helvet}
+\RequirePackage[T1]{fontenc}
+\renewcommand{\familydefault}{\sfdefault}
+\RequirePackage{uarial}
+
+% couleurs déjà définies dans ton sty
+\renewcommand{\thesection}{\textcolor{primary}{\Roman{section}}}
+\renewcommand{\thesubsection}{\textcolor{primary}{\Alph{subsection}}}
+
+\RequirePackage{sectsty}
+\sectionfont{\color{primary}}
+\subsectionfont{\color{primary}}
+
+
+% Commandes personnalisées
+
+% Titre du document
+\newcommand{\docTitle}[1]{%
+  \begin{center}
+    \vspace{2em}
+    {\huge\textbf{#1}}
+    \vspace{1em}
+  \end{center}
+}
+
+% Définition
+\newcommand{\definition}[1]{%
+  \begin{tcolorbox}[defStyle]
+    {\color{primary}\textbf{Définition :}} #1
+  \end{tcolorbox}
+}
+
+% Théorème / Propriété
+\newcommand{\theorem}[4]{%
+  \begin{tcolorbox}[theoremStyle]
+    {\color{danger}\textbf{#1 : #2}}%
+    \ifthenelse{\equal{#3}{true}}{%
+        \ifthenelse{\equal{#1}{Propriété}}{%
+            \textit{~(admise)}%
+        }{%
+            \textit{~(admis)}%
+        }%
+    }{}%
+    \par\vspace{0.5em}#4
+  \end{tcolorbox}
+}
+
+% Remarque
+\newcommand{\remark}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{warning}\textbf{\faInfoCircle\  Remarque :}}~#1
+  \par\vspace{1em}
+}
+
+% Attention
+\newcommand{\attention}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{danger}\textbf{\faTimes\ Attention \faTimes}}~#1
+  \par\vspace{1em}
+}
+
+% Illustration
+\newcommand{\illustration}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{success}\textbf{\faImage\ Illustration :}}~#1
+  \par\vspace{1em}
+}
+
+% Vocabulaire
+\newcommand{\vocabulary}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{purple}\textbf{\faCommentDots\ Vocabulaire :}}~#1
+  \par\vspace{1em}
+}
+
+% Exemple
+\newcommand{\example}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{info}\textbf{\faLightbulb\ Exemple :}}~#1
+  \par\vspace{1em}
+}
+
+% Application / Training
+\newcommand{\training}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{success}\textbf{\faChalkboardTeacher\ Application :}}~#1
+  \par\vspace{1em}
+}
+
+% Feuille à petits carreaux (5x5 mm) avec nombre de lignes choisi, couleur info
+\newcommand{\carreaux}[1]{%
+  \begin{tikzpicture}[baseline=(current bounding box.north west)]
+    \pgfmathsetmacro{\nbLines}{#1}
+    \pgfmathsetmacro{\height}{0.5 * \nbLines} % 0.5 cm = 5 mm
+    \def\width{16}  
+    
+    % Lignes verticales (toutes les 0.5 cm)
+    \foreach \x in {0,0.5,...,\width} {
+      \draw[info, thin] (\x cm, 0) -- (\x cm, \height cm);
+    }
+    % Lignes horizontales (toutes les 0.5 cm)
+    \foreach \y in {0,0.5,...,\height} {
+      \draw[info, thin] (0, \y cm) -- (\width cm, \y cm);
+    }
+    
+    % Bordure du cadre
+    \draw[info, thin] (0,0) rectangle (\width cm, \height cm);
+  \end{tikzpicture}
+}
