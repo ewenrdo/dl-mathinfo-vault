@@ -23,6 +23,10 @@ Ce package permet :
 /main.tex                  % Un fichier d'exemple appliquant tous les composants
 
 /lessons/                  % Tes leçons de mathématiques utilisant ce package
+  └── sample.tex           % Document-type
+
+/exercises/                % Tes leçons de mathématiques utilisant ce package
+  └── sample.tex           % Document-type
 ```
 
 ---
@@ -51,6 +55,7 @@ Dans ton fichier `.tex`, ajoute simplement :
 * `tikz`
 * `sectsty`
 * `uarial`, `helvet`
+* `paracol`
 
 ---
 
