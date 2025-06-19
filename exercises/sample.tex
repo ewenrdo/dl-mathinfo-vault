@@ -1,0 +1,45 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../components/components}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL1 Math-Info}
+\fancyhead[C]{Applications linéaires}
+\fancyhead[R]{2024-2025}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+% Début des colonnes
+\begin{paracol}{2}
+
+\exercise{1}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\exercise{2}{Deuxième exercice}{Texte de l'exercice 2.}
+
+\exercise{3}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
+
+\switchcolumn % Changer de colonne
+
+\exercise{4}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\exercise{5}{Deuxième exercice}{Texte de l'exercice 2.}
+
+\exercise{6}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
+
+
+% Passer à la page suivante
+\switchcolumn
+\newpage
+\exercise{7}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\end{paracol}
+
+\end{document}

@@ -191,38 +191,34 @@ La matrice associée de \( f \) relative aux bases \( B \) et \( C \) est donné
 \definition{Soit \( B = (v_1, \ldots, v_n) \) une base de \( E \) et \( C = (w_1, \ldots, w_n) \) une autre base de \( E \). On appelle \textbf{matrice de changement de base} de \( B \) vers \( C \) et on note
 \[
 \textcolor{primary}{\mathrm{P_{B \to C}} = \begin{pmatrix}
-    \text{coord}_{C}(v_1) & \text{coord}_{C}(v_2) & \ldots & \text{coord}_{C}(v_n)
+    \text{coord}_{B}(w_1) & \text{}_{B}(w_2) & \ldots & \text{coord}_{B}(w_n)
 \end{pmatrix}}
 \]
 
-la matrice dont les colonnes sont les coordonnées des vecteurs de la base \( B \) dans la base \( C \).
+la matrice dont les colonnes sont les coordonnées des vecteurs de la base \( C \) exprimés dans la base \( B \).
 }
 
 \example{
-Soit \( B = ((1, 0), (0, 1)) \) la base canonique de \( \mathbb{R}^2 \) et \( C = ((1, 1), (1, -1)) \) une autre base de \( \mathbb{R}^2 \).
+% Dans R 2 , la matrice de passage de la base canonique à la base ( u , v ) avec u = ( 2 , 3 ) et v = ( 4 , 5 ) est : ( 2 4 3 5 ) . %
 
-On calcule les coordonnées des vecteurs de \( B \) dans la base \( C \) :
-
-\[
-\text{coord}_{C}(1, 0) = \frac{1}{2} \cdot (1, 1) + \frac{1}{2} \cdot (1, -1) = \begin{pmatrix}
-\frac{1}{2} \\ \frac{1}{2}
-\end{pmatrix}
-\]
-
-\[
-\text{coord}_{C}(0, 1) = \frac{1}{2} \cdot (1, 1) - \frac{1}{2} \cdot (1, -1) = \begin{pmatrix}
-\frac{1}{2} \\ -\frac{1}{2}
-\end{pmatrix}
-\]
+Soit \( B = ((1, 0), (0, 1)) \) la base canonique de \( \mathbb{R}^2 \) et \( C = ((2, 3), (4, 5)) \) une autre base de \( \mathbb{R}^2 \).\\
 
 La matrice de changement de base de \( B \) vers \( C \) est donnée par :
-
 \[
 \textcolor{info}{\mathrm{P_{B \to C}} = \begin{pmatrix}
-\frac{1}{2} & \frac{1}{2} \\
-\frac{1}{2} & -\frac{1}{2}
-\end{pmatrix}}
-\]
+    2 & 4 \\
+    3 & 5
+    \end{pmatrix}}
+    \]
+
+}
+
+\training{
+    Soit \(w\) un vecteur de \(E\), \(X_1\) ses coordonnées dans la base \(B\), \(X_2\) ses coordonnées dans la base \(B_2\) et soit \(P_{B \to C}\) la matrice de passage de \(B\) à \(C\). Alors on a :
+
+    \[
+    \textcolor{success}{X_1 = P_{B \to C} \cdot X_2}
+    \]
 }
 
 \remark{

@@ -12,6 +12,7 @@
 
 % Définition des couleurs
 \definecolor{primary}{RGB}{0,71,171}
+\definecolor{primarySmooth}{RGB}{230,237,247}
 \definecolor{danger}{RGB}{214,23,105}
 \definecolor{warning}{RGB}{255, 115, 0}
 \definecolor{success}{RGB}{0, 153, 0}
@@ -156,4 +157,26 @@
     % Bordure du cadre
     \draw[info, thin] (0,0) rectangle (\width cm, \height cm);
   \end{tikzpicture}
+}
+
+\newcommand{\exercise}[3]{%
+  \noindent
+  \tcbox[colframe=primary,
+         colback=primarySmooth,
+         arc=4pt, 
+         boxrule=0.5pt,
+         boxsep=2pt,
+         left=2pt,
+         right=2pt,
+         top=1pt,
+         bottom=1pt,
+         valign=center,
+         nobeforeafter,
+         box align=base] % <-- désactive sharp corners pour arrondi effectif
+  {\textbf{\textcolor{primary}{#1}}}%  % texte en primary
+  \hspace{0.5em}%
+  \textbf{#2}\par
+  \vspace{0.25em}
+  \noindent #3\par
+  \vspace{1em}
 }

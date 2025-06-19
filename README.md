@@ -69,14 +69,15 @@ Voici les commandes personnalisées disponibles :
 | `\illustration{...}`                      | Pour ajouter une **illustration** ou une explication visuelle        |
 | `\vocabulary{...}`                        | Présente un **terme de vocabulaire**                                 |
 | `\carreaux{n}`                            | Génère une **feuille de petits carreaux** (5x5 mm), de `n` lignes    |
+| `\exercise{n}{Titre}{Contenu}`            | Exercice n°`n`, avec son **titre** et son **contenu.**              |
 
 ---
 
-## 🧪 Exemple minimal (`main.tex`)
+## 🧪 Exemple minimal de leçon (`/lessons/sample.tex`)
 
 ```latex
 \documentclass{article}
-\usepackage{components}
+\usepackage{components} % lien relatif vers le components.sty
 
 \begin{document}
 
@@ -99,6 +100,44 @@ Voici les commandes personnalisées disponibles :
 \vocabulary{Une bijection est une fonction à la fois injective et surjective.}
 
 \carreaux{10}
+
+\end{document}
+```
+## 🧪 Exemple minimal d'exercice (`/exercises/sample.tex`)
+
+```latex
+\documentclass{article}
+\usepackage{components} % lien relatif vers le components.sty
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+% Début des colonnes
+\begin{paracol}{2}
+
+\exercise{1}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\exercise{2}{Deuxième exercice}{Texte de l'exercice 2.}
+
+\exercise{3}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
+
+\switchcolumn % Changer de colonne
+
+\exercise{4}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\exercise{5}{Deuxième exercice}{Texte de l'exercice 2.}
+
+\exercise{6}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
+
+
+% Passer à la page suivante
+\switchcolumn
+\newpage
+\exercise{7}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\end{paracol}
 
 \end{document}
 ```
