@@ -1,0 +1,151 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+\usepackage{../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL Math-Info}
+\fancyhead[C]{Réduction des endomorphismes}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Réduction des endomorphismes et matrices diagonalisables}
+Dans toute ce chapitre, on notera \( E \) un \(\mathbb{K}\)-espace vectoriel, avec \(\mathbb{K} \in \left\{ \mathbb{R}, \mathbb{C} \right\} \).
+
+\section{Sous-espaces stables par un endomorphisme}
+
+\definition{Soit $f \in \mathcal{L}(E)$, et soit $F \subset E$ un sous-espace vectoriel.
+
+On dit que $F$ est \textbf{stable} par $f$ si $f(F) \subset F$., $i.e.$ $\forall x \in F, f(x) \in F$.
+}
+
+\remark{
+\begin{itemize}
+    \item $0_E$ est stable par $f$.
+    \item $E$ est stable par $f$.
+    \item $\ker(f)$ et $Im(f)$ sont stables par $f$.
+\end{itemize}
+}
+ 
+\textbf{Preuve:} \\
+\carreaux{20}
+
+
+\section{Éléments propres d'un endomorphisme}
+\vocabulary{On appelle \textbf{élément propre} de $f$ ses valeurs propres, vecteurs propres et sous-espaces propres.}
+
+\subsection{Valeur propre} 
+
+\definition{Soit $f \in \mathcal{L}(E)$, et soit $\lambda \in \mathbb{K}$.\\
+$\lambda$ est une \textbf{valeur propre} de $f$ si $\exists x \in E \setminus \left\{ 0_E \right\}$ : $f(x) = \lambda x$.\\
+On dit que $x$ est un \textbf{vecteur propre} de $f$ associé à $\lambda$.\\\\
+L'ensemble des valeurs propres de $f$ est noté $Sp(f)$ et appelé \textbf{spectre} de $f$.
+}
+
+\subsection{Sous-espace propre}
+\definition{Soit $f \in \mathcal{L}(E)$, et soit $\lambda \in \mathbb{K}$.\\
+On note $E_\lambda(f)$ le \textbf{sous-espace propre} de $f$ associé à $\lambda$, défini par :
+\[E_\lambda(f) = \ker(f - \lambda Id_E) = \left\{ x \in E : f(x) = \lambda x \right\}.\]\\
+$E_\lambda(f)$ est un sous-espace vectoriel de $E$.}
+
+\remark{
+    $E_\lambda(f)$ est l'ensemble des vecteurs propres de $f$ associés à $\lambda$.
+}
+
+\remark{
+    \begin{itemize}
+        \item $\lambda \in Sp(f) \iff f$ n'est pas injective $\iff \det(E_\lambda(f)) \neq 0$.
+        \item $0_E \in Sp(f) \iff \det(f) = 0$.
+    \end{itemize}
+}
+
+\textbf{Preuve:} \\
+\carreaux{22}
+
+\section{Polynôme caractéristique}
+\definition{On appelle \textbf{polynôme caractéristique} d'une matrice $A \in M_n(\mathbb{K})$ le polynôme défini par :
+\[
+\chi_A(X) = \det(A - X Id_n).
+\]
+}
+
+\example{
+    Soit $A = \begin{pmatrix}
+        5 & 0 & 4 \\
+        4 & 1 & 0 \\
+        -8 & 0 & -7
+    \end{pmatrix}$. Déterminons son polynôme caractéristique.\\
+    $\chi_A(X) = \det(A - X Id_3) = \det\left(\begin{pmatrix}
+        5 - X & 0 & 4 \\
+        4 & 1 - X & 0 \\
+        -8 & 0 & -7 - X
+    \end{pmatrix}\right)$\\\\
+    En développant le déterminant suivant la deuxième colonne, on obtient :
+    \[
+    \chi_A(X) = (1 - X) \det\left(\begin{pmatrix}
+        5 - X & 4 \\
+        -8 & -7 - X
+    \end{pmatrix}\right) = (1 - X) \left((5 - X)(-7 - X) + 32\right).
+    \]\\
+    En factorisant ce polynôme, on trouve :
+    \[
+    \chi_A(X) = -(X-1)^2(X+3)
+    \]
+}
+
+\remark{
+    $\lambda \in Sp(A) \iff \det(A - \lambda Id_E) = 0 \iff \chi_A(\lambda) = 0$.\\
+    Donc : $Sp(A) = \left\{ \lambda \in \mathbb{K} : \chi_A(\lambda) = 0 \right\}$.
+}
+\textbf{Preuve:} \\
+\carreaux{7}
+
+
+\example{
+    (suite de l'exemple précédent)\\
+    On a trouvé le polynôme caractéristique de $A$ : $\chi_A(X) = -(X-1)^2(X+3)$.\\
+    Donc les valeurs propres de $A$ sont $\lambda_1 = 1$ (de multiplicité 2) et $\lambda_2 = -3$.\\
+    Alors, on a : $Sp(A) = \left\{ 1, -3 \right\}$.
+}
+
+\remark {
+    $A \in M_2(\mathbb{K}) \implies Sp(A) = \chi_A(X) = X^2 - Tr(A)X + \det(A)$.
+}
+\textbf{Preuve:} \\
+\carreaux{7}
+
+\section{Matrice diagonalisable}
+\definition{Soit $A \in M_n(\mathbb{K})$. On dit que $A$ est \textbf{diagonalisable} si $A$ est \textbf{semblable} à une matrice diagonale.\\\\
+Autrement dit, $A$ est diagonalisable si $A = P D P^{-1}$, où $D$ est une matrice diagonale et $P$ est une matrice inversible.}
+
+\remark{
+    \begin{itemize}
+        \item Soient $\lambda_1, \ldots, \lambda_k$ les valeurs propres de $A$, et soient $E_{\lambda_i}(A)$ les sous-espaces propres associés à $\lambda_i$.\\
+        $A$ diagonalisable $\iff \dim(E_{\lambda_i}(A)) =$ ordre de multiplicité de $\lambda_i$.\\
+        $e.g.$ $\lambda_i$ est une valeur propre simple, alors $\dim(E_{\lambda_i}(A)) = 1$.
+        \item $A$ diagonalisable $\iff E = \bigoplus_{i=1}^k E_{\lambda_i}(A)$. ($i.e. E$ est la somme directe des sous-espaces propres associés aux valeurs propres de $A$)
+    \end{itemize}
+}
+
+\example{
+    (suite de l'exemple précédent)\\
+    On a trouvé que $Sp(A) = \left\{ 1, -3 \right\}$ et $\chi_A(X) = -(X-1)^2(X+3)$.\\
+Alors, A est diagonalisable si : \[ 
+        \begin{cases}
+            \dim(E_1(A)) = 2 \\
+            \dim(E_{-3}(A)) = 1
+        \end{cases}
+        \]\\\\
+On a aussi que A est diagonalisable si $\mathbb{R}^3 = E_1(A) \oplus E_{-3}(A)$.      
+}
+\end{document}
