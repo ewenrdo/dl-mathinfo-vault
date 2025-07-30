@@ -1,0 +1,96 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../components/components}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL1 Math-Info}
+\fancyhead[C]{Réduction des endomorphismes et matrices diagonalisables}
+\fancyhead[R]{2024-2025}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\exercise{1}{Sous-espaces stables}{
+Soit \( f : \mathbb{R}^3 \to \mathbb{R}^3 \) défini par \( f(x, y, z) = (x + y, y + z, z) \).\\
+Détermine si les sous-espaces suivants sont stables par \( f \) :
+\begin{itemize}
+  \item \( F_1 = \{(x, y, 0) \in \mathbb{R}^3\} \)
+  \item \( F_2 = \text{Vect}(1, 0, -1) \)
+  \item \( F_3 = \text{Vect}(1, 1, 1) \)
+\end{itemize}
+}
+
+\exercise{2}{Valeurs propres et vecteurs propres}{
+Soit \( f : \mathbb{R}^2 \to \mathbb{R}^2 \) défini par \( f(x, y) = (3x + y, x + 3y) \).\\
+\begin{enumerate}
+  \item Détermine la matrice de \( f \) dans la base canonique.
+  \item Calcule le polynôme caractéristique.
+  \item Trouve les valeurs propres et les vecteurs propres associés.
+  \item Le spectre contient-il 0 ? \( f \) est-elle diagonalisable ?
+\end{enumerate}
+}
+
+\exercise{3}{Polynôme caractéristique}{
+Soit \( A = \begin{pmatrix} 2 & 0 & 0 \\ 1 & 3 & 0 \\ 4 & -1 & 2 \end{pmatrix} \).\\
+\begin{enumerate}
+  \item Calcule le polynôme caractéristique de \( A \).
+  \item Détermine les valeurs propres de \( A \).
+  \item Donne une base de chaque sous-espace propre.
+  \item \( A \) est-elle diagonalisable ? Justifie.
+\end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{4}{Étude complète d'une matrice}{
+Soit \( A = \begin{pmatrix} 5 & 0 & 4 \\ 4 & 1 & 0 \\ -8 & 0 & -7 \end{pmatrix} \).\\
+\begin{enumerate}
+  \item Rappelle le polynôme caractéristique de \( A \) donné dans le cours.
+  \item Trouve une base de chaque sous-espace propre.
+  \item Déduis \( P \) et \( D \) telles que \( A = P D P^{-1} \).
+  \item Vérifie que \( \mathbb{R}^3 = E_1(A) \oplus E_{-3}(A) \).
+\end{enumerate}
+}
+
+\exercise{5}{Théorie — diagonalisabilité}{
+Prouve que si \( f \in \mathcal{L}(E) \) est diagonalisable, alors :
+\begin{itemize}
+  \item Le polynôme caractéristique de \( f \) est scindé.
+  \item Pour toute valeur propre \( \lambda \), la dimension de \( E_\lambda(f) \) est égale à sa multiplicité algébrique.
+\end{itemize}
+\textit{Indication : utilise le théorème du rang, le lien entre dimension et injectivité, et la décomposition en base de vecteurs propres.}
+}
+
+\exercise{6}{Diagonalisabilité}{
+Soit \( A = \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix} \).\\
+\begin{enumerate}
+  \item Calcule son polynôme caractéristique.
+  \item Donne ses valeurs propres et les sous-espaces propres.
+  \item \( A \) est-elle diagonalisable ? Justifie rigoureusement.
+\end{enumerate}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{7}{Matrice à paramètres}{
+Soit \( A = \begin{pmatrix} 1 & a \\ 0 & 1 \end{pmatrix} \) avec \( a \in \mathbb{R} \).\\
+\begin{enumerate}
+  \item Calcule le polynôme caractéristique.
+  \item Pour quelles valeurs de \( a \) la matrice est-elle diagonalisable ?
+  \item Interprète géométriquement le cas où \( a \neq 0 \).
+\end{enumerate}
+}
+
+\end{paracol}
+
+\end{document}

@@ -138,7 +138,6 @@
   \par\vspace{1em}
 }
 
-
 % Feuille à petits carreaux (5x5 mm) avec nombre de lignes choisi, couleur info
 \newcommand{\carreaux}[1]{%
   \begin{tikzpicture}[baseline=(current bounding box.north west)]
@@ -158,13 +157,6 @@
     % Bordure du cadre
     \draw[info, thin] (0,0) rectangle (\width cm, \height cm);
   \end{tikzpicture}
-}
-\newcommand{\proof}[2]{%
-  \vspace{1em}
-  \noindent
-  {\color{primary}\textbf{\faCheckCircle\ Preuve :}}~#1
-  \par\vspace{0.5em}
-  \carreaux{#2}
 }
 
 \newcommand{\exercise}[3]{%
