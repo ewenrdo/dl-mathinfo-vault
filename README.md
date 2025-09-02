@@ -20,7 +20,7 @@ Ce package permet :
 
 /images/                   % Éventuelles illustrations utilisées dans les leçons
 
-/main.tex                  % Un fichier d'exemple appliquant tous les composants
+/sample.tex                  % Un fichier d'exemple appliquant tous les composants
 
 /lessons/                  % Tes leçons de mathématiques utilisant ce package
   └── sample.tex           % Document-type

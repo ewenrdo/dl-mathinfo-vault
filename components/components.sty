@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{components}[2025/06/05 v1.0 Composants personnalisés]
+\ProvidesPackage{components}[2025/09/02 v1.1 Composants personnalisés]
 
 % Chargement des packages nécessaires
 \RequirePackage{xcolor}
@@ -9,6 +9,9 @@
 \RequirePackage{fontawesome5}
 \RequirePackage{tikz}
 \RequirePackage{calc}
+\RequirePackage{listings}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
 
 % Définition des couleurs
 \definecolor{primary}{RGB}{0,71,171}
@@ -179,4 +182,28 @@
   \vspace{0.25em}
   \noindent #3\par
   \vspace{1em}
+}
+
+
+% Définir le style du code
+
+\lstset{
+  backgroundcolor=\color{blue!5},   % couleur de fond
+  basicstyle=\ttfamily\footnotesize, % police typewriter
+  keywordstyle=\color{blue},         % mots-clés
+  stringstyle=\color{red},           % chaînes
+  commentstyle=\color{green!60!black}, % commentaires
+  numbers=left,                      % numérotation des lignes
+  numberstyle=\tiny\color{gray},
+  breaklines=true,                   % retour à la ligne auto
+  frame=single,                      % cadre autour
+  rulecolor=\color{blue!50},
+  showstringspaces=false             % ne pas afficher les espaces dans les chaînes
+  morecomment=[l]{#},                  % définit '#' comme commentaire
+  literate=
+   {é}{{\'e}}1
+   {è}{{\`e}}1
+   {à}{{\`a}}1
+   {ù}{{\`u}}1
+   {ç}{{\c{c}}}1
 }
