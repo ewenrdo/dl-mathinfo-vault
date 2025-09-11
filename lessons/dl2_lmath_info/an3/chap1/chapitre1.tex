@@ -1,0 +1,89 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info AN3}
+\fancyhead[C]{Suites de Cauchy}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Suites de Cauchy}
+
+\section{Rappels sur les suites}
+
+\subsection{Définitions générales}
+
+On ne rappelera que ce qui n'est pas "évident" dans le cours de L1.
+
+\definition{
+    Une sous-suite (ou suite extraite) d'une suite $(u_n)$ est une suite $(v_n)$ : \(\exists \varphi : \mathbb{N} \to \mathbb{N}, \text{ strictement croissante tq } v_n = u_{\varphi(n)} \)
+}
+
+\vocabulary{
+    Une sous-suite de $(u_n)$ est aussi notée $(u_{n_k})$.
+}
+
+\definition{
+    Une suite $(u_n)$ converge vers $l\in\mathbb{R}$ si : \(\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall n \geq N_\varepsilon, |u_n - l| < \varepsilon\)
+}
+\vocabulary{
+    Si elle ne converge pas on dit qu'elle diverge. \\
+    Attention : une suite peut diverger mais avoir une limite (une suite qui tend vers l'infini).
+}
+
+
+\theorem{Propriété}{Bornes}{true}{Si une suite $(u_n)$ converge, alors elle est bornée : \(\exists M > 0, \forall n \in \mathbb{N}, |u_n| \leq M\).}
+\theorem{Propriété}{Convergence des sous-suites}{true}{Si une suite $(u_n)$ converge vers $l$, alors toute sous-suite $(u_{n_k})$ converge aussi vers $l$.}
+
+\subsection{Propriétés et théorèmes fondamentaux}
+\theorem{Propriété}{Espace-vectoriel}{true}{L'ensemble des suites réelles convergeantes est un $\mathbb{R}$-espace vectoriel.}
+\theorem{Théorème}{Suites adjacentes}{true}{
+    Deux suites $(u_n)$ et $(v_n)$ sont dites adjacentes si :
+    \begin{itemize}
+        \item $(u_n)$ est croissante et $(v_n)$ est décroissante
+        \item \(u_n \leq v_n, \forall n \in \mathbb{N}\)
+        \item \(v_n - u_n \xrightarrow[n\to\infty]{} 0\)
+    \end{itemize}
+    Si deux suites sont adjacentes, alors elles convergent vers la même limite.
+}
+\theorem{Théorème}{Bolzano-Weierstrass}{true}{Toute suite réelle bornée admet une sous-suite convergente.}
+
+\section{Suites de Cauchy}
+\definition{
+    Une suite $(u_n)$ est une suite de Cauchy si : \(\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall p,q \geq N_\varepsilon, |u_p - u_q| < \varepsilon\)
+}
+\theorem{Propriété}{Convergence}{false}{Toute suite convergente est une suite de Cauchy.}
+\noindent\textbf{Preuve:}\\
+\carreaux{7}
+\theorem{Proposition}{Bornes}{false}{Toute suite de Cauchy est bornée.}
+\noindent\textbf{Preuve:}\\
+\carreaux{7}
+
+\theorem{Théorème}{}{false}{Toute suite de Cauchy dans $\mathbb{R}$ converge dans $\mathbb{R}$.}
+\noindent\textbf{Preuve:}\\
+\carreaux{10}
+\remark{On dit que $\mathbb{R}$ est complet.}
+
+\definition{
+    On dit que $(\mathbb{R}, |\cdot|)$ est complet.
+}
+\example{
+    Notion de complétude\\
+    $(\mathbb{Q}, |\cdot|)$ n'est pas complet : la suite définie par $u_n = \text{la partie décimale de } \sqrt{2} \text{ à la } n\text{-ième décimale}$ est une suite de Cauchy dans $\mathbb{Q}$ qui ne converge pas dans $\mathbb{Q}$ (car $\sqrt{2} \notin \mathbb{Q}$).\\
+    Par contre, elle converge dans $\mathbb{R}$.
+}
+
+\end{document}
