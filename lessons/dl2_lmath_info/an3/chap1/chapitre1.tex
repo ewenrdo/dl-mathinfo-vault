@@ -85,5 +85,111 @@ On ne rappelera que ce qui n'est pas "évident" dans le cours de L1.
     $(\mathbb{Q}, |\cdot|)$ n'est pas complet : la suite définie par $u_n = \text{la partie décimale de } \sqrt{2} \text{ à la } n\text{-ième décimale}$ est une suite de Cauchy dans $\mathbb{Q}$ qui ne converge pas dans $\mathbb{Q}$ (car $\sqrt{2} \notin \mathbb{Q}$).\\
     Par contre, elle converge dans $\mathbb{R}$.
 }
+\section{Topologie de $\mathbb{R}$}
+\subsection{Rappels}
+\textcolor{primary}{a) Ouvert}
+\definition{Soit \(x\in\mathbb{R}\) et \(V\subset \mathbb{R}\). On dit que $V$ est un voisinage de $x$ si : \(\exists \varepsilon > 0, ]x-\varepsilon, x+\varepsilon[ \subset V\)}
+\definition{\(U\subset \mathbb{R}\) est un ouvert de $\mathbb{R}$ si : \(\forall x \in U, U \text{ est un voisinage de } x\)}
+
+\example{
+    \begin{itemize}
+        \item \(\mathbb{R}\) est un ouvert de $\mathbb{R}$.
+        \item \(]a,b[ \text{ est un ouvert de } \mathbb{R}\)
+        \item \(]a,+\infty[ \text{ est un ouvert de } \mathbb{R}\)
+        \item \(]-\infty,a[ \text{ est un ouvert de } \mathbb{R}\)
+        \item L'ensemble vide est un ouvert de $\mathbb{R}$.
+    \end{itemize}  
+}
+
+\theorem{Propriété}{Opérations sur les ouverts}{true}{
+    \begin{itemize}
+        \item L'intersection finie d'ouverts est un ouvert.
+        \item L'union quelconque d'ouverts est un ouvert.
+    \end{itemize}
+}
+
+\remark{
+    %% Grande intersection de ]-1/n, 1/n[ = {0} en symbole maths
+    L'intersection infinie d'ouverts n'est pas forcément un ouvert : \(\bigcap_{n=1}^{\infty} ]-\frac{1}{n}, \frac{1}{n}[ = \{0\}\) qui n'est pas un ouvert de $\mathbb{R}$.\\
+    Toutefois, pour un \(n_{max}\) donné l'intersection de \(n_{max}\) ouverts est un ouvert.
+
+}
+
+\textcolor{primary}{b) Fermé}
+
+\definition{
+    \(F\subset \mathbb{R}\) est un fermé de $\mathbb{R}$ si : \(\mathbb{R} \setminus F \text{ est un ouvert de } \mathbb{R}\)
+}
+
+\example{
+    \begin{itemize}
+        \item \(\mathbb{R}\) est un fermé de $\mathbb{R}$.
+        \item \([a,b] \text{ est un fermé de } \mathbb{R}\)
+        \item Toute famille finie d'éléments de $\mathbb{R}$ est un fermé de $\mathbb{R}$.
+        \item L'ensemble vide est un fermé de $\mathbb{R}$.
+    \end{itemize}  
+}
+
+\remark{$\mathbb{Q}$ n'est ni ouvert ni fermé dans $\mathbb{R}$.}
+
+\theorem{Propriété}{Opérations sur les fermés}{true}{
+    \begin{itemize}
+        \item L'union finie de fermés est un fermé.
+        \item L'intersection quelconque de fermés est un fermé.
+    \end{itemize}
+}
+
+\theorem{Théorème}{Caractérisation zéquentielle des fermés}{false}{
+    \(F\subset \mathbb{R}\) fermé $\Leftrightarrow$ toute suite $(u_n)$ d'éléments de $F$ qui converge dans $\mathbb{R}$ a sa limite dans $F$.
+}
+\noindent{\textbf{Preuve:}\\
+$\Rightarrow$/ Supposons F fermé, on a \(\mathbb{R} \setminus F\) ouvert.\\
+Par l'absurde, on suppose qu'il existe une suite $(u_n)$ d'éléments de $F$ qui converge vers \(l \in \mathbb{R} \setminus F\).\\
+Comme \(\mathbb{R} \setminus F\) est un ouvert, $\exists \varepsilon > 0, ]l-\varepsilon, l+\varepsilon[ \subset \mathbb{R} \setminus F$.\\
+Par convergence de $(u_n)$, $\exists N_\varepsilon \in \mathbb{N}, \forall n \geq N_\varepsilon, |u_n - l| < \varepsilon \Rightarrow u_n \in ]l-\varepsilon, l+\varepsilon[ \subset \mathbb{R} \setminus F$ ce qui est absurde car $(u_n)$ est une suite d'éléments de $F$.\\\\
+
+$\Leftarrow$/ On raisonne par contraposée.\\
+Si $\mathbb{R} \setminus F$ n'est pas un ouvert, $\exists l \in \mathbb{R} \setminus F$ tel que $\forall r > 0, ]l-r, l+r[ \cap F \neq \mathbb{R}\setminus F$ car $\mathbb{R}\setminus F$ est au voisinage de $l$.\\
+Supposons qu'il existe une suite $(u_n)$ d'éléments de $F$.\\
+En particulier, $\forall n \in \mathbb{N}^*, u_n \in ]l-\frac{1}{n}, l+\frac{1}{n}[ \cap F \implies u_n \xrightarrow[n\to\infty]{} l \text{ et } (u_n) \in F$.\\
+}
+\remark{Ce théorème est utile pour montrer qu'on a un ensemble fermé.   }
+
+
+\definition{Soit $A\subset\mathbb{R}$.\\
+On définit l'adhérence de $A$, notée $\overline{A}$, comme suit : \(\overline{A} = \bigcap_{F \text{ fermé},\, A \subset F} F\).\\
+C'est le plus petit fermé contenant $A$.
+}
+
+\theorem{Lemme}{}{false}{
+    Soit \(A\subset \mathbb{R}\).\\
+    $x\in\overline{A} \Leftrightarrow \forall \varepsilon > 0, ]x-\varepsilon, x+\varepsilon[ \cap A \neq \emptyset$.
+}
+\noindent\textbf{Preuve:}\\
+\carreaux{10}
+
+\theorem{Théorème}{}{false}{
+    Soit \(A\subset \mathbb{R}\).\\
+    Alors \(\overline{A} = \{x\in\mathbb{R}, \exists (u_n) \text{ suite d'éléments de } A, u_n \xrightarrow[n\to\infty]{} x\}\).
+}
+\remark{
+    Autrement dit, l'adhérence de $A$ est l'ensemble des limites de suites d'éléments de $A$.
+}
+\noindent\textbf{Preuve:}\\
+\carreaux{10}
+
+\subsection{Complétude}
+
+\definition{
+    $F\subset \mathbb{R}$ est complet si toute suite de Cauchy d'éléments de $F$ converge dans $F$.
+}
+
+\example{\(\mathbb{R}\) est complet.}
+
+\theorem{Théorème}{Caractérisation des parties complètes de $\mathbb{R}$}{false}{
+    \(F\subset \mathbb{R}\) est complet $\Leftrightarrow$ $F$ est fermé.
+}
+\noindent\textbf{Preuve:}\\
+\carreaux{12}
 
 \end{document}
