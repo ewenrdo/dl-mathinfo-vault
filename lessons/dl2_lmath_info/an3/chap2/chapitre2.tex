@@ -1,0 +1,149 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info AN3}
+\fancyhead[C]{Séries}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Séries numériques}
+
+%% 17/09/2025
+
+\section{Séries et sommes d'une série}
+
+\definition{
+    Soit \((u_n)\) une suite dans $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$.\\
+    On considère \(\forall N \in \mathbb{N}, S_N = \sum_{n=0}^{N} u_n \in \mathbb{K}\).\\\
+    On a donc une suite $(S_N)_{N \in \mathbb{N}}$ associée à la suite $(u_n)_{n \in \mathbb{N}}$.
+}
+\definition{On appelle \textbf{série de terme général \(u_n\)} que l'on note \(\sum_{n \geq 0} u_n\) la suite $(S_N)_{N \in \mathbb{N}}$.}
+
+\ndlr{Les deux définitions précédentes peuvent être regroupées.}
+
+\vocabulary{On dit que \((S_n)\) est la suite des sommes partielles de la série.}
+\remark{\((S_n)\) correspond aux $N+1$ premiers termes de la suite.}
+
+\subsection{Correspondance suite - série}
+
+\noindent{
+\textbf{Raisonnement :}
+Par définition une série est une suite. Expliquons comment une suite peut-être vue comme une série.\\
+Si $(u_n)$ est une suite, considérons la série de terme général \(v_n = u_n - u_{n-1} \forall n \in \mathbb{N}\) (avec la convention \(v_{0} = u_{0}\)).\\
+Ainsi, \(u_n = \sum_{k=0}^{n} v_k\).}
+
+\remark{Cependant la série associée à une suite $(u_n)$ va s'étudier en tant que telle (que série) grâce à $u_n$.}
+
+
+\subsection{Opérations sur les séries}
+
+\theorem{Propriété}{Opérations sur les séries}{true}{
+    Soient \(\sum_{n\geq0} u_n\) et \(\sum_{n\geq0} v_n\) deux séries.\\
+    Alors, pour tout \(\lambda \in \mathbb{K}\) :
+    \begin{itemize}
+        \item \textbf{Somme} : \(\sum_{n\geq0} (u_n + v_n) = \sum_{n\geq0} u_n + \sum_{n\geq0} v_n\) définie comme $(S_N  + S'_N)$
+        \item \textbf{Produit par un scalaire} : \(\sum_{n\geq0} \lambda u_n = \lambda \sum_{n\geq0} u_n\) définie comme \((\lambda S_N)\)
+    \end{itemize}
+}
+
+\example{Si $u_n=0, \forall n \in \mathbb{N}$, alors \(\sum_{n\geq0} u_n = 0\) est la série nulle.}
+
+
+\subsection{Troncature d'une série}
+
+
+\definition{
+    Si $(u_n)$ est une suite définie pour \(n \geq n_0 \mid n_0 \in \mathbb{N}\).
+    On peut considérer la série \(\sum_{n \geq n_0} u_n\) où \(u_{0} = u_{1} = ... = u_{n_0 - 1} = 0\), ou bien on peut écrire $\sum_{n \geq n_0} u_n$.
+
+    Si $\sum_{n \geq 0} u_n$ est une série de terme général $u_n$, une \textbf{troncature} de la série est $\sum_{n \geq n_0} u_n$. C'est la suite $(S_N)$ où \(S_N = \sum_{n=n_0}^{N} u_n\).
+}
+
+\ndlr{Cette définition pourraît être synthétisée.}
+
+\example{
+    \begin{itemize}
+        \item la série nulle
+        \item la série géométrique de raison $q\in\mathbb{C^*}$ : \(\sum_{n\geq0} q^n\) de terme général \(q^n\) ;
+        \item la série harmonique : \(\sum_{n\geq1} \frac{1}{n}\) de terme général \(\frac{1}{n}\) ;
+        \item la série $\sum_{n\geq1} \frac{1}{n^\alpha}, \alpha\in\mathbb{R}$.
+    \end{itemize}
+}
+
+\section{Convergence d'une série}
+\subsection{Définitions et nature d'une série}
+\definition{
+    Soit \(\sum_{n\geq0} u_n\) une série.\\
+    On dit que la série converge, si la suite $(S_N)$ converge, et on note $S$ la limite de $S_N$.\\
+    S s'appelle la somme de la série.\\\\
+
+    Dans ce cas, on écrit : \(\sum_{n=0}^{\infty} u_n = S \in \mathbb{R}\) \textit{(c'est une "somme infinie", un objet-limite).}
+}
+
+\vocabulary{Si $(S_N)$ diverge, alors on dit que la série $\sum_{n\geq0} u_n$ diverge.}
+\attention{Si $S$ n'existe pas, alors on écrit \textbf{jamais} la notation avec \(\infty\)}
+
+\vocabulary{La convergence ou la divergence d'une série s'appelle la \textbf{nature} de la série.}
+\theorem{Proposition}{Stabilité de la limite par troncature}{true}{
+    La nature d'une série n'est pas modifée par troncature.
+}
+\noindent\textbf{Preuve:}\\
+\carreaux{12}
+\ndlr{Indication : les premiers termes n'influencent pas la convergence.}
+
+\subsection{Quelques applications...}
+
+\example{
+    \begin{itemize}
+        \item Si $(u_n)$ est nulle à partir d'un rang $N_0$ alors la série $\sum_{n\geq0} u_n$ est converge, et $\sum_{n=0}^{\infty} u_n =  \sum_{n=0}^{N_0} u_n$.
+        \item Série géométrique $\sum_{n\geq0} q^n$ :\\
+        On considère la suite des sommes partielles $(S_N)$ où \(S_N = \sum_{n=0}^{N} q^n\) = \(\frac{1-q^{N+1}}{1-q}\) avec \(q \neq 1\). On a plusieurs cas :
+        \begin{itemize}
+            \item Si \(|q| < 1\), $q^{N+1} \xrightarrow[N\to\infty]{} 0$ donc \(S_N \xrightarrow[N\to\infty]{} \frac{1}{1-q} \Leftrightarrow \sum_{n=0}^{\infty} q^n = \frac{1}{1-q}\).\\
+            La série $\sum_{n\geq0} q^n$ converge et on arrive à trouver S !
+            \item Si \(|q| > 1\), alors $\sum_{n\geq0} q^n$ diverge.
+            \item Si \(q = 1\), alors $\sum_{n\geq0} q^n = N+1 \Rightarrow \sum_{n\geq0} q^n$ diverge.
+        \end{itemize}
+        \item $\sum_{n\geq1}{log(1+1/n)}$ :\\
+        On a \(\forall N \geq 1, S_N = \sum_{n=1}^{N} log(\frac{n+1}{n}) = log(N+1)\) (télescopage).\\
+        Or \(log(N+1) \xrightarrow[N\to\infty]{} +\infty\), donc la série $\sum_{n\geq1}{log(1+1/n)}$ diverge.
+        \item $\sum_{n\geq1} \frac{1}{n(n+1)}$ :\\
+        On a \(\forall N \geq 1, S_N = \sum_{n=1}^{N} \frac{1}{n(n+1)} = \sum_{n=1}^{N} (\frac{1}{n} - \frac{1}{n+1}) = 1 - \frac{1}{N+1}\) (télescopage).\\
+        Or \(1 - \frac{1}{N+1} \xrightarrow[N\to\infty]{} 1\), donc la série $\sum_{n\geq1} \frac{1}{n(n+1)}$ converge et \(\sum_{n=1}^{\infty} \frac{1}{n(n+1)} = 1\).
+        \item \textbf{Important, démontré plus tard :} $\sum_{n\geq1} \frac{1}{n}$ (série harmonique) diverge.
+        \item $\sum_{n\geq1} \frac{(-1)^n}{n}$ converge. \textit{(idée : montrer que $S_N$ converge en montant $A_N= S_{2N}$ et $B_N=S_{2N+1}$ sont adjacentes)}
+    \end{itemize}
+}
+
+\attention{Ces six exemples sont à connaître et comprendre parfaitement.}
+
+\training{Étudier la convergence de la série géométrique pour \(|q| = 1\) et \(q = -1\) ($q\in\mathbb{C}$).}
+\noindent\carreaux{5}
+
+\subsection{Propriétés des séries convergentes}
+
+\theorem{Propriété}{Convergence de la combinaison linéaire}{true}{
+    Soient \(\sum_{n\geq0} u_n\) et \(\sum_{n\geq0} v_n\) deux séries convergentes.\\
+    Alors $\forall \lambda,\mu \in \mathbb{K}$ : \(\sum_{n\geq0} (\lambda u_n + \mu v_n) = \lambda \sum_{n\geq0} u_n + \mu \sum_{n\geq0} v_n\) et cette série converge.
+}
+\remark{En d'autres termes, la somme de deux séries convergentes est une série $\sum_{n\geq0} (u_n + v_n)$ qui converge.}
+\noindent{
+\textbf{Preuve :}\\
+La suite de sommes partielles associée à $\sum_{n\geq}{(u_n + v_n)}$ est $\sum_{n=0}^{N} (u_n + v_n) = \sum_{n=0}^{N} (u_n) + \sum_{n=0}^{N} (v_n)$\\
+Comme $\sum_{n=0}^{N} (u_n)$ et $\sum_{n=0}^{N} (v_n)$ sont convergentes, on a $\sum_{n=0}^{N} (u_n + v_n)$ est convergente et sa limite est \(\sum_{n=0}^{\infty} (u_n+v_n)  = \sum_{n=0}^{\infty} (u_n) + \sum_{n=0}^{\infty} (v_n)\).
+}
+\end{document}
