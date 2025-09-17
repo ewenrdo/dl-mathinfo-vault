@@ -309,23 +309,85 @@ Le sous-groupe engendré par \(\overline{1}\) est \(\{ \overline{n} \mid n \in \
 }
 
 \section{Morphismes}
-\ndlr{Section à rattraper, cf OneNote}
-    
+\ndlr{On a omis les démonstrations dans cette section, cf. OneNote.}
+
+\definition{
+    Soient $(G, *)$ et $(G', *')$ deux groupes.\\
+    Une application \functionSets{\varphi}{G \rightarrow G'} est un \textbf{morphisme de groupes} (ou homomorphisme) si :\\
+    $\forall g_1,g_2 \in G \varphi(g_1 * g_2) = \varphi(g_1) *' \varphi(g_2)$
+}
+
+\remark{
+    Notons que si $\varphi$ est un morphisme de groupes, alors $\varphi(e) = e'$.
+}
+
+\definition{
+    Si $\varphi$ est un morphisme de groupes et est bijective, alors $\varphi$ est un \textbf{isomorphisme}.
+}
+\vocabulary{On dit alors que G est isomorphe à G', ou G et G' sont isomorphes.}
+
+\theorem{Proposition}{}{false}{
+    $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme.
+}
+
+\example{
+    \begin{itemize}
+        \item \function{\varphi}{G \rightarrow G'}{g \mapsto e'} est le morphisme trivial.
+        \item \function{\varphi}{G \rightarrow G}{g \mapsto g} est le morphisme identité.
+        \item Si $H \subset G$ est un sous-groupe, \function{\varphi}{H \rightarrow G}{h \mapsto h} est un morphisme.
+        \item \function{exp}{(\mathbb{R}, +) \rightarrow (\mathbb{R}^*, \times)}{t \mapsto e^t} est un morphisme.
+        \item \function{exp}{(\mathbb{C}, +) \rightarrow (\mathbb{C}^*, \times)}{z \mapsto e^z} est un morphisme.
+        \item \function{ln}{(\mathbb{R}^*_+, \times) \rightarrow (\mathbb{R}, +)}{x \mapsto \ln(x)} est un morphisme.
+        \item $n\in\mathbb{Z}$, \function{\varphi}{\mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}}{k \mapsto \overline{k}} est un morphisme.
+        \item $k\in\mathbb{Z}$, \function{\varphi}{\mathbb{Z} \rightarrow {-1, 1}}{k \mapsto (-1)^k} est un morphisme.
+        \item $(G, \cdot)$ groupe, $g_0\in G$, \function{\varphi}{\mathbb{Z} \rightarrow G}{n \mapsto g_0^n = exp_{g_0}(n)} est un morphisme.
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{false}{
+    Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
+    Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
+}
+
+\vocabulary{On appelle noyau de $\varphi$ l'ensemble $Ker(\varphi) = \{ g \in G \mid \varphi(g) = e' \}$.}
+\vocabulary{On appelle image de $\varphi$ l'ensemble $Im(\varphi) = \{ g' \in G' \mid \exists g \in G, \varphi(g) = g' \}$.}
+
+\theorem{Proposition}{}{false}{
+    $Ker(\varphi)$ est un sous-groupe de $G$.
+}
+\theorem{Proposition}{}{false}{
+    $Im(\varphi)$ est un sous-groupe de $G'$.
+}
+\theorem{Corollaire}{}{true}{
+    Soit $H \subset G$ un sous-groupe.\\
+    Alors $\varphi(H)$ est un sous-groupe de $G'$.
+}
+
+\theorem{Proposition}{Injectivité}{false}{
+    $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
+}
+
+\theorem{Proposition}{Surjectivité}{false}{
+    $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
+}
+\example{
+    \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
+}
+
+
 \section{Ordres}
-\ndlr{Section à rattraper jusqu'à corollaire "Tout groupe cyclique d'ordre n est isomorphe à Z/nZ", cf OneNote. Y ajoute l'exemple vu en TD sur ({-1,1}, x)}
 
 \vocabulary{On appelle \textbf{ordre} d'un ensemble G son cardinal.}
 
 \theorem{Proposition}{Ordre d'un élément}{false}{
     Soit $g \in G$, G fini.\\
-    On a un morphisme $exp_g : \mathbb{Z} \rightarrow \mathbb{G}$, $n \mapsto g^n=exp_g(n)$.\\
+    On a un morphisme $\exp_g : \substack{\mathbb{Z} \longrightarrow G \\ n \longmapsto g^n}$.\\
     Supposons que $\exists l \in \mathbb{N}^* g^l = e, \exists !k > 0 : Ker(exp_g)=k\mathbb{Z}$.\\\\
     De plus, $k=min\{l\in\mathbb{N}^* \mid g^l=e\}$ est \textbf{l'ordre de g}.
 }
 \noindent\textbf{Preuve:}\\
 \carreaux{7}
 \remark{Si $l$ existe, alors l'ordre de $g$ est fini.}
-
 
 \theorem{Proposition}{}{false}{
     Si $G$ est un groupe fini, tout élément est d'ordre fini.
@@ -344,5 +406,15 @@ Le sous-groupe engendré par \(\overline{1}\) est \(\{ \overline{n} \mid n \in \
     Tout groupe cyclique d'ordre $n$ est isomorphe à $\mathbb{Z} / n\mathbb{Z}$.
 }
 
+\training{
+    Déterminer l'ordre de -1 pour \((\{-1, 1\}, \times)\). 
+}
+\noindent{
+    \textbf{Solution:}\\
+    On a que \((-1)^1 = -1\) et \((-1)^2 = 1\). Donc l'ordre de \(-1\) est \(2\).
+}
+
+
+ 
 \end{document}
 
