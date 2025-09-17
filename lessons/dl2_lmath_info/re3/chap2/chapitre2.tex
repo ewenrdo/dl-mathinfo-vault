@@ -1,0 +1,189 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info AL3}
+\fancyhead[C]{Groupes}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Groupes symétriques}
+
+\section{Permutations}
+
+\definition{Soient $X$ un ensemble et $S(X)$ l'ensemble des bijections de $X$ dans $X$.\\
+On appelle permutation de $X$ tout élément de $S(X)$.}
+
+\theorem{Propriété}{Ensemble des permutations}{true}{
+    $(S(X), \circ)$ est un groupe \textit{(en général non commutatif)}.
+}
+\vocabulary{C'est le groupe symétrique sur $X$.}
+\noindent{
+    \textbf{Démonstration :}\\
+    \begin{itemize}
+        \item  La composée de deux bijections est une bijection, donc $\circ$ est une loi interne sur $S(X)$.
+        \item La loi $\circ$ est associative.
+        \item L'élément neutre est l'identité $id_X$.
+        \item L'inverse d'une bijection est une bijection (la bijection réciproque). $\Box$ 
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{false}{
+    Soit Y un ensemble avec une bijection $b : X \rightarrow Y$.\\
+    L'application $\varphi_b : S(X) \rightarrow S(Y)$ définie par $\sigma \mapsto b \circ \sigma \circ b^{-1}$ est un isomoprhisme de groupe.
+}
+\remark{Donc $S(Y)$ est isomoprhe à $S(X)$.}
+\noindent{
+    \textbf{Démonstration :}\\
+    $\varphi_b$ est bien définie : comme $b$ et $\sigma$ sont bijectives, $b\circ\sigma\circ b^{-1}$ est bijective.\\
+    $\varphi_b$ est un morphisme $\forall \sigma, \sigma' \in S(X)$. On a :\\
+    \[
+        \varphi_b(\sigma\circ\sigma') = b \circ (\sigma \circ \sigma') \circ b^{-1}\\
+                                    = b \circ \sigma \circ b^{-1}\circ b \circ \sigma' \circ b^{-1}\\
+                                    = (b\circ \sigma \circ b^{-1}) \circ (b\circ \sigma' \circ b^{-1})
+                                    = \varphi_b(\sigma) \circ  \varphi_b(\sigma')
+    \]
+    $\varphi_b$ est bijective car sa réciproque est donnée par $\tau = b^{-1} \circ \tau \circ b$. $\Box$
+}
+
+\definition{
+Supposons X fini de cardinal n.\\
+Il existe une bijection ${1,2,..,n} \rightarrow X$ (numérotation de X).\\
+On prend $S_n = S({1,2,...n})$ : c'est le \textbf{groupe symétrique sur n lettres}. Il est isomoprhe à $S(X)$}
+
+Notation par tableau : $\sigma$
+\[
+\begin{array}{c|ccccc}
+i & 1 & 2 & 3 & \cdots & n \\
+\hline
+\sigma(i) & \sigma(1) & \sigma(2) & \sigma(3) & \cdots & \sigma(n)
+\end{array}
+\]
+
+\definition{Soit $\sigma \in S(X)$.\\
+Le support de $\sigma$ est ${x \in X \mid \sigma(x) \neq x}$ }
+
+\example{
+    Prenons $S(X)=S_6$.\\
+\[
+\begin{array}{c|cccccc}
+i & 1 & 2 & 3 & 4 & 5 & 6 \\
+\hline
+\sigma(i) & 3 & 2 & 1 & 6 & 5 & 4
+\end{array}
+\]
+    $\sigma$ a pour support ${1,3,4,6}$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soient $\sigma, \sigma' \in S(X)$ de supports disjoints.\\
+    Alors $\sigma$ et $\sigma'$ commutent, \textit{i.e.} $\sigma \circ \sigma' = \sigma' \circ \sigma$
+}
+
+\noindent{
+    \textbf{Démonstration :}\\
+    Soient S et S' les supports de $\sigma$ et $\sigma'$.
+    On a $\sigma \circ \sigma'(x) = \sigma'(\sigma(x)) = \sigma'(x)$.\\
+    On a $\sigma'(x) \notin S$, sinon $\sigma'(x) \notin S'$ et $\sigma'(\sigma'(x)) = \sigma'(x)$\\
+    donc $\sigma'(x)=x$, donc $\sigma'(x) \notin S$.\\
+    Donc $\sigma\circ\sigma'(x) = \sigma'(x) = \sigma'\circ\sigma(x)$.\\\\
+    De même, si $x \in X-S'$, on a : $\sigma\circ\sigma'(x) = \sigma'\circ\sigma(x)$.\\
+    Comme $S \cap S' = \emptyset$, on a : $\sigma\circ\sigma'(x)=\sigma'\circ\sigma(x)$ $\forall x \in X$. $\Box$
+   }   
+
+\theorem{Propriété}{Ordre de $S_n$}{false}{
+    Le groupe $S_n$ est d'ordre $n!$.
+}
+\noindent{
+    \textbf{Démonstration :}\\
+    Soient X,Y deux ensembles à $n$ éléments.\\
+    Montrons que $\#\{bijections X \rightarrow Y\} = n!$.\\
+    En effet, si $X={x_1,...,x_n}$ et $f : X\rightarrow Y$ est une bijection, il y a :
+    \begin{itemize}
+        \item $n$ possibilités pour $f(x_1)$
+        \item $n-1$ possibilités pour $f(x_2)$
+        \\$\vdots$
+        \item 1 possibilité pour $f(x_n)$
+    \end{itemize}
+}
+
+\section{Cycles}
+
+\definition{
+    Soit $X$ un ensemble et soit $k \geq 2$ un entier.\\
+    Un $k$-cycle de $S(X)$ est donné par $a_1,a_2,\ldots,a_k \in X \mid a_i \neq a_j si i \neq j$.\\\\
+    et $\sigma(a_i) = a_{i+1}$ pour $1 \leq i < k$ et $\sigma(a_k) = a_1$ et $\sigma$ de support ${a_1, a_2, ...n a_k}$.\\
+    On le note $(a_1 \cdots a_k)$.
+}
+
+\attention{La notation n'est pas unique : $(a_{i}a_{i+1}\cdots a_{k}a_{1}a_{2} \cdots a_{i-1}) = (a_1 \cdots a_k)$}
+
+\vocabulary{On dit qu'une permutation $c$ est un cycle s'il existe $k\geq2 \mid c$ est un k-cycle. Alors $k$ s'appelle la \textbf{longueur} de $c$.}
+
+\theorem{Proposition}{}{false}{
+    Comme élément du groupe $S(X)$ un k-cycle $c$ est d'ordre k.
+}
+\noindent{
+    \textbf{Démonstration :}\\
+    Posons $c = (a_1 \cdots a_k)$.\\
+    On a $\varepsilon(a_1)=a_{1+j}\neq a_{1}$.\\
+    Donc $ordre(c)\geq k$. On a $c^k(a_i)=a_i \forall i$, donc $c$ est d'ordre $k$. $\Box$
+}
+
+\remark{\textbf{Rappel}\\
+Des cycles à supports disjoints communtent.\\
+Soient $c = (a_1 \cdots a_k)$ et $c' = (a'_1 \cdots a'_{k'})$ deux cycles de $S(X)$ tels que $S(c) \cap S(c') = \emptyset$.\\
+avec ${a_1, \ldots, a_k} \cap  {a'_1, \ldots, a'_{k'}} = \emptyset$.\\
+On a $c \circ c' = c' \circ c$
+}
+
+\definition{
+    Soit $x \in X$, l'\textbf{orbite de x sous $\sigma$} est $\{\sigma^m(x) \mid m\in Z\}$.
+}
+
+\remark{
+On a $x \notin Support(\sigma)$ si $\sigma(x)=x \Leftrightarrow$ orbite de $x$ est un singleton.\\
+Si $\sigma$ est un $k$-cycle de support $S$ et $x\in S$, l'orbite de $x$ a $k$ éléments, c'est $S$.
+
+}
+
+\theorem{Théorème}{}{false}{
+    Si $X$ est fini, tout élément de $S(X)$ s'écrit comme produit de cycles à supports disjoints.\\
+    Cette écriture est unique à l'ordre des facteurs près.
+}
+\noindent{
+    \textbf{Démonstration :}\\
+    \begin{itemize}
+        \item \textbf{Existance :} (par récurrence)\\
+        {
+            Si $Support(\sigma) = \emptyset$, on a $\sigma = id_X$ : c'est bien un produit (vide) de cycles.\\
+            Supposons maintenant que $Support(\sigma) \neq \emptyset$. Soit $x\in Support(\sigma)$.\\
+            Soit $\sigma' \in S(X)$ donnée par $\sigma'(y)=\sigma(y)$ si $y \notin$ orbite de $x$, $\sigma'(y)=y$ sinon.\\
+            Considérons le cycle $c$ donné par : $(x \sigma(x)\sigma^2(x)-\sigma^k(x))$ avec $k=min\{m \mid \sigma^m(x)=x\}$.\\
+            C'est un $k$-cycle de support l'orbite de $x$.\\
+            Si $y \in$ orbite de $x$ on a $\sigma(y)=c(y)$.\\
+            Alors $\sigma$ et $c$ sont de supports disjoints et on a : $\sigma = \sigma' c = c \sigma'$.\\
+            En effet, soit $y\in X$,\\
+            $y \notin$ orbite de $x$ on a $\sigma'(y)=c(y)$
+        }
+    \end{itemize}
+}
+\attention{Démonstration non terminée, j'ai perdu le fil}
+\ndlr{Le prof écrivait pas clair au tableau, et la démo était pas clair, cette partie est à vérifier.}
+
+
+\end{document}
+
