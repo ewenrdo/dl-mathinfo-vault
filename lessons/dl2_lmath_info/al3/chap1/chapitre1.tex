@@ -312,7 +312,37 @@ Le sous-groupe engendré par \(\overline{1}\) est \(\{ \overline{n} \mid n \in \
 \ndlr{Section à rattraper, cf OneNote}
     
 \section{Ordres}
-\ndlr{Section à rattraper jusqu'à corollaire "Tout groupe cyclique d'ordre n est isomoprhe à Z/nZ, cf OneNote}
+\ndlr{Section à rattraper jusqu'à corollaire "Tout groupe cyclique d'ordre n est isomorphe à Z/nZ", cf OneNote. Y ajoute l'exemple vu en TD sur ({-1,1}, x)}
+
+\vocabulary{On appelle \textbf{ordre} d'un ensemble G son cardinal.}
+
+\theorem{Proposition}{Ordre d'un élément}{false}{
+    Soit $g \in G$, G fini.\\
+    On a un morphisme $exp_g : \mathbb{Z} \rightarrow \mathbb{G}$, $n \mapsto g^n=exp_g(n)$.\\
+    Supposons que $\exists l \in \mathbb{N}^* g^l = e, \exists !k > 0 : Ker(exp_g)=k\mathbb{Z}$.\\\\
+    De plus, $k=min\{l\in\mathbb{N}^* \mid g^l=e\}$ est \textbf{l'ordre de g}.
+}
+\noindent\textbf{Preuve:}\\
+\carreaux{7}
+\remark{Si $l$ existe, alors l'ordre de $g$ est fini.}
+
+
+\theorem{Proposition}{}{false}{
+    Si $G$ est un groupe fini, tout élément est d'ordre fini.
+}
+
+\noindent\textbf{Preuve:}\\
+\carreaux{7}
+
+\vocabulary{Si g n'est pas d'ordre fini, alors il est d'\textbf{ordre infini}.}
+
+\theorem{Proposition}{}{true}{
+    Supposons $g$ d'ordre $n$.\\
+    Alors $exp_g : \mathbb{Z} \rightarrow G$ passe au quotient pur $\mathbb{Z} / n\mathbb{Z}$ et définit un isomorphisme de $\mathbb{Z} / n\mathbb{Z} \rightarrow g^{\mathbb{Z}}$.
+}
+\theorem{Corollaire}{}{true}{
+    Tout groupe cyclique d'ordre $n$ est isomorphe à $\mathbb{Z} / n\mathbb{Z}$.
+}
 
 \end{document}
 
