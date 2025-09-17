@@ -33,6 +33,7 @@ Ce package permet :
 
 ## 🚀 Installation
 
+Suivre ce tutoriel pour le suivi via [ce tutoriel youtube](https://www.youtube.com/watch?v=4lyHIQl4VM8)
 Clone le repo, et amuse toi, l'environnement est déjà prêt à être utilisé.
 
 ```bash
