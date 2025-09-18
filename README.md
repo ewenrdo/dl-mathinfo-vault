@@ -93,15 +93,14 @@ Pour des exemples d’utilisation, se référer directement aux fichiers :
 
 ---
 
----
-
-
 ## Crédits
 
-Ce projet est développé par **Ewen Rodrigues de Oliveira**.
-Le design initial des commandes provient de ressources pédagogiques variées qui ont fait leurs preuves dans l’enseignement des mathématiques ainsi que de mon expérience au cours de mes années d'études.
+Le design principal de ce projet est directement inspiré des travaux de Mme Yuen et M. Alliot (version initiale), enseignants agrégés de mathématiques au lycée. Les choix de présentation, de structuration et de style des commandes LaTeX reprennent largement leurs pratiques pédagogiques, qui ont fait leurs preuves auprès des étudiants.
 
-En particulier, je tiens à remercier les sources d'inspiration suivantes :
-- Mme Yuen, enseignante agrégée de mathématiques au lycée, pour son approche pédagogique claire et efficace (et la plus grande source d'inspiration pour le projet).
-- Les discussions pédagogiques avec M. Alliot, enseignant agrégé de mathématiques au lycée.
-- Les documents de cours et de TD utilisés durant mes études à l'université.
+Un grand remerciement à Mme Yuen et M. Alliot pour leur générosité, leur exigence et la qualité de leur enseignement, qui ont servi de fondation à ce projet et à mes connaissances en mathématiques.
+
+Le projet a vocation à évoluer pour intégrer les avancées récentes et améliorer continuellement son contenu pédagogique. Tant que le design reste fidèle à l’esprit et à la structure des documents de ces enseignants, l’utilisation de ce projet doit rester strictement personnelle (usage individuel, non public, non commercial).
+
+Si des modifications substantielles éloignent le projet des modèles d’origine, une réévaluation des conditions d’utilisation sera nécessaire.
+
+**Attention :** Le contenu (plan du cours) du dossier `lessons/dl2_lmath_info` est tous droits réservés à l'Université Paris Cité ([u-pariscite.fr](https://u-pariscite.fr)). Toute réutilisation ou diffusion de ce contenu est strictement interdite sans l'accord de l'université. Il arrive que je modifie le cours pour le rendre plus clair, mais le fond reste le même. Merci de respecter cette condition.
