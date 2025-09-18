@@ -1,16 +1,23 @@
-# 📚 `Math-Lesson-Latex` – Un package LaTeX pour écrire des cours de maths plus vite
+# Math-Lesson-Maker – Générateur pédagogique de documents LaTeX pour les mathématiques
 
-Bienvenue sur le repo de **Math-Lesson-Latex**, un package LaTeX personnel conçu pour faciliter, accélérer et standardiser la rédaction de cours de mathématiques. Il fournit des commandes prêtes à l’emploi pour les définitions, théorèmes, exemples, applications, remarques, illustrations, vocabulaires, et plus encore — dans un style moderne et coloré.
+Bienvenue sur **Math-Lesson-Maker** ! Ce projet a pour vocation de faciliter et d’accélérer la création de documents pédagogiques en mathématiques, tout en garantissant une présentation claire, moderne et homogène. Il s’adresse aussi bien aux enseignants qu’aux étudiants ou créateurs de supports, en mettant l’accent sur la lisibilité, la structuration et l’efficacité pédagogique.
 
-## 🌟 Objectif
+> **Disclaimer MATHS-INFO 2** :
+> Les étudiants de MATHS-INFO 2 trouveront ici l’ensemble des feuilles de cours de l’année, régulièrement mises à jour.
 
-Ce package permet :
-
-* d’unifier la présentation des contenus mathématiques ;
-* d’accélérer la rédaction de cours (particulièrement utiles pour enseignants, étudiants, ou créateurs de fiches) ;
-* d’améliorer la lisibilité et l’impact visuel grâce à l’usage de couleurs, d’icônes, et de boîtes stylisées.
+L’objectif est de proposer un cadre unifié pour la rédaction de feuilles de TD et de cours, avec des outils LaTeX personnalisés pour illustrer, expliquer, et valoriser les contenus mathématiques. L’accent est mis sur la pédagogie : chaque commande vise à rendre les notions plus accessibles, à structurer les démonstrations, et à encourager la compréhension active.
 
 ---
+
+## Deux types de documents générés
+
+Le projet permet de générer deux types de documents distincts :
+
+- **Feuille de TD** (exercices, travaux dirigés, sujets d’entraînement) : voir les exemples dans `exercises/sample.tex`.
+- **Feuille de cours** (supports de cours structurés, définitions, théorèmes, illustrations) : voir les exemples dans `lessons/sample.tex`.
+
+Chaque type dispose de ses propres modèles et commandes adaptées, pour répondre aux besoins spécifiques de la pédagogie mathématique.
+
 
 ## 📁 Arborescence du projet
 
@@ -31,38 +38,41 @@ Ce package permet :
 
 ---
 
-## 🚀 Installation
+## Installation et prise en main rapide
 
-Suivre ce tutoriel pour le suivi via [ce tutoriel youtube](https://www.youtube.com/watch?v=4lyHIQl4VM8)
-Clone le repo, et amuse toi, l'environnement est déjà prêt à être utilisé.
+1. **Installer VSCode et LaTeX (et son environnement)**
+  - Suivre la vidéo d’installation et de configuration de VSCode : [https://www.youtube.com/watch?v=4lyHIQl4VM8](https://www.youtube.com/watch?v=4lyHIQl4VM8)
 
-```bash
-git clone https://github.com/ton-utilisateur/components-maths.git
-```
+2. **Cloner le dépôt**
+  - Ouvre un terminal puis exécute :
+    ```bash
+    git clone https://github.com/FunoxPanda/Math-Lesson-Maker.git
+    ```
+  - Ou utilise l’interface graphique de VSCode :
+    - `Ctrl+Shift+P` → “Git: Clone” → colle l’URL du dépôt
 
-Dans ton fichier `.tex`, ajoute simplement :
+3. **Ouvrir le dossier dans VSCode**
+  - Menu “Fichier” → “Ouvrir un dossier” → sélectionne le dossier cloné
 
-```latex
-\usepackage{components}
-```
+4. **Compiler un exemple**
+  - Ouvre un fichier `.tex` dans `lessons/` ou `exercises/` (par exemple `lessons/sample.tex`)
+  - Clique sur “Compiler” (icône LaTeX ou commande `Ctrl+Alt+B` si tu utilises l’extension LaTeX Workshop)
 
-⚠️ Ce package nécessite les extensions suivantes :
+5. **Astuces**
+  - Pour ajouter le package à ton document :
+    ```latex
+    \usepackage{components}
+    ```
+  - Les dépendances LaTeX nécessaires sont listées dans le fichier `components/components.sty` (voir les `\RequirePackage{...}`)
+  - Pour toute question sur LaTeX ou VSCode, consulte la vidéo ou la documentation officielle.
 
-* `xcolor`
-* `tcolorbox`
-* `ifthen`
-* `amsmath`, `amssymb`, `amsfonts`
-* `fontawesome5`
-* `tikz`
-* `sectsty`
-* `uarial`, `helvet`
-* `paracol`
+L’environnement est prêt à l’emploi : tu peux modifier, compiler et créer tes propres feuilles de cours ou de TD directement !
 
 ---
 
-## 🛠️ Fonctionnalités
+## Commandes personnalisées disponibles
 
-Voici les commandes personnalisées disponibles :
+Voici les principales commandes LaTeX fournies par le package (voir la documentation dans `components/components.sty` et les exemples complets dans `lessons/sample.tex` et `exercises/sample.tex`) :
 
 | Commande                                  | Description                                                          |
 | ----------------------------------------- | -------------------------------------------------------------------- |
@@ -75,87 +85,23 @@ Voici les commandes personnalisées disponibles :
 | `\illustration{...}`                      | Pour ajouter une **illustration** ou une explication visuelle        |
 | `\vocabulary{...}`                        | Présente un **terme de vocabulaire**                                 |
 | `\carreaux{n}`                            | Génère une **feuille de petits carreaux** (5x5 mm), de `n` lignes    |
-| `\exercise{n}{Titre}{Contenu}`            | Exercice n°`n`, avec son **titre** et son **contenu.**              |
+| `\exercise{n}{Titre}{Contenu}`            | Exercice n°`n`, avec son **titre** et son **contenu**               |
+
+Pour des exemples d’utilisation, se référer directement aux fichiers :
+- `lessons/sample.tex` pour les feuilles de cours
+- `exercises/sample.tex` pour les feuilles de TD
 
 ---
 
-## 🧪 Exemple minimal de leçon (`/lessons/sample.tex`)
-
-```latex
-\documentclass{article}
-\usepackage{components} % lien relatif vers le components.sty
-
-\begin{document}
-
-\docTitle{Exemple de cours}
-
-\definition{Une fonction est dite continue si...}
-
-\theorem{Théorème}{Théorème fondamental}{false}{
-  Soit $f$ continue sur un intervalle $I$...
-}
-
-\example{Soit $f(x) = x^2$. On a...}
-
-\training{Résoudre l'équation $f(x) = 4$.}
-
-\remark{La continuité est nécessaire pour appliquer ce théorème.}
-
-\attention{Ne pas confondre continuité et dérivabilité.}
-
-\vocabulary{Une bijection est une fonction à la fois injective et surjective.}
-
-\carreaux{10}
-
-\end{document}
-```
-## 🧪 Exemple minimal d'exercice (`/exercises/sample.tex`)
-
-```latex
-\documentclass{article}
-\usepackage{components} % lien relatif vers le components.sty
-
-\usepackage{paracol}
-
-\begin{document}
-\setlength{\columnsep}{2cm}
-
-% Début des colonnes
-\begin{paracol}{2}
-
-\exercise{1}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
-
-\exercise{2}{Deuxième exercice}{Texte de l'exercice 2.}
-
-\exercise{3}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
-
-\switchcolumn % Changer de colonne
-
-\exercise{4}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
-
-\exercise{5}{Deuxième exercice}{Texte de l'exercice 2.}
-
-\exercise{6}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
-
-
-% Passer à la page suivante
-\switchcolumn
-\newpage
-\exercise{7}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
-
-\end{paracol}
-
-\end{document}
-```
-
 ---
 
-## ✍️ Auteur
 
-Développé par **Ewen**, étudiant-entrepreneur en Mathématiques et Informatique à l'Université Paris Cité, CEO de [Wybz](https://github.com/funoxpanda), dans le cadre de l’optimisation de la rédaction pédagogique de cours scientifiques.
+## Crédits
 
----
+Ce projet est développé par **Ewen Rodrigues de Oliveira**.
+Le design initial des commandes provient de ressources pédagogiques variées qui ont fait leurs preuves dans l’enseignement des mathématiques ainsi que de mon expérience au cours de mes années d'études.
 
-## 📜 Licence
-
-Ce projet est sous licence MIT — libre à toi de le modifier, partager, et utiliser dans tes propres projets.
+En particulier, je tiens à remercier les sources d'inspiration suivantes :
+- Mme Yuen, enseignante agrégée de mathématiques au lycée, pour son approche pédagogique claire et efficace (et la plus grande source d'inspiration pour le projet).
+- Les discussions pédagogiques avec M. Alliot, enseignant agrégé de mathématiques au lycée.
+- Les documents de cours et de TD utilisés durant mes études à l'université.

@@ -45,7 +45,7 @@ On appelle permutation de $X$ tout élément de $S(X)$.}
     Soit Y un ensemble avec une bijection $b : X \rightarrow Y$.\\
     L'application $\varphi_b : S(X) \rightarrow S(Y)$ définie par $\sigma \mapsto b \circ \sigma \circ b^{-1}$ est un isomoprhisme de groupe.
 }
-\remark{Donc $S(Y)$ est isomoprhe à $S(X)$.}
+\remark{Donc $S(Y)$ est isomorphe à $S(X)$.}
 \noindent{
     \textbf{Démonstration :}\\
     $\varphi_b$ est bien définie : comme $b$ et $\sigma$ sont bijectives, $b\circ\sigma\circ b^{-1}$ est bijective.\\
@@ -62,7 +62,7 @@ On appelle permutation de $X$ tout élément de $S(X)$.}
 \definition{
 Supposons X fini de cardinal n.\\
 Il existe une bijection ${1,2,..,n} \rightarrow X$ (numérotation de X).\\
-On prend $S_n = S({1,2,...n})$ : c'est le \textbf{groupe symétrique sur n lettres}. Il est isomoprhe à $S(X)$}
+On prend $S_n = S({1,2,...n})$ : c'est le \textbf{groupe symétrique sur n lettres}. Il est isomorphe à $S(X)$}
 
 Notation par tableau : $\sigma$
 \[
@@ -167,7 +167,7 @@ Si $\sigma$ est un $k$-cycle de support $S$ et $x\in S$, l'orbite de $x$ a $k$ �
 \noindent{
     \textbf{Démonstration :}\\
     \begin{itemize}
-        \item \textbf{Existance :} (par récurrence)\\
+        \item \textbf{Existence :} (par récurrence)\\
         {
             Si $Support(\sigma) = \emptyset$, on a $\sigma = id_X$ : c'est bien un produit (vide) de cycles.\\
             Supposons maintenant que $Support(\sigma) \neq \emptyset$. Soit $x\in Support(\sigma)$.\\
@@ -181,10 +181,17 @@ Si $\sigma$ est un $k$-cycle de support $S$ et $x\in S$, l'orbite de $x$ a $k$ �
         }
     \end{itemize}
 }
-\attention{Démonstration non terminée, j'ai perdu le fil}
-\ndlr{Le prof écrivait pas clair au tableau, et la démo était pas clair, cette partie est à vérifier.}
+\attention{Démonstration non terminée \textit{(le prof n'écrivait pas clair au tableau)}}
 
-\example{À ajouter, cf Laurent}
+\example{Soit $X = \{1,2,3,4,5\}$ et $\sigma \in S(X)$ défini par :
+\[
+\sigma(1)=3, \quad \sigma(2)=5, \quad \sigma(3)=1, \quad \sigma(4)=4, \quad \sigma(5)=2
+\]
+Alors $\sigma$ s'écrit comme produit de cycles à supports disjoints :
+\[
+\sigma = (1\ 3)(2\ 5)
+\]
+Cette écriture est unique à l'ordre des facteurs près.}
 
 \end{document}
 
