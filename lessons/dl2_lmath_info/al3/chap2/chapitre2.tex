@@ -193,5 +193,70 @@ Alors $\sigma$ s'écrit comme produit de cycles à supports disjoints :
 \]
 Cette écriture est unique à l'ordre des facteurs près.}
 
+\subsection{Signature}
+
+\definition{
+    Soit $X$ un ensemble fini et notons $S(X)$ le groupe symétrique sur $X$.\\
+    Posons $Z = \{(i,j) \mid i,j \in X, i \neq j\}$.\\
+    Soit $R$ la relation sur $Z$ donnée par : $(i,j) R (i',j') \Leftrightarrow (i,j) = (i',j')$ ou $(i,j) = (j',i')$. \textit(i.e. $\{i,j\} = \{i',j'\}$\textit).\\
+    C'est une relation d'équivalence. Soit $S$ un système de représentants de $R$.\\\\
+    Soit $\sigma \in S(X)$.\\
+    Alors si $(i,j) \in Z$, on a $(\sigma(i),\sigma(j)) \in Z$.\\
+    De plus, $(i,j) \mapsto (\sigma(i),\sigma(j))$ est une bijection de $Z$ notée $\sigma^2$.\\\\
+    
+    Soit $(i,j)\in S$.\\
+    On dit qu'on a une \textbf{inversion} en $(i,j)$ pour $\sigma$ si $(\sigma(i),\sigma(j)) \notin S$.\\
+}
+
+\example{
+    Si $X={1,2,\ldots,n}$, on peut prendre $S = \{(i,j) \in X^2 \mid i < j\}$.\\
+    Alors $(i,j) \in S$ est une inversion pour $\sigma \Leftrightarrow \sigma(j) < \sigma(i)$.
+}
+
+\theorem{Propriété}{Signature}{false}{
+On pose $\varepsilon_S(\sigma) = (-1)^{\#\{\text{inversions de $\sigma$}\}} \in \{-1,1\}$.
+On a $\varepsilon_S(\sigma)$ ne dépend pas du choix de $S$.
+
+On le note $\varepsilon(\sigma)$ et on l'appelle la \textbf{signature} de $\sigma$.
+}
+
+\noindent{
+    \textbf{Démonstration :}\\
+    Soit $(i_0, j_0) \in S$. Posons $S' = S - \{(i_0, j_0)\} \cup \{(j_0, i_0)\}$.\\
+    Si $(i,j) \neq (i_0, j_0)$ et $(i,j)\neq(j_0,i_0)$, on a $(i,j) \in S$ est une inversion pour $S \Leftrightarrow (i,j) \in S'$ est une inversion pour $S'$.\\
+    Si $(i,j) = (i_0, j_0)$, on a $(i,j) \in S\backslash S'$ et $(j,i) \in S'\backslash S$.\\
+    On a une inversion $(i_0,j_0)$ pour $S \Leftrightarrow$ on a une inversion $(j_0,i_0)$ pour $S'$.\\
+    Donc $\#\{\text{inversions de $\sigma$ pour $S$}\} \equiv \#\{\text{inversions de $\sigma$ pour $S'$}\}$.\\
+    Donc $\varepsilon_S(\sigma) = \varepsilon_{S'}(\sigma)$ de proche en proche on a $\varepsilon_S$ indépendant de $S$. $\Box$
+}
+
+\theorem{Proposition}{}{false}{
+    Soit \functionSets{f}{X \rightarrow Y} injective.\\
+    On a : \[
+    \varepsilon(\sigma) = \prod_{(i,j) \in S} \frac{f(\sigma(j))-f(\sigma(i))}{f(j)-f(i)}
+    \]
+}
+
+\example{
+    Si $X = \{1,2,\ldots,n\}$ et $f = id_X$, on a : \[
+    \varepsilon(\sigma) = \prod_{1 \leq i < j \leq n} \frac{\sigma(j)-\sigma(i)}{j-i}
+    \]
+}
+
+\noindent{
+    \textbf{Démonstration :}\\
+    On a $(\sigma(i),\sigma(j)) \in S \Leftrightarrow (i,j)$ est une inversion.\\
+    Sinon, on a $(\sigma(j),\sigma(i)) \in S$.\\
+    Donc : \[
+    \prod_{(i,j) \in S} \frac{f(\sigma(j))-f(\sigma(i))}{f(j)-f(i)} = \prod_{\substack{(i,j) \in S \\ \text{pas une inversion}}} \frac{f(\sigma(j))-f(\sigma(i))}{f(j)-f(i)} \times \prod_{\substack{(i,j) \in S \\ \text{inversion}}} \frac{f(\sigma(j))-f(\sigma(i))}{f(j)-f(i)} \]\[
+    = \prod_{\substack{(i,j) \in S}} \frac{1}{f(j)-f(i)} \times \prod_{\substack{(i,j) \in S \\ \text{inversion}}} (f(\sigma(j))-f(\sigma(i))) \times \prod_{\substack{(i,j) \in S \\ \text{pas une inversion}}} (f(\sigma(j))-f(\sigma(i)))\\
+    \]
+    Si $S=\{(\sigma(i), \sigma(j)) \mid \sigma \text{ pas une inversion sur } S\cup \{(\sigma(j), \sigma(i)) \mid \sigma \text{ inversion sur } S\}\}$.\\
+    Donc : 
+    %% \prod_{(i,j) \in S} \frac{1}{f(j)-f(i)} = \prod_{\substack{(i,j) \in S\\ \text{\sigma pas inversion}}} (f(\sigma(j))-f(\sigma(i))) \times \prod_{\substack{(i,j) \in S \\ \text{\sigma inversion}}} (f(\sigma(j))-f(\sigma(i)))\\
+    \attention{Démonstration non terminée \textit{(le prof n'écrivait pas clair au tableau et c'était verbeux)}}
+}
+
+
 \end{document}
 
