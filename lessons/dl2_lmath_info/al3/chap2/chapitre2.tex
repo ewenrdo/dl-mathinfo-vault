@@ -193,7 +193,7 @@ Alors $\sigma$ s'écrit comme produit de cycles à supports disjoints :
 \]
 Cette écriture est unique à l'ordre des facteurs près.}
 
-\subsection{Signature}
+\section{Signature}
 
 \definition{
     Soit $X$ un ensemble fini et notons $S(X)$ le groupe symétrique sur $X$.\\
@@ -257,6 +257,86 @@ On le note $\varepsilon(\sigma)$ et on l'appelle la \textbf{signature} de $\sigm
     \attention{Démonstration non terminée \textit{(le prof n'écrivait pas clair au tableau et c'était verbeux)}}
 }
 
+\theorem{Théorème}{Signature et morphisme}{false}{
+    La signature est un morphisme de groupe de $S(X)$ dans $\{-1,1\}$.\\
+    \textit{i.e.} $\forall \sigma, \varrho \in S(X)$, on a : $\varepsilon(\sigma \circ \varrho) = \varepsilon(\sigma) \times \varepsilon(\varrho)$.
+}
+
+\noindent{
+    \textbf{Démonstration :}\\
+    \theorem{Lemme}{\textit{pour démontrer le théorème}}{false}{
+        On a $\sigma^2(S) = \{(\sigma(i),\sigma(j)) \mid (i,j) \in S\}$ est un système de représentants de $R$.
+    }
+
+    \ndlr{Demander la démonstration à Laurent}
+    
+}
+
+\definition{
+    Soit $\sigma\in S(X)$.\\
+    Si $\varepsilon(\sigma) = 1$, on dit que $\sigma$ est une \textbf{paire}.\\
+    Si $\varepsilon(\sigma) = -1$, on dit que $\sigma$ est une \textbf{impaire}.
+}
+
+\theorem{Proposition}{}{false}{
+    On pose $\mathcal{A}(X) = \{\sigma \in S(X) \mid \varepsilon(\sigma) = 1\}$.\\
+    C'est un sous-groupe de $S(X)$ appelé le \textbf{groupe alterné} sur $X$.\\\\
+
+    En particulier, si $X = \{1,2,\ldots,n\}$, on le note $\mathcal{A}_n$. (groupe alterné sur n lettres)\\
+    Et on a $\#\mathcal{A}_n = ord(\mathcal{A}_n) = \frac{n!}{2}$ pour $n\geq2$.
+}
+\noindent{
+    \textbf{Démonstration :}\\
+    On a $\mathcal{A}(X) = \{\sigma \in S(X) \mid \varepsilon(\sigma) = 1\} = Ker(\varepsilon)$, donc c'est un sous-groupe de $S(X)$.\\
+    Supposons que $\mathcal{A}_n$ a un élément $\tau$ de signature -1, c'est vrai si $n\geq2$.\\
+    Alors $S(X) = \mathcal{A}(X) \cup \tau \mathcal{A}(X)$ et $\mathcal{A}(X) \cap \tau \mathcal{A}(X) = \emptyset$.\\
+    En effet, si $\sigma \in \mathcal{A}(X)$ OK.
+    Sinon si $\sigma \notin \mathcal{A}(X)$, on a $\varepsilon(\sigma) = -1$ et donc $\varepsilon(\sigma\tau^{-1}) = -1 \times -1 = 1$, donc $\sigma\tau^{-1} \in \mathcal{A}(X)$ et $\sigma \in \tau \mathcal{A}(X)$.\\
+    On a $\mathcal{A}(X) \cap \tau \mathcal{A}(X) = \emptyset$.\\
+    On a une bijection \function{}{\mathcal{A}(X) \rightarrow \tau \mathcal{A}(X)}{\sigma \mapsto \tau\sigma}.\\
+    Donc $\#\mathcal{A}(X) = \#\tau \mathcal{A}(X)$ et $\#S(X) = 2\#\mathcal{A}(X)$.\\
+    Donc $\#\mathcal{A}(X) = \frac{\#S(X)}{2}$. Donc $\#\mathcal{A}_n = \frac{n!}{2}$ pour $n\geq2$.
+    $\Box$
+}
+
+\section{Transpositions}
+
+\definition{
+    Une transposition de $X$ est un 2-cycle. On la note $(a\ b)$.
+}
+
+\theorem{Propriété}{Transpositions et signature}{false}{
+    Soit $\sigma \in S(X)$.\\
+    On a $\varepsilon(\sigma) = (-1)$. (une transposition existe ssi $\#X \geq 2$)
+}
+
+\noindent{
+    \textbf{Démonstration :}\\
+    Soit $\sigma = (a\ b)$ avec $(a,b) \in S$.\\
+    Soit \functionSets{f}{X \rightarrow \mathbb{R}} et $f(a), f(b) : f(b) > f(c) > f(a)$ si $c \neq a,b$.\\
+    On a : $\varepsilon(\sigma) = \ldots$\\
+    \ndlr{Il y a une erreur dans la démonstration du prof, il écrit n'importe quoi au tableau}
+}
+
+\theorem{Formulaire}{}{false}{
+    Soit $c = (a_1 \cdots a_k)$ un $l$-cycle.\\
+    \begin{enumerate}
+    \item On a $c = (a_1 a_2)(a_2 a_3) \cdots (a_{k-1} a_k)$ \textit{i.e. c'est un produit de transpositions}.
+    \item Soit $\sigma \in S(X)$.\\
+    On a $\sigma c \sigma^{-1} = (\sigma(a_1) \cdots \sigma(a_k))$ (formule de conjugaison).
+    \item Soient $c_1,\ldots,c_k$ des cycles.\\
+    On a $\sigma c_1 \cdots c_k \sigma^{-1} = (\sigma c_1 \sigma^{-1}) \cdots (\sigma c_k \sigma^{-1})$.
+    \end{enumerate}
+}
+
+\ndlr{Démonstration laissée à l'appréciation du lecteur, elle n'était pas à mon appréciation}
+
+\theorem{Corollaire}{}{false}{
+    Le groupe $S(X)$ est engendré par les transpositions.\\
+    \textit{i.e.} toute permutation $\sigma$ de $S(X)$ s'écrit comme produit de transpositions $\sigma = \tau_1 \cdots \tau_r$ et $\varepsilon(\sigma) = (-1)^k$. (non unique)  
+}
+
+\ndlr{Démonstration laissée à l'appréciation du lecteur, elle n'était pas à mon appréciation}
 
 \end{document}
 
