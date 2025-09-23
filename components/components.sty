@@ -170,6 +170,27 @@
   \end{tikzpicture}
 }
 
+
+\newcommand{\carreauxExos}[1]{%
+  \begin{tikzpicture}[baseline=(current bounding box.north west)]
+    \pgfmathsetmacro{\nbLines}{#1}
+    \pgfmathsetmacro{\height}{0.5 * \nbLines} % 0.5 cm = 5 mm
+    \def\width{13}
+    
+    % Lignes verticales (toutes les 0.5 cm)
+    \foreach \x in {0,0.5,...,\width} {
+      \draw[info, thin] (\x cm, 0) -- (\x cm, \height cm);
+    }
+    % Lignes horizontales (toutes les 0.5 cm)
+    \foreach \y in {0,0.5,...,\height} {
+      \draw[info, thin] (0, \y cm) -- (\width cm, \y cm);
+    }
+    
+    % Bordure du cadre
+    \draw[info, thin] (0,0) rectangle (\width cm, \height cm);
+  \end{tikzpicture}
+}
+
 \newcommand{\exercise}[3]{%
   \noindent
   \tcbox[colframe=primary,

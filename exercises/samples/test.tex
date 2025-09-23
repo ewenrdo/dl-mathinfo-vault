@@ -1,0 +1,68 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL1 Math-Info}
+\fancyhead[C]{Interrogation écrite : Applications linéaires}
+\fancyhead[R]{2024-2025}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{1cm}
+
+% Début des colonnes
+\begin{paracol}{2}
+
+\noindent{\textbf{Nom :} \\
+\textbf{Prénom :} \\
+\textbf{Classe :} \\
+} 
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.66\columnwidth}|>{\centering\arraybackslash}p{0.07\columnwidth}|>{\centering\arraybackslash}p{0.07\columnwidth}|>{\centering\arraybackslash}p{0.07\columnwidth}|}
+\hline      
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{NA} & \textbf{ECA} & \textbf{A} \\
+\hline
+Reprehenderit amet mollit incididunt non quis eiusmod. & & & \\
+\hline
+Reprehenderit amet mollit incididunt non quis eiusmod. & & & \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\exercise{1}{5 points}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+\noindent\carreauxExos{10}\\\\ 
+
+\exercise{2}{Deuxième exercice}{Texte de l'exercice 2.}
+
+\exercise{3}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
+
+\switchcolumn % Changer de colonne
+
+\exercise{4}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\exercise{5}{Deuxième exercice}{Texte de l'exercice 2.}
+
+\exercise{6}{Troisième exercice}{Texte de l'exercice 3 qui sera dans la colonne 2 si la colonne 1 est pleine.}
+
+
+% Passer à la page suivante
+\switchcolumn
+\newpage
+\exercise{7}{Titre de l'exercice}{Voici le texte de l'exercice qui commence sur la ligne d'après.}
+
+\end{paracol}
+
+\end{document}
