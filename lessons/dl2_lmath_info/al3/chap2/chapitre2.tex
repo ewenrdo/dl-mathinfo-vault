@@ -12,7 +12,7 @@
 \fancyhf{} % reset tout
 
 \fancyhead[L]{DL2 Math-Info AL3}
-\fancyhead[C]{Groupes}
+\fancyhead[C]{Théorie des groupes}
 \fancyhead[R]{2025-2026}
 
 \fancyfoot[L]{Ewen Rodrigues de Oliveira}
@@ -25,7 +25,10 @@
 \section{Permutations}
 
 \definition{Soient $X$ un ensemble et $S(X)$ l'ensemble des bijections de $X$ dans $X$.\\
-On appelle permutation de $X$ tout élément de $S(X)$.}
+On appelle permutation de $X$ tout élément de $S(X)$.\\\\
+
+Intuitivement, c'est l'ensemble des réarrangements des éléments de $X$.}
+
 
 \theorem{Propriété}{Ensemble des permutations}{true}{
     $(S(X), \circ)$ est un groupe \textit{(en général non commutatif)}.
@@ -74,7 +77,9 @@ i & 1 & 2 & 3 & \cdots & n \\
 \]
 
 \definition{Soit $\sigma \in S(X)$.\\
-Le support de $\sigma$ est $\{x \in X \mid \sigma(x) \neq x\}$ }
+Le support de $\sigma$ est $\{x \in X \mid \sigma(x) \neq x\}$.\\\\
+Intuitivement, c'est l'ensemble des éléments de $X$ que $\sigma$ "déplace".}
+
 
 \example{
     Prenons $S(X)=S_6$.\\
@@ -85,7 +90,7 @@ i & 1 & 2 & 3 & 4 & 5 & 6 \\
 \sigma(i) & 3 & 2 & 1 & 6 & 5 & 4
 \end{array}
 \]
-    $\sigma$ a pour support ${1,3,4,6}$.
+    $\sigma$ a pour support $\{1,3,4,6\}$.
 }
 
 \theorem{Proposition}{}{false}{
