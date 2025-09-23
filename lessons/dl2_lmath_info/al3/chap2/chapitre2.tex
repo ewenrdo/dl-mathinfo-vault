@@ -137,6 +137,24 @@ i & 1 & 2 & 3 & 4 & 5 & 6 \\
     On le note $(a_1 \cdots a_k)$.
 }
 
+\example{
+    Soit $X = \{1,2,3,4,5\}$.\\
+    Alors $(1\ 3\ 4)$ est un 3-cycle de $S(X)$ défini par : 
+    \[
+    \begin{array}{c|ccccc}
+    i & 1 & 2 & 3 & 4 & 5 \\
+    \hline
+    \sigma(i) & 3 & 2 & 4 & 1 & 5
+    \end{array}
+    \]
+}
+
+\remark{
+    Un k-cycle est juste une notation compacte pour une permutation, par exemple :\\
+    $(a_1 a_2 \cdots a_k)$ est la permutation $\sigma$ définie par :\\
+    $\sigma(a_1) = a_2, \sigma(a_2) = a_3, \ldots, \sigma(a_{k-1}) = a_k, \sigma(a_k) = a_1$ et $\sigma(x) = x$ si $x \notin \{a_1, a_2, \ldots, a_k\}$.
+}
+
 \attention{La notation n'est pas unique : $(a_{i}a_{i+1}\cdots a_{k}a_{1}a_{2} \cdots a_{i-1}) = (a_1 \cdots a_k)$}
 
 \vocabulary{On dit qu'une permutation $c$ est un cycle s'il existe $k\geq2 \mid c$ est un k-cycle. Alors $k$ s'appelle la \textbf{longueur} de $c$.}
@@ -159,7 +177,7 @@ On a $c \circ c' = c' \circ c$
 }
 
 \definition{
-    Soit $x \in X$, l'\textbf{orbite de x sous $\sigma$} est $\{\sigma^m(x) \mid m\in Z\}$.
+    Soit $x \in X$, l'\textbf{orbite de $x$ sous $\sigma$} est $\{\sigma^m(x) \mid m\in Z\}$.
 }
 
 \remark{
