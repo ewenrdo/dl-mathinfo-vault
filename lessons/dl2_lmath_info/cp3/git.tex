@@ -103,10 +103,12 @@
 
 \theorem{Utilisation des branches}{}{true}{
     Les branches permettent de travailler sur des fonctionnalités ou des corrections de bugs sans affecter la branche principale.\\
+    C'est pratique pour tester des idées, ou pour développer une fonctionnalité et ne la rajouter à la branche principale que lorsqu'elle est terminée.\\
 
     On peut créer une nouvelle branche avec la commande \texttt{git branch <nom\_branche>}, puis se déplacer dessus avec \texttt{git checkout <nom\_branche>}.\\
 }
 
+\remark{\texttt{git checkout} est aussi utilisé pour revenir à une version précédente d'un fichier ou d'un commit.}
 \remark{Depuis GIT 2.23, on peut utiliser la commande \texttt{git switch <nom\_branche>} pour se déplacer sur une branche.}
 
 \theorem{Fusion de branches}{}{true}{
