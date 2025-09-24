@@ -18,6 +18,7 @@
 \definecolor{primarySmooth}{RGB}{230,237,247}
 \definecolor{danger}{RGB}{214,23,105}
 \definecolor{warning}{RGB}{255, 115, 0}
+\definecolor{warningSmooth}{RGB}{255, 208, 0}
 \definecolor{success}{RGB}{0, 153, 0}
 \definecolor{info}{RGB}{0, 153, 204}
 \definecolor{purple}{RGB}{159, 47, 245}
@@ -101,6 +102,16 @@
   {\color{warning}\textbf{\faInfoCircle\  Remarque :}}~#1
   \par\vspace{1em}
 }
+
+
+% Rappel
+\newcommand{\reminder}[1]{%
+  \vspace{1em}
+  \noindent
+  {\color{warningSmooth}\textbf{\faInfoCircle\  Rappel :}}~#1
+  \par\vspace{1em}
+}
+
 % Comment (Note de la rédaction)
 \newcommand{\ndlr}[1]{%
   \vspace{1em}

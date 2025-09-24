@@ -282,4 +282,179 @@ Ce qui a été fait dans le \textbf{Chapitre 1 - Suites de Cauchy} sur les suite
 \remark{
     Si $(S_N)$ n'est pas bornée, alors $S_N \xrightarrow[N\to\infty]{} +\infty$. On tolère la notation \(\sum_{n=0}^{\infty} u_n = +\infty\).
 }
+
+\training{\textbf{Application du théorème.}\\
+Soit $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ deux séries à termes positifs.\\
+Montrons que la série $\sum_{n\geq0} \sqrt{u_n v_n}$ converge.\\
+En effet, utilisons l'inégalité de Cauchy-Schwarz.\\
+$\forall N \in \mathbb{N}, \sum_{n=0}^{N} \sqrt{u_n v_n} \leq \sqrt{\sum_{n=0}^{N} u_n} \sqrt{\sum_{n=0}^{N} v_n}$.\\
+Or les deux termes de droite sont bornés, donc $\forall N \in \mathbb{N}, \sum_{n=0}^{N} \sqrt{u_n v_n}$ est bornée.\\
+Donc $\sum_{n\geq0} \sqrt{u_n v_n}$ converge.
+\\\\
+\textbf{Autre preuve (sans Cauchy-Schwarz) :}\\
+$(a-b)^2 \geq 0 \Leftrightarrow ab \leq \frac{a^2 + b^2}{2} \forall a,b \in \mathbb{R}$.\\
+Donc $\sum_{n=0}^{N} \sqrt{u_n v_n} \leq \frac{1}{2} (\sum_{n=0}^{N} u_n + \sum_{n=0}^{N} v_n)$.\\
+Or les deux termes de droite sont bornés, donc $\forall N \in \mathbb{N}, \sum_{n=0}^{N} \sqrt{u_n v_n}$ est bornée.\\
+Donc $\sum_{n\geq0} \sqrt{u_n v_n}$ converge.
+}
+
+\ndlr{On a pas encore abordé Cauchy-Schwarz.}
+
+\theorem{Proposition}{}{false}{
+    Soient $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ deux séries convergentes \textit{(pas forcément à termes positifs mais réels)}.\\
+    Si $u_n \leq v_n \forall n \in \mathbb{N}$, alors $\sum_{n=0}^{\infty} u_n \leq \sum_{n=0}^{\infty} v_n$.
+}
+
+\noindent{\textbf{Preuve:}\\
+    On considère la série à termes positifs $\sum_{n\geq0} (v_n - u_n)$. C'est une série convergente.\\
+    On a $\sum_{n=0}^{\infty} (v_n - u_n) \geq 0$.\\
+    Or $\sum_{n\geq0} v_n$ et $\sum_{n\geq0} u_n$ sont convergentes.\\
+    Donc on peut écrire : \(\sum_{n=0}^{\infty} v_n - \sum_{n=0}^{\infty} u_n = \sum_{n=0}^{\infty} (v_n - u_n) \geq 0\).\\
+    Donc \(\sum_{n=0}^{\infty} u_n \leq \sum_{n=0}^{\infty} v_n\).
+}
+
+\subsection{Critère de comparaison}
+Tout cela est fait pour des séries à termes positifs.
+\theorem{Théorème}{Critère de comparaison ("Hyper important")}{false}{
+    Soit $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ deux séries à termes positifs.\\
+    Supposons que $\forall n \in \mathbb{N}, 0 \leq u_n \leq v_n$.\\
+    Alors :
+    \begin{itemize}
+        \item Si $\sum_{n\geq0} v_n$ converge, alors $\sum_{n\geq0} u_n$ converge.
+        \item Si $\sum_{n\geq0} u_n$ diverge, alors $\sum_{n\geq0} v_n$ diverge.
+    \end{itemize}
+}
+
+\noindent{\textbf{Preuve:}\\
+    \begin{itemize}
+        \item On a $\forall N \in \mathbb{N}, 0 \leq \sum_{n=0}^{N} u_n \leq \sum_{n=0}^{N} v_n$.\\
+        Or $\sum_{n\geq0} v_n$ converge, donc la suite des sommes partielles$(\sum_{n=0}^{N} v_n)$ est bornée.\\
+        Donc la suite des sommes partielles $(\sum_{n=0}^{N} u_n)$ est bornée et donc $\sum_{n\geq0} u_n$ converge.
+        \item Comme $\sum_{n\geq0} u_n$ diverge, la suite des sommes partielles $(\sum_{n=0}^{N} u_n)$ n'est pas bornée.\\
+        Et comme $\forall N \in \mathbb{N}, 0 \leq \sum_{n=0}^{N} u_n \leq \sum_{n=0}^{N} v_n$, la suite des sommes partielles $(\sum_{n=0}^{N} v_n)$ n'est pas bornée.\\
+        Et donc par le théorème de convergence des séries à termes positifs on a que $\sum_{n\geq0} v_n$ diverge.
+    \end{itemize}
+}
+
+\theorem{Corollaire}{}{false}{
+    Soient $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ deux séries à termes positifs.\\
+    $\exists n_0 \in \mathbb{N}, \forall n \geq n_0, \frac{u_{n+1}}{u_n} \leq \frac{v_{n+1}}{v_n}$.\\
+    Alors :
+    \begin{itemize}
+        \item Si $\sum_{n\geq0} v_n$ converge, alors $\sum_{n\geq0} u_n$ converge.
+        \item Si $\sum_{n\geq0} u_n$ diverge, alors $\sum_{n\geq0} v_n$ diverge.
+    \end{itemize}
+}
+
+\noindent{\textbf{Preuve:}\\
+    Pour $n \geq n_0$,\\
+    \(
+        \frac{u_{n+1}}{u_n} \times \frac{u_n}{u_{n-1}} \times \ldots \times \frac{u_{n_0+1}}{u_{n_0}} \leq \frac{v_{n+1}}{v_n} \times \frac{v_n}{v_{n-1}} \times \ldots \times \frac{v_{n_0+1}}{v_{n_0}}\\
+        \Rightarrow \frac{u_{n+1}}{u_{n_0}} \leq \frac{v_{n+1}}{v_{n_0}} \Rightarrow u_{n+1} \leq k v_{n+1}\) avec \(k = \frac{u_{n_0}}{v_{n_0}} \in \mathbb{R}_{+}^*\)
+
+    \begin{itemize}
+        \item On suppose que $\sum_{n\geq0} v_n$ converge.\\
+        Donc $\sum_{n\geq0} k v_n$ converge.\\
+        Donc par le théorème précédent, comme $\forall n \geq n_0, 0 \leq u_n \leq k v_n$, on a que $\sum_{n\geq0} u_n$ converge.
+        \item \textit{(non démontré en cours)}
+    \end{itemize}
+}
+
+\training{\textit{applications aux séries absolument convergentes}\\
+
+    \theorem{Proposition}{}{false}{
+        Soit $\sum_{n\geq0} u_n$ une série à termes réels.\\
+        Définissons $u_{n}^{+} = \max(u_n,0) \geq 0$ et $u_{n}^{-} = \max(-u_n,0) \geq 0$.\\
+
+        On a $\sum_{n\geq0} u_n$ est ACV.\\
+       $\sum_{n\geq0} |u_n|$ converge \(\Leftrightarrow\) $\sum_{n\geq0} u_{n}^{+}$ et $\sum_{n\geq0} u_{n}^{-}$ convergent.\\
+    }
+
+    \noindent{\textbf{Preuve:}\\
+        $\Rightarrow$/ On a $\forall n \in \mathbb{N} 0 \leq u_{n}^{+} \leq |u_n|$ et $0 \leq u_{n}^{-} \leq |u_n|$.\\
+        Donc par le théorème de comparaison, $\sum_{n\geq0} u_{n}^{+}$ et $\sum_{n\geq0} u_{n}^{-}$ convergent.\\
+        $\Leftarrow$/ On remarque que $|u_n| = u_{n}^{+} + u_{n}^{-}$.\\
+        Si $\sum_{n\geq0} u_{n}^{+}$ et $\sum_{n\geq0} u_{n}^{-}$ convergent, alors $\sum_{n\geq0} |u_n|$ converge $\Rightarrow \sum_{n\geq0} u_n$ est ACV.
+    }
+
+    \theorem{Proposition}{}{false}{
+        Soit $\sum_{n\geq0} u_n$ une série à termes complexes.\\
+        On a $\sum_{n\geq0} u_n$ est ACV \(\Leftrightarrow\) $\sum_{n\geq0} Re(u_n)$ et $\sum_{n\geq0} Im(u_n)$ sont ACV.
+    }
+}
+
+\training{Montrer la proposition précédente.}
+\noindent\carreaux{10}
+
+
+\subsection{Domination, convergence et équivalence}
+
+\reminder{
+    Soient ($u_n$) et ($v_n$) deux suites.\\
+    \begin{itemize}
+        \item $u_n = O(v_n)$ ssi \(\exists M > 0, |u_n| \leq M |v_n|\) au voisinage de l'infini (n assez grand) $\Leftrightarrow |\frac{u_n}{v_n}|$ est bornée.
+        \item $u_n = o(v_n)$ ssi $\frac{u_n}{v_n} \xrightarrow[n\to\infty]{} 0$. ($u_n$ est négligeable devant $v_n$)
+        \item $u_n = o(v_n) \Rightarrow u_n = O(v_n)$
+        \item $u_n \sim v_n$ ssi $\frac{u_n}{v_n} \xrightarrow[n\to\infty]{} 1$. ($u_n$ est équivalent à $v_n$)
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{true}{
+    Soient $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ deux séries à termes positifs.\\
+    On suppose $u_n = O_{+\infty}(v_n)$.\\
+    \begin{itemize}
+        \item Si $\sum_{n\geq0} v_n$ converge, alors $\sum_{n\geq0} u_n$ converge.
+        \item Si $\sum_{n\geq0} u_n$ diverge, alors $\sum_{n\geq0} v_n$ diverge.
+    \end{itemize}
+}
+
+\noindent{\textbf{Indication pour la preuve:}\\
+    Il suffit de remarquer que $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} M v_n$ sont de même nature ; et $M$ est tel que $u_n \leq M v_n$
+}
+
+\attention{
+    Si on sait que $\sum_{n\geq0} v_n$ alors pour montrer que $\sum_{n\geq0} u_n$ converge, il suffit de montrer que $u_n = o_{+\infty}(v_n)$.\\
+    \textit{(en réalité il faudrait montrer grand O, mais o $\Rightarrow$ O donc c'est plus fort et plus simple à montrer)}
+}
+
+\theorem{Corollaire}{}{true}{
+    Soit $\sum_{n\geq0} u_n$ une série à terme général dans $\mathbb{C}$ et soit $\sum_{n\geq0} v_n$ une série à terme général positif tel que $\sum_{n\geq0} v_n$ converge.\\
+    Si $u_n = O_{+\infty}(v_n)$, alors $\sum_{n\geq0} u_n$ converge absolument (ACV).
+}
+
+\training{Montrer le corollaire précédent.}
+\noindent\carreaux{10}
+
+\theorem{Théorème}{"Hyper² important"}{false}{
+    Soit $\sum_{n\geq0} u_n$ une série à terme général dans $\mathbb{C}$ et soit $\sum_{n\geq0} v_n$ une série à termes positifs.\\
+    On suppose $u_n \sim_{+\infty} v_n$.\\ \textit{(on pourrait mettre une constante)}\\
+    On a :
+    \begin{itemize}
+        \item Si $\sum_{n\geq0} v_n$ converge alors $\sum_{n\geq0} u_n$ converge absolument (ACV).
+        \item Si $\sum_{n\geq0} v_n$ diverge alors $\sum_{n\geq0} u_n$ diverge.
+    \end{itemize}
+}
+
+\remark{
+    Si $u_n \geq 0$ alors $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ sont de même nature.
+}
+
+\section{Séries de références}
+
+\subsection{Série de Riemann}
+
+\theorem{Théorème}{}{false}{
+    Soit $\alpha \in \mathbb{R}$. Soit la série $\sum_{n\geq1} \frac{1}{n^{\alpha}}$, dite \textbf{série de Riemann}.\\
+    La série converge \(\Leftrightarrow \alpha > 1\).
+}
+
+\noindent{\textbf{Preuve:}\\
+    On a vu que pour $\alpha = 1$, la série diverge (série harmonique).\\
+    \begin{itemize}
+        \item Si $\alpha \leq 1, \frac{1}{n^{\alpha}} \geq \frac{1}{n}$. Donc par le théorème de comparaison, $\sum_{n\geq1} \frac{1}{n^{\alpha}}$ diverge.
+    \end{itemize}
+}
+
+\ndlr{Démonstration à terminer au prochain cours}
+
 \end{document}
