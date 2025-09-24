@@ -22,4 +22,35 @@
 
 \docTitle{Chapitre 3 : Espaces vectoriels}
 
+
+\section{Corps}
+
+\definition{Un \textbf{corps} est un ensemble $K$ muni de deux lois de composition interne notées $+$ et $\times$ telles que :\\
+    \begin{itemize}
+        \item $(K,+)$ est un groupe abélien
+        \item $(K\setminus\{0\},\times)$ est un groupe abélien
+        \item La loi $\times$ est distributive par rapport à la loi $+$
+    \end{itemize}
+    Si de plus la loi $\times$ est commutative, on dit que $K$ est un \textbf{corps commutatif}.
+}
+
+\reminder{Distributivité : $\forall a,b,c \in K, a \times (b + c) = a \times b + a \times c$}
+\example{$\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{Z}/p\mathbb{Z}, p \text{ premier}$ sont des corps.}
+
+\section{Espaces vectoriels}
+
+\definition{
+    Soient $K$ un corps et $E$ un groupe abélien.\\
+    Soit une loi \function{}{K \times E \rightarrow E}{(\lambda, v) \mapsto \lambda \cdot v} \textit{(multiplication externe)}.\\
+    On dit que $(E, +, \cdot)$ est un \textbf{$K$-espace vectoriel} si on a $\forall \lambda, \mu \in K, \forall v \in E$ :\\
+    \begin{itemize}
+        \item $\lambda \cdot (\mu \cdot v) = (\lambda \times \mu) \cdot v$
+        \item $1 \cdot v = v$
+        \item $(\lambda + \mu) \cdot v = \lambda \cdot v + \mu \cdot v$ \textit{(on a deux + différents)}
+        \item $\lambda \cdot (v + w) = \lambda \cdot v + \lambda \cdot w$
+    \end{itemize}
+}
+
+\vocabulary{Les éléments de $E$ sont appelés \textbf{vecteurs}. Les éléments de $K$ sont appelés \textbf{scalaires}.}
+\example{$\mathbb{R}^n$ est un $\mathbb{R}$-espace vectoriel. De même pour $\{0\}$, $\mathbb{R}[X]$, $M_n(\mathbb{R})$.}
 \end{document}
