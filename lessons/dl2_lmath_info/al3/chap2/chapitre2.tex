@@ -364,5 +364,58 @@ On le note $\varepsilon(\sigma)$ et on l'appelle la \textbf{signature} de $\sigm
 
 \ndlr{Démonstration laissée à l'appréciation du lecteur, elle n'était pas à mon appréciation}
 
+\theorem{Proposition}{}{false}{
+    Soit $c$ un cycle de longueur $l$.\\
+    Alors $\varepsilon(c) = - (-1)^{l} = (-1)^{l-1}$.
+}
+
+\noindent{
+    \textbf{Démonstration :}\\
+    On a $c = (a_1 a_2\cdots a_l) = (a_1 a_2)(a_2 a_3) \cdots (a_{l-1} a_l)$, donc $c$ est produit de $l-1$ transpositions.\\
+    Donc $\varepsilon(c) = \varepsilon((a_1 a_2)) \times \cdots \times \varepsilon((a_{l-1} a_l)) = (-1)^{l-1}$. $\Box$
+}
+
+\example{
+    Soit $\sigma \in S_{12}$ donné par :\\
+    \[
+    \begin{array}{c|cccccccccccc}
+        i & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+        \hline
+        \sigma(i) & 10 & 8 & 7 & 4 & 2 & 9 & 1 & 12 & 3 & 11 & 5 & 6
+    \end{array}
+    \]
+    Elle vaut $(1\ 10\ 11\ 5\ 2\ 8\ 12\ 6\ 9\ 3\ 7)$.\\
+    Donc $\varepsilon(\sigma) = (-1)^{11-1} = 1$.
+}
+
+\section{Compléments sur les groupes cycliques}
+
+\theorem{Proposition}{Ordre d'une permutation}{false}{
+    Soit $G$ un groupe et $g \in G$ d'ordre fini $n$.\\
+    L'application \function{exp_g}{\mathbb{Z} \rightarrow G}{k \mapsto g^k}  se factorise \textit{(i.e. passe au quotient)} par $\mathbb{Z}/n\mathbb{Z}$.\\
+    L'application quotient est un isomorphisme de $\mathbb{Z}/n\mathbb{Z}$ sur $g^\mathbb{Z} = \{g^k \mid k \in \mathbb{Z}\}$.
+}
+
+\theorem{Corollaire}{}{false}{
+    Tout groupe cyclique d'ordre $n$ est isomorphe à $\mathbb{Z}/n\mathbb{Z}$.
+}
+
+\noindent{
+    \textbf{Démonstration de la proposition :}\\
+    Il faut montrer que si $k,k' \in \mathbb{Z}$ et $k \equiv k' [n]$, alors $exp_g(k) = exp_g(k')$.\\
+    Comme $k \equiv k' [n]$, $\exists t \in \mathbb{Z}$ tel que $k' - k = tn$ et donc $k' = k + tn$.\\
+    On a $exp_g(k') = exp_g(k + tn) = g^{k+tn} = g^k (g^{n})^{t} = g^k e_G = g^k = exp_g(k)$. $\Box$\\\\
+
+    Pour $k\in \mathbb{Z}$, notons $f(\overline{k}) = exp_g(k)$.\\
+    On a $f(\overline{k}+\overline{k'}) = f(\overline{k+k'}) = exp_g(k+k') = g^{k+k'} = g^k g^{k'} = f(\overline{k}) + f(\overline{k'})$.\\
+    Donc $f$ est un morphisme de groupe.\\ 
+    Pour $k\in\mathbb{Z}$, on a $f(\overline{k}) =g^{\mathbb{Z}}$. Donc $Im(f) = g^{\mathbb{Z}}$.\\
+    Montrons $f$ injective.\\
+    Soit $k\in \mathbb{Z}$ tel que $f(\overline{k}) = e_G$.\\
+    On a $g^k = e_G$. Donc $n \mid k$ et donc $\overline{k} = \overline{0}$. $\Box$
+}
+
+\ndlr{Fin du chapitre, amen.}
+
 \end{document}
 
