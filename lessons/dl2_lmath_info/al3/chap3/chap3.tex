@@ -70,4 +70,31 @@ On peut voir $\mathbb{C}$ comme un $\mathbb{R}$-espace vectoriel.}
 
 \vocabulary{Les $(\lambda_v)_{v \in X}$ sont appelés les \textbf{coefficients} de la combinaison linéaire.}
 
+\section{Sous-espaces vectoriels}
+
+\definition{
+    Soit $E$ un $K$-ev. Soit $F \subset E$.\\
+    On dit que $F$ est un \textbf{sous-espace vectoriel} (sous-ev) de $E$ si :
+    \begin{itemize}
+        \item $F \neq \emptyset$
+        \item $\forall u,v \in F, \lambda,\mu \in K, \lambda u + \mu v \in F$
+    \end{itemize}
+}
+
+\theorem{Proposition}{Caractérisation des sous-ev}{false}{
+    Tout sous-espace vectoriel est un espace vectoriel pour les lois induites par $E$.
+}
+
+\noindent{\textbf{Preuve:}\\
+Montrons $(F, +)$ est un sous-groupe de $(E, +)$ :\\
+\begin{itemize}
+    \item $F \neq \emptyset$ donc $\exists u \in F$.
+    \item $\lambda = \mu = 1 \implies u + v \in F, \forall u,v \in F$ donc $F$ est stable par $+$
+    \item $u + (-1)u = u(1 + (-1)) = 0_E \in F$. On a donc $-u \in F, \forall u \in F$.
+\end{itemize}
+Donc on a bien un sous-groupe.\\
+Les autres propriétés sont vérifiables et immédiates, on a bien un espace vectoriel.
+
+}
+
 \end{document}
