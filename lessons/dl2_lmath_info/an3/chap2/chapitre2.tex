@@ -33,7 +33,7 @@
 }
 \definition{On appelle \textbf{série de terme général \(u_n\)} que l'on note \(\sum_{n \geq 0} u_n\) la suite $(S_N)_{N \in \mathbb{N}}$.}
 
-\ndlr{Les deux définitions précédentes peuvent être regroupées.}
+\ndlr{Les deux définitions précédentes gagneraient à être fusionnées.}
 
 \vocabulary{On dit que \((S_N)\) est la suite des sommes partielles de la série.}
 \remark{\((S_N)\) correspond aux $N+1$ premiers termes de la suite.}
@@ -452,9 +452,149 @@ Tout cela est fait pour des séries à termes positifs.
     On a vu que pour $\alpha = 1$, la série diverge (série harmonique).\\
     \begin{itemize}
         \item Si $\alpha \leq 1, \frac{1}{n^{\alpha}} \geq \frac{1}{n}$. Donc par le théorème de comparaison, $\sum_{n\geq1} \frac{1}{n^{\alpha}}$ diverge.
+        \item $\Leftarrow/$ Supposons $\alpha > 1$.\\
+        Considérons la série $\sum_{n\geq1} u_n$ de terme général $u_n = \frac{1}{n^{\alpha-1}} - \frac{1}{(n+1)^{\alpha-1}}$.\\
+        \textbf{Observation 1 :} $\forall N \in \mathbb{N}^*, \sum_{n=1}^{N} u_n = 1 - \frac{1}{(N+1)^{\alpha-1}}$ donc $\sum_{n\geq1} u_n$ converge (car $\alpha - 1 > 0$). (téléscopage)\\
+        \textbf{Observation 2 :} Déterminons un équivalent de $u_n$.\\
+        $u_n = \frac{1}{n^{\alpha-1}} - \frac{1}{(n+1)^{\alpha-1}} = \frac{1}{n^{\alpha-1}} (1 - (\frac{n}{n+1})^{\alpha-1})$.\\
+        On a $(\frac{n}{n+1})^{\alpha-1} = (\frac{n+1-1}{n+1})^{\alpha-1} = (1 - \frac{1}{n+1})^{\alpha-1} = 1 - \frac{\alpha-1}{n} + o_{+\infty}(\frac{1}{n})$ (DL ordre 1).\\
+        $\Rightarrow 1 - (\frac{n}{n+1})^{\alpha-1} = \frac{\alpha-1}{n} + o_{+\infty}(\frac{1}{n}) \sim_{+\infty} \frac{\alpha-1}{n}$.\\
+        Donc $u_n \sim_{+\infty} \frac{1}{n^{\alpha-1}} \times \frac{\alpha-1}{n} = \frac{\alpha-1}{n^{\alpha}} > 0$.\\
+        On a deux séries à termes positifs $\sum_{n\geq1} u_n$ et $\sum_{n\geq1} \frac{\alpha-1}{n^{\alpha}}$ qui sont de même nature car équivalentes ($u_n \sim_{+\infty} \frac{\alpha-1}{n^{\alpha}}$).\\
+        On en déduit que $\sum_{n\geq1} \frac{\alpha - 1}{n^{\alpha}}$ converge pour $\alpha > 1$ par le théorème sur les équivalents.\\
+        De plus la nature d'une série n'est pas modifiée quand le terme général est multiplié par un scalaire non nul.\\
+        Donc $\sum_{n\geq1} \frac{1}{n^{\alpha}}$ est de même nature que $\sum_{n\geq1} \frac{\alpha - 1}{n^{\alpha}}$.\\
+        Donc $\sum_{n\geq1} \frac{1}{n^{\alpha}}$ converge.
     \end{itemize}
 }
 
-\ndlr{Démonstration à terminer au prochain cours}
+\attention{Démonstration probablement en question de cours au partiel/CC :)}
+
+\theorem{Règles de comparaisons avec les séries de Riemann}{}{false}{
+    Soient $\sum u_n$ une série de terme général dans $\mathbb{C}$.
+    \begin{enumerate}
+        \item Si $u_n \sim_{+\infty} k \frac{1}{n^{\alpha}}$ avec $k \in \mathbb{C}^*$.
+        \begin{itemize}
+            \item Si $\alpha > 1$ alors $\sum_{n\geq1} u_n$ converge absolument (ACV).
+            \item Si $\alpha \leq 1$ alors $\sum_{n\geq1} u_n$ diverge.
+        \end{itemize}
+        \item Si $\exists \alpha > 1, n^{\alpha} |u_n|$ bornée \textit(i.e. $u_n = O(\frac{1}{n^{\alpha}})$), alors $\sum u_n$ converge absolument (ACV).\\
+            \textit{il suffit de montrer que $u_n = o(\frac{1}{n^{\alpha}})$}
+        \item On se restreint à $u_n \in \mathbb{R}$. Si $\exists \alpha \leq 1, n^{\alpha} u_n \xrightarrow[n\to\infty]{} +\infty$, alors $\sum u_n$ diverge.
+ 
+    \end{enumerate}
+}
+
+\remark{Penser $u_n$ à terme réel positif et $k \in \mathbb{R}_{+}^{*}$ pour la compréhension. \textit{(suffisant pour la compréhension et la plupart des exercices)}}
+
+\training{Montrer les règles de comparaison avec les séries de Riemann.}
+\noindent\carreaux{25}
+\training{Etudier la nature de la série de terme général $u_n = \sqrt{n^2+n+1} - \sqrt[3]{n^3+an^2+bn+c}$ avec $a,b,c \in \mathbb{R}$.}
+\noindent\carreaux{10}
+
+\subsection{Série géométrique}
+
+\reminder{
+    La série $\sum_{n\geq0} q^n$ converge \(\Leftrightarrow |q| < 1\) et dans ce cas $\sum_{n=0}^{\infty} q^n = \frac{1}{1-q}$.
+}
+\noindent{\textbf{Preuve:}\\
+    $\Leftarrow$ Si $|q| < 1$, alors $S_N = \sum_{n=0}^{N} q^n = \frac{1-q^{N+1}}{1-q} \xrightarrow[N\to\infty]{} \frac{1}{1-q}$.\\
+    $\Rightarrow$ Si $|q| \geq 1$, alors $q^n \nrightarrow 0$ donc la série diverge (grossièrement).
+}
+
+\theorem{Règle de Cauchy}{}{false}{
+    Soit $\sum_{n\geq0} u_n$ une série à terme général dans $\mathbb{C}$.\\
+    On suppose que $\lim_{n\to\infty} |u_n|^{\frac{1}{n}} = l$ (existe et égale à $l\in [0,+\infty]$, $+\infty$ autorisé).
+    \begin{enumerate}
+        \item Si $l < 1$, alors $\sum_{n\geq0} u_n$ converge absolument (ACV).
+        \item Si $l > 1$, alors $\sum_{n\geq0} u_n$ diverge.
+        \item Si $l = 1$, on ne peut rien conclure.
+    \end{enumerate}
+}
+\remark{Comprendre la règle précédente dans le cas réel, terme positif.}
+
+\noindent{\textbf{Preuve:}\\
+    \begin{enumerate}
+        \item Si $l < 1$, prenons $\varepsilon > 0$ tel que $l + \varepsilon < 1$.\\
+        Or $|u_n|^{\frac{1}{n}} \xrightarrow[n\to\infty]{} l$, donc $\exists N \in \mathbb{N}, \forall n \geq N, |u_n|^{\frac{1}{n}} \leq l + \varepsilon$.\\
+        Donc $|u_n| \leq (l + \varepsilon)^n$ pour $n \geq N$.\\
+        Or la série de terme général $(l + \varepsilon)^n$ est une série géométrique de raison $l + \varepsilon < 1$, donc elle converge.\\
+        Donc $\sum_{n\geq0} u_n$ converge.
+        \item Laissée à la douce appréciation du lecteur.
+        \item Trouvons une série $\sum_{n\geq0} u_n$  où $|u_n|^{\frac{1}{n}} \xrightarrow[n\to\infty]{} 1$ et où on ne peut rien conclure sur la nature de la série.\\
+        Si on prend $u_n = \frac{1}{n^{\alpha}} = e^{-\alpha \ln(n)}$, on a bien $u_n^{\frac{1}{n}} = e^{-\alpha \frac{\ln(n)}{n}} \xrightarrow[n\to\infty]{} 1 \forall \alpha$.\\
+        Or on a convergence pour $\alpha > 1$ et divergence pour $\alpha \leq 1$, on ne peut rien conclure.
+    \end{enumerate}
+}
+\newpage
+
+\training{Etudier la nature de la série de terme général $u_n = \cosh(\frac{1}{n})^{-n^3}$.}
+\noindent\carreaux{10}
+
+\theorem{Règle de d'Alembert}{}{false}{
+    Soit $\sum u_n$ une série à terme général dans $\mathbb{C}$ .\\
+    On suppose que $\lim_{n\to\infty} |\frac{u_{n+1}}{u_n}| = l$ (existe et égale à $l\in [0,+\infty]$, $+\infty$ autorisé).
+    \begin{enumerate}
+        \item Si $l < 1$, alors $\sum_{n\geq0} u_n$ converge absolument (ACV).
+        \item Si $l > 1$, alors $\sum_{n\geq0} u_n$ diverge.
+        \item Si $l = 1$, on ne peut rien conclure.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve:}\\
+    \begin{enumerate}
+        \item Si $l < 1$, prenons $\varepsilon > 0$ tel que $l + \varepsilon < 1$.\\
+        Or $|\frac{u_{n+1}}{u_n}| \xrightarrow[n\to\infty]{} l$, donc $\exists N \in \mathbb{N}, \forall n \geq N, |\frac{u_{n+1}}{u_n}| \leq l + \varepsilon$.\\
+        Posons $q = l + \varepsilon < 1$.\\
+        Ainsi, $|\frac{u_{n+1}}{u_n}| \leq \frac{q^{n+1}}{q^n}$ pour $n \geq N$.\\
+        On a une comparaison du type $\frac{a_{n+1}}{a_n} \leq \frac{b_{n+1}}{b_n}$.\\
+        On a vu que dans ce cas, $sum b_n$ converge $\Rightarrow \sum a_n$ converge.\\
+        Or $\sum q^n$ converge (série géométrique de raison $q < 1$) donc $\sum u_n$ converge (ACV).
+        \item Comme $\lim_{n\to\infty} |\frac{u_{n+1}}{u_n}| = l > 1, \exists N \in \mathbb{N}, \forall n \geq N, |\frac{u_{n+1}}{u_n}| \geq 1 \Rightarrow |u_n|$ est minorée par $n$ assez grand.\\
+        Donc $\sum u_n$ diverge.
+        \item Prendre $\sum_{n\geq1} \frac{1}{n^{\alpha}}$. On a bien $\frac{(n+1)^{\alpha}}{n} \xrightarrow[n\to\infty]{} 1$ et la nature dépend de $\alpha$.
+    \end{enumerate}
+}
+
+\training{Etudier la nature de la série de terme général $u_n = \frac{n!}{n^n}$.}
+\noindent\carreaux{13}
+
+\newpage
+\ndlr{On a évoqué en cours la formule de Stirling pour la culture, mais elle est hors programme : $n! \sim \sqrt{2 \pi n} (\frac{n}{e})^n$.}
+
+\theorem{Proposition}{Comparaison des règles de d'Alembert et de Cauchy}{false}{
+    Soit $\sum u_n$ une série à terme général positif ou nul.\\
+    On suppose que $\frac{u_{n+1}}{u_n} \xrightarrow[n\to\infty]{} l \in [0,+\infty]$.\\
+    Alors $u_n^{\frac{1}{n}} \xrightarrow[n\to\infty]{} l$.
+}
+
+\noindent{\textbf{Preuve:}\\
+    On suppose $\lim_{n\to\infty} \frac{u_{n+1}}{u_n} = l, l>0, l\neq +\infty$.\\
+    On a $\forall l_1, 0 < l_1 < l$, $\sum_{n\geq0} \frac{l_1^n}{u_n}$ converge par la règle de d'Alembert.\\
+    En effet, $\frac{l_1^{n+1}}{u_{n+1}} \times \frac{u_n}{l_1^n} = l_1 \times \frac{u_n}{u_{n+1}} \xrightarrow[n\to\infty]{} \frac{l_1}{l} < 1$.\\
+    Par convergence de la série on a que $\frac{l_1^n}{u_n} \xrightarrow[n\to\infty]{} 0$.\\*
+    À partir d'un certain rang, $\frac{l_1^n}{u_n} \leq 1 \Rightarrow l_1^n \leq u_n \Rightarrow l_1 \leq u_n^{\frac{1}{n}}$.\\\\
+    On a $\forall l_2, 0 < l < l_2$, $\sum_{n\geq0} \frac{u_n}{l_2^n}$ converge par la règle de d'Alembert.\\
+    À partir d'un certain rang (même argument que pour $l_1$), $u_n \leq l_2^n \Rightarrow u_n^{\frac{1}{n}} \leq l_2$.\\\\
+    Donc $l_1 \leq u_n^{\frac{1}{n}} \leq l_2$, $\forall l_1 < l < l_2$ pour un $n$ assez grand.\\
+    On fait tendre $n$ vers $\infty$ puis $l_1$ et $l_2$ vers $l$ et on en déduit que $u_n^{\frac{1}{n}} \xrightarrow[n\to\infty]{} l$.\\
+}
+
+\attention{La réciproque est fausse.}
+\example{Contre-exemple.\\
+Soit $0 < a < b$. Posons :
+\[
+    u_n = \begin{cases}
+        a^p b^p & \text{si n = 2p}\\
+        a^{p+1} b^p & \text{si n = 2p + 1}
+    \end{cases}
+\]
+
+On a $u_n^{\frac{1}{n}} \xrightarrow[n\to\infty]{} ab$ (peu importe la parité de $n$).\\
+Mais $\frac{u_{n+1}}{u_n}$ dépend de la parité de $n$.
+}
+
+\remark{Donc on préfère la règle de d'Alembert à celle de Cauchy.}
+
 
 \end{document}
