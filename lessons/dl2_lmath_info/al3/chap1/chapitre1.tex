@@ -135,7 +135,11 @@ pour tout \((x_1, y_1), (x_2, y_2) \in G_1 \times G_2\). Alors \((G_1 \times G_2
 \carreaux{20}
 
 
-\theorem{Corollaire}{Sous-groupe engendré}{false}{Soit \(X \subseteq G\). Considérons  \(H = \bigcap_{i \in I} H_i\). C'est un \textbf{sous-groupe de \(G\) engendré par \(X\)}.}
+\theorem{Corollaire}{Sous-groupe engendré}{false}{
+    Soit \(X \subseteq G\). 
+    Considérons  \(H = \bigcap_{H sous-groupe de G : X \subseteq H} H\).\\
+    
+    C'est un \textbf{sous-groupe de \(G\) engendré par \(X\)}.}
 \definition{Soit \(g \in G\).\\
 On a posé pour \(n\in \mathbb{Z}, g^n = \underbrace{g \cdot g \cdot ... \cdot g}_{n \text{ fois}}\) si \(n > 0\), \(g^0 = e\) (élément neutre) et \(g^n = \underbrace{g^{-1} \cdot g^{-1} \cdot ... \cdot g^{-1}}_{-n \text{ fois}}\) si \(n < 0\).\newline
 On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'ensemble des itérés} de \(g\).}
@@ -379,12 +383,18 @@ Le sous-groupe engendré par \(\overline{1}\) est \(\{ \overline{n} \mid n \in \
 
 \vocabulary{On appelle \textbf{ordre} d'un ensemble G son cardinal.}
 
+\definition{
+    Soit $x \in G$. On appelle \textbf{ordre} de $x$ le cardinal de l'ensemble $<x> = \{ x^n \mid n \in \mathbb{Z} \}$.\\
+    C'est le plus petit entier $k > 0$ tel que $x^k = e$ si il existe, sinon l'ordre de $x$ est infini.
+}
+
 \theorem{Proposition}{Ordre d'un élément}{false}{
     Soit $g \in G$, G fini.\\
     On a un morphisme $\exp_g : \substack{\mathbb{Z} \longrightarrow G \\ n \longmapsto g^n}$.\\
     Supposons que $\exists l \in \mathbb{N}^* g^l = e, \exists !k > 0 : Ker(exp_g)=k\mathbb{Z}$.\\\\
     De plus, $k=min\{l\in\mathbb{N}^* \mid g^l=e\}$ est \textbf{l'ordre de g}.
 }
+
 \noindent\textbf{Preuve:}\\
 \carreaux{7}
 \remark{Si $l$ existe, alors l'ordre de $g$ est fini.}
