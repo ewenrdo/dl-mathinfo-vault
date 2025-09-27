@@ -24,4 +24,4 @@ Ces documents utilisent un package LaTeX personnalisé _(plus d'informations dan
 
 ## Note
 
-Ces supports peuvent être modifiés pour améliorer la clarté pédagogique, mais le fond du cours reste conforme au programme officiel de l'Université Paris Cité.
+Ces supports peuvent être modifiés pour améliorer la clarté pédagogique, mais le fond du cours reste conforme au cours dispensé par M. Boyer.
