@@ -3,7 +3,7 @@
 Ce dossier contient les supports de cours d'Analyse 3 (AN3) dans le cadre du cursus DL2 MATH-INFO / MATH à l'Université Paris Cité.
 Merci à Laurent pour son aide précieuse pour la relecture et l'ajout de certaines parties du cours.
 
-**Je ne suis pas responsable de l'exactitude mathématique du contenu.** _(j'essaie de faire au mieux, mais les erreurs arrivent vites 😉)
+**Je ne suis pas responsable de l'exactitude mathématique du contenu.** _(j'essaie de faire au mieux, mais les erreurs arrivent vites 😉)_
 Une erreur --> envoyer un mail à ewen@wybz.fr _(ou créer une issue sur GitHub pour les plus endurcis)_
 ## Contenu
 
