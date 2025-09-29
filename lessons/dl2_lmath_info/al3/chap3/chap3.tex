@@ -93,8 +93,111 @@ Montrons $(F, +)$ est un sous-groupe de $(E, +)$ :\\
     \item $u + (-1)u = u(1 + (-1)) = 0_E \in F$. On a donc $-u \in F, \forall u \in F$.
 \end{itemize}
 Donc on a bien un sous-groupe.\\
-Les autres propriétés sont vérifiables et immédiates, on a bien un espace vectoriel.
+Les autres propriétés sont vérifiables et immédiates, on a bien un espace vectoriel
+}
 
+\example{
+    Soit $E$ un $\mathbb{K}$-ev.\\
+    \begin{itemize}
+        \item $\{0_E\}$ et $E$ sont des sous-ev de $E$.
+        \item $\{(x,y) \mid ax+by=0\} \subset \mathbb{R}^2$ est un sous-ev de $\mathbb{R}^2$.
+    \end{itemize}
+}
+
+\theorem{Proposition}{Intersection de sev}{false}{
+    Soit $E$ un $K$-ev. Soit $(F_i)_{i \in I}$ une famille de sev de $E$.\\
+    Alors $\bigcap_{i \in I} F_i$ est un sev de $E$.
+}
+
+\noindent{\textbf{Preuve:}\\
+Montrons que $\bigcap_{i \in I} F_i$ est stable par combinaison linéaire.\\
+Soient $x,y \in \bigcap_{i \in I} F_i$ et $\lambda, \mu \in K$.\\
+On a $x,y \in F_i$ pour tout $i \in I$, donc $\lambda x + \mu y \in F_i$ pour tout $i \in I$.\\
+Donc $\lambda x + \mu y \in \bigcap_{i \in I} F_i$. $\Box$}
+
+\remark{L'union de sev n'est pas forcément un sev.}
+
+\theorem{Proposition}{Sous-ev engendré}{false}{
+    Soit $E$ un $K$-ev. Soit $X \subset E$.\\
+    Alors il existe un plus petit sev de $E$ contenant $X$, noté $\text{Vect}(X)$ et appelé le \textbf{sev engendré} par $X$.\\
+    On a $\text{Vect}(X) = \{\sum_{x\in X} \lambda_x x \mid (\lambda_x)_{x\in X} \text{est presque nulle}, \lambda_x \in K\} = \bigcap_{\substack{F \text{ sev de } E \\ X \subset F}} F$.\\\\
+    Intuitivement, c'est l'ensemble des combinaisons linéaires d'éléments de $X$.
+}
+
+\reminder{"Presque nulle" signifie que tous les coefficients sont nuls sauf un nombre fini d'entre eux.}
+
+\noindent{\textbf{Preuve:}\\
+Montrons que $Vect(X)$ est un sev de E.\\
+Soient $u,v \in Vect(X)$ et $\lambda, \mu \in K$.\\
+On a $u = \sum_{x \in X} \lambda_x x$ et $v = \sum_{x \in X} \mu_x x$ avec $(\lambda_x)_{x \in X}$ et $(\mu_x)_{x \in X}$ presque nulles.\\
+Donc $\lambda u + \mu v = \sum_{x \in X} (\lambda \lambda_x + \mu \mu_x) x$ est une combinaison linéaire d'éléments de $X$ avec des coefficients presque nuls.\\
+Donc $\lambda u + \mu v \in Vect(X)$. C'est bien un sev.
+
+On a $X \subset \{CL de X\}$ car $x = 1 \cdot x + 0 \cdot y, \forall x \in X, y \in E$.\\
+Donc $Vect(X) \subset \{CL de X\}$.\\
+Réciproquement, $Vect(X)$ est stable par combinaison linéaire et contient $X$, donc $\{CL de X\} \subset Vect(X)$. Donc $Vect(X) = \{CL de X\}$. $\Box$.}
+
+\remark{La démonstration est générée par IA, elle diffère de celle du cours.}
+
+\theorem{Proposition}{Addition de sev}{false}{
+    Soit $E$ un $K$-ev. Soit $(F_i)_{i \in I}$ une famille de sev de $E$.\\
+    On peut considérer $Vect(\bigcup_{i \in I} F_i)$, noté $\sum_{i \in I} F_i$ et appelé la \textbf{somme} de la famille $(F_i)_{i \in I}$.
+}
+
+\remark{On note $F_1 + F_2 + \cdots + F_n$ au lieu de $\sum_{i=1}^n F_i$.}
+
+\theorem{Proposition}{Caractérisation de la somme}{false}{
+    Soit $E$ un $K$-ev. Soit $(F_i)_{i \in I}$ une famille de sev de $E$.\\
+    Alors $\sum_{i \in I} F_i = \{\sum_{i \in I} x_i \mid x_i \in F_i, \text{ presque tous nuls}\}$.
+}
+
+\noindent{\textbf{Preuve:}\\
+\ndlr{cf. Laurent}}
+
+\example{Soient $F$ et $G$ deux sev de $E$.\\
+Alors $F + G = \{x + y \mid x \in F, y \in G\}$.}
+
+\theorem{Proposition}{Application}{false}{
+    On a une application \function{\varphi}{F_1 \times F_2 \times \cdots \times F_n \rightarrow F_1 + F_2 + \cdots + F_n}{(x_1, x_2, \ldots, x_n) \mapsto x_1 + x_2 + \cdots + x_n}.\\
+    Elle est surjective.
+}
+
+\vocabulary{Si de plus l'application $\varphi$ est injective, alors on dit que la somme $F_1 + F_2 + \cdots + F_n$ est \textbf{directe} et on note $F_1 \oplus F_2 \oplus \cdots \oplus F_n$.}
+
+\theorem{Proposition}{Caractérisation de la somme directe}{false}{
+    Soient $F_1, F_2, \ldots, F_n$ des sev de $E$. Les assertions suivantes sont équivalentes :
+    \begin{itemize}
+        \item $F_1 + F_2 + \cdots + F_n$ est une somme directe.
+        \item $\forall (u_1, u_2, \ldots, u_n) \in F_1 \times F_2 \times \cdots \times F_n, u_1 + u_2 + \cdots + u_n = 0_E \implies u_1 = u_2 = \cdots = u_n = 0_E$
+        \item $\forall i \in \{1, 2, \ldots, n\}, F_i \cap (F_1 + \cdots + F_{i-1}) = \{0_E\}$
+    \end{itemize}
+}
+\noindent{\textbf{Preuve:}\\
+\ndlr{cf. Laurent}}
+
+\attention{On a $F_1$ somme directe avec $F_2$ ssi $F_1 \cap F_2 = \{0_E\}$. Mais pour avoir $F_1 \oplus F_2$ et $F_1 \oplus F_3$, et $F_2 \oplus F_3 = \{0_E\}$, mais pas forcément $F_1 \oplus F_2 \oplus F_3$.}
+
+\example{On prend 3 droites dans le plan passant par l'origine, deux par deux distinctes.\\
+Alors elles sont en somme, mais pas en somme directe.}
+
+\vocabulary{Si $F \oplus G = E$, on dit que $F$ et $G$ sont des \textbf{supplémentaires}.}
+\attention{Le supplémentaire n'est pas unique.}
+
+\section{Familles}
+
+\definition{
+    Soit $E$ un $K$-ev. Soit $I$ un ensemble.\\
+    Soit $(x_i)_{i \in I}$ une famille d'éléments de $E$.\\\\
+    Soit $J \subset I$. On dit que $(x_i)_{i \in J}$ est une \textbf{sous-famille} de $(x_i)_{i \in I}$.
+}
+
+\vocabulary{À l'inverse, $(x_i)_{i \in I}$ est une \textbf{sur-famille} de $(x_i)_{i \in J}$.}
+
+\remark{Dans la pratique, on prend souvent $I = \{1, 2, \ldots, n\}$.}
+
+\remark{
+    Soit $X \subset E$. On a une famille $(x)_{x \in X}$ indexée par $X$.\\
+    Donc une combinaison linéaire de X est une combinaison linéaire de la famille $(x)_{x \in X}$. \textit{(la réciproque n'est pas vraie, car il peut y avoir des répétitions dans la famille)}
 }
 
 \end{document}
