@@ -197,7 +197,35 @@ Alors elles sont en somme, mais pas en somme directe.}
 
 \remark{
     Soit $X \subset E$. On a une famille $(x)_{x \in X}$ indexée par $X$.\\
-    Donc une combinaison linéaire de X est une combinaison linéaire de la famille $(x)_{x \in X}$. \textit{(la réciproque n'est pas vraie, car il peut y avoir des répétitions dans la famille)}
+    Donc une combinaison linéaire de X est une combinaison linéaire de la famille $(x)_{x \in X}$. \textit{(la réciproque n'est pas vraie, car il peut y avoir des répétitions dans la famille: x+x n'est pas une combinaison linéaire de X)}
 }
+\definition{
+Soit $(x_i)_{i \in I}$ une famille de vecteurs de $E$.\\
+On dit que $(x_i)_{i \in I}$ est \textbf{libre} si :\\
+$\forall (\lambda_i)_{i \in I}$ presque nulle, $\sum_{i \in I} \lambda_i x_i = 0_E \implies \forall i \in I, \lambda_i = 0$.\\
+On dit que $(x_i)_{i \in I}$ est \textbf{liée} sinon.\\\\
+
+Pour $X \subset E$, on dit que $X$ est une partie libre (resp. liée) si la famille $(x)_{x \in X}$ est libre (resp. liée).
+}
+
+\example{
+    Dans $\mathbb{R}^3$, les vecteurs $(1,0,0)$ et $(0,1,0)$ sont libres.\\
+    Les vecteurs $(1,0,0)$ et $(2,0,0)$ sont liés.
+}
+
+\definition{
+    Soit $(x_i)_{i \in I}$ une famille de vecteurs de $E$.\\
+    On dit que c'est une \textbf{famille génératrice} de $E$ si $Vect(\{x_i \mid i \in I\}) = E$.\\\\
+    Alors tout élément de $E$ s'écrit comme une combinaison linéaire des $x_i$.\\
+    Pour $X \subset E$, on dit que $X$ est une partie génératrice de $E$ si la famille $(x)_{x \in X}$ est génératrice de $E$.
+}
+
+\theorem{Proposition}{Sous-familles}{false}{
+    Soit $(x_i)_{i \in I}$ une famille de vecteurs de $E$.\\
+    Alors toute sous-famille $(x_j)_{j \in J}$ de $(x_i)_{i \in I}$ est libre (resp. liée) si $(x_i)_{i \in I}$ est libre (resp. liée).\\
+    Et toute sur-famille $(x_k)_{k \in K}$ de $(x_i)_{i \in I}$ est génératrice (resp. non génératrice) si $(x_i)_{i \in I}$ est génératrice (resp. non génératrice).\\\\
+    \textit{(de même pour un sous-ensemble et un sur-ensemble d'une partie de $E$)}
+}
+
 
 \end{document}
