@@ -597,4 +597,122 @@ Mais $\frac{u_{n+1}}{u_n}$ dépend de la parité de $n$.
 \remark{Donc on préfère la règle de d'Alembert à celle de Cauchy. Mais si la règle d'Alembert ne donne rien, la règle de Cauchy ne donnera rien non plus.}
 
 \section{Séries semi-convergentes}
+\example{
+    $\sum_{n\geq1} \frac{e^{in\theta}}{n}$, on voit qu'elle n'est pas ACV, mais $|\frac{e^{in\theta}}{n}| = 1$ $\forall \theta \in \mathbb{R}$.\\
+    Mais on a pas les outils pour voir si elle est "seulement" convergente. \textit{Idem} pour la série $\sum_{n\geq1} \frac{(-1)^n}{n}$.
+}
+
+Donc le but ici, c'est de trouver des critères de convergence pour des séries qui ne sont pas ACV.
+
+\subsection{Définitions et premières propriétés}
+
+\definition{Une série est dite \textbf{semi-convergente} (SCV) si elle est convergente mais pas absolument convergente.}
+\remark{On considère ici les les séries à terme général $u_n \in \mathbb{C}$ ou $\mathbb{R}$ (on a pas $u_n \geq 0$).}
+
+\theorem{Proposition}{"étrange"}{false}{
+    Soit $\sum_{n\geq0} u_n$ une série à terme général dans $\mathbb{R}$.\\
+    On considère la série $\sum_{n\geq0} u_n^{+}$ et $\sum_{n\geq0} u_n^{-}$.\\
+
+    On a $\sum_{n\geq0} u_n$ est SCV \(\Rightarrow\) $\sum_{n\geq0} u_n^{+}$ et $\sum_{n\geq0} u_n^{-}$ divergent.
+}
+
+\noindent{\textbf{Preuve:}\\
+    On rappelle que $u_n^{+} = \max(u_n,0)$ et $u_n^{-} = \max(-u_n,0)$ et donc $u_n = u_n^{+} - u_n^{-}$ (2) et $|u_n| = u_n^{+} + u_n^{-}$ (1).\\
+    \begin{itemize}
+        \item Si $\sum_{n\geq0} u_n^{+}$ et $\sum_{n\geq0} u_n^{-}$ convergent, alors $\sum_{n\geq0} u_n$ ACV par (1) : \textbf{absurde}.
+        \item Si l'une des séries converge et l'autre diverge, alors $\sum_{n\geq0} u_n$ diverge par (2).
+        \item Seule possibilité donc : $\sum_{n\geq0} u_n^{+}$ et $\sum_{n\geq0} u_n^{-}$ divergent.
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{false}{
+    Considérons $\sum_{n\geq0} u_n$ une série à terme général dans $\mathbb{C}$.\\
+    Alors on a :\\
+    $\sum_{n\geq0} u_n$ est SCV \(\Leftrightarrow\) $\sum_{n\geq0} Re(u_n)$ et $\sum_{n\geq0} Im(u_n)$ sont CV et l'une d'entre elles est SCV.
+}
+
+\noindent{\textbf{Preuve:}\\
+    $\Rightarrow/$ Si $\sum_{n\geq0} u_n$ est CV, alors $\sum{n=0}^{N} u_n = \sum_{n=0}^{N} Re(u_n) + i \sum_{n=0}^{N} Im(u_n)$.\\
+    Donc on a la CV des séries $\sum_{n\geq0} Re(u_n)$ et $\sum_{n\geq0} Im(u_n)$.\\
+    Montrons que l'une des deux séries n'est pas ACV.\\
+    En effet on a $\forall n \in \mathbb{N}, |u_n| \leq |Re(u_n)| + |Im(u_n)|$ si $\sum_{n\geq0} |Re(u_n)|$ et $\sum_{n\geq0} |Im(u_n)|$ ACV.\\
+    $\Rightarrow$ une des deux séries n'est pas ACV.\\
+    $\Rightarrow$ une des deux séries est ACV.\\\\
+
+    $\Leftarrow/$ On a que $\sum_{n\geq0} Re(u_n)$ et $\sum_{n\geq0} Im(u_n)$ sont CV.\\
+    Donc $\sum_{n\geq0} u_n$ est CV.\\
+    Montrons que $\sum_{n\geq0} u_n$ est SCV.\\
+    On a : $|Re(u_n)| \leq |u_n|$ et $|Im(u_n)| \leq |u_n|$, $\forall n \in \mathbb{N}$.\\
+    Si $\sum_{n\geq0} u_n$ était ACV, alors $\sum_{n\geq0} Re(u_n)$ et $\sum_{n\geq0} Im(u_n)$ seraient ACV ce qui est contraite à l'hypothèse "l'une d'entre elles est SCV".
+}
+
+\subsection{Critère d'Abel}
+\training{On veut donner un critère pour la convergence d'une série du type $\sum_{n\geq1} \frac{e^{in\theta}}{n} = a_n b_n$ avec $a_n = e^{in\theta}$ et $b_n = \frac{1}{n}$.}
+
+
+\theorem{Théorème}{Critère d'Abel}{false}{
+    On considère la série $\sum_{n\geq0} u_n$ où $\sum_{n\geq0} u_n \in \mathbb{C}$, avec $u_n = a_n b_n$ tels quels :
+    \begin{enumerate}
+        \item $(a_n)$ est \textbf{réelle}, \textbf{décroissante}, et \textbf{\(\lim_{n\to\infty} a_n = 0\)}.
+        \item $(b_n)$ est \textbf{complexe} telle que $B_N = \sum_{n=0}^{N} b_n$, \textit{i.e.} $(B_N)$ est \textbf{bornée}.
+    \end{enumerate}
+    Alors la série $\sum_{n\geq0} a_n b_n$ converge.
+}
+
+\reminder{Une suite complexe est bornée : $\exists M > 0, \forall n \in \mathbb{N}, |z_n| \leq M$, où $|z_n| = \sqrt{Re(z_n)^2 + Im(z_n)^2}$.}
+
+\noindent{\textbf{Preuve:}\\
+On va utiliser la "transformation d'Abel".\\
+On a $B_N = \sum_{n=0}^{N} b_n$.\\
+Alors $B_k - B_{k-1} = b_k$, $\forall k \geq 1$ et $B_0 = b_0$.\\
+
+On part de la somme partielle de la série :\\
+\(
+\forall n \in \mathbb{N}, \sum_{k=1}^{N} a_k b_k = a_0 b_0 + \sum_{k=1}^{N} a_k (B_k - B_{k-1})\\
+    = a_0 b_0 + \sum_{k=1}^{N} a_k B_k - \sum_{k=1}^{N} a_k B_{k-1}\\
+    = a_0 b_0 + \sum_{k=1}^{N} a_k B_k - \sum_{k=0}^{N-1} a_{k+1} B_k\\
+    = a_0 b_0 + \sum_{k=1}^{N-1} (a_k - a_{k+1}) B_k + a_N B_N - a_1 b_0
+    = \sum_{k=0}^{N} (a_k - a_{k+1}) B_k + a_n B_N \text{ avec } a_n \text{ tend vers 0 et } B_n \text{ bornée}\\
+    \)
+
+Etude de $\sum_{k=0}^{N} (a_k - a_{k+1}) B_k$, séries à termes dans \(\mathbb{C}\).\\
+Etudions donc l'ACV :\\
+\(
+|a_k - a_{k+1} B_k| |a_k - a_{k+1}| |B_k| \leq (a_k - a_{k+1}) M \text{ car } |B_k| \leq M\\
+\)
+Or la série $\sum_{k=0}^{N} (a_k - a_{k+1}) M$ est de même nature que $\sum_{k=0}^{N} a_k - a_{k+1}$ (car $M$ est un scalaire non nul).\\
+Et la CV de cette série téléscopique est évidente.\\
+}
+
+\ndlr{Il y avait beaucoup d'indices et d'infos, j'attends la vérification de Laurent pour être sûr que c'est correct (j'ai un doute sur la fin).}
+
+\training{Pour $\theta \neq 2\pi k, \sum_{n\geq1} \frac{e^{in\theta}}{n}$ converge par le critère d'Abel, $a_n = \frac{1}{n}$ et $b_n = e^{in\theta}$ et $\sum_{n\geq1} b_n = \frac{1-e^{i(N+1)\theta}}{1-e^{i\theta}}$ et $|B_N| = |\frac{1-e^{i(N+1)\theta}}{1-e^{i\theta}}| \leq \frac{|1| + |e^{i(N+1)\theta}|}{|1-e^{i\theta}|} = \frac{2}{|1-e^{i\theta}|}$.\\
+    Donc la série $\sum_{n\geq1} \frac{e^{in\theta}}{n}$ converge, mais pas ACV, donc elle est SCV.
+}
+
+\training{Etudier la convergence, l'absolue convergence et la semi-convergence de la série $\sum_{n\geq1} \frac{e^{in\theta}}{n^{\alpha}}$ avec $\theta \in \mathbb{R}, \alpha \in \mathbb{R}_{+}^*$.}
+\noindent\carreaux{15}
+
+\remark{Dans le critère d'Abel, comme $(a_n)$ est décroissante et $a_n \xrightarrow[n\to\infty]{} 0$, $a_n \geq 0$ (car $a_n \in \mathbb{R}$).}
+
+\subsection{Séries alternées}
+
+\definition{Une série $\sum_{n\geq0} u_n$ est dite \textbf{alternée} si $u_n = (-1)^n a_n$ ou $u_n = (-1)^{n+1} a_n$ avec $a_n \geq 0$.}
+
+\example{$\sum_{n\geq0} \frac{(-1)^n}{n}$, $\sum_{n\geq0} (-1)^n$ sont des séries alternées.}
+
+\remark{$(-1)^n \cdot u_n = (-1)^{2n}a_n = a_n$ ou $u_n = -a_n \Rightarrow (-1)^n u_n$ est de signe constant}
+\remark{Une définition équivalente est : une série est alternée si le signe de $(-1)^n \cdot u_n$ est constant.}
+
+
+\theorem{Théorème}{Critère spécial des séries alternées (CSSA)}{false}{
+    Soit $\sum_{n\geq0} u_n$ une série de terme général $u_n = (-1)^n a_n$, avec $a_n \geq 0$.\\
+    Si :
+    \begin{enumerate}
+        \item $(a_n)$ est décroissante.
+        \item $\lim_{n\to\infty} a_n = 0$.
+    \end{enumerate}
+    Alors la série $\sum_{n\geq0} u_n$ converge.\\
+}
+
 \end{document}
