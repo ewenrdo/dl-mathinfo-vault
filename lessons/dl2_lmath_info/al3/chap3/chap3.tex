@@ -227,5 +227,86 @@ Pour $X \subset E$, on dit que $X$ est une partie libre (resp. liée) si la fami
     \textit{(de même pour un sous-ensemble et un sur-ensemble d'une partie de $E$)}
 }
 
+\section{Bases}
+\definition{
+    Soit $(x_i)_{i \in I}$ une famille de vecteurs de $E$.\\
+    On dit que $(x_i)_{i \in I}$ est une \textbf{base} de $E$ si c'est une famille libre et génératrice de $E$.\\\\
+    Pour $X \subset E$, on dit que $X$ est une partie basique de $E$ si c'est une partie libre et génératrice de $E$. Alors la famille $(x)_{x \in X}$ est une base de $E$.
+}
 
+\vocabulary{Une partie basique appelée une \textbf{base} par abus de langage.}
+
+\theorem{Théorème}{Coordonnées}{false}{
+    Soit $(b_i)_{i \in I}$ une base de $E$, et soit $u \in E$.\\
+    Alors il existe une unique famille $(\lambda_i)_{i \in I}$ presque nulle telle que $u = \sum_{i \in I} \lambda_i b_i$.
+}
+\vocabulary{On dit que $\lambda_i$ est la \textbf{i-ème coordonnée} de $u$ dans la base $B$.}
+\noindent{\textbf{Preuve:}\\
+Montrons l'existence.\\
+Comme B est une base, c'est une famille génératrice, donc $u$ s'écrit comme une combinaison linéaire de vecteurs de B.\\
+Montrons l'unicité.\\
+Supposons qu'il existe $(\lambda_i)_{i \in I}$ et $(\mu_i)_{i \in I}$ presque nulles telles que $u = \sum_{i \in I} \lambda_i b_i = \sum_{i \in I} \mu_i b_i$.\\
+On a donc $\sum_{i \in I} (\lambda_i - \mu_i) b_i = 0_E$. Comme B est libre, on a $\forall i \in I, \lambda_i - \mu_i = 0$, donc $\lambda_i = \mu_i$. $\Box$}
+
+\example{E=$\{0\}$, la seule base est la base vide.\\Dans $\mathbb{R}^2$, la famille $((1,0),(0,1))$ est une base : c'est la base canonique.}
+\vocabulary{Si $E$ est engendré par une partie finie, on dit que $E$ est de \textbf{dimension finie}.}
+\remark{$K^n$ est de dimension finie, $K^X$ avec $X$ infini est de dimension infinie.}
+
+\theorem{Proposition}{}{false}{
+    Soit $L \subset E$ avec une partie libre. Soit $u \in E$.\\
+    Alors $L \cup \{u\}$ est libre ssi $u \notin Vect(L)$.
+}
+
+\noindent{\textbf{Preuve:}\\
+Si $u \in Vect(L)$, alors $u = \sum_{v \in L} \lambda_v v$ avec $(\lambda_v)_{v \in L}$ presque nulle.\\
+Donc $u - \sum_{v \in L} \lambda_v v = 0
+$ avec $1 \neq 0$, donc $L \cup \{u\}$ est liée.\\
+Réciproquement, si $L \cup \{u\}$ est liée, alors il existe $(\lambda_v)_{v \in L}$ presque nulle et $\mu \neq 0$ tels que $\sum_{v \in L} \lambda_v v + \mu u = 0_E$.\\
+Donc $u = -\frac{1}{\mu} \sum_{v \in L} \lambda_v v \in Vect(L)$. $\Box$}
+
+\attention{Démonstration générée par IA, différente de celle du cours.}
+\ndlr{cf. Laurent pour une autre preuve}
+
+\theorem{Théorème}{Base incomplète}{false}{
+    Soit $G$ une partie génératrice finie de $E$.\\
+    Soit $L \subset G$ une partie libre.\\
+    Alors il existe une partie basique $B$ de $E$ telle que $L \subset B \subset G$.\\\\
+}
+
+\ndlr{cf. Laurent pour les preuve}
+
+\theorem{Corollaire}{Existence de base}{false}{
+    Si $E$ est un $K$-ev de dimension finie, alors $E$ admet une base.
+}
+
+\noindent{\textbf{Preuve:}\\
+On applique le théorème de la base incomplète avec $L = \emptyset$. $\Box$}
+
+\theorem{Corollaire}{Caractérisation des bases}{false}{
+    Si $L$ est une partie libre à $p$ éléments de $E$ et $G$ une partie génératrice finie à $q$ éléments de $E$.\\
+    On a $p \leq q$.
+}
+\ndlr{cf. Laurent pour les preuve}
+  
+
+
+\theorem{Théorème}{Bases finies}{false}{
+    Si $E$ est un $K$-ev de dimension finie, alors toutes les bases de $E$ ont le même cardinal, appelé la \textbf{dimension} de $E$ et noté $\dim(E)$.
+}
+
+Si $E$ est de dimension finie $n$ et $(u_1,\ldots,u_n)$ est une famille libre de E, il existe $(u_{p+1}, \ldots, u_n)$ tels que $(u_1, \ldots, u_n)$ est une base de $E$.\\
+
+\theorem{Théorème}{Assertions équivalentes}{false}{
+    Les assertions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item E est un ev de dimension n.
+        \item Toute base de E a $n$ vecteurs.
+        \item Toute base génératrice de E a au moins $n$ vecteurs.
+        \item Toute partie génératrice de E a $n$ vecteurs est libre.
+        \item Toute partie libre de $E$ a au plus $n$ vecteurs.
+        \item Toute partie libre $E$ à $n$ éléments est génératrice.
+    \end{enumerate}
+}
+
+\ndlr{cf. Laurent pour les preuve}
 \end{document}
