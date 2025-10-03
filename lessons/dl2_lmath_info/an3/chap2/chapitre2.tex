@@ -722,15 +722,93 @@ Et la CV de cette série téléscopique est évidente.\\
     Donc la série $\sum_{n\geq0} u_n$ converge.
 }
 
-\theorem{Proposition}{}{true}{
+\theorem{Proposition}{}{false}{
     Soit $\sum_{n\geq0} (-1)^n a_n$ une série alternée vérifiant les hypothèses du CSSA (donc $(a_n)$ est décroissante et $\lim_{n\to\infty} a_n = 0$).\\
     On considère la suite des sommes partielles $(S_N)$ avec $S_N = \sum_{k=0}^{N} (-1)^k a_k$.\\
-    Soit $S$ la somme de la série.\\\\
+    Soit $S$ la somme de la série.\\
 
     Alors :\\
     $S_{2N+1} \leq S \leq S_{2N}$ et $|R_N| = |S - S_N| \leq a_{N+1}$.
 }
 
-\ndlr{Démo au prochain cours, retirer le \textit{true} de la proposition}
+\noindent{\textbf{Preuve:}\\
+    On pouse $A_N = S_{2N}$ et $B_N = S_{2N+1}$.\\
+    On observe que $S_{2N+1}-S_{2N} = -a_{2N+1} \leq 0$\\
+    $\Leftrightarrow S_{2N+1} \leq S_{2N}$.\\\\
+
+    \noindent\textit{Variations de $(A_N)$ et $(B_N)$}\\
+    $A_{N+1} - A_N = S_{2N+2} - S_{2N} = a_{2N+2} - a_{2N+1} \leq 0$ car $(a_n)$ décroissante.\\
+    $\Leftrightarrow A_{N+1} \leq A_N$. Donc $(A_N)$ est décroissante et $B_{N+1} - B_N = S_{2N+3} - S_{2N+1} = a_{2N+2} - a_{2N+3} \geq 0$ car $(a_n)$ décroissante.\\
+    $\Leftrightarrow B_{N+1} \geq B_N$. Donc $(B_N)$ est croissante.\\\\
+
+    \noindent De plus, on a $B_N - A_N \xrightarrow[N\to\infty]{} 0$ donc $(A_N)$ et $(B_N)$ sont adjacentes, et convergent vers la même limite $S$.\\
+    et donc $B_N \leq S \leq A_N$ où $S = \lim_{N\to\infty} A_N = \lim_{N\to\infty} B_N$.\\\\
+    On a bien $S_{2N+1} \leq S \leq S_{2N}, \forall N \in \mathbb{N}$.\\\\
+
+    \noindent Etudions maintenant le reste.\\
+    $R_N = S - S_N$, on veut montrer que $|R_N| \leq a_{N+1}$.\\
+    Séparons le cas $N$ pair et impair :\\
+    \begin{itemize}
+        \item Si $N = 2p+1$, alors $S_{2p+1} \leq S \implies S - S_{2p+1} \geq 0$.\\
+        $\Rightarrow |R_{2p+1}| = S - S_{2p+1} \leq S_{2p+2} - S_{2p+1} = a_{2p+2} = a_{N+1}$.
+        \item \textit{Laissé en exercice au lecteur :)} $\Box$
+    \end{itemize}
+   
+}
+\newpage
+
+\attention{
+    \begin{enumerate}
+        \item Si deux suites sont équivalentes ($\sim$) et l'une monotone, l'autre ne l'est pas forcément.
+        \example{$a_n = \frac{1}{\sqrt{n}+(-1)^n}$ et $b_n = \frac{1}{\sqrt{n}}$. On a $a_n \sim b_n$ mais $(a_n)$ n'est pas monotone (on le montre en encadrant/calculant 3 termes consécutifs (2p, 2p+1, 2p+2), alors que $(b_n)$ l'est).}
+        \item Considérons $\sum_{n\geq0} (-1)^n a_n$. On remarque que $\sum_{n\geq0} (-1)^n a_n$ n'est pas ACV. Est-elle semi-convergente ?\\
+        Le CSSA ne s'applique pas. Mais $(-1)^n a_n \sim \frac{(-1)^n}{\sqrt{n}}$ QUI N'IMPLIQUE PAS "$\sum_{n\geq0} (-1)^n a_n$ CV car $\sum_{n\geq0} \frac{(-1)^n}{\sqrt{n}}$ CV" (car $\sum_{n\geq0} \frac{(-1)^n}{\sqrt{n}}$ n'est pas positive).\\
+        \textbf{À faire :} Montrer que $(-1)^n a_n = \frac{(-1)^n}{\sqrt(n)} + b_n$, où $b_n = \frac{-1}{\sqrt{n}(\sqrt{n}+(-1)^n)}$ et en déduire que $\sum u_n$ DV.
+
+    \end{enumerate}
+    Donc $u_n \sim v_n$, $\sum v_n$ CV $\implies \sum u_n CV$ que si $v_n est \geq 0 ou \leq 0$
+}
+
+\section{Produit de Cauchy de deux séries}
+
+\definition{
+    Soient $\sum_{n\geq0} a_n$ et $\sum_{n\geq0} b_n$ deux séries.\\
+    La \textbf{série produit (de Cauchy)} est définie par la série $\sum_{n\geq0} c_n$ où $c_n = \sum_{p+q=n} a_p b_q = \sum_{k=0}^{n} a_k b_{n-k}, \forall n \in \mathbb{N}$.
+}
+
+\remark{Supposons que $a_n = 0 = b_n$ pour $n > N\in\mathbb{N}$. Considérons $P(X) = a_0 + a_1 X + ... + a_n X^n$ et $Q(X) = b_0 + b_1 X + ... + b_n X^n$.\\
+Alors $(PQ)(X) = c_0 + c_1 X + ... + c_{2N} X^{2N}$.  On peut penser au produit de Cauchy comme une "généralisation".}
+
+\theorem{Proposition}{}{false}{
+    On considère $\sum_{n\geq0} a_n$ et $\sum_{n\geq0} b_n$ deux séries à termes positifs et convergentes.\\
+    Alors la série produit $\sum_{n\geq0} c_n$ est convergente et on a : $\sum_{n=0}^{\infty} c_n = (\sum_{n=0}^{\infty} a_n)(\sum_{n=0}^{\infty} b_n)$.
+}
+
+\noindent{\textbf{Preuve:}\\
+    Soient $A_n = \sum_{n=0}^{N} a_n$ et $B_N = \sum_{n=0}^{N} b_n$.\\
+    Notons $C_N = \sum_{n=0}^{N} c_n$ = $\sum_{n=0}^{N} \sum_{k=0}^{n} a_k b_{n-k}$.\\\\
+    On veut monrer que $(C_N)$ converge et déterminer sa limite.\\\\
+    $(C_n)$ est une somme partielle à termes positifs, donc $(C_N)$ est croissante.\\
+    Posons $I_N = \{ 0, \ldots, N\} \subset \mathbb{N}$\\
+    \ndlr{Dessin $I_N x I_N$}
+    Considérons $A_N B_N = \sum_{(p,q) \in I_N x I_N} a_p b_q$.\\
+    Mais $C_N = \sum_{n=0}^{N} c_n = \sum_{n=0}^{N} \sum_{p+q=n} a_p b_q = \sum_{(p,q) \in I_N^2, p+q \leq N} a_p b_q$.\\
+    On a $\{ (p,q) \mid p+q \leq N\} \subset \{(p,q) \mid p,q\in I_N\}$, donc $C_N \leq A_N B_N$  (1) qui est bornée car $A_N$ CV et $B_N$ CV $\implies C_N$ bornée.\\
+    On a aussi l'inégalité : $A_N B_N \leq C_{2N} (2)$\\
+    \ndlr{Deuxième schema}
+    car $\{(p,q) \mid p+q \leq N\} \supset \{(p,q) \mid 0 \leq p,q \leq N\}$.
+    On obtient $\lim_{+\infty} c_n =  \lim_{+\infty} (A_N B_N) = (\lim_{+\infty} A_N)\cdot(\lim_{+\infty} B_N)$. $\Box$
+}
+
+\theorem{Théorème}{}{false}{
+    Soient $\sum_{n\geq0} u_n$ et $\sum_{n\geq0} v_n$ deux séries à termes dans $\mathbb{C}$.\\
+    Si les séries sont ACV, alors la série produit $\sum_{n\geq0} c_n$ est ACV.
+}
+
+\noindent{\textbf{Preuve:}\\
+    On considère $A_N = \sum_{n=0}^{N} |u_n|$ et $B_N = \sum_{n=0}^{N} |v_n|$.\\
+    On étudie $|\sum_{n=0}^{N} u_n \cdot \sum_{n=0}^{N} v_n -\sum_{n=0}^{N} c_n|$.\\
+}
+
 
 \end{document}
