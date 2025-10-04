@@ -73,11 +73,20 @@ Soit $(u_n)$ une suite à valeur dans $(K, |\cdot|)$.\\
 $(u_n)$ est une suite de Cauchy si : \(\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall n \geq N_\varepsilon, \forall p \in \mathbb{N}, |u_{n+p} - u_n| < \varepsilon\)
 }
 \theorem{Propriété}{Convergence}{false}{Toute suite convergente est une suite de Cauchy.}
-\noindent\textbf{Preuve:}\\
-\carreaux{7}
+\noindent{
+    \textbf{Preuve:} Soit \(\varepsilon \in 0\) \\
+    Comme $(u_n)$ est convergent, \(\forall N_\varepsilon \in \mathbb{N}\) tel que \(|u_n -\ell|<\varepsilon/2\), \(\forall n\ge N_\varepsilon\)\\
+    \(\forall p, q\ge N_\varepsilon, |u_p - u_q|=|u_p-\ell +\ell -u_q|\le|u_p-\ell|+|\ell-u_q|<\varepsilon/2 + \varepsilon/2=\varepsilon\)\\
+    Ainsi, \(\forall \varepsilon>0, \exists N_\varepsilon \in \mathbb{N}\) tel que \(\forall p, q\ge N_\varepsilon\) on a \(|u_p-u_q|<\varepsilon\)
+}\\
+
 \theorem{Proposition}{Bornes}{false}{Toute suite de Cauchy est bornée.}
-\noindent\textbf{Preuve:}\\
-\carreaux{7}
+\noindent{
+    \textbf{Preuve:}\\
+    Prenons \(\varepsilon=1, \exists N\in \mathbb{N}\) tel que \(\forall p, q\ge N\), on a \(|u_p-u_q|<1\Rightarrow |u_p-u_q|<1\Rightarrow |u_p|<1+|u_q|\).\\
+    On a \(\forall p\ge N \), on a \(|u_p|<1+|u_q|\). Posons \(M\in \mathbb{R}_+ :=max\{{|u_0|, |u_1|, ..., |u_{N-1}|, |u_N|}\}\)\\
+    Alors \(|u_p|\le M, \forall p\in \mathbb{N}\)
+}\\
 
 \theorem{Théorème}{}{false}{Toute suite de Cauchy dans $\mathbb{R}$ converge dans $\mathbb{R}$.}
 \noindent\textbf{Preuve:}\\

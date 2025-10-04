@@ -131,8 +131,20 @@ pour tout \((x_1, y_1), (x_2, y_2) \in G_1 \times G_2\). Alors \((G_1 \times G_2
     Soit \((H_i)_{i \in I}\) une famille de sous-groupes de \((G, \cdot)\). Alors l'intersection \(H = \bigcap_{i \in I} H_i\) est un sous-groupe de \(G\).
 }
 
-\noindent\textbf{Preuve:}\\
-\carreaux{20}
+\noindent\textbf{Preuve:}
+
+
+Vérifions à l'aide de la proposition sur les sous-groupes
+
+
+\begin{itemize}
+    \item Le neutre \(1 \in H,\forall i\in I\). Donc \(1\in \bigcap_{i\in I} H_i\) . Donc \(H \ne \emptyset\) .
+    \item Soient \(h, h', \in H\). On a \(h, h'\in H, \forall i\in H\). Il appartient à (\(H_0, H_1, ...\))\\
+    Donc, \(h, h'\in H_i\) (si on regarde quand ils appartiennent au même \(H_i\))\\
+    Donc, \(h\cdot h'\in \bigcap_{i\in I}H_i = H\)
+    \item On a \(h\in H_i, \forall i\in I\), donc \(h^{-1}\in H_i, \forall i\in I\) (même principe)\\
+    Donc, \(h^{-1}\in \bigcap_{i\in I}H_i=H\).
+\end{itemize}
 
 
 \theorem{Corollaire}{Sous-groupe engendré}{false}{
