@@ -308,5 +308,31 @@ Si $E$ est de dimension finie $n$ et $(u_1,\ldots,u_n)$ est une famille libre de
     \end{enumerate}
 }
 
-\ndlr{cf. Laurent pour les preuve}
+\ndlr{cf. Laurent pour les preuves}
+
+\theorem{Proposition}{}{false}{
+Soit $E$ un $K$-ev. Supposons $E$ de dimension finie.\\
+Soit $F$ un sev de $E$. Alors $F$ est de dimension finie et $\dim(F) \leq \dim(E)$.\\\\
+Si de plus $\dim(F) = \dim(E)$, alors $F = E$.
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\section{Applications linéaires}
+
+\definition{
+    Soient $E$ et $F$ des $K$-ev.\\
+    Soit une application \functionSets{f}{E \rightarrow F}.\\
+    On dit que $f$ est une \textbf{application linéaire} si $\forall x,y \in E, \forall \lambda, \mu \in K, f(\lambda x + \mu y) = \lambda f(x) + \mu f(y)$.\\\\
+    On note $\mathcal{L}(E,F)$ l'ensemble des applications linéaires de $E$ dans $F$.
+}
+
+\vocabulary{On appelle aussi les applications linéaires des \textbf{morphismes} d'espaces vectoriels.}
+\remark{$f$ est un morphisme de groupes de $(E,+)$ dans $(F,+)$.}
+
+\vocabulary{On dit que $f$ est un \textbf{endomorphisme} si $E=F$.\\
+On dit que $f$ est un \textbf{isomorphisme} si $f$ est bijective.\\
+On dit que $f$ est un \textbf{automorphisme} si $f$ est un endomorphisme et un isomorphisme.}
+
+\vocabulary{Si $F=K$, on dit que $f$ est une \textbf{forme linéaire}.}
+
 \end{document}
