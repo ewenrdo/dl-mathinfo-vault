@@ -335,4 +335,27 @@ On dit que $f$ est un \textbf{automorphisme} si $f$ est un endomorphisme et un i
 
 \vocabulary{Si $F=K$, on dit que $f$ est une \textbf{forme linéaire}.}
 
+\example{
+    \begin{enumerate}
+        \item Soit $\alpha \in K$. L'application \function{\varphi_\alpha}{E \rightarrow E}{x \mapsto \alpha x} est linéaire. C'est l'\textbf{homotétie} de rapport $\alpha$.
+        \item Soit $B$ une base de $E$.\\
+        L'application \function{\varphi_B}{E \rightarrow}{x \mapsto \text{ième coordonnée de } x \text{ dans la base } B} est linéaire. C'est \textbf{l'application coordonnées} dans la base $B$.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $f \in \mathcal{L}(E,F)$. Soit $B$ une base de $E$.\\
+    Alors $f$ est déterminée par ses valeurs sur $B$. \textit{(i.e. si $g \in \mathcal{L}(E,F)$ vérifie $f(e_i) = g(e_i), \forall i$, alors $f=g$)}
+}
+
+\remark{
+    \begin{itemize}
+        \item $B$ génératrice suffit.
+        \item Si $E$ est de dimension finie, $f$ est déterminée par un nombre fini de valeurs.
+    \end{itemize}
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+
 \end{document}
