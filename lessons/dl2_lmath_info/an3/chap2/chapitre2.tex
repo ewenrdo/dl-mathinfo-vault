@@ -806,9 +806,67 @@ Alors $(PQ)(X) = c_0 + c_1 X + ... + c_{2N} X^{2N}$.  On peut penser au produit 
 }
 
 \noindent{\textbf{Preuve:}\\
-    On considère $A_N = \sum_{n=0}^{N} |u_n|$ et $B_N = \sum_{n=0}^{N} |v_n|$.\\
-    On étudie $|\sum_{n=0}^{N} u_n \cdot \sum_{n=0}^{N} v_n -\sum_{n=0}^{N} c_n|$.\\
+    On considère $A_N = \sum_{n=0}^{N} |a_n|$, $B_N = \sum_{n=0}^{N} |b_n|$ et $C_N = \sum_{n=0}^{N} |c_n|$.\\
+    D'après la proposition précédente et sa démonstration, on a $A_N B_N - C_N \xrightarrow[N\to\infty]{} 0$. (on va utiliser cette propriété)\\
+    On a $\forall N \in \mathbb{N}, |(\sum_{n=0}^{N} a_n)(\sum_{n=0}^{N} |b_n|) - (\sum_{n=0}^{N} |c_n|)|$.\\
+    On peut donc écrire : \[
+|(\sum_{n=0}^{N} a_n)(\sum_{n=0}^{N} |b_n|) - (\sum_{n=0}^{N} |c_n|)|
+= |\sum_{p\in I_N} \sum_{q \in I_N} a_p b_q - \sum_{(p,q) \in I_N^2, p+q \leq N} a_p b_q|\\
+= |\sum_{(p,q) \in I_N^2} a_p b_q  - \sum_{(p,q) \in J_N^2} a_p b_q| \\ \text{ où } J_N = \{(p,q) \mid p+q \leq N\}\]
+Or $J_N \subset I_N^2$, donc \[
+|\sum_{(p,q) \in I_N^2} a_p b_q  - \sum_{(p,q) \in J_N^2} a_p b_q| 
+= |\sum_{(p,q) \in I_N^2 \setminus J_N^2} a_p b_q| = \sum_{(p,q) \in K_N} |a_p b_q|\] où $K_N = I_N^2 \setminus J_N^2 = \{(p,q) \mid p+q > N\}$.\\
+\[\leq \sum_{(p,q) \in K_N} |a_p| |b_q| = (\sum_{n=0}^{N} |a_n|)(\sum_{n=0}^{N} |b_n|) - \sum_{n=0}^{N} |c_n| = A_N B_N - C_N \xrightarrow[N\to\infty]{} 0\] par la proposition précédente et l'inégalité triangulaire.
 }
+
+\ndlr{À changer dans la démo $A_N$ en $A_N'$ et $B_N$ en $B_N'$.\\
+De plus, il faut mettre $C_N' = \sum_{n=0}^{N} |c_n'| = \sum_{n=0}^{N} |a_k| |b_{n-k}|$ et pas $|\sum_{n=0}^{N} a_k b_{n-k}|$.
+}
+
+\remark{
+    L'hypothèse d'absolue convergence pour $\sum a_n$ et $\sum b_n$ est très importante dans le théorème.\\
+    L'hypothèse de positivité dans la proposition qui précède le théorème est fondamentale.
+}
+
+\example{
+    On considère la série de terme général $u_n = \frac{(-1)^n}{\sqrt{n}}$.\\
+    \begin{itemize}
+        \item $u_n$ n'est pas positive.
+        \item On a pas l'absolue convergence.
+        \item Le CSSA s'applique car $a_n = \frac{1}{\sqrt{n}}$ est positive, décroissante et tend vers 0.
+    \end{itemize}
+
+    Considérons le produit de Cauchy.
+    $(\sum_{n \geq 1} u_n)(\sum_{n \geq 1} u_n) = \sum_{n \geq 1} c_n$ où $c_n = \sum_{k=1}^{n-1} \frac{(-1)^k}{\sqrt{k}} \cdot \frac{(-1)^{n-k}}{\sqrt{n-k}}$\\
+    Montrons que $\sum_{n \geq 1} c_n$ diverge (en montrant que ça ne tend pas vers 0).\\
+    On a $|c_n| = |\sum_{k=1}^{n-1} \frac{1}{\sqrt{k \cdot (n-k)}}|$
+    
+    On a $k(n-k) \leq kn-k^2 \leq kn \leq (n-1)n$.\\
+    Donc $|c_n| = |\sum_{k=1}^{n-1} \frac{1}{\sqrt{k \cdot (n-k)}}| \geq \sum_{k=1}^{n-1} \frac{1}{\sqrt{(n-1)n}} = \frac{n-1}{\sqrt{(n-1)n}} = \sqrt{\frac{n-1}{n}}$.\\
+    Donc $|c_n| \nrightarrow 0$.\\
+    \textbf{Conclusion :} Pour faire le produit de Cauchy de deux séries, il faut :
+    \begin{enumerate}
+        \item Que les deux séries soient ACV.
+        \item ou Que les deux séries soient à termes positifs et CV.
+    \end{enumerate}
+}
+
+\training{
+    Fixons $z \in \mathbb{C}$. Etudions la convergence de la série $\sum_{n\geq0} \frac{z^n}{n!}$.\\
+    1. Montrons que $\forall n \in \mathbb{N}$ la série ACV.\\ 
+    On va utiliser la règle de d'Alembert : $\frac{|u_{n+1}|}{|u_n|} = \frac{|z|}{(n+1)}.$\\
+    Donc $\forall z \in \mathbb{C}, \frac{z^n}{n!} \xrightarrow[n\to\infty]{} 0$.\\
+    Donc $\forall z \in \mathbb{C}, \sum_{n\geq0} u_n(z)$ est ACV.\\
+    \remark{On a le bon goût de pouvoir appeller $\sum_{n\geq0} \frac{z^n}{n!} := exp(z)$. \textit{(je dis bon goût mais ça risque de faire mal bientôt)}}
+    2. Calculons $exp(z) \cdot exp(z')$ avec $z,z' \in \mathbb{C}$.\\
+    Comme les deux séries sont ACV, on peut faire le produit de Cauchy.\\
+    $exp(z) \cdot exp(z') = \sum_{n\geq0} c_n$ où $c_n = \sum_{k=0}^{n} \frac{z^k}{k!} \cdot \frac{(z')^{n-k}}{(n-k)!}$\\
+    On a $c_n = \frac{1}{n!} \sum_{k=0}^{n} \frac{n!}{k!(n-k)!} z^k (z')^{n-k} = \frac{(z+z')^n}{n!}$ par le binôme de Newton.\\
+    Donc $exp(z) \cdot exp(z') = \sum_{n\geq0}^{+\infty} \frac{(z+z')^n}{n!} = exp(z+z')$.
+}
+
+\section{Hors-programme : Séries commutativement convergentes}
+\ndlr{On a traité de ça en parlant rapidement de permutations. À voir chez Laurent si c'est nécessaire à mettre, mais je l'omets ici pour l'instant.}
 
 
 \end{document}
