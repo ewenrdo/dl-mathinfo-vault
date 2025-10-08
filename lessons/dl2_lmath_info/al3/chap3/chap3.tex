@@ -399,4 +399,59 @@ On dit que $f$ est un \textbf{automorphisme} si $f$ est un endomorphisme et un i
 
 \remark{Si $K$ est un corps fini, i.e. $K = \mathbb{Z}/p\mathbb{Z}$, $p$ premier, et si $E$ est de dimension finie $n$, alors $GL(E)$ est fini.}
 
+\section{Noyau et image d'une application linéaire}
+
+\ndlr{Un grand merci à Laurent qui a pris en note cette partie du cours. J'ai omis les démonstrations, voir le cours de l'année précédente pour les détails.}
+
+\definition{
+    Soit $f \in \mathcal{L}(E,F)$. On définit le \textbf{noyau} de $f$ par : $\ker(f) = f^{-1}(0_E) = \{x \in E \mid f(x) = 0_F\}$.\\
+    On définit l'\textbf{image} de $f$ par : $\text{Im}(f) = f(E) = \{f(x) \mid x \in E\}$.
+}
+\vocabulary{On appelle \textbf{rang} de $f$ la dimension de $\text{Im}(f)$, notée $\text{rg}(f)$.}
+\theorem{Proposition}{}{true}{
+    Soit $f \in \mathcal{L}(E,F)$. Alors $\ker(f)$ est un sev de $E$ et $\text{Im}(f)$ est un sev de $F$.
+}
+\theorem{Proposition}{Injectivité}{true}{
+    Soit $f \in \mathcal{L}(E,F)$. Alors $f$ est injective si et seulement si $\ker(f) = \{0_E\}$.
+}
+\theorem{Proposition}{Surjectivité}{true}{
+    Soit $f \in \mathcal{L}(E,F)$. Alors $f$ est surjective si et seulement si $\text{Im}(f) = F$.
+}
+\theorem{Théorème du rang}{}{true}{
+    Supposons $E$ de dimension finie. Alors $\ker(f)$ et $\text{Im}(f)$ sont de dimension finie et on a : \[\dim(E) = \dim(\ker(f)) + \dim(\text{Im}(f))\].
+}
+
+\remark{Le rang d'une famille de vecteurs $(x_1,\ldots,x_k)$ est la dimension de $Vect(\{x_i\})$.}
+
+\theorem{Corollaire}{}{true} {
+    On suppose $E$ de dimension finie. 
+    \begin{enumerate}
+        \item Si $f$ est injective, alors $\dim(F) \geq \dim(E)$.
+        \item Si $f$ est surjective, alors $\dim(F) \leq \dim(E)$.
+        \item Si $f$ est bijective, alors $\dim(F) = \dim(E)$.
+        \item Si $F$ est de dimension finie, et $\dim(E) = \dim(F)$, alors les assertions suivantes sont équivalentes :
+        \begin{itemize}
+            \item $f$ est bijective
+            \item $f$ est injective
+            \item $f$ est surjective
+        \end{itemize}
+    \end{enumerate}
+}
+
+\section{Espaces vectoriels produits}
+
+\theorem{Proposition}{Construction}{true}{
+    Soient $E,F$ des $K$-ev. Alors $E \times F$ est un groupe produit pour $+$.
+    On munit $E \times F$ de la multiplication externe donnée par \function{\cdot}{K \times (E \times F) \rightarrow E \times F}{(\lambda, (x,y)) \mapsto (\lambda x, \lambda y)}.\\
+    Alors $E \times F$ est un $K$-ev, appelé \textbf{espace-vectoriel produit} de $E$ et $F$.
+}
+
+\remark{Si $E_1 \ldots E_n$ sont des $K$-ev, on définit de même le $K$-ev produit $E_1 \times E_2 \times \cdots \times E_n$. En particulier, $E^n = E \times E \times \cdots \times E$.}
+
+\theorem{Proposition}{Base et dimension de l'espace-vectoriel produit}{true}{
+    Soient $(b_i)_{i \in I}$ une base de $E$ et $(c_j)_{j \in J}$ une base de $F$, et $I \cap J = \emptyset$.\\
+    Alors la famille $(d_k)_{k \in I \cup J}$ définie par $d_i = (b_i, 0_F)$ si $i \in I$ et $d_i = (0_E, c_i)$ si $i \in J$ est une base de $E \times F$.\\
+    En particulier, si $E$ et $F$ sont de dimension finies, $E \times F$ est de dimension finie et $\dim(E \times F) = \dim(E) + \dim(F)$.
+}
+
 \end{document}
