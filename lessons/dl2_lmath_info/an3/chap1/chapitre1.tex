@@ -209,7 +209,16 @@ $\Rightarrow \exists r_0 >0$ tel que $]x-r, x+r[\subset\mathbb{R}\setminus\overl
     Autrement dit, l'adhérence de $A$ est l'ensemble des limites de suites d'éléments de $A$.
 }
 \noindent\textbf{Preuve:}\\
-\carreaux{10}
+Montrons $\Rightarrow$\\
+\indent Si $x\in\overline{A}\Rightarrow \forall x\in \mathbb{N}^* , ]x-r,x+r[\cap A\ne \emptyset$, on construit $(u_n)_{n\in \mathbb{N}^*}$ en choisissant $u_n$ dans $]x-1/n, x+1/n[\cap A\ne \emptyset$.\\
+\indent Ainsi, $(u_n)_{n\in \mathbb{n\in \mathbb{N}^*}}$ est une suite de $A$ qui tend vers $x$\\
+Montrons $\Leftarrow$\\
+\indent Soit $(u_n)_{n\in \mathbb{N}}$ une suite de $A$ qui tend vers $x$.\\
+\indent $\forall \varepsilon >0, \exists N_\varepsilon \in \mathbb{N}$ tel que $ \forall n\ge N_\varepsilon$, on a $|u_n-x|<\varepsilon$\\
+\indent  \indent \indent 
+$\Rightarrow ]x-\varepsilon, x+\varepsilon[\ni u_n \leftarrow $ qui est dans $A$\\
+\indent  \indent \indent 
+$\Rightarrow \forall \varepsilon>0, ]x-r, x+r[\cap A \ne \emptyset$\\
 
 \subsection{Complétude}
 
@@ -223,6 +232,14 @@ $\Rightarrow \exists r_0 >0$ tel que $]x-r, x+r[\subset\mathbb{R}\setminus\overl
     \(F\subset \mathbb{R}\) est complet $\Leftrightarrow$ $F$ est fermé.
 }
 \noindent\textbf{Preuve:}\\
-\carreaux{12}
+Montrons $\Rightarrow$ avec l'utilisation de la caractérisation séquentielle des fermés :\\
+\indent Soit $(u_n)_{n\in \mathbb{N}}$ une suite de $F$ qui converge vers $\ell$.\\
+\indent Or, $(u_n)$ est de Cauchy (car elle converge) dans $F$.\\
+\indent Comme $F$ est complète on a que $\ell \in F$ et donc $F$ est bien fermé.\\
+Montrons $\Leftarrow$\\
+\indent Soit $(u_n)_{n\in \mathbb{N}}$ de Cauchy de $F\subset \mathbb{R}$, c'est donc une suite de Cauchy dans $\mathbb{R}$.\\
+\indent Or, comme $\mathbb{R}$ est complet, on sait que $(u_n)_{n\in \mathbb{N}}$ converge vers une limie $\ell$.\\
+\indent Donc, $(u_n)_{n\in \mathbb{N}}$ est alors une de $F$ convergente vers $\ell$ (elle converge dans $\overline{F}$) et $F$ fermé.\\
+\indent Donc $\ell \in F$. \indent Donc $F$ est complète.
 
 \end{document}
