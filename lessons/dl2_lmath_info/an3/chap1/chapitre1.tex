@@ -189,8 +189,17 @@ C'est le plus petit fermé contenant $A$.
     Soit \(A\subset \mathbb{R}\).\\
     $x\in\overline{A} \Leftrightarrow \forall \varepsilon > 0, ]x-\varepsilon, x+\varepsilon[ \cap A \neq \emptyset$.
 }
+
 \noindent\textbf{Preuve:}\\
-\carreaux{10}
+Montrons $\Rightarrow$ par l'absurde\\
+\indent Soit \(x\in \overline{A}\). Si \(\exists r>0\) tel que \(]x-r, x+r[\).\\
+\indent On a $\mathbb{R}\setminus ]x-r, x+r[ \supset A$ qui est fermé. Absurde car $x\in \overline{A}$\\
+Montrons $\Leftarrow$ par l'absurde\\
+\indent $\forall r>0$ tel que $]x-r, x+r[\cap A\ne \emptyset $\\
+\indent Par l'absurde : Si $x\notin \overline{A}\Rightarrow x\in \mathbb{R}\setminus \overline{A}$ un ouvert \\
+\indent\indent\indent\indent\indent\indent\indent\indent 
+$\Rightarrow \exists r_0 >0$ tel que $]x-r, x+r[\subset\mathbb{R}\setminus\overline{A}\subset \mathbb{R}\setminus A$.\\
+\indent Donc $]x-r, x+r[\cap A=\emptyset$. Donc absurde\\
 
 \theorem{Théorème}{}{false}{
     Soit \(A\subset \mathbb{R}\).\\
