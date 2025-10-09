@@ -89,8 +89,16 @@ $(u_n)$ est une suite de Cauchy si : \(\forall \varepsilon > 0, \exists N_\varep
 }\\
 
 \theorem{Théorème}{}{false}{Toute suite de Cauchy dans $\mathbb{R}$ converge dans $\mathbb{R}$.}
-\noindent\textbf{Preuve:}\\
-\carreaux{10}
+\noindent\textbf{Preuve:}   \indent Soit \((u_n)_{n\in \mathbb{R}}\) de Cauchy.\\
+    On sait que \((u_n)\) est bornée par la proposition précédente.\\
+    Par le théorème de Bozano-Weierstrass, \(\exists \varphi : \mathbb{N} \to \mathbb{N}\) strictement croissante telle que \((u_\varphi(n))\) est convergente.\\
+    Soit \(\ell \in \mathbb{R}\) sa limite. Soit \(\varepsilon >0\), \(\exists N_\varepsilon \in \mathbb{N}\) tel que \(\forall n\ge N_\varepsilon\), on a \(|u_\varphi(n) - \ell|<\varepsilon/2 \).\\
+    Par ailleurs, comme \((u_n)_{n\in \mathbb{N}}\) est de Cauchy, \(\exists N'_\varepsilon \in \mathbb{N}\) tel que \(\forall p, q\ge N'_\varepsilon\), on a \(|u_p-u_q|<\varepsilon/2\).
+    Alors pour \(p\ge N'_\varepsilon\) et \(n_0\) tel que pour \(n_0\ge N_\varepsilon\) et \(\varphi(n_0)\ge N'_\varepsilon\)\\
+    \indent \(|u_p -\ell|\le |u_p-u_{\varphi(n_0)}|+|u_{\varphi(n_0)}-\ell|<\varepsilon/2 +\varepsilon/2 = \varepsilon\)\\
+    Ainsi, \(\forall \varepsilon>0, \exists N_\varepsilon\in\mathbb{N}\) tel que \(|u_p-\ell|<\varepsilon, \forall p\ge N'_\varepsilon\).\\
+    Donc, la suite de Cauchy est bien convergente.
+										
 \remark{On dit que $\mathbb{R}$ est complet.}
 
 \definition{
