@@ -293,7 +293,57 @@ De plus, il faut mettre $C_N' = \sum_{n=0}^{N} |c_n'| = \sum_{n=0}^{N} |a_k| |b_
     Donc $exp(z) \cdot exp(z') = \sum_{n\geq0}^{+\infty} \frac{(z+z')^n}{n!} = exp(z+z')$.
 }
 
-\section{Hors-programme : Séries commutativement convergentes}
+\section{Compléments}
+
+\subsection{Hors-programme : Séries commutativement convergentes}
 \ndlr{On a traité de ça en parlant rapidement de permutations. À voir chez Laurent si c'est nécessaire à mettre, mais je l'omets ici pour l'instant.}
+
+\subsection{Introduction aux séries de Taylor d'une fonction}
+
+\definition{
+Considérons $f : I \to \mathbb{R}$ où $I$ est un intervalle ouvert contenant $o$.\\
+Supposons que $f \in \mathcal{C}^{\infty}(I)$. \textit{(i.e. $f$ est dérivable autant de fois qu'on veut sur $I$ et les dérivées sont continues)}.\\
+La \textbf{série de Taylor} associée à $f$ au voisinage de 0 est la série $\sum_{n\geq0} \frac{f^{(n)}(0)}{n!} x^n$.
+}
+
+Ici, $x \in \mathcal{V}(0)$ \textit{(cela peut être I tout entier)}. Et il s'agit en fait d'une série de fonctions: $x \in \mathcal{V}(0) \subset I \mapsto \frac{f^{(n)}(0)}{n!} x^n$.\\
+À ce stade du cours, on y pense comme une série numérique à $x$ fixé.
+
+\textbf{Deux questions se posent :}
+\begin{enumerate}
+    \item Pour quels $x \in I$ la série de Taylor $\sum_{n\geq0} \frac{f^{(n)}(0)}{n!} x^n$ converge-t-elle ?
+    \item Si elle converge "pour des $x$", a-t-elle pour somme $f(x)$ ?
+\end{enumerate}
+
+\remark{Plus généralement, si $I$ est quelconque et que on prend $a < b \in I$, les mêmes questions se posent de la façon suivante :
+$f(b) = \sum_{n\geq0} \frac{(b-a)^n}{n!} f^{(n)}(a)$ ?}
+
+\remark{Les sommes partielles de la série de Taylor associée à $f$, i.e. $\sum_{n=0}^{N} \frac{f^{(n)}(0)}{n!} x^n, x \in I$ sont appelées \textbf{polynômes de Taylor}}
+
+\textbf{Réponses partielles aux questions.}
+\begin{enumerate}
+    \item Utiliser les règles de d'Alembert ou de Cauchy pour déterminer les $x \in I$ tels que $\sum_{n\geq0} \frac{f^{(n)}(0)}{n!} x^n$ converge.
+    \item Utilisons la formule de Taylor avec reste intégral si on veut montrer que pour les $x$ où $\sum_{n\geq0} \frac{f^{(n)}(0)}{n!} x^n$ converge, on a $f(x) = \sum_{n\geq0}^{+\infty} \frac{f^{(n)}(0)}{n!} x^n$.\\
+    Ou de manière équivalente $\sum_{n=0}^{N} \frac{f^{(n)}(0)}{n!} x^n \xrightarrow[N\to\infty]{} f(x)$. (convergence à $x$ fixé !)
+\end{enumerate}
+
+\training{Retrouvons la formule de Taylor avec reste intégral.}
+\theorem{Théorème fondamental de l'analyse}{Rappel}{true}{
+    Soit $x \in I, x > 0$.\\
+    Alors $f(x) - f(0) = \int_{0}^{x} f'(t) dt$.
+}
+
+$\int_{0}^{x} f'(t) dt = \int_{0}^{x} (t - x)' f'(t) dt = [(t-x)f'(t)]_{0}^{x} - \int_{0}^{x} (t-x) f''(t) dt$.\\
+$= -x f'(0) + \int_{0}^{x} (x-t) f''(t) dt$.\\
+Ce qui se réécrit : $f(x) - f(0) - xf'(0) = \int_{0}^{x} (x-t) f''(t) dt$.\\
+On refait la même chose pour $f''$ :\\
+$\int_{0}^{x} (x-t) f''(t) dt = \int_{0}^{x} ((x-t)^2/2)' f''(t) dt = - [(x-t)^2/2 f''(t)]_{0}^{x} + \int_{0}^{x} (x-t)^2/2 f^{(3)}(t) dt$.\\
+$= -x^2/2 f''(0) + \int_{0}^{x} (x-t)^2/2 f^{(3)}(t) dt$.\\
+Ce qui se réécrit : $f(x) - f(0) - xf'(0) - x^2/2 f''(0) = \int_{0}^{x} (x-t)^2/2 f^{(3)}(t) dt$.\\
+Puis on continue par récurrence et on a :
+\theorem{Théorème}{Taylor avec R.I.}{false}{
+    $f \in \mathcal{C}^{\infty}(I), I \ni 0$\\
+    On a $\forall x \in I, x > 0, f(x) - \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} x^k = \int_{0}^{x} \frac{(x-t)^n}{n!} f^{(n+1)}(t) dt$.
+}
 
 \end{document}
