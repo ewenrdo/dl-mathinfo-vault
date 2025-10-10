@@ -364,9 +364,21 @@ Par la formule de Taylor avec reste intégral, on a $|f(x) - \sum_{k=0}^{n} \fra
 Donc $exp(x) = \sum_{n\geq0}^{+\infty} \frac{x^n}{n!}, \forall x \in \mathbb{R}$.
 }
 
-\example{Calculons la valeur de $\sum_{n\geq0}^{+\infty} \frac{1}{n!}$.\\
+\example{
+Calculons la valeur de $\sum_{n\geq0}^{+\infty} \frac{1}{n!}$.\\
 On sait que $\sum_{n\geq0}^{+\infty} \frac{x^n}{n!} = exp(x)$, donc en prenant $x = 1$, on obtient $\sum_{n\geq0}^{+\infty} \frac{1}{n!} = exp(1) = e$.
-
 }
 
+\cexample{Voici une fonction $C^{\infty}$ sur $\mathbb{R}$ dont la série de Taylor ne converge pas vers la fonction (sauf en 0).\\
+Considérons \function{f}{\mathbb{R} \mapsto \mathbb{R}}{x \mapsto \begin{cases}
+    0 & \text{ si } x = 0\\
+    e^{-\frac{1}{x^2}} & \text{ si } x \neq 0
+\end{cases}}.\\
+
+$f$ est continue sur $\mathbb{R}$.\\
+$x \mapsto e^{-\frac{1}{x^2}}$ est dérivable sur $\mathbb{R}^*$, et $\lim_{x\to0} f(x) = 0 = f(0)$.\\\\
+
+On montre que $f$ est $C^{\infty}$ : elle se prolonge en une fonction $C^{\infty}$ sur $\mathbb{R}$ telle que $f^{(n)}(0) = 0, \forall n \in \mathbb{N}$.\\
+Il faut vérifier $\lim_{x\to0} f^{(n)}(x) = 0, \forall n \in \mathbb{N}$.
+}
 \end{document}
