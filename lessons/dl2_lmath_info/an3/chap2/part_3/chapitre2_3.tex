@@ -346,4 +346,27 @@ Puis on continue par récurrence et on a :
     On a $\forall x \in I, x > 0, f(x) - \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} x^k = \int_{0}^{x} \frac{(x-t)^n}{n!} f^{(n+1)}(t) dt$.
 }
 
+\remark{Pour montrer que $\sum_{n\geq0} \frac{f^{(n)}(0)}{n!} x^n$ converge vers $f(x)$, il suffit de montrer que le $R_n(x) \xrightarrow[n\to\infty]{} 0$, où $R_n$ est le reste.\\
+On a $|R_n(x)| = |\int_{0}^{x} \frac{(x-t)^n}{n!} f^{(n+1)}(t) dt|$. En principe, majorer $R_n(x)$ !
+}
+
+\training{On prend $f(x) = exp(x)$, $I = \mathbb{R}$.\\
+On a que $\forall n \in \mathbb{N}, f^{(n)}(x) = exp(x)$. Sa série de Taylor au voisinage de 0 est $\sum_{n\geq0} \frac{f^{(n)}(0)}{n!} x^n = \sum_{n\geq0} \frac{x^n}{n!}$.\\
+\textbf{1. Convergence}\\
+$u_n(x) = \frac{x^n}{n!}$.\\
+On utilise la règle de d'Alembert : $\frac{|u_{n+1}(x)|}{|u_n(x)|} = \frac{|x|}{n+1} \xrightarrow[n\to\infty]{} 0, \forall x \in \mathbb{R}$.\\
+Or $0 < 1$, donc $\sum_{n\geq0} \frac{x^n}{n!}$ est ACV, $\forall x \in \mathbb{R}$.\\
+
+\textbf{2. Somme}\\
+On veut montrer que $\sum_{n\geq0}^{+\infty} \frac{x^n}{n!} = exp(x), \forall x \in \mathbb{R}$.\\
+Par la formule de Taylor avec reste intégral, on a $|f(x) - \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} x^k| = |R_n(x)| = |\int_{0}^{x} \frac{(x-t)^n}{n!} e(t) dt| \\ 
+\leq \frac{|x|^n}{n!}e^x \xrightarrow[n\to\infty]{} 0, \forall x \in \mathbb{R}$.\\
+Donc $exp(x) = \sum_{n\geq0}^{+\infty} \frac{x^n}{n!}, \forall x \in \mathbb{R}$.
+}
+
+\example{Calculons la valeur de $\sum_{n\geq0}^{+\infty} \frac{1}{n!}$.\\
+On sait que $\sum_{n\geq0}^{+\infty} \frac{x^n}{n!} = exp(x)$, donc en prenant $x = 1$, on obtient $\sum_{n\geq0}^{+\infty} \frac{1}{n!} = exp(1) = e$.
+
+}
+
 \end{document}
