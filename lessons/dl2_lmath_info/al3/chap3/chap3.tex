@@ -454,4 +454,84 @@ On dit que $f$ est un \textbf{automorphisme} si $f$ est un endomorphisme et un i
     En particulier, si $E$ et $F$ sont de dimension finies, $E \times F$ est de dimension finie et $\dim(E \times F) = \dim(E) + \dim(F)$.
 }
 
+\theorem{Propriété}{}{true}{
+    On sait que $K$ est un $K$-ev de dimension 1, de base $\{1\}$.\\
+    Donc pour $n \geq 1$, $K^n$ est de dimension $n$ et de base canonique $\{e_1, e_2, \ldots, e_n\}$ où $e_i$ est le vecteur dont la i-ème coordonnée vaut 1 et les autres 0.
+}
+\vocabulary{Une telle base est appelée la \textbf{base canonique} de $K^n$.}
+
+\theorem{Proposition}{Espace vectoriel de dimension égale}{true}{
+    Soit $E$ un $K$-ev de dimension finie $n$ et base $B = (b_i)_{1 \leq i \leq n}$.\\
+    Il existe un isomorphisme de $E$ sur $K^n$ qui à $\sum_{i=1}^n \lambda_i b_i \mapsto \sum_{i=1}^n \lambda_i e_i$.\\
+}
+
+\theorem{Théorème}{Isomorphisme sur $K^n$}{true}{
+    Tout espace vectoriel de dimension finie $n$ est isomorphe à $K^n$.
+}
+\remark{Cet isomorphisme dépend du choix d'une base et n'est pas unique.}
+
+\theorem{Théorème}{Généralisation de l'isomorphime de deux espaces vectoriels}{true}{
+    Soient $E$ et $F$ deux $K$-ev de dimension finie.\\
+    Alors $E$ et $F$ sont isomorphes si et seulement si $\dim(E) = \dim(F)$.
+}
+
+\section{Sommes et supplémentaires}
+
+\theorem{Proposition}{Formule de Grassman}{true}{
+    Soit $E$ un $K$-ev de dimension finie. Soient $F$ et $G$ deux sev de $E$.\\
+    Alors $F + G$ est de dimension finie et on a : \[\dim(F + G) = \dim(F) + \dim(G) - \dim(F \cap G)\].
+}
+
+\theorem{Corollaire}{}{true}{
+    Si $F$ et $G$ sont en somme directe, alors on a $F \oplus G$ est isomorphe à $F \times G$.
+}
+
+\theorem{Proposition}{Existence de supplémentaires}{true}{
+    Soit $E$ un $K$-ev de dimension finie. Soit $F$ un sev de $E$.\\
+    Alors il existe un sev (non unique) $G$ de $E$ tel que $F \oplus G = E$.
+}
+
+\theorem{Propriété}{}{true}{
+    Supposons que $F \oplus G = E$.\\
+    Tout $x\in E$ s'écrit de manière unique $x = y + z$ avec $y \in F$ et $z \in G$.
+}
+\definition{
+    On appelle \textbf{projection sur $F$ parallèlement à $G$} l'application \function{\pi_{F,G}}{E \rightarrow E}{x = y + z \mapsto y} où $y \in F$ et $z \in G$.\\
+}
+
+\theorem{Proposition}{}{true}{
+    \begin{enumerate}
+        \item On a $p(x) = x$ si $x \in F$.
+        \item On a $p(x) = 0_E$ si $x \in G$.
+        \item On a $p(x) = 0$ so $F = \{0_E\}$.
+        \item On a $p(x) = id$ si $F = E$.
+        \item On a $p \circ p = p$ (on dit que $p$ est idempotente).
+        \item L'endomorphisme $id_E - p$ est la projection sur $G$ parallèlement à $F$.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{Projection et noyau}{true}{
+    Soit $p \in \mathcal{L}(E)$ tel que $p \circ p = p$.\\
+    Alors on a $\ker(p) \oplus \text{Im}(p) = E$ et $p$ est la projection sur $\text{Im}(p)$ parallèlement à $\ker(p)$.
+}
+
+\definition{
+    Soit $E$ un $K$-ev de dimension finie. Soient $F$ et $G$ deux sev de $E$.\\
+    On appelle \textbf{symétrie par rapport à $F$ parallèlement à $G$} l'application \function{s_{F,G}}{E \rightarrow E}{x = y + z \mapsto y - z} où $y \in F$ et $z \in G$.\\
+}
+
+\theorem{Proposition}{}{true}{
+    On a $s = 2p - id_E$ où $p$ est la projection sur $F$ parallèlement à $G$.\\
+}
+
+\theorem{Proposition}{}{true}{
+    On a $s^2 = id_E$.
+}
+
+\theorem{Proposition}{}{true}{
+    Soit $s \in \mathcal{L}(E)$ tel que $s^2 = id_E$.\\
+    Alors on a $E = \ker(s - id_E) \oplus \ker(s + id_E)$ et $s$ est la symétrie par rapport à $\ker(s - id_E)$ parallèlement à $\ker(s + id_E)$.
+}
+
+
 \end{document}
