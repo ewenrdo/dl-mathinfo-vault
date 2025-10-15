@@ -105,7 +105,12 @@
         \item Soit $x > 0$, $\int_0^x e^{-\alpha t}\,dt = \left[ -\frac{e^{-\alpha t}}{\alpha} \right]_0^x = \frac{1}{\alpha}(1 - e^{-\alpha x})$.\\
         La convergence de $\int_0^{+\infty} e^{-\alpha t}\,dt$ est la même que $\frac{1}{\alpha}(1 - e^{-\alpha x})$, quand $x \to +\infty$.\\
         Donc, $\lim_{x \to +\infty} \int_0^x e^{-\alpha t}\,dt = \lim_{x \to +\infty} \frac{1}{\alpha}(1 - e^{-\alpha x}) = \frac{1}{\alpha}$.\\
-        \textbf{Donc $\int_0^{+\infty} e^{-\alpha t}\,dt$ converge pour tout $\alpha > 0$, et vaut $\frac{1}{\alpha}$.}
+        \textbf{Donc $\int_0^{+\infty} e^{-\alpha t}\,dt$ converge si, et seulement si, $\alpha > 0$, et vaut $\frac{1}{\alpha}$.}
     \end{enumerate}
+}
+\attention{Si $\alpha \leq 0$, l'intégrale diverge.}
+
+\vocabulary{
+    La nature de l'intégrale impropre $\int_a^{+\infty} f(t)\,dt$ est la convergence ou la divergence de cette intégrale.
 }
 \end{document}
