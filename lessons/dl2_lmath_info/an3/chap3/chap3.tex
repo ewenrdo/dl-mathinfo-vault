@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info AN3}
+\fancyhead[C]{Intégration}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Intégrales impropres}
+
+% Jusqu'à présent, les intégrales qu'on a étudiées étaient des intégrales de Riemann, approchant l'aire sous une courbe.
+\attention{Tous les exemples de calculs d'intégrales dans ce chapitre sont à connaître par cœur (il s'agit d'intégrales de référence), et peuvent être utilisés dans des exercices.}
+
+\section{Généralités sur les intégrales impropres}
+
+\subsection{Sur un intervalle du type $[a, +\infty[, a\in\mathbb{R}$}
+\definition{
+    Soit \functionSets{f}{[a, +\infty[ \rightarrow \mathbb{R} \text{ ou } \mathbb{C}} une fonction continue.\\
+    On dit que l'intégrale impropre \textit{(ou généralisée)} au voisiage de $+\infty$ converge (ou existe) si $\lim_{x \to +\infty} \int_a^x f(t) dt$ existe et est finie.\\\\
+    Dans ce cas, on note: $\int_a^{+\infty} f(t)\,dt$ l'intégrale impropre. Si une telle limite n'existe pas, on dit que l'intégrale diverge.
+}
+
+\remark{On utilisera la notation $\int_a^{+\infty} f(t)\,dt$ pour l'intégrale impropre qui converge ou diverge (on précise toujours si elle converge ou diverge).}
+
+\theorem{Propriété}{}{false}{
+    Supposons que $\int_a^{+\infty} f(t)\,dt$ converge.\\
+    Alors, $\lim_{A \to +\infty} \int_A^{+\infty} f(t)\,dt = 0$ converge. C'est le reste de l'intégrale impropre.
+}
+
+\noindent{\textbf{Preuve:}\\
+    Soit $x > A > a$.\\
+    On a : $\int_a^x f(t)\,dt = \int_a^A f(t)\,dt + \int_A^x f(t)\,dt$.\\
+    En faisant tendre $x$ vers $+\infty$, on obtient : $\int_a^{+\infty} f(t)\,dt = \int_a^A f(t)\,dt + \int_A^{+\infty} f(t)\,dt$.\\
+    On passe à la limite sur $A, A \to +\infty$ et on obtient :\\
+    $\int_a^{+\infty} f(t)\,dt = \int_a^{+\infty} f(t)\,dt + \lim_{A \to +\infty} \int_A^{+\infty} f(t)\,dt$.\\
+    Donc $\lim_{A \to +\infty} \int_A^{+\infty} f(t)\,dt = 0$ $\Box$.
+}
+
+\remark{Si on continue $f$ continue de $]-\infty, a]$ dans $\mathbb{R}$ ou $\mathbb{C}$, on peut définir l'intégrale impropre $\int_{-\infty}^{a} f(t)\,dt$ par $\lim_{x \to -\infty} \int_x^a f(t)\,dt$.}
+
+\example{
+    $\int_1^{+\infty} \frac{1}{t}\,dt$ converge-t-elle?
+    \begin{enumerate}
+        \item D'abord, $t \mapsto \frac{1}{t}$ est continue sur $[1, +\infty[$.
+        \item Soit $x > 1$, $\int_1^x \frac{1}{t}\,dt = [\ln(t)]_1^x = \ln(x)$.\\
+    Donc, $\lim_{x \to +\infty} \int_1^x \frac{1}{t}\,dt = \lim_{x \to +\infty} \ln(x) = +\infty$.\\
+    \textbf{Donc $\int_1^{+\infty} \frac{1}{t}\,dt$ diverge.}
+    \end{enumerate}
+}
+\example{
+    $\int_0^{+\infty} cos(t)\,dt$ converge-t-elle?
+    \begin{enumerate}
+        \item D'abord, $t \mapsto cos(t)$ est continue sur $[0, +\infty[$.
+        \item Soit $x > 0$, $\int_0^x cos(t)\,dt = [sin(t)]_0^x = sin(x)$.\\
+    Donc, $\lim_{x \to +\infty} \int_0^x cos(t)\,dt = \lim_{x \to +\infty} sin(x)$ n'existe pas.\\
+    \textbf{Donc $\int_0^{+\infty} cos(t)\,dt$ diverge.}
+    \end{enumerate}
+}
+
+\example{
+    $\int_0^{+\infty} \frac{1}{t^\alpha}\,dt$ converge-t-elle? ($\alpha \in \mathbb{R}$)
+    \begin{enumerate}
+        \item D'abord, $t \mapsto \frac{1}{t^\alpha}$ est continue sur $[0, +\infty[$ pour $\alpha > 0$.
+        \item Soit $x > 0$, $\int_0^x \frac{1}{t^\alpha}\,dt = \left[ \frac{t^{1-\alpha}}{1-\alpha} \right]_0^x = \frac{x^{1-\alpha}}{1-\alpha}$.\\
+    Donc, $\lim_{x \to +\infty} \int_0^x \frac{1}{t^\alpha}\,dt = \lim_{x \to +\infty} \frac{x^{1-\alpha}}{1-\alpha}$.
+    \begin{itemize}
+        \item Si $\alpha < 1$, alors $1-\alpha > 0$ et $\lim_{x \to +\infty} \frac{x^{1-\alpha}}{1-\alpha} = +\infty$.
+        \item Si $\alpha = 1$, alors $\lim_{x \to +\infty} \frac{x^{1-\alpha}}{1-\alpha}$ est indéfini.
+        \item Si $\alpha > 1$, alors $1-\alpha < 0$ et $\lim_{x \to +\infty} \frac{x^{1-\alpha}}{1-\alpha} = 0$.
+    \end{itemize}
+    \textbf{Donc $\int_0^{+\infty} \frac{1}{t^\alpha}\,dt$ converge si et seulement si $\alpha > 1$.}
+    \end{enumerate}
+}
+
+\theorem{Proposition}{Convergence des intégrales de Riemann}{false}{
+    Les intégrales de la forme $\int_1^{+\infty} \frac{1}{t^\alpha}\,dt$ sont appelées des intégrales de Riemann et convergent si et seulement si $\alpha > 1$, et on a :
+    \[
+        \int_1^{+\infty} \frac{1}{t^\alpha}\,dt = 
+        \begin{cases}
+            \frac{1}{\alpha - 1} & \text{si } \alpha > 1\\
+            \text{indéterminée} & \text{si } \alpha = 1\\
+            +\infty & \text{si } \alpha < 1
+        \end{cases}
+    \]
+}
+
+\example{
+    $\int_0^{+\infty} e^{-\alpha t}\,dt$ converge-t-elle?
+    \begin{enumerate}
+        \item D'abord, $t \mapsto e^{-\alpha t}$ est continue sur $[0, +\infty[$ pour $\alpha > 0$.
+        \item Soit $x > 0$, $\int_0^x e^{-\alpha t}\,dt = \left[ -\frac{e^{-\alpha t}}{\alpha} \right]_0^x = \frac{1}{\alpha}(1 - e^{-\alpha x})$.\\
+        La convergence de $\int_0^{+\infty} e^{-\alpha t}\,dt$ est la même que $\frac{1}{\alpha}(1 - e^{-\alpha x})$, quand $x \to +\infty$.\\
+        Donc, $\lim_{x \to +\infty} \int_0^x e^{-\alpha t}\,dt = \lim_{x \to +\infty} \frac{1}{\alpha}(1 - e^{-\alpha x}) = \frac{1}{\alpha}$.\\
+        \textbf{Donc $\int_0^{+\infty} e^{-\alpha t}\,dt$ converge pour tout $\alpha > 0$, et vaut $\frac{1}{\alpha}$.}
+    \end{enumerate}
+}
+\end{document}
