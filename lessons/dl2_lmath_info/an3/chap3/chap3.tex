@@ -113,4 +113,43 @@
 \vocabulary{
     La nature de l'intégrale impropre $\int_a^{+\infty} f(t)\,dt$ est la convergence ou la divergence de cette intégrale.
 }
+
+\training{Déterminer la nature de l'intégrale impropre suivante : $\int_0^{+\infty} \frac{1}{t^2 + 1}\,dt$.}
+
+\subsection{Sur un intervalle du type $]-\infty, +\infty[$}
+
+\definition{
+    Soit \functionSets{f}{]-\infty, +\infty[ \rightarrow \mathbb{R} \text{ ou } \mathbb{C}} une fonction continue.\\
+    On dit que l'intégrale impropre (ou généralisée) sur $]-\infty, +\infty[$ converge si pour $a \in \mathbb{R}$, les deux intégrales $\int_{-\infty}^a f(t)\,dt$ et $\int_a^{+\infty} f(t)\,dt$ convergent.
+}
+
+\example{
+    $\int_{-\infty}^{+\infty} \frac{1}{1+t^2}\,dt$ converge-t-elle?
+    \begin{enumerate}
+        \item D'abord, $t \mapsto \frac{1}{1+t^2}$ est continue sur $]-\infty, +\infty[$.
+        \item On a $\int_0^{+\infty} \frac{1}{1+t^2}\,dt = \lim_{x \to +\infty} [\arctan(t)]_0^{x} = \frac{\pi}{2}$ (converge).
+        \item On a $\int_{-\infty}^{0} \frac{1}{1+t^2}\,dt = \lim_{y \to -\infty} [\arctan(t)]_{y}^{0} = \frac{\pi}{2}$ (converge).
+    \end{enumerate}
+    \textbf{Donc $\int_{-\infty}^{+\infty} \frac{1}{1+t^2}\,dt$ converge et vaut $\pi$.}
+}
+
+\section{Intégrales impropres sur des intervalles $[a, b[, b<+\infty[$}
+
+\definition{
+    Soient $a < b \in \mathbb{R}$.
+    Considérons une fonction continue sur $[a, b[$ \textit{(a priori, f n'est pas continue en b car sinon $\int_a^b f(t)\,dt$ n'est pas impropre)}.\\
+     
+    On définit l'intégrale impropre $\int_a^b f(t)\,dt$ comme la limite $\lim_{x \to b^-} \int_a^x f(t)\,dt$, si cette limite existe et est finie.\\
+    Si cette limite n'existe pas, on dit que l'intégrale diverge.
+}
+
+\remark{Si \functionSets{f}{]a, b] \rightarrow \mathbb{R}} est continue, on peut définir l'intégrale impropre $\int_a^b f(t)\,dt$ par $\lim_{x \to a^+} \int_x^b f(t)\,dt$.}
+
+\example{
+    $\int_0^1 \frac{1}{t^{\alpha}}\,dt$ converge-t-elle?
+    $\int_0^1 \ln(t)\,dt$ converge-t-elle?
+
+   }
+
+
 \end{document}
