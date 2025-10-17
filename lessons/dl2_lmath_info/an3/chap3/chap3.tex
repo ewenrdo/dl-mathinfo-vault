@@ -133,7 +133,7 @@
     \textbf{Donc $\int_{-\infty}^{+\infty} \frac{1}{1+t^2}\,dt$ converge et vaut $\pi$.}
 }
 
-\section{Intégrales impropres sur des intervalles $[a, b[, b<+\infty[$}
+\subsection{Intégrales impropres sur des intervalles $[a, b[, b<+\infty$}
 
 \definition{
     Soient $a < b \in \mathbb{R}$.
@@ -149,7 +149,147 @@
     $\int_0^1 \frac{1}{t^{\alpha}}\,dt$ converge-t-elle?
     $\int_0^1 \ln(t)\,dt$ converge-t-elle?
 
-   }
+}
+\remark{Il se peut qu'on rencontre des intégrales impropres aux deux bornes $a$ et $b$ avec \functionSets{f}{]a, b[ \rightarrow \mathbb{R}}. Pour étudier $\int_a^b f(t)\,dt$ on peut utiliser la relation de Chasles ($c \in ]a, b[$), ce qui nous ramène à des intégrales impropres à une seule borne : $\int_a^b f(t)\,dt = \int_a^c f(t)\,dt + \int_c^b f(t)\,dt$.}
 
+\training{\textbf{Résolution d'un faux problème aux bornes par prolongement par continuité.}
+Prenons $\int_0^1 \frac{\sin(t)}{t}\,dt$.
+\begin{itemize}
+    \item $t \mapsto \frac{\sin(t)}{t}$ est $\mathcal{C}^0(]0, 1], \mathbb{R}$ (i.e. continue sur $]0, 1]$).
+    \textit{A priori}, on a une intégrale impropre en $0$.
+    \item On remarque que $t \mapsto \frac{\sin(t)}{t}$ peut être prolongée par continuité en $0$ par la valeur $1$ (car $\lim_{t \to 0} \frac{\sin(t)}{t} = 1$).
+    Donc on définit $\tilde{f}(t) : ]0, 1] \rightarrow \mathbb{R}$, $t \mapsto \begin{cases}
+        \frac{\sin(t)}{t} & \text{si } t \in ]0, 1]\\
+        1 & \text{si } t = 0
+    \end{cases}$.
+    \item Maintenant, $\tilde{f}$ est continue sur $[0, 1]$, donc l'intégrale $\int_0^1 \tilde{f}(t)\,dt$ est une intégrale de Riemann classique.
+    Et en fait, $\int_0^1 \frac{\sin(t)}{t}\,dt = \int_0^1 \tilde{f}(t)\,dt$. (ne dépend pas des points clés)    
+\end{itemize}
+}
+
+\theorem{Proposition}{Prolongement par continuité}{false}{
+    Soient $a < b \in \mathbb{R}$ et \functionSets{f}{]a, b[ \rightarrow \mathbb{R}} une fonction continue.\\
+    Si $f$ peut être prolongée par continuité en $a$ (resp. en $b$), alors l'intégrale impropre $\int_a^b f(t)\,dt$ converge si et seulement si l'intégrale de Riemann $\int_a^b \tilde{f}(t)\,dt$ converge, où $\tilde{f}$ est le prolongement par continuité de $f$ en $a$ (resp. en $b$).\\\\
+    Dans ce cas, on a : $\int_a^b f(t)\,dt = \int_a^b \tilde{f}(t)\,dt$.
+}
+
+\noindent{\textbf{Preuve:}\\
+    C'est par définition de l'intégrale de Riemann : retirer un nombre fini de points d'un intervalle n'affecte pas la valeur de l'intégrale (de l'aire sous la courbe).\\
+    \textit{En réalité, ça se démontre via les intégrales de Lebesgue et la mesure, mais ce n'est pas au programme ici.}
+    $\Box$
+}
+
+\remark{Toutes les propositions évoquées jusqu'ici restent valables pour une fonction continue par morceaux.}
+\newpage
+\training{Etudier la convergence de $\int_1^2 \frac{\ln(t)}{t-1}\,dt$.}
+\noindent{\textbf{Indication:} On peut élargir la classe de fonctions que l'on intègre (fonctions continues) en considérant la classe des fonctions continues par morceaux.}\\
+\carreaux{10}
+
+\theorem{Rappel}{Fonctions continues par morceaux}{false}{
+    Soit \functionSets{f}{[a, b] \rightarrow \mathbb{R}} est $\mathcal{C}^0 p.m$ (par morceaux) sur $[a, b]$ s'il existe une subdivision de $[a,b]$ donnée par $a=a_0 < a_1 < ... < a_n = b$ telle que :
+    \begin{itemize}
+        \item $f$ restreinte à chaque intervalle $]a_{i-1}, a_i[$ est continue.
+        \item Pour tout $i \in [|1, n-1|]$, les limites $\lim_{x \to a_i^-} f(x)$ et $\lim_{x \to a_i^+} f(x)$ existent et sont finies.
+    \end{itemize}
+}
+
+\example{La fonction $x \mapsto \lfloor x \rfloor$ est continue par morceaux sur tout intervalle $[a, b]$.}
+\cexample{Soit \functionSets{f}{[0, 1] \rightarrow \mathbb{R}}, $f(x) = \begin{cases}
+    \frac{1}{t} & \text{si } t > 0\\
+    0 & \text{si } t = 0
+\end{cases}$ n'est pas continue par morceaux sur $[0, 1]$ car $\lim_{x \to 0^+} f(x) = +\infty$.}
+
+\subsection{Propriétés des intégrales convergences}
+
+Ici, on va considérer $[a,b[$ avec $a\in\mathbb{R}$ et $b \in \mathbb{R} \cup \{+\infty\}$.
+\theorem{Propriété}{Linéarité des intégrales impropres}{false}{
+    Soient $f,g \in \mathcal{C}^0([a,b[,\mathbb{R})$ et $\lambda, \mu \in \mathbb{R}$ telles que les intégrales impropres $\int_a^b f(t)\,dt$ et $\int_a^b g(t)\,dt$ convergent.\\
+    Alors l'intégrale impropre $\int_a^b (\lambda f(t) + \mu g(t))\,dt = \lambda \int_a^b f(t)\,dt + \mu \int_a^b g(t)\,dt$ converge.
+}
+
+\theorem{Propriété}{Positivité}{false}{
+    Soit $f \in \mathcal{C}^0([a,b[,\mathbb{R})$ telle que $f(t) \geq 0$ pour tout $t \in [a,b[$ et que l'intégrale impropre $\int_a^b f(t)\,dt$ converge.\\
+    Alors, $\int_a^b f(t)\,dt \geq 0$.\\\\
+
+    De plus, si $\int_a^b f(t)\,dt = 0$, alors $f(t) = 0$ pour tout $t \in [a,b[$.
+}
+
+\theorem{Propriété}{Relation de Chasles}{false}{
+    Soit $f \in \mathcal{C}^0([a,b[,\mathbb{R})$ telle que l'intégrale impropre $\int_a^b f(t)\,dt$ converge.\\
+    Alors $\forall c \in ]a,b[$, les intégrales impropres $\int_a^c f(t)\,dt$ et $\int_c^b f(t)\,dt$ convergent et on a :
+    \[
+        \int_a^b f(t)\,dt = \int_a^c f(t)\,dt + \int_c^b f(t)\,dt
+    \]
+}
+
+\theorem{Propriété}{Intégration par parties}{false}{
+    Soient $u,v \in \mathcal{C}^1([a,b[,\mathbb{R})$.\\
+    On a $\forall x \in [a,b[$, $\int_a^x u(t)v'(t)\,dt = [u(t)v(t)]_a^x - \int_a^x u'(t)v(t)\,dt$.\\\\
+    $= u(x)v(x) - u(a)v(a) - \int_a^x u'(t)v(t)\,dt$.\\\\
+    On part de $\int_a^b u(t)v'(t)\,dt$ converge.\\
+    Dans ce cas, si $\lim_{x \to b} u(x)v(x)$ et $\lim_{x \to b} \int_a^x u'(t)v(t)\,dt$ existent, alors on peut écrire :
+    \[
+        \int_a^b u(t)v'(t)\,dt = \lim_{x \to b} [u(x)v(x)]_a^x - \lim_{x \to b} \int_a^x u'(t)v(t)\,dt
+    \]
+}
+
+\attention{Savoir refaire ce calcul plutôt que de le réciter.}
+
+\training{Montrer que $\int_0^{+\infty} t^n e^{-\lambda t}\,dt$ = $\frac{n!}{\lambda^{n+1}}$ pour tout $n\in \mathbb{N}^*$}
+\carreaux{10}
+
+\theorem{Théorème}{Changement de variable}{false}{
+    Soient \functionSets{f}{[a,b[ \rightarrow \mathbb{R}} (b peut être infini) une fonction continue et \functionSets{\varphi}{[\alpha,\beta[ \rightarrow [a,b[} une fonction $\mathcal{C}^1$ bijective et strictement croissante. (en fait $\varphi^{-1}(a) = \alpha$ et $\varphi^{-1}(b) = \beta$)\\\\
+    Alors $\int_a^b f(t)\,dt$ converge si et seulement si $\int_{\alpha}^{\beta} f(\varphi(t)) \varphi'(t)\,dt$ converge.\\
+    Et dans ce cas, on a :
+    \[
+        \int_a^b f(t)\,dt = \int_{\alpha}^{\beta} f(\varphi(t)) \varphi'(t)\,dt
+    \]
+}
+
+\noindent{\textbf{Preuve:}\\
+    On considère $\int_a^A f(t)\,dt$ pour $A > a$.\\
+    On a : $\int_a^A f(t)\,dt = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(A)} f(\varphi(t)) \varphi'(t)\,dt$.\\\\
+    En fait, $\varphi^{-1}$ est continue, donc $\mathcal{C}^1$.\\
+    Donc si $A \to b$, alors $\varphi^{-1}(A) \to \varphi^{-1}(b)$ et donc $\lim_{A \to +\infty} \int_a^A f(t)\,dt = \\lim_{\varphi^{-1}(A) \to \varphi^{-1}(b)} \int_{\varphi^{-1}(a)}^{\varphi^{-1}(A)} f(\varphi(t)) \varphi'(t)\,dt$.\\\\
+    Et donc $\int_a^b f(t)\,dt = \int_{\alpha}^{\beta} f(\varphi(t)) \varphi'(t)\,dt$. $\Box$
+}
+
+\remark{On ne change pas la nature de l'intégrale impropre avec un changement de variable.}
+
+\example{Convergence et calcul de $\int_0^{+\infty} \frac{e^t}{1+e^{2t}}\,dt$.\\
+En pratique, on note $\varphi = u$. Ici, posons $u(t) = e^t$, donc $du = e^t dt$.\\
+Alors $\int_0^{+\infty} \frac{e^t}{1+e^{2t}}\,dt = \int_{u(0)}^{u(+\infty)} \frac{1}{1+u^2}\,du = \int_1^{+\infty} \frac{1}{1+u^2}\,du$.\\
+On sait que cette intégrale converge et vaut $\frac{\pi}{4}$ (arctan).}
+
+\section{Fonctions positives}
+
+On se donne \functionSets{f}{[a,b[ \rightarrow \mathbb{R}} une fonction continue.
+
+\remark{Toutes les propositions qui suivent sont analogues aux séries numériques à termes positifs.}
+
+\theorem{Proposition}{}{false}{
+    $\int_a^b f(t)\,dt$ converge si et seulement si la fonction $x \mapsto \int_a^x f(t)\,dt$ est bornée.
+}
+\remark{Ici, c'est une série converge ssi la suite des sommes partielles est bornée.}
+\noindent{\textbf{Preuve:}\\
+    La fonction $F: x \mapsto \int_a^x f(t)\,dt$ est croissante.\\
+    Si $x' > x$ alors $F(x') - F(x) = \int_a^{x'} f(t)\,dt - \int_a^x f(t)\,dt = \int_x^{x'} f(t)\,dt \geq 0$ (car $f$ positive).\\\\
+}
+
+\theorem{Théorème}{Comparaison}{false}{
+    Soient $f,g \in \mathcal{C}^0([a,b[,\mathbb{R})$. Supposons $0 \leq f(t) \leq g(t)$ pour tout $t \in [a,b[$.\\
+    Alors :
+    \begin{itemize}
+        \item Si $\int_a^b g(t)\,dt$ converge, alors $\int_a^b f(t)\,dt$ converge.
+        \item Si $\int_a^b f(t)\,dt$ diverge, alors $\int_a^b g(t)\,dt$ diverge.
+    \end{itemize}
+}
+
+\theorem{Théorème}{Comparaison par équivalences}{false}{
+    Soient $f,g \in \mathcal{C}^0([a,b[,\mathbb{R})$.
+    On suppose $f$ positive (ou signe constant) au moins au voisinage de $b$ et que $f(t) \sim_{t \to b} g(t)$.\\
+    Alors les intégrales impropres $\int_a^b f(t)\,dt$ et $\int_a^b g(t)\,dt$ sont de même nature.
+}
 
 \end{document}
