@@ -292,4 +292,128 @@ On se donne \functionSets{f}{[a,b[ \rightarrow \mathbb{R}} une fonction continue
     Alors les intégrales impropres $\int_a^b f(t)\,dt$ et $\int_a^b g(t)\,dt$ sont de même nature.
 }
 
+\theorem{Théorème}{Comparaison avec $o$}{false}{
+    Soit $I=[a,b[$ où $b \in \mathbb{R} \cup \{+\infty\}$.\\
+    Soient \functionSets{f}{I \rightarrow \mathbb{R_{+}}} et \functionSets{g}{I \rightarrow \mathbb{R_{+}}} deux fonctions continues.\\
+    \begin{enumerate}
+        \item Si $f(t) = o_b(g(t))$ et si $\int_a^b g(t)\,dt$ converge, alors $\int_a^b f(t)\,dt$ converge.
+        \item Si $\lim_{t \to b} \frac{f(t)}{g(t)} = +\infty$ et si $\int_a^b g(t)\,dt$ diverge, alors $\int_a^b f(t)\,dt$ diverge.
+    \end{enumerate}
+}
+
+\remark{Dans le premier cas, on peut remplacer $f(t) = o_b(g(t))$ par $f(t) = O_b(g(t))$ (i.e. il existe $M > 0$ tel que $f(t) \leq M g(t)$ au voisinage de $b$).}
+
+\reminder{Rappel : o $\Rightarrow$ O}
+
+\noindent{\textbf{Preuve de théorème de comparaison par équivalents:}\\
+    On a $f,g : I \rightarrow \mathbb{R_{+}}, g>0$ et $\lim_{t \to b} \frac{f(t)}{g(t)} = 1 \Leftrightarrow \lim_{t \to b} \frac{f(t)}{g(t)} - 1 = 0$.\\
+    Suppons dans un premier temps $b\in\mathbb{R}$.\\
+
+    Pour $\varepsilon > 0$, $\exists \delta > 0$ tel que\\
+    $\forall t \in ]b-\delta, b[$ alors $|\frac{f(t)}{g(t)} - 1| < \frac{1}{2} = \varepsilon$.\\
+
+    On a alors $\forall t \in ]b-\delta, b[$, $\frac{1}{2} g(t) < f(t) < \frac{3}{2} g(t)$.\\\\
+    On en déduit de cette inégalité par le théorème de comparaison que $\int_{b-\delta}^b f(t)\,dt$ et $\int_{b-\delta}^b g(t)\,dt$ sont de même nature.\\
+    Donc $\int_a^b f(t)\,dt$ et $\int_a^b g(t)\,dt$ sont de même nature. $\Box$.
+}
+
+\training{
+    $\int_0^{+\infty} \frac{1}{t^7+t^6+1}\,dt$ converge car $t \mapsto \frac{1}{t^7+t^6+1}$ est $\mathcal{C}^0([0, +\infty[)$, \\
+    et $\int_1^{+\infty} \frac{1}{t^7+t^6+1}\,dt$ converge par comparaison avec $\int_1^{+\infty} \frac{1}{t^7}\,dt$ : $\frac{1}{t^7+t^6+1} < \frac{1}{t^7}$ pour $t \geq 1$.\\
+    Par l'intégrale de Riemann, $\int_1^{+\infty} \frac{1}{t^7}\,dt$ converge, donc $\int_1^{+\infty} \frac{1}{t^7+t^6+1}\,dt$ converge.\\
+}
+\training{
+    $\int_0^{+\infty} (t^7+t^6+1)e^{-t^2}\,dt$ converge-t-elle ?\\
+    $f(t)$ est $\mathcal{C}^0([0, +\infty[)$, et $\lim_{t \to +\infty} t^2 f(t) = 0 \Leftrightarrow f(t) = o_{+\infty}(\frac{1}{t^2})$. ($f(t) > 0 et < \frac{1}{t^2}$.)\\
+    Par le théorème de comparaison avec $o$, comme $\int_0^{+\infty} \frac{1}{t^2}\,dt$ converge, alors $\int_0^{+\infty} (t^7+t^6+1)e^{-t^2}\,dt$ converge.
+}
+
+\theorem{Proposition}{Intégrales de Bertrand}{false}{
+    Soient $\alpha, \beta \in \mathbb{R}$.
+    Les intégrales de la forme $\int_2^{+\infty} \frac{1}{t^\alpha (\ln t)^\beta}\,dt$ convergent si et seulement si :
+    \begin{itemize}
+        \item soit $\alpha > 1$,
+        \item soit $\alpha = 1$ et $\beta > 1$.
+    \end{itemize}
+}
+
+\noindent{\textbf{Preuve:}\\
+    $t\in[2, +\infty[ \mapsto \frac{1}{t^\alpha (\ln t)^\beta}$ est $\mathcal{C}^0([2, +\infty[)$.\\
+    \begin{enumerate}
+        \item Si $\alpha > 1$, prenons $1 < a < \alpha$.\\
+        On a $\frac{t^a}{t^\alpha (\ln t)^\beta} = \frac{1}{t^{\alpha - a} (\ln t)^\beta}$.\\
+        Or $a - \alpha < 0$ et $(\ln t)^\beta > 0$, donc $\frac{1}{t^{\alpha - a} (\ln t)^\beta} \to 0$ quand $t \to +\infty$ par croissances comparées.\\
+        Donc $\frac{1}{t^\alpha (\ln t)^\beta} = o_{+\infty}(\frac{1}{t^a}) \forall \beta \in \mathbb{R}$.\\
+        Or $\int_2^{+\infty} \frac{1}{t^a}\,dt$ converge (intégrale de Riemann), donc par le théorème de comparaison avec $o$, $\int_2^{+\infty} \frac{1}{t^\alpha (\ln t)^\beta}\,dt$ converge.
+        \item Si $\alpha < 1$, prenons $a$ tel que $\alpha < b < 1$.\\
+        Calculons $\frac{t^b}{t^\alpha (\ln t)^\beta} = \frac{1}{t^{\alpha - b} (\ln t)^\beta} \longrightarrow_{t \to +\infty} +\infty$ par croissances comparées.\\
+        Par le (2) du théorème de comparaison avec $o$, comme $\int_2^{+\infty} \frac{1}{t^b}\,dt$ diverge (intégrale de Riemann), alors $\int_2^{+\infty} \frac{1}{t^\alpha (\ln t)^\beta}\,dt$ diverge pour $b < 1$.
+        \item Si $\alpha = 1$,
+        \begin{itemize}
+            \item Si $\beta \neq 1$, on a :
+            $\int_2^{x} \frac{1}{t (\ln t)^\beta}\,dt = [\frac{(\ln t)^{1-\beta}}{1-\beta}]_2^{x}$ = $\frac{(\ln x)^{1-\beta}}{1-\beta} - \frac{(\ln 2)^{1-\beta}}{1-\beta}$, qui CV si et seulement si $1 - \beta < 0$.
+            \item Si $\beta = 1$, on a : $\int_2^{x} \frac{1}{t \ln t}\,dt$ qui diverge.
+        \end{itemize}
+    \end{enumerate}
+}
+
+\section{Absolue convergence et fonctions intégrables}
+Soient $I = [a,b[$ avec $a \in \mathbb{R}$ et $b \in \mathbb{R} \cup \{+\infty\}$ et \functionSets{f}{I \rightarrow \mathbb{C}}.
+
+\definition{
+    On dit que $\int_a^b f(t)\,dt$ converge absolument si l'intégrale $\int_a^b |f(t)|\,dt$ converge.
+}
+
+\definition{
+    On dit que $f$ est intégrable si $\int_a^b f(t)\,dt$ converge $\Leftrightarrow \int_a^b |f(t)|\,dt$ converge.
+}
+
+\vocabulary{Considérons $L^{1}(I) = \{ f : I \rightarrow \mathbb{C} \mid f \text{ est continue et } \int_I |f(t)|\,dt \text{ converge} \}$.}
+
+\theorem{Proposition}{}{false}{
+    $L^{1}_{\text{continue}}(I)$ est un $\mathbb{C}$-espace vectoriel.
+}
+
+\noindent{\textbf{Preuve:}\\
+    Montrons que c'est un sous-espace vectoriel des fonctions de $I$ dans $\mathbb{C}$.\\
+    $0 \in L^{1}_{\text{continue}}(I)$ car $\int_a^b |0|\,dt = 0$ converge.\\
+    Soient $f,g \in L^{1}_{\text{continue}}(I)$ et $\lambda, \mu \in \mathbb{C}$, on veut montrer que $\lambda f + \mu g \in L^{1}(I)$.\\
+
+    \noindent On a que $\forall t \in I$ $|\lambda f(t) + \mu g(t)| \leq |\lambda||f(t)| + |\mu||g(t)|$ (inégalité triangulaire).\\
+    Or $\int_I |\lambda||f(t)| + |\mu||g(t)|\,dt = |\lambda| \int_I |f(t)|\,dt + |\mu| \int_I |g(t)|\,dt$ converge (car $f,g \in L^{1}_{\text{continue}}(I)$).\\
+    Donc la fonction $t \mapsto |\lambda f(t) + \mu g(t)|$ a son intégrale $\int_I |\lambda f(t) + \mu g(t)|\,dt$ qui converge par le théorème de comparaison.\\
+    Donc $\lambda f + \mu g \in L^{1}_{\text{continue}}(I)$. $\Box$
+}
+
+\theorem{Théorème}{Comparaison}{false}{
+    Soient \functionSets{f}{I \rightarrow \mathbb{C}} et \functionSets{g}{I \rightarrow \mathbb{R_{+}}}\\
+    Si $|f(t)| \leq g(t)$ pour tout $t \in I$ et si $\int_I g(t)\,dt$ converge, alors $\int_a^b f(t)\,dt$ converge absolument, et donc $f$ intégrable sur $I$.
+}
+
+\noindent{\textbf{Preuve :}\\
+Les fonctions positives auxquelles appliquer le théorème de comparaison sont $|f(t)|$ et $g(t)$.\\
+}
+
+\theorem{Théorème}{Comparaison avec équivalences}{false}{
+    Soient \functionSets{f}{I \rightarrow \mathbb{C}} et \functionSets{g}{I \rightarrow \mathbb{R_{+}}}\\
+    Si $|f(t)| \sim_{t \to b} g(t)$ et si $g$ est positive au moins au voisinage de $b$, alors les intégrales $\int_a^b f(t)\,dt$ et $\int_a^b g(t)\,dt$ sont de même nature.
+}
+
+\noindent{\textbf{Preuve :}\\
+Les fonctions positives auxquelles appliquer le théorème de comparaison sont $|f(t)|$ et $g(t)$.\\
+Si $\frac{f(t)}{g(t)} \to 0$ alors $\frac{|f(t)|}{g(t)} \to 0$.\\
+}
+
+\theorem{Théorème}{Comparaison avec o}{false}{
+    Soient \functionSets{f}{I \rightarrow \mathbb{C}} et \functionSets{g}{I \rightarrow \mathbb{R_{+}}}\\
+    \begin{enumerate}
+        \item Si $f(t) = o_b(g(t))$ et si $\int_I g(t)\,dt$ converge, alors $\int_I f(t)\,dt$ converge absolument, et donc $f$ est intégrable sur $I$.
+        \item Supposons que $f$ est à valeur dans $\mathbb{R}$ (pas $\mathbb{C}$).\\
+        Si $\lim_{t \to b} \frac{f(t)}{g(t)} = \pm \infty$ et si $\int_I g(t)\,dt$ diverge, alors $\int_I f(t)\,dt$ diverge.
+    \end{enumerate}
+}
+
+
+
+
 \end{document}
