@@ -413,7 +413,75 @@ Si $\frac{f(t)}{g(t)} \to 0$ alors $\frac{|f(t)|}{g(t)} \to 0$.\\
     \end{enumerate}
 }
 
+\theorem{Proposition}{Absolue convergence et convergence}{false}{
+    Si $\int_a^b f(t)\,dt$ converge absolument, alors $\int_a^b f(t)\,dt$ converge. (ACV $\Rightarrow$ CV)\\
+    De plus, on a la majoration : $\left| \int_a^b f(t)\,dt \right| \leq \int_a^b |f(t)|\,dt$.
+}
 
+\noindent{\textbf{Preuve dans le cas réel :}\\
+Soit \functionSets{f}{I \rightarrow \mathbb{R}}, on considère les fonctions $f_{+}(t) = \max(f(t), 0)$ et $f_{-}(t) = \max(-f(t), 0)$ (qui sont positives et continues).\\
+Et $f(t) = f_{+}(t) - f_{-}(t)$ et $|f(t)| = f_{+}(t) + f_{-}(t)$.\\
+On a $f_{+}(t), f_{-}(t) \leq |f(t)| \forall t \in I$.\\
+Donc on peut passer à l'intégrale : $\int_a^b f_{+}(t)\,dt, \int_a^b f_{-}(t)\,dt \leq \int_a^b |f(t)|\,dt$ qui converge par hypothèse.\\
+Donc par le théorème de comparaison, $\int_a^b f_{+}(t)\,dt$ et $\int_a^b f_{-}(t)\,dt$ convergent.\\
+On en déduit que $\int_a^b f(t)\,dt = \int_a^b f_{+}(t)\,dt - \int_a^b f_{-}(t)\,dt$ converge.\\\\
+De plus, on a :
+\[
+    \left| \int_a^b f(t)\,dt \right| = \left| \int_a^b f_{+}(t)\,dt - \int_a^b f_{-}(t)\,dt \right| \leq \left| \int_a^b f_{+}(t)\,dt \right| + \left| \int_a^b f_{-}(t)\,dt \right| = \int_a^b f_{+}(t)\,dt + \int_a^b f_{-}(t)\,dt = \int_a^b |f(t)|\,dt
+\]
+}
+\noindent{\textbf{Preuve dans le cas complexe :}\\
+cf. Laurent
+}
+\section{Intégales SCV}
 
+\definition{
+    Soit \functionSets{f}{I \rightarrow \mathbb{C}}.\\
+    On dit que $\int_a^b f(t)\,dt$ est semi-convergente si $\int_a^b f(t)\,dt$ converge mais pas absolument.
+    Autrement dit, si $f$ n'est pas intégrable sur $I$ mais que $\int_a^b f(t)\,dt$ converge.
+}
+
+\remark{Si $f$ est positive sur $I$, alors $\int_a^b f(t)\,dt$ ne peut pas être semi-convergente.}
+
+\example{
+    $\int_1^{+\infty} \frac{\sin t}{t}\,dt$ est SCV.\\
+    Remarquons que $\frac{\sin t}{t^2}$ et $\frac{\cos t}{t^2}$ sont ACV (montré par intégrales de riemann, et majoration par $\frac{1}{t^2}$).\\
+    Montrons que $\int_1^{+\infty} \frac{\sin t}{t}\,dt$ converge.\\
+    Par IPP, on a :
+    \[
+        \int_1^{A} \frac{\sin t}{t}\,dt = \left[ -\frac{\cos t}{t} \right]_1^{A} - \int_1^{A} -\frac{\cos t}{t^2}\,dt
+    \]
+    Et donc, en faisant tendre $A$ vers $+\infty$, on a que $\lim_{A \to +\infty} \frac{\sin t}{t}$ existe.\\
+    Donc $\int_1^{+\infty} \frac{\sin t}{t}\,dt$ converge.\\\\
+    Montrons que $\int_1^{+\infty} \left| \frac{\sin t}{t} \right|\,dt$ diverge.\\
+    On a que $x >> x^2$ entre $0$ et $1$.\\
+    Ici, $|sin t| >> \sin^2 t \forall t \in \mathbb{[1, +\infty[}$.\\
+    Et on a : $sin^2 t = \frac{1 - \cos(2t)}{2}$.\\
+    On a donc $\forall A > 1$ : $\int_1^{A} \left| \frac{\sin t}{t} \right|\,dt \geq \int_1^{A} \frac{\sin^2 t}{t}\,dt = \frac{1}{2} \int_1^{A} \frac{1 - \cos(2t)}{t}\,dt$.\\
+    $= \frac{1}{2} \left( \int_1^{A} \frac{1}{t}\,dt - \int_1^{A} \frac{\cos(2t)}{t}\,dt \right)$.\\
+    Donc ça diverge (car $\int_1^{A} \frac{1}{t}\,dt = \ln A$ diverge et $\int_1^{A} \frac{\cos(2t)}{t}\,dt$ converge par intégrale de Riemann).\\
+}
+
+\section{Comparaison Série - Intégrale}
+
+On prend \functionSets{f}{[1, +\infty[ \rightarrow \mathbb{R_{+}}} une fonction continue, décroissante.\\
+Soit $N \in \mathbb{N}$ assez grand.
+Considérons $\int_1^{N} f(t)\,dt$.\\
+On a : $\int_1^{N} f(t)\,dt = \sum_{k=1}^{N-1} \int_k^{k+1} f(t)\,dt$ par la relation de Chasles.\\
+Or $f$ étant décroissante, on a $\forall t \in [k, k+1], f(k+1) \leq f(t) \leq f(k)$.\\
+Donc $f(k+1) \leq \int_k^{k+1} f(t)\,dt \leq f(k)$.\\
+En sommant pour $k$ de $1$ à $N-1$, on a
+\[
+    \sum_{k=1}^{N-1} f(k+1) \leq \int_1^{N} f(t)\,dt \leq \sum_{k=1}^{N-1} f(k)
+\]
+
+\theorem{Théorème}{Comparaison série - intégrale}{false}{
+    Soient \functionSets{f}{[1, +\infty[ \rightarrow \mathbb{R_{+}}} une fonction continue, décroissante.\\
+    Alors les intégrales impropres $\int_1^{+\infty} f(t)\,dt$ et les séries numériques $\sum_{n\geq1} f(n)$ sont de même nature.
+}
+
+\training{
+    Donner un équivalent de $\int_1^{N} f(t)\,dt$ si $f(t) = \frac{1}{t}$.
+}
 
 \end{document}
