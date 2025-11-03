@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Topologie}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés}
+
+\section{Distances et normes}
+
+Soit $X$ un ensemble quelconque (dans la suite supposé non nul).
+
+\definition{
+    Une distance $d$ sur $X$ est une application $d\colon X\times X \to \mathbb{R}_+$ qui vérifie les axiomes suivants :
+    \begin{enumerate}
+        \item $\forall (x,y) \in X^2, d(x,y) = d(y,x)$ (symétrie)
+        \item $\forall x,y,z \in X, d(x,z) \leq d(x,y) + d(y,z)$ (inégalité triangulaire)
+        \item $\forall (x,y) \in X^2, d(x,y) = 0 \Leftrightarrow x = y$ (séparation)
+    \end{enumerate}
+}
+
+\vocabulary{
+    On appelle \textbf{espace métrique} un couple $(X,d)$ où $X$ est un ensemble et $d$ une distance sur $X$.
+}
+
+\example{
+    \begin{itemize}
+        \item $\mathbb{R}$ muni de la distance $d(x,y) = |x-y|$, où $|\cdot|$ est la valeur absolue.
+        \item $\mathbb{C}$ muni de la distance $d(z_1, z_2) = |z_1 - z_2|$, où $|\cdot|$ est le module.
+        \item Une autre façon de voir l'exemple 2, on considère l'ensemble $\mathbb{R}^2$ muni de la distance suivante :\\
+        Si $A = (x_A, y_A)$ et $B = (x_B, y_B)$ sont deux points de $\mathbb{R}^2$, on définit la distance $d(A,B) = \sqrt{(x_A - x_B)^2 + (y_A - y_B)^2}$.\\
+        On appelle cette distance la \textbf{distance euclidienne} sur $\mathbb{R}^2$.
+        \item Prenons $X =$ cercle unité muni de la distance $d(A,B) = arccos(cos(\theta_2 - \theta_1))$ où $\theta_1$ et $\theta_2$ sont les arguments des points $A$ et $B$ respectivement.
+        \textit{(voir schéma OneNote)}
+    \end{itemize}
+}
+
+\remark{
+    On peut voir l'exemple 1 comme un cas particulier de l'exemple 2, en identifiant $\mathbb{R}$ à l'axe des réels dans le plan complexe.
+}
+
+\remark{On peut généraliser l'exemple 3 à $\mathbb{R}^n$ muni de la distance euclidienne définie par :
+\[d(A,B) = \sqrt{\sum_{i=1}^{n} (x_{A_i} - x_{B_i})^2}\]
+où $A = (x_{A_1}, x_{A_2}, \ldots, x_{A_n})$ et $B = (x_{B_1}, x_{B_2}, \ldots, x_{B_n})$ sont deux points de $\mathbb{R}^n$.}
+
+\end{document}

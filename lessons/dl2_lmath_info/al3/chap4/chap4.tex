@@ -2,8 +2,6 @@
 
 \usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
 
-\usepackage{amsmath,amssymb}
-
 \usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
 
 \usepackage{fancyhdr}
@@ -14,7 +12,7 @@
 \fancyhf{} % reset tout
 
 \fancyhead[L]{DL2 Math-Info}
-\fancyhead[C]{Topologie}
+\fancyhead[C]{Espaces vectoriels}
 \fancyhead[R]{2025-2026}
 
 \fancyfoot[L]{Ewen Rodrigues de Oliveira}
@@ -22,29 +20,157 @@
 
 \begin{document}
 
-\docTitle{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés}
+\docTitle{Chapitre 4 : Matrices}
 
-\section{Distances et normes}
+\section{Généralités}
+Voir le cours de MM1.
 
-Soit $X$ un ensemble quelconque (dans la suite supposé non nul).
+\theorem{Proposition}{Symbole de Kronecker}{false}{
+    Soit \(n \in \mathbb{N}^*\). Le symbole de Kronecker est défini par :
+    \[
+        \delta_{ij} = \begin{cases}
+            1 & \text{si } i = j \\
+            0 & \text{sinon}
+        \end{cases}
+    \]
+    pour \(i, j \in \{1, 2, \ldots, n\}\).
+}
+
+\remark{De là découle immédiatement les matrices élémentaires suivantes : $E_{ij} = (\delta_{ik}\delta_{jl})_{1 \leq k,l \leq n}$.}
+
+\section{Structure d'un espace vectoriel}
+
+\subsection{Ensemble des matrices}
+
+\theorem{Proposition}{}{false}{
+    Soient $n,m \in \mathbb{N}$.\\
+    Comme $M_{n,m}(\mathbb{K}) = \{ \varphi : \{1, \ldots, n\} \times \{1, \ldots, m\} \to \mathbb{K} \}$, on en déduit que $M_{n,m}(\mathbb{K})$ est un espace vectoriel de dimension $nm$.
+}
+
+\remark{Une base de $M_{n,m}(\mathbb{K})$ est donnée par les matrices élémentaires $\{ E_{ij} \mid 1 \leq i \leq n, 1 \leq j \leq m \}$.}
+
+\subsection{Structure multiplicative}
+
+\theorem{Proposition}{}{false}{
+    Soient $n, m, p, q \in \mathbb{N}^*$.\\
+    Soient $A = (a_{ij}) \in M_{n,p}(\mathbb{K})$ et $B = (b_{jk}) \in M_{p,q}(\mathbb{K})$.\\
+    Le produit matriciel $C = AB$ est défini par $C = (c_{ik})$ où $c_{ik} = \sum_{j=1}^{p} a_{ij} b_{jk}$.
+}
+
+\remark{Le produit matriciel est associatif.}
+
+\theorem{Proposition}{Linéarité}{false}{
+    Si on fixe $A \in M_{n,p}(\mathbb{K})$, l'application $M_{p,q}(\mathbb{K}) \to M_{n,q}(\mathbb{K}), B \mapsto AB$ est $K$-linéaire.\\
+    \textit{Réciproquement $M_{n,p}(\mathbb{K}) \to M_{n,q}(\mathbb{K}), A \mapsto AB$ est $K$-linéaire si on fixe $B \in M_{p,q}(\mathbb{K})$.}
+}
+
+\remark{Si $n=p$, on a une \textbf{loi associative interne} sur $M_n(\mathbb{K})$. La matrice identité $I_n$ est l'élément neutre.}
 
 \definition{
-    Une distance $d$ sur $X$ est une application $d\colon X\times X \to \mathbb{R}^+$ qui vérifie les axiomes suivants :
+    Soit $A \in M_n(\mathbb{K})$. On dit que $A$ est inversible s'il existe $B \in M_n(\mathbb{K})$ tel que $AB = BA = I_n$. Dans ce cas, $B$ est unique et on le note $A^{-1}$.
+}
+
+\vocabulary{On note $GL_n(\mathbb{K})$ l'ensemble des matrices inversibles de $M_n(\mathbb{K})$.}
+
+\theorem{Proposition}{Groupe}{false}{
+    L'ensemble $GL_n(\mathbb{K})$ muni du produit matriciel est un groupe. (non abélien si $n \geq 2$)
+}
+
+\remark{
     \begin{enumerate}
-        \item $\forall (x,y) \in X^2, d(x,y) = d(y,x)$ (symétrie)
-        \item $\forall x,y,z \in X, d(x,z) \leq d(x,y) + d(y,z)$ (inégalité triangulaire)
-        \item $\forall (x,y) \in X^2, d(x,y) = 0 \Leftrightarrow x = y$ (séparation)
+        \item $GL_n(\mathbb{K})$ n'est pas un espace vectoriel.
+        \item $GL_1(\mathbb{K}) = \mathbb{K}^*$ qui est abélien.
     \end{enumerate}
 }
 
-\vocabulary{
-    On appelle \textbf{espace métrique} un couple $(X,d)$ où $X$ est un ensemble et $d$ une distance sur $X$.
+\section{Transposition}
+
+\definition{
+    Soient $n,p \in \mathbb{N}^*$ et $A = (a_{ij}) \in M_{n,p}(\mathbb{K})$.\\
+    La transposée de $A$ est la matrice ${ }^t A = (a_{ji}) \in M_{p,n}(\mathbb{K})$.
 }
 
-\example{
-    \begin{itemize}
-        \item $\mathbb{R}$ muni de la distance $d(x,y) = |x-y|$, où $|\cdot|$ est la valeur absolue.
-        \item $\mathbb{C}$ muni de la distance $d(z_1, z_2) = |z_1 - z_2|$, où $|\cdot|$ est le module.
-    \end{itemize}
+\theorem{Propriété}{}{false}{
+    L'application transposée $M_{n,p}(\mathbb{K}) \to M_{p,n}(\mathbb{K}), A \mapsto { }^t A$ est une isomorphisme linéaire.\\
+    Elle est symétrique si ${ }^t({ }^t A) = A$ et antisymétrique si ${ }^t({ }^t A) = -A$.
 }
+
+\section{Représentation matricielle}
+
+\definition{
+    Soit $E$ un $K$-espace vectoriel de dimension $n$. Soit $B=(e_1, \ldots, e_n)$ une base de $E$.\\
+    Soit $(u_1, \ldots, u_p)$ une famille de $p$ vecteurs de $E$. Posons pour $1 \leq j \leq p$, $u_j = \sum_{i=1}^{n} a_{ij} e_i$.\\\\
+
+    On définit $Mat_B(u_1, \ldots, u_p) = A = (a_{ij}) \in M_{n,p}(\mathbb{K})$ la matrice des coordonnées des vecteurs $(u_1, \ldots, u_p)$ dans la base $B$.
+}
+
+\theorem{Propriété}{}{false}{
+    Si $p=1$, on a $u=u_1$ et $Mat_B(u) = \begin{pmatrix}
+        a_{1} \\
+        a_{2} \\
+        \vdots \\
+        a_{n}
+    \end{pmatrix}$\\
+    On a que l'application $E \to K^n, u \mapsto Mat_B(u)$ est un isomorphisme linéaire.
+}
+
+\definition{
+    Soient $E,F$ des $K$-espaces vectoriels avec $dimE=p, dimF=n$.\\
+    Soit $f \in \mathcal{L}(E,F)$. Soient $B=(e_1, \ldots, e_p)$ une base de $E$ et $B'=(v_1, \ldots, v_n)$ une base de $F$.\\
+
+    On définit la matrice de $f$ dans les bases $B$ et $B'$ par $Mat_{B,B'}(f) = Mat(f(e_1), \ldots, f(e_p)) \in M_{n,p}(\mathbb{K})$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $u \in E$.\\
+    Posons $X = Mat(u, B)$, $Y= Mat(f(u), B)$. Posons A $ = Mat_{B,B'}(f)$.\\
+    On a $Y = AX$.
+}
+
+\theorem{Proposition}{}{false}{
+    L'application $\mathcal{L}(E,F) \to M_{p,n}(\mathbb{K}), f \mapsto Mat_{B,B'}(f)$ est un isomorphisme linéaire.
+}
+
+\theorem{Proposition}{Composition}{false}{
+    Soit $G$ un $K$-espace vectoriel de base finie $B''$. Soit $g \in \mathcal{L}(F,G)$.\\
+    Alors $Mat_{B,B''}(g \circ f) = Mat_{B',B''}(g) \cdot Mat_{B,B'}(f)$.
+}
+
+\theorem{Proposition}{Bijection et inversibilité}{false}{
+    On a $f \in \mathcal{L}(E,F)$ est un bijective si et seulement si $Mat_{B,B'}(f) \in GL_n(\mathbb{K})$.\\
+    Alors $Mat_{B',B}(f^{-1}) = (Mat_{B,B'}(f))^{-1}$.
+}
+
+\remark{Soit $A\in M_{p,n}(\mathbb{K})$. Il lui correspond $L(A) : K^p \to K^n$ définie par $L(A)(X) = AX$.\\
+On a $L(AB) = L(A) \circ L(B)$.}
+
+\definition{
+    \begin{enumerate}
+        \item Noyau de A : $\text{Ker}(A) = \{ X \in K^m \mid AX = 0 \} = Ker(L(A))$.
+        \item Image de A : $\text{Im}(A) = \{ Y \in K^n \mid \exists X \in K^m, Y = AX \} = Im(L(A))$.
+        \item Rang de A : $\text{rg}(A) = dim(Im(A)) = rg(L(A))$.
+    \end{enumerate}
+}
+
+\section{Matrice de changement de base}
+
+\definition{Soit $E$ un $K$-espace vectoriel de dimension $n$.
+Soient $B = (e_1, \ldots, e_n)$ et $B' = (v_1, \ldots, v_n)$ des bases de $E$.\\
+Si on pose $v_j = \sum_{i=1}^{n} a_{ij} e_j$, alors : $P_{B,B'} = (a_{ij}) \in M_n(\mathbb{K})$ est la matrice de passage de la base $B$ à la base $B'$.}
+
+...
+
+\theorem{Proposition}{}{false}{
+    Les conditions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $A$ est inversible.
+        \item Pour tout $B$, $AX=B$ a une unique solution $X$.
+        \item Pour tout $B$, $AX=B$ admet au moins une solution $X$.
+        \item Pour tout $B$, $AX=B$ admet au plus une solution $X$.
+        \item $AX=0$ a pour solution $X=0$.
+    \end{enumerate}
+}
+
+\vocabulary{On appelle système de Cramer un système de la forme $AX=B$ où $A$ est inversible.}
+
 \end{document}
