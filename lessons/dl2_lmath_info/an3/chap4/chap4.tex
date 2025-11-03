@@ -103,4 +103,19 @@ Idem pour $\mathbb{Q}$.}
 \training{Démontrer le théorème ci-dessus. \textit{(vérifier que $d_Y$ satisfait bien les axiomes d'une distance.)}}
 \noindent\carreaux{10}
 
+\subsection{Espaces vectoriels normés}
+
+On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espace vectoriel ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$). (a priori pas de dimension finie)
+
+\subsubsection{Définitions}
+\definition{
+    Une norme $N$ sur $E$ est une application $N\colon E \to \mathbb{R}_+$ souvent notée $\| \cdot \|$ qui vérifie les axiomes suivants :
+    \begin{enumerate}
+        \item $\forall u \in E, \forall \lambda \in \mathbb{K}, \|\lambda u\| = |\lambda| \cdot \|u\|$ (homogénéité)
+        \item $\forall (u,v) \in E^2, \|u+v\| \leq \|u\| + \|v\|$ (inégalité triangulaire)
+        \item $\forall u \in E, \|u\| = 0 \Leftrightarrow u = 0_E$ (séparation)
+    \end{enumerate}
+}
+\vocabulary{On dit que le couple $(E, N) = (E, \| \cdot \|)$ est un \textbf{espace vectoriel normé}. Il est commun d'écrire $e.v.n.$.}
+\remark{$\forall x \in E, N(-x) = N(x)$ d'après l'axiome 1.}
 \end{document}
