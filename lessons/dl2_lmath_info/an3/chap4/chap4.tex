@@ -118,4 +118,18 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
 }
 \vocabulary{On dit que le couple $(E, N) = (E, \| \cdot \|)$ est un \textbf{espace vectoriel normé}. Il est commun d'écrire $e.v.n.$.}
 \remark{$\forall x \in E, N(-x) = N(x)$ d'après l'axiome 1.}
+
+\theorem{Théorème}{Association norme-distance}{false}{
+    Soit $(E, \| \cdot \|)$ un espace vectoriel normé.\\
+    Alors c'est en particulier un espace métrique pour la distance définie par $d_N(u,v) = \|v - u\|$.
+}
+
+\noindent{\textbf{Preuve :} Il suffit de vérifier les axiomes d'une distance.
+    \begin{enumerate}
+        \item Symétrie : $d_N(u,v) = \|v-u\| = \|-(u-v)\| = \|u-v\| = d_N(v,u)$.
+        \item Inégalité triangulaire : $d_N(u,w) = \|w-u\| = \|(w-v) + (v-u)\| \leq \|w-v\| + \|v-u\| = d_N(u,v) + d_N(v,w)$.
+        \item Séparation : $d_N(u,v) = 0 \Leftrightarrow \|v-u\| = 0 \Leftrightarrow v-u = 0_E \Leftrightarrow u=v$.
+    \end{enumerate}
+}
+
 \end{document}
