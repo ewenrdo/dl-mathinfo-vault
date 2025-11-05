@@ -97,4 +97,24 @@ $(u=(x,y), v=(z,t)) \mapsto xz + yt$ n'est pas alternée car $(1,0)$ et $(0,1)$ 
 
 \vocabulary{On note $(u_1,\ldots,\hat{u_i},\ldots,u_p)$ la famille obtenue en supprimant $u_i$ de la famille $(u_1,\ldots,u_p)$.}
 
+\section{Cas des formes $n$-linéaires alternées sur un espace vectoriel de dimension $n$}
+
+Soit $E$ un espace vectoriel de dimension $n$ sur un corps $K$, et soit $B = (e_1,\ldots,e_n)$ une base de $E$.
+\textit{But : déterminer les formes $n$-linéaires alternées sur $E$.}
+
+\theorem{Proposition}{Formule de développement d'une forme $n$-linéaire alternée}{false}{
+    Soit $(u_1,\ldots,u_n) \in E^n$.\\
+    Posons $u_j = \sum_{i=1}^n \lambda_{ij} e_i$ avec $\lambda_{ij} \in K$.\\
+    Soit $f$ une forme linéaire alternée sur $E$.\\
+    On a : $f(u_1,\ldots,u_n) = (\sum_{\sigma \in S_n} \varepsilon(\sigma) \left( \prod_{j=1}^n \lambda_{\sigma(j),j} \right)) f(e_1,\ldots,e_n)$.
+}
+
+\remark{Pour $n=1$, on a : $f(u_1) = \lambda_{11} f(e_1)$ (linéarité).\\
+Pour $n=2$, on a : $f(u_1,u_2) = (\lambda_{11}\lambda_{22} - \lambda_{21}\lambda_{12}) f(e_1,e_2)$ (déjà vu dans le cas bilinéaire).\\
+Pour $n=3$, on a : $f(u_1,u_2,u_3) = (\lambda_{11}\lambda_{22}\lambda_{33} + \lambda_{21}\lambda_{32}\lambda_{13} + \lambda_{31}\lambda_{12}\lambda_{23} - \lambda_{31}\lambda_{22}\lambda_{13} - \lambda_{21}\lambda_{12}\lambda_{33} - \lambda_{11}\lambda_{32}\lambda_{23}) f(e_1,e_2,e_3)$.\\
+Il y a $n!$ termes dans la formule. On a l'intuition que ça ressemble à un déterminant.
+}
+\remark{Le facteur de gauche dans la formule est indépendant de $f$. Celui de droite est indépendant des $u_i$.}
+\ndlr{cf. Laurent pour la preuve}
+
 \end{document}
