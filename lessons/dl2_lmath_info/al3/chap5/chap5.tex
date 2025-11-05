@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Espaces vectoriels}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Déterminants}
+
+\section{Aire algébrique dans le plan}
+
+Soit $E$ un plan sur un corps $K$.
+Soient $u,v \in E$.
+Comment définir $\mathcal{A}(u,v)$, l'aire algébrique du parallélogramme construit sur les vecteurs $u$ et $v$ ?
+Propriéts attendues :
+\begin{itemize}
+    \item $\mathcal{A}(\lambda u,v) = \lambda \mathcal{A}(u,v)$ pour tout $\lambda \in K$ (linéarité par rapport au premier argument) ;
+    \item $\mathcal{A}(u,\lambda v) = \lambda \mathcal{A}(u,v)$ pour tout $\lambda \in K$ (linéarité par rapport au premier argument) ;
+    \item $\mathcal{A}(u_1+u_2, v) = \mathcal{A}(u_1,v) + \mathcal{A}(u_2,v)$ (additivité par rapport au premier argument) ;
+    \item $\mathcal{A}(u,v_1+v_2) = \mathcal{A}(u,v_1) + \mathcal{A}(u,v_2)$ (additivité par rapport au second argument) ;
+\end{itemize}
+Donc les applications $u \mapsto \mathcal{A}(u,v)$ et $v \mapsto \mathcal{A}(u,v)$ sont linéaires.
+De plus, $\mathcal{A}(u,u) = 0$ pour tout $u \in E$.
+Cela entraine : $\mathcal(u+v, u+v) = 0$\\
+et donc : $\mathcal{A}(u,u+v) + \mathcal{A}(v,u+v) = 0$\\
+et donc : $\mathcal{A}(u,u) + \mathcal{A}(u,v) + \mathcal{A}(v,u) + \mathcal{A}(v,v) = 0$\\
+et donc : $\mathcal{A}(v,u) = -\mathcal{A}(u,v)$ (antisymétrie/alternée).
+
+Soit $(e_1,e_2)$ une base de $E$.\\
+Soient $u=ae_1 + be_2$ et $v=ce_1 + de_2$, avec $a,b,c,d \in K$.\\
+On a : $\mathcal{A}(u,v) = \mathcal{A}(ae_1 + be_2, ce_1 + de_2)$\\
+$= ac\mathcal{A}(e_1,e_1) + ad\mathcal{A}(e_1,e_2) + bc\mathcal{A}(e_2,e_1) + bd\mathcal{A}(e_2,e_2)$\\
+$= (ad - bc)\mathcal{A}(e_1,e_2) = $déterminant de $u$ et $v$ dans la base $(e_1,e_2)$ multiplié par $\mathcal{A}(e_1,e_2)$.
+
+\attention{
+    Pour avoir une meilleure idée que le ramassis de maths crachées au tableau, voir \href{https://www.youtube.com/watch?v=Ip3X9LOh2dk}{cette vidéo} (en anglais).
+}
+
+\section{Formes multilinéaires}
+
+\definition{
+Soit $E$ un espace vectoriel sur un corps $K$, soit $p$ un entier naturel non nul.\\
+Soit \function{f}{E^p}{K} une application.\\
+On dit que $f$ est une \textbf{forme multilinéaire} si pour tout $i$ et $(u_1,\ldots,u_{i-1},u_{i+1},\ldots,u_p) \in E^{p}$, $u \mapsto f(u_1,\ldots,u_{i-1},u,u_{i+1},\ldots,u_p)$ est une application linéaire de $E$ dans $K$.\\
+Autrement dit, $f$ est linéaire par rapport à chacun de ses variables.
+}
+\vocabulary{On dit que $f$ est $p$-linéaire. C'est une forme linéaire si $p=1$, une forme bilinéaire si $p=2$.}
+
+\definition{
+    On dit que $f$ est \textbf{alternée} si pour tout $(u_1,\ldots,u_p) \in E^p$ et pour tout $i \neq j$, $f(u_1,\ldots,u_i,\ldots,u_j,\ldots,u_p) = 0_K$ dès que $u_i = u_j$.\\\\
+    Autrement dit, $f$ s'annule si deux de ses arguments sont égaux.
+}
+
+\definition{
+    On dit que $f$ est \textbf{antisymétrique} si pour tous $i,j, i \neq j$ on a $f(u_1,\ldots,u_i,\ldots,u_j,\ldots,u_p) = - f(u_1,\ldots,u_j,\ldots,u_i,\ldots,u_p)$.\\\\
+    Autrement dit, permuter deux arguments de $f$ change le signe de son image.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $\sigma \in S_p$ une permutation et soit $f\colon E^p \to K$ une forme $p$-linéaire.\\
+    L'application $(u_1,\ldots,u_p) \mapsto f(u_{\sigma(1)},\ldots,u_{\sigma(p)})$ est une forme $p$-linéaire notée $f^\sigma$.\\
+    De plus, si $f$ est antisymétrique, on a $f^\sigma = \varepsilon(\sigma) f$ où $\varepsilon(\sigma)$ est la signature de la permutation $\sigma$.
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Théorème}{Relation entre alternance et antisymétrie}{false}{
+    Toute forme $p$-linéaire alternée est antisymétrique.\\
+    De plus, si $2 \neq 0$ (i.e. 2 est inversible dans $K$), toute forme $p$-linéaire antisymétrique est alternée.
+}
+
+\remark{Si $K = \mathbb{Z}/2\mathbb{Z} := \mathbb{F}_2$ et $E=\mathbb{K}$, alors :
+$(u=(x,y), v=(z,t)) \mapsto xz + yt$ n'est pas alternée car $(1,0)$ et $(0,1)$ sont distincts mais l'image est $1$. Cependant, cette application est antisymétrique car $1 = -1$ dans $\mathbb{F}_2$.}
+
+\end{document}

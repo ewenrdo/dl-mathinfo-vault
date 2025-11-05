@@ -190,4 +190,91 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
     Alors $\frac{x}{N(x)}$ est un vecteur unitaire (ou vecteur normé), c'est-à-dire $N\left(\frac{x}{N(x)}\right) = 1$. (existe car $N(x) \neq 0$ par séparation)
 }
 
+\theorem{Propriété}{}{true} {
+    Soit $(E, N)$ un espace vectoriel normé.\\
+    Alors $\forall (x_1, x_2, \ldots, x_n) \in E^n$, $\forall (\lambda_1, \lambda_2, \ldots, \lambda_n) \in \mathbb{K}^n$, on a :
+    \[N(\sum_{i=1}^{n} \lambda_i x_i) \leq \sum_{i=1}^{n} |\lambda_i| \cdot N(x_i)\]
+}
+
+\theorem{Propriété}{Inégalité triangulaire renversée}{false} {
+    Soit $(E, N)$ un espace vectoriel normé.\\
+    \begin{enumerate}
+        \item $\forall (x,y) \in E^2, N(x + y) \leq N(x) + N(y)$
+        \item $\forall (x,y) \in E^2, |N(x) - N(y)| \leq N(x - y)$
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item C'est l'axiome 2 de la définition d'une norme.
+        \item On a $N(x) = N((x - y) + y) \leq N(x - y) + N(y)$ d'après l'inégalité triangulaire.\\
+        Donc $N(x) - N(y) \leq N(x - y)$.\\
+        De plus, $N(y) = N((y - x) + x) \leq N(y - x) + N(x)$ d'après l'inégalité triangulaire.\\
+        Donc $N(y) - N(x) \leq N(y - x) = N(x - y)$.\\
+        En combinant les deux, on obtient $|N(x) - N(y)| \leq N(x - y)$.
+    \end{enumerate}
+}
+
+\section{Topologie sur les espaces métriques}
+
+\remark{Un evn étant un espace métrique avec la distance $d(x,y) = N(y - x)$, toutes les notions de topologie vues ici s'appliquent aux evn.}
+
+\definition{Soit $(X,d)$ un espace métrique.\\
+    Une boule ouverte de centre $a\in X$ de rayon $r>0$ est $B(a,r) = \{ x \in X \mid d(x,a) = d(a,x) < r \}$.
+}
+
+\definition{Soit $(X,d)$ un espace métrique.\\
+    Une boule fermée de centre $a\in X$ de rayon $r>0$ est $B_F(a,r) = \{ x \in X \mid d(a,x) \leq r \}$.
+}
+
+\definition{Soit $(X,d)$ un espace métrique.\\
+    La sphère de centre $a\in X$ de rayon $r>0$ est $S(a,r) = \{ x \in X \mid d(a,x) = r \}$.
+}
+
+\example{
+    Dans $(\mathbb{R}, |\cdot|)$, $B(1,1) = ]0,2[$
+}
+
+\example{
+    Dans $\mathbb{R}^2$ avec trois métriques :\\
+    $d_1 = \|y-x\|_1$, $d_2 = \|y-x\|_2$ et $d_{\infty} = \|y-x\|_{\infty}$.\\
+    Traçons les boules de centre 0 de rayon 1 associées à chaque distance.\\
+    $B(0,1) = \{ x\in \mathbb{R}^2 \mid d(x,0) < 1\}$.\\
+    On a : $\|x\|_{1,2,\infty} < 1$.\\
+    \begin{itemize}
+        \item Pour $d_1$ : $\|x\|_1 = |x_1| + |x_2| < 1$. C'est un losange.
+        \item Pour $d_2$ : $\|x\|_2 = \sqrt{x_1^2 + x_2^2} < 1$. C'est un disque.
+        \item Pour $d_{\infty}$ : $\|x\|_{\infty} = \max(|x_1|, |x_2|) < 1$. C'est un carré.
+    \end{itemize}
+}
+
+\remark{Les bordures correspondent aux sphères $S(0,1)$ associées à chaque distance. Les boules fermées $B_F(0,1)$ correspondent aux mêmes figures mais en incluant les bordures.}
+
+\definition{
+    Une partie $U$ de $X$ est un ouvert de $(X,d)$ si $\forall x \in U, \exists r > 0$ tel que $B(x,r) \subset U$.
+}
+
+\example{
+    $]0,1[ \subset \mathcal{C}(]0,1[,\mathbb{R})$ est un ouvert : $\forall x \in ]0,1[, B(x, \min(x, 1-x)) \subset ]0,1[$.
+}
+
+\definition{
+    Une topologie sur $(X,d)$ est l'ensemble des ouverts de $(X,d)$. Autrement dit, $\tau = \{ U \subset X \mid U \text{ est un ouvert de } (X,d) \}$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item Toute boule ouverte de $(X,d)$ est un ouvert de $(X,d)$.
+        \item Si $(U_i)_{i \in I}$ est une famille d'ouverts de $(X,d)$, alors $\bigcup_{i \in I} U_i$ est un ouvert de $(X,d)$.
+        \item Si $(U_1, U_2, \ldots, U_n)$ est une famille finie d'ouverts de $(X,d)$, alors $\bigcap_{i=1}^{n} U_i$ est un ouvert de $(X,d)$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item Soit $B(a,r)$ une boule ouverte de $(X,d)$. Soit $x \in B(a,r)$. On a $d(a,x) < r$. Posons $s = r - d(a,x) > 0$. Montrons que $B(x,s) \subset B(a,r)$.\\
+        Soit $y \in B(x,s)$. On a $d(x,y) < s$. D'après l'inégalité triangulaire, on a $d(a,y) \leq d(a,x) + d(x,y) < d(a,x) + s = d(a,x) + (r - d(a,x)) = r$. Donc $y \in B(a,r)$. Ainsi, $B(x,s) \subset B(a,r)$ et donc $B(a,r)$ est un ouvert de $(X,d)$.
+    \end{enumerate}
+}
+
 \end{document}
