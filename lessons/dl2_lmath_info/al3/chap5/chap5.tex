@@ -88,4 +88,13 @@ Autrement dit, $f$ est linéaire par rapport à chacun de ses variables.
 \remark{Si $K = \mathbb{Z}/2\mathbb{Z} := \mathbb{F}_2$ et $E=\mathbb{K}$, alors :
 $(u=(x,y), v=(z,t)) \mapsto xz + yt$ n'est pas alternée car $(1,0)$ et $(0,1)$ sont distincts mais l'image est $1$. Cependant, cette application est antisymétrique car $1 = -1$ dans $\mathbb{F}_2$.}
 
+\theorem{Proposition}{}{false}{
+    Soit $f$ une forme $p$-linéaire alternée.\\
+    Soit $(u_1,\ldots,u_p) \in E^p$ et soit $i \in \{1,\ldots,p\}$.\\
+    Soit $v_i = u_i$ + combinaison linéaire de $u_1, \ldots, \hat{u_i}, \ldots, u_p$ (c'est-à-dire des $u_j$ avec $j \neq i$).\\
+    Alors $f(u_1,\ldots,u_{i-1},v_i,u_{i+1},\ldots,u_p) = f(u_1,\ldots,u_p)$.
+}
+
+\vocabulary{On note $(u_1,\ldots,\hat{u_i},\ldots,u_p)$ la famille obtenue en supprimant $u_i$ de la famille $(u_1,\ldots,u_p)$.}
+
 \end{document}
