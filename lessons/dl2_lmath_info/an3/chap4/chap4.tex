@@ -138,4 +138,56 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
     En fait, les exemples 1, 2 et 3 dans "Espaces métriques" sont des evn : $(\mathbb{R}, |\cdot|)$, $(\mathbb{C}, |\cdot|)$ et $(\mathbb{R}^n, \|\cdot\|_2)$ où $\| (x_1, \ldots, x_n) \|_2 = \sqrt{\sum_{i=1}^{n} x_i^2} = \| \cdot \|_\text{euclidienne}$.
 }
 
+\training{
+    Définissons $X = (x_1, x_2, \ldots, x_n) \in \mathbb{R}^n \mapsto \|X\|_{\infty} = \max(|x_1|, |x_2|, \ldots, |x_n|)$.\\
+    Montrer que $\|\cdot\|_{\infty}$ est une norme sur $\mathbb{R}^n$.\\
+    \textbf{Observation :} $\|X\|_{\infty} = |x_{i_0}|$ où $i_0 \in \{1, 2, \ldots, n\}$ réalise le maximum.\\
+    \textbf{Homogénéité :} $\forall i \in \{1, \ldots, n\}, |x_i| \leq |x_{i_0}|$\\
+    $\forall \lambda \in \mathbb{R},$ $|\lambda| \cdot |x_i| \leq |\lambda| \cdot |x_{i_0}| \forall i \in \{1, \ldots, n\}$\\
+    D'où $\forall \lambda \in \mathbb{R}, |\lambda x_i| \leq |\lambda| \cdot |x_{i_0}| \forall i \in \{1, \ldots, n\}$\\
+    Or $\lambda X = (\lambda x_1, \ldots, \lambda x_n)$, $i_0$ réalise le maximum de $(|\lambda x_1|, \ldots, |\lambda x_n|)$\\
+    Donc $\|\lambda X\|_{\infty} = |\lambda| \cdot |x_{i_0}| = |\lambda| \cdot \|X\|_{\infty}$.\\
+    \textbf{Inégalité triangulaire :} Soient $X = (x_1, \ldots, x_n)$ et $Y = (y_1, \ldots, y_n)$ dans $\mathbb{R}^n$.\\
+    $\|X+Y\|_{\infty} = \max(|x_1 + y_1|, \ldots, |x_n + y_n|)$.\\
+    On a $\forall i \in \{1, \ldots, n\}, |x_i + y_i| \leq |x_i| + |y_i| \leq \|X\|_{\infty} + \|Y\|_{\infty}$.\\
+    En prenant le $max$ sur $i$, on obtient $\|X+Y\|_{\infty} \leq \|X\|_{\infty} + \|Y\|_{\infty}$.\\
+    \textbf{Séparation :} Soit $X = (x_1, \ldots, x_n) \in \mathbb{R}^n$.\\
+    $\|X\|_{\infty} = 0 \Leftrightarrow \max(|x_1|, \ldots, |x_n|) = 0$.\\
+    Or $\forall k \in \{1, \ldots, n\}, |x_k| \leq \max(|x_1|, \ldots, |x_n|) = 0 \Rightarrow x_k = 0$ $\Rightarrow X = 0_{\mathbb{R}^n}$.\\
+}
+
+\training{
+\begin{enumerate}
+    \item Montrer que \function{\|\cdot\|_1}{\mathbb{R}^n \rightarrow \mathbb{R}_+}{X \mapsto \sum_{i=1}^{n} |x_i|} est une norme sur $\mathbb{R}^n$.
+    \item \textbf{Plus difficile.} Plus généralement, montrer que pour $p \in \mathbb{R}_{+}$, \function{\|\cdot\|_p}{\mathbb{R}^n \rightarrow \mathbb{R}_+}{X \mapsto \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}} est une norme sur $\mathbb{R}^n$.
+\end{enumerate}    
+}
+
+\example{Exemples de normes sur des espaces de dimension infinie :
+    \begin{itemize}
+        \item Considérons $E = \mathcal{C}([0,1], \mathbb{R})$ l'espace vectoriel des fonctions continues de $[0,1]$ dans $\mathbb{R}$. On définit la norme $\|f\|_{\infty} = \sup_{x \in [0,1]} |f(x)|$ pour $f \in E$. En effet,\\\\
+        \textbf{Homogénéité :} Soit $f \in E$ et $\lambda \in \mathbb{R}$.\\
+        On a $\|\lambda f\|_{\infty} = \sup_{x \in [0,1]} |\lambda f(x)| = |\lambda| \cdot \sup_{x \in [0,1]} |f(x)| = |\lambda| \cdot \|f\|_{\infty}$.\\
+        \textbf{Inégalité triangulaire :} Soient $f,g \in E$.\\
+        On a $\|f+g\|_{\infty} = \sup_{x \in [0,1]} |f(x) + g(x)|$.\\
+        Or $\forall x \in [0,1], |f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \|f\|_{\infty} + \|g\|_{\infty}$.\\
+        En prenant le supremum sur $x$, on obtient $\|f+g\|_{\infty} \leq \|f\|_{\infty} + \|g\|_{\infty}$.\\
+        \textbf{Séparation :} Soit $f \in E$.\\
+        On a $\|f\|_{\infty} = 0 \Leftrightarrow \sup_{x \in [0,1]} |f(x)| = 0$.\\
+        Or $\forall x \in [0,1], |f(x)| \leq \sup_{x \in [0,1]} |f(x)| = 0 \Rightarrow f(x) = 0$ pour tout $x$ dans $[0,1]$ $\Rightarrow f = 0_E$.\\
+        \item Considérons $E = \{ f\colon I \to \mathbb{R}, f \in \mathcal{C}^0(I) \mid \int_I |f|(t)dt \text{ converge} \} = L_1$ où $I$ est un intervalle de $\mathbb{R}$. On définit la norme $\|f\|_1 = \int_I |f(t)| dt$ pour $f \in E$.
+    \end{itemize}
+}
+
+\attention{$\|f\|_{\infty}$ existe car $\sup|f(t)| < +\infty$ pour $f$ continue sur le compact $[0,1]$.}
+
+\cexample{$f \in \mathcal{C}^0(]0,1], \mathbb{R})$ définie par $f(x) = \frac{1}{x}$. Alors $\|f\|_{\infty}$ n'existe pas car $\sup_{x \in ]0,1]} |f(x)| = +\infty$.}
+
+\subsubsection{Propriétés}
+
+\theorem{Propriété}{Vecteurs unitaires}{true}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel non nul, soit $x \in E\setminus \{0_E\}$ et soit $N$ une norme sur $E$.\\
+    Alors $\frac{x}{N(x)}$ est un vecteur unitaire (ou vecteur normé), c'est-à-dire $N\left(\frac{x}{N(x)}\right) = 1$. (existe car $N(x) \neq 0$ par séparation)
+}
+
 \end{document}
