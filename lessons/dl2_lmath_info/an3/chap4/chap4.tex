@@ -216,7 +216,7 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
 }
 
 \section{Topologie sur les espaces métriques}
-
+\subsection{Ouverts et fermés}
 \remark{Un evn étant un espace métrique avec la distance $d(x,y) = N(y - x)$, toutes les notions de topologie vues ici s'appliquent aux evn.}
 
 \definition{Soit $(X,d)$ un espace métrique.\\
@@ -280,6 +280,76 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
         En effet, soit $z \in B(x,r), d(z,x) < r \leq r_i$ donc $z \in B(x,r_i) \subset U_i$ pour tout $i \in \{1, 2, \ldots, n\}$. Donc $z \in \bigcap_{i=1}^{n} U_i$. Ainsi, $\bigcap_{i=1}^{n} U_i$ est un ouvert de $(X,d)$.
     \end{enumerate}
 }
-\cexample{L'intersection de $\mathbb{Q}$ et de $\mathbb{R}\setminus \mathbb{Q}$ dans $(\mathbb{R}, |\cdot|)$ est vide, qui est un ouvert. Cependant, l'intersection infinie $\bigcap_{n=1}^{\infty} ]-\frac{1}{n}, \frac{1}{n}[ = \{0\}$ n'est pas un ouvert de $(\mathbb{R}, |\cdot|)$.}
+
+\cexample{Si $I$ est infini, la propriété 3 n'est pas vraie en général. Par exemple, dans $(\mathbb{R}, |\cdot|)$, considérons la famille d'ouverts $U_n = ]-1/n, 1/n[$ pour $n \in \mathbb{N}^*$. Alors $\bigcap_{n=1}^{\infty} U_n = \{0\}$ qui n'est pas un ouvert de $(\mathbb{R}, |\cdot|)$.}
+
+\definition{
+    Soit $(X,d)$ un espace métrique.\\
+    Une partie $F$ de $X$ est un fermé de $(X,d)$ si son complémentaire $X \setminus F$ est un ouvert de $(X,d)$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item Toute boule fermée de $(X,d)$ est un fermé de $(X,d)$.
+        \item Si $(F_i)_{i \in I}$ est une famille de fermés de $(X,d)$, alors $\bigcap_{i \in I} F_i$ est un fermé de $(X,d)$. (I un ensemble quelconque)
+        \item Si $(F_1, F_2, \ldots, F_n)$ est une famille finie de fermés de $(X,d)$, alors $\bigcup_{i=1}^{n} F_i$ est un fermé de $(X,d)$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item Soit $B_F(x,r)$ une boule fermée de $(X,d)$. C'est un fermé $\Leftrightarrow$ $X \setminus B_F(x,r)$ est un ouvert de $(X,d)$.\\
+        Soit $y \in X \setminus B_F(x,r)$. On a $d(x,y) > r$. Posons $\varrho = d(y,x) - r > 0$. Montrons que $B(y,\varrho) \subset X \setminus B_F(x,r)$.\\
+        Soit $z \in B(y,\varrho)$. On a $d(y,z) < \varrho$.\\
+        $d(z,y) < d(y,x) - r \Rightarrow r < d(y,x) - d(z,y) \leq d(z,x)$ (inégalité triangulaire) $\Rightarrow z \in X \setminus B_F(x,r)$.\\
+        Ainsi, $B(y,\varrho) \subset X \setminus B_F(x,r)$ et donc $X \setminus B_F(x,r)$ est un ouvert de $(X,d)$.\\
+        Donc $B_F(x,r)$ est un fermé de $(X,d)$.
+        \item Laissé en exercice au lecteur.
+        \item Laissé en exercice au lecteur.
+    \end{enumerate}
+}
+
+\remark{
+    Dans $(\mathbb{R}, |\cdot|)$, tout intervalle fermé est un fermé, et tout intervalle ouvert est un ouvert. ($\mathbb{R}$ est ouvert).\\
+    On a : $]a, +\infty[ = \bigcup_{n=1}^{\infty} ]a, a+n[$ est un ouvert.
+}
+
+\remark{$X$ et $\emptyset$ sont des ouverts et des fermés de $(X,d)$ (prendre $r$ arbitrairement grand pour $X$ et $r$ quelconque pour $\emptyset$).}
+
+\definition{Soit $\mathcal{V} \subset X$ une partie de l'espace métrique $(X,d)$.\\
+    On dit que $\mathcal{V}$ est un voisinage de $a \in X$ si $\exists r > 0$ tel que $B(a,r) \subset \mathcal{V}$.
+}
+
+\theorem{Proposition}{}{false}{
+    On dit aussi que $U$ est un ouvert de $(X,d)$ si et seulement si $U$ est un voisinage de chacun de ses points.
+}
+
+\subsection{Intérieur et adhérence}
+Soit $(X,d)$ un espace métrique.
+\definition{Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.\\
+    On appelle intérieur de $A$ l'ensemble des points $a \in A$ tels que $A$ est un voisinage de $a$. On le note : $\overset{\circ}{A}$.\\
+    On a : \[\overset{\circ}{A} = \bigcup \{ U \subset A \mid U \text{ est un ouvert de } (X,d) \}\]
+}
+
+\definition{Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.\\
+    On appelle adhérence de $A$ l'ensemble des points $x \in X$ tels que $\forall r > 0, B(x,r) \cap A \neq \emptyset$. On le note : $\overline{A}$.\\
+    On a : \[\overline{A} = \bigcap _{F \supset A, F \text{ fermé de } (X,d)} F\]
+}
+
+\theorem{Proposition}{Lien avec les ouverts}{false}{
+    Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.
+    \begin{enumerate}
+        \item $\overset{\circ}{A}$ est un ouvert contenu dans $A$.
+        \item Si $U \subset A$ est un ouvert de $(X,d)$, alors $U \subset \overset{\circ}{A}$.\\
+        Autrement dit, $\overset{\circ}{A}$ est le plus grand ouvert contenu dans $A$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item C'est une union quelconque d'ouverts indus dans $A$, donc $\overset{\circ}{A}$ est un ouvert. De plus, par définition, $\overset{\circ}{A} \subset A$.
+        \item Par définition $\overset{\circ}{A} = \bigcup \{ U \subset A \mid U \text{ est un ouvert de } (X,d) \}$. Donc si $U \subset A$ est un ouvert de $(X,d)$, alors $U$ est dans la famille indexée par l'union, donc $U \subset \overset{\circ}{A}$.
+    \end{enumerate}
+}
 
 \end{document}
