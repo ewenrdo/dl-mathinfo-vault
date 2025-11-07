@@ -265,7 +265,7 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
 \theorem{Proposition}{}{false}{
     \begin{enumerate}
         \item Toute boule ouverte de $(X,d)$ est un ouvert de $(X,d)$.
-        \item Si $(U_i)_{i \in I}$ est une famille d'ouverts de $(X,d)$, alors $\bigcup_{i \in I} U_i$ est un ouvert de $(X,d)$.
+        \item Si $(U_i)_{i \in I}$ est une famille d'ouverts de $(X,d)$, alors $\bigcup_{i \in I} U_i$ est un ouvert de $(X,d)$. (I un ensemble quelconque)
         \item Si $(U_1, U_2, \ldots, U_n)$ est une famille finie d'ouverts de $(X,d)$, alors $\bigcap_{i=1}^{n} U_i$ est un ouvert de $(X,d)$.
     \end{enumerate}
 }
@@ -274,7 +274,12 @@ On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espa
     \begin{enumerate}
         \item Soit $B(a,r)$ une boule ouverte de $(X,d)$. Soit $x \in B(a,r)$. On a $d(a,x) < r$. Posons $s = r - d(a,x) > 0$. Montrons que $B(x,s) \subset B(a,r)$.\\
         Soit $y \in B(x,s)$. On a $d(x,y) < s$. D'après l'inégalité triangulaire, on a $d(a,y) \leq d(a,x) + d(x,y) < d(a,x) + s = d(a,x) + (r - d(a,x)) = r$. Donc $y \in B(a,r)$. Ainsi, $B(x,s) \subset B(a,r)$ et donc $B(a,r)$ est un ouvert de $(X,d)$.
+        \item Soit $x \in (U_i)_{i \in I}$. Alors $\exists i_0 \in I$ tel que $x \in U_{i_0}$. Comme $U_{i_0}$ est un ouvert de $(X,d)$, il existe $r > 0$ tel que $B(x,r) \subset U_{i_0} \subset \bigcup_{i \in I} U_i$. Donc $\bigcup_{i \in I} U_i$ est un ouvert de $(X,d)$.
+        \item Soit $x \in \bigcap_{i=1}^{n} U_i$, où on a écrit $I = \{1, 2, \ldots, n\}, n \in \mathbb{N}^*$.\\
+        Alors $\forall i \in \{1, 2, \ldots, n\}, \exists r_i > 0$ tel que $B(x,r_i) \subset U_i$. Posons $r = \min(r_1, r_2, \ldots, r_n) > 0$. Alors $B(x,r) \subset \bigcap U_i$ pour tout $i \in \{1, 2, \ldots, n\}$.\\
+        En effet, soit $z \in B(x,r), d(z,x) < r \leq r_i$ donc $z \in B(x,r_i) \subset U_i$ pour tout $i \in \{1, 2, \ldots, n\}$. Donc $z \in \bigcap_{i=1}^{n} U_i$. Ainsi, $\bigcap_{i=1}^{n} U_i$ est un ouvert de $(X,d)$.
     \end{enumerate}
 }
+\cexample{L'intersection de $\mathbb{Q}$ et de $\mathbb{R}\setminus \mathbb{Q}$ dans $(\mathbb{R}, |\cdot|)$ est vide, qui est un ouvert. Cependant, l'intersection infinie $\bigcap_{n=1}^{\infty} ]-\frac{1}{n}, \frac{1}{n}[ = \{0\}$ n'est pas un ouvert de $(\mathbb{R}, |\cdot|)$.}
 
 \end{document}
