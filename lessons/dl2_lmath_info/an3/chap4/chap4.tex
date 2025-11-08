@@ -352,4 +352,60 @@ Soit $(X,d)$ un espace métrique.
     \end{enumerate}
 }
 
+\theorem{Proposition}{Lien avec les fermés}{false}{
+    Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.
+    \begin{enumerate}
+        \item $\overline{A}$ est un fermé contenant $A$.
+        \item Si $F \supset A$ est un fermé de $(X,d)$, alors $\overline{A} \subset F$.\\
+        Autrement dit, $\overline{A}$ est le plus petit fermé contenant $A$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item C'est une intersection quelconque de fermés contenant $A$, donc $\overline{A}$ est un fermé. De plus, par définition, $A \subset \overline{A}$.
+        \item Par définition $\overline{A} = \bigcap _{F \supset A, F \text{ fermé de } (X,d)} F$. Donc si $F \supset A$ est un fermé de $(X,d)$, alors $F$ est dans la famille indexée par l'intersection, donc $\overline{A} \subset F$.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item $\overset{\circ}{A} = X \setminus \overline{(X \setminus A)}$
+        \item $\overline{A} = X \setminus \overset{\circ}{(X \setminus A)}$
+        \item $x \in \overline{A} \Leftrightarrow \forall r > 0, B(x,r) \cap A \neq \emptyset$
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item ($\Rightarrow$) $x \in \overset{\circ}{A}$. Par définition d'un ouvert, $\exists r > 0$ tel que $B(x,r) \subset \overset{\circ}{A} \subset A$.\\
+        ($\Leftarrow$) On a $B(x,r) \subset A$ qui est un ouvert.\\
+        Donc $B(x,r) \subset \overset{\circ}{A}$ car $\overset{\circ}{A}$ est le plus grand ouvert contenu dans $A$. Donc $x \in \overset{\circ}{A}$, donc $x \in \overset{\circ}{A}$.\\
+        \item $\overset{\circ}{A} \Leftrightarrow X\setminus\overset{\circ}{A} = \overline{(X \setminus A)}$.\\
+        Or $\overset{\circ}{A} = \bigcup \{ U \subset A \mid U \text{ est un ouvert de } (X,d) \}$.\\
+        Donc $X \setminus \overset{\circ}{A} = X \setminus \bigcup \{ U \subset A \mid U \text{ est un ouvert de } (X,d) \} = \bigcap_{F \supset X \setminus A, F \text{ fermé de } (X,d)} F = \overline{(X \setminus A)}$.\\
+        Faire de même avec $\overline{A} = X \setminus \overset{\circ}{(X \setminus A)}$.
+        \item $x \in \overline{A} \Leftrightarrow x \in X \setminus \overset{\circ}{(X \setminus A)}$ (d'après 2) $\Leftrightarrow x \notin \overset{\circ}{(X \setminus A)}$ $\Leftrightarrow$ pour tout $r > 0$, $B(x,r) \not\subset X \setminus A$ $\Leftrightarrow$ pour tout $r > 0$.
+        $\Leftarrow B(x,r) \cap A \neq \emptyset$.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{itemize}
+    \item $U$ est ouvert $\Leftrightarrow \overset{\circ}{U} = U$.
+    \item $F$ est fermé $\Leftrightarrow \overline{F} = F$.
+    \end{itemize}
+}
+
+\subsection{Suites dans un espace métrique}
+
+\subsubsection{Définitions}
+
+\definition{
+    On dit qu'une suite $(x_n)$, $x_n \in X$ pour tout $n \in \mathbb{N}$, converge si $\exists x \in X$ tel que $d(x_n,x) \to 0$ quand $n \to +\infty$.\\
+    Autrement dit, \[\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, d(x_n,x) < \varepsilon\]
+}
+
+\remark{Si $(X,d) = (\mathbb{R}, |\cdot|)$, on retrouve la définition usuelle de la convergence des suites réelles.}
+
 \end{document}
