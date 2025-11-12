@@ -537,6 +537,7 @@ Soit $a \in f^{-1}(U)$. Alors $f(a) \in U$.\\
 Soit $\varepsilon > 0$ tq $B(f(a), \varepsilon) \subset U$.\\
 Montrons que $\exists \delta_\varepsilon > 0$ tel que $d_X(x,a) < \delta_\varepsilon$ et $d_Y(f(x), f(a)) < \varepsilon$.\\
 Comme $f^{-1}(U)$ est un ouvert de $(X,d_X)$, il existe $\delta_\varepsilon > 0$ tel que $B_X(a, \delta_\varepsilon) \subset f^{-1}(U)$ qui est ouvert.\\
-Alors si $x \in X$ tq $d_X(x,a) < \delta_\varepsilon$, on a $d_Y(f(x), f(a)) < \varepsilon$ car $f(x) \in U$.\\
+Alors si $x \in X$ tq $d_X(x,a) < \delta_\varepsilon$, donc $f(x) \in B(f(a), \varepsilon)$.\\
+Donc on a $d_Y(f(x), f(a)) < \varepsilon$ car $f(x) \in U$.\\
 Ainsi, $f$ est continue en $a$.}
 \end{document}
