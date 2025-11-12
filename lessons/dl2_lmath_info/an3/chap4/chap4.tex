@@ -408,4 +408,135 @@ Soit $(X,d)$ un espace métrique.
 
 \remark{Si $(X,d) = (\mathbb{R}, |\cdot|)$, on retrouve la définition usuelle de la convergence des suites réelles.}
 
+\definition{
+    On dit que $x \in X$ est une valeur d'adhérence d'une suite $(x_n)$ si il existe une sous suite qui converge vers $x$.
+    i.e. $\exists (n_k)_{k \in \mathbb{N}}$ strictement croissante telle que $d(x_{n_k}, x) \to 0$ quand $k \to +\infty$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(x_n)$ une suite de $(X,d)$ qui converge vers $x$.\\
+    Alors $x$ est la seule valeur d'adhérence de $(x_n)$. En particulier, la limite de $(x_n)$ est unique.
+}
+
+
+\noindent{\textbf{Preuve :}\\
+Soit $x$ la limite de $(x_n)$. Suppons qu'il existe une sous-suite $(x_{n_k})$ qui converge vers une autre valeur $y \neq x$.\\
+On a $d(x,y) > 0$. Posons $\varepsilon = \frac{d(x,y)}{2} > 0$.\\
+$\exists k_1, (\varepsilon, y) \in \mathbb{N}, \forall k \geq k_1, d(x_{n_k}, y) < \varepsilon$. (convergence de la sous-suite)\\
+Et comme $x_n \to x$, alors $x_{n_k} \to x$ aussi.\\
+Donc $\exists k_2, (\varepsilon, x) \in \mathbb{N}, \forall k \geq k_2, d(x_{n_k}, x) < \varepsilon$.\\
+Alors on a pour $k \geq \max(k_1, k_2)$ :\\
+$d(x,y) \leq d(x, x_{n_k}) + d(x_{n_k}, y) < \varepsilon + \varepsilon = 2\varepsilon = d(x,y)$, ce qui est absurde. Donc $x$ est la seule valeur d'adhérence de $(x_n)$.
+}\\
+
+\noindent{\textbf{Fermés}\\Soit $A$ une partie quelconque de l'espace métrique $(X,d)$.
+}
+
+\theorem{Proposition}{Caractérisation de l'adhérence par des suites}{false}{
+    $\overline{A} = \{ x \in X \mid \exists (x_n) \text{ suite de } A, x_n \to x \}$.
+}
+\noindent{\textbf{Preuve :}\\
+$(\subset)$ Soit $x \in X$ tq $\exists (x_n) \in A$ avec $d(x_n, x) \to 0$.\\
+On veut montrer que $x \in \overline{A} \Rightarrow$ pour tout $r > 0, B(x,r) \cap A \neq \emptyset$.\\
+Soit $r > 0$. Comme $d(x_n, x) \to 0$, il existe $N \in \mathbb{N}$ tel que $\forall n \geq N, d(x_n, x) < r$.\\
+On a $x_n \in A$ donc $x_n \in B(x,r) \cap A \neq \emptyset \forall n \geq N$. Donc $x \in \overline{A}$. $\Box$\\
+$(\supset)$ Soit $x \in \overline{A} \Rightarrow$ pour tout $r > 0, B(x,r) \cap A \neq \emptyset$.\\*
+Prenons, $n \in \mathbb{N}$, $r = \frac{1}{n+1} > 0$.\\
+Alors $B(x, \frac{1}{n+1}) \cap A \neq \emptyset$.\\
+Pour chaque $n \in \mathbb{N}$, choisissons $x_n \in B(x, \frac{1}{n+1}) \cap A$.\\
+On a alors construit une suite $(x_n)$ qui vérifie $d(x_n, x) < \frac{1}{n+1}$.\\
+Ainsi, $x$ est bien la limite d'une suite d'éléments de $A$. $\Box$
+}
+
+\theorem{Proposition}{Caractérisation des fermés par des suites}{false}{
+    Une partie $F$ de $(X,d)$ est fermée si et seulement si pour toute suite $(x_n)$ d'éléments de $F$ qui converge vers $x \in X$, on a $x \in F$.
+}
+
+\noindent{\textbf{Preuve :}\\
+On a $\overline{F} = \{ x \in X \mid \exists (x_n) \text{ suite de } F, x_n \to x \}$.\\
+Or $\overline{F} = F$. On a donc le résultat.
+}
+
+\subsection{Continuité}
+
+\subsubsection{Définitions}
+
+\definition{
+    Soit $f \colon (X,d_X) \to (Y,d_Y)$ une application entre deux espaces métriques.\\
+    \begin{itemize}
+        \item $f$ est continue en $a \in X$ si $\forall \varepsilon > 0, \exists \delta_\varepsilon > 0 \colon x \in B(a, \delta_\varepsilon)$, alors $f(x) \in B(f(a), \varepsilon)$.\\
+        \textit{Autrement dit, pour tout $\varepsilon \exists \delta_\varepsilon$ tel que $d_X(x,a) < \delta_\varepsilon \Rightarrow d_Y(f(x), f(a)) < \varepsilon$.}
+        \item $f$ est continue sur $X$ si $f$ est continue en tout point de $X$.
+    \end{itemize}
+}
+
+\remark{Si $f \colon (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$, on retrouve la définition usuelle de la continuité des fonctions réelles.}
+
+\definition{
+    Soit $k \geq 0$ un réel.\\
+    On dit que $f \colon (X,d_X) \to (Y,d_Y)$ est k-lipschitzienne si $\forall x,y \in X, d_Y(f(x), f(y)) \leq k d_X(x,y)$.
+}
+
+\definition{Si $f \colon (X, d_X) \to (Y, d_Y)$ est une application k-lipschitzienne, alors $f$ est continue sur $X$.}
+
+\noindent{\textbf{Preuve :}\\
+Montrons que $f$ est continue.\\
+Soit $a \in X$ et soit $\varepsilon > 0$. Posons $\delta_\varepsilon = \frac{\varepsilon}{2k} > 0$.\\
+$\forall x \in B(a, \delta_\varepsilon)$, on a $d_Y(f(a),f(x)) \leq kd_X(a,x) \leq k \delta_\varepsilon = \frac{\varepsilon}{2} < \varepsilon$.\\
+Ainsi, $f$ est continue.\\
+Remarquons de plus que $\delta_\varepsilon$ ne dépend pas de $a$, donc $f$ est uniformément continue sur $X$. (HP)
+}
+
+\example{
+    Exemple d'une fonction 1-lipschitzienne : \function{f}{(\mathbb{R}^n, \|\cdot\|) \to (\mathbb{R}, |\cdot|)}{x \mapsto \|x\|}.\\
+    En effet, $|f(x) - f(y)| = ||x| - |y|| \leq \|x - y\| = d(x,y)$ (inégalité triangulaire renversée).
+}
+
+\subsubsection{Caractérisation de la continuité}
+
+\theorem{Proposition}{Caractérisation de la continuité par des suites}{false}{
+    Soit $f \colon (X,d_X) \to (Y,d_Y)$ une application entre deux espaces métriques.\\
+    Alors $f$ est continue en $a \in X$ si et seulement si pour toute suite $(x_n)$ de $X$ qui converge vers $a$, la suite $(f(x_n))$ converge vers $f(a)$.
+}
+
+\noindent{\textbf{Preuve :}\\
+$(\Rightarrow)$ Soit $(x_n)$ une suite de $X$ qui converge vers $a$.\\
+Soit $\varepsilon > 0$. Comme $f$ est continue en $a$, il existe $\delta_\varepsilon > 0$ tel que $d_X(x,a) < \delta_\varepsilon \Rightarrow d_Y(f(x), f(a)) < \varepsilon$.\\
+Comme $x_n \to a$, il existe $N \in \mathbb{N}$ tel que $\forall n \geq N, d_X(x_n, a) < \delta_\varepsilon$.\\
+Donc $\forall n \geq N, d_Y(f(x_n), f(a)) < \varepsilon$ pour tout $n \geq N$.\\
+Ainsi $\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, d_Y(f(x_n), f(a)) < \varepsilon$. Donc $f(x_n) \to f(a)$.\\
+$(\Leftarrow)$ Par l'absurde, supposons que $f$ n'est pas continue en $a$.\\
+C'est-à-dire qu'il existe $\varepsilon_0 > 0, \forall \delta > 0, \exists x \in X$ tel que $d_X(x,a) < \delta$ mais $d_Y(f(x), f(a)) > \varepsilon_0$.\\
+$\forall n \in \mathbb{N}$, posons $\delta = \frac{1}{n+1} > 0$.\\
+On construit une suite $(x_n)$ de $X$ telle que $d_X(x_n, a) < \frac{1}{n+1}$, $d_Y(f(x_n), f(a)) > \varepsilon_0$.\\
+On a $x_n \to a$ mais $f(x_n) \not\to f(a)$ (car $d_Y(f(x_n), f(a)) > \varepsilon_0$ pour tout $n$).\\
+Absurde. Donc $f$ est continue en $a$.
+}
+
+\theorem{Proposition}{}{false}{
+    $f \colon (X,d_X) \to (Y,d_Y)$ est continue sur $X$ si et seulement si pour tout ouvert $U$ de $(Y,d_Y)$, $f^{-1}(U)$ est un ouvert de $(X,d_X)$.
+}
+\reminder{
+    $f^{-1}(U) = \{ x \in X \mid f(x) \in U \}$.
+}
+
+\noindent{\textbf{Preuve :}\\
+$(\Rightarrow)$ Soit $U$ un ouvert de $(Y,d_Y)$.\\
+Montrons que $f^{-1}(U)$ est un ouvert de $(X,d_X)$.\\
+Soit $a \in f^{-1}(U)$. Alors $f(a) \in U$.\\
+Comme $U$ est un ouvert de $(Y,d_Y)$, il existe $\varepsilon > 0$ tel que $B_Y(f(a), \varepsilon) \subset U$.\\
+Or $\exists \delta_\varepsilon > 0$ tel que $x \in B_X(a, \delta_\varepsilon) \Rightarrow f(x) \in B_Y(f(a), \varepsilon)$.\\
+Vérifions que $B_X(a, \delta_\varepsilon) \subset f^{-1}(U)$.\\
+Soit $x \in B_X(a, \delta_\varepsilon)$.
+ Alors $d_X(x,a) < \delta_\varepsilon \Rightarrow  d_Y(f(x),f(a)) < \varepsilon \Rightarrow f(x) \in B_Y(f(a), \varepsilon) \subset U$ $\Rightarrow x \in f^{-1}(U)$.\\
+Donc $B_X(a, \delta_\varepsilon) \subset f^{-1}(U)$. Ainsi, $f^{-1}(U)$ est un ouvert de $(X,d_X)$.\\
+
+\noindent$(\Leftarrow)$ Soit $U$ un ouvert de $(Y,d_Y)$.\\
+Alors $f^{-1}(U)$ est un ouvert de $(X,d_X)$.\\
+Soit $a \in f^{-1}(U)$. Alors $f(a) \in U$.\\
+Soit $\varepsilon > 0$ tq $B(f(a), \varepsilon) \subset U$.\\
+Montrons que $\exists \delta_\varepsilon > 0$ tel que $d_X(x,a) < \delta_\varepsilon$ et $d_Y(f(x), f(a)) < \varepsilon$.\\
+Comme $f^{-1}(U)$ est un ouvert de $(X,d_X)$, il existe $\delta_\varepsilon > 0$ tel que $B_X(a, \delta_\varepsilon) \subset f^{-1}(U)$ qui est ouvert.\\
+Alors si $x \in X$ tq $d_X(x,a) < \delta_\varepsilon$, on a $d_Y(f(x), f(a)) < \varepsilon$ car $f(x) \in U$.\\
+Ainsi, $f$ est continue en $a$.}
 \end{document}
