@@ -194,4 +194,27 @@ Soit $E$ un $K$-espace vectoriel de dimension finie $n$, et soit $B$ une base de
     Dans ce cas, $A^{-1} = \frac{1}{det(A)} { }^t com(A)$.
 }
 
+\section{Application aux systèmes linéaires}
+
+On se donne $A = (a_{ij}) \in M_n(K)$ et $b \in K^n$. Soit $B = \begin{pmatrix}b1\\ \vdots \\ b_n\end{pmatrix}$.\\
+On cherche les solutions $X \in K^n$ à l'équation $AX = B$.
+En posant $X = \begin{pmatrix}x_1 \\ \vdots \\ x_n\end{pmatrix}$, on a le système linéaire suivant :
+\[\begin{cases}
+a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n = b_1\\
+a_{21}x_1 + a_{22}x_2 + \ldots + a_{2n}x_n = b_2\\
+\vdots \\
+a_{n1}x_1 + a_{n2}x_2 + \ldots + a_{nn}x_n = b_n
+\end{cases}\]
+
+\theorem{Théorème}{}{false}{
+    Si $\det(A) \neq 0_K$, alors le système admet une unique solution donnée par $X = A^{-1}B$ (formule de Cramer).\\
+    Plus précisément, la solution $X = \begin{pmatrix}x_1 \\ \vdots \\ x_n\end{pmatrix}$ vérifie pour tout $k$ :\\
+    $x_k = \frac{det(A_k(B))}{det(A)}$ où $A_k(B)$ est la matrice obtenue en remplaçant la $k$-ème colonne de $A$ par le vecteur $B$.\\
+    Si $\det(A) = 0_K$, le système admet soit aucune, soit une infinité de solutions.
+}
+
+\example{Pour $n=2$, $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$ et $B = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$.\\
+On a : $det(A) = ad - bc$.\\
+Si $ad - bc \neq 0$, on a $\begin{cases} x_1 = \frac{b_1 d - b_2 b}{ad - bc} \\ x_2 = \frac{a b_2 - c b_1}{ad - bc} \end{cases}$.
+}
 \end{document}
