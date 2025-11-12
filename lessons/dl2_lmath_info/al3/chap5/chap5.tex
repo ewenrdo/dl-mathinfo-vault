@@ -180,10 +180,11 @@ Soit $E$ un $K$-espace vectoriel de dimension finie $n$, et soit $B$ une base de
 }
 
 \theorem{Théorème}{}{false}{
-    On a $det(A) = (-1)^{i+1}a_{i1}A + \ldots + (-1)^{i+n}a_{in}A$ (développement suivant la $i$-ème ligne).\\
-    $= (-1)^{1+j}a_{1j}A + \ldots + (-1)^{n+j}a_{nj}A$ (développement suivant la $j$-ème colonne).
-}
+    On a $det(A) = (-1)^{i+1}a_{i1} \Delta_{i1} + \ldots + (-1)^{i+n}a_{in}\Delta_{in}$ (développement suivant la $i$-ème ligne).\\
+    $= (-1)^{1+j}a_{1j} \Delta_{1j} + \ldots + (-1)^{n+j}a_{nj}\Delta_{nj}$ (développement suivant la $j$-ème colonne).\\\\
 
+    Autrement dit, $det(A) = \sum_{j=1}^n (-1)^{i+j} a_{ij} \Delta_{ij} = \sum_{i=1}^n (-1)^{i+j} a_{ij} \Delta_{ij}$.
+}
 \theorem{Théorème}{Comatrice et transposée}{false}{
     On a $A { }^t com(A) = com(A) { }^t A = det(A) I_n$.
 }
