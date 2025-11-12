@@ -1,0 +1,125 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Réduction des endomorphismes}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 6 : Théorie spectrale}
+
+\section{Valeurs propres, vecteurs propres, sous-espaces propres}
+
+On se donne $E$ un $K$-espace vectoriel et $u \in End(E)$ un endomorphisme de $E$.
+\definition{
+    Soit $\lambda \in K$. On dit que $\lambda$ est une \textbf{valeur propre (vp)} de $u$ s'il existe un vecteur $x \in E \setminus \{0_E\}$ tel que $u(x) = \lambda x$. Un tel vecteur $x$ est appelé un \textbf{vecteur propre ($\overrightarrow{vp}$)} associé à la valeur propre $\lambda$ de $u$.
+}
+
+\definition{
+    On note $E_\lambda$ le \textbf{sous-espace propre} de $u$ associé à la valeur propre $\lambda$ :
+    \[
+        E_\lambda = \{ x \in E \mid u(x) = \lambda x \} = Ker(u - \lambda Id_E)
+    \]
+}
+
+\theorem{Propriété}{}{true}{
+    On a $\lambda$ est une valeur propre de $u$ si et seulement si $E_\lambda \neq \{0_E\}$.\\
+    Ce qui est vrai si et seulement si $u - \lambda Id_E$ n'est pas inversible (autrement dit, $det(u - \lambda Id_E) = 0$).
+}
+
+\vocabulary{On dit que $u$ est \textbf{diagonalisable} s'il existe une base de $E$ formée de $\overrightarrow{vp}$ de $u$. (vecteurs propres)}
+\theorem{Proposition}{}{false}{
+    $u$ est diagonalisable si et seulement si $Mat_B(u)$ est diagonale pour une certaine base $B$ de $E$. (E de dimension finie)
+}
+
+\noindent{\textbf{Preuve :}\\
+Soient $(x_1, \ldots, x_n)$ une base de $E$ formée de $\overrightarrow{vp}$ de $u$ avec $u(x_i) = \lambda_i x_i$. On a donc :
+\[
+    Mat_B(u) = 
+    \begin{pmatrix}
+        \lambda_1 & 0 & \ldots & 0 \\
+        0 & \lambda_2 & \ldots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \ldots & \lambda_n
+    \end{pmatrix}
+\] $\Box$
+}
+
+\vocabulary{On dit que $u$ est \textbf{trigonalisable} s'il existe une base de $E$ dans laquelle la matrice de $u$ est triangulaire supérieure. (vecteurs propres)}
+\remark{Alors $x$ est un $\overrightarrow{vp}$ de $u$. Un endomorphisme sans $\overrightarrow{vp}$ n'est pas diagonalisable.}
+
+\example{Si $E = K^2$ et $Mat_B(u) = \begin{pmatrix}
+    5 & -1 \\
+    4 & 1
+\end{pmatrix}$ ($B$ = canonique), alors $u$ est trigonalisable pour la base $B' = \left\{ \begin{pmatrix}
+    1 \\
+    2   
+\end{pmatrix}, \begin{pmatrix}
+    0 \\
+    -1
+\end{pmatrix} \right\}$. En effet, on a :
+$u(\begin{pmatrix}
+    1 \\
+    2\end{pmatrix}) = \begin{pmatrix}
+    3 \\
+    6
+\end{pmatrix} = 3 \begin{pmatrix}
+    1 \\
+    2
+\end{pmatrix}$
+}
+
+\example{
+    Si $Mat_B(u) = \begin{pmatrix}
+        1 & 1 \\
+        0 & 2
+    \end{pmatrix}$, alors $u$ est diagonalisable.
+}
+\example{
+    Si $Mat_B(u) = \begin{pmatrix}
+        0 & -1 \\
+        1 & 0
+    \end{pmatrix}$, n'est pas diagonalisable si $K = \mathbb{R}$ (pas de $\overrightarrow{vp}$), mais est diagonalisable si $K = \mathbb{C}$ (car $\lambda = i$ et $\lambda = -i$ sont des vp).
+}
+
+\section{Projections, symétries et rotations}
+Posons $E = F \oplus G$ avec $F, G$ sous-espaces vectoriels de $E$.
+
+\theorem{Proposition}{}{true}{
+    Soit $p \in \mathcal{L}(E)$ la projection sur $F$ parallèlement à $G$ (i.e. $p(x + y) = x$ pour tout $(x, y) \in F \times G$).\\
+    Alors les valeurs propres de $p$ sont contenues dans $\{0, 1\}$.
+    De plus, $F = E_1$ et $G = E_0$ et $p$ est diagonalisable.
+}
+
+\ndlr{cf. Laurent pour la démonstration}
+
+\theorem{Proposition}{}{true}{
+    Soit $s \in \mathcal{L}(E)$ la symétrie par rapport à $F$ parallèlement à $G$ (i.e. $s(x + y) = x - y$ pour tout $(x, y) \in F \times G$).\\
+    Alors les valeurs propres de $s$ sont contenues dans $\{-1, 1\}$.
+    De plus, $F = E_1$ et $G = E_{-1}$ et $s$ est diagonalisable.
+}
+
+Supposons $E = \mathbb{K}^2, K=\mathbb{R}$.\\
+Considérons $u$ tel que $Mat_B(u) = \begin{pmatrix}
+    \cos \theta & -\sin \theta \\
+    \sin \theta & \cos \theta \end{pmatrix}$ dans la base canonique $B$ de $\mathbb{R}^2$ avec $\theta \in \mathbb{R} \setminus \pi\mathbb{Z}$.
+
+\theorem{Proposition}{}{true}{
+    $u$ n'est pas diagonalisable si $K = \mathbb{R}$ (pas de $\overrightarrow{vp}$), mais est diagonalisable si $K = \mathbb{C}$ (car $\lambda = \cos \theta + i \sin \theta$ et $\lambda = \cos \theta - i \sin \theta$ sont des vp).
+}
+\end{document}
