@@ -540,4 +540,130 @@ Comme $f^{-1}(U)$ est un ouvert de $(X,d_X)$, il existe $\delta_\varepsilon > 0$
 Alors si $x \in X$ tq $d_X(x,a) < \delta_\varepsilon$, donc $f(x) \in B(f(a), \varepsilon)$.\\
 Donc on a $d_Y(f(x), f(a)) < \varepsilon$ car $f(x) \in U$.\\
 Ainsi, $f$ est continue en $a$.}
+
+\noindent\textbf{Interlude : Inégalité de Cauchy-Schwarz}
+
+Considérons $<\cdot , \cdot > \colon \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}$ définie par $<x,y> = \sum_{i=1}^{n} x_i y_i$.
+Cette application est bilinéaire, symétrique, positive et définie ($<x,x> = 0 \Leftrightarrow x = 0$).\\
+On observe que la norme euclidienne s'écrit $\|x\|_2 = \sqrt{<x,x>}$.\\\\
+
+On dit que $<\cdot , \cdot >$ est un produit scalaire (forme bilinéaire symétrique définie positive), et ce produit scalaire est relié à la norme 2 (il s'agit du produit scalaire euclidien).
+
+\theorem{Théorème}{Inégalité de Cauchy-Schwarz}{false}{
+    $\forall X,Y \in \mathbb{R}^n, |<X,Y>| \leq \|X\|_2 \|Y\|_2$.
+}
+\noindent {\textbf{Démonstration :}
+\begin{itemize}
+    \item Fixons $X, Y \in \mathbb{R}^n$ ($\neq 0_{\mathbb{R}^n}$)
+    \[
+    P(t) = \|X + tY\|_2^2 = \langle X + tY, X + tY \rangle = \|X\|_2^2 + t^2 \|Y\|_2^2 + 2t \langle X, Y \rangle 
+    \ge 0 
+    = t^2 \|Y\|_2^2 + 2t \langle X, Y \rangle + \|X\|_2^2.
+    \]
+    $P$ est un polynôme de degré 2 en $t$. $P(t) \ge 0, \forall t \in \mathbb{R}$, son discriminant est $\le 0$.
+    \[
+    \Delta = 4 \langle X, Y \rangle^2 - 4 \|X\|_2^2 \|Y\|_2^2 = 4(\langle X, Y \rangle^2 - \|X\|_2^2 \|Y\|_2^2).
+    \]
+    Or, $\Delta \le 0 \iff \langle X, Y \rangle^2 - \|X\|_2^2 \|Y\|_2^2 \le 0 \iff \langle X, Y \rangle^2 \le \|X\|_2^2 \|Y\|_2^2
+    \iff |\langle X, Y \rangle| \le \|X\|_2 \|Y\|_2$.
+    
+    \item De plus, si $\Delta = 0$, $\exists t_0 \in \mathbb{R}$ racine double, $P(t_0) = 0 = \|X + t_0 Y\|_2^2$
+    \[
+    \implies X + t_0 Y = 0 \implies X \text{ et } Y \text{ sont colinéaires}.
+    \]
+    Et si $X$ et $Y$ sont colinéaires, alors
+    \[
+    |\langle X, Y \rangle| = |\langle X, \lambda X \rangle| = |\lambda| \langle X, X \rangle 
+    = |\lambda| \|X\|_2^2 = |\lambda| \|X\|_2 \|X\|_2 
+    = \|X\|_2 \|\lambda X\|_2 = \|X\|_2 \|Y\|_2.
+    \]
+\end{itemize}}
+
+\theorem{Corollaire}{Égalité de Cauchy-Schwarz}{false}{
+    L'égalité $|<X,Y>| = \|X\|_2 \|Y\|_2$ est vérifiée si et seulement si $X$ et $Y$ sont colinéaires.
+}
+
+\ndlr{Démo à reprendre, cf screen Laurent 2}
+
+\subsubsection{Continuité des applications linéaires dans les evn}
+
+\textit{A priori}, les espaces vectoriels ne sont pas forcément de dimension finie.\\
+Soit $f \colon (E, \|\cdot\|_E) \to (F, \|\cdot\|_F)$ une application linéaire entre deux $K$-espaces vectoriels normés (evn).\\
+
+\theorem{Proposition}{Caractérisation de la continuité des applications linéaires}{false}{
+    Les propriétés suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $f$ est continue de $(E, \|\cdot\|_E)$ dans $(F, \|\cdot\|_F)$.
+        \item $f$ est continue en 0.
+        \item $\exists k > 0$ tel que $\forall x \in E, \|f(x)\|_F \leq k \|x\|_E$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Démonstration :}
+
+\begin{itemize}
+    \item $i) \Rightarrow ii)$ : $f$ continue sur $E \Rightarrow f$ continue en $0$, \quad $f(0_E) = 0_F$
+    
+    \item $ii) \Rightarrow iii)$ : $f$ continue en $0$ : Soit $\varepsilon > 0$, $\exists \delta > 0$ tel que si $\|x\|_E < \delta \Rightarrow \|f(x)\|_F < \varepsilon$.
+    
+    Soit $x \in E$. Posons $y = \frac{\delta x}{2\|x\|_E}$. Alors
+    \[
+        \|f(y)\|_F < \varepsilon \quad \Rightarrow \quad f\left(\frac{\delta x}{2\|x\|_E}\right) < \varepsilon
+    \]
+    \[
+        \Rightarrow \frac{\delta}{2\|x\|_E} \|f(x)\|_F < \varepsilon
+    \]
+    \[
+        \Rightarrow \|f(x)\|_F < \frac{2\varepsilon}{\delta} \|x\|_E
+    \]
+    
+    On trouve $K = \frac{2\varepsilon}{\delta}$, indépendant de $x \in E$, tel que $\forall x \in E, \, \|f(x)\|_F \le K \|x\|_E$.
+    
+    \item $iii) \Rightarrow i)$ : On part de $\exists K > 0$ tel que $\forall x \in E, \|f(x)\|_F \le K \|x\|_E$, on obtient $\forall x,y \in E, \|f(x-y)\|_F \le K \|x-y\|_E$
+    \[
+        \Rightarrow \exists K > 0, \, \forall x,y \in E, \, \|f(x) - f(y)\|_F \le K \|x-y\|_E
+    \]
+    \[
+        \Rightarrow f \text{ est } K\text{-Lipschitz} \quad \Rightarrow f \text{ continue.}
+    \]
+\end{itemize}
+}
+\subsection{Equivalence de normes}
+
+\textbf{Problème :} Soit $E$ un evn avec une normée notée $N_1 \colon E \in \mathbb{R}^+$.\\
+On peut \textit{a priori} mettre d'autres normes sur $E$, disons $N_2 \colon E \in \mathbb{R}^+$.\\
+Si $(x_n)$ une suite de $E$ converge pour la norme $N_1$, converge-t-elle aussi pour la norme $N_2$ ?\\
+
+\definition{
+    $N_1$ et $N_2$ sont \textbf{équivalentes} si $\exists C,c > 0$ tels que $\forall x \in E, c N_2(x) \leq N_1(x) \leq C N_2(x)$.\\
+    On note $N_1 \sim N_2$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item $N_1 \sim N_2 \Leftrightarrow N_2 \sim N_1$.
+        \item Si $N_1 \sim N_2$ et $N_2 \sim N_3$, alors $N_1 \sim N_3$.
+    \end{enumerate}
+}
+
+\example{Voir TD, normes $\|\cdot\|_1, \|\cdot\|_2, \|\cdot\|_{\infty}$ sur $\mathbb{R}^n$.}
+\remark{Un des buts du cours est de montrer que sur $\mathbb{R}^n$ (+ généralement pour tout evn), toutes les normes sont équivalentes.}
+
+\theorem{Proposition}{}{false}{
+    Soit $(x_n)$ une suite de $E$, où $E$ est muni de $N_1$ et $N_2$ deux normes équivalentes.\\
+    Alors $(x_n)$ converge pour la norme $N_1$ si et seulement si $(x_n)$ converge pour la norme $N_2$.
+}
+\noindent{\textbf{Démonstration :}
+
+\begin{itemize}
+    \item $\Rightarrow$ : On suppose $\exists a \in X$ tel que $x_n \xrightarrow{N_1} a \Leftrightarrow N_1(x_n - a) \underset{n \to +\infty}{\longrightarrow} 0.$\\
+    Or, $\underline{c N_2(z) \leq N_1(z)} \leq C N_2(z)$\\
+    Cette inégalité implique $N_2(x_n - a) \leq \frac{1}{c} \underline{N_1(x_n - a)} \underset{n \to +\infty}{\longrightarrow} 0$\\
+    $\Rightarrow N_2(x_n - a) \underset{n \to +\infty}{\longrightarrow} 0$\\
+    $\Rightarrow x_n \xrightarrow{N_2} a.$\\
+    \item $\Leftarrow$  : Si $x_n \xrightarrow{N_2} a \Rightarrow N_2(x_n - a) \underset{n \to +\infty}{\longrightarrow} 0.$\\
+    On utilise $\underline{N_1(\cdot) \leq C N_2(\cdot)}$ ($C > 0$)\\
+    $\frac{N_1}{c}(x_n - a) \to 0 \Rightarrow N_1(x_n - a) \underset{n \to +\infty}{\longrightarrow} 0.$\\
+\end{itemize}}
+
 \end{document}
