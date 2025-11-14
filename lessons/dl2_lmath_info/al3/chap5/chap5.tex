@@ -127,6 +127,53 @@ Il y a $n!$ termes dans la formule. On a l'intuition que ça ressemble à un dé
 }
 
 % Cours à rattraper
+
+\section{Déterminant d'une famille de vecteurs dans une base}
+
+\definition{
+    Soit $E$ un $K$-espace vectoriel de dimension finie $n$, et soit $B = (e_1,\ldots,e_n)$ une base de $E$.\\
+    Soit $(u_1,\ldots,u_n) \in E^n$.\\
+    On appelle \textbf{déterminant} de la famille $(u_1,\ldots,u_n)$ dans la base $B$ eton note $det_B(u_1,\ldots,u_n)$ la valeur de la forme $n$-linéaire alternée $f_0$ (définie précédemment) en $(u_1,\ldots,u_n)$.\\\\
+
+    Autrement dit, si $det_B(u_1,\ldots,u_n) = f_0(u_1,\ldots,u_n)$ où $f_0$ est la forme $n$-linéaire alternée telle que $f_0(e_1,\ldots,e_n) = 1$.\\
+    si on pose $u_j = \sum_{i=1}^n \lambda_{ij} e_i$ avec $\lambda_{ij} \in K$, on a :\\
+}
+
+\theorem{Proposition}{}{true}{
+    L'application $(u_1,\ldots,u_n) \mapsto det_B(u_1,\ldots,u_n)$ est une forme $n$-linéaire alternée sur $E$.\\
+    En particulier, elle change de signe si on échange deux de ses arguments.\\
+}
+\theorem{Proposition}{Combinaison linéaire et déterminant}{true}{
+    On a que $(u_1, \ldots, u_n)$ est liée si $det_B(u_1, \ldots, u_n) = 0$.
+    (Et donc $(u_1, \ldots, u_n)$ est une base de $E$ si $det_B(u_1, \ldots, u_n) \neq 0$).
+}
+
+\theorem{Théorème}{Déterminants dans deux bases}{true}{
+    Soient $B_1$ et $B_2$ deux bases de $E$.\\
+    On a $det_{B_2}(u_1,\ldots,u_n) = det_{B_2}(B_1) \times det_{B_1}(u_1,\ldots,u_n)$.
+}
+\section{Déterminant d'une matrice 3x3}
+\ndlr{Voir MM1, méthode de Sarrus}
+
+\section{Déterminant d'une matrice carrée}
+
+\definition{
+    Le déterminant d'une matrice $A$ est le déterminant dans la base canonique de la famille de vecteurs constituée par les colonnes de $A$.
+}
+\example{
+    Soit $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in M_2(K)$.\\
+    On a $det(A) = det_{B_{can}} \left( \begin{pmatrix} a \\ c \end{pmatrix}, \begin{pmatrix} b \\ d \end{pmatrix} \right) = ad - bc$.
+}
+
+\theorem{Proposition}{Matrices triangulaires}{false}{
+    Si $A = (a_{ij}) \in M_n(K)$ est triangulaire (en particulier diagonale), on a $det(A) = a_{11} \times a_{22} \times \ldots \times a_{nn}$.\\\\
+    Autrement dit, le déterminant d'une matrice triangulaire est le produit des scalaires sur sa diagonale.
+}
+
+\theorem{Théorème}{Transposée}{true}{
+    Pour toute matrice carrée $A \in M_n(K)$, on a $det({ }^t A) = det(A)$.
+}
+
 \section{Déterminant d'un endomorphisme}
 
 Soit $E$ un $K$-espace vectoriel de dimension finie $n$, et soit $B$ une base de $E$.
