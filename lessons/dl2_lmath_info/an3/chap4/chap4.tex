@@ -719,13 +719,56 @@ Par continuité de $f$, $\forall x \in E\setminus\{0\} \frac{\|f(x)\|_F}{\|x\|_E
 \ndlr{cf. Laurent pour la démonstration de la remarque}
 
 \theorem{Proposition}{}{false}{
-    \begin{itemize}
+    \begin{enumerate}
         \item Soit $(x_n)$ une suite d'éléments de $(X,d)$ qui converge vers $x \in X$.\\
         Alors $(x_n)$ est une suite de Cauchy. 
         \item Une suite de Cauchy a au plus une valeur d'adhérence.
         \item Une suite de Cauchy qui a une valeur d'adhérence converge vers cette valeur d'adhérence.
-        
-    \end{itemize}
+    \end{enumerate}
 }
 
+\noindent{\textbf{Preuve :}
+\begin{enumerate}
+    \item Soit $(x_n)$ une suite qui converge vers $a \in X$.\\
+    Donc $\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall n \geq N_\varepsilon, d(x_n,a) < \varepsilon$.\\
+    Montrons que $(x_n)$ est de Cauchy. Par convergence de $(x_n)$, on a $\exists N_\varepsilon \in \mathbb{N}, \forall n \geq N_\varepsilon, d(x_n,a) < \frac{\varepsilon}{2}$.\\
+    Ainsi, $d(x_n,x_m) \leq d(x_n,a) + d(a,x_m) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$.\\
+    Donc on a : $\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall m,n \geq N_\varepsilon, d(x_n,x_m) < \varepsilon$.\\
+    C'est-à-dire que $(x_n)$ est de Cauchy.
+    \item Supposons que $(x_n)$ est une suite de Cauchy qui admet deux valeurs d'adhérence distinctes $a \neq b \in X$.\\
+    On a $x_{\varphi(n)} \to a$ et $x_{\psi(n)} \to b$ deux sous-suites de $(x_n)$.\\
+    Posons $\varepsilon = d(a,b) > 0$ car $a \neq b$.\\
+    Comme $(x_n)$ est de Cauchy, $\exists N_0 \in \mathbb{N}, \forall m,n \geq N_0, d(x_n,x_m) < \frac{\varepsilon}{3}$.\\
+    De plus, comme $x_{\varphi(n)} \to a$, $\exists N_1 \in \mathbb{N}, \forall n \geq N_1, d(x_{\varphi(n)}, a) < \frac{\varepsilon}{3}$.\\
+    Et comme $x_{\psi(n)} \to b$, $\exists N_2 \in \mathbb{N}, \forall n \geq N_2, d(x_{\psi(n)}, b) < \frac{\varepsilon}{3}$.\\
+    Comme $\varphi(n), \psi(n) \to +\infty$, on peut choisir $n$ tel que $\varphi(n), \psi(n) \geq N_0$ avec $\varphi(n) \geq N_1$ et $\psi(n) \geq N_2$.\\
+    $\varepsilon = d(a,b) \leq d(a,x_{\varphi(n)}) + d(x_{\varphi(n)}, x_{\psi(n)}) + d(x_{\psi(n)}, b) < \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon$.\\
+    Absurde. Donc $a = b$, donc la valeur d'adhérence est unique.
+    \item Soit $(x_n)$ une suite de Cauchy et soit $(x_{\varphi(n)})$ une sous-suite de $(x_n)$ qui converge vers $a$.\\
+    Soit $\varepsilon > 0$. Comme $(x_n)$ est de Cauchy, $\exists N_0 \in \mathbb{N}, \forall m,n \geq N_0, d(x_n,x_m) < \frac{\varepsilon}{2}$.\\
+    De plus, comme $x_{\varphi(n)} \to a$, $\exists N_1 \in \mathbb{N}, \forall n \geq N_1, d(x_{\varphi(n)}, a) < \frac{\varepsilon}{2}$.\\
+    On a alors :\\
+    $d(x_n,a) \leq d(x_n, x_{\varphi(m)}) + d(x_{\varphi(m)}, a) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$ pour tout $\forall n,m \geq max(N_0, N_1)$ (possible car $\varphi(n) \to +\infty$).\\
+    Donc $\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, d(x_n,a) < \varepsilon$.\\
+    C'est-à-dire que $x_n \to a$. $\Box$
+\end{enumerate}}
+
+\definition{
+    Une partie $A \in (X,d)$ est bornée si $\exists x \in X \exists r > 0$ tel que $A \subset B(x,r)$.
+}
+
+\illustration{
+    Patatoïdes, une partie A dans un autre espace, avec un $x$ dans cet autre espace, mais pas dans A.
+}
+
+\theorem{Proposition}{}{false}{
+    Si $(x_n)$ est une suite de Cauchy dans $(X,d)$, alors $(x_n)$ est bornée.
+}
+\noindent{\textbf{Preuve :}\\
+Posons $A = \{ x_0, x_1, x_2, \ldots, x_n \ldots\} \subset X$.\\
+On veut montrer que $\exists y \in X, r > 0$ tel que $d(x_n, y) < r, \forall n \in \mathbb{N}$.\\
+Pour $\varepsilon = 1 \exists N \in \mathbb{N}, \forall m,n \geq N, d(x_n,x_m) < 1$.\\
+On a $\forall n \geq N, d(x_n, y) \leq d(x_n, x_N) + d(x_N, y) < 1 + d(x_N, y) \leq 1 + \max_{0 \leq k \leq N} d(x_k, y) = r$.\\
+Ainsi, $\forall n \in \mathbb{N}, d(x_n, y) < r$. Donc $(x_n)$ est bornée. $\Box$
+}
 \end{document}
