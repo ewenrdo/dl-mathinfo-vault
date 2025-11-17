@@ -698,4 +698,23 @@ Par continuité de $f$, $\forall x \in E\setminus\{0\} \frac{\|f(x)\|_F}{\|x\|_E
     \]
 \end{itemize}
 }
+
+\theorem{Proposition}{}{true}{
+    Soit $f \in \mathcal{L}_c(E,F)$.
+    On a $|||f||| = \sup_{x \neq 0} \frac{\|f(x)\|_F}{\|x\|_E} = \sup_{\|x\|_E \leq 1} \|f(x)\|_F$ = $ \sup_{\|x\|_E = 1} \|f(x)\|_F$.
+}
+
+\remark{On montrera qu'en dimension finie, toute application linéaire est continue.}
+
+\subsection{Introduction à la complétude dans les espaces métriques}
+
+\subsubsection{Définitions et premières propriétés}
+
+\definition{
+    Soit $(X,d)$ un espace métrique.\\
+    Une suite $(x_n)$ de $(X,d)$ est dite de Cauchy si \[\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall m,n \geq N, d(x_n,x_m) < \varepsilon\]
+}
+
+\remark{Si on travaille dans $(X,d)$ = $(E, \|\cdot\|)$ un evn, avec $d_E(x,y) = \|x-y\|$, et si on se donne une autre norme $\|\cdot\|'$ sur $E$ équivalente à $\|\cdot\|$, alors une suite est de Cauchy pour $\|\cdot\|$ si et seulement si elle est de Cauchy pour $\|\cdot\|'$.}
+\ndlr{cf. Laurent pour la démonstration de la remarque}
 \end{document}
