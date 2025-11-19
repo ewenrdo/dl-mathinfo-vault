@@ -126,4 +126,140 @@ Considérons $u$ tel que $Mat_B(u) = \begin{pmatrix}
 
 \section{Rappels sur les polynômes}
 \ndlr{cf. AL2}
+
+\definition{
+    Un polynôme $P$ est irréductible sur $K$ si $P=QR$ entraine que $Q$ ou $R$ est de degré $0$ (c'est-à-dire une constante).\\
+    Cela dépend du corps $K$.
+}
+
+\definition{
+    $P$ est sciendé sur $K$ si $P$ est produit de polynômes de degré $1$ sur $K$.
+}
+\example{
+    Sur $\mathbb{R}$, $X^2 + 1$ est irréductible. Sur $\mathbb{C}$, $X^2 + 1 = (X - i)(X + i)$ est scindé.
+}
+
+\vocabulary{$P$ est scindé à racines simples si $P$ est scindé et si toutes ses racines sont de multiplicité $1$, i.e. $P = c(X - \alpha_1)(X - \alpha_2) \ldots (X - \alpha_n)$ avec $\alpha_i$ distincts.}
+
+\theorem{Théorème d'Alembert-Gauss}{}{true}{
+    \begin{enumerate}
+        \item Si $K = \mathbb{C}$, tout polynôme de degré $\geq 1$ est scindé. (i.e. $\mathbb{C}$ est un corps algébriquement clos)
+        \item Si $K = \mathbb{R}$, tout polynôme de degré $\geq 1$ est produit de polynômes irréductibles de degré $1$ ou $2$.
+    \end{enumerate}
+}
+
+\section{Polynôme caractéristique d'un endomorphisme}
+
+Soit $E$ un $K$-espace vectoriel de dimension finie $n$ et $u \in End(E)$.\\
+\reminder{Soit $\lambda \in K$. C'est une valeur propre de $u$ si et seulement si $det(u - \lambda Id_E) = 0$.}
+\example{
+    $Mat_B(u) = \begin{pmatrix}
+        5 & 1 \\
+        2 & 4 \end{pmatrix}$. $E=\mathbb{R}^2$, $K=\mathbb{R}$ et $B$ la base canonique.\\
+        On a :
+    \[
+    det(u - \lambda Id_E) = det\begin{pmatrix}
+        5 - \lambda & 1 \\
+        2 & 4 - \lambda
+    \end{pmatrix} = \lambda^2 - 9\lambda + 18 = (\lambda - 6)(\lambda - 3)
+    \]
+    Donc les valeurs propres de $u$ sont $3$ et $6$.
+}
+
+\theorem{Théorème}{}{true}{
+    Posons $P_u(\lambda) = det(\lambda Id_E - u)$. C'est un polynôme de $K[\lambda]$ de degré $n$ appelé \textbf{polynôme caractéristique} de $u$.\\
+    Plus précisément, on a $P_u(\lambda) = (-1)^n \lambda^n + (-1)^{n-1} tr(u) \lambda^{n-1} + \ldots + det(u)$.
+}
+\example{
+    Pour $n=2$, on a $P_u(\lambda) = \lambda^2 - tr(u) \lambda + det(u)$.\\
+}
+
+\theorem{Corollaire}{}{true}{
+    L'endomorphisme $u$ admet au plus $n$ valeurs propres (distinctes).
+}
+
+\section{Polynôme caractéristique d'une matrice}
+
+Soit $A \in M_n(K)$ une matrice carrée, soit $\lambda \in K$.
+On dit que $\lambda$ est une valeur propre de $A$ s'il existe un vecteur $X \in K^n \setminus \{0\}$ tel que $AX = \lambda X$.
+On pose $E_{\lambda}(A) = Ker(A - \lambda I_n)$ le sous-espace propre de $A$ associé à la valeur propre $\lambda$.
+Et on pose $P_A(\lambda) = det(\lambda I_n - A)$ le polynôme caractéristique de $A$.
+
+\theorem{Proposition}{}{true}{
+    Soit $AB \in M_n(K)$ tel que $B$ sont semblables $A$ (i.e. il existe $P \in GL_n(K)$ tel que $B = P^{-1}AP$).\\
+    Alors $A$ et $B$ ont même polynôme caractéristique ($P_A = P_B$) et donc les mêmes valeurs propres.
+}
+
+\theorem{Proposition}{}{true}{
+    Supposons $A$ triagonalisable (i.e. semblable à une matrice triangulaire).\\
+    Alors $P_A$ est scindé sur $K$.
+}
+
+\remark{La réciproque est vraie (vu plus tard), $P_A$ scindé $\implies A$ trigonalisable.}
+\attention{Retenir que $P_A$ non scindé $\implies A$ non trigonalisable.}
+
+\example{
+    Si $K=\mathbb{R}$ et $A = \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}$. On a $P_A(\lambda) = \lambda^2$. Mais $A$ n'est pas diagonalisable.
+}
+
+\section{Étude des sous-espaces propres (sep)}
+
+Soit $E$ un $K$-espace vectoriel de dimension finie $n$ et $u \in End(E)$.
+Soit $F$ un sev de $E$.
+
+\definition{
+    On dit que $F$ est \textbf{stable} par $u$ si $u(F) \subset F$.
+    Alors $u_{|F} \in End(F)$ est la restriction de $u$ à $F$.
+}
+
+\theorem{Proposition}{}{true}{
+    Le polynôme caractéristique de $u_{|F}$ divise celui de $u$.
+    Autrement dit : $P_{u_{|F}}(\lambda) | P_u(\lambda)$.\\
+    Autrement dit : $\exists Q \in K[\lambda], P_u(\lambda) = P_{u_{|F}}(\lambda) Q(\lambda)$.
+}
+
+\textit{La preuve utilise le déterminant par blocs.}
+
+\theorem{Proposition}{}{true}{
+    Soit $k \leq n$ et soient $A \in M_k(K)$ et $B \in M_{k,n-k}(K)$ et $D \in M_{n-k}(K)$.\\
+    On a : $det\begin{pmatrix}
+        A & B \\
+        0 & D\end{pmatrix} = det(A) det(D)$.
+}
+
+\theorem{Proposition}{}{true}{
+    Soit $\lambda \in K$. Alors $E_\lambda$ est stable par $u$.
+}
+En effet, si $u(x) = \lambda x$, alors $u(u(x)) = u(\lambda x) = \lambda u(x)$, donc $u(x) \in E_\lambda$.
+
+\theorem{Corollaire}{}{true}{
+    Soit $\lambda \in K$, et soit $X \in E_\lambda \setminus \{0_E\}$.\\
+On a que $u_{|E_\lambda}$ est une homothétie de rapport $\lambda$.\\
+Donc $P_{u_{|E_\lambda}}(\lambda) = (\lambda - X)^{\dim(E_\lambda)}$\\.
+En particulier, $P_{u_{|E_\lambda}}$ divise $P_u$.\\
+}
+
+\vocabulary{On appelle la \textbf{multiplicité} de la valeur propre $\lambda$ pour $u$ le plus grand entier $m$ tel que $(\lambda - X)^m$ divise $P_u(X)$. On la note $m_{a}(\lambda)$.}
+\vocabulary{On appelle la \textbf{multiplicité géométrique} de la valeur propre $\lambda$ pour $u$ l'entier $\dim(E_\lambda)$. On la note $m_{g}(\lambda)$.}
+
+\theorem{Proposition}{}{true}{
+    On a $1 \leq m_{g}(\lambda) \leq m_{a}(\lambda)$ si $\lambda$ est une valeur propre de $u$.
+}
+
+\example{
+    Soit $A = \begin{pmatrix}
+        3 & 0 & 0 \\
+        0 & 3 & 1 \\
+        0 & 0 & 3
+    \end{pmatrix}$. On a $P_A(\lambda) = (3 - \lambda)^3$. Donc $m_a(3) = 3$.\\
+    On a $E_3 = Ker(A - 3I_3) = \left\{ \begin{pmatrix}
+        x \\
+        y \\
+        0
+    \end{pmatrix} \mid (x, y) \in K^2 \right\}$. Donc $\dim(E_3) = 2$. Donc $m_g(3) = 2$.
+}
+
 \end{document}
