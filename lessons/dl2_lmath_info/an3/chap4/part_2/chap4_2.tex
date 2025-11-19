@@ -735,6 +735,21 @@ Par définition de $sup$, $\forall \varepsilon > 0, \exists x_\varepsilon \in X$
 En discrétisant, $\varepsilon = \frac{1}{n+1}$, on obtient une suite $(x_n)$ de $X$ telle que $f(x_n) \to sup_{x \in X} f(x)$.\\
 Or $(x_n)$ est une suite du compact $(X,d)$, donc $(x_n)$ admet une sous-suite convergente $(x_{\varphi(n)})$ qui converge vers $b \in X$.\\
 Par continuité de $f$, $f(x_{\varphi(n)}) \to f(b)$.\\
-Donc $f(b) = sup_{x \in X} f(x) < +\infty$. $\Box$
+Donc $f(b) = sup_{x \in X} f(x) < +\infty$ et $b$ réalise le $sup$. $\Box$
+\textit{faire de même pour l'inf}
 }
+
+\theorem{Proposition}{}{false}{
+    Soit $K \subset (X,d)$ et $K$ compact. Alors $K$ est borné.
+}
+\noindent{\textbf{Preuve :}\\
+Soit $a \in X$. Considérons la fonction $f \colon X \in \mathbb{R}^+, x \mapsto d(x,a)$.\\
+$|f(x) - f(y)| = |d(x,a) - d(y,a)| \leq d(x,y)$ par inégalité triangulaire.\\
+Donc $f$ est 1-Lipschitz, donc continue.\\
+Regardons $f$ restreinte à $K$, qui est compact.\\
+Donc par la propriété fondamentale, $f$ est bornée sur $K$ et atteint ses bornes sur $K$.\\
+Donc $\exists M > 0, \forall x \in K, d(x,a) \leq M$.\\
+Ainsi, $K \subset B(a,M)$, donc $K$ est borné. $\Box$
+}
+
 \end{document}
