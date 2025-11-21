@@ -759,10 +759,24 @@ Ainsi, $K \subset B(a,M)$, donc $K$ est borné. $\Box$
 
 \noindent{\textbf{Preuve :} \textit{Laissée à l'appréciation du lecteur.}}
 
-\subsubsection{Compacité en dimension finie}
+\subsubsection{Compacité dans un evn de dimension finie}
 
 \theorem{Théorème}{}{false}{
-    Les compacts de $\mathbb{R}^n$ sont les fermés et bornés.
+    Les compacts de $\mathbb{R}^n$ sont les fermés et bornés.\\\\
+    Autrement dit, $K \subset \mathbb{R}^n$ est compact $\Leftrightarrow K$ est fermé et borné.
 }
 
+\noindent{\textbf{Preuve :}
+\begin{itemize}
+    \item ($\Rightarrow$) Soit $K$ un compact de $\mathbb{R}^n$.\\
+    Alors $K$ est borné (proposition vue plus haut dans le cadre d'espaces métriques).\\
+    Or $\mathbb{R}^n$ est complet (avec par exemple la norme $\|\cdot\|_{\infty}$).\\
+    Et comme $K$ est un compact de $\mathbb{R}^n$, $K$ est complet donc $K$ est fermé dans $\mathbb{R}^n$ (proposition vue plus haut).
+    \item ($\Leftarrow$) Soit $K$ un fermé et borné de $\mathbb{R}^n$.\\
+    Comme $K$ est borné, $\exists R > 0$ tel que $K \subset B(0,R)$ pour la norme $\|\cdot\|_{\infty}$.\\
+    Ainsi $K \subset B(0,R) \subset [-R,R]^n$ qui est un compact de $\mathbb{R}^n$.\\
+    Or $K$ est fermé dans $\mathbb{R}^n$, donc $K$ est fermé dans $[-R,R]^n$ (car $[-R,R]^n$ est fermé dans $\mathbb{R}^n$).\\
+    Donc $K$ est un fermé d'un compact, donc $K$ est compact. $\Box$
+    \end{itemize}
+}
 \end{document}
