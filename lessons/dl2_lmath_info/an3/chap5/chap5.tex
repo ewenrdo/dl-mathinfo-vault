@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Fonctions de plusieurs variables}
+
+\textbf{Cadre de travail :}
+\begin{itemize}
+    \item $p,q \in \mathbb{N}^*$
+    \item $U$ ouvert de $\mathbb{R}^n$
+    \item $f : U \to \mathbb{R}^m$
+    \item $\mathbb{R}^p$ et $\mathbb{R}^q$ sont des espaces vectoriels qui peuvent être normés, donc des espaces métriques. Ainsi, toutes les propriétés et des notions des espaces métriques s'appliquent.
+\end{itemize}
+
+\section{Continuité}
+
+\reminder{Une suite $(X_n)$ de composante $\begin{pmatrix}x^{(n)}_1 \\ x^{(n)}_2 \\ \vdots \\ x^{(n)}_p\end{pmatrix} \in \mathbb{R}^p$ tend vers $X = \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_p\end{pmatrix} \in \mathbb{R}^p$ si et seulement si chacune de ses composantes converge, c'est-à-dire :
+\[
+    \forall i \in \{1, \ldots, p\}, \quad x^{(n)}_i \xrightarrow[n \to +\infty]{} x_i
+\]}
+
+\theorem{Proposition}{}{false}{
+    Soit \functionSets{f}{U \to \mathbb{R}^q} et $a \in U$. On écrit $f(x) = (f_1(x), f_2(x), \ldots, f_q(x)), x\in U$.\\
+    On a : $f$ est continue en $a \Leftrightarrow \forall i=1,\ldots,q, f_i(x)$ est continue en $a$.
+}
+
+\remark{$\forall i=1,\ldots,q$, les fonctions $x \mapsto f_i(x)$ sont à valeur dans $\mathbb{R}$, donc on peut utiliser les résultats de la continuité pour les fonctions à valeur réelle.}
+\vocabulary{On appelle les $f_i$ les \textbf{fonctions composantes} de $f$.}
+
+\noindent{\textbf{Preuve :}\\
+    On rappelle que $f$ est continue en $a$ ssi par toute suite $(x_n)$ qui converge vers $a$, la suite $(f(x_n))$ converge vers $f(a)$.\\
+    On a donc $f(x_n) = (f_1(x_n), f_2(x_n), \ldots, f_q(x_n)) \to f(a) = (f_1(a), f_2(a), \ldots, f_q(a))$ ssi $\forall i=1,\ldots,q, f_i(x_n) \to f_i(a)$.\\
+    Donc $f$ est continue en $a$ ssi $\forall i=1,\ldots,q, f_i$ est continue en $a$.
+}
+
+Pour comprendre la continuité, il suffit de se restreindre aux fonctions $f : U \to \mathbb{R}$.\\
+\example{
+    \begin{enumerate}
+        \item $f(x,y) = \frac{x^2y}{x^2+y^2}$ et $f(0,0)=0$.\\
+        On a $U = \mathbb{R}^2$, $p=2$ et $q=1$.\\
+        Montrons que $f$ est continue.\\\\
+        $f$ est continue sur $\mathbb{R}^2 \setminus \{(0,0)\}$ car c'est un quotient de fonctions continues (polynômes) dont le dénominateur ne s'annule pas.\\
+        Montrons que $f$ est continue en $(0,0)$.\\
+        On doit montrer que si $(x,y) \to (0,0)$, alors $f(x,y) \to 0$.\\
+        $|f(x,y)| = \left|\frac{x^2y}{x^2+y^2}\right| = \frac{x^2 |y|}{x^2+y^2} \leq \frac{x^2 |y|}{y^2} = |y|$.\\
+        Donc si $(x,y) \to (0,0)$, alors $|y| \to 0$ et donc $f(x,y) \to 0$.\\
+        Ainsi, $f$ est continue en $(0,0)$.\\
+        Donc $f$ est continue sur $\mathbb{R}^2$.
+        \item $f(x,y) = \frac{xy}{x^2+y^2}$.\\
+        $f$ peut-elle être continue sur $\mathbb{R}^2$ ?\\
+        Sur $\mathbb{R}^2 \setminus \{(0,0)\}$, $f$ est continue (même raison).\\
+        Problème en $(0,0)$.\\
+        Montrons que $f(x,y)$ n'a pas de limite en $(0,0)$.\\
+        Trouvons $(x_n,y_n) \to (0,0)$ et $(a_n,b_n) \to (0,0)$ tels que $f(x_n,y_n)$ et $f(a_n,b_n)$ aient des limites différentes.\\
+        Prenons $(x_n,y_n) = \left(\frac{1}{n},\frac{1}{n}\right)$.
+        On a : $f(x_n,y_n) = \frac{\frac{1}{n} \cdot \frac{1}{n}}{\left(\frac{1}{n}\right)^2 + \left(\frac{1}{n}\right)^2} = \frac{\frac{1}{n^2}}{\frac{2}{n^2}} = \frac{1}{2}$.\\
+        De plus, prenons $(a_n,b_n) = \left(\frac{2}{n},\frac{1}{n}\right)$.
+        On a : $f(a_n,b_n) = \frac{\frac{2}{n} \cdot \frac{1}{n}}{\left(\frac{2}{n}\right)^2 + \left(\frac{1}{n}\right)^2} = \frac{\frac{2}{n^2}}{\frac{4}{n^2} + \frac{1}{n^2}} = \frac{2}{5}$.\\
+        Ainsi, $f(x_n,y_n) \to \frac{1}{2}$ et $f(a_n,b_n) \to \frac{2}{5}$.\\
+        Donc $f$ n'a pas de limite en $(0,0)$ et donc $f$ n'est pas continue en $(0,0)$.
+        Ainsi, $f$ n'est pas continue sur $\mathbb{R}^2$.
+    \end{enumerate}
+}
+
+
+\end{document}

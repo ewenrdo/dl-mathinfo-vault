@@ -779,4 +779,50 @@ Ainsi, $K \subset B(a,M)$, donc $K$ est borné. $\Box$
     Donc $K$ est un fermé d'un compact, donc $K$ est compact. $\Box$
     \end{itemize}
 }
+
+\attention{Cette caractérisation est fausse en dimension infinie.}
+\cexample{Pour fixer les idées, les boules unités (par exemple) sont des compacts en dimension finie, mais pas en dimension infinie.}
+
+\theorem{Théorème}{Equivalence des normes}{false}{
+    Toutes les normes sur $\mathbb{R}^n$ sont équivalentes.
+}
+
+\noindent{\textbf{Preuve :}
+On va montrer que toute norme est équivalente à la norme 1 notée $\| \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix} \|_1 = |x_1| + |x_2| + \ldots + |x_n|$.\\
+Ainsi, par transitivité, toutes les normes seront équivalentes.\\
+Considérons \function{f}{\mathbb{R}^n \to \mathbb{R}}{X \mapsto N(X)} avec $N$ une norme quelconque sur $\mathbb{R}^n$.\\
+Montrons que $f$ est lipschitzienne de $(\mathbb{R}^n, \|\cdot\|_1)$ dans $(\mathbb{R}, |\cdot|)$.\\
+
+Notons $(e_1, e_2, \ldots, e_n)$ la base canonique de $\mathbb{R}^n$.\\
+$|f(X) - f(Y)| = |N(X) - N(Y)| \leq N(X-Y)$ par inégalité triangulaire reversée.\\
+$= N(\sum_{i=1}^{n} (x_i - y_i) e_i) \leq \sum_{i=1}^{n} N((x_i - y_i) e_i) = \sum_{i=1}^{n} |x_i - y_i| N(e_i) \leq (\max_{1 \leq i \leq n} N(e_i)) \sum_{i=1}^{n} |x_i - y_i| = K \|X - Y\|_1$ où $K = \max_{1 \leq i \leq n} N(e_i)$.\\
+Donc $f$ est $K$-lipschitzienne.\\
+Donc $f$ est donc continue.\\
+Considérons $S(0,1) = \{ X \in \mathbb{R}^n \mid \|X\|_1 = 1 \}$ le bord de la boule unité pour la norme 1.\\ 
+Or $S(0,1)$ est compact (fermé et borné dans $\mathbb{R}^n$).\\
+$f$ sur $S(0,1)$ est bornée et atteint ses bornes car $f$ est continue (propriété fondamentale).\\
+Donc $\exists m,M > 0, \forall X \in S(0,1), m \leq N(X) \leq M$.\\
+En effet $m > 0$ car $\exists x_0 \in S(0,1)$ (qui réalise l'inf) tel que $0 \leq f(x_0) = m$, qui est différent de 0 car $N$ est une norme.\\
+Prenons $y \in \mathbb{R}^n \setminus \{0\}$.\\
+Considérons $\frac{y}{\|y\|_1} \in S(0,1)$.\\
+On a alors $m \leq f(\frac{y}{\|y\|_1}) \leq M$.\\
+i.e. $m \leq N(\frac{y}{\|y\|_1}) \leq M$.\\
+i.e. $m \|y\|_1 \leq N(y) \leq M \|y\|_1$.\\
+Ce qui est vrai pour $y \neq 0$. Mais l'équivalence des normes est toujours vraie pour $y = 0$.\\
+Ainsi, $N$ est équivalente à la norme 1. \\\\
+
+Donc par transitivité, toutes les normes sur $\mathbb{R}^n$ sont équivalentes.\\
+(car deux normes équivalentes à une troisième sont équivalentes entre elles) $\Box$
+}
+
+\theorem{Théorème}{Continuité automatique des applications linéaires de $\mathbb{R}^p$ dans $\mathbb{R}^q$}{false}{
+    $f \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q) \Rightarrow f$ est continue.
+}
+
+\noindent{\textbf{Preuve :}\\
+On va choisir la norme 1 sur $\mathbb{R}^p$ et $\|\cdot\|$ une norme quelconque sur $\mathbb{R}^q$.\\
+Soit $(e_1, e_2, \ldots, e_p)$ la base canonique de $\mathbb{R}^q$.\\
+$\forall x \in \mathbb{R}^q, \| f(x) \| = \| f(\sum_{i=1}^{p} x_i e_i) \| = \| \sum_{i=1}^{p} x_i f(e_i) \| \leq \sum_{i=1}^{p} |x_i| \| f(e_i) \| \leq (\max_{1 \leq i \leq p} \| f(e_i) \|) \sum_{i=1}^{p} |x_i| = K \|x\|_1$ où $K = \max_{1 \leq i \leq p} \| f(e_i) \|$.\\
+Ainsi, $f$ est bien continue. $\Box$
+}
 \end{document}
