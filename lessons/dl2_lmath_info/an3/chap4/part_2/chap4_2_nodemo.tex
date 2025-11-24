@@ -1,0 +1,454 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Topologie}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4.2 : Topologie des espaces métriques et des espaces vectoriels normés}
+
+
+\section{Topologie sur les espaces métriques}
+\subsection{Ouverts et fermés}
+\remark{Un evn étant un espace métrique avec la distance $d(x,y) = N(y - x)$, toutes les notions de topologie vues ici s'appliquent aux evn.}
+
+\definition{Soit $(X,d)$ un espace métrique.\\
+    Une boule ouverte de centre $a\in X$ de rayon $r>0$ est $B(a,r) = \{ x \in X \mid d(x,a) = d(a,x) < r \}$.
+}
+
+\definition{Soit $(X,d)$ un espace métrique.\\
+    Une boule fermée de centre $a\in X$ de rayon $r>0$ est $B_F(a,r) = \{ x \in X \mid d(a,x) \leq r \}$.
+}
+
+\definition{Soit $(X,d)$ un espace métrique.\\
+    La sphère de centre $a\in X$ de rayon $r>0$ est $S(a,r) = \{ x \in X \mid d(a,x) = r \}$.
+}
+
+\example{
+    Dans $(\mathbb{R}, |\cdot|)$, $B(1,1) = ]0,2[$
+}
+
+\example{
+    Dans $\mathbb{R}^2$ avec trois métriques :\\
+    $d_1 = \|y-x\|_1$, $d_2 = \|y-x\|_2$ et $d_{\infty} = \|y-x\|_{\infty}$.\\
+    Traçons les boules de centre 0 de rayon 1 associées à chaque distance.\\
+    $B(0,1) = \{ x\in \mathbb{R}^2 \mid d(x,0) < 1\}$.\\
+    On a : $\|x\|_{1,2,\infty} < 1$.\\
+    \begin{itemize}
+        \item Pour $d_1$ : $\|x\|_1 = |x_1| + |x_2| < 1$. C'est un losange.
+        \item Pour $d_2$ : $\|x\|_2 = \sqrt{x_1^2 + x_2^2} < 1$. C'est un disque.
+        \item Pour $d_{\infty}$ : $\|x\|_{\infty} = \max(|x_1|, |x_2|) < 1$. C'est un carré.
+    \end{itemize}
+}
+
+\remark{Les bordures correspondent aux sphères $S(0,1)$ associées à chaque distance. Les boules fermées $B_F(0,1)$ correspondent aux mêmes figures mais en incluant les bordures.}
+
+\definition{
+    Une partie $U$ de $X$ est un ouvert de $(X,d)$ si $\forall x \in U, \exists r > 0$ tel que $B(x,r) \subset U$.
+}
+
+\example{
+    $]0,1[ \subset \mathcal{C}(]0,1[,\mathbb{R})$ est un ouvert : $\forall x \in ]0,1[, B(x, \min(x, 1-x)) \subset ]0,1[$.
+}
+
+\definition{
+    Une topologie sur $(X,d)$ est l'ensemble des ouverts de $(X,d)$. Autrement dit, $\tau = \{ U \subset X \mid U \text{ est un ouvert de } (X,d) \}$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item Toute boule ouverte de $(X,d)$ est un ouvert de $(X,d)$.
+        \item Si $(U_i)_{i \in I}$ est une famille d'ouverts de $(X,d)$, alors $\bigcup_{i \in I} U_i$ est un ouvert de $(X,d)$. (I un ensemble quelconque)
+        \item Si $(U_1, U_2, \ldots, U_n)$ est une famille finie d'ouverts de $(X,d)$, alors $\bigcap_{i=1}^{n} U_i$ est un ouvert de $(X,d)$.
+    \end{enumerate}
+}
+
+\cexample{Si $I$ est infini, la propriété 3 n'est pas vraie en général. Par exemple, dans $(\mathbb{R}, |\cdot|)$, considérons la famille d'ouverts $U_n = ]-1/n, 1/n[$ pour $n \in \mathbb{N}^*$. Alors $\bigcap_{n=1}^{\infty} U_n = \{0\}$ qui n'est pas un ouvert de $(\mathbb{R}, |\cdot|)$.}
+
+\definition{
+    Soit $(X,d)$ un espace métrique.\\
+    Une partie $F$ de $X$ est un fermé de $(X,d)$ si son complémentaire $X \setminus F$ est un ouvert de $(X,d)$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item Toute boule fermée de $(X,d)$ est un fermé de $(X,d)$.
+        \item Si $(F_i)_{i \in I}$ est une famille de fermés de $(X,d)$, alors $\bigcap_{i \in I} F_i$ est un fermé de $(X,d)$. (I un ensemble quelconque)
+        \item Si $(F_1, F_2, \ldots, F_n)$ est une famille finie de fermés de $(X,d)$, alors $\bigcup_{i=1}^{n} F_i$ est un fermé de $(X,d)$.
+    \end{enumerate}
+}
+
+
+\remark{
+    Dans $(\mathbb{R}, |\cdot|)$, tout intervalle fermé est un fermé, et tout intervalle ouvert est un ouvert. ($\mathbb{R}$ est ouvert).\\
+    On a : $]a, +\infty[ = \bigcup_{n=1}^{\infty} ]a, a+n[$ est un ouvert.
+}
+
+\remark{$X$ et $\emptyset$ sont des ouverts et des fermés de $(X,d)$ (prendre $r$ arbitrairement grand pour $X$ et $r$ quelconque pour $\emptyset$).}
+
+\definition{Soit $\mathcal{V} \subset X$ une partie de l'espace métrique $(X,d)$.\\
+    On dit que $\mathcal{V}$ est un voisinage de $a \in X$ si $\exists r > 0$ tel que $B(a,r) \subset \mathcal{V}$.
+}
+
+\theorem{Proposition}{}{false}{
+    On dit aussi que $U$ est un ouvert de $(X,d)$ si et seulement si $U$ est un voisinage de chacun de ses points.
+}
+
+\subsection{Intérieur et adhérence}
+Soit $(X,d)$ un espace métrique.
+\definition{Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.\\
+    On appelle intérieur de $A$ l'ensemble des points $a \in A$ tels que $A$ est un voisinage de $a$. On le note : $\overset{\circ}{A}$.\\
+    On a : \[\overset{\circ}{A} = \bigcup \{ U \subset A \mid U \text{ est un ouvert de } (X,d) \}\]
+}
+
+\definition{Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.\\
+    On appelle adhérence de $A$ l'ensemble des points $x \in X$ tels que $\forall r > 0, B(x,r) \cap A \neq \emptyset$. On le note : $\overline{A}$.\\
+    On a : \[\overline{A} = \bigcap _{F \supset A, F \text{ fermé de } (X,d)} F\]
+}
+
+\theorem{Proposition}{Lien avec les ouverts}{false}{
+    Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.
+    \begin{enumerate}
+        \item $\overset{\circ}{A}$ est un ouvert contenu dans $A$.
+        \item Si $U \subset A$ est un ouvert de $(X,d)$, alors $U \subset \overset{\circ}{A}$.\\
+        Autrement dit, $\overset{\circ}{A}$ est le plus grand ouvert contenu dans $A$.
+    \end{enumerate}
+}
+
+
+\theorem{Proposition}{Lien avec les fermés}{false}{
+    Soit $A \subset X$ une partie de l'espace métrique $(X,d)$.
+    \begin{enumerate}
+        \item $\overline{A}$ est un fermé contenant $A$.
+        \item Si $F \supset A$ est un fermé de $(X,d)$, alors $\overline{A} \subset F$.\\
+        Autrement dit, $\overline{A}$ est le plus petit fermé contenant $A$.
+    \end{enumerate}
+}
+
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item $\overset{\circ}{A} = X \setminus \overline{(X \setminus A)}$
+        \item $\overline{A} = X \setminus \overset{\circ}{(X \setminus A)}$
+        \item $x \in \overline{A} \Leftrightarrow \forall r > 0, B(x,r) \cap A \neq \emptyset$
+    \end{enumerate}
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{itemize}
+    \item $U$ est ouvert $\Leftrightarrow \overset{\circ}{U} = U$.
+    \item $F$ est fermé $\Leftrightarrow \overline{F} = F$.
+    \end{itemize}
+}
+
+\subsection{Suites dans un espace métrique}
+
+\subsubsection{Définitions}
+
+\definition{
+    On dit qu'une suite $(x_n)$, $x_n \in X$ pour tout $n \in \mathbb{N}$, converge si $\exists x \in X$ tel que $d(x_n,x) \to 0$ quand $n \to +\infty$.\\
+    Autrement dit, \[\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, d(x_n,x) < \varepsilon\]
+}
+
+\remark{Si $(X,d) = (\mathbb{R}, |\cdot|)$, on retrouve la définition usuelle de la convergence des suites réelles.}
+
+\definition{
+    On dit que $x \in X$ est une valeur d'adhérence d'une suite $(x_n)$ si il existe une sous suite qui converge vers $x$.
+    i.e. $\exists (n_k)_{k \in \mathbb{N}}$ strictement croissante telle que $d(x_{n_k}, x) \to 0$ quand $k \to +\infty$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(x_n)$ une suite de $(X,d)$ qui converge vers $x$.\\
+    Alors $x$ est la seule valeur d'adhérence de $(x_n)$. En particulier, la limite de $(x_n)$ est unique.
+}
+
+
+\noindent{\textbf{Fermés}\\Soit $A$ une partie quelconque de l'espace métrique $(X,d)$.
+}
+
+\theorem{Proposition}{Caractérisation de l'adhérence par des suites}{false}{
+    $\overline{A} = \{ x \in X \mid \exists (x_n) \text{ suite de } A, x_n \to x \}$.
+}
+
+\theorem{Proposition}{Caractérisation des fermés par des suites}{false}{
+    Une partie $F$ de $(X,d)$ est fermée si et seulement si pour toute suite $(x_n)$ d'éléments de $F$ qui converge vers $x \in X$, on a $x \in F$.
+}
+
+
+\subsection{Continuité}
+
+\subsubsection{Définitions}
+
+\definition{
+    Soit $f \colon (X,d_X) \to (Y,d_Y)$ une application entre deux espaces métriques.\\
+    \begin{itemize}
+        \item $f$ est continue en $a \in X$ si $\forall \varepsilon > 0, \exists \delta_\varepsilon > 0 \colon x \in B(a, \delta_\varepsilon)$, alors $f(x) \in B(f(a), \varepsilon)$.\\
+        \textit{Autrement dit, pour tout $\varepsilon \exists \delta_\varepsilon$ tel que $d_X(x,a) < \delta_\varepsilon \Rightarrow d_Y(f(x), f(a)) < \varepsilon$.}
+        \item $f$ est continue sur $X$ si $f$ est continue en tout point de $X$.
+    \end{itemize}
+}
+
+\remark{Si $f \colon (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$, on retrouve la définition usuelle de la continuité des fonctions réelles.}
+
+\definition{
+    Soit $k \geq 0$ un réel.\\
+    On dit que $f \colon (X,d_X) \to (Y,d_Y)$ est k-lipschitzienne si $\forall x,y \in X, d_Y(f(x), f(y)) \leq k d_X(x,y)$.
+}
+
+\definition{Si $f \colon (X, d_X) \to (Y, d_Y)$ est une application k-lipschitzienne, alors $f$ est continue sur $X$.}
+
+
+\example{
+    Exemple d'une fonction 1-lipschitzienne : \function{f}{(\mathbb{R}^n, \|\cdot\|) \to (\mathbb{R}, |\cdot|)}{x \mapsto \|x\|}.\\
+    En effet, $|f(x) - f(y)| = ||x| - |y|| \leq \|x - y\| = d(x,y)$ (inégalité triangulaire renversée).
+}
+
+\subsubsection{Caractérisation de la continuité}
+
+\theorem{Proposition}{Caractérisation de la continuité par des suites}{false}{
+    Soit $f \colon (X,d_X) \to (Y,d_Y)$ une application entre deux espaces métriques.\\
+    Alors $f$ est continue en $a \in X$ si et seulement si pour toute suite $(x_n)$ de $X$ qui converge vers $a$, la suite $(f(x_n))$ converge vers $f(a)$.
+}
+
+\theorem{Proposition}{}{false}{
+    $f \colon (X,d_X) \to (Y,d_Y)$ est continue sur $X$ si et seulement si pour tout ouvert $U$ de $(Y,d_Y)$, $f^{-1}(U)$ est un ouvert de $(X,d_X)$.
+}
+\reminder{
+    $f^{-1}(U) = \{ x \in X \mid f(x) \in U \}$.
+}
+\noindent\textbf{Interlude : Inégalité de Cauchy-Schwarz}
+
+Considérons $<\cdot , \cdot > \colon \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}$ définie par $<x,y> = \sum_{i=1}^{n} x_i y_i$.
+Cette application est bilinéaire, symétrique, positive et définie ($<x,x> = 0 \Leftrightarrow x = 0$).\\
+On observe que la norme euclidienne s'écrit $\|x\|_2 = \sqrt{<x,x>}$.\\\\
+
+On dit que $<\cdot , \cdot >$ est un produit scalaire (forme bilinéaire symétrique définie positive), et ce produit scalaire est relié à la norme 2 (il s'agit du produit scalaire euclidien).
+
+\theorem{Théorème}{Inégalité de Cauchy-Schwarz}{false}{
+    $\forall X,Y \in \mathbb{R}^n, |<X,Y>| \leq \|X\|_2 \|Y\|_2$.
+}
+\theorem{Corollaire}{Égalité de Cauchy-Schwarz}{false}{
+    L'égalité $|<X,Y>| = \|X\|_2 \|Y\|_2$ est vérifiée si et seulement si $X$ et $Y$ sont colinéaires.
+}
+
+\ndlr{Démo à reprendre, cf screen Laurent 2}
+
+\subsubsection{Continuité des applications linéaires dans les evn}
+
+\textit{A priori}, les espaces vectoriels ne sont pas forcément de dimension finie.\\
+Soit $f \colon (E, \|\cdot\|_E) \to (F, \|\cdot\|_F)$ une application linéaire entre deux $K$-espaces vectoriels normés (evn).\\
+
+\theorem{Proposition}{Caractérisation de la continuité des applications linéaires}{false}{
+    Les propriétés suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $f$ est continue de $(E, \|\cdot\|_E)$ dans $(F, \|\cdot\|_F)$.
+        \item $f$ est continue en 0.
+        \item $\exists k > 0$ tel que $\forall x \in E, \|f(x)\|_F \leq k \|x\|_E$.
+    \end{enumerate}
+}
+
+\subsection{Equivalence de normes}
+
+\textbf{Problème :} Soit $E$ un evn avec une normée notée $N_1 \colon E \in \mathbb{R}^+$.\\
+On peut \textit{a priori} mettre d'autres normes sur $E$, disons $N_2 \colon E \in \mathbb{R}^+$.\\
+Si $(x_n)$ une suite de $E$ converge pour la norme $N_1$, converge-t-elle aussi pour la norme $N_2$ ?\\
+
+\definition{
+    $N_1$ et $N_2$ sont \textbf{équivalentes} si $\exists C,c > 0$ tels que $\forall x \in E, c N_2(x) \leq N_1(x) \leq C N_2(x)$.\\
+    On note $N_1 \sim N_2$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item $N_1 \sim N_2 \Leftrightarrow N_2 \sim N_1$.
+        \item Si $N_1 \sim N_2$ et $N_2 \sim N_3$, alors $N_1 \sim N_3$.
+    \end{enumerate}
+}
+
+\example{Voir TD, normes $\|\cdot\|_1, \|\cdot\|_2, \|\cdot\|_{\infty}$ sur $\mathbb{R}^n$.}
+\remark{Un des buts du cours est de montrer que sur $\mathbb{R}^n$ (+ généralement pour tout evn), toutes les normes sont équivalentes.}
+
+\theorem{Proposition}{}{false}{
+    Soit $(x_n)$ une suite de $E$, où $E$ est muni de $N_1$ et $N_2$ deux normes équivalentes.\\
+    Alors $(x_n)$ converge pour la norme $N_1$ si et seulement si $(x_n)$ converge pour la norme $N_2$.
+}
+\subsection{Norme subordonnée}
+Soient $(E, \|\dot\|_E)$ et $(F, \|\dot\|_F)$.\\
+Soit $f \colon E \to F$ une application linéaire continue.
+On a vu que la continuité d'une application linéaire entre evn se caractérisaient de la façon suivante :\\
+$\exists K > 0 \colon \forall x \in E \|f(x)\|_F \leq K\|x\|_E$.\\
+Si $x \neq 0$, on peut considérer $\frac{\|f(x)\|_F}{\|x\|_E} \in \mathbb{R}_{+}$\\
+Par continuité de $f$, $\forall x \in E\setminus\{0\} \frac{\|f(x)\|_F}{\|x\|_E} \leq K$.
+
+\definition{
+    La norme subordonnée de $f$ par rapport à $\|\cdot\|_E$ et $\|\cdot\|_F$ est définie par $|||f||| := \sup_{x\in E\setminus\{0\}} \frac{\|f(x)\|_F}{\|x\|_E}$.
+}
+\remark{Cette triple barre est bien définie et correspond à la meilleure constante de continuité de $f$.}
+\theorem{Proposition}{Espace des applications linéaires continues}{false}{
+    Notons $\mathcal{L}_{c}(E,F) = \{ f \colon E \to F \mid f \text{ est continue} \}$.
+    Alors $|||\cdot|||$ est une norme sur $\mathcal{L}_{c}(E,F)$ et $(\mathcal{L}_{c}(E,F), |||\cdot|||)$ est un evn.
+}
+
+\vocabulary{On dit que $|||\cdot|||$ est la "norme triple".}
+
+\theorem{Proposition}{}{true}{
+    Soit $f \in \mathcal{L}_c(E,F)$.
+    On a $|||f||| = \sup_{x \neq 0} \frac{\|f(x)\|_F}{\|x\|_E} = \sup_{\|x\|_E \leq 1} \|f(x)\|_F$ = $ \sup_{\|x\|_E = 1} \|f(x)\|_F$.
+}
+
+\remark{On montrera qu'en dimension finie, toute application linéaire est continue.}
+
+\subsection{Introduction à la complétude dans les espaces métriques}
+
+\subsubsection{Définitions et premières propriétés}
+
+\definition{
+    Soit $(X,d)$ un espace métrique.\\
+    Une suite $(x_n)$ de $(X,d)$ est dite de Cauchy si \[\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall m,n \geq N, d(x_n,x_m) < \varepsilon\]
+}
+
+\remark{Si on travaille dans $(X,d)$ = $(E, \|\cdot\|)$ un evn, avec $d_E(x,y) = \|x-y\|$, et si on se donne une autre norme $\|\cdot\|'$ sur $E$ équivalente à $\|\cdot\|$, alors une suite est de Cauchy pour $\|\cdot\|$ si et seulement si elle est de Cauchy pour $\|\cdot\|'$.}
+\ndlr{cf. Laurent pour la démonstration de la remarque}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item Soit $(x_n)$ une suite d'éléments de $(X,d)$ qui converge vers $x \in X$.\\
+        Alors $(x_n)$ est une suite de Cauchy. 
+        \item Une suite de Cauchy a au plus une valeur d'adhérence.
+        \item Une suite de Cauchy qui a une valeur d'adhérence converge vers cette valeur d'adhérence.
+    \end{enumerate}
+}
+
+\definition{
+    Une partie $A \in (X,d)$ est bornée si $\exists x \in X \exists r > 0$ tel que $A \subset B(x,r)$.
+}
+
+\illustration{
+    Patatoïdes, une partie A dans un autre espace, avec un $x$ dans cet autre espace, mais pas dans A.
+}
+
+\theorem{Proposition}{}{false}{
+    Si $(x_n)$ est une suite de Cauchy dans $(X,d)$, alors $(x_n)$ est bornée.
+}
+\definition{
+    Un espace métrique $(X,d)$ est complet si toute suite de Cauchy de $(X,d)$ converge dans $X$.
+}
+
+\example{$(\mathbb{R}, |\cdot|)$ est complet.}
+\theorem{Théorème}{}{false}{
+    $\mathbb{R}^d$ $(d \in \mathbb{N})$ est complet pour $\|\cdot\|_{\infty}$. \textit{(feuille de TD4, exercice 13)}
+}
+
+
+\subsubsection{Complétude et fermeture}
+
+\theorem{Proposition}{}{false}{
+    Soit $(X,d)$ un espace métrique.\\
+    On considère $A \subset X$, et donc $A$ devient un espace métrique pour la distance $d$ restreinte à $A$.\\
+    Si $(A,d)$ est complet, alors $A$ est fermé dans $(X,d)$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soient $(X,d)$ un espace métrique et $A \subset X$.\\
+    Si $A$ est fermé dans $(X,d)$ alors $(A,d)$ est complet.
+}
+
+\remark{Comme dans $\mathbb{R}$ on a la Caractérisation suivante : pour $(X,d)$ complet, alors $(A,d) \subset (X,d)$ est complet si et seulement si $A$ est fermé dans $(X,d)$.}
+
+\subsection{Compacité}
+
+\subsubsection{Définitions et premières propriétés}
+\definition{On dit qu'un espace métrique $(X,d)$ est compact si toute suite de $(X,d)$ admet une sous-suite convergente dans $(X,d)$.}
+
+\remark{On sait que si $(x_n)$ est une suite bornée (\textit{i.e.} $\exists a<b \in \mathbb{R}, \forall n \in \mathbb{N}, a \leq x_n \leq b$) dans $(\mathbb{R}, |\cdot|)$, alors par le théorème de Bolzano-Weierstrass, $\exists$ une sous-suite de $(x_n)$ qui converge.\\
+Autrement dit, tout segment fermé $[a,b]$ est compact avec la définition. On peut dire qu'on a choisi une définition qui "généralise" Bolzano-Weierstrass.}
+
+\theorem{Proposition}{}{false}{
+    $(X,d)$ est compact $\Rightarrow (X,d)$ est complet.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(X,d)$ compact. Soit $F \subset X$ (on pense $(F,d)$).\\
+    Alors $F$ est fermé $\Leftrightarrow$ $(F,d)$ est compact.
+}
+\remark{Dans le cas $(A,d) \subset (X,d)$ :
+\begin{itemize}
+    \item La définition de compacité est : toute suite $(x_n)$ de $A$ admet une sous-suite convergente dans $A$.
+    \item La défintiion de la complétude est : toute suite de Cauchy $(x_n)$ de $A$ converge dans $A$.
+\end{itemize}
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(X,d)$ et $(Y,d')$ deux espaces compacts.\\
+    Alors $X \times Y$ est compact.\\\\
+    Autrement dit le produit d'espaces compacts est compact.
+}
+
+\remark{D'abord, mussions $X \times Y$ d'une distance.\\
+Soit $\delta \colon ((x,y), (x',y')) \in (X \times Y)^2 \mapsto d(x,x') + d'(y,y')$.
+}
+\training{Montrer que $\delta$ est une distance sur $X \times Y$.}
+\textit{On aurait pu considérer aussi $\delta_{\infty} \colon ((x,y), (x',y')) \mapsto \max(d(x,x'), d'(y,y'))$.}\\
+\carreaux{10}
+
+
+\remark{Plus généralement, le produit fini d'espaces compacts est compact.}
+
+\subsubsection{Fonctions continues sur un compact}
+
+\theorem{Propriété fondamentale}{}{false}{
+    Soit $f$ continue de $(X,d)$ (compact) dans $\mathbb{R}$.\\
+    Alors $f$ est bornée et atteint ses bornes.\\\\
+
+    Autrement dit, $m = inf_{x \in X} f(x) \leq f(x) \leq sup_{x \in X} f(x) = M$ pour tout $x \in X$, et $\exists a,b \in X$ tels que $f(a) = m$ et $f(b) = M$.
+}
+
+
+\theorem{Proposition}{}{false}{
+    Soit $K \subset (X,d)$ et $K$ compact. Alors $K$ est borné.
+}
+
+\theorem{Proposition HP}{}{true}{
+    Soit $(K,d)$ compact. Soit $f \colon (K,d) \to (Y,d')$ continue.\\
+    Alors $f(K)$ est compact dans $(Y,d')$.
+}
+
+
+\subsubsection{Compacité dans un evn de dimension finie}
+
+\theorem{Théorème}{}{false}{
+    Les compacts de $\mathbb{R}^n$ sont les fermés et bornés.\\\\
+    Autrement dit, $K \subset \mathbb{R}^n$ est compact $\Leftrightarrow K$ est fermé et borné.
+}
+
+
+\attention{Cette caractérisation est fausse en dimension infinie.}
+\cexample{Pour fixer les idées, les boules unités (par exemple) sont des compacts en dimension finie, mais pas en dimension infinie.}
+
+\theorem{Théorème}{Equivalence des normes}{false}{
+    Toutes les normes sur $\mathbb{R}^n$ sont équivalentes.
+}
+
+
+\theorem{Théorème}{Continuité automatique des applications linéaires de $\mathbb{R}^p$ dans $\mathbb{R}^q$}{false}{
+    $f \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q) \Rightarrow f$ est continue.
+}
+
+\end{document}
