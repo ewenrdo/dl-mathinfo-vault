@@ -262,4 +262,79 @@ En particulier, $P_{u_{|E_\lambda}}$ divise $P_u$.\\
     \end{pmatrix} \mid (x, y) \in K^2 \right\}$. Donc $\dim(E_3) = 2$. Donc $m_g(3) = 2$.
 }
 
+\theorem{Proposition}{Somme directe des sep}{true}{
+    Soit $\lambda_1, \lambda_2, \ldots, \lambda_k$ des valeurs propres distinctes de $u$.\\
+    Alors $E_{\lambda_1} + E_{\lambda_2} + \ldots + E_{\lambda_k}$ est une somme directe.\\
+    i.e. $\sum_{i=1}^k E_{\lambda_i} = \bigoplus_{i=1}^k E_{\lambda_i}$.\\\\
+    Autrement dit, les sous-espaces propres associés à des valeurs propres distinctes sont en somme directe.
+}
+
+\theorem{Corollaire}{}{true}{
+    Toute famille de vecteurs propres associés à des valeurs propres distinctes est libre.
+}
+\theorem{Corollaire}{}{true}{
+    Si $u$ admet $n$ valeurs propres distinctes (avec $n = \dim(E)$), alors $u$ est diagonalisable.
+}
+\example{
+    Soit $A = \begin{pmatrix}
+        1 & 2 & 3 \\
+        2 & 4 & 6 \\
+        3 & 6 & 9
+    \end{pmatrix}$. On a $P_A(\lambda) = -\lambda(\lambda^2 - 15\lambda -18)$ qui est scindé sur $\mathbb{R}$ à racines simples. Les valeurs propres sont $0, \frac{15 + \sqrt{297}}{2}, \frac{15 - \sqrt{297}}{2}$, donc distinctes. Donc $A$ est diagonalisable.
+}
+
+\section{Diagonalisabilité}
+
+Soit $E$ un $K$-espace vectoriel de dimension finie $n$ et $u \in End(E)$.
+Soit $F$ un sev de $E$.
+
+\theorem{Théorème}{}{true}{
+    $u$ est diagonalisable si et seuelemnt si $E = \bigoplus_{\lambda \text{ vp de } u} E_\lambda$.\\\\
+
+    Autrement dit, $u$ est diagonalisable si et seulement si la somme des dimensions des sous-espaces propres de $u$ est égale à $\dim(E)$.\\
+}
+
+\theorem{Théorème}{}{true}{
+    $u$ est diagonalisable si et seulement si le polynôme caractéristique de $u$ est scindé et on a $m_a(\lambda) = m_g(\lambda)$ pour toute valeur propre $\lambda$ de $u$.
+}
+
+\theorem{Proposition}{}{true}{
+    Supposons $u$ diagonalisable. Soit $F$ un sev de $E$ stable par $u$.\\
+    Alors la restriction $u_{|F} \in \mathcal{L}(F)$ est diagonalisable.
+}
+
+\theorem{Lemme}{}{true}{
+    On a $F = \bigoplus_{\lambda \text{ vp de } u} (F \cap E_\lambda)$.
+}
+
+\theorem{Théorème}{}{true}{
+    Soit $v \in End(E)$ tel que $u \circ v = v \circ u$ (i.e. $u$ et $v$ commutent).\\
+    Supposons que $u$ et $v$ sont diagonalisables.\\
+    Alors il existe une base $B$ de $E$ telle que les matrices de $u$ et $v$ dans cette base sont diagonales. 
+}
+
+\vocabulary{On dit que $u$ et $v$ sont \textbf{simultanément diagonalisables}.}
+
+\theorem{Corollaire}{}{true}{
+    Soit $v \in End(E)$ tel que $u \circ v = v \circ u$ (i.e. $u$ et $v$ commutent).\\
+    Alors toute combinaison linéaire de $u$ et $v$ est diagonalisable.\\
+    De plus, $u \circ v$ et $v \circ u$ sont diagonalisables.
+}
+
+\section{Trigonalisation}
+
+\theorem{Théorème}{}{true}{
+    $u$ est trigonalisable si et seulement si le polynôme caractéristique de $u$ est scindé.
+}
+
+\theorem{Corollaire}{}{true}{
+    Si $K = \mathbb{C}$, tout endomorphisme de $E$ est trigonalisable.
+}
+
+\example{Soit $\theta \in \mathbb{R} \setminus \pi \mathbb{Z}$ et $u$ tel que $Mat_B(u) = \begin{pmatrix}
+    \cos \theta & -\sin \theta \\
+    \sin \theta & \cos \theta
+\end{pmatrix}$ dans la base canonique $B$ de $\mathbb{R}^2$.\\
+On a $P_u(\lambda) = \lambda^2 - 2\cos \theta \lambda + 1$. Ce polynôme n'est pas scindé sur $\mathbb{R}$ car ses racines sont $\cos \theta \pm i \sin \theta$. Donc $u$ n'est pas trigonalisable sur $\mathbb{R}$. Cependant, $P_u$ est scindé sur $\mathbb{C}$, donc $u$ est trigonalisable sur $\mathbb{C}$.
+}
 \end{document}
