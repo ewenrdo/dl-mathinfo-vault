@@ -175,4 +175,52 @@ De même, $\forall x$ fixé dans $\mathbb{R}$, la fonction $y \mapsto f(x,y) = x
     On dit que $f$ admet des dérivées partielles en $a$ si $\forall k \in \{1,\ldots,p\}$, $\frac{\partial f}{\partial x_k}(a)$ existe. (\textit{i.e.} toutes les dérivées partielles existent en $a$)
 }
 
+\attention{Problème : Malheureusement, ce n'est pas parce que $f$ admet des dérivées partielles en $a$ que $f$ est continue en $a$. (d'où le fait de chercher une meilleure notion de dérivabilité)}
+
+\cexample{
+    Soit $f(x,y) = \frac{xy}{x^2 + y^2}$ si $(x,y) \neq (0,0)$ et $f(0,0) = 0$.\\
+    On a $U \subset \mathbb{R}^2$ ouvert, $p=2$ et $q=1$.\\
+    Montrons que $f$ admet des dérivées partielles sur $\mathbb{R}^2$ mais que $f$ n'est pas continue en $(0,0)$.\\
+    Montrons que $x \mapsto \frac{\partial f}{\partial x}(x,y)$ existe pour tout $y$.\\
+    Fixons $y \in \mathbb{R}$.\\
+    Considérons $x \mapsto f(x,y) = \begin{cases}
+        \frac{xy}{x^2 + y^2} & \text{si } (x,y) \neq (0,0)\\
+        0 & \text{si } (x,y) = (0,0)
+    \end{cases}$ est dérivée en tout $x \in \mathbb{R}$.\\
+    Ainsi $\forall y \in \mathbb{R} x \mapsto f(x,y)$ est dérivable en tout $x \in \mathbb{R}$. Donc $\frac{\partial f}{\partial x}(x,y)$ existe pour tout $(x,y) \in \mathbb{R}^2$.\\
+
+    De même, par symétrie on montre que $y \mapsto f(x,y)$ est dérivable en tout $y \in \mathbb{R}$ pour tout $x \in \mathbb{R}$.\\
+    Ainsi $f$ admet des dérivées partielles en tout point de $\mathbb{R}^2$.\\
+    En particulier, $\frac{\partial f}{\partial x}(0,0)$ et $\frac{\partial f}{\partial y}(0,0)$ existent.\\
+    Pourtant, on a vu que $f$ n'est pas continue en $(0,0)$.\\
+}
+
+\noindent{\textit{Transition :} On peut voir le problème de continuité en $(0,0)$ comme le fait que $f(x,x)=\frac{1}{2}$ qui ne tend pas vers $0$ quand $x \to 0$.\\
+En fait, on regarde la trajectoire $t \mapsto (t,t)$ qui n'est pas alignée avec les axes.\\
+Une notion plus forte que la dérivée partielle est la dérivée directionnelle.}
+
+\subsection{Dérivée directionnelle}
+
+Soit $f : U \to \mathbb{R}^q$ où $U \subset \mathbb{R}^p$ ouvert.\\
+Soit $a \in U$ et soit $h$ un vecteur de $\mathbb{R}^p$.\\
+Considérons la fonction d'une variable réelle $\varphi \colon t \mapsto f(a + th)$ où $t$ varie dans un voisinage de $0$ tel que $a + th \in U$.\\
+
+\definition{On dit que $f$ admet une dérivée directionnelle en $a$ selon la direction $h$ si $\varphi$ est dérivable en $0$.\\
+    On a :
+    \[
+        \varphi'(0) = \lim_{t \to 0} \frac{f(a + th) - f(a)}{t}
+    \]
+}
+
+\theorem{Proposition}{Lien avec la dérivée partielle}{false}{
+    Si on choisit comme direction $h = e_k$ (le $k$-ième vecteur de la base canonique de $\mathbb{R}^p$), alors la dérivée directionnelle de $f$ en $a$ selon la direction $e_k$ est la $k$-ième dérivée partielle de $f$ en $a$.\\
+}
+\noindent{\textbf{Preuve :}\\
+    On a $\varphi(t) = f(a + te_k) = f(a_1, \ldots, a_{k-1}, a_k + t, a_{k+1}, \ldots, a_p)$.\\
+    Donc $\varphi$ est dérivable en $0$ ssi la fonction $x_k \mapsto f(a_1, \ldots, a_{k-1}, x_k, a_{k+1}, \ldots, a_p)$ est dérivable en $a_k$.\\
+    Ainsi, la dérivée directionnelle de $f$ en $a$ selon la direction $e_k$ est égale à la $k$-ième dérivée partielle de $f$ en $a$.
+}
+
+
+
 \end{document}
