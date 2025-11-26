@@ -337,4 +337,80 @@ Soit $F$ un sev de $E$.
 \end{pmatrix}$ dans la base canonique $B$ de $\mathbb{R}^2$.\\
 On a $P_u(\lambda) = \lambda^2 - 2\cos \theta \lambda + 1$. Ce polynôme n'est pas scindé sur $\mathbb{R}$ car ses racines sont $\cos \theta \pm i \sin \theta$. Donc $u$ n'est pas trigonalisable sur $\mathbb{R}$. Cependant, $P_u$ est scindé sur $\mathbb{C}$, donc $u$ est trigonalisable sur $\mathbb{C}$.
 }
+
+\section{Polynômes d'endomorphismes (et de matrices)}
+Soit $K$ un corps. Soit $E$ un $K$-espace vectoriel. Soit $P \in \mathbb{K}[X]$, $P = P(X) = \sum_{k=0}^d a_k X^k$ (où $d$ est le degré de $P$).
+Soit $u \in End(E)$ un endomorphisme de $E$, et $u \circ u = u^2$.
+En particulier, on a $u \circ u \circ \ldots \circ u = u^k$ ($k$ fois), $u^0 = Id_E$ et $u^1 = u$.\\\\
+\definition{
+    On pose $P(u) = \sum_{k=0}^d a_k u^k \in End(E)$. C'est un polynôme en $u$.\\
+    L'application \function{\varphi_u}{K[X] \to End(E)}{P \mapsto P(u)} est linéaire.\\
+    On note $\mathbb{K}[u] = Im(\varphi_u) = \{ P(u) \mid P \in K[X] \}$. C'est un sous-espace vectoriel de $End(E)$.
+}
+
+\definition{
+    Soit $A \in M_n(K)$. On définit de même $P(A) = a_0I_n + a_1A + \cdots + a_d A^d = \sum_{k=0}^d a_k A^k \in M_n(K)$.\\
+    L'application \function{\psi_A}{K[X] \to M_n(K)}{P \mapsto P(A)} est linéaire.\\\\
+
+    Si $A = Mat_B(u)$, alors $P(A) = Mat_B(P(u))$.\\
+    On note $\mathbb{K}[A] = Im(\psi_A) = \{ P(A) \mid P \in K[X] \}$. C'est un sous-espace vectoriel de $M_n(K)$.
+}
+
+\theorem{Proposition}{Stabilité du noyau}{true}{
+    Le sous-espace vectoriel $Ker(P(u))$ est stable par $u$.
+}
+
+\remark{Si $u,v \in End(E)$, on a $Ker(v)$ est stable par u. Or $P(u)$ et $u$ commutent.}
+\remark{Plus généralement, pour $P,Q \in K[X]$, on a $P(u)$ et $Q(u)$ commutent.}
+\noindent{\textbf{Preuve :}\\
+Si $Q = b_0 + b_1 X + \ldots + b_e X^e$, alors $P(u) \circ Q(u) = Q(u) \circ P(u)$ car :
+\begin{align*}
+    P(u) \circ Q(u) &= \left( \sum_{k=0}^d a_k u^k \right) \circ \left( \sum_{l=0}^e b_l u^l \right) \\
+    &= \sum_{k=0}^d \sum_{l=0}^e a_k b_l u^{k+l} \\
+    &= \sum_{l=0}^e \sum_{k=0}^d b_l a_k u^{l+k} \\
+    &= Q(u) \circ P(u)
+\end{align*} $\Box$
+}
+
+\theorem{Proposition}{}{true}{
+    Si $\lambda \in Sp(u)$, alors $P(\lambda) \in Sp(P(u))$.
+}
+
+\remark{Il peut exister $\lambda \in K$ tq $P(\lambda) \in Sp(P(u))$ mais $\lambda \notin Sp(u)$.}
+\cexample{
+    $u = id_E, P(X)=X^2-1, \lambda = -1$.
+    On a $Sp(u) = \{1\}$, mais $P(-1) = 0 \in Sp(P(u))$.
+    Mais $-1 \notin Sp(u)$.
+}
+
+\vocabulary{On dit que $P$ est un polynôme annulateur de $u$ si $P(u) = 0_{End(E)}$.}
+\theorem{Proposition}{Sous-groupe des polynômes annulateurs}{true}{
+    Considérons $Ann_{\mathbb{K}[X]}(u) = \{ P \in K[X] \mid P(u) = 0 \}$ l'ensemble des polynômes annulateurs de $u$.\\
+    C'est un sous-groupe de $(K[X], +)$.\\\\
+    De plus, pour $Q \in K[X]$ et $P \in Ann_{\mathbb{K}[X]}(u)$, on a $Q P \in Ann_{\mathbb{K}[X]}(u)$.
+}
+\vocabulary{On dit que $Ann_{\mathbb{K}[X]}(u)$ est un idéal de l'anneau $K[X]$. (HP)}
+\noindent{\textbf{Preuve du sous groupe :}\\
+Soient $P, Q \in Ann_{\mathbb{K}[X]}(u)$. On a :
+\begin{itemize}
+    \item $P + Q \in Ann_{\mathbb{K}[X]}(u)$ car $(P + Q)(u) = P(u) + Q(u) = 0 + 0 = 0$.
+    \item $-P \in Ann_{\mathbb{K}[X]}(u)$ car $(-P)(u) = -P(u) = -0 = 0$.
+    \item $0 \in Ann_{\mathbb{K}[X]}(u)$ car $0(u) = 0$.
+\end{itemize} $\Box$
+}
+
+\noindent{\textbf{Preuve de la stabilité par multiplication :}\\
+Soit $P \in Ann_{\mathbb{K}[X]}(u)$ et $Q \in K[X]$. On a :
+\[
+    (Q P)(u) = Q(u) \circ P(u) = Q(u) \circ 0 = 0
+\]
+$\Box$
+}
+
+\theorem{Proposition}{Unicité du polynôme}{true}{
+    Il existe un unique $P_0 \in \mathbb{K}[X]$ unitaire (i.e. de coefficient dominant $a_d = 1$) tel que $P \in Ann_{\mathbb{K}[X]}(u) \Leftrightarrow \exists Q : P = Q P_0$.\\
+    En particulier, $P_0 \in Ann_{\mathbb{K}[X]}(u)$ et $P_0$ divise tout polynôme annulateur de $u$.\\\\
+    Alors $P_0$ est appelé le \textbf{polynôme minimal} de $u$. C'est le polynôme annulateur de $u$ unitaire de plus petit degré.
+}
+\ndlr{Cette proposition gagnerait à être synthétisée et/ou divisée et améliorée en clarté.}
 \end{document}
