@@ -199,7 +199,7 @@ De même, $\forall x$ fixé dans $\mathbb{R}$, la fonction $y \mapsto f(x,y) = x
 En fait, on regarde la trajectoire $t \mapsto (t,t)$ qui n'est pas alignée avec les axes.\\
 Une notion plus forte que la dérivée partielle est la dérivée directionnelle.}
 
-\subsection{Dérivée directionnelle}
+\subsection{Dérivées directionnelles}
 
 Soit $f : U \to \mathbb{R}^q$ où $U \subset \mathbb{R}^p$ ouvert.\\
 Soit $a \in U$ et soit $h$ un vecteur de $\mathbb{R}^p$.\\
@@ -220,7 +220,38 @@ Considérons la fonction d'une variable réelle $\varphi \colon t \mapsto f(a + 
     Donc $\varphi$ est dérivable en $0$ ssi la fonction $x_k \mapsto f(a_1, \ldots, a_{k-1}, x_k, a_{k+1}, \ldots, a_p)$ est dérivable en $a_k$.\\
     Ainsi, la dérivée directionnelle de $f$ en $a$ selon la direction $e_k$ est égale à la $k$-ième dérivée partielle de $f$ en $a$.
 }
+\training{
+    Étudier la dérivée directionnelle en toutes les directions au point $(0,0)$ de la fonction $f(x,y) = \frac{xy}{x^2 + y^2}$ si $(x,y) \neq (0,0)$ et $f(0,0) = 0$.\\
+}
+\noindent\carreaux{15}
 
+\attention{Cette notion de dérivée directionnelle est encore trop faible pour garantir la continuité de $f$ en $a$.}
 
+\training{Considérer $f(x,y)=\frac{y^2}{x}$ si $x \neq 0$ et $f(x,y)=y$ sinon.\\
+\begin{enumerate}
+    \item Montrer que $f$ admet des dérivées directionnelles en tout point de $\mathbb{R}^2$ et en toute direction.
+    \item Montrer que $f$ n'est pas continue sur $\mathbb{R}^2$.
+    \textit{Indication : Considérer le point $(0,1)$ et $(\frac{1}{n},1) \to (0,1)$.}
+\end{enumerate}
+}
+\noindent\carreaux{15}
+
+\subsection{Dérivées différentielles (cette fois-ci c'est la bonne !)}
+\textit{La dérivée différentielle est la notion qui assure que si une fonction est différentiable en un point, alors elle est continue en ce point.}
+Soit $f \colon \mathbb{R}^p \to \mathbb{R}^q$ et $a \in U$, où $U \subset \mathbb{R}^p$ est ouvert.
+
+\definition{
+    On dit que $f$ est différentiable en $a$ $\Leftrightarrow \exists Df(a) \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$ telle que :
+    \[
+        f(a+h) = f(a) + Df(a) \cdot h + o(\|h\|) \quad \text{quand } h \to 0
+    \]
+    avec $h \in \mathbb{R}^p, f(a) \in \mathbb{R}^q, Df(a) \cdot h \in \mathbb{R}^q$.
+} 
+
+\example{
+    $f \colon \mathbb{R} \to \mathbb{R}, f$ dérivable en $a \in \mathbb{R}$.\\
+    $Df(a) \in \mathcal{L}(\mathbb{R}, \mathbb{R})$.\\
+    Dans le cas d'une fonction d'une variable réelle, $Df(a) \colon h \mapsto f'(a)h$. (c'est une multiplication par un scalaire)
+}
 
 \end{document}
