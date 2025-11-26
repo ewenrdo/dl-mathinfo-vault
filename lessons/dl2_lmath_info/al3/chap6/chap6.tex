@@ -418,4 +418,49 @@ $\Box$
     Si $\lambda$ est une valeur propre de $u$ et $P \in Ann_{\mathbb{K}[X]}(u)$, alors $P(\lambda) = 0$.\\\\
     Autrement dit, toute valeur propre de $u$ est racine de son polynôme minimal.
 }
+
+\example{
+    Soit $u$ une homothétie de rapport $\lambda \in K$.\\
+    On a $P(u) = 0 \Leftrightarrow a_0 I_E + a_1 u + \ldots + a_d u^d = 0 \Leftrightarrow P(\lambda) id_E = 0 \Leftrightarrow P(\lambda) = 0 \Leftrightarrow (X - \lambda) | P$.\\
+    Donc le polynôme minimal de $u$ est $P_0(X) = X - \lambda$.
+}
+\example{
+    $E = \mathbb{R}^3$
+    $Mat_{B,C}(u) = \begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}$ dans les bases $B, C$ canoniques.\\
+    $(X-1)^2$ annule u car $Mat_{B,C}(u - Id_E) = \begin{pmatrix}
+        0 & 1 & 0 \\
+        0 & 0 & 0 \\
+        0 & 0 & 0
+    \end{pmatrix}$ et donc ($u - Id_E)^2 = 0$.\\
+    Donc le polynôme minimal de $u$ divise $(X-1)^2$ ou $(X-1)$.\\
+    Or $u \neq Id_E$, donc le polynôme minimal de $u$ est $P_0(X) = (X-1)^2$.
+}
+
+Pour $A \in M_n(K)$, on définit de même le polynôme minimal de $A$.
+
+\definition{
+Soient $P_1, P_2 \in K[X]$. On dit que $P_1$ et $P_2$ sont \textbf{premiers entre eux} s'il existe $Q_1, Q_2 \in K[X]$ tels que $Q_1 P_1 + Q_2 P_2 = 1$. \\\\
+
+De même, pour $m$ polynômes, on a : $P_1, P_2, \ldots, P_m$ sont premiers entre eux s'il existe $Q_1, Q_2, \ldots, Q_m \in K[X]$ tels que $\sum_{i=1}^m Q_i P_i = 1$.\\
+Cela entraine qu'ils n'ont pas de facteur commun non constant (i.e. de degré $\geq 1$).
+}
+
+\definition{
+    Soit $P_1, \ldots P_m \in K[X]$. On dit que $P_1, \ldots, P_m$ sont \textbf{premiers entre eux deux à deux} si pour tout $i \neq j$, $P_i$ et $P_j$ sont premiers entre eux.
+}
+
+\theorem{Théorème}{Lemme des noyaux}{true}{
+    Soit $u \in End(E)$ et soient $P_1, P_2, \ldots, P_m \in K[X]$ des polynômes deux à deux premiers entre eux et tous non nuls.\\
+    Posons $ P = \prod_{i=1}^m P_i$.
+    Alors on a :
+    \[
+        Ker\left( P(u) \right) = \bigoplus_{i=1}^m Ker\left( P_i(u) \right)
+    \]\\\\
+    En particulier, si $P \in Ann_{\mathbb{K}[X]}(u)$ on a $E = \bigoplus_{i=1}^m Ker\left( P_i(u) \right)$.
+    Si $\pi_i$ est la projection de $E$ sur $Ker\left( P_i(u) \right)$ parallèlement aux autres $Ker\left( P_j(u) \right)$ ($j \neq i$), alors $\pi_i \in \mathbb{K}[u]$ et $\sum_{i=1}^m \pi_i = Id_E$.
+}
 \end{document}
