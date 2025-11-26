@@ -82,5 +82,86 @@ Pour comprendre la continuité, il suffit de se restreindre aux fonctions $f : U
     \end{enumerate}
 }
 
+\section{Vers une bonne notion de dérivée pour les fonctions à plusieurs variables}
+
+\textbf{Introduction :} Soit $f \colon ]a,b[ \to \mathbb{R}$ où $]a,b[ \subset \mathbb{R}$.
+On dit que $f$ est dérivable en $x \in ]a,b[$ si il existe un réel $f'(x)$ tel que : 
+\[
+    f(x+h) = f(x) + hf'(x) + o(h)
+\]
+Ce qui équivaut à : $\lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$ existe.\\
+Si $f$ est dérivable en $x$ alors on sait que $f$ est continue en $x$.\\
+$|f(x+h) - f(x)| \to 0$ quand $h \to 0$.
+
+\subsection{Rappels : fonctions à valeurs dans $\mathbb{R}^q, q \geq 1$}
+Soit \function{f}{]a,b[ \to \mathbb{R}^q}{x \mapsto (f_1(x), f_2(x), \ldots, f_q(x))}. (fonction coordonnées)
+
+\definition{
+    On dit que $f$ est dérivable en $x \in ]a,b[$ si $\lim_{h \to 0} \frac{f(x) - f(x+h)}{h}$ existe. (avec $\frac{f(x) - f(x+h)}{h} \in \mathbb{R}^q$).\\
+    \textit{i.e.} $\exists L \in \mathbb{R}^q$ tel que $\| \frac{f(x) - f(x+h)}{h} - L \| \to 0$ quand $h \to 0$ où $\|.\|$ est une norme $\mathbb{R}^q$ (elles sont équivalentes).
+}
+
+\theorem{Proposition}{Dérivabilité}{false}{
+    $f$ est dérivable en $x$ $\Leftrightarrow \forall i=1,\ldots,q, f_i$ est dérivable en $x$ et on a : $f'(x) = (f_1'(x), f_2'(x), \ldots, f_q'(x))$.\\
+    Autrement dit, $f$ est dérivable en $x$ si et seulement si chacune de ses composantes est dérivable en $x$.
+}
+
+\noindent{\textbf{Preuve :}\\
+    $\Rightarrow/$ Supposons $f$ dérivable en $x$.\\
+    $\exists L = (L_1, L_2, \ldots, L_q) \in \mathbb{R}^q$ tel que $\| \frac{f(x+h) - f(x)}{h} - L \| \to 0$ quand $h \to 0$.\\
+    On a le choix de $\|.\|$ car les normes sont toutes équivalentes (en dimension finie). Prenons la norme infinie.\\
+    Alors $\forall i \in \{1,\ldots,q\}, |\frac{f_i(x+h) - f_i(x)}{h} - L_i| \leq \| \frac{f(x+h) - f(x)}{h} - L \|_{+\infty} \to 0$ quand $h \to 0$.\\
+    Ainsi, $\forall i \in \{1,\ldots,q\}, f_i$ est dérivable en $x$ et $f_i'(x) = L_i$.\\
+    Et donc $f'(x) = (f_1'(x), f_2'(x), \ldots, f_q'(x))$.\\
+    $\Leftarrow/$ Supposons que $\forall i=1,\ldots,q, f_i$ est dérivable en $x$.\\
+    Donc $\forall i \in \{1,\ldots,q\}, \frac{f_i(x+h) - f_i(x)}{h} \to f_i'(x)$ quand $h \to 0$.\\
+    Montrons que $\lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$ existe.\\
+    Posons $L = (f_1'(x), f_2'(x), \ldots, f_q'(x)) \in \mathbb{R}^q$.\\
+    On veut $\| \frac{f(x+h) - f(x)}{h} - L \| \to 0$ quand $h \to 0$.\\
+    Prenons $\|.\|_1$ la norme 1.\\
+    On a :
+    \[
+        \left\| \frac{f(x+h) - f(x)}{h} - L \right\|_1 = \sum_{i=1}^q \left| \frac{f_i(x+h) - f_i(x)}{h} - L_i \right|
+    \]
+    On a une somme finie donc chaque terme (par hypothèse) tend vers 0 quand $h \to 0$.\\
+    En passant à la limite on obtient : $\| \frac{f(x+h) - f(x)}{h} - L \|_1 \to 0$ quand $h \to 0$.\\
+    Donc $f$ est dérivable en $x$ et $f'(x) = L = (f_1'(x), f_2'(x), \ldots, f_q'(x))$.
+}
+
+\subsection{Dérivées partielles}
+
+Soit $U \subset \mathbb{R}^p$ ouvert et $p \in \mathbb{N}^*$.
+On considère $f : U \to \mathbb{R}^q$.
+
+\remark{Penser à une fonction $f$ définie de $U=\mathbb{R}^2$ dans $\mathbb{R}$, donc $p=2$ et $q=1$. (tous les problèmes se posent déjà dans ce cas)}
+
+On veut définir la notion de dérivées partielles en un point $a = (a_1, a_2, \ldots, a_p) \in U$.\\
+Il y a $p$ dérivées partielles (car $p$ variables). Prenons $k \in \{1,\ldots,p\}$ et définissons la $k$-ième dérivée partielle de $f$ en $a=(a_1, a_2, \ldots, a_p)$.\\
+Considérons la $k$-ième fonction partielle d'une variable réelle $g_k \colon x_k \mapsto f(a_1, \ldots, a_{k-1}, x_k, a_{k+1}, \ldots, a_p)$.\\
+Les points $a_1, \ldots, a_{k-1}, a_{k+1}, \ldots, a_p$ sont fixés dans $\mathbb{R}$ et $x_k$ varie dans un voisinage de $a_k$.\\
+\ndlr{Schéma,  $\neg$ cf. Laurent}
+
+On dit que $f$ admet une $k$-ième dérivée partielle en $a$ si $g_k$ est dérivable en $a_k$ et on a :
+\[
+    \frac{\partial f}{\partial x_k}(a) = g_k'(a_k)
+\]
+
+\example{
+    Soit $f \colon (x,y) \mapsto x^2 + y^2$.\\
+    Prenons $a = (a_1, a_2) \in \mathbb{R}^2$.
+    Alors :
+    \[
+        \frac{\partial f}{\partial x}(a) = 2a_1 \quad \text{et} \quad \frac{\partial f}{\partial y}(a) = 2a_2
+    \]\\
+
+On utilise plutôt les notations suivantes :
+    \[
+        \frac{\partial f}{\partial x}(x, y) = 2x \quad \text{et} \quad \frac{\partial f}{\partial y}(x, y) = 2y
+    \]
+}
+
+\attention{
+    Avant de calculer une dérivée partielle en un point, il faut justifier qu'elles existent (i.e. que les fonctions partielles sont dérivables en les points correspondants).
+}
 
 \end{document}
