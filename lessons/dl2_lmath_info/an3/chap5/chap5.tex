@@ -164,4 +164,15 @@ On utilise plutôt les notations suivantes :
     Avant de calculer une dérivée partielle en un point, il faut justifier qu'elles existent (i.e. que les fonctions partielles sont dérivables en les points correspondants).
 }
 
+\example{(suite) Ici, il faut dire :\\
+$\forall y$ fixé dans $\mathbb{R}$, la fonction $x \mapsto f(x,y) = x^2 + y^2$ avec $y$ constant est dérivable en tout $x \in \mathbb{R}$ (c'est un polynôme). Donc $\frac{\partial f}{\partial x}(x,y)$ existe pour tout $(x,y) \in \mathbb{R}^2$.\\
+De même, $\forall x$ fixé dans $\mathbb{R}$, la fonction $y \mapsto f(x,y) = x^2 + y^2$ avec $x$ constant est dérivable en tout $y \in \mathbb{R}$. Donc $\frac{\partial f}{\partial y}(x,y)$ existe pour tout $(x,y) \in \mathbb{R}^2$.
+}
+
+\remark{$f$ admet une $k$-ième dérivée partielle en $a$ $\Leftrightarrow$ la fonction $t \mapsto f(a+te_k)$ (où $e_k$ est le $k$-ième vecteur de la base canonique de $\mathbb{R}^p$) est dérivable en $0$.}
+
+\definition{
+    On dit que $f$ admet des dérivées partielles en $a$ si $\forall k \in \{1,\ldots,p\}$, $\frac{\partial f}{\partial x_k}(a)$ existe. (\textit{i.e.} toutes les dérivées partielles existent en $a$)
+}
+
 \end{document}
