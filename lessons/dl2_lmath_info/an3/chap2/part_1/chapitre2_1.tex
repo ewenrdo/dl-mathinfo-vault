@@ -25,13 +25,11 @@
 \section{Séries et sommes d'une série}
 
 \definition{
-    Soit \((u_n)\) une suite dans $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$.\\
-    On considère \(\forall N \in \mathbb{N}, S_N = \sum_{n=0}^{N} u_n \in \mathbb{K}\).\\\
-    On a donc une suite $(S_N)_{N \in \mathbb{N}}$ associée à la suite $(u_n)_{n \in \mathbb{N}}$.
+    Soit \((u_n)\) une suite dans \(\mathbb{K} = \mathbb{R}\) ou \(\mathbb{C}\).\\
+    Pour tout \(N \in \mathbb{N}\) on pose \(S_N = \sum_{n=0}^{N} u_n \in \mathbb{K}\).\\\\
+    La suite \((S_N)_{N\in\mathbb{N}}\) est appelée la \textbf{série} de terme général \(u_n\) et se note \(\sum_{n\geq0} u_n\).\\
+    Les \(S_N\) sont appelées les \textbf{sommes partielles} de la série.
 }
-\definition{On appelle \textbf{série de terme général \(u_n\)} que l'on note \(\sum_{n \geq 0} u_n\) la suite $(S_N)_{N \in \mathbb{N}}$.}
-
-\ndlr{Les deux définitions précédentes gagneraient à être fusionnées.}
 
 \vocabulary{On dit que \((S_N)\) est la suite des sommes partielles de la série.}
 \remark{\((S_N)\) correspond aux $N+1$ premiers termes de la suite.}
@@ -65,13 +63,9 @@ Ainsi, \(u_n = \sum_{k=0}^{n} v_k\).}
 
 
 \definition{
-    Si $(u_n)$ est une suite définie pour \(n \geq n_0 \mid n_0 \in \mathbb{N}\).
-    On peut considérer la série \(\sum_{n \geq n_0} u_n\) où \(u_{0} = u_{1} = ... = u_{n_0 - 1} = 0\), ou bien on peut écrire $\sum_{n \geq n_0} u_n$.
-
-    Si $\sum_{n \geq 0} u_n$ est une série de terme général $u_n$, une \textbf{troncature} de la série est $\sum_{n \geq n_0} u_n$. C'est la suite $(S_N)$ où \(S_N = \sum_{n=n_0}^{N} u_n\).
+    Soit $(u_n)$ défini à partir d'un rang $n_0\in\mathbb{N}$. Une troncature de la série $\sum_{n\geq0}u_n$ au rang $n_0$ est la série \(\sum_{n\geq n_0} u_n\).\\
+    Les sommes partielles associées sont \(S_N=\sum_{n=n_0}^{N} u_n\).
 }
-
-\ndlr{Cette définition pourraît être synthétisée.}
 
 \example{
     \begin{itemize}
