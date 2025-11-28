@@ -244,7 +244,7 @@ Soit $f \colon \mathbb{R}^p \to \mathbb{R}^q$ et $a \in U$, où $U \subset \math
     \[
         f(a+h) = f(a) + Df(a) \cdot h + o(\|h\|) \quad \text{quand } h \to 0
     \]
-    avec $h \in \mathbb{R}^p, f(a) \in \mathbb{R}^q, Df(a) \cdot h \in \mathbb{R}^q$.
+    avec $\forall h \in \mathbb{R}^p, f(a) \in \mathbb{R}^q, Df(a) \cdot h \in \mathbb{R}^q$, et $o(\|h\|) = \|h\| \varepsilon(h)$ où $\varepsilon(h) \to 0$ quand $\|h\| \to 0$.
 } 
 
 \example{
@@ -253,4 +253,58 @@ Soit $f \colon \mathbb{R}^p \to \mathbb{R}^q$ et $a \in U$, où $U \subset \math
     Dans le cas d'une fonction d'une variable réelle, $Df(a) \colon h \mapsto f'(a)h$. (c'est une multiplication par un scalaire)
 }
 
+\example{
+    Soit $f \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$.\\
+    $\forall a \in \mathbb{R}^p, \forall h \in \mathbb{R}^q, f(a+h) = f(a) + f(h)$.\\
+    Ainsi, la différentielle de $f$ en $a$ est : $\forall h \in \mathbb{R}^p, Df(a) \cdot h = f(h)$.\\
+    Autrement dit, $Df(a) = f$, et la différentielle est indépendante de $a$.
+}
+
+\theorem{Proposition}{Différentiabilité implique continuité}{false}{
+    Si $f$ est différentiable en $a$, alors $f$ est continue en $a$.
+}
+
+\noindent{\textbf{Preuve :}\\
+    $\forall h \in \mathbb{R}^p, f(a+h) = f(a) + Df(a) \cdot h + o(\|h\|)$.\\
+    On a : $\|f(a+h) - f(a)\| \leq \|Df(a) \cdot h\| + \|o(\|h\|)\|$. (car $\| \cdot \|$ est une norme)\\
+    $= \|Df(a) \cdot h\| + \|h\| \|\varepsilon_a(h)\|$.\\
+    $\leq C_a \|h\| + \|h\| \|\varepsilon_a(h)\|$ où $C_a$ est une constante telle que $\|Df(a) \cdot h\| \leq C_a \|h\|$ (par continuité automatique des applications linéaires en dimension finie).\\
+    Or $\|h\| \varepsilon_a(h) \to 0$ quand $\|h\| \to 0$.\\
+    Donc $\|f(a+h) - f(a)\| \to 0$ quand $\|h\| \to 0$.\\
+    Ainsi, $f$ est continue en $a$.
+}
+
+\theorem{Proposition}{Lien avec les dérivées directionnelles}{false}{
+    Si $f$ est différentiable en $a$, alors $f$ admet des dérivées directionnelles en $a$ selon toutes les directions et on a :
+    \[
+        \forall h \in \mathbb{R}^p, \quad \text{la dérivée directionnelle de } f \text{ en } a \text{ selon la direction } h \text{ est } Df(a) \cdot h
+    \]
+}
+
+\noindent{\textbf{Preuve :}\\
+    On a $\forall t \in \mathbb{R}, \forall h \in \mathbb{R}^p, f(a+th) = f(a) + Df(a) \cdot (th) + \|th\| \varepsilon_a(th)$. (car $f$ est différentiable en $a$)\\
+    $= f(a) + t(Df(a) \cdot h) + |t| \|h\| \varepsilon_a(th)$.\\
+    On veut montrer que $t \mapsto f(a + th)$ est dérivable en $0$.\\
+    Par ce qui précède, on a :\\
+    $f(a+h)-f(a) = t(Df(a) \cdot h) + |t| \|h\| \varepsilon_a(th)$.\\
+    $\Rightarrow \frac{f(a+th) - f(a)}{t} = Df(a) \cdot h + \frac{|t|}{t} \|h\| \varepsilon_a(th)$.\\
+    En passant à la limite quand $t \to 0$, on obtient : $\
+    \lim_{t \to 0} \frac{f(a+th) - f(a)}{t} = Df(a) \cdot h$.\\
+    Donc $t \mapsto f(a + th)$ est dérivable en $0$ et sa dérivée en $0$ est $Df(a) \cdot h$.\\
+    Ainsi, $f$ admet une dérivée directionnelle en $a$ selon la direction $h$.
+}
+
+\remark{Il existe des fonctions qui admettent des dérivées directionnelles en un point selon toutes les directions mais qui ne sont pas différentiables en ce point.}
+
+\cexample{
+    Considérons $\|\cdot\| \colon \mathbb{R}^p \to \mathbb{R}$ une norme quelconque. C'est une fonction à plusieurs variables.\\
+    Montrons que $\|\cdot\|$ n'est pas différentiable en $a$ (si elle l'était, par la proposition précédente, elle serait dérivable dans toutes les directions en $a$).\\
+    On a $\forall t \in \mathbb{R}, \forall h \in \mathbb{R}^p, \|th\| = |t| \|h\|$.\\
+    On a $\frac{\|0 + th\| - \|0\|}{t} = \frac{\|th\|}{t} = \frac{|t|}{t} \|h\|$.\\
+    En passant à la limite quand $t \to 0$, on constate que la limite n'existe pas (car $\frac{|t|}{t}$ n'a pas de limite quand $t \to 0$).\\
+    Ainsi, $\|\cdot\|$ n'admet pas de dérivée directionnelle en $0$ selon la direction $h$.\\
+    Donc $\|\cdot\|$ n'est pas différentiable en $0$.
+}
+
 \end{document}
+
