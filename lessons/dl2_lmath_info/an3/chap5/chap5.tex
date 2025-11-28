@@ -298,13 +298,25 @@ Soit $f \colon \mathbb{R}^p \to \mathbb{R}^q$ et $a \in U$, où $U \subset \math
 
 \cexample{
     Considérons $\|\cdot\| \colon \mathbb{R}^p \to \mathbb{R}$ une norme quelconque. C'est une fonction à plusieurs variables.\\
-    Montrons que $\|\cdot\|$ n'est pas différentiable en $a$ (si elle l'était, par la proposition précédente, elle serait dérivable dans toutes les directions en $a$).\\
+    Montrons que $\|\cdot\|$ n'est pas différentiable en $a=0$ (si elle l'était, par la proposition précédente, elle serait dérivable dans toutes les directions en $a$).\\
     On a $\forall t \in \mathbb{R}, \forall h \in \mathbb{R}^p, \|th\| = |t| \|h\|$.\\
     On a $\frac{\|0 + th\| - \|0\|}{t} = \frac{\|th\|}{t} = \frac{|t|}{t} \|h\|$.\\
     En passant à la limite quand $t \to 0$, on constate que la limite n'existe pas (car $\frac{|t|}{t}$ n'a pas de limite quand $t \to 0$).\\
     Ainsi, $\|\cdot\|$ n'admet pas de dérivée directionnelle en $0$ selon la direction $h$.\\
     Donc $\|\cdot\|$ n'est pas différentiable en $0$.
 }
+
+\ndlr{Les prochains théorèmes sont compliqués et leur preuve dépasse le cadre de ce cours. Ils seront donnés dans un cadre réduit et admis sans preuve.}
+
+
+\textbf{Gradient d'une fonction numérique}\\
+Soit $f \colon U \to \mathbb{R}$ où $U \subset \mathbb{R}^p$ est ouvert.\\
+On a définir le gradient de $f$.\\
+Supposons $f$ différentiable en $a \in U$.\\
+On a $Df(a) \in \mathcal{L}(\mathbb{R}^p, \mathbb{R})$ (la différentielle est une forme linéaire).\\
+Prenons $h,k \in \mathbb{R}^p$ dans la base canonique de $\mathbb{R}^p$.\\
+Donc $h = (h_1, h_2, \ldots, h_p)$ et $k = (k_1, k_2, \ldots, k_p)$.\\
+On note : $< h, k > = \sum_{i=1}^p h_i k_i$ (HP : produit scalaire).\\
 
 \end{document}
 
