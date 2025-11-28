@@ -315,8 +315,112 @@ On a définir le gradient de $f$.\\
 Supposons $f$ différentiable en $a \in U$.\\
 On a $Df(a) \in \mathcal{L}(\mathbb{R}^p, \mathbb{R})$ (la différentielle est une forme linéaire).\\
 Prenons $h,k \in \mathbb{R}^p$ dans la base canonique de $\mathbb{R}^p$.\\
-Donc $h = (h_1, h_2, \ldots, h_p)$ et $k = (k_1, k_2, \ldots, k_p)$.\\
+Donc $h = (h_1, h_2, \ldots, h_p)$ et $k = (k_1, k_2, \ldots, k_p)$ (considérer plutôt des vecteurs colonnes, mais pas évident à écrire ici).\\
 On note : $< h, k > = \sum_{i=1}^p h_i k_i$ (HP : produit scalaire).\\
+On veut $Df(a) \cdot h = < *, h>$ pour un certain $* \in \mathbb{R}^p$.\\
+Si $h = \sum_{i=1}^p h_i e_i$ où $e_i$ est le $i$-ième vecteur de la base canonique de $\mathbb{R}^p$, on a :\\
+$Df(a)h = \sum_{i=1}^p Df(a) (h_i e_i) = \sum_{i=1}^p h_i Df(a)e_i$.\\
+On note : $\frac{\partial f}{\partial x_i}(a) = Df(a)e_i$ (la $i$-ième dérivée partielle de $f$ en $a$).\\
+Donc : $Df(a)h = \sum_{i=1}^p h_i \frac{\partial f}{\partial x_i}(a)$.\\
+Pour écrire cela sous la forme $< *, h>$, on pose :
+\[
+    \nabla f(a) = \begin{pmatrix}
+        \frac{\partial f}{\partial x_1}(a) \\
+        \frac{\partial f}{\partial x_2}(a) \\
+        \vdots \\
+        \frac{\partial f}{\partial x_p}(a)
+    \end{pmatrix} \in \mathbb{R}^p
+\]
+(On appelle $\nabla f(a)$ le gradient de $f$ en $a$)\\
+On a donc : $Df(a)h = < \nabla f(a), h >$.
+
+\definition{
+    Un point critique de $f$ est un point $x$ où $\nabla f(x) = 0$.
+}
+
+Si $f : U \to \mathbb{R}^q$ alors on a $\forall h \in \mathbb{R}^p, Df(a)h  = Df(a) \cdot \sum_{i=1}^p h_i e_i = \sum_{i=1}^p h_i Df(a)e_i$.\\
+$= \sum_{i=1}^p h_i \frac{\partial f}{\partial x_i}(a)$ où $\frac{\partial f}{\partial x_i}(a) \in \mathbb{R}^q$ est la $i$-ième dérivée partielle de $f$ en $a$.\\
+$= \sum_{i=1}^p \frac{\partial f}{\partial x_i}(a) e_i^*$.\\
+En notant $e_i^* = dx_i$ (forme linéaire sur $\mathbb{R}^p$), on a : $Df(a) = \sum_{i=1}^p \frac{\partial f}{\partial x_i}(a) dx_i$.\\
+
+\textbf{Matrice jacobienne}\\
+Soit $f \colon U \to \mathbb{R}^q$ où $U \subset \mathbb{R}^p$ est ouvert.\\
+Supposons $f$ différentiable en $a \in U$.\\
+
+\definition{
+    La jacobienne est la matrice de $Df(a)$ dans les bases canoniques de $\mathbb{R}^p$ et $\mathbb{R}^q$.\\
+    Elle est notée $J_f(a) \in M_{q,p}(\mathbb{R})$.\\ On a :\\
+    $Jf(a) = \begin{pmatrix}
+        \frac{\partial f_1}{\partial x_1}(a) & \frac{\partial f_1}{\partial x_2}(a) & \ldots & \frac{\partial f_1}{\partial x_p}(a) \\
+        \frac{\partial f_2}{\partial x_1}(a) & \frac{\partial f_2}{\partial x_2}(a) & \ldots & \frac{\partial f_2}{\partial x_p}(a) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \frac{\partial f_q}{\partial x_1}(a) & \frac{\partial f_q}{\partial x_2}(a) & \ldots & \frac{\partial f_q}{\partial x_p}(a)
+    \end{pmatrix} = (\frac{\partial f_i}{\partial x_j}(a))_{1 \leq i \leq q, 1 \leq j \leq p}$
+}
+
+\remark{On remarque que $J_f(a) = { }^t(\nabla f(a))$}
+\example{$f : (r,\theta) \mapsto (x,y) = (r \cos \theta, r \sin \theta)$. (coordonnées polaires vers cartésiennes)\\
+    $J_f(r,\theta) = \begin{pmatrix}
+        \cos \theta & -r \sin \theta \\
+        \sin \theta & r \cos \theta
+    \end{pmatrix}$ (cas où $p=q=2$)
+}
+
+\definition{
+    Si $p=q$, alors $J_f(a) \in M_p(\mathbb{R})$.\\
+    On définit le déterminant jacobien de $f$ en $a$ comme étant : $\det J_f(a)$.
+}
+
+\section{Fonctions $C^1, C^2$}
+Supposons $f \colon U \subset \mathbb{R}^2 \to \mathbb{R}$ (vrai pour $\mathbb{R}^q$)\\
+\definition{
+    On dit que $f$ est continuement différentiable sur $U$ si :
+    $a \in U \mapsto Df(a) \in \mathcal{L}(\mathbb{R}^2, \mathbb{R})$ est continue sur $U$.\\
+    Ce qui est équivalent à : $\forall h \in \mathbb{R}^2, a \mapsto Df(a) \cdot h$ est continue sur $U$.\\
+}
+
+\theorem{Théorème}{}{false}{
+    $f$ est différentiable sur $U \Leftrightarrow$ les dérivées partielles sont continues sur $U$.\\\\
+
+    C'est à dire, $a \mapsto \frac{\partial f}{\partial x}(a)$ et $a \mapsto \frac{\partial f}{\partial y}(a)$ sont continues sur $U$.
+}
+
+\example{Dans le cas de notre example précédent, le jacobien est : $detJ_f(r,\theta) = r$.\\
+    Donc $f$ est différentiable en tout point $(r,\theta)$ avec $r \neq 0$.
+}
+
+\definition{
+    $f : U \subset \mathbb{R}^2 \to \mathbb{R}$ est de classe $C^1$ sur $U$ si $f$ est différentiable sur $U$ et si les dérivées partielles de $f$ sont continues sur $U$.\\
+}
+
+Etant donnée $f : U \subset \mathbb{R}^2 \to \mathbb{R}$ de classe $C^1$ sur $U$, on peut se demander si $f$ est plus régulière : est-elle de classe $C^2$ ?\\
+Considérons la fonction qui $a \in U \mapsto \frac{\partial f}{\partial x}(a)$. (de même en remplaçant $x$ par $y$)\\
+On peut se demander si les dérivées partielles des dérivées partielles existent et sont continues.\\
+\definition{
+    $f$ est de classe $C^2$ sur $U$ si $f$ est de classe $C^1$ sur $U$ et si les dérivées partielles de $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$ existent et sont continues sur $U$.\\
+    On note : $\frac{\partial^2 f}{\partial x^2}, \frac{\partial^2 f}{\partial y^2}, \frac{\partial^2 f}{\partial x \partial y}, \frac{\partial^2 f}{\partial y \partial x}$.
+}
+
+\example{
+    $f(x,y) = x^2 y + y^2$ est de classe $C^2$ sur $\mathbb{R}^2$ car toutes ses dérivées partielles d'ordre 1 et 2 existent et sont continues sur $\mathbb{R}^2$.
+}
+
+\theorem{Théorème de Schwarz}{}{true}{
+    Si $f$ est de classe $C^2$ sur $U$, alors :
+    \[
+        \forall (x,y) \in U, \quad \frac{\partial^2 f}{\partial x \partial y}(x,y) = \frac{\partial^2 f}{\partial y \partial x}(x,y)
+    \]\\\\
+    On a la commutativité des dérivées partielles d'ordre 2.
+}
+
+Il est alors naturel de considérer la matrice $Hf(a) \in M_2(\mathbb{R})$ définie par :
+\[
+    Hf(a) = \begin{pmatrix}
+        \frac{\partial^2 f}{\partial x^2}(a) & \frac{\partial^2 f}{\partial x \partial y}(a) \\
+        \frac{\partial^2 f}{\partial y \partial x}(a) & \frac{\partial^2 f}{\partial y^2}(a)
+    \end{pmatrix}
+\]
+Le Théorème de Schwarz assure que $Hf(a)$ est une matrice symétrique (i.e. $Hf(a) = { }^t Hf(a)$).
 
 \end{document}
 
