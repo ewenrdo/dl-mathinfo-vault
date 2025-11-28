@@ -4,7 +4,7 @@
 
 \usepackage{amsmath,amssymb}
 
-\usepackage{../../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
 
 \usepackage{fancyhdr}
 
@@ -22,8 +22,198 @@
 
 \begin{document}
 
-\docTitle{Chapitre 4.2 : Topologie des espaces métriques et des espaces vectoriels normés}
+\docTitle{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés}
 
+\section{Distances et normes}
+
+Soit $X$ un ensemble quelconque (dans la suite supposé non nul).
+
+\definition{
+    Une distance $d$ sur $X$ est une application $d\colon X\times X \to \mathbb{R}_+$ qui vérifie les axiomes suivants :
+    \begin{enumerate}
+        \item $\forall (x,y) \in X^2, d(x,y) = d(y,x)$ (symétrie)
+        \item $\forall x,y,z \in X, d(x,z) \leq d(x,y) + d(y,z)$ (inégalité triangulaire)
+        \item $\forall (x,y) \in X^2, d(x,y) = 0 \Leftrightarrow x = y$ (séparation)
+    \end{enumerate}
+}
+
+\vocabulary{
+    On appelle \textbf{espace métrique} un couple $(X,d)$ où $X$ est un ensemble et $d$ une distance sur $X$.
+}
+
+\example{
+    \begin{itemize}
+        \item $\mathbb{R}$ muni de la distance $d(x,y) = |x-y|$, où $|\cdot|$ est la valeur absolue.
+        \item $\mathbb{C}$ muni de la distance $d(z_1, z_2) = |z_1 - z_2|$, où $|\cdot|$ est le module.
+        \item Une autre façon de voir l'exemple 2, on considère l'ensemble $\mathbb{R}^2$ muni de la distance suivante :\\
+        Si $A = (x_A, y_A)$ et $B = (x_B, y_B)$ sont deux points de $\mathbb{R}^2$, on définit la distance $d(A,B) = \sqrt{(x_A - x_B)^2 + (y_A - y_B)^2}$.\\
+        On appelle cette distance la \textbf{distance euclidienne} sur $\mathbb{R}^2$.
+        \item Prenons $X =$ cercle unité muni de la distance $d(A,B) = arccos(cos(\theta_2 - \theta_1))$ où $\theta_1$ et $\theta_2$ sont les arguments des points $A$ et $B$ respectivement.
+        \textit{(voir schéma OneNote)}
+    \end{itemize}
+}
+
+\remark{
+    On peut voir l'exemple 1 comme un cas particulier de l'exemple 2, en identifiant $\mathbb{R}$ à l'axe des réels dans le plan complexe.
+}
+
+\remark{On peut généraliser l'exemple 3 à $\mathbb{R}^n$ muni de la distance euclidienne définie par :
+\[d(A,B) = \sqrt{\sum_{i=1}^{n} (x_{A_i} - x_{B_i})^2}\]
+où $A = (x_{A_1}, x_{A_2}, \ldots, x_{A_n})$ et $B = (x_{B_1}, x_{B_2}, \ldots, x_{B_n})$ sont deux points de $\mathbb{R}^n$.}
+
+Il se trouve que les exemples 1, 2 et 3 proviennent d'espaces vectoriels normés, qu'on verra (très) rapidement.
+
+\theorem{Proposition}{Inégalités triangulaires}{false}{
+    Soit $(X,d)$ un espace métrique.\\
+    On a :
+    \begin{enumerate}
+        \item $\forall (x,y,z) \in X^3, d(x,z) \leq d(x,y) + d(y,z)$ (inégalité triangulaire) 
+        \item $\forall (x,y,z) \in X^3, |d(x,y) - d(x,z)| \leq d(y,z)$ (inégalité triangulaire généralisée)
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item C'est l'axiome 2 de la définition d'une distance.
+        \item On a $d(x,y) \leq d(x,z) + d(z,y)$ d'après l'inégalité triangulaire.\\
+        Donc $d(x,y) - d(x,z) \leq d(z,y)$ = $d(y,z)$.\\
+        De plus, $d(x,z) \leq d(x,y) + d(y,z)$ d'après l'inégalité triangulaire.\\
+        Donc $d(x,z) - d(x,y) \leq d(y,z)$.\\
+        En combinant les deux, on obtient $|d(x,y) - d(x,z)| \leq d(y,z)$.
+    \end{enumerate}
+}
+
+\theorem{Construction d'espaces métriques}{Restriction}{true}{
+    On part de $(X,d)$ un espace métrique.\\
+    Soit $Y \subset X$. Alors $(Y, d|_{Y\times Y})$ est un espace métrique.
+    }
+\vocabulary{On dit que $d|_{Y\times Y}$ est la \textbf{distance sur $Y$ induite} par la distance sur $X$.}
+\remark{Ainsi, tout sous-ensemble d'un espace métrique est muni d'une "structure d'espace métrique" induite : c'est la distance induite.}
+
+\example{$(X, d_X) = (\mathbb{C}, |\cdot|)$ un espace métrique. Alors pour $Y = \mathbb{R} \subset \mathbb{C}$, $d_Y$ n'est autre que la distance usuelle sur $\mathbb{R}$.\\
+Idem pour $\mathbb{Q}$.}
+
+\theorem{Construction d'espaces métriques}{Bijection}{true}{
+    Soient $(X,d_X)$ et $Y$ un ensemble quelconque et \functionSets{f}{Y \rightarrow X} bijective.\\
+    Alors $(Y, d_Y)$ est un espace métrique, où $d_Y(y_1,y_2) = d_X(f(y_1),f(y_2))$ pour tout $y_1,y_2 \in Y$.\\
+
+    Autrement dit, \function{d_Y}{Y \times Y \rightarrow \mathbb{R}_+}{(y_1,y_2) \mapsto d_X(f(y_1),f(y_2))}.
+}
+
+\training{Démontrer le théorème ci-dessus. \textit{(vérifier que $d_Y$ satisfait bien les axiomes d'une distance.)}}
+\noindent\carreaux{10}
+
+\subsection{Espaces vectoriels normés}
+
+On a plus un ensemble $X$ quelconque mais on considère $E$ un $\mathbb{K}$-espace vectoriel ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$). (a priori pas de dimension finie)
+
+\subsubsection{Définitions}
+\definition{
+    Une norme $N$ sur $E$ est une application $N\colon E \to \mathbb{R}_+$ souvent notée $\| \cdot \|$ qui vérifie les axiomes suivants :
+    \begin{enumerate}
+        \item $\forall u \in E, \forall \lambda \in \mathbb{K}, \|\lambda u\| = |\lambda| \cdot \|u\|$ (homogénéité)
+        \item $\forall (u,v) \in E^2, \|u+v\| \leq \|u\| + \|v\|$ (inégalité triangulaire)
+        \item $\forall u \in E, \|u\| = 0 \Leftrightarrow u = 0_E$ (séparation)
+    \end{enumerate}
+}
+\vocabulary{On dit que le couple $(E, N) = (E, \| \cdot \|)$ est un \textbf{espace vectoriel normé}. Il est commun d'écrire $e.v.n.$.}
+\remark{$\forall x \in E, N(-x) = N(x)$ d'après l'axiome 1.}
+
+\theorem{Théorème}{Association norme-distance}{false}{
+    Soit $(E, \| \cdot \|)$ un espace vectoriel normé.\\
+    Alors c'est en particulier un espace métrique pour la distance définie par $d_N(u,v) = \|v - u\|$.
+}
+
+\noindent{\textbf{Preuve :} Il suffit de vérifier les axiomes d'une distance.
+    \begin{enumerate}
+        \item Symétrie : $d_N(u,v) = \|v-u\| = \|-(u-v)\| = \|u-v\| = d_N(v,u)$.
+        \item Inégalité triangulaire : $d_N(u,w) = \|w-u\| = \|(w-v) + (v-u)\| \leq \|w-v\| + \|v-u\| = d_N(u,v) + d_N(v,w)$.
+        \item Séparation : $d_N(u,v) = 0 \Leftrightarrow \|v-u\| = 0 \Leftrightarrow v-u = 0_E \Leftrightarrow u=v$.
+    \end{enumerate}
+}
+
+\remark{Hors programme : espaces euclidiens $\subset$ espaces vectoriels normés $\subset$ espaces métriques.}
+
+\example{
+    En fait, les exemples 1, 2 et 3 dans "Espaces métriques" sont des evn : $(\mathbb{R}, |\cdot|)$, $(\mathbb{C}, |\cdot|)$ et $(\mathbb{R}^n, \|\cdot\|_2)$ où $\| (x_1, \ldots, x_n) \|_2 = \sqrt{\sum_{i=1}^{n} x_i^2} = \| \cdot \|_\text{euclidienne}$.
+}
+
+\training{
+    Définissons $X = (x_1, x_2, \ldots, x_n) \in \mathbb{R}^n \mapsto \|X\|_{\infty} = \max(|x_1|, |x_2|, \ldots, |x_n|)$.\\
+    Montrer que $\|\cdot\|_{\infty}$ est une norme sur $\mathbb{R}^n$.\\
+    \textbf{Observation :} $\|X\|_{\infty} = |x_{i_0}|$ où $i_0 \in \{1, 2, \ldots, n\}$ réalise le maximum.\\
+    \textbf{Homogénéité :} $\forall i \in \{1, \ldots, n\}, |x_i| \leq |x_{i_0}|$\\
+    $\forall \lambda \in \mathbb{R},$ $|\lambda| \cdot |x_i| \leq |\lambda| \cdot |x_{i_0}| \forall i \in \{1, \ldots, n\}$\\
+    D'où $\forall \lambda \in \mathbb{R}, |\lambda x_i| \leq |\lambda| \cdot |x_{i_0}| \forall i \in \{1, \ldots, n\}$\\
+    Or $\lambda X = (\lambda x_1, \ldots, \lambda x_n)$, $i_0$ réalise le maximum de $(|\lambda x_1|, \ldots, |\lambda x_n|)$\\
+    Donc $\|\lambda X\|_{\infty} = |\lambda| \cdot |x_{i_0}| = |\lambda| \cdot \|X\|_{\infty}$.\\
+    \textbf{Inégalité triangulaire :} Soient $X = (x_1, \ldots, x_n)$ et $Y = (y_1, \ldots, y_n)$ dans $\mathbb{R}^n$.\\
+    $\|X+Y\|_{\infty} = \max(|x_1 + y_1|, \ldots, |x_n + y_n|)$.\\
+    On a $\forall i \in \{1, \ldots, n\}, |x_i + y_i| \leq |x_i| + |y_i| \leq \|X\|_{\infty} + \|Y\|_{\infty}$.\\
+    En prenant le $max$ sur $i$, on obtient $\|X+Y\|_{\infty} \leq \|X\|_{\infty} + \|Y\|_{\infty}$.\\
+    \textbf{Séparation :} Soit $X = (x_1, \ldots, x_n) \in \mathbb{R}^n$.\\
+    $\|X\|_{\infty} = 0 \Leftrightarrow \max(|x_1|, \ldots, |x_n|) = 0$.\\
+    Or $\forall k \in \{1, \ldots, n\}, |x_k| \leq \max(|x_1|, \ldots, |x_n|) = 0 \Rightarrow x_k = 0$ $\Rightarrow X = 0_{\mathbb{R}^n}$.\\
+}
+
+\training{
+\begin{enumerate}
+    \item Montrer que \function{\|\cdot\|_1}{\mathbb{R}^n \rightarrow \mathbb{R}_+}{X \mapsto \sum_{i=1}^{n} |x_i|} est une norme sur $\mathbb{R}^n$.
+    \item \textbf{Plus difficile.} Plus généralement, montrer que pour $p \in \mathbb{R}_{+}$, \function{\|\cdot\|_p}{\mathbb{R}^n \rightarrow \mathbb{R}_+}{X \mapsto \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}} est une norme sur $\mathbb{R}^n$.
+\end{enumerate}    
+}
+
+\example{Exemples de normes sur des espaces de dimension infinie :
+    \begin{itemize}
+        \item Considérons $E = \mathcal{C}([0,1], \mathbb{R})$ l'espace vectoriel des fonctions continues de $[0,1]$ dans $\mathbb{R}$. On définit la norme $\|f\|_{\infty} = \sup_{x \in [0,1]} |f(x)|$ pour $f \in E$. En effet,\\\\
+        \textbf{Homogénéité :} Soit $f \in E$ et $\lambda \in \mathbb{R}$.\\
+        On a $\|\lambda f\|_{\infty} = \sup_{x \in [0,1]} |\lambda f(x)| = |\lambda| \cdot \sup_{x \in [0,1]} |f(x)| = |\lambda| \cdot \|f\|_{\infty}$.\\
+        \textbf{Inégalité triangulaire :} Soient $f,g \in E$.\\
+        On a $\|f+g\|_{\infty} = \sup_{x \in [0,1]} |f(x) + g(x)|$.\\
+        Or $\forall x \in [0,1], |f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \|f\|_{\infty} + \|g\|_{\infty}$.\\
+        En prenant le supremum sur $x$, on obtient $\|f+g\|_{\infty} \leq \|f\|_{\infty} + \|g\|_{\infty}$.\\
+        \textbf{Séparation :} Soit $f \in E$.\\
+        On a $\|f\|_{\infty} = 0 \Leftrightarrow \sup_{x \in [0,1]} |f(x)| = 0$.\\
+        Or $\forall x \in [0,1], |f(x)| \leq \sup_{x \in [0,1]} |f(x)| = 0 \Rightarrow f(x) = 0$ pour tout $x$ dans $[0,1]$ $\Rightarrow f = 0_E$.\\
+        \item Considérons $E = \{ f\colon I \to \mathbb{R}, f \in \mathcal{C}^0(I) \mid \int_I |f|(t)dt \text{ converge} \} = L_1$ où $I$ est un intervalle de $\mathbb{R}$. On définit la norme $\|f\|_1 = \int_I |f(t)| dt$ pour $f \in E$.
+    \end{itemize}
+}
+
+\attention{$\|f\|_{\infty}$ existe car $\sup|f(t)| < +\infty$ pour $f$ continue sur le compact $[0,1]$.}
+
+\cexample{$f \in \mathcal{C}^0(]0,1], \mathbb{R})$ définie par $f(x) = \frac{1}{x}$. Alors $\|f\|_{\infty}$ n'existe pas car $\sup_{x \in ]0,1]} |f(x)| = +\infty$.}
+
+\subsubsection{Propriétés}
+
+\theorem{Propriété}{Vecteurs unitaires}{true}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel non nul, soit $x \in E\setminus \{0_E\}$ et soit $N$ une norme sur $E$.\\
+    Alors $\frac{x}{N(x)}$ est un vecteur unitaire (ou vecteur normé), c'est-à-dire $N\left(\frac{x}{N(x)}\right) = 1$. (existe car $N(x) \neq 0$ par séparation)
+}
+
+\theorem{Propriété}{}{true} {
+    Soit $(E, N)$ un espace vectoriel normé.\\
+    Alors $\forall (x_1, x_2, \ldots, x_n) \in E^n$, $\forall (\lambda_1, \lambda_2, \ldots, \lambda_n) \in \mathbb{K}^n$, on a :
+    \[N(\sum_{i=1}^{n} \lambda_i x_i) \leq \sum_{i=1}^{n} |\lambda_i| \cdot N(x_i)\]
+}
+
+\theorem{Propriété}{Inégalité triangulaire renversée}{false} {
+    Soit $(E, N)$ un espace vectoriel normé.\\
+    \begin{enumerate}
+        \item $\forall (x,y) \in E^2, N(x + y) \leq N(x) + N(y)$
+        \item $\forall (x,y) \in E^2, |N(x) - N(y)| \leq N(x - y)$
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} 
+    \begin{enumerate}
+        \item C'est l'axiome 2 de la définition d'une norme.
+        \item On a $N(x) = N((x - y) + y) \leq N(x - y) + N(y)$ d'après l'inégalité triangulaire.\\
+        Donc $N(x) - N(y) \leq N(x - y)$.\\
+        De plus, $N(y) = N((y - x) + x) \leq N(y - x) + N(x)$ d'après l'inégalité triangulaire.\\
+        Donc $N(y) - N(x) \leq N(y - x) = N(x - y)$.\\
+        En combinant les deux, on obtient $|N(x) - N(y)| \leq N(x - y)$.
+    \end{enumerate}
+}
 
 \section{Topologie sur les espaces métriques}
 \subsection{Ouverts et fermés}
@@ -393,7 +583,7 @@ On dit que $<\cdot , \cdot >$ est un produit scalaire (forme bilinéaire symétr
     L'égalité $|<X,Y>| = \|X\|_2 \|Y\|_2$ est vérifiée si et seulement si $X$ et $Y$ sont colinéaires.
 }
 
-\ndlr{Démo à reprendre, cf. screen 2 Laurent}
+\ndlr{Démo à reprendre, cf screen Laurent 2}
 
 \subsubsection{Continuité des applications linéaires dans les evn}
 
