@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Distances, normes et topologie}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Vérifier qu'une application est une distance. & 1, 2 \\
+\hline
+Montrer qu'une application est une norme. & 3, 4 \\
+\hline
+Manipuler l'inégalité triangulaire et sa version généralisée. & 5, 6 \\
+\hline
+Topologie : ouverts, fermés, adhérence, intérieur. & 7, 8, 9, 10 \\
+\hline
+Suites : convergence, Cauchy, caractérisations. & 11, 12, 13, 14, 15 \\
+\hline
+Continuité : $\varepsilon$ - $\delta$, suites, Lipschitz. & 16, 17, 18 \\
+\hline
+Normes équivalentes et propriétés en dimension finie. & 19, 20 \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\exercise{1}{Distance induite par une norme}{Montrer que si $(E,\|\cdot\|)$ est un espace vectoriel normé, alors $d(u,v)=\|v-u\|$ est une distance sur $E$.}
+
+\exercise{2}{Distance induite par une bijection}{Soient $(X,d)$ un espace métrique et $f:Y\to X$ une bijection. Vérifier que $d_Y(y_1,y_2)=d(f(y_1),f(y_2))$ est une distance.}
+
+\exercise{3}{Norme infinie}{Montrer que $\|x\|_\infty=\max(|x_1|,\dots,|x_n|)$ est une norme sur $\mathbb{R}^n$.}
+
+\exercise{4}{Norme $\ell^1$}{Montrer que $\|x\|_1=\sum_{i=1}^n |x_i|$ est une norme sur $\mathbb{R}^n$.}
+
+\exercise{5}{Inégalité triangulaire généralisée}{Dans un espace métrique $(X,d)$, démontrer que $|d(x,y)-d(x,z)|\le d(y,z)$.}
+
+\exercise{6}{Inégalité triangulaire renversée}{Dans un espace vectoriel normé, montrer que $|\|x\|-\|y\||\le\|x-y\|$.}
+
+\exercise{7}{Boules ouvertes}{Montrer qu'une boule ouverte $B(a,r)$ d'un espace métrique est un ouvert.}
+\switchcolumn
+
+\exercise{8}{Boules fermées}{Montrer qu'une boule fermée $\overline{B}(a,r)$ est un fermé.}
+
+\exercise{9}{Intérieur}{Montrer que $\mathring{A}$ est le plus grand ouvert contenu dans $A$.}
+
+\exercise{10}{Adhérence}{Montrer que $\overline{A}$ est le plus petit fermé contenant $A$.}
+
+
+\exercise{11}{Convergence $\Rightarrow$ Cauchy}{Montrer qu'une suite convergente dans un espace métrique est de Cauchy.}
+
+\exercise{12}{Unicité de la limite}{Montrer qu'une suite dans un espace métrique possède au plus une limite.}
+
+\exercise{13}{Caractérisation séquentielle de l'adhérence}{Montrer que $x\in\overline{A}$ ssi il existe une suite $(x_n)\subset A$ telle que $x_n\to x$.}
+
+\exercise{14}{Caractérisation des fermés}{Montrer que $F$ est fermé ssi toute suite de $F$ convergeant dans $X$ converge dans $F$.}
+
+\exercise{15}{Caractérisation séquentielle de la continuité}{Montrer qu'une fonction est continue en $a$ ssi $x_n\to a$ implique $f(x_n)\to f(a)$.}
+
+\exercise{16}{Lipschitz $\Rightarrow$ continu}{Montrer qu'une application $k$-lipschitzienne est continue.}
+
+\exercise{17}{Cauchy--Schwarz}{Démontrer l'inégalité de Cauchy--Schwarz dans $\mathbb{R}^n$.}
+
+\exercise{18}{Applications linéaires continues}{Montrer que si $f$ est linéaire et continue en $0$, alors il existe $K>0$ tel que $\|f(x)\|\le K\|x\|$.}
+\switchcolumn
+
+\exercise{19}{Suites et normes équivalentes}{Montrer que si deux normes sont équivalentes, alors elles donnent les mêmes suites convergentes.}
+
+\exercise{20}{Compacts de $\mathbb{R}^n$}{Montrer qu'un ensemble est compact dans $\mathbb{R}^n$ ssi il est fermé et borné.}
+
+\end{paracol}
+
+\end{document}

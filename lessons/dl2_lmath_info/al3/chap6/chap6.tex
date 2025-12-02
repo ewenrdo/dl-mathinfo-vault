@@ -466,4 +466,47 @@ Cela entraine qu'ils n'ont pas de facteur commun non constant (i.e. de degré $\
 \theorem{Théorème}{}{true}{
     $u$ est diagonalisable ssi. $u$ admet un polynôme annulateur scindé à racines simples.
 }
+
+\section{Matrices compagnons et théorème de Cayley-Hamilton}
+
+Soit $P \in K[X]$ unitaire.
+Posons $P(X) = a_0 + a_1 X + a_2X^2 + ... + a_{n-1}X^{n-1} + X^n$.
+
+\definition{On appelle \textbf{matrice compagnon} de $P$ la matrice :
+\[
+C(P) = 
+\begin{pmatrix}
+0      & 0      & 0      & \cdots & 0      & -a_0 \\
+1      & 0      & 0      & \cdots & 0      & -a_1 \\
+0      & 1      & 0      & \cdots & 0      & -a_2 \\
+0      & 0      & 1      & \cdots & 0      & -a_3 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0      & 0      & 0      & \cdots & 1      & -a_{\,n-1}
+\end{pmatrix}.
+\]
+
+}
+\theorem{Proposition}{}{true}{
+    Le polynôme caractéristique de $A$ est $(-1)^nP(X)$.
+}
+
+Soit $E$ un $K$-espace vectoriel de dimension $n$.
+Soit $u \in \mathcal{L}(E)$. Notons $P_u$ son polynôme caractéristique.
+
+\theorem{Théorème de Cayley-Hamilton}{}{true}{
+    On a $P_u(u)=0$.\\
+    Autrement dit, le polynôme minimal de $u$ divise $P_u$.
+}
+
+\example{
+    On prend $n=2$.
+    Alors $P_u(X)=X^2-Tr(u)X+det(u)$.
+    Donc $u^2-Tr(u)\cdot u + detu=0$.
+}
+
+\theorem{Corollaire}{}{true}{
+    $u \in GL(E) \Leftrightarrow det(u) \neq 0$.\\
+    Dans ce cas, on a $u^{-1} \in K[u]$.
+}
+
 \end{document}

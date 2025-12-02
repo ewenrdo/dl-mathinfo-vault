@@ -1,0 +1,275 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Fonctions de plusieurs variables}
+
+\textbf{Cadre de travail :}
+\begin{itemize}
+    \item $p,q \in \mathbb{N}^*$
+    \item $U$ ouvert de $\mathbb{R}^n$
+    \item $f : U \to \mathbb{R}^m$
+    \item $\mathbb{R}^p$ et $\mathbb{R}^q$ sont des espaces vectoriels qui peuvent être normés, donc des espaces métriques. Ainsi, toutes les propriétés et des notions des espaces métriques s'appliquent.
+\end{itemize}
+
+\section{Continuité}
+
+\reminder{Une suite $(X_n)$ à valeur dans $\mathbb{R}^p$ converge si et seulement si chacune de ses composantes converge.}
+
+\theorem{Proposition}{}{false}{
+    Soit \functionSets{f}{U \to \mathbb{R}^q} et $a \in U$. On écrit $f(x) = (f_1(x), f_2(x), \ldots, f_q(x)), x\in U$.\\
+    On a : $f$ est continue en $a \Leftrightarrow \forall i=1,\ldots,q, f_i(x)$ est continue en $a$.
+}
+
+\remark{$\forall i=1,\ldots,q$, les fonctions $x \mapsto f_i(x)$ sont à valeur dans $\mathbb{R}$, donc on peut utiliser les résultats de la continuité pour les fonctions à valeur réelle.}
+\vocabulary{On appelle les $f_i$ les \textbf{fonctions composantes} de $f$.}
+
+Pour comprendre la continuité, il suffit de se restreindre aux fonctions $f : U \to \mathbb{R}$.\\
+
+\section{Vers une bonne notion de dérivée pour les fonctions à plusieurs variables}
+
+\textbf{Introduction :} Soit $f \colon ]a,b[ \to \mathbb{R}$ où $]a,b[ \subset \mathbb{R}$.
+On dit que $f$ est dérivable en $x \in ]a,b[$ si il existe un réel $f'(x)$ tel que : 
+\[
+    f(x+h) = f(x) + hf'(x) + o(h)
+\]
+Ce qui équivaut à : $\lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$ existe.\\
+Si $f$ est dérivable en $x$ alors on sait que $f$ est continue en $x$.\\
+$|f(x+h) - f(x)| \to 0$ quand $h \to 0$.
+
+\subsection{Rappels : fonctions à valeurs dans $\mathbb{R}^q, q \geq 1$}
+Soit \function{f}{]a,b[ \to \mathbb{R}^q}{x \mapsto (f_1(x), f_2(x), \ldots, f_q(x))}. (fonction coordonnées)
+
+\definition{
+    On dit que $f$ est dérivable en $x \in ]a,b[$ si $\lim_{h \to 0} \frac{f(x) - f(x+h)}{h}$ existe. (avec $\frac{f(x) - f(x+h)}{h} \in \mathbb{R}^q$).\\
+    \textit{i.e.} $\exists L \in \mathbb{R}^q$ tel que $\| \frac{f(x) - f(x+h)}{h} - L \| \to 0$ quand $h \to 0$ où $\|.\|$ est une norme $\mathbb{R}^q$ (elles sont équivalentes).
+}
+
+\theorem{Proposition}{Dérivabilité}{false}{
+    $f$ est dérivable en $x$ $\Leftrightarrow \forall i=1,\ldots,q, f_i$ est dérivable en $x$ et on a : $f'(x) = (f_1'(x), f_2'(x), \ldots, f_q'(x))$.\\
+    Autrement dit, $f$ est dérivable en $x$ si et seulement si chacune de ses composantes est dérivable en $x$.
+}
+
+\subsection{Dérivées partielles}
+
+Soit $U \subset \mathbb{R}^p$ ouvert et $p \in \mathbb{N}^*$.
+On considère $f : U \to \mathbb{R}^q$.
+
+\remark{Penser à une fonction $f$ définie de $U=\mathbb{R}^2$ dans $\mathbb{R}$, donc $p=2$ et $q=1$. (tous les problèmes se posent déjà dans ce cas)}
+
+On veut définir la notion de dérivées partielles en un point $a = (a_1, a_2, \ldots, a_p) \in U$.\\
+Il y a $p$ dérivées partielles (car $p$ variables). Prenons $k \in \{1,\ldots,p\}$ et définissons la $k$-ième dérivée partielle de $f$ en $a=(a_1, a_2, \ldots, a_p)$.\\
+Considérons la $k$-ième fonction partielle d'une variable réelle $g_k \colon x_k \mapsto f(a_1, \ldots, a_{k-1}, x_k, a_{k+1}, \ldots, a_p)$.\\
+Les points $a_1, \ldots, a_{k-1}, a_{k+1}, \ldots, a_p$ sont fixés dans $\mathbb{R}$ et $x_k$ varie dans un voisinage de $a_k$.\\
+
+On dit que $f$ admet une $k$-ième dérivée partielle en $a$ si $g_k$ est dérivable en $a_k$ et on a :
+\[
+    \frac{\partial f}{\partial x_k}(a) = g_k'(a_k)
+\]
+
+
+\attention{
+    Avant de calculer une dérivée partielle en un point, il faut justifier qu'elles existent (i.e. que les fonctions partielles sont dérivables en les points correspondants).
+}
+
+\remark{$f$ admet une $k$-ième dérivée partielle en $a$ $\Leftrightarrow$ la fonction $t \mapsto f(a+te_k)$ (où $e_k$ est le $k$-ième vecteur de la base canonique de $\mathbb{R}^p$) est dérivable en $0$.}
+
+\definition{
+    On dit que $f$ admet des dérivées partielles en $a$ si $\forall k \in \{1,\ldots,p\}$, $\frac{\partial f}{\partial x_k}(a)$ existe. (\textit{i.e.} toutes les dérivées partielles existent en $a$)
+}
+
+\attention{Problème : Malheureusement, ce n'est pas parce que $f$ admet des dérivées partielles en $a$ que $f$ est continue en $a$. (d'où le fait de chercher une meilleure notion de dérivabilité)}
+
+\noindent{\textit{Transition :} On peut voir le problème de continuité en $(0,0)$ comme le fait que $f(x,x)=\frac{1}{2}$ qui ne tend pas vers $0$ quand $x \to 0$.\\
+En fait, on regarde la trajectoire $t \mapsto (t,t)$ qui n'est pas alignée avec les axes.\\
+Une notion plus forte que la dérivée partielle est la dérivée directionnelle.}
+
+\subsection{Dérivées directionnelles}
+
+Soit $f : U \to \mathbb{R}^q$ où $U \subset \mathbb{R}^p$ ouvert.\\
+Soit $a \in U$ et soit $h$ un vecteur de $\mathbb{R}^p$.\\
+Considérons la fonction d'une variable réelle $\varphi \colon t \mapsto f(a + th)$ où $t$ varie dans un voisinage de $0$ tel que $a + th \in U$.\\
+
+\definition{On dit que $f$ admet une dérivée directionnelle en $a$ selon la direction $h$ si $\varphi$ est dérivable en $0$.\\
+    On a :
+    \[
+        \varphi'(0) = \lim_{t \to 0} \frac{f(a + th) - f(a)}{t}
+    \]
+}
+
+\theorem{Proposition}{Lien avec la dérivée partielle}{false}{
+    Si on choisit comme direction $h = e_k$ (le $k$-ième vecteur de la base canonique de $\mathbb{R}^p$), alors la dérivée directionnelle de $f$ en $a$ selon la direction $e_k$ est la $k$-ième dérivée partielle de $f$ en $a$.\\
+}
+
+\training{
+    Étudier la dérivée directionnelle en toutes les directions au point $(0,0)$ de la fonction $f(x,y) = \frac{xy}{x^2 + y^2}$ si $(x,y) \neq (0,0)$ et $f(0,0) = 0$.\\
+}
+\noindent\carreaux{15}
+
+\attention{Cette notion de dérivée directionnelle est encore trop faible pour garantir la continuité de $f$ en $a$.}
+
+\training{Considérer $f(x,y)=\frac{y^2}{x}$ si $x \neq 0$ et $f(x,y)=y$ sinon.\\
+\begin{enumerate}
+    \item Montrer que $f$ admet des dérivées directionnelles en tout point de $\mathbb{R}^2$ et en toute direction.
+    \item Montrer que $f$ n'est pas continue sur $\mathbb{R}^2$.
+    \textit{Indication : Considérer le point $(0,1)$ et $(\frac{1}{n},1) \to (0,1)$.}
+\end{enumerate}
+}
+\noindent\carreaux{15}
+
+\subsection{Dérivées différentielles (cette fois-ci c'est la bonne !)}
+\textit{La dérivée différentielle est la notion qui assure que si une fonction est différentiable en un point, alors elle est continue en ce point.}
+Soit $f \colon \mathbb{R}^p \to \mathbb{R}^q$ et $a \in U$, où $U \subset \mathbb{R}^p$ est ouvert.
+
+\definition{
+    On dit que $f$ est différentiable en $a$ $\Leftrightarrow \exists Df(a) \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$ telle que :
+    \[
+        f(a+h) = f(a) + Df(a) \cdot h + o(\|h\|) \quad \text{quand } h \to 0
+    \]
+    avec $\forall h \in \mathbb{R}^p, f(a) \in \mathbb{R}^q, Df(a) \cdot h \in \mathbb{R}^q$, et $o(\|h\|) = \|h\| \varepsilon(h)$ où $\varepsilon(h) \to 0$ quand $\|h\| \to 0$.
+} 
+
+\theorem{Proposition}{Différentiabilité implique continuité}{false}{
+    Si $f$ est différentiable en $a$, alors $f$ est continue en $a$.
+}
+
+\theorem{Proposition}{Lien avec les dérivées directionnelles}{false}{
+    Si $f$ est différentiable en $a$, alors $f$ admet des dérivées directionnelles en $a$ selon toutes les directions et on a :
+    \[
+        \forall h \in \mathbb{R}^p, \quad \text{la dérivée directionnelle de } f \text{ en } a \text{ selon la direction } h \text{ est } Df(a) \cdot h
+    \]
+}
+
+\remark{Il existe des fonctions qui admettent des dérivées directionnelles en un point selon toutes les directions mais qui ne sont pas différentiables en ce point.}
+
+\ndlr{Les prochains théorèmes sont compliqués et leur preuve dépasse le cadre de ce cours. Ils seront donnés dans un cadre réduit et admis sans preuve.}
+
+
+\textbf{Gradient d'une fonction numérique}\\
+Soit $f \colon U \to \mathbb{R}$ où $U \subset \mathbb{R}^p$ est ouvert.\\
+On a définir le gradient de $f$.\\
+Supposons $f$ différentiable en $a \in U$.\\
+On a $Df(a) \in \mathcal{L}(\mathbb{R}^p, \mathbb{R})$ (la différentielle est une forme linéaire).\\
+Prenons $h,k \in \mathbb{R}^p$ dans la base canonique de $\mathbb{R}^p$.\\
+Donc $h = (h_1, h_2, \ldots, h_p)$ et $k = (k_1, k_2, \ldots, k_p)$ (considérer plutôt des vecteurs colonnes, mais pas évident à écrire ici).\\
+On note : $< h, k > = \sum_{i=1}^p h_i k_i$ (HP : produit scalaire).\\
+On veut $Df(a) \cdot h = < *, h>$ pour un certain $* \in \mathbb{R}^p$.\\
+Si $h = \sum_{i=1}^p h_i e_i$ où $e_i$ est le $i$-ième vecteur de la base canonique de $\mathbb{R}^p$, on a :\\
+$Df(a)h = \sum_{i=1}^p Df(a) (h_i e_i) = \sum_{i=1}^p h_i Df(a)e_i$.\\
+On note : $\frac{\partial f}{\partial x_i}(a) = Df(a)e_i$ (la $i$-ième dérivée partielle de $f$ en $a$).\\
+Donc : $Df(a)h = \sum_{i=1}^p h_i \frac{\partial f}{\partial x_i}(a)$.\\
+Pour écrire cela sous la forme $< *, h>$, on pose :
+\[
+    \nabla f(a) = \begin{pmatrix}
+        \frac{\partial f}{\partial x_1}(a) \\
+        \frac{\partial f}{\partial x_2}(a) \\
+        \vdots \\
+        \frac{\partial f}{\partial x_p}(a)
+    \end{pmatrix} \in \mathbb{R}^p
+\]
+(On appelle $\nabla f(a)$ le gradient de $f$ en $a$)\\
+On a donc : $Df(a)h = < \nabla f(a), h >$.
+
+\definition{
+    Un point critique de $f$ est un point $x$ où $\nabla f(x) = 0$.
+}
+
+Si $f : U \to \mathbb{R}^q$ alors on a $\forall h \in \mathbb{R}^p, Df(a)h  = Df(a) \cdot \sum_{i=1}^p h_i e_i = \sum_{i=1}^p h_i Df(a)e_i$.\\
+$= \sum_{i=1}^p h_i \frac{\partial f}{\partial x_i}(a)$ où $\frac{\partial f}{\partial x_i}(a) \in \mathbb{R}^q$ est la $i$-ième dérivée partielle de $f$ en $a$.\\
+$= \sum_{i=1}^p \frac{\partial f}{\partial x_i}(a) e_i^*$.\\
+En notant $e_i^* = dx_i$ (forme linéaire sur $\mathbb{R}^p$), on a : $Df(a) = \sum_{i=1}^p \frac{\partial f}{\partial x_i}(a) dx_i$.\\
+
+\textbf{Matrice jacobienne}\\
+Soit $f \colon U \to \mathbb{R}^q$ où $U \subset \mathbb{R}^p$ est ouvert.\\
+Supposons $f$ différentiable en $a \in U$.\\
+
+\definition{
+    La jacobienne est la matrice de $Df(a)$ dans les bases canoniques de $\mathbb{R}^p$ et $\mathbb{R}^q$.\\
+    Elle est notée $J_f(a) \in M_{q,p}(\mathbb{R})$.\\ On a :\\
+    $Jf(a) = \begin{pmatrix}
+        \frac{\partial f_1}{\partial x_1}(a) & \frac{\partial f_1}{\partial x_2}(a) & \ldots & \frac{\partial f_1}{\partial x_p}(a) \\
+        \frac{\partial f_2}{\partial x_1}(a) & \frac{\partial f_2}{\partial x_2}(a) & \ldots & \frac{\partial f_2}{\partial x_p}(a) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \frac{\partial f_q}{\partial x_1}(a) & \frac{\partial f_q}{\partial x_2}(a) & \ldots & \frac{\partial f_q}{\partial x_p}(a)
+    \end{pmatrix} = (\frac{\partial f_i}{\partial x_j}(a))_{1 \leq i \leq q, 1 \leq j \leq p}$
+}
+
+\remark{On remarque que $J_f(a) = { }^t(\nabla f(a))$}
+
+\definition{
+    Si $p=q$, alors $J_f(a) \in M_p(\mathbb{R})$.\\
+    On définit le déterminant jacobien de $f$ en $a$ comme étant : $\det J_f(a)$.
+}
+
+\section{Fonctions $C^1, C^2$}
+Supposons $f \colon U \subset \mathbb{R}^2 \to \mathbb{R}$ (vrai pour $\mathbb{R}^q$)\\
+\definition{
+    On dit que $f$ est continuement différentiable sur $U$ si :
+    $a \in U \mapsto Df(a) \in \mathcal{L}(\mathbb{R}^2, \mathbb{R})$ est continue sur $U$.\\
+    Ce qui est équivalent à : $\forall h \in \mathbb{R}^2, a \mapsto Df(a) \cdot h$ est continue sur $U$.\\
+}
+
+\theorem{Théorème}{}{false}{
+    $f$ est différentiable sur $U \Leftrightarrow$ les dérivées partielles sont continues sur $U$.\\\\
+
+    C'est à dire, $a \mapsto \frac{\partial f}{\partial x}(a)$ et $a \mapsto \frac{\partial f}{\partial y}(a)$ sont continues sur $U$.
+}
+
+\definition{
+    $f : U \subset \mathbb{R}^2 \to \mathbb{R}$ est de classe $C^1$ sur $U$ si $f$ est différentiable sur $U$ et si les dérivées partielles de $f$ sont continues sur $U$.\\
+}
+
+Etant donnée $f : U \subset \mathbb{R}^2 \to \mathbb{R}$ de classe $C^1$ sur $U$, on peut se demander si $f$ est plus régulière : est-elle de classe $C^2$ ?\\
+Considérons la fonction qui $a \in U \mapsto \frac{\partial f}{\partial x}(a)$. (de même en remplaçant $x$ par $y$)\\
+On peut se demander si les dérivées partielles des dérivées partielles existent et sont continues.\\
+\definition{
+    $f$ est de classe $C^2$ sur $U$ si $f$ est de classe $C^1$ sur $U$ et si les dérivées partielles de $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$ existent et sont continues sur $U$.\\
+    On note : $\frac{\partial^2 f}{\partial x^2}, \frac{\partial^2 f}{\partial y^2}, \frac{\partial^2 f}{\partial x \partial y}, \frac{\partial^2 f}{\partial y \partial x}$.
+}
+
+\theorem{Théorème de Schwarz}{}{true}{
+    Si $f$ est de classe $C^2$ sur $U$, alors :
+    \[
+        \forall (x,y) \in U, \quad \frac{\partial^2 f}{\partial x \partial y}(x,y) = \frac{\partial^2 f}{\partial y \partial x}(x,y)
+    \]\\\\
+    On a la commutativité des dérivées partielles d'ordre 2.
+}
+
+Il est alors naturel de considérer la matrice $Hf(a) \in M_2(\mathbb{R})$ définie par :
+\[
+    Hf(a) = \begin{pmatrix}
+        \frac{\partial^2 f}{\partial x^2}(a) & \frac{\partial^2 f}{\partial x \partial y}(a) \\
+        \frac{\partial^2 f}{\partial y \partial x}(a) & \frac{\partial^2 f}{\partial y^2}(a)
+    \end{pmatrix}
+\]
+Le Théorème de Schwarz assure que $Hf(a)$ est une matrice symétrique (i.e. $Hf(a) = { }^t Hf(a)$).\\
+Cela nous permet d'écrire deux développements de Taylor d'ordre 1 et 2 pour $f$ en $a$ :
+
+Si $f$ est $C^1$, $ f(a+(h,k)) = f(a) + \frac{\partial f}{\partial x}(a) h + \frac{\partial f}{\partial y}(a) k + o(\|(h,k)\|)$ quand $(h,k) \to (0,0)$.\\
+Et à l'ordre 2, si $f$ est $C^2$,\\
+$f(a+(h,k)) = f(a) + \frac{\partial f}{\partial x}(a) h + \frac{\partial f}{\partial y}(a) k + \frac{1}{2} (h^2 \frac{\partial^2 f}{\partial x^2}(a) + 2hk \frac{\partial^2 f}{\partial x \partial y}(a) + k^2 \frac{\partial^2 f}{\partial y^2}(a)) + o(\|(h,k)\|^2)$ quand $(h,k) \to (0,0)$.\\\\
+
+Bonnes vacances et bonnes révisions ! :)
+
+\end{document}
+

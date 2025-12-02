@@ -1,0 +1,113 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components} % <-- ton fichier .sty, avec toutes tes définitions
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Réduction des endomorphismes}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 6.2 : Sous-espaces caractéristiques}
+
+Soit $E$ un $K$-espace vectoriel de dimension finie $n$.\\
+Soit $u \in \mathcal{L}(E)$ un endomorphisme de $E$.\\
+Soit $\lambda \in K$ une valeur propre de $u$.\\
+\reminder{On appelle $m_a(\lambda)$ la multiplicité algébrique de $\lambda$, c'est-à-dire la multiplicité de $\lambda$ comme racine du polynôme caractéristique de $u$.}
+\reminder{On appelle $m_g(\lambda)$ la multiplicité géométrique de $\lambda$, c'est-à-dire la dimension du sous-espace propre $E_\lambda = Ker(u - \lambda Id_E)$.}
+
+\definition{
+    On pose $N_\lambda = Ker\big((u - \lambda Id_E)^{m_a(\lambda)}\big)$.\\
+    Il s'agit du \textbf{sous-espace caractéristique} de $u$ associé à la valeur propre $\lambda$.
+}
+
+\theorem{Théorème}{}{true}{
+    On suppose $P_u$ scindé (i.e. trigonalisable).\\
+    Alors :
+    \begin{enumerate}
+        \item $N_\lambda$ est un sev stable par $u$ de dimension $m_a(\lambda)$.
+        \item $E_\lambda \subset N_\lambda$.
+        \item $E = \bigoplus_{\lambda \in Sp(u)} N_\lambda$.
+        \item Soit $\pi_\lambda$ la projection de $E$ sur $N_\lambda$ parallèlement à $\bigoplus_{\mu \in Sp(u), \mu \neq \lambda} N_\mu$.\\
+        Alors $\pi_\lambda \in K[u]$.
+        \item Si $\lambda \neq \mu$, $\pi_\lambda \circ \pi_\mu = 0$
+    \end{enumerate}
+}
+
+\example{
+    $Mat(u) = \begin{pmatrix}
+        1 & 1 & 0\\
+        0 & 1 & 0\\
+        0 & 0 & 2
+    \end{pmatrix}$. Les valeurs propres sont $1$ et $2$.
+    $P_u(X) = -(X-1)^2(X-2)$.\\
+    Donc :
+    \begin{itemize}
+        \item $\lambda = 2$, $m_a(2)=m_g(1)=1$ donc $E_2 = Ke_3 = N_2$.
+        \item $\lambda = 1$, $m_a(1)=2$ et $m_g(1)=1$ donc $E_1 = Ke_1$ et $N_1 = Ke_1 \oplus Ke_2$.
+    \end{itemize}
+}
+
+\theorem{Théorème}{}{true}{
+    $N_\lambda$ est stable par $u$ et posons $u_\lambda = u_{|N_\lambda}$.\\
+    Alors : 
+    \begin{enumerate}
+        \item $u_\lambda$ a une seule valeur propre qui est $\lambda$.
+        \item On a $P_u = \pm (X - \lambda)^{m_a(\lambda)}$.
+        \item On a $dim N_\lambda = m_a(\lambda)$.
+        \item $\exists B_\lambda$ une base de $N_\lambda$ telle que $Mat_{B_\lambda}(u_\lambda) = \lambda I_{m_a(\lambda)}$.
+    \end{enumerate}
+}
+
+\theorem{Corollaire}{}{true}{
+    On suppose $P_u$ scindé.\\
+    Il existe une base $B$ de trigonalisation de $u$ telle que la $Mat_B(u)$ est de la forme suivante :\\
+% Forme bloc-triangulaire : blocs diagonaux A_{lambda_k}
+\[
+\mathrm{Mat}_B(u) =
+\begin{pmatrix}
+A_{\lambda_1} & 0            & \cdots & 0 \\
+0             & A_{\lambda_2} & \ddots & \vdots \\
+\vdots        & \ddots       & \ddots & 0 \\
+0             & \cdots       & 0      & A_{\lambda_k}
+\end{pmatrix},
+\]
+\[
+\text{avec}\qquad
+A_{\lambda_i} =
+\begin{pmatrix}
+\lambda_i & \ast      & \ast & \cdots & \ast\\
+0         & \lambda_i & \ast & \cdots & \ast\\
+\vdots    & \ddots    & \ddots & \ddots & \vdots\\
+0         & \cdots    & 0      & \lambda_i & \ast\\
+0         & \cdots    & \cdots & 0      & \lambda_i
+\end{pmatrix}
+\]
+}
+
+\example{
+    $E = \mathbb{R}^3$ et $u$ tel que $Mat(u) = \begin{pmatrix}
+        2 & 1 & 3\\
+        5 & 3 & 6\\
+        -2 & -1 & -2\end{pmatrix}$.\\
+    $P_u(X) = - (X-1)^3$.\\
+    Donc $1$ est la seule valeur propre de $u$ avec $m_a(1)=3$.\\
+    Or $u$ n'est pas diagonalisable car si $u$ diagonalisable dans $B$, on a $Mat_B(u) = I_3$ .
+    Donc $u = Id_E$. Absurde.\\\\
+    $u$ est scindé, donc trigonalisable.
+}
+
+\end{document}
