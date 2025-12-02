@@ -22,8 +22,6 @@
 
 \docTitle{Chapitre 1 : Suites de Cauchy}
 
-\attention{Certaines démonstrations ont été omises dans ce cours. Je les ai en format papier, n'hésitez pas à me demander à e.rodriguesdeoliveir@gmail.com.}
-
 \section{Rappels sur les suites}
 
 \subsection{Définitions générales}
@@ -42,8 +40,7 @@ On ne rappelera que ce qui n'est pas "évident" dans le cours de L1.
     Une suite $(u_n)$ converge vers $l\in\mathbb{R}$ si : \(\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall n \geq N_\varepsilon, |u_n - l| < \varepsilon\)
 }
 \vocabulary{
-    Si elle ne converge pas on dit qu'elle diverge. \\
-    Attention : une suite peut diverger mais avoir une limite (une suite qui tend vers l'infini).
+    Si elle ne converge pas on dit qu'elle diverge. Une suite divergente peut avoir une limite (une suite qui tend vers l'infini).
 }
 
 
@@ -63,7 +60,9 @@ On ne rappelera que ce qui n'est pas "évident" dans le cours de L1.
 }
 \theorem{Théorème}{Bolzano-Weierstrass}{true}{Toute suite réelle bornée admet une sous-suite convergente.}
 
+\newpage
 \section{Suites de Cauchy}
+\ndlr{Tout ce qui va suivre est une application du chapitre 4 de ce cours.}
 \definition{
     Une suite $(u_n)$ est une suite de Cauchy si : \(\forall \varepsilon > 0, \exists N_\varepsilon \in \mathbb{N}, \forall p,q \geq N_\varepsilon, |u_p - u_q| < \varepsilon\)
 }
@@ -109,6 +108,7 @@ $(u_n)$ est une suite de Cauchy si : \(\forall \varepsilon > 0, \exists N_\varep
     $(\mathbb{Q}, |\cdot|)$ n'est pas complet : la suite définie par $u_n = \text{la partie décimale de } \sqrt{2} \text{ à la } n\text{-ième décimale}$ est une suite de Cauchy dans $\mathbb{Q}$ qui ne converge pas dans $\mathbb{Q}$ (car $\sqrt{2} \notin \mathbb{Q}$).\\
     Par contre, elle converge dans $\mathbb{R}$.
 }
+
 \section{Topologie de $\mathbb{R}$}
 \subsection{Rappels}
 \textcolor{primary}{a) Ouvert}
