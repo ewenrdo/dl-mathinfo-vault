@@ -110,4 +110,86 @@ A_{\lambda_i} =
     $u$ est scindé, donc trigonalisable.
 }
 
+
+\section{Nilpotence}
+
+\definition{
+    On dit que $u \in End(E)$ est \textbf{nilpotent} s'il existe $k \in \mathbb{N}^*$ tel que $u^k = 0_{End(E)}$.
+}
+\vocabulary{On appelle l'indice de nilpotence le plus petit entier $k$ tel que $u^k = 0$.}
+
+\theorem{Proposition}{}{true}{
+    L'endomorphisme $u$ est nilpotent si et seulement si $P_u$ est scindé avec pour seule racine $0$ (c'est à dire que sa seule valeur propre est $0$).\\
+    En particulier, $u$ est trigonalisable strictement avec des 0 sur la diagonale. On a que l'indice de nilpotence de $u$ est inférieur ou égal à $dim(E)$.
+}
+\theorem{Corollaire}{}{true}{
+    $u$ nilpotent et diagonalisable $\Rightarrow u = 0_{End(E)}$.
+}
+
+\theorem{Proposition}{}{true}{
+    Si $u$ est nilpotent d'indice $k$ et $x \in E$ avec $u^{k-1}(x) \neq 0$, alors la famille $\{x, u(x), u^2(x), \ldots, u^{k-1}(x)\}$ est libre.\\
+    Ainsi, on a $k \leq dim(E)$.
+}
+
+\theorem{Proposition}{}{true}{
+    Si $u$ est nilpotent d'indice $n = dim(E)$, alors il existe une base $B$ de $E$ telle que :
+    \[
+    Mat_B(u) =
+    \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0\\
+        0 & 0 & 1 & \cdots & 0\\
+        \vdots & \vdots & \ddots & \ddots & \vdots\\
+        0 & 0 & \cdots & 0 & 1\\
+        0 & 0 & \cdots & 0 & 0
+    \end{pmatrix}
+    \]
+}
+
+\remark{
+    La matrice ci-dessus est un cas particulier de forme de Jordan.
+}
+\remark{\textbf{Comment trouver une base de trigonalisation de $u$ lorsque $u$ est nilpotent d'indice $k \leq n=dim(E)$ ?}\\
+    On a $Ker(u) \subset Ker(u^2) \subset \cdots \subset Ker(u^{k-1}) \subsetneq Ker(u^k) = E$.\\
+    On considère $B_1$ une base de $Ker(u)$, que l'on complète en une base $B_2$ de $Ker(u^2)$, que l'on complète en une base $B_3$ de $Ker(u^3)$, et ainsi de suite jusqu'à obtenir une base $B_k$ de $E$.\\
+    On a ainsi construit une base $B_k$ de $E$ telle que $Mat_{B_k}(u)$ est triangulaire supérieure avec des 0 sur la diagonale.\\
+}
+
+\theorem{Proposition}{Combinaison linéaire}{true}{
+    Soient $u,v \in End(E)$ deux endomorphismes nilpotents qui commutent.\\
+    Alors toute combinaison linéaire $au + bv$ avec $a,b \in K$ est nilpotente.
+}
+
+\section{Décomposition de Jordan Chévalley (ou Dunford)}
+
+\theorem{Théorème}{}{true}{
+    Soit $u \in End(E)$ tel que $P_u$ est scindé.\\
+    Il existe un unique $(d,e) \in End(E)^2$ tel que :
+    \begin{itemize}
+        \item $u = d + e$,
+        \item $d$ est diagonalisable,
+        \item $e$ est nilpotent,
+        \item $d$ et $e$ commutent.
+        \item $d,e \in K[u]$ (polynômes en $u$).
+    \end{itemize}.\\
+    C'est la \textbf{décomposition de Jordan Chévalley} (ou Dunford) de $u$.
+}
+
+\definition{
+    Soit $A \in M_n(K)$.\\
+    On dit que $A$ est nilpotente si il existe $k \geq 1$ tel que $A^k = 0$ (matrice nulle).
+}
+
+\theorem{Théorème}{Décomposition de Jordan Chévalley matricielle}{true}{
+    Soit $A \in M_n(K)$ tel que son polynôme caractéristique est scindé.\\
+    Il existe un unique couple $(D,N) \in M_n(K)^2$ tel que :
+    \begin{itemize}
+        \item $A = D + N$,
+        \item $D$ est diagonalisable,
+        \item $N$ est nilpotente,
+        \item $D$ et $N$ commutent,
+        \item $D,N$ sont des polynômes en $A$.
+    \end{itemize}
+}
+
+
 \end{document}
