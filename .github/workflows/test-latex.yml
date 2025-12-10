@@ -1,0 +1,29 @@
+name: Test LaTeX Compilation
+
+on:
+  push:
+    branches: [ "main", "feat/ci", "opt/rewriting" ]
+  pull_request:
+    branches: [ "main", "feat/ci", "opt/rewriting" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
+      - name: Find changed LaTeX files
+        id: latexfiles
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.tex$' > changed_tex.txt || true
+      - name: Compile changed LaTeX files
+        run: |
+          while IFS= read -r file; do
+            echo "Compiling $file"
+            pdflatex -interaction=nonstopmode "$file" || exit 1
+          done < changed_tex.txt
