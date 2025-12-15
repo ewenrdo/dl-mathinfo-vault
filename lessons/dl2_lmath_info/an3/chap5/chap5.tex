@@ -294,6 +294,39 @@ Soit $f \colon \mathbb{R}^p \to \mathbb{R}^q$ et $a \in U$, où $U \subset \math
     Ainsi, $f$ admet une dérivée directionnelle en $a$ selon la direction $h$.
 }
 
+\theorem{Proposition}{Lien avec le gradient}{true}{
+    On a que la dérivée directionnelle de $f$ en $a$ selon la direction $h$ est donnée par $Df(a) \cdot h = < \nabla f(a), h >$ où $\nabla f(a)$ est le gradient de $f$ en $a$.
+}
+
+\example{
+    Posons $f(x,y,z) = x^2 \cdot (1 + z \cdot cos(y))$.\\
+    On admet que $\nabla f(x,y,z) = \begin{pmatrix}
+        2x(1 + z \cdot cos(y)) \\
+        -x^2 z \cdot sin(y) \\
+        x^2 \cdot cos(y)
+    \end{pmatrix}$.\\
+
+    Donc la dérivée directionnelle de $f$ le long du vecteur $(1,1,1)$ au point $(1,\pi,1)$ est :
+    \[
+        Df(1,\pi,1) \cdot \begin{pmatrix}
+            1 \\
+            1 \\
+            1
+        \end{pmatrix} = < \nabla f(1,\pi,1), (1,1,1) >
+    \]
+    Or $\nabla f(1,\pi,1) = \begin{pmatrix}
+        2(1 + 1 \cdot cos(\pi)) \\
+        -1^2 \cdot 1 \cdot sin(\pi) \\
+        1^2 \cdot cos(\pi)
+    \end{pmatrix} = \begin{pmatrix}
+        0 \\    
+        0 \\
+        -1
+    \end{pmatrix}$.\\
+
+    \noindent Donc la dérivée directionnelle de $f$ le long du vecteur $(1,1,1)$ au point $(1,\pi,1)$ est $< (0,0,-1), (1,1,1) > = -1$.
+}
+
 \remark{Il existe des fonctions qui admettent des dérivées directionnelles en un point selon toutes les directions mais qui ne sont pas différentiables en ce point.}
 
 \cexample{
