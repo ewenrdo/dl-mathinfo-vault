@@ -680,4 +680,52 @@ A_{\lambda_i} =
     \end{itemize}
 }
 
+
+\example{
+    Soit $A = \begin{pmatrix}
+        3 & -1 & 1\\
+        2 & 0 & 1\\
+        1 & -1 & 2
+    \end{pmatrix}$.\\
+    On calcule facilement que :
+    \begin{itemize}
+        \item $P_A(X) = -(X-2)^2(X-1)$,
+        \item $m_a(2) = 2$, $m_g(2) = 1$,
+        \item $m_a(1) = m_g(1) = 1$.
+        \item $E_2 = Ker(A - 2I_3) = Vect\{(1,1,0)^T\}$,
+        \item $N_1 = E_1 = = Ker(A - I_3) = Vect\{(0,1,1)^T\}$.
+        \item $N_2 = Ker\big((A - 2I_3)^2\big) = Vect\{(1,1,0)^T, (0,0,1)^T\}$.
+    \end{itemize}
+    On a donc $N_1 + N_2 = \mathbb{R}^3$. (car $dim(N_1) + dim(N_2) = 3$ et $N_1 \cap N_2 = \{0\}$).\\
+    Donc $N_1 \oplus N_2 = \mathbb{R}^3$.\\
+    Par le théorème de Jordan Chévalley, il existe un unique $(D,N)$ tel que $A = D + N$ avec $D$ diagonalisable, $N$ nilpotente et $DN = ND$.\\
+    Or :
+    \begin{itemize}
+        \item $d(e_1) = 2e_1 + e_2 + e_3$
+        \item $d(e_2) = e_2 - e_2$
+        \item $d(e_3) = 2e_3$
+    \end{itemize}
+    Donc $D = Mat_{can}d = \begin{pmatrix}
+        2 & 1 & 0\\
+        1 & 1 & 1\\
+        1 & 0 & 1
+    \end{pmatrix}$ et $N = A - D = \begin{pmatrix}
+        1 & -1 & 1\\
+        1 & -1 & 1\\
+        0 & 0 & 0
+    \end{pmatrix}$.\\
+    De plus, $N^2 = 0_3$. Donc $N$ est nilpotente d'indice $2$.
+    Donc : $A = \begin{pmatrix}
+        2 & 1 & 0\\
+        1 & 1 & 1\\
+        1 & 0 & 1
+    \end{pmatrix} + \begin{pmatrix}
+        1 & -1 & 1\\
+        1 & -1 & 1\\
+        0 & 0 & 0
+    \end{pmatrix}$ : décomposition de Jordan Chévalley de $A$.\\\\
+    \textbf{Pour calculer $A^n$ :}\\
+    On utilise le fait que $D$ et $N$ commutent, le binôme de Newton donc et la nilpotence de $N$ :
+    \[A^n = (D + N)^n = \sum_{k=0}^{n} \binom{n}{k} D^{n-k}N^k = D^n + nD^{n-1}N\] (tous les termes avec $k \geq 2$ sont nuls car $N^2 = 0$).
+}
 \end{document}
