@@ -1,0 +1,127 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../components/components}
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{Terminale Spé Maths}
+\fancyhead[C]{Dénombrement}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Dénombrement}
+
+\section{Partie d'un ensemble}
+
+\definition{
+Soit $E$ un ensemble.
+
+\begin{itemize}
+  \item On dit qu'un ensemble $A$ est une \textbf{partie} de $E$ si tous les éléments de $A$ sont des éléments de $E$. On écrit dans ce cas $A \subseteq E$.
+  \item L'ensemble de toutes les parties de $E$ est noté $\mathcal{P}(E)$.
+\end{itemize}
+}
+
+\example{Notons $E$ l'ensemble des élèves du groupe de spécialité maths 4.}
+\noindent\carreaux{6}
+
+\example{
+    \begin{enumerate}
+        \item Si $E = \{0;1;2;3\}$ alors $\varnothing$, $\{0;1\}$, $\{0\}$, $\{0;2\}$ sont des parties de $E$.
+        \item $\{0; 2024\}$ et $\mathbb{Z}$ sont des parties de $\mathbb{R}$.
+    \end{enumerate}
+}
+
+\vocabulary{
+Une partie à 1 élément s'appelle un \textbf{singleton}. Une partie à 2 éléments s'appelle une \textbf{paire}.
+}
+
+\remark{
+Tout ensemble $E$ contient au moins deux parties : l'ensemble vide et lui-même. Autrement dit, nous avons toujours $\varnothing \subseteq E$ et $E \subseteq E$.
+}
+
+\theorem{Propriété}{Nombre de parties d'un ensemble fini}{}%
+{
+Soit $E$ un ensemble fini à $n$ éléments. Le nombre de parties de $E$ est égal à $2^n$. Autrement dit :
+\[
+\mathrm{Card}(\mathcal{P}(E)) = 2^n.
+\]
+}
+
+
+\noindent{\textbf{Démonstration :}\\
+    Lorsque l'on cherche à construire une partie de $E$, pour chaque élément de $E$ il y a deux choix possibles : soit il est dans cette partie, soit il n'y est pas.\\
+    Si un élément est dans cette partie, on peut considérer qu'on lui affecte la valeur 1, et la valeur 0 sinon.\\
+    Ainsi, cela revient à déterminer le nombre de $n$-uplets de $\{0;1\}$, ou encore le cardinal de l'ensemble $\{0;1\}^n$.\\
+    On sait que $\mathrm{Card}(\{0;1\}) = 2$, et par conséquent, d'après la propriété sur le cardinal du produit cartésien, on a :
+    \[
+    \mathrm{Card}(\{0;1\}^n) = 2^n.
+    \]
+}
+
+\newpage
+
+\training{On pose $E = \{\ln(3);\, e^\pi;\, 2024\}$.\\
+1. Déterminer le nombre de parties de $E$.\\
+\noindent{\carreaux{2}}\\\\
+2. Donner toutes les parties de $E$.\\
+\carreaux{4}
+}
+
+\section{Combinaisons}
+
+\subsection{Définition}
+
+\definition{
+Soit $E$ un ensemble fini de cardinal $n$ et $k$ un entier naturel tel que $k \le n$.
+
+\begin{itemize}
+  \item Une \textbf{combinaison} de $k$ éléments de $E$ est une partie de $E$ de cardinal $k$.
+  \item Le nombre de combinaisons de $k$ éléments de $E$ est $\binom{n}{k}$.
+\end{itemize}
+}
+
+\attention{
+Dans une combinaison, l'ordre dans lequel on énumère les éléments ne compte pas. Par exemple, si $a$ et $b$ sont deux éléments d'un ensemble $E = \{a, b\} = \{b, a\}$ (en tant qu'éléments de $\mathcal{P}(E)$) alors que $(a ; b) \ne (b ; a)$ (en tant qu'éléments de $E \times E$).
+}
+
+\theorem{Propriété}{}{true}{
+Soient $n$ et $k$ deux entiers naturels tels que $k \le n$. Alors :
+
+\begin{enumerate}
+  \item $\binom{n}{1} = n$ ; \qquad $\binom{n}{n} = 1$ ; \qquad et \qquad $\binom{n}{0} = 1$ ;
+  \item \textbf{Symétrie des coefficients binomiaux :} \quad $\displaystyle \binom{n}{n-k} = \binom{n}{k}$ ;
+  \item \textbf{Formule de Pascal :} \quad $\displaystyle \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}$.
+\end{enumerate}
+}
+
+\ndlr{Démonstration laissée à l'appréciation du lecteur.}
+
+\theorem{Propriété}{Somme des coefficients binomiaux}{}{
+    Soit $n \in \mathbb{N}$. Alors :
+    \[
+    \sum_{k=0}^{n} \binom{n}{k} = 2^n.
+    \]
+}
+
+\subsection{Nombre de combinaisons à $k$ éléments}
+
+\theorem{Propriété}{Nombre de combinaisons à $k$ éléments}{true}
+{
+Soient $n$ et $k$ deux entiers naturels tels que $0 \le k \le n$. Alors :
+\[
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+\]
+}
+
+
+\end{document}

@@ -2,8 +2,9 @@
 
 Bienvenue sur **Math-Lesson-Maker** ! Ce projet a pour vocation de faciliter et d’accélérer la création de documents pédagogiques en mathématiques, tout en garantissant une présentation claire, moderne et homogène. 
 
-> **Disclaimer MATHS-INFO 2** :
-> Les étudiants de MATHS-INFO 2 trouveront ici l’ensemble des feuilles de cours de l’année de mathématiques, régulièrement mises à jour.
+> **Disclaimer L2 MATH / MATHS-INFO 2** :
+> Les étudiants de L2 MATH / MATHS-INFO 2 trouveront ici l’ensemble des feuilles de cours de l’année de mathématiques, régulièrement mises à jour.
+> Je conseille vivement de consulter [ce site web](https://ewenrdo.fr/ressources) pour accéder à ces ressources, qui y sont rangées de manière plus structurée.
 
 L’objectif est de proposer un cadre unifié pour la rédaction de feuilles de TD et de cours, avec des outils LaTeX personnalisés pour illustrer, expliquer, et valoriser les contenus mathématiques. L’accent est mis sur la pédagogie : chaque commande vise à rendre les notions plus accessibles, à structurer les démonstrations, et à encourager la compréhension active.
 
@@ -87,3 +88,4 @@ Le projet a vocation à évoluer pour intégrer les avancées récentes et amél
 Si des modifications substantielles éloignent le projet des modèles d’origine, une réévaluation des conditions d’utilisation sera nécessaire.
 
 **Attention :** Le contenu (plan du cours) du dossier `lessons/dl2_lmath_info` est tous droits réservés à l'Université Paris Cité ([u-pariscite.fr](https://u-pariscite.fr)). Toute réutilisation ou diffusion de ce contenu est strictement interdite sans l'accord de l'université. Il arrive que je modifie le cours pour le rendre plus clair, mais le fond reste le même. Merci de respecter cette condition.
+**UPDATE 16/01/2026 :** Dorénavant, les crédits seront mentionnés sur [ewenrdo.fr/ressources](https://ewenrdo.fr/ressources) pour une meilleure visibilité et accessibilité. Le lecteur est invité à s'y référer pour toute question relative aux droits d'utilisation.

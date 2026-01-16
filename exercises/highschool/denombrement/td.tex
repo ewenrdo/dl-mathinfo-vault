@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Distances, normes et topologie}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Manipuler un ensemble, ses parties et l'opérateur d'inclusion. & ? \\
+\hline
+Déterminer le cardinal d'une partie d'un ensemble. & ? \\
+\hline
+Utiliser les formules de combinaisons. & ? \\
+\hline
+Utiliser la formule de combinaison à k éléments. & ? \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\exercise{1}{}{
+    On considère l'ensemble $E = \{1,2,3\}$.
+    \begin{enumerate}
+        \item Dire si les ensembles suivants sont des parties de E :
+        \begin{itemize}
+            \item $\{1 ; 3\}$
+            \item $\{2 ; 4\}$
+            \item $\varnothing$
+        \end{itemize}
+        \item Donner deux parties différentes de $E$ ayant exactement un élément.
+    \end{enumerate}
+}
+
+\exercise{2}{}{
+    Soit $E$ un ensemble à $7$ éléments.
+    \begin{enumerate}
+        \item Donner le nombre de parties de $E$.
+        \item Combien $E$ possède-t-il de parties non vides ?
+        \item Combien $E$ possède-t-il de parties à $3$ éléments ?
+    \end{enumerate}
+}
+
+\exercise{3}{}{
+    Dans un groupe de $12$ élèves, on souhaite former un jury de $4$ élèves.
+    \begin{enumerate}
+        \item Expliquer pourquoi l'ordre n'intervient pas dans le choix des élèves.
+        \item Donner le nombre de juries possibles.
+    \end{enumerate}
+}   
+\switchcolumn
+\exercise{4}{}{
+    Un club comporte $8$ filles et $5$ garçons. On forme une équipe de $3$ élèves.
+    \begin{enumerate}
+        \item Combien d'équipes différentes peut-on former ?
+        \item Combien d'équipes comportent uniquement des filles ?
+        \item Combien d'équipes peut-on composer avec exactement $1$ garçon ?
+    \end{enumerate} 
+}
+
+
+\exercise{5}{}{
+    Calculer :
+    \begin{enumerate}
+        \item $\binom{6}{2}$, $\binom{6}{4}$, $\binom{6}{0}$
+        \item Vérifier la symétrie des coefficients binomiaux pour $n = 6$.
+        \item Vérifier la formule de Pascal :
+        \[
+            \binom{5}{2} + \binom{5}{3} = \binom{6}{3}
+        \]
+    \end{enumerate}
+}
+
+
+\exercise{9}{}{
+    On considère l’ensemble $E$ à $10$ éléments.
+    \begin{enumerate}
+        \item Combien de parties de $E$ ont un nombre pair d’éléments ?
+        \item Combien de parties ont un nombre impair d’éléments ?
+        \item Justifier que ces deux nombres sont égaux.
+    \end{enumerate}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{10}{Type-bac}{
+    On considère une classe de $20$ élèves.
+    
+    \textbf{Partie A}
+    \begin{enumerate}
+        \item Combien de groupes de $5$ élèves peut-on former ?
+        \item Combien de groupes contiennent un élève donné ?
+    \end{enumerate}
+    
+    \textbf{Partie B}
+    On considère l’ensemble $E$ des $20$ élèves.
+    \begin{enumerate}
+        \item Donner le nombre de parties de $E$.
+        \item Combien de parties contiennent exactement $5$ élèves ?
+        \item Retrouver le résultat de la partie A à l’aide des combinaisons.
+    \end{enumerate}
+    
+    \textbf{Partie C}
+    On choisit au hasard une partie de $E$.
+    \begin{enumerate}
+        \item Quelle est la probabilité que cette partie contienne exactement $5$ élèves ?
+        \item Quelle est la probabilité qu’elle soit non vide ?
+    \end{enumerate}
+}
+
+\switchcolumn
+
+\end{paracol}
+
+\end{document}
