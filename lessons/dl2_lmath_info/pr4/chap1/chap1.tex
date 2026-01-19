@@ -20,8 +20,86 @@
 
 \begin{document}
 
-\docTitle{Chapitre 1 : Combinatoire}
+\docTitle{Chapitre 1 : Dénombrement}
 
-\textit{Cours à venir.}
+\section{Cardinal d'un ensemble}
+
+\definition{
+    Soit $E$ un ensemble.    
+    On dit que $E$ est \textbf{fini} s'il existe un entier naturel $n \in \mathbb{N}$ et une bijection entre $E$ et l'ensemble $\{1, 2, \ldots, n\}$.\\
+    Si $n = 0$, on dit que $E$ est vide et on note $E = \emptyset$.\\\\
+    On appelle $n$ le \textbf{cardinal} de $E$ et on le note $Card(E)$.
+}
+
+\theorem{Lemme}{Égalité des cardinaux}{false}{
+    Soient $A$ et $B$ deux ensembles finis non vides. Alors, on a $Card(A) = Card(B)$ si et seulement si il existe une bijection entre $A$ et $B$.
+}
+\noindent{\textbf{Démonstration :}\\
+Soit $n \geq 1$ tq $Card(A) = n$.\\
+\textit{On a au tableau le dessin d'une bijection entre $A$ et $S_n = \{1, 2, \ldots, n\}$.}\\
+$\Rightarrow \exists f \colon A \to S_n$ bijective.\\
+Si $Card(B) = n$, alors $\exists g \colon B \to S_n$ bijective.\\
+Donc, $g^{-1} \colon S_n \to B$ est bijective.\\
+Considérons $g^{-1} \circ f \colon A \to B$. C'est une bijection entre $A$ et $B$ par composition de bijections.\\
+Donc, $Card(A) = Card(B)$.\\\\
+}
+
+\training{Montrer que si $A$ et $B$ sont en bijection, alors $Card(A) = Card(B)$.}
+\noindent\carreaux{10}
+
+\definition{
+    Soient $E$ et $F$ deux ensembles non vides.
+    Alors on appelle le \textbf{produit cartésien} de $E$ et $F$ et on note $E \times F := \{(x,y) \mid x \in E, y \in F\}$.
+}
+\example{
+    Soient $E = \{1, 2\}$ et $F = \{5,6,7\}$.\\
+    Alors, $E \times F = \{(1,5), (1,6), (1,7), (2,5), (2,6), (2,7)\}$.
+}
+
+\theorem{Proposition}{Principe multiplicatif}{false}{
+    Soient $A$ et $B$ deux ensembles finis non vides. Alors, $A \times B$ est fini et on a :
+    \[
+        Card(A \times B) = Card(A) \times Card(B)
+    \].\\
+    En règle générale, si $A_1, A_2, \ldots, A_k$ sont des ensembles finis non vides, alors :
+    \[
+        Card(A_1 \times A_2 \times \ldots \times A_k) = \prod_{i=1}^{k} Card(A_i)
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+On démontre cette proposition pour le cas $k=2$.\\
+Soient $A$ et $B$ deux ensembles finis non vides.\\
+Soient $n = Card(A)$ et $m = Card(B)$.\\
+
+On pose $A = \{1, 2, \ldots, n\}$ et $B = \{1, 2, \ldots, m\}$. (ça revient au même par le lemme précédent)\\
+On peut dresser le tableau suivant pour représenter $A \times B$ :\\
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+    & 1 & 2 & $\ldots$ & n \\
+    \hline
+    1 & (1,1) & (2,1) & $\ldots$ & (n,1) \\
+    \hline
+    2 & (1,2) & (2,2) & $\ldots$ & (n,2) \\
+    \hline
+    $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
+    \hline
+    m & (1,m) & (2,m) & $\ldots$ & (n,m) \\
+\end{tabular}
+\end{center}
+On remarque que le tableau contient $n$ colonnes et $m$ lignes.\\
+Donc, le tableau contient $n \times m$ cases.\\
+Chaque case correspond à un élément de $A \times B$.\\\\
+On pose donc $f \colon A \times B \to \{1, 2, \ldots, n \times m\}$ l'application définie par $f((i,j)) = i + (j-1) \times n$ (l'idée est de numéroter les cases de gauche à droite et de haut en bas).\\
+On vérifie facilement que $f$ est une bijection (strictement croissante et bien définie).\\
+Donc, $Card(A \times B) = n \times m = Card(A) \times Card(B)$.\\
+}
+
+%\theorem{Formulaire}{Cas d'utilisation des formules de dénombrement}{false}{
+%    \begin{center}
+%    \includegraphics[width=1\textwidth]{./images/combinatoire_formules.png}
+%    \captionof{figure}{Arbre décisionnel illustrant les cas d'utilisation des formules de dénombrement}
+%\end{center}
+%}
 
 \end{document}
