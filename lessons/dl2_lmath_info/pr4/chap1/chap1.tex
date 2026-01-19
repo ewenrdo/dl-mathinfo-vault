@@ -95,6 +95,65 @@ On vérifie facilement que $f$ est une bijection (strictement croissante et bien
 Donc, $Card(A \times B) = n \times m = Card(A) \times Card(B)$.\\
 }
 
+\definition{
+    Soit $E$ un ensemble non vide et $n \geq 1$ un entier naturel.\\
+    Les éléments de $E^n := \underbrace{E \times E \times \ldots \times E}_{n \text{ fois}}$ sont appelés des \textbf{n-uplets} d'éléments de $E$, et on les note $(\omega_1, \omega_2, \ldots, \omega_n)$ avec $\omega_i \in E$ pour tout $i \in \{1, 2, \ldots, n\}$.
+}
+
+\theorem{Proposition}{Cardinal des n-uplets}{false}{
+    Soient $n,M \geq 1$ et soit $E$ un ensemble tel que $Card(E) = M$.\\
+    On dit que le nombre de $n$-uplets d'éléments de $E$ est égal à $M^n$, c'est-à-dire :
+    \[
+        Card(E^n) = M^n
+    \]
+}
+
+\example{L'ensemble des dates d'anniversaires des 8 étudiants du premier rang est décrit par $(\omega_1, \omega_2, \ldots, \omega_8)$ où chaque $\omega_i$ est une date parmi les 366 possibles \textit{(années bissextiles)}.\\
+Le nombre de configurations possibles pour les dates d'anniversaires des 8 étudiants est donc $366^8$.
+}
+
+\definition{
+    Soit $E$ un ensemble de cardinal $M \geq 1$ et soit $0 \leq n \leq M$.\\
+    Un \textbf{arrangement} de $n$ éléments de $E$ est un n-uplet $(\omega_1, \omega_2, \ldots, \omega_n)$ d'éléments de $E$ tels que tous les $\omega_i$ sont distincts.\\
+    On parle de $n$-uplets d'éléments distincts de $E$.
+}
+
+\vocabulary{Quand $n = M$, on parle de \textbf{permutations} d'éléments de $E$ \textit{(on parle de $A_M^M$)}.}
+
+\example{Si on reprend l'exemple des dates d'anniversaires, un arrangement de 3 éléments parmi les 8 étudiants du premier rang pourrait être $(\omega_1, \omega_3, \omega_5)$ où les dates d'anniversaires des étudiants 1, 3 et 5 sont distinctes.}
+
+\theorem{Proposition}{Cardinal des arrangements}{false}{
+    Soient $E$ un ensemble de cardinal $M \geq 1$ et soit $0 \leq n \leq M$.\\
+    Le nombre d'arrangements de $n$ éléments de $E$ est donné par la formule :
+    \[
+        A_M^n = \frac{M!}{(M-n)!}
+    \]
+    Dans le cas d'une permutation, on a $A_M^M = M!$ \textit{(application de la formule avec $n = M$)}.
+}
+
+\noindent{\textbf{Démonstration :}\\
+Soit $E$ un ensemble de cardinal $M \geq 1$ et soit $0 \leq n \leq M$.\\
+On cherche à compter le nombre d'arrangements de $n$ éléments de $E$.\\
+
+Soit $(\omega_1, \omega_2, \ldots, \omega_n)$ un arrangement de $n$ éléments de $E$.\\
+- Pour choisir $\omega_1$, on a $M$ possibilités.\\
+- Pour choisir $\omega_2$, on a $M-1$ possibilités (car $\omega_2$ doit être distinct de $\omega_1$).\\
+$\vdots$\\
+- Pour choisir $\omega_n$, on a $M-n+1$ possibilités (car $\omega_n$ doit être distinct de tous les $\omega_i$ précédents).\\
+Par le principe multiplicatif, le nombre total d'arrangements de $n$ éléments de $E$ est donc :
+\[
+    A_M^n = M \times (M-1) \times (M-2) \times \ldots \times (M-n+1) = \frac{M!}{(M-n)!}
+\]
+}
+
+\reminder{On rappelle que $k! = \prod_{i=1}^{k} i$ pour tout $k \geq 1$ et $0! = 1$.}
+
+\example{Si on reprend l'exemple des dates d'anniversaires, le nombre d'arrangements de 3 éléments parmi les 8 étudiants du premier rang est donné par :
+\[
+    A_8^3 = \frac{8!}{(8-3)!} = \frac{8!}{5!} = 8 \times 7 \times 6 = 336
+\]
+}
+
 %\theorem{Formulaire}{Cas d'utilisation des formules de dénombrement}{false}{
 %    \begin{center}
 %    \includegraphics[width=1\textwidth]{./images/combinatoire_formules.png}
