@@ -154,6 +154,29 @@ Par le principe multiplicatif, le nombre total d'arrangements de $n$ éléments 
 \]
 }
 
+\theorem{Proposition}{Dénombrement d'applications}{false}{
+    Soient $A$ et $B$ deux ensembles finis tels que $Card(A) = n$ et $Card(B) = M$ (avec $n, M \geq 1$).\\
+    Alors :
+    \begin{enumerate}
+        \item L'ensemble $\mathcal{F}(A,B)$ des applications de $A$ dans $B$ est fini et on a : $Card(\mathcal{F}(A,B)) = M^n$.
+        \item Si $n \leq M$, le nombre de fonctions injectives de $A$ dans $B$ est donné par : $A_M^n$.
+        \item Si $n = M$, le nombre de fonctions bijectives de $A$ dans $B$ est donné par : $A_M^M = M!$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Démonstration :}\\
+Soient $A$ et $B$ deux ensembles finis tels que $Card(A) = n$ et $Card(B) = M$ (avec $n, M \geq 1$).\\
+\begin{enumerate}
+    \item Soit $f \in \mathcal{F}(A,B)$.\\
+    On peut représenter $f$ par un n-uplet $(f(a_1), f(a_2), \ldots, f(a_n))$ d'éléments de $B$ où $a_i \in A$ pour tout $i \in \{1, 2, \ldots, n\}$.\\
+    Chaque $f(a_i)$ peut prendre n'importe quelle valeur dans $B$, donc on a $M$ possibilités pour chaque $f(a_i)$.\\
+    Par le principe multiplicatif, le nombre total de fonctions de $A$ dans $B$ est donc : $M^n$. \textit{Réciproquement, chaque n-uplet d'éléments de $B$ correspond à une fonction de $A$ dans $B$.}
+    
+    \item Toute fonction injective correspond à un arrangement de $n$ éléments de $B$ (car les images des éléments de $A$ doivent être distinctes).\\
+    \item \textit{Laissée en exercice.}
+\end{enumerate}}
+
+
 %\theorem{Formulaire}{Cas d'utilisation des formules de dénombrement}{false}{
 %    \begin{center}
 %    \includegraphics[width=1\textwidth]{./images/combinatoire_formules.png}
