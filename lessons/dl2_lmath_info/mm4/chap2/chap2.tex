@@ -252,6 +252,18 @@ On a $\forall i \in \{1, 2, \ldots, n\}, f_i(e_j - e_j') = 0$.\\
 Donc par le lemme de séparation, $e_j - e_j' = 0$ c'est-à-dire $e_j = e_j'$.\\\\
 
 \textbf{Existence :}\\
+Notons $E^{**} = (E^*)^*$ (l'espace bidual de $E$).\\
+Soit $J : E \to E^{**}$ l'application définie par : $J \colon x \mapsto (\varphi \mapsto \langle \varphi, x \rangle)$.\\
+$J$ est linéaire, montrons qu'elle est injective.\\\\
+Soit $x \in ker(J)$, donc $ev_x = 0_{E^{**}}$.\\
+Alors $\forall \varphi \in E^*, \langle \varphi, x \rangle = 0$.\\
+Donc par le lemme de séparation, $x = 0$.\\
+Donc $ker(J) = \{0\}$ et $J$ est injective.\\\\
 
+Comme $dim(E) = dim(E^{**}) = n < +\infty$ et que $J$ est injective, $J$ est un isomorphisme.\\\\
+Donc $J$ est surjective.\\
+Donc $J$ est bijective.\\\\
+
+La base antéduale $(e_1, \ldots, e_n)$ est alors définie comme $(J^{-1}(f_1^*), \ldots, J^{-1}(f_n^*))$. $\Box$
 }
 \end{document}
