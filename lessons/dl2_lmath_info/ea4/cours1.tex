@@ -86,4 +86,19 @@ On sait que le programme termine, car la boucle for itère un nombre fini de foi
 \textbf{Complexité en temps:} autant d'additions élémentaires (\textit{ie.} de chiffres) que de chiffres dans les nombres. Donc \textbf{linéaire EN la taille des entrées} (préciser linéaire en quoi est important, éviter les sous-entendus).\\
 Donc ici, dire que "$n_1$ et $n_2$ sont de taille au plus $l$" signifie que $n_1,n_2 \in O(10^l)$, ou encore que $l = 1 + \lfloor max(\log_{10}(n_1), \log_{10}(n_2)) \rfloor$.
 
+\example{Multiplication de deux entiers.}
+\begin{lstlisting}[language=Python]
+def multiplication_naive(nb1, nb2) :
+# nb1 tableau de chiffres représentant un entier n1
+# nb2 entier n2 représenté de manière usuelle (type int)
+    res = [0] * len(nb1) # tableau de 0 de longueur identique que nb1
+    for i in range(1, nb2+1) : # de i=1 à i=nb2, donc nb2 tours
+        res = addition(res, nb1)
+    return res
+\end{lstlisting}
+
+\textbf{Correction:} similaire à l'addition, en utilisant l'invariant "après l'étape $i$, $res \equiv n_1 \times i [10^l]$" où $l$ est la taille de $n_1$.\\
+\textbf{Complexité en temps:} $n_2$ additions, de grands entiers. Chaque addition est de coût linéaire en la taille du résultat, donc en $log(n_1 \times n_2) = log(n_1) + log(n_2)$.\\
+Complexité en $O(n_2 \times (log(n_1 \cdot n_2)))$, soit $O(l \times 10^l)$ si $n_1$ et $n_2$ sont de taille $l$.
+
 \end{document}
