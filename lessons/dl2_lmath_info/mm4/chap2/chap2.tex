@@ -1,0 +1,109 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info MM4}
+\fancyhead[C]{Algèbre linéaire}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Formes linéaires et dualité}
+
+\section{Formes linéaires et hyperplan}
+
+\reminder{
+    $E$ et $F$ des $\mathbb{K}$-espaces vectoriels.
+    On note $\mathcal{L}(E,F)$ l'ensemble des applications linéaires de $E$ dans $F$.
+}
+
+\definition{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel.\\
+    On appelle \textbf{forme linéaire} sur $E$ toute application linéaire de $E$ dans $\mathbb{K}$.\\\\
+    
+    On appelle l'espace dual de $E$ et on note $E^*$ l'ensemble des formes linéaires sur $E$ :
+    \[E^* = \mathcal{L}(E, \mathbb{K})\]
+}
+
+\remark{Si $\varphi \in E^*$ et $x \in E$, on peut noter $\varphi(x) = \langle \varphi, x \rangle$.}
+\vocabulary{On appelle $\langle, \rangle$ le crochet de dualité.}
+
+\example{$E = \mathbb{R}^3$.\\
+On pose $f(x,y,z) = 3x + 2y - z$. Alors $f \in E^*$.}
+
+\theorem{Proposition}{}{false}{
+    L'image d'un élément de $E^*$ est $\mathbb{K}$ ou $\{0\}$ et $dim_\mathbb{K}(\mathbb{K}) = 1$.\\\\
+    \textit{
+        $Im(f) = \{0\} \Leftrightarrow f = 0$.
+    }
+}
+
+\noindent{\textbf{Preuve :} Appliquer le théorème du rang.}
+
+\definition{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel.\\
+    On appelle \textbf{hyperplan} de $E$ le noyau d'une forme linéaire non nulle sur $E$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel et soit $H$ un sous-espace vectoriel de $E$.\\
+    $H$ est un hyperplan de $E$ $\Leftrightarrow$ $\exists x_0 \in E \setminus \{0\}$ tel que $E = H \oplus Vect(x_0)$.\\\\
+    De plus, si $dim(E)=n$, $H$ est un hyperplan de $E$ $\Leftrightarrow$ $dim(H) = n-1$.
+}
+\remark{Le prof a noté $\mathbb{K}x_0$ au lieu de $Vect(x_0)$.}
+
+\noindent{\textbf{Démonstration :}\\
+Supposons que $H$ est un hyperplan de $E$.\\
+Par définition, il existe $f \in E^* \setminus \{0\}$ tel que $H = Ker(f)$.\\\\
+Soit $x_0 \in E$ tel que $f(x_0) \neq 0$. En particulier, $f(x_0) \neq 0$ (car $f$ est non nulle).\\
+Montrons que $E = H \oplus Vect(x_0)$.\\
+Soit $x \in H \cup Vect(x_0)$.\\
+Comme $x \in Vect(x_0)$, il existe $\lambda \in \mathbb{K}$ tel que $x = x_0 * \lambda$.\\
+Or $x \in H \Rightarrow 0 = f(x) = f(x_0 * \lambda) = \lambda f(x_0)$.\\
+Comme $f(x_0) \neq 0$, on en déduit que $\lambda = 0$ et donc $x = 0$ et $H \cap Vect(x_0) = \{0\}$.\\\\
+
+Montrons que $E = H + Vect(x_0)$.\\
+Soit $x \in E$.\\
+On a $x = \underbrace{x - \frac{f(x)}{f(x_0)} x_0}_{\in H} + \underbrace{\frac{f(x)}{f(x_0)} x_0}_{\in Vect(x_0)}$.\\
+Donc $E = H + Vect(x_0)$ et finalement $E = H \oplus Vect(x_0)$.\\\\
+
+Réciproquement, supposons qu'il existe $x_0 \in E \setminus \{0\}$ tel que $E = H \oplus Vect(x_0)$.\\
+Soit $p$ la projection sur $Vect(x_0)$ parallèlement à $H$. \textit{(ie. pour $x \in E$, $p(x)$ est l'unique élément $\lambda x_0$ dans la décomposition $x = h + \lambda x_0$ avec $h \in H$ et $\lambda \in \mathbb{K}$)}.\\
+Pour $x \in E$, on note $\lambda(x) \in \mathbb{K}$ tel que $p(x) = \lambda(x) x_0$.\\
+On a $\lambda : E \to \mathbb{K} \in E^*$ (il suffit de montrer que $\lambda$ est linéaire).\\
+De plus, $\lambda(x_0) = 1$ par définition donc $\lambda \in E^* \setminus \{0\}$ et $\forall h \in H, \lambda(h) = 0$ (car $p(h) = 0$).\\
+Doc $H = Ker(\lambda)$, c'est-à-dire que $H$ est un hyperplan de $E$. $\Box$}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel et soient $f,g \in E^*$.\\
+    \[ker(f) = ker(g) \Leftrightarrow \exists \lambda \in \mathbb{K} \setminus \{0\}, g = \lambda f\] \textit{(ie. $f$ et $g$ sont proportionnelles).}
+}
+
+\noindent{\textbf{Démonstration :}\\
+    Comme $f$ et $g$ sont non nulles, $ker(f)=ker(g)$ est un hyperplan de $E$.\\
+    Donc $E$ s'écrit comme $E = H \oplus Vect(x_0)$ avec $H = ker(f) = ker(g)$ et $x_0 \in E \setminus \{0\}$.\\\\
+    En particulier, $x_0 \notin ker(f)$ et $x_0 \notin ker(g)$. (car sinon $E = ker(f)$ ou $E = ker(g)$ et donc $f=0$ ou $g=0$).\\\\
+    Donc posons $\lambda = \frac{f(x_0)}{g(x_0)}$.\\
+    Montrons que $f = \lambda g$.\\
+    Soit $x \in E$.\\
+    On écrit $x = h + \mu x_0$ avec $h \in H$ et $\mu \in \mathbb{K}$.\\
+    Alors $f(x) = f(h + \mu x_0) = f(h) + \mu f(x_0) = \mu f(x_0)$ (car $h \in H = ker(f)$).\\
+    Et de même $g(x) = g(h + \mu x_0) = g(h) + \mu g(x_0) = \mu g(x_0) = \lambda \mu f(x)$.\\
+    Donc $g = \lambda f$. $\Box$
+}
+
+\section{Bases duales}
+
+\end{document}
