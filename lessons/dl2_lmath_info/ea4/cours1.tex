@@ -81,4 +81,9 @@ def addition(nb1, nb2):                        # deux entiers sous forme de tabl
 print(addition([7,5,3,1], [8,6,4,2]))  # affiche [5,2,8,3] pour 1357 + 2468 = 3825
 \end{lstlisting}
 
+On sait que le programme termine, car la boucle for itère un nombre fini de fois (la taille des tableaux).\\
+\textbf{Correction:} en montrant l'invariant : "après $i$ tours de boucle, $res \equiv n_1 + n_2 [10^i]$" (ie. les $i$ premiers chiffres de la somme sont corrects). On peut faire une preuve par récurrence sur $i$.\\
+\textbf{Complexité en temps:} autant d'additions élémentaires (\textit{ie.} de chiffres) que de chiffres dans les nombres. Donc \textbf{linéaire EN la taille des entrées} (préciser linéaire en quoi est important, éviter les sous-entendus).\\
+Donc ici, dire que "$n_1$ et $n_2$ sont de taille au plus $l$" signifie que $n_1,n_2 \in O(10^l)$, ou encore que $l = 1 + \lfloor max(\log_{10}(n_1), \log_{10}(n_2)) \rfloor$.
+
 \end{document}
