@@ -122,9 +122,23 @@ Doc $H = Ker(\lambda)$, c'est-à-dire que $H$ est un hyperplan de $E$. $\Box$}
     \end{cases}\]
 
     De manière équivalente, si $x \in E$ s'écrit $x = \sum_{j=1}^n x_j e_j$ (coordonnées de $x$ dans la base $(e_1, \ldots, e_n)$), alors :
-    $\langle e_j^*, x \rangle = x_j$.\\
+    $\langle e_i^*, x \rangle = x_i$. (car $\langle e_i^*, \sum_{j=1}^n x_j e_j \rangle = \sum_{j=1}^n x_j \langle e_i^*, e_j \rangle = x_i$)\\
 
     Ou encore $x = \sum_{j=1}^n \langle e_j^*, x \rangle e_j$.
 }
+
+\noindent{\textbf{Preuve de pourquoi est-ce une base :}\\
+
+Montrons que $(e_1^*, e_2^*, \ldots, e_n^*)$ est une base de $E^*$.\\
+Comme il y a $n$ vecteurs dans cette famille, il suffit de montrer que cette famille est libre.\\\\
+
+Soit $\lambda_1, \lambda_2, \ldots, \lambda_n \in \mathbb{K}$ tels que $\sum_{i=1}^n \lambda_i e_i^* = 0_{E^*}$.\\
+Montrons que tous les $\lambda_i$ sont nuls.\\\\
+On applique en $e_j$ l'application linéaire $\sum_{i=1}^n \lambda_i e_i^*$ :
+\[\left(\sum_{i=1}^n \lambda_i e_i^*\right)(e_j) = \sum_{i=1}^n \lambda_i \langle e_i^*, e_j \rangle = \lambda_j = 0\]
+Donc la famille est libre et c'est bien une base de $E^*$. $\Box$
+}
+
+
 
 \end{document}
