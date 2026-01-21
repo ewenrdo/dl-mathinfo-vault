@@ -152,6 +152,38 @@ Donc la famille est libre et c'est bien une base de $E^*$. $\Box$
 
 \subsection{Représentation matricielle}
 
+\theorem{Proposition}{Couplage en base et lien avec les matrices}{true}{
+    Soit $E$ un espace vectoriel de dimension $n$ sur un corps $\mathbb{K}$. 
+    Soit $(e_1,\dots,e_n)$ une base de $E$ et $(e_1^*,\dots,e_n^*)$ sa base duale.\\
+
+    Soit $x \in E$ et $\varphi \in E^*$ écrits sous la forme
+    \[
+        x = \sum_{i=1}^n x_i e_i
+        \qquad\text{et}\qquad
+        \varphi = \sum_{i=1}^n y_i e_i^*.
+    \]
+    Alors 
+    \[
+        \langle \varphi, x \rangle = \sum_{i=1}^n y_i x_i.
+    \]
+    De plus, si l'on pose
+    \[
+        X = \begin{pmatrix}
+            x_1 \\ \vdots \\ x_n
+        \end{pmatrix}
+        \qquad\text{et}\qquad
+        Y = \begin{pmatrix}
+            y_1 \\ \vdots \\ y_n
+        \end{pmatrix},
+    \]
+    on obtient
+    \[
+        \langle \varphi, x \rangle = {}^tY\,X.
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+
 Soit $(e_1, \ldots, e_n)$ une base de $E$ et $(e_1^*, \ldots, e_n^*)$ sa base duale.\\
 Soit $x \in E$ et $\varphi \in E^*$.\\
 On écrit $x = \sum_{i=1}^n x_i e_i$ et $\varphi = \sum_{i=1}^n y_i e_i^*$.\\
@@ -162,17 +194,23 @@ On écrit $x = \sum_{i=1}^n x_i e_i$ et $\varphi = \sum_{i=1}^n y_i e_i^*$.\\
     x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}$ et $Y = \begin{pmatrix}
     y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}$, on a :
 \[\langle \varphi, x \rangle = { }^t Y X\]
-
-\theorem{Résumé}{}{true}{
-    \[\langle \varphi, x \rangle = \sum_{i=1}^n y_i x_i\]
-    Ou encore, si on pose $X = \begin{pmatrix}
-        x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}$ et $Y = \begin{pmatrix}
-        y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}$, on a :
-    \[\langle \varphi, x \rangle = { }^t Y X\]
+$\Box$
 }
 
 \subsection{Pratique : Calcul de bases duales}
 
+\definition{
+    On appelle \textbf{matrice de passage de $B$ vers $C$} la matrice dont les colonnes sont les coordonnées des vecteurs de la base $C$ dans la base $B$.\\
+    On la note $P_{B \to C}$.
+}
+
+\reminder{On a la relation suivante par rapport aux coordonnées : $X_C = P_{B \to C} X_B$.}
+
+\theorem{Proposition}{Relation entre matrices de passage}{false}{
+    ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$.
+}
+
+\noindent{\textbf{Démonstration :}\\
 Soit $B = (u_1, u_2, \ldots, u_n)$ une base de $\mathbb{R}^n$ et $B_C = (e_1, e_2, \ldots, e_n)$ la base canonique de $\mathbb{R}^n$.\\
 Soit $B^* = (u_1^*, u_2^*, \ldots, u_n^*)$ la base duale de $(u_1, u_2, \ldots, u_n)$ et $B_C^* (e_1^*, e_2^*, \ldots, e_n^*)$ la base duale de $(e_1, e_2, \ldots, e_n)$.\\
 
@@ -187,11 +225,10 @@ Question : peut-on calculer $P$ à partir de $A$ ?\\
 $\delta_ij = \langle u_i^*, u_j \rangle$ (par définition de la base duale).
 $= \langle \sum_{k=1}^n p_{ki} e_k^*, \sum_{l=1}^n a_{lj} e_l \rangle = \sum_{k=1}^n \sum_{l=1}^n p_{ki} a_{lj} \langle e_k^*, e_l \rangle = \sum_{k=1}^n p_{ki} a_{kj}$.\\
 
-\textit{(non lisible au tableau depuis ma place, cf. Laurent)}
-
-\theorem{Proposition}{Relation entre matrices de passage}{false}{
-    ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$.
+Donc la matrice $I_n$ est égale à la matrice produit ${ }^t P A$. \\
+Donc ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$. $\Box$
 }
+
 
 \example{
     Soit $u_1 = { }^t (1 1)$ et $u_2 = { }^t (-1 2)$.\\
