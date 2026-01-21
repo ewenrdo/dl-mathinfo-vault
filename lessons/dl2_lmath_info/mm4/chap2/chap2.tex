@@ -108,6 +108,8 @@ Doc $H = Ker(\lambda)$, c'est-à-dire que $H$ est un hyperplan de $E$. $\Box$}
 
 \section{Bases duales}
 
+\subsection{Définition et exemples}
+
 \theorem{Proposition}{Dimension de l'espace dual}{true}{
     Soit $E$ un $\mathbb{K}$-espace vectoriel de dimension finie $n$.
     Alors $dim(E^*) = dim_{\mathbb{K}}(E) \cdot dim_{\mathbb{K}}(\mathbb{K}) = n \cdot 1 = n$.
@@ -139,6 +141,79 @@ On applique en $e_j$ l'application linéaire $\sum_{i=1}^n \lambda_i e_i^*$ :
 Donc la famille est libre et c'est bien une base de $E^*$. $\Box$
 }
 
+\example{
+    Dans $\mathbb{R}^n$, soit $(e_1, \ldots, e_n)$ la base canonique.\\
+    Notons $(e_1^*, \ldots, e_n^*)$ sa base duale (canonique).\\
+    On a : $\forall i \in \{1, \ldots, n\}, \langle e_i^*, (x_1, \ldots, x_n) \rangle = x_i$.\\
+    C'est à dire, $e_i^* : \mathbb{R}^n \to \mathbb{R}, (x_1, \ldots, x_n) \mapsto x_i$.
+}
 
+\remark{C'est un fait général, $(e_1^*, \ldots, e_n^*)$ est la base de $E^*$ telle que chaque $e_i^*$ extrait la $i$-ième coordonnée dans la base $(e_1, \ldots, e_n)$.}
+
+\subsection{Représentation matricielle}
+
+Soit $(e_1, \ldots, e_n)$ une base de $E$ et $(e_1^*, \ldots, e_n^*)$ sa base duale.\\
+Soit $x \in E$ et $\varphi \in E^*$.\\
+On écrit $x = \sum_{i=1}^n x_i e_i$ et $\varphi = \sum_{i=1}^n y_i e_i^*$.\\
+
+\noindent Alors : $\langle \varphi, x \rangle = \left\langle \sum_{i=1}^n y_i e_i^*, \sum_{j=1}^n x_j e_j \right\rangle = \sum_{i=1}^n y_i \langle e_i^*, \sum_{j=1}^n x_j e_j \rangle = \sum_{i=1}^n \sum_{j=1}^n y_i x_j \langle e_i^*, e_j \rangle = \sum_{i=1}^n \sum_{j=1}^n y_i x_j \delta_{ij} = \sum_{i=1}^n y_i x_i$.\\
+
+\noindent Autrement dit, si on pose $X = \begin{pmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}$ et $Y = \begin{pmatrix}
+    y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}$, on a :
+\[\langle \varphi, x \rangle = { }^t Y X\]
+
+\theorem{Résumé}{}{true}{
+    \[\langle \varphi, x \rangle = \sum_{i=1}^n y_i x_i\]
+    Ou encore, si on pose $X = \begin{pmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}$ et $Y = \begin{pmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}$, on a :
+    \[\langle \varphi, x \rangle = { }^t Y X\]
+}
+
+\subsection{Pratique : Calcul de bases duales}
+
+Soit $B = (u_1, u_2, \ldots, u_n)$ une base de $\mathbb{R}^n$ et $B_C = (e_1, e_2, \ldots, e_n)$ la base canonique de $\mathbb{R}^n$.\\
+Soit $B^* = (u_1^*, u_2^*, \ldots, u_n^*)$ la base duale de $(u_1, u_2, \ldots, u_n)$ et $B_C^* (e_1^*, e_2^*, \ldots, e_n^*)$ la base duale de $(e_1, e_2, \ldots, e_n)$.\\
+
+\noindent Notons $A$ la matrice des coefficients de la base $(u_1, u_2, \ldots, u_n)$ dans la base $(e_1, e_2, \ldots, e_n)$.\\
+On écrit $u_j = \begin{pmatrix}
+    a_{1j} \\ a_{2j} \\ \vdots \\ a_{nj} \end{pmatrix}$ pour $j \in \{1, 2, \ldots, n\}$.\\
+Alors $A$ est la matrice de passage de la base $B_C$ à la base $B$.\\
+On note également $P$ la matrice de passage de la base $B_C^*$ à la base $B^*$.\\
+\textit{ie} $u_i^* = \sum_{j=1}^n p_{ji} e_j^*$ pour $i \in \{1, 2, \ldots, n\}$. ($= (p_{1i}, p_{2i}, \ldots, p_{ni})$ dans la base canonique de $(\mathbb{R}^n)^*$).\\
+
+Question : peut-on calculer $P$ à partir de $A$ ?\\
+$\delta_ij = \langle u_i^*, u_j \rangle$ (par définition de la base duale).
+$= \langle \sum_{k=1}^n p_{ki} e_k^*, \sum_{l=1}^n a_{lj} e_l \rangle = \sum_{k=1}^n \sum_{l=1}^n p_{ki} a_{lj} \langle e_k^*, e_l \rangle = \sum_{k=1}^n p_{ki} a_{kj}$.\\
+
+\textit{(non lisible au tableau depuis ma place, cf. Laurent)}
+
+\theorem{Proposition}{Relation entre matrices de passage}{false}{
+    ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$.
+}
+
+\example{
+    Soit $u_1 = { }^t (1 1)$ et $u_2 = { }^t (-1 2)$.\\
+    La matrice de passage de la base canonique à $(u_1, u_2)$ est $A = \begin{pmatrix}
+        1 & -1 \\ 1 & 2
+    \end{pmatrix}$.\\
+    $A^{-1} = \frac{1}{3} \begin{pmatrix}
+        2 & 1 \\ -1 & 1
+    \end{pmatrix}$.\\
+    Donc la matrice de passage de la base duale canonique à la base duale de $(u_1, u_2)$ est $P = { }^t (A^{-1}) = \frac{1}{3} \begin{pmatrix}
+        2 & -1 \\ 1 & 1
+    \end{pmatrix}$.\\\\
+    Donc $u_1^* = \frac{1}{3} (2 e_1^* + e_2^*)$ et $u_2^* = \frac{1}{3} (-e_1^* + e_2^*)$.
+    Donc $\langle u_1^*, { }^t (x y) \rangle = \frac{2x + y}{3}$ et $\langle u_2^*, { }^t (x y) \rangle = \frac{-x + y}{3}$.
+}
+
+\section{Bases antéduales}
+
+\definition{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel de dimension finie $n$.\\
+    Soit $f$ une base de $E^*$.\\
+    Une \textbf{base antéduale} notée $e$ de $E$ est telle que $e^* = f$.
+}
 
 \end{document}
