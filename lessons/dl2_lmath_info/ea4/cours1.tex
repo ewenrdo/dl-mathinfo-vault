@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info EA4}
+\fancyhead[C]{Éléments d'algorithmique}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Cours 1}
+
+\section{Thème du cours}
+
+\definition{
+    Par \textbf{algorithmique}, on entend la conception et l'analyse des algorithmes.
+}
+\definition{
+    Un \textbf{algorithme} est une méthode systématique de résolution d'un problème.\\
+    Ce concept n'est pas limité à l'informatique (de nombreux algorithmes ont été écrits avant l'invention des ordinateurs).\\\\
+    La notion est devenue centrale en informatique avec l'apparition de machines capables d'exécuter \textbf{fidèlement} et \textbf{rapidement} une suite d'opérations prédéfinie.
+}
+\example{
+    Plusieurs exemples d'algorithmes célèbres :
+    \begin{itemize}
+        \item Des algorithmes de calcul : \textit{opérations arithmétiques, approximation de $pi, \sqrt{2}, ...$}
+        \item Des constructions géométriques : \textit{milieu d'un segment, triangle équilatéral, pentagone régulier, centre d'un cercle, ...}
+        \item Des recettes de cuisine
+        \item Des manuels de construction : \textit{IKEA, lego, ...}
+    \end{itemize}
+}
+
+Trois axes d'études dans ce cours :
+\begin{enumerate}
+    \item Conception d'algorithmes\\
+    \textit{y'a-t-il des techniques générales ?}
+    \item Preuve de correction (ie. l'algorithme fait bien ce qu'on attend de lui).\\
+    Un algorithme est \textbf{correct} si pour chaque entrée, il \textbf{termine (1)} en produisant la \textbf{bonne sortie (2)}.\\
+    \textit{(on peut donc distinguer la preuve de terminison et la preuve de correction proprement dite (appelée aussi correction partielle))}
+    \item Étude de l'efficacité.\\
+    \textit{les ressources nécessaires (temps, mémoire) sont-elles raisonnables ? Est-il possible de faire mieux ?}
+\end{enumerate}
+
+\example{
+    Addition de deux entiers : 1357 + 2468.
+    On dessine ça :
+    \begin{center}
+        \begin{tabular}{c@{\hspace{1cm}}c@{\hspace{1cm}}c@{\hspace{1cm}}c@{\hspace{1cm}}c}
+              & 1 & 3 & 5 & 7 \\
+            + & 2 & 4 & 6 & 8 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    Et on utilise des retenues et on additionne les colonnes de droite à gauche.\\
+    C'est un algorithme correct (on peut le prouver) et efficace (il est linéaire en la taille des entiers : 4 opérations au lieu de 3825 pour une addition naïve).
+
+    En Python, ça donne ça :
+}
+\begin{lstlisting}[language=Python]
+def addition(nb1, nb2):                        # deux entiers sous forme de tableau de taille égale en commançant par les unités
+    res = []
+    retenue = 0
+    for(chiffre1, chiffre2) in zip(nb1, nb2) : # parcours en parallèle les tableaux
+        tmp = chiffre1 + chiffre2 + retenue
+        retenue = tmp // 10;                   # division euclidienne
+        res.append(tmp % 10)                   # ajout à la fin du tableau
+    return res + [retenue]                     # concaténation de deux tableaux
+
+print(addition([7,5,3,1], [8,6,4,2]))  # affiche [5,2,8,3] pour 1357 + 2468 = 3825
+\end{lstlisting}
+
+\end{document}
