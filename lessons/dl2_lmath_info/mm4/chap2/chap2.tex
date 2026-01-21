@@ -29,6 +29,8 @@
     On note $\mathcal{L}(E,F)$ l'ensemble des applications linéaires de $E$ dans $F$.
 }
 
+\remark{On note $dim_\mathbb{K}(E)$ la dimension de $E$ en tant qu'espace vectoriel sur $\mathbb{K}$. C'est utile, car par exemple $dim_\mathbb{R}(\mathbb{C}) = 2$ mais $dim_\mathbb{C}(\mathbb{C}) = 1$.}
+
 \definition{
     Soit $E$ un $\mathbb{K}$-espace vectoriel.\\
     On appelle \textbf{forme linéaire} sur $E$ toute application linéaire de $E$ dans $\mathbb{K}$.\\\\
@@ -100,10 +102,29 @@ Doc $H = Ker(\lambda)$, c'est-à-dire que $H$ est un hyperplan de $E$. $\Box$}
     Soit $x \in E$.\\
     On écrit $x = h + \mu x_0$ avec $h \in H$ et $\mu \in \mathbb{K}$.\\
     Alors $f(x) = f(h + \mu x_0) = f(h) + \mu f(x_0) = \mu f(x_0)$ (car $h \in H = ker(f)$).\\
-    Et de même $g(x) = g(h + \mu x_0) = g(h) + \mu g(x_0) = \mu g(x_0) = \lambda \mu f(x)$.\\
-    Donc $g = \lambda f$. $\Box$
+    Et de même $g(x) = g(h + \mu x_0) = g(h) + \mu g(x_0) = \mu g(x_0) = \mu \frac{f(x_0)}{\lambda}$.\\\\
+    Donc $f = \lambda g$. $\Box$
 }
 
 \section{Bases duales}
+
+\theorem{Proposition}{Dimension de l'espace dual}{true}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel de dimension finie $n$.
+    Alors $dim(E^*) = dim_{\mathbb{K}}(E) \cdot dim_{\mathbb{K}}(\mathbb{K}) = n \cdot 1 = n$.
+}
+
+\definition{
+    Soit $(e_1, e_2, \ldots, e_n)$ une base de $E$.\\
+    On appelle $(e_1^*, e_2^*, \ldots, e_n^*)$ la base duale de $E$ définie par :
+    \[\forall i,j \in \{1, 2, \ldots, n\} \text{, } \langle e_i^*, e_j \rangle = \delta_{ij} = \begin{cases}
+        1 & \text{si } i=j\\
+        0 & \text{sinon}
+    \end{cases}\]
+
+    De manière équivalente, si $x \in E$ s'écrit $x = \sum_{j=1}^n x_j e_j$ (coordonnées de $x$ dans la base $(e_1, \ldots, e_n)$), alors :
+    $\langle e_j^*, x \rangle = x_j$.\\
+
+    Ou encore $x = \sum_{j=1}^n \langle e_j^*, x \rangle e_j$.
+}
 
 \end{document}
