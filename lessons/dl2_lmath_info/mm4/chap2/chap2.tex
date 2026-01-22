@@ -65,7 +65,7 @@ On pose $f(x,y,z) = 3x + 2y - z$. Alors $f \in E^*$.}
     De plus, si $dim(E)=n$, $H$ est un hyperplan de $E$ $\Leftrightarrow$ $dim(H) = n-1$.
 }
 \remark{Le prof a noté $\mathbb{K}x_0$ au lieu de $Vect(x_0)$.}
-
+\ndlr{On pourrait avoir aussi : $\forall x \in E \setminus H, E = H \oplus Vect(x)$.}
 \noindent{\textbf{Démonstration :}\\
 Supposons que $H$ est un hyperplan de $E$.\\
 Par définition, il existe $f \in E^* \setminus \{0\}$ tel que $H = Ker(f)$.\\\\
@@ -204,10 +204,11 @@ $\Box$
     On la note $P_{B \to C}$.
 }
 
-\reminder{On a la relation suivante par rapport aux coordonnées : $X_C = P_{B \to C} X_B$.}
+\reminder{On a la relation suivante par rapport aux coordonnées : $X_B = P_{B \to C} X_C$.}
 
 \theorem{Proposition}{Relation entre matrices de passage}{false}{
-    ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$.
+    On a $({ }^t P_{B_C^* \to B^*}) P_{B_C \to B} = I_n$ et donc $P_{B_C^* \to B^*} = ({ }^t P_{B_C \to B})^{-1}$.\\\\
+    \textit{Avec les notations de la démonstration : ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$.}
 }
 
 \noindent{\textbf{Démonstration :}\\
@@ -231,7 +232,7 @@ Donc ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$. $\Box$
 
 
 \example{
-    Soit $u_1 = { }^t (1 1)$ et $u_2 = { }^t (-1 2)$.\\
+    Soit $u_1 = { }^t (1 \: 1)$ et $u_2 = { }^t (-1 \: 2)$.\\
     La matrice de passage de la base canonique à $(u_1, u_2)$ est $A = \begin{pmatrix}
         1 & -1 \\ 1 & 2
     \end{pmatrix}$.\\
