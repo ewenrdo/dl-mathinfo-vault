@@ -322,7 +322,7 @@ Une autre preuve de l'existence des bases antéduales est la suivante :\\
 Soit $B$ une base quelconque de $E$ et $B^*$ sa base duale.\\
 Soit $P$ la matrice de passage de $B^*$ à $f$.\\
 On pose $e_j = \sum_{i=1}^n c_{ij} \cdot \varepsilon_i$ où $\varepsilon_i$ sont les vecteurs de la base $B$ et $C = (c_{ij})$ la matrice de passage de $B$ à $e$.\\\\
-}
+
 \begin{center}
     \includegraphics[width=0.25\textwidth]{./images/graph_chap2_1.png}
     \captionof{figure}{Construction d'une base antéduale.}
@@ -330,5 +330,17 @@ On pose $e_j = \sum_{i=1}^n c_{ij} \cdot \varepsilon_i$ où $\varepsilon_i$ sont
 \textit{Synthèse :} Montrons que $\langle f_j, e_i \rangle = \delta_{ij}$.\\
 On a $f_j = \sum_{i=1}^n p_{ij} \cdot \varepsilon_i^*$ où $\varepsilon_i^*$ sont les vecteurs de la base $B^*$.\\
 De plus, on a $e_j = \sum_{i=1}^n c_{ij} \cdot \varepsilon_i$.\\\\
-D'où : $\langle f_j, e_i \rangle = \left\langle \sum_{k=1}^n p_{kj} \cdot \varepsilon_k^*, \sum_{l=1}^n c_{li} \cdot \varepsilon_l \right\rangle = \sum_{k=1}^n \sum_{l=1}^n p_{kj} c_{li} \langle \varepsilon_k^*, \varepsilon_l \rangle = \sum_{k=1}^n p_{kj} c_{ki}$.\\
+D'où : $\langle f_j, e_i \rangle = \left\langle \sum_{k=1}^n p_{kj} \cdot \varepsilon_k^*, \sum_{l=1}^n c_{li} \cdot \varepsilon_l \right\rangle = \sum_{k=1}^n \sum_{l=1}^n p_{kj} c_{li} \langle \varepsilon_k^*, \varepsilon_l \rangle = \sum_{k=1}^n p_{kj} c_{ki} = \delta_{ij}$ car ${ }^t P C = I_n$.\\
+Donc $e$ est bien la base antéduale de $f$. $Box$
+}
+
+\example{On pose $f_1(x,y) = 3x-y$ et $f_2(x,y)=x+2y$.\\
+Déterminons la base antéduale de $(f_1, f_2)$ dans $\mathbb{R}^2$.\\\\
+On pose $A := P_{B_C^* \to f} = \begin{pmatrix}
+    3 & 1 \\ -1 & 2
+\end{pmatrix}$ la matrice dont les colonnes sont les coordonnées de $f_1$ et $f_2$ dans la base duale canonique. (ie. la matrice de passage de la base duale canonique à la base $(f_1, f_2)$).\\\\
+On a : $A^{-1} = \frac{1}{7} \begin{pmatrix}
+    2 & -1 \\ 1 & 3
+\end{pmatrix}$.\\
+}
 \end{document}
