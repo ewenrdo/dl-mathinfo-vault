@@ -405,4 +405,25 @@ Donc $dim(V) = 3 - 2 = 1$.\\
 Donc $(d_1)$ est une droite dans $\mathbb{R}^3$.
 }
 
+\training{On peut montrer plus facilement que le rang des colonnes est égal au rang des lignes en utilisant les formes linéaires.}
+\theorem{Théorème}{Rang des lignes et des colonnes}{true}{
+    Soit $M \in M_{m,n}(\mathbb{K})$.\\
+    Soit $p$ le rang de la famille des vecteurs lignes de $M$ et soit $q$ le rang de la famille des vecteurs colonnes de $M$.\\
+    Alors $p = q$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+    Posons $E = \mathbb{R}^n$.\\
+    Soit $(f_1, \ldots, f_m)$ les formes linéaires sur $E$ qui correspondent aux vecteurs lignes de $M$.\\
+    On pose $F : E \to \mathbb{R}^m, x \mapsto \begin{pmatrix}
+        f_1(x) \\ f_2(x) \\ \vdots \\ f_m(x)
+    \end{pmatrix}$.\\\\
+    Posons $V = ker(F) = \bigcap_{i=1}^m Ker(f_i)$.\\
+    On a par définition $q = rg(F)$.\\
+    La proposition précédente donne $dim(V) = n - dim(Vect(f_1, \ldots, f_m)) = n - p$.\\\\
+    Par le théorème du rang, on a $dim(E) = dim(ker(F)) + rg(F)$, c'est-à-dire $n = dim(V) + q$.\\\\
+    Donc $n = n - p + q$ et finalement $p = q$. $\Box$
+    
+}
+
 \end{document}
