@@ -350,4 +350,59 @@ Donc la base antéduale de $(f_1, f_2)$ est donnée par : $(\begin{pmatrix}
 \end{pmatrix}, \begin{pmatrix}1/7 \\ 3/7
 \end{pmatrix})$.
 }
+
+\section{Application aux systèmes linéaires}
+\remark{
+    Le système linéaire suivant est une droite en tant qu'intersection d'hyperplans qui sont des noyaux de formes linéaires indépendantes :
+    \[
+    (d_1) : 
+    \begin{cases}
+        x + 2y - z = 0\\
+        2x - y + z = 0
+    \end{cases}
+    \]
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel de dimension finie $n$.\\
+    Soient $(\varphi_1, \varphi_2, \ldots, \varphi_k)$ des formes linéaires sur $E$.\\
+    Soit $V = \bigcap_{i=1}^k Ker(\varphi_i)$.\\\\
+    Si $(\varphi_1, \varphi_2, \ldots, \varphi_k)$ est une famille libre dans $E^*$, alors $dim(V) = n - k$.\\
+    Plus généralement, si $k' = dim(Vect(\varphi_1, \varphi_2, \ldots, \varphi_k))$, alors $dim(V) = n - k'$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+On suppose que $(\varphi_1, \varphi_2, \ldots, \varphi_k)$ est une famille libre dans $E^*$.\\
+Par le théorème de la base incomplète, soit $(\varphi_1, \varphi_2, \ldots, \varphi_k, \varphi_{k+1}, \ldots, \varphi_n)$ une base de $E^*$.\\\\
+On pose $F : E \to \mathbb{K}^n, x \mapsto \begin{pmatrix}
+    \varphi_1(x) \\ \varphi_2(x) \\ \vdots \\ \varphi_n(x)
+\end{pmatrix}$.\\
+
+Montrons que $F$ est un isomorphisme.\\
+Il suffit de montrer que $F$ est injective (car $dim(E) = dim(\mathbb{K}^n) = n < +\infty$).\\\\
+Soit $x \in E$ tel que $\forall i \in \{1, 2, \ldots, n\}, \varphi_i(x) = 0$.\\
+Par le lemme de séparation, $x = 0$.\\
+Donc $ker(F) = \{0\}$ et $F$ est injective.\\\\
+Donc $F$ est un isomorphisme.\\\\
+On a $V = \bigcap_{i=1}^k Ker(\varphi_i) = F^{-1}(\{\begin{pmatrix}
+    y_1 \\ y_2 \\ \vdots \\ y_n
+\end{pmatrix} \in \mathbb{K}^n \mid \forall 1 \leq i \leq k, y_i = 0\}) = F^{-1}(Vect(\underbrace{e_{k+1}, e_{k+2}, \ldots, e_n}_{\text{de dim } n-k}))$ où $(e_1, e_2, \ldots, e_n)$ est la base canonique de $\mathbb{K}^n$.\\
+Comme $F$ est un isomorphisme, $dim(V) = dim(Vect(e_{k+1}, e_{k+2}, \ldots, e_n)) = n - k$.\\\\
+
+Pour le cas général.\\
+Soit $(\varphi_1', \varphi_2', \ldots, \varphi_{k'}')$ une base de $Vect(\varphi_1, \varphi_2, \ldots, \varphi_k)$.\\
+Alors $V = \bigcap_{i=1}^k Ker(\varphi_i) = \bigcap_{j=1}^{k'} Ker(\varphi_j')$.\\
+En effet, $x \in V \Leftrightarrow \forall i \in \{1, 2, \ldots, k\}, \varphi_i(x) = 0 \Leftrightarrow \forall \varphi \in Vect(\varphi_1, \varphi_2, \ldots, \varphi_k), \varphi(x) = 0 \Leftrightarrow \forall \varphi \in \{\varphi_1', \varphi_2', \ldots, \varphi_{k'}'\}, \varphi(x) = 0 \Leftrightarrow \forall i \in \{1, 2, \ldots, k'\}, \varphi_i'(x) = 0 \Leftrightarrow x \in \bigcap_{i=1}^{k'} Ker(\varphi_i')$.\\\\
+En appliquant la preuve précédente, on a $dim(V) = n - k'$. $\Box$
+}
+
+\example{Reprenons $(d_1)$.\\
+On a $E = \mathbb{R}^3$ et $n = 3$.\\
+On note $\varphi_1(x,y,z) = x + 2y - z$ et $\varphi_2(x,y,z) = 2x - y + z$.\\
+On a $V = Ker(\varphi_1) \cap Ker(\varphi_2)$.\\
+On admet que $(\varphi_1, \varphi_2)$ est une famille libre dans $E^*$.\\\\
+Donc $dim(V) = 3 - 2 = 1$.\\
+Donc $(d_1)$ est une droite dans $\mathbb{R}^3$.
+}
+
 \end{document}
