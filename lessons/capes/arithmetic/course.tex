@@ -1,0 +1,171 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../components/components}
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{CAPES}
+\fancyhead[C]{Arithmétique}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+\docTitle{Arithmétique}
+
+\section{Arithmétique des entiers}
+\subsection{Divisibilité}
+\subsubsection{Division euclidienne}
+
+\definition{
+    On dit que $a$ divise $b$ si $\exists k \in \mathbb{Z}, b = a \cdot k$.\\
+    On le note $a \mid b$.
+}
+
+\theorem{Théorème}{Division euclidienne}{true}{
+    Soient $a,b \in \mathbb{Z}$ et $b$ non nul.\\
+    Il existe un unique couple $(q, r) \in \mathbb{Z}^2$ tel que :
+    \[
+        a = b \cdot q + r
+    \]
+}
+
+\remark{On dit que $a$ divise $b$ si le reste de la division euclidienne de $b$ par $a$ est nul.}
+
+\subsubsection{Congruences}
+\definition{
+    Soient $a, b \in \mathbb{Z}$ et $n \in \mathbb{N}^*$.\\
+    On dit que $a$ est congru à $b$ modulo $n$ si $n$ divise $a - b$.\\
+    On le note $a \equiv b \; (mod \; n)$ ou encore $a \equiv b \; [n]$.
+}
+
+\theorem{Petit théorème de Fermat}{}{true}{
+    Soient $p$ un nombre premier et $a \in \mathbb{Z}$ tel que $p \nmid a$.\\
+    Alors on a que :
+    \[
+        a^{p-1} \equiv 1 \; [p]
+    \]\\
+    En partiuclier, on a que : $a^p \equiv a \; [p]$.
+}
+
+\theorem{Lemme}{}{true}{
+    Soit $x,y \in \mathbb{Z}$ et soit $p \in \mathbb{P}$.\\
+    Alors :
+    \[
+        (x + y)^p \equiv x^p + y^p \; [p]
+    \]
+}
+
+\subsubsection{Critère de divisibilité}
+
+\theorem{Proposition}{Écriture des nombres relatifs}{true}{
+    On a que $\forall n \in \mathbb{Z}, n = \sum_{i=0}^{k} a_i \cdot 10^i$ avec $a_i$ un entier entre $-9$ et $9$.
+}
+
+\noindent Pour pouvoir aller plus rapidement, on établit les critères de divisibilité suivants :
+\begin{enumerate}
+    \item $2 \mid n \Leftrightarrow$ le dernier chiffre de $n$ est pair.
+    \item $3 \mid n \Leftrightarrow 3 \mid$ la somme des chiffres de $n$.
+    \item $4 \mid n \Leftrightarrow 4 \mid 10 \cdot a_1 + a_0$ (\textit{ie} si le nombre formé par les deux derniers chiffres de $n$ est divisible par 4).
+    \item $9 \mid n \Leftrightarrow 9 \mid$ la somme des chiffres de $n$. 
+\end{enumerate}
+
+\subsection{Nombres premiers}
+
+\subsubsection{Généralités}
+
+\definition{
+    On dit que $n$ est un nombre \textbf{premier} et on note $n \in \mathbb{P}$ \textit{(non standard)} si les diviseurs de $n$ sont $n$ et $1$.
+}
+
+\theorem{Crible d'Eratosthène}{}{true}{
+    Pour trouver la liste des nombres premiers, on applique l'algorithme suivant :
+    \begin{enumerate}
+        \item On écrit la liste des nombres ;
+        \item On retire $1$ ;
+        \item On retire tous les multiples de 2 \textit{(sauf lui-même)} ;
+        \item De même avec le nombre suivant 2 non barré, et ainsi de suite.
+    \end{enumerate}
+}
+
+\theorem{Théorème fondamental de l'arithmétique}{}{true}{
+    Tout entier naturel $n \geq 2$ s'écrit de manière unique (à l'ordre près des facteurs) comme un produit de nombres premiers.\\\\
+    Plus formellement, $\forall n \geq 2, \exists ! (p_1, p_2, \ldots, p_k) \in \mathbb{P}^k$ et $\forall i \in [1, k] \cap \mathbb{N}, \exists ! \alpha_i \in \mathbb{N}^*$ tels que :
+    \[
+        n = \prod_{i=1}^{k} p_i^{\alpha_i}
+    \]
+}
+
+\theorem{Corollaire}{}{true} {
+    Soit $n \in \mathbb{N}$.\\
+    Si $n \notin \mathbb{P}$, alors $n$ a forcément un facteur premier $p$ tel que $p \leq \sqrt{n}$.
+}
+
+\subsubsection{PGCD et PPCM}
+
+\definition{
+    Le \textbf{plus grand commun diviseur} (PGCD) de deux entiers $a$ et $b$ est le plus grand entier qui divise à la fois $a$ et $b$.\\
+    On le note $pgcd(a, b)$ ou $a \wedge b$. 
+}
+
+\definition{
+    On dit de deux nombres qu'ils sont \textbf{premiers entre eux} si leur PGCD vaut $1$.
+}
+
+\theorem{Théorème de Bézout}{}{true}{
+    Soient $a,b \in \mathbb{Z}$.\\
+    Il existe des entiers $u,v \in \mathbb{Z}$ tels que :
+    \[
+        a \cdot u + b \cdot v = pgcd(a, b)
+    \]
+    En particulier on a l'\textbf{identité de Bézout} :
+    $a,b$ sont premiers entre eux $\Leftrightarrow \exists u,v \in \mathbb{Z}, a \cdot u + b \cdot v = 1$.
+}
+
+\definition{
+    Le \textbf{plus petit commun multiple} (PPCM) de deux entiers $a$ et $b$ est le plus petit entier qui est multiple à la fois de $a$ et de $b$.\\
+    On le note $ppcm(a, b)$ ou $a \vee b$.
+}
+
+\theorem{Lemme}{}{false}{
+    Soient $a,b,k \in \mathbb{Z}$.\\
+    Alors on que $pgcd(a - k \cdot b, b) = pgcd(a, b)$.
+}
+
+\theorem{Lemme de Gauss}{}{false}{
+    Soient $a,b,c \in \mathbb{N}$.
+    \[
+    \begin{cases}
+        a \mid b \cdot c\\
+        a \wedge b = 1
+    \end{cases} \Rightarrow a \mid c
+    \]
+}
+\theorem{Lemme d'Euclide}{}{false}{
+    Soient $a,b \in \mathbb{N}$ et $p \in \mathbb{P}$.
+    \[
+    p \mid a \cdot b \Rightarrow \left( p \mid a \; \text{ou} \; p \mid b \right)
+    \]
+}
+
+\section{Résolution dans $\mathbb{Z}$ d'équations diophantiennes}
+
+\definition{
+    Une \textbf{équation diophantienne} est une équation \textit{(polynomiale)} dont les solutions recherchées sont des entiers relatifs.\\
+    On s'intéressera ici aux équations de la forme $a \cdot x + b \cdot y = c$ avec $a,b,c \in \mathbb{Z}$.
+}
+
+\theorem{Étapes de résolution}{}{false}{
+    \textbf{Étape 1}
+    \textbf{Étape 2}
+    \textbf{Étape 3}
+}
+\ndlr{WIP}
+
+\end{document}
