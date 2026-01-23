@@ -204,6 +204,10 @@ $\Box$
     On la note $P_{B \to C}$.
 }
 
+\reminder{
+    $A$ est la matrice de passage de $B$ à $B'$ si $e_j' = \sum_{i=1}^n a_{ij} \cdot e_i$.
+}
+
 \reminder{On a la relation suivante par rapport aux coordonnées : $X_B = P_{B \to C} X_C$.}
 
 \theorem{Proposition}{Relation entre matrices de passage}{false}{
@@ -262,8 +266,10 @@ Donc ${ }^t P A = I_n$ c'est-à-dire $P = ({ }^t A)^{-1}$. $\Box$
 
 \theorem{Lemme de séparation}{}{false}{
     Soit $E$ un $\mathbb{K}$-espace vectoriel de dimension finie $n$.\\
-    Soit $f=(f_1, f_2, \ldots, f_n)$ une base de $E^*$ et $x \in E$.
-    Alors $\forall i \in \{1, 2, \ldots, n\}, \langle f_i, x \rangle = 0 \Rightarrow x = 0$.
+    On a que $\forall \varphi \in E^*, \langle \varphi, x \rangle = 0 \Rightarrow x = 0$.\\
+    
+    En particulier, soit $f=(f_1, f_2, \ldots, f_n)$ une base de $E^*$ et $x \in E$.
+    Alors, $\forall i \in \{1, 2, \ldots, n\}, \langle f_i, x \rangle = 0 \Rightarrow x = 0$.
 }
 
 \noindent{\textbf{Démonstration du lemme de séparation :}\\
@@ -291,17 +297,38 @@ Donc par le lemme de séparation, $e_j - e_j' = 0$ c'est-à-dire $e_j = e_j'$.\\
 
 \textbf{Existence :}\\
 Notons $E^{**} = (E^*)^*$ (l'espace bidual de $E$).\\
-Soit $J : E \to E^{**}$ l'application définie par : $J \colon x \mapsto (\varphi \mapsto \langle \varphi, x \rangle)$.\\
+Soit $J : E \to E^{**}$ l'application définie par : $J \colon x \mapsto \underbrace{(\varphi \mapsto \langle \varphi, x \rangle)}_{ev_x \in E^{**}}$.\\\\
 $J$ est linéaire, montrons qu'elle est injective.\\\\
 Soit $x \in ker(J)$, donc $ev_x = 0_{E^{**}}$.\\
 Alors $\forall \varphi \in E^*, \langle \varphi, x \rangle = 0$.\\
 Donc par le lemme de séparation, $x = 0$.\\
 Donc $ker(J) = \{0\}$ et $J$ est injective.\\\\
 
-Comme $dim(E) = dim(E^{**}) = n < +\infty$ et que $J$ est injective, $J$ est un isomorphisme.\\\\
-Donc $J$ est surjective.\\
-Donc $J$ est bijective.\\\\
-
-La base antéduale $(e_1, \ldots, e_n)$ est alors définie comme $(J^{-1}(f_1^*), \ldots, J^{-1}(f_n^*))$. $\Box$
+Comme $dim(E) = dim(E^{**}) = n < +\infty$ et que $J$ est injective, $J$ est un isomorphisme \textit{(théorème du rang)}.
+On pose $e_i = J^{-1}(f_i^{*})$ où $\underbrace{(f_1^{*}, f_2^{*}, \ldots, f_n^{*})}_{\text{base de $E^{**}$}}$ est la base duale de $f = (f_1, f_2, \ldots, f_n)$.\\\\
+Montrons que $e^* = f$.\\\\
+Soit $1 \leq i,j \leq n$.\\
+On a $\langle f_i, e_j \rangle = ev_{e_j}(f_i) = \langle J(e_j), f_i \rangle = \langle J(J^{-1}(f_j^{*})), f_i \rangle = \langle f_j^{*}, f_i \rangle = \delta_{ij}$.\\\\
+Donc $f$ est la base duale de $e$, \textit{i.e.} $e^* = f$. $\Box$
 }
+
+\remark{On a déjà vu qu'en pratique on peut calculer des bases duales. 
+On suppose qu'on connaît $B$ (base de $E$) et $B^*$ (base de $E^*$) et on veut calculer la base duale de $B'$.
+On note $A = P_{B \to B'}$ la matrice de passage de $B$ à $B'$.
+Et on note $P = P_{B^* \to (B')^*}$ la matrice de passage de $B^*$ à $(B')^*$.\\
+On a vu que $P = ({ }^t A)^{-1}$.\\\\
+Une autre preuve de l'existence des bases antéduales est la suivante :\\
+Étant donné une base $f$ de $E^*$, on veut construire sa base antéduale $e$.\\\\
+Soit $B$ une base quelconque de $E$ et $B^*$ sa base duale.\\
+Soit $P$ la matrice de passage de $B^*$ à $f$.\\
+On pose $e_j = \sum_{i=1}^n c_{ij} \cdot \varepsilon_i$ où $\varepsilon_i$ sont les vecteurs de la base $B$ et $C = (c_{ij})$ la matrice de passage de $B$ à $e$.\\\\
+}
+\begin{center}
+    \includegraphics[width=0.25\textwidth]{./images/graph_chap2_1.png}
+    \captionof{figure}{Construction d'une base antéduale.}
+\end{center}
+\textit{Synthèse :} Montrons que $\langle f_j, e_i \rangle = \delta_{ij}$.\\
+On a $f_j = \sum_{i=1}^n p_{ij} \cdot \varepsilon_i^*$ où $\varepsilon_i^*$ sont les vecteurs de la base $B^*$.\\
+De plus, on a $e_j = \sum_{i=1}^n c_{ij} \cdot \varepsilon_i$.\\\\
+D'où : $\langle f_j, e_i \rangle = \left\langle \sum_{k=1}^n p_{kj} \cdot \varepsilon_k^*, \sum_{l=1}^n c_{li} \cdot \varepsilon_l \right\rangle = \sum_{k=1}^n \sum_{l=1}^n p_{kj} c_{li} \langle \varepsilon_k^*, \varepsilon_l \rangle = \sum_{k=1}^n p_{kj} c_{ki}$.\\
 \end{document}
