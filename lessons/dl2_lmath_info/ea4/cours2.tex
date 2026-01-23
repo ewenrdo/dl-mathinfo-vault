@@ -1,0 +1,34 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info EA4}
+\fancyhead[C]{Éléments d'algorithmique}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Cours 2 : Introduction à Python}
+
+Pour exécuter du code Python, il faut installer Python (version 3 de préférence) sur son ordinateur.\\
+Et pour le lancer depuis le terminal, il faut préciser dans l'en-tête du fichier le chemin vers l'interpréteur Python (shebang) :
+\begin{lstlisting}[language=Python]
+#! /usr/bin/env python3 : indique au système que ce fichier doit etre exécuté avec l'interpréteur python3
+
+print("Hello, World!") # affiche le texte entre guillemets
+\end{lstlisting}
+
+On peut aussi exécuter \texttt{python3 -i mon\_fichier.py} pour lancer un script et rester en mode interactif après son exécution.
+\end{document}
