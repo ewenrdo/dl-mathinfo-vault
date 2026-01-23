@@ -432,6 +432,33 @@ Donc $(d_1)$ est une droite dans $\mathbb{R}^3$.
     Soit $f \in \mathcal{L}(E,F)$.\\
     On appelle \textbf{application linéaire transposée} de $f$ notée ${ }^t f$ ou $f^{*}$ l'application linéaire $f^t : F^* \to E^*$ définie par :
     \[\forall \varphi \in F^*, f^t(\varphi) = \varphi \circ f\]
+    De manière équivalente, $f^{*}$ est l'application qui vérifie $\forall x \in E, \forall \varphi \in F^*, \langle f^{*}(\varphi), x \rangle = \langle \varphi, f(x) \rangle$.
 }
 
+\theorem{Proposition}{}{false}{
+    Soient $E,F,G$ des $\mathbb{K}$-espaces vectoriels.\\
+    Soient $f \in \mathcal{L}(E,F)$ et $g \in \mathcal{L}(F,G)$.\\
+    Alors :
+    \[(g \circ f)^{*} = f^{*} \circ g^{*}\]
+    et : $id_E^{*} = id_{E^*}$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+On rappelle que $(g \circ f)^{*} : G^* \to E^*$.\\
+Soit $\varphi \in G^*$.\\
+On a : $(g \circ f)^{*}(\varphi) = \varphi \circ (g \circ f) = (\varphi \circ g) \circ f = f^{*}(\varphi \circ g) = f^{*}(g^{*}(\varphi)) = (f^{*} \circ g^{*})(\varphi)$.\\
+Donc ($g \circ f)^{*} = f^{*} \circ g^{*}$.\\
+
+\noindent Pour l'identité, soit $\varphi \in E^*$.\\
+On a : $id_E^{*}(\varphi) = \varphi \circ id_E = \varphi = id_{E^*}(\varphi)$.\\
+Donc $id_E^{*} = id_{E^*}$. $\Box$
+}
+
+\theorem{Proposition}{}{false}{
+    Soient $E$ et $F$ des $\mathbb{K}$-espaces vectoriels.\\
+    Soient $e$ une base de $E$ et $f$ une base de $F$ et soient $e^*$ et $f^*$ leurs bases duales respectives.\\
+    Soit $g \in \mathcal{L}(E,F)$ (alors $g^{*} \in \mathcal{L}(F^*, E^*)$).\\
+    Alors : 
+    \[Mat_{f^*, e^*}(g^{*}) = { }^t (Mat_{e,f}(g))\]
+}
 \end{document}
