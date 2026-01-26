@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info PR4}
+\fancyhead[C]{Probabilités}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Espaces de probabilités}
+
+\definition{
+    On dit que $E$ est \textbf{infini dénombrable} s'il existe une bijection entre $E$ en $\mathbb{N}$.
+}
+
+\definition{
+    $E$ est \textbf{dénombrale} s'il est fini ou infini dénombrable. 
+}
+
+\theorem{Proposition}{}{false}{
+    Si $E$ et $F$ sont dénombrables, alors $E \times F$ est dénombrable.
+}
+
+\noindent{\textbf{Démonstration :}\\
+Supposons $E$ et $F$ dénombrales, donc supposons que $E = \mathbb{N}$ et $F = \mathbb{N}$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(E_i)_{i \in J}$ où $J \subset \mathbb{N}$ et $E_i$ est dénombrable pour chaque $i \in J$.\\
+    Alors $\bigcup_{i \in J} E_i$ est dénombrable.
+}
+
+\definition{
+    Soit $\Omega$ un ensemble dénombrable.\\
+    Une \textbf{probabilité} sur $\Omega$ est une application $\mathbb{P} : \mathcal{P}(\Omega) \to [0, 1]$ telle que :
+    \begin{enumerate}
+        \item $\mathbb{P}(\emptyset) = 0$ et $\mathbb{P}(\Omega) = 1$
+        \item Soit $(E_n)_{n \in \mathbb{N}}$ tq $E_i \cap E_j = \emptyset$ une suite finie ou dénombrable de parties de $\Omega$ alors $\mathbb{P}(\bigcup_{n} E_n) = \sum_{n} \mathbb{P}(E_n)$.
+    \end{enumerate}
+}
+
+\remark{$\Omega$ est aussi appelé "univers". Les parties de $\Omega$ sont appelées "événements".}
+\vocabulary{$\omega \in \Omega$ est appelé un "résultat-élémentaire".}
+\vocabulary{$E \in \mathcal{P}(\Omega)$ est appelé un "événement".}
+
+\remark{
+    $E = \{ \omega_1, \omega_2, \ldots , \omega_n, \ldots \} = \bigcup_{i} \{ \omega_i \}$\\
+    $\mathbb{P}(E) = \mathbb{P}(\bigcup_{i} \{ \omega_i \}) = \sum_{i} \mathbb{P}(\{ \omega_i \})$
+}
+
+\theorem{Proposition}{}{true}{
+    Soient $\Omega$ et $\mathbb{P}$ sur $\Omega$ une probabilité sur $\Omega$.\\
+    Soit $f : \Omega \to \mathbb{R}$ définie par $f(\omega) = \mathbb{P}(\{\omega\})$ pour tout $\omega \in \Omega$.\\
+    Alors : 
+    \begin{enumerate}
+        \item $0 \leq f(\omega) \leq 1$.
+        \item $\sum_{\omega \in \Omega} f(\omega) = 1$.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{}{true}{
+    Soit $\Omega$ un ensemble dénombrable alors et $f : \Omega \to \mathbb{R}$ tel que :
+    \begin{enumerate}
+        \item $f(\omega) \geq 0$
+        \item $\sum_{\omega \in \Omega} f(\omega) = 1$
+    \end{enumerate}
+    Alors $\mathbb{P}_f(E) : \mathcal{P}(\Omega) \to \mathbb{R}$ définie par $\mathbb{P}_f(E) = \sum_{\omega \in E} f(\omega)$ est une probabilité sur $\Omega$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+\begin{enumerate}
+    \item $\mathbb{P}_f(E) = [0,1]$\\
+    $\mathbb{P}_f(E) \geq 0$ car $f(\omega) \geq 0$.\\
+    $\mathbb{P}_f(E) = \sum_{\omega \in E} f(\omega) \leq \sum_{\omega \in \Omega} f(\omega) = 1$.\\
+    \item $\sigma$-additivité : Soit $(E_n)_{n \in \mathbb{N}}$ où $E_n \cap E_m = \emptyset$ pour $n \neq m$ et $E \in \mathcal{P}(\Omega)$.\\
+    $\mathbb{P}_f(\bigcup_{n} E_n) = \sum_{\omega \in \bigcup_{n} E_n} f(\omega) = \sum_{n} \sum_{\omega \in E_n} f(\omega) = \sum_{n} \mathbb{P}_f(E_n)$.    
+\end{enumerate}
+}
+
+\definition{Soit $\Omega$ un ensemble dénombrable et $\mathbb{P}$ une probabilité sur $\Omega$, $(\Omega, \mathbb{P})$ est un \textbf{espace de probabilité}.}
+
+\definition{
+    Soit $\Omega$ un ensemble fini alors la probabilité $\mathbb{P}(\{\omega\}) = \frac{1}{|\Omega|}$ pour tout $\omega \in \Omega$ est appelée \textbf{probabilité uniforme} sur $\Omega$.
+}
+
+\ndlr{Exemple manquant à revoir avec Laurent.}
+
+\end{document}

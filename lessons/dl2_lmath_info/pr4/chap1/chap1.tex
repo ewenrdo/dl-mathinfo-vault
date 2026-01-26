@@ -176,12 +176,77 @@ Soient $A$ et $B$ deux ensembles finis tels que $Card(A) = n$ et $Card(B) = M$ (
     \item \textit{Laissée en exercice.}
 \end{enumerate}}
 
+\reminder{Soient $X, Y$ deux ensembles. Soit $f : X \to Y$.
+    $\forall A \subset Y$ $f^{-1}(A) = \{x \in X \mid f(x) \in A\}$ est l'\textbf{image réciproque} de $A$ par $f$.
+}
+\remark{$f^{-1}(A)$ peut être $\emptyset$, même si $A \neq \emptyset$.}
+\theorem{Proposition}{Lemme des bergers}{false}{
+    Soit $X$ et $Y$ des ensembles finis et $f \colon X \to Y$ une application.\\
+    On suppose que $Card(f^{-1}(\{ y \})) = k$ où $k \in \mathbb{N}^*$ pour tout $y \in f(X)$.\\\\
+    Alors $Card(Y) = \frac{Card(X)}{k}$.
+}
+\example{C'est l'idée du berger qui compte ses moutons. Si chaque mouton a 4 pattes, en comptant le nombre de pattes total et en divisant par 4, on obtient le nombre de moutons.}
 
-%\theorem{Formulaire}{Cas d'utilisation des formules de dénombrement}{false}{
-%    \begin{center}
-%    \includegraphics[width=1\textwidth]{./images/combinatoire_formules.png}
-%    \captionof{figure}{Arbre décisionnel illustrant les cas d'utilisation des formules de dénombrement}
-%\end{center}
-%}
+\noindent{\textbf{Démonstration :}\\
+    $X_i = f^{-1}(\{y_i\})$.\\
+    $X = \bigcup_{y_i \in f(X)} X_i$ et les $X_i$ sont disjoints.\\
+    Donc $Card(X) = \sum_{i = 1}^n Card(X_i)$.\\
+    En effet, si $z_1 \in f^{-1}(\{y_1\}) \Rightarrow z_1 \notin f^{-1}(\{y_j\})$ pour $j \neq 1$.\\
+    Donc $X_i \cap X_j = \emptyset$ pour $i \neq j$.\\
+    $\forall x \in X$, $\exists i : f(x) = y_i$ par définition de l'image.\\
+    Donc $X = \bigcup_{i=1}^{n} X_i$.\\
+    Or $Card(X_i) = K$ donc $Card(X) = \sum_{i=1}^{n} k = n \times k$ où $n = Card(f(X))$.\\
+    Donc $n = \frac{Card(X)}{k}$.\\
+}
+
+\example{
+    Prenons le mot "Ensemble". On a 8 lettres, dont 3 "e" identiques.\\
+    Le nombre de façons de réarranger les lettres du mot "Ensemble" est donc : $\frac{8!}{3!} = 6720$.
+}
+
+\definition{
+    Soient $E$ un ensemble fini de cardinal $N$ et $0 \leq n \leq N$.\\
+    Un sous-ensemble à $n$ éléments de $E$ est appelé une \textbf{combinaison} de $n$ éléments de $E$.\\\\
+    Elle est donnée $(\omega_1, \omega_2, \ldots, \omega_n)$ où les $\omega_i$ sont distincts et non ordonnés.
+}
+
+\theorem{Proposition}{}{false}{
+    Le nombre total des combinaisons à $n$ éléments de $E$ est donné par :
+    \[
+        C^n_N = \frac{N!}{n!(N-n)!} = \frac{1}{n!} A^n_N = \binom{N}{n}
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+    $X = \{ \text{arrangements de n éléments de E} \}$.\\
+    $Y = \{ \text{combinaisons de n éléments de E} \}$.\\
+    Soit $f \colon X \to Y$ l'application telle que $f((\omega_1, \omega_2, \ldots, \omega_n)) = \{\omega_1, \omega_2, \ldots, \omega_n\}$.\\
+    Donc $Card(f^{-1}(\{\omega_1, \omega_2, \ldots, \omega_n\})) = n!$ car il y a $n!$ façons d'ordonner les éléments d'une combinaison.\\
+    Donc $Card(Y) = \frac{Card(X)}{n!} = \frac{A^n_N}{n!} = \frac{N!}{n!(N-n)!}$.
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+        \item Soient $A$ et $B$ tq $A \cap B = \emptyset, A, B$ finis.\\
+        $\Rightarrow Card(A \cup B) = Card(A) + Card(B)$.
+        \item Soient $A, B$ finis.\\
+        $\Rightarrow Card(A \cup B) = Card(A) + Card(B) - Card(A \cap B)$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Démonstration :}\\
+    \begin{enumerate}
+        \item Exercice : si $n = Card(A)$ et $m = Card(B)$.\\
+        Idée montrer $A \cup B$ est en bijection avec $\{1, \ldots, n, \ldots, n+m\}$.
+        \item cf. Laurent.
+    \end{enumerate}
+}
+
+\theorem{Formulaire}{Cas d'utilisation des formules de dénombrement}{false}{
+    \begin{center}
+    \includegraphics[width=1\textwidth]{./images/combinatoire_formules.png}
+    \captionof{figure}{Arbre décisionnel illustrant les cas d'utilisation des formules de dénombrement}
+\end{center}
+}
 
 \end{document}
