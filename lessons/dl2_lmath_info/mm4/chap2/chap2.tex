@@ -455,7 +455,7 @@ Donc $id_E^{*} = id_{E^*}$. $\Box$
 }
 
 \theorem{Proposition}{}{false}{
-    Soient $E$ et $F$ des $\mathbb{K}$-espaces vectoriels.\\
+    Soient $E$ et $F$ des $\mathbb{K}$-espaces vectoriels de dimension finie.\\
     Soient $e$ une base de $E$ et $f$ une base de $F$ et soient $e^*$ et $f^*$ leurs bases duales respectives.\\
     Soit $g \in \mathcal{L}(E,F)$ (alors $g^{*} \in \mathcal{L}(F^*, E^*)$).\\
     Alors : 
@@ -465,8 +465,40 @@ Donc $id_E^{*} = id_{E^*}$. $\Box$
 \noindent{\textbf{Démonstration :}\\
 On note $M = Mat_{e,f}(g)$ et $M' = Mat_{f^*, e^*}(g^{*})$.\\
 On note $m = dim(E)$ et $n = dim(F)$.\\\\
-$g^{*}(f_j^{*}) = \sum_{i=1}^m m_{ji}' e_i^*$ pour $j \in \{1, 2, \ldots, n\}$.\\\\
-$g(e_j) = \sum_{i=1}^n m_{ij} f_i$ pour $j \in \{1, 2, \ldots, m\}$.\\\\
+$g^{*}(f_l^{*}) = \sum_{k=1}^m M_{kl}' e_k^*$ pour $j \in \{1, 2, \ldots, n\}$.\\\\
+$g(e_j) = \sum_{i=1}^n M_{ij} f_i$ pour $j \in \{1, 2, \ldots, m\}$.\\\\
+Par définition de $g^{*}$, on a : $\langle g^{*}(f_l^{*}), e_j \rangle = \langle f_l^{*}, g(e_j) \rangle$.\\
+$= \left\langle \sum_{k=1}^m M_{kl}' e_k^*, e_j \right\rangle = \left\langle f_l^{*}, \sum_{i=1}^n M_{ij} f_i \right\rangle$.\\\\
+$= \sum_{k=1}^m M_{kl}' \langle e_k^*, e_j \rangle = \sum_{i=1}^n M_{ij} \langle f_l^{*}, f_i \rangle$.\\\\
+Or par définition des bases duales, on a $\langle e_k^*, e_j \rangle = \delta_{kj}$ et $\langle f_l^{*}, f_i \rangle = \delta_{li}$.\\\\
+Donc $M_{jl}' = M_{lj}$.\\\\
+Donc $M' = { }^t M$. $\Box$
 }
+
+\theorem{Corollaire}{}{false}{
+    Soient $E$ et $F$ des $\mathbb{K}$-espaces vectoriels de dimension finie.\\
+    Soient $g \in \mathcal{L}(E,F)$.\\
+    Alors :
+    \[ rg(g^{*}) = rg(g) \]
+}
+\noindent{\textbf{Démonstration :}\\
+On a $Mat_{e,f}(g) = { }^t Mat_{f^*, e^*}(g^{*})$, que l'on note $M = { }^t M'$.\\
+On a $rg(g) = rg(M) = rg({ }^t M) = rg(M') = rg(g^{*})$. $\Box$
+}
+
+\section{Remarque sur le calcul des bases duales.}
+
+Soit $E$ un $\mathbb{K}$-espace vectoriel de dimension finie $n$.\\
+Soient $e, f$ deux bases de $E$ et soient $e^*, f^*$ leurs bases duales respectives.\\
+Soit $A = P_{e \to f}$ la matrice de passage de la base $e$ à la base $f$ et soit $P = P_{e^* \to f^*}$ la matrice de passage de la base $e^*$ à la base $f^*$.\\
+On a vu que $P = ({ }^t A)^{-1}$.\\\\
+$f_j = \sum_{i=1}^n A_{ij} e_i$ pour $j \in \{1, 2, \ldots, n\}$.\\\\
+Donc $A = Mat_{e, f}(id_E)$.\\\\
+De même, $P = Mat_{e^*, f^*}(id_{E^*})$.\\\\
+Par la proposition précédente, on a $P = { }^t A$ et $id_{E^*} = (id_E)^{*}$.
+
+\newpage
+\tableofcontents
+
 
 \end{document}
