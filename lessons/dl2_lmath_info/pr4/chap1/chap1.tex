@@ -22,8 +22,8 @@
 
 \docTitle{Chapitre 1 : Dénombrement}
 
-\section{Cardinal d'un ensemble}
-
+\section{Ensembles et cardinalité}
+\subsection{Ensembles finis et cardinal}
 \definition{
     Soit $E$ un ensemble.    
     On dit que $E$ est \textbf{fini} s'il existe un entier naturel $n \in \mathbb{N}$ et une bijection entre $E$ et l'ensemble $\{1, 2, \ldots, n\}$.\\
@@ -47,6 +47,7 @@ Donc, $Card(A) = Card(B)$.\\\\
 \training{Montrer que si $A$ et $B$ sont en bijection, alors $Card(A) = Card(B)$.}
 \noindent\carreaux{10}
 
+\subsection{Produit cartésien et $n$-uplets}
 \definition{
     Soient $E$ et $F$ deux ensembles non vides.
     Alors on appelle le \textbf{produit cartésien} de $E$ et $F$ et on note $E \times F := \{(x,y) \mid x \in E, y \in F\}$.
@@ -112,6 +113,8 @@ Donc, $Card(A \times B) = n \times m = Card(A) \times Card(B)$.\\
 Le nombre de configurations possibles pour les dates d'anniversaires des 8 étudiants est donc $366^8$.
 }
 
+\section{Dénombrement des structures}
+\subsection{Arrangements et permutations}
 \definition{
     Soit $E$ un ensemble de cardinal $M \geq 1$ et soit $0 \leq n \leq M$.\\
     Un \textbf{arrangement} de $n$ éléments de $E$ est un n-uplet $(\omega_1, \omega_2, \ldots, \omega_n)$ d'éléments de $E$ tels que tous les $\omega_i$ sont distincts.\\
@@ -204,6 +207,8 @@ Soient $A$ et $B$ deux ensembles finis tels que $Card(A) = n$ et $Card(B) = M$ (
     Le nombre de façons de réarranger les lettres du mot "Ensemble" est donc : $\frac{8!}{3!} = 6720$.
 }
 
+\subsection{Combinaisons}
+
 \definition{
     Soient $E$ un ensemble fini de cardinal $N$ et $0 \leq n \leq N$.\\
     Un sous-ensemble à $n$ éléments de $E$ est appelé une \textbf{combinaison} de $n$ éléments de $E$.\\\\
@@ -224,6 +229,8 @@ Soient $A$ et $B$ deux ensembles finis tels que $Card(A) = n$ et $Card(B) = M$ (
     Donc $Card(f^{-1}(\{\omega_1, \omega_2, \ldots, \omega_n\})) = n!$ car il y a $n!$ façons d'ordonner les éléments d'une combinaison.\\
     Donc $Card(Y) = \frac{Card(X)}{n!} = \frac{A^n_N}{n!} = \frac{N!}{n!(N-n)!}$.
 }
+
+\subsection{Formules de dénombrement}
 
 \theorem{Proposition}{}{false}{
     \begin{enumerate}

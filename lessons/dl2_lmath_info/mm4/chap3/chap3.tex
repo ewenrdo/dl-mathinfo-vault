@@ -37,6 +37,27 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
     On peut tracer les graphes de ces suites de fonctions : $f_0, f_1, f_2, \ldots$
 }
 
+\subsection{Convergence simple}
+
+\definition{
+    Soit $(f_n)$ une série de fonctions de $I$ dans $E$.\\
+    On dit que $(f_n)$ est \textbf{simplement convergente} sur $I$ s'il existe une fonction $f : I \to E$ telle que, pour tout $x \in I$, la suite $(f_n(x))$ converge dans $E$.\\
+    On appelle dans ce cas la \textbf{limite simple} de la suite $(f_n)$ la fonction $f$ définie par : \function{f}{I \to E}{x \mapsto \lim_{n \to +\infty} f_n(x)}.
+}
+
+\example{
+    On pose \function{f_n}{\left[0,1\right] \to \mathbb{R}}{x \mapsto x^n.}{}\\
+    Soit $x \in \left[0,1\right]$.\\
+    $lim_{n \to +\infty} x^n = \begin{cases}
+        0 & \text{si } x < 1\\
+        1 & \text{si } x = 1
+    \end{cases}$\\
+    Donc la suite $(f_n)$ converge simplement sur $\left[0,1\right]$ et sa limite simple est la fonction $f$ définie par : \function{f}{\left[0,1\right] \to \mathbb{R}}{x \mapsto \begin{cases}
+        0 & \text{si } x < 1\\
+        1 & \text{si } x = 1
+    \end{cases}}.
+}
+
 \newpage
 \tableofcontents
 
