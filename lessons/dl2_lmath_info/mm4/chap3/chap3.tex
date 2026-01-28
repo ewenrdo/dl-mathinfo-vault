@@ -66,10 +66,62 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
         0 & \text{si } x > \frac{2}{n}
     \end{cases}$ définie de $\left[0,1\right]$ dans $\mathbb{R}$.\\
     On a que $f_n$ converge simplement vers la fonction nulle sur $\left[0,1\right]$.\\
-    En effet, $f_n(0) = 0 \longrightarrow 0$ et si $x \in \left]0,1\right]$, alors il existe $N \in \mathbb{N}$ tel que $n \geq N \implies x > \frac{2}{n} \implies f_n(x) = 0$. Donc $f_n(x) \longrightarrow 0$.\\
+    En effet, $f_n(0) = 0 \longrightarrow 0$ et si $x \in \left]0,1\right]$, alors il existe $N \in \mathbb{N}$ tel que $n \geq N \implies x > \frac{2}{n} \implies f_n(x) = 0$ (axiome d'Archimède). Donc $f_n(x) \longrightarrow 0$.\\
     D'où la limite simple est la fonction nulle.\\
     Cependant, $max_{[0,1]} f_n = f_n\left(\frac{1}{n}\right) = n$, qui diverge vers $+\infty$. Donc la "convergence n'est pas uniforme".\\
     Autre chose étrange, $\int_0^1 f_n(x) dx = 1$, alors qu'on s'attendrait à ce que l'intégrale de la limite soit nulle.
+}
+\newpage
+\subsection{Convergence uniforme}
+
+\definition{
+    On dit que $(f_n)$ converge \textbf{uniformément} sur $I$ vers $f$ s'il existe une fonction $f : I \to E$ telle que : \\
+    $\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, \forall x \in I, |f_n(x) - f(x)| < \varepsilon$.
+}
+
+\remark{
+    $(f_n)$ converge simplement vers $f$ si $\forall x \in I, \underbrace{\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, |f_n(x) - f(x)| < \varepsilon}_{(f_n(x))_{n\in\mathbb{N}} \text{ converge vers } f(x)}$. Ce n'est donc pas la même chose que la convergence uniforme, où $n_0$ ne dépend pas de $x$.
+}
+
+\example{
+    Dans l'example précédent (avec les $\frac{1}{n}$), $f_n(\frac{1}{n}) \longrightarrow +\infty$, donc la convergence n'est pas uniforme sur $\left[0,1\right]$ vers $0$. En effet, $\forall n \geq 1, |f_n(\frac{1}{n}) - 0| = n \geq 1$.\\
+    
+}
+
+\theorem{Proposition}{}{false}{
+    \begin{enumerate}
+    \item Si $(f_n)$ converge uniformément vers $f$ sur $I$, alors elle converge simplement vers $f$ sur $I$.
+    \item La limite simple de $(f_n)$ est unique. Si $f$ est limite simple de $(f_n)$  par définition : $f(x) = \lim_{n \to +\infty} f_n(x)$ (qui est unique).
+    \item La limite uniforme de $(f_n)$ est unique (si elle existe).
+\end{enumerate}
+}
+
+\remark{Si on a la limite simple de $(f_n)$, alors c'est la seule candidate possible pour être la limite uniforme. Donc pour calculer une limite uniforme, on commence par chercher la limite simple, puis on prouve la convergence uniforme vers cette limite simple.}
+
+\example{
+    Soit $a < 1$.\\
+    $f_n = x^n$ sur $\left[0,a\right] \to \mathbb{R}$.\\
+    $(f_n)$ converge simplement vers $0$.
+    \begin{enumerate}
+        \item Soit $x \in \left[0,a\right]$, $x < 1 \Rightarrow x^n \longrightarrow 0$.\\
+        Donc $0$ est la limite simple de $(f_n)$.
+        \item Soit $\varepsilon > 0$.\\
+        Soit $n_0 \in \mathbb{N}$ tel que soit $n \geq n_0, \forall x \in \left[0,a\right], |x^n - 0| < a^n \leq a^{n_0} < \varepsilon$ (car $a < 1$).
+    \end{enumerate}
+}
+
+\cexample{Par contre, montrons que $f_n = x^n$ sur $\left[0,1\right[$ ne converge pas uniformément vers $0$ (remarquons qu'on a pas pris $1$).\\
+\begin{enumerate}
+    \item La limite simple est toujours $0$ (même justification que tout à l'heure).
+    \item $(1-\frac{1}{n})^n \longrightarrow \frac{1}{e} \neq 0$. Donc il n'y a pas de convergence uniforme.
+\end{enumerate}
+}
+
+\remark{Pour montrer que $f_n$ converge uniformément vers $f$, il suffit de trouver une majoration $M_n$ indépendante de $x$ telle que $|f_n(x) - f(x)| \leq M_n$ et $M_n \longrightarrow 0$.}
+
+\definition{
+    Soit $f$ une fonctio de $I$ dans $E$.\\
+    La \textbf{norme uniforme (ou norme infinie)} de $f$ est définie par : $\|f\|_{I,\;\infty} = sup_{x \in I} |f(x)|$.
 }
 
 \newpage
