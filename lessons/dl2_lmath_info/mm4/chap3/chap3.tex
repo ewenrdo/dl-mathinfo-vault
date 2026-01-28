@@ -57,6 +57,20 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
         1 & \text{si } x = 1
     \end{cases}}.
 }
+\attention{On atteint un premier problème : la limite de $f_n$ est continue mais la limite simple $f$ ne l'est pas.}
+
+\example{
+    On pose $f_n = \begin{cases}
+        n^2 x & \text{si } x \in \left[0, \frac{1}{n}\right]\\
+        n^2 \left( \frac{2}{n} - x \right) & \text{si } x \in \left[\frac{1}{n}, \frac{2}{n}\right]\\
+        0 & \text{si } x > \frac{2}{n}
+    \end{cases}$ définie de $\left[0,1\right]$ dans $\mathbb{R}$.\\
+    On a que $f_n$ converge simplement vers la fonction nulle sur $\left[0,1\right]$.\\
+    En effet, $f_n(0) = 0 \longrightarrow 0$ et si $x \in \left]0,1\right]$, alors il existe $N \in \mathbb{N}$ tel que $n \geq N \implies x > \frac{2}{n} \implies f_n(x) = 0$. Donc $f_n(x) \longrightarrow 0$.\\
+    D'où la limite simple est la fonction nulle.\\
+    Cependant, $max_{[0,1]} f_n = f_n\left(\frac{1}{n}\right) = n$, qui diverge vers $+\infty$. Donc la "convergence n'est pas uniforme".\\
+    Autre chose étrange, $\int_0^1 f_n(x) dx = 1$, alors qu'on s'attendrait à ce que l'intégrale de la limite soit nulle.
+}
 
 \newpage
 \tableofcontents
