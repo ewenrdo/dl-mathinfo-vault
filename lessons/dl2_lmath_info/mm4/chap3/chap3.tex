@@ -173,6 +173,22 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     \[\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall p,q \geq n_0, \forall x \in I, |f_p(x) - f_q(x)| < \varepsilon.\]
 }
 
+\theorem{Théorème}{}{false}{
+    Soit $(f_n)$ une suite de fonctions de $I$ dans $E$.\\
+    Alors $(f_n)$ est uniformément de Cauchy si et seulement si elle converge uniformément sur $I$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+    Supposons $(f_n)$ est uniformément de Cauchy, donc elle est simplement de Cauchy. Donc $\forall x \in I$, la suite $(f_n(x))$ converge dans $E$ (car $E$ est complet).\\
+    On note $f(x) = \lim_{n \to +\infty} f_n(x)$.\\
+    Donc $f_n \to f$ (simplement).
+    Montrons que $f_n \to f$ uniformément.\\
+    A-t-on $\| f_n - f \|_{I,\;\infty} \longrightarrow 0$ ?\\
+    Soit $\varepsilon > 0$.\\
+    Soit $n_0 \in \mathbb{N}$ tel que $\forall p,q \geq n_0, \|f_p - f_q\|_{\infty} < \varepsilon$.\\
+    Soit $x \in I \; |f_n(x) - f(x)| \leq |f_n(x) - f_{n_0}(x)| + |f_{n_0}(x) - f(x)|$.\\
+}
+
 \newpage
 \tableofcontents
 
