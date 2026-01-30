@@ -162,6 +162,17 @@ Alors :
     Donc $f_n$ converge uniformément vers la fonction nulle sur $[0,a]$. 
 \end{enumerate}
 }
+
+\remark{L'hypothèse "continue sur $[0,a]$" permet d'appliquer le théorème des bornes atteintes : $\| f_n \| = max_{x \in [0,a]} f_n(x)$.\\
+et comme $f_n$ est croissante, le maximum est atteint en $a$.}
+
+\remark{En général, pour calculer des bornes supérieures (extrema en général) d'une fonction, il faut faire le tableau de variations.}
+
+\definition{
+    Soit $(f_n)$ une suite de fonctions de $I$ dans $E$. On dit que $(f_n)$ est une \textbf{suite de Cauchy uniforme} sur $I$ s'il :
+    \[\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall p,q \geq n_0, \forall x \in I, |f_p(x) - f_q(x)| < \varepsilon.\]
+}
+
 \newpage
 \tableofcontents
 
