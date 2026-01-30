@@ -186,8 +186,22 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     A-t-on $\| f_n - f \|_{I,\;\infty} \longrightarrow 0$ ?\\
     Soit $\varepsilon > 0$.\\
     Soit $n_0 \in \mathbb{N}$ tel que $\forall p,q \geq n_0, \|f_p - f_q\|_{\infty} < \varepsilon$.\\
-    Soit $x \in I \; |f_n(x) - f(x)| \leq |f_n(x) - f_{n_0}(x)| + |f_{n_0}(x) - f(x)|$.\\
+    Soit $n \geq n_0$.\\
+    Soit $x \in I$.\\
+    Soit $p_x \in \mathbb{N}$ tel que $|f_{p_x}(x) - f(x)| < \varepsilon$ (car $f_n(x) \to f(x)$).\\
+    On a pour $p \geq max(p_x, n_0) \; |f_n(x) - f(x)| \leq |f_n(x) - f_p(x)| + |f_p(x) - f(x)| < \|f_n - f_p\|_{I,\;\infty} + \varepsilon < 2\varepsilon$ car $p \geq n_0$.\\
+    En passant à la borne supérieur, $\| f_n - f\| \leq 2 \varepsilon$.\\
+    Quitte à remplacer $\varepsilon$ par $\frac{\varepsilon}{2}$, on a bien $\| f_n - f\|_{I,\;\infty} < \varepsilon$. Donc $f_n \to f$ uniformément. $\Box$
 }
+
+\section{Propriétés de la limite uniforme}
+
+\theorem{Proposition}{}{true}{
+    Soit $(f_n)$ une suite de fonctions de $I \to E$. On suppose $f_n \to f$ uniformément.\\
+    Alors, si $f_n$ est bornée à partir d'un certain rang, alors $f$ est bornée. De plus, $lim_{n \to +\infty} \| f_n \|_{I,\;\infty} = \| f \|_{I,\;\infty}$.
+}
+
+\ndlr{cf. Alex}
 
 \newpage
 \tableofcontents
