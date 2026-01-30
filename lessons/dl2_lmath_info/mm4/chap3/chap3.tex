@@ -120,19 +120,48 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
 \remark{Pour montrer que $f_n$ converge uniformément vers $f$, il suffit de trouver une majoration $M_n$ indépendante de $x$ telle que $|f_n(x) - f(x)| \leq M_n$ et $M_n \longrightarrow 0$.}
 
 \definition{
-    Soit $f$ une fonctio de $I$ dans $E$.\\
+    Soit $f$ une fonction de $I$ dans $E$.\\
     La \textbf{norme uniforme (ou norme infinie)} de $f$ est définie par : $\|f\|_{I,\;\infty} = sup_{x \in I} |f(x)|$.
 }
 
 \theorem{Proposition}{}{false}{
     Soit $(f_n)$ une suite de fonctions de $I$ dans $E$.\\
-    Alors $(f_n)$ converge uniformément vers $f$ sur $I$ si et seulement si : $\|f_n - f\|_{I,\;\infty} \longrightarrow 0$.
+    Alors $(f_n)$ converge uniformément vers $f$ sur $I$ si et seulement si \[\begin{cases}
+        f_n - f \text{ est bornée sur } I \text{ à partir d'un certain rang}\\
+        \|f_n - f\|_{I,\;\infty} \longrightarrow 0
+    \end{cases}\]
 }
+
+\remark{La première condition est là pour que la norme infinie soit bien définie et réelle.}
+
+\reminder{On dit que $f \colon I \to E$ est bornée sur $I$ s'il existe $M \geq 0$ tel que $\forall x \in I, |f(x)| \leq M$. Autrement dit, $\{f(x) \mid x \in I\} = f(I)$ est une partie bornée de $E$, $\| f \|_{\infty} < +\infty$.}
 
 \noindent{\textbf{Démonstration :}\\
-    Remarque précédente + le sup est le plus petit majorant. $\Box$
+    Si $\|f_n - f\|_{I,\;\infty} \longrightarrow 0$, alors $\forall x \in I, |f_n(x) - f(x)| \leq \|f_n - f\|_{I,\;\infty} \longrightarrow 0$. Donc $(f_n)$ converge uniformément vers $f$ par la remarque.\\\\
+    Réciproquement, si $\| f_n - f\|_{I,\;\infty} \nrightarrow 0$, alors il existe $\varepsilon > 0$ et une sous-suite $\varphi$ strictement croissante telle que $\| f_{\varphi(n)} - f\|_{I,\;\infty} \geq \varepsilon$.\\
+    Donc il existe $x_n \in I$ tel que $|f_{\varphi(n)}(x_n) - f(x_n)| \geq \varepsilon$ par définition du sup. $\Box$
 }
 
+\example{\function{f_n}{[0,1[ \to \mathbb{R}}{x \mapsto x^n}\\
+\begin{enumerate}
+    \item $f_n$ converge simplement vers la fonction nulle. (CVS)
+    \item $\|f_n - 0\|_{[0,1[,\;\infty} = sup_{x \in [0,1[} |x^n - 0| = 1$. En effet, le prolongement par continuité de $f_n$ est $x^n$ sur $[0,1]$ et est continue $1$.\\
+    donc $lim_{x \to 1^-} f_n(x) = 1$. Donc $\| f_n \|_{\infty} \geq 1$.
+\end{enumerate}
+}
+\ndlr{cf. Laurent pour la démo de $\|f_n\|_{\infty} \geq 1$}
+
+\remark{On sait de plus que $\| f_n \|_{[0,1[,\;\infty} = 1$ car $\forall x \in [0,1[, |f_n(x)| = x^n < 1$. Donc $\| f_n \|_{\infty} \leq 1$. Donc $\| f_n \|_{\infty} = 1$.}
+\example{(suite)
+$f_n : [0,a] \to \mathbb{R}, x \mapsto x^n$ avec $a < 1$.\\
+Alors : 
+\begin{enumerate}
+    \item $f_n$ converge simplement vers la fonction nulle sur $[0,a]$.
+    \item $\| f_n \|_{[0,a]\;\infty} = f_n(a) = a^n$ car $f_n$ est continue $[0,a]$ et $f_n$ est croissante sur $[0,a]$.\\
+    Donc $lim_{n \to +\infty} \| f_n \|_{[0,a],\;\infty}$ (car $= a^n$).\\
+    Donc $f_n$ converge uniformément vers la fonction nulle sur $[0,a]$. 
+\end{enumerate}
+}
 \newpage
 \tableofcontents
 
