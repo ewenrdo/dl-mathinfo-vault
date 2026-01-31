@@ -25,16 +25,14 @@
 \section{Suites de fonctions}
 
 \definition{Soit $I$ un intervalle ouvert, et soit $E = \mathbb{R}$ ou $\mathbb{C}$\\
-Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathcal{F}(I, E)$, l'ensemble des fonctions de $I$ dans $E$. On la note $(f_n)_{n \in \mathbb{N}}$, où $f_n$ est la fonction associée à l'entier naturel $n$.
+Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathcal{F}(I, E) = E^I$, l'ensemble des fonctions de $I$ dans $E$. On la note $(f_n)_{n \in \mathbb{N}}$, où $f_n$ est la fonction associée à l'entier naturel $n$.
 }
 
-\vocabulary{$\mathcal{F}(I, E)$ : ensemble des fonctions de $I$ dans $E$. On le note aussi $E^I$.}
 \remark{Cette notion est généralisable si $I$ devient un disque de $\mathbb{C}$ et $E$ un espace vectoriel normé.}
 
 \example{
     $f_n : \left[ 0, +\infty \right[ \to \mathbb{R}$ définie par $f_n(x) = x^n$, pour tout $n \in \mathbb{N}$.
-    On a aussi : $f_n : \mathbb{R} \to \mathbb{R}$ définie par $f_n(x) = \cos(nx)$, pour tout $n \in \mathbb{N}$.\\
-    On peut tracer les graphes de ces suites de fonctions : $f_0, f_1, f_2, \ldots$
+    On a aussi : $f_n : \mathbb{R} \to \mathbb{R}$ définie par $f_n(x) = \cos(nx)$, pour tout $n \in \mathbb{N}$. On peut tracer les graphes de ces suites de fonctions : $f_0, f_1, f_2, \ldots$
 }
 
 \subsection{Convergence simple}
@@ -55,7 +53,7 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
     Donc la suite $(f_n)$ converge simplement sur $\left[0,1\right]$ et sa limite simple est la fonction $f$ définie par : \function{f}{\left[0,1\right] \to \mathbb{R}}{x \mapsto \begin{cases}
         0 & \text{si } x < 1\\
         1 & \text{si } x = 1
-    \end{cases}}.
+    \end{cases}}
 }
 \attention{On atteint un premier problème : la limite de $f_n$ est continue mais la limite simple $f$ ne l'est pas.}
 
@@ -65,12 +63,14 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
         n^2 \left( \frac{2}{n} - x \right) & \text{si } x \in \left[\frac{1}{n}, \frac{2}{n}\right]\\
         0 & \text{si } x > \frac{2}{n}
     \end{cases}$ définie de $\left[0,1\right]$ dans $\mathbb{R}$.\\
-    On a que $f_n$ converge simplement vers la fonction nulle sur $\left[0,1\right]$.\\
-    En effet, $f_n(0) = 0 \longrightarrow 0$ et si $x \in \left]0,1\right]$, alors il existe $N \in \mathbb{N}$ tel que $n \geq N \implies x > \frac{2}{n} \implies f_n(x) = 0$ (axiome d'Archimède). Donc $f_n(x) \longrightarrow 0$.\\
-    D'où la limite simple est la fonction nulle.\\
+    On a que $f_n$ converge simplement vers la fonction nulle sur $\left[0,1\right]$. En effet, $f_n(0) = 0 \longrightarrow 0$ et si $x \in \left]0,1\right]$, alors il existe $N \in \mathbb{N}$ tel que $n \geq N \implies x > \frac{2}{n} \implies f_n(x) = 0$ (axiome d'Archimède). Donc $f_n(x) \longrightarrow 0$, d'où le fait que la limite simple est la fonction nulle.\\
     Cependant, $max_{[0,1]} f_n = f_n\left(\frac{1}{n}\right) = n$, qui diverge vers $+\infty$. Donc la "convergence n'est pas uniforme".\\
     Autre chose étrange, $\int_0^1 f_n(x) dx = 1$, alors qu'on s'attendrait à ce que l'intégrale de la limite soit nulle.
 }
+\begin{center}
+    \includegraphics[width=0.25\textwidth]{./images/figure1.png}
+    \captionof{figure}{Graphique de $f_n$}
+\end{center}
 \newpage
 \subsection{Convergence uniforme}
 
