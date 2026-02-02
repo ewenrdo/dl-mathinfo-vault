@@ -1,0 +1,131 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info PR4}
+\fancyhead[C]{Probabilités}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Probabilités conditionnelles et indépendance}
+
+\definition{Soit $B \in \mathcal{P}(\Omega)$ tel que $\mathbb{P}(B) > 0$.\\
+La \textbf{probabilité conditionnelle} de $A$ sachant $B$ est définie par :
+\[
+    \forall A \in \mathcal{P}(\Omega), \quad  \mathbb{P}(A \mid B) = \mathbb{P}_B(A) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}
+\]
+}
+
+\example{
+    $\Omega = \{1, 2, 3, 4, 5, 6\}$ (lancer de dé équilibré).\\
+    $B = \{2, 4, 6\}$ (obtenir un nombre pair). $A = \{ 2 \}$.\\
+    On se muni de la probabilité uniforme $\mathbb{P}$ définie par $\mathbb{P}(\{i\}) = \frac{1}{6}$ pour tout $i \in \Omega$.\\
+    La probabilité que si on obtient un nombre pair, ce soit un 2 est :
+    \[
+        \mathbb{P}(A \mid B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)} = \frac{\frac{1}{6}}{\frac{3}{6}} = \frac{1}{3}
+    \]
+}
+
+\remark{On a que $\mathbb{P}(A \mid \Omega) = \mathbb{P}(A)$.}
+
+\theorem{Proposition}{}{false}{
+    Soit $B \in \mathcal{P}(\Omega)$ tel que $\mathbb{P}(B) > 0$.\\
+    Alors $\mathbb{P}_B = \mathbb{P}(\cdot \mid B)$ est une probabilité sur $\Omega$ où pour tout $A \in \mathcal{P}(\Omega)$, $\mathbb{P}_B(A) = \mathbb{P}(A \mid B)$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+Vérifions les axiomes de la probabilité :
+\begin{enumerate}
+    \item $\mathbb{P}_B(\emptyset) = \mathbb{P}(\emptyset \mid B) = \frac{\mathbb{P}(\emptyset \cap B)}{\mathbb{P}(B)} = \frac{0}{\mathbb{P}(B)} = 0$ et $\mathbb{P}_B(\Omega) = \mathbb{P}(\Omega \mid B) = \frac{\mathbb{P}(\Omega \cap B)}{\mathbb{P}(B)} = \frac{\mathbb{P}(B)}{\mathbb{P}(B)} = 1$.
+    \item On a que $\mathbb{P}(A \cap B) \leq \mathbb{P}(B)$ donc $\mathbb{P}_B(A) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)} \leq 1$.
+    \item Soit $(A_n)_{n \in \mathbb{N}}$ une suite finie ou dénombrable de parties de $\Omega$ telles que $A_i \cap A_j = \emptyset$ pour $i \neq j$.\\
+    Alors :
+    \[
+        \mathbb{P}_B\left( \bigcup_{n} A_n \right) = \mathbb{P}\left( \bigcup_{n} A_n \mid B \right) = \frac{\mathbb{P}\left( \left( \bigcup_{n} A_n \right) \cap B \right)}{\mathbb{P}(B)} = \frac{\mathbb{P}\left( \bigcup_{n} (A_n \cap B) \right)}{\mathbb{P}(B)}
+    \]
+    Or, comme les $A_n$ sont disjoints, les $A_n \cap B$ le sont aussi. Donc :
+    \[
+        \mathbb{P}_B\left( \bigcup_{n} A_n \right) = \frac{\sum_{n} \mathbb{P}(A_n \cap B)}{\mathbb{P}(B)} = \sum_{n} \frac{\mathbb{P}(A_n \cap B)}{\mathbb{P}(B)} = \sum_{n} \mathbb{P}_B(A_n)
+    \] $\Box$
+\end{enumerate}
+}
+
+\theorem{Proposition}{Formule des probabilités totales}{false}{
+    Soit $(B_n)_n$ une suite de parties dénombrable de $\Omega$ telles que :
+    \begin{enumerate}
+        \item $\forall i \neq j, B_i \cap B_j = \emptyset$
+        \item $\bigcup_{n} B_n = \Omega$
+        \item $\forall n, \mathbb{P}(B_n) > 0$
+    \end{enumerate}
+    Alors, pour tout $A \in \mathcal{P}(\Omega)$, on a :
+    \[
+        \mathbb{P}(A) = \sum_{n} \mathbb{P}(A \mid B_n) \cdot \mathbb{P}(B_n)
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+$E = \bigcup_{n} (\underbrace{E \cap B_n}_{F_n})$ car $\bigcup_{n} B_n = \Omega$. De plus, $F_i \cap F_j = \emptyset$ pour $i \neq j$.\\
+Donc :
+\[
+    \mathbb{P}(E) = \mathbb{P}\left( \bigcup_{n} F_n \right) = \sum_{n} \mathbb{P}(F_n) = \sum_{n} \mathbb{P}(E \cap B_n)
+\]
+Or, $\mathbb{P}(E \cap B_n) = \mathbb{P}(E \mid B_n) \cdot \mathbb{P}(B_n)$.\\
+D'où le résultat. $\Box$
+}
+
+\theorem{Proposition}{Formule de Bayes}{false}{
+    Soit $(B_n)_n$ une suite de parties dénombrable de $\Omega$ telles que :
+    \begin{enumerate}
+        \item $\forall i \neq j, B_i \cap B_j = \emptyset$
+        \item $\bigcup_{n} B_n = \Omega$
+        \item $\forall n, \mathbb{P}(B_n) > 0$
+    \end{enumerate}
+    Alors, pour tout $E \in \mathcal{P}(\Omega)$ tel que $\mathbb{P}(E) > 0$, on a :
+    \[
+        \forall k, \quad \mathbb{P}(B_k \mid E) = \frac{\mathbb{P}(E \mid B_k) \cdot \mathbb{P}(B_k)}{\sum_{n} \mathbb{P}(E \mid B_n) \cdot \mathbb{P}(B_n)}
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+Par définition de la probabilité conditionnelle, on a :
+$\mathbb{P}(B_k \mid E) = \frac{\mathbb{P}(E \cap B_k)}{\mathbb{P}(E)}$ = $\frac{\mathbb{P}(E \mid B_k) \cdot \mathbb{P}(B_k)}{\mathbb{P}(E)}$.\\
+Or, par la formule des probabilités totales, on a :
+$\mathbb{P}(E) = \sum_{n} \mathbb{P}(E \mid B_n) \cdot \mathbb{P}(B_n)$.\\
+D'où le résultat. $\Box$
+}
+
+\example{
+    Imaginons qu'on ait une maladie rare qui touche 1 personne sur 100.\\
+    \text{ie} $\mathbb{P}(M) = 0.01$  où $M$ est l'événement "la personne est malade" (prévalence).\\
+    De plus, $\mathbb{P}(T + \mid M) = 0.99$ où $T +$ est l'événement "le test est positif" (sensibilité).\\
+    Cependant, le test n'est pas parfait et on a $\mathbb{P}(T - \mid M^c) = 0.95$ où $T -$ est l'événement "le test est négatif" (spécificité).\\
+    Question : Quelle est la probabilité qu'une personne soit malade sachant que son test est positif ?\\
+    On cherche donc $\mathbb{P}(M \mid T +)$. Par la formule de Bayes, on a :
+    \[
+        \mathbb{P}(M \mid T +) = \frac{\mathbb{P}(T + \mid M) \cdot \mathbb{P}(M)}{\mathbb{P}(T + \mid M) \cdot \mathbb{P}(M) + \mathbb{P}(T + \mid M^c) \cdot \mathbb{P}(M^c)}
+    \]
+    Or, $\mathbb{P}(T + \mid M^c) = 1 - \mathbb{P}(T - \mid M^c) = 1 - 0.95 = 0.05$ et $\mathbb{P}(M^c) = 1 - \mathbb{P}(M) = 0.99$.\\
+    Donc :
+    \[
+        \mathbb{P}(M \mid T +) = \frac{0.99 \cdot 0.01}{0.99 \cdot 0.01 + 0.05 \cdot 0.99} \approx 0.166
+    \]
+    Ainsi, même si le test est positif, la probabilité que la personne soit réellement malade n'est qu'environ de 16.6\%.
+}
+
+\newpage
+\tableofcontents
+
+\end{document}

@@ -45,7 +45,7 @@ Supposons $E$ et $F$ dénombrales, donc supposons que $E = \mathbb{N}$ et $F = \
 }
 
 \section{Espaces probabilisés dénombrables}
-
+\subsection{Généralités}
 \definition{
     Soit $\Omega$ un ensemble dénombrable.\\
     Une \textbf{probabilité} sur $\Omega$ est une application $\mathbb{P} : \mathcal{P}(\Omega) \to [0, 1]$ telle que :
@@ -100,5 +100,74 @@ Supposons $E$ et $F$ dénombrales, donc supposons que $E = \mathbb{N}$ et $F = \
 }
 
 \ndlr{Exemple manquant à revoir avec Laurent.}
+\subsection{Propriétés élémentaires}
+
+\theorem{Proposition}{}{false}{
+    Soit $A_1, A_2 \in \mathcal{P}(\Omega)$ alors :
+    \[
+        \mathbb{P}\left(A_1 \cup A_2\right) = \mathbb{P}(A_1) + \mathbb{P}(A_2) - \mathbb{P}(A_1 \cap A_2)
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+Patatoïde \textit{(diagramme de Venn)}.\\\\
+On a $\mathbb{P}(A_1) = \mathbb{P}(A_1 \cap A_2^c) + \mathbb{P}(A_1 \cap A_2)$ car $A_1 = (A_1 \cap A_2^c) \cup (A_1 \cap A_2)$.\\\\
+De même, $\mathbb{P}(A_2) = \mathbb{P}(A_2 \cap A_1^c) + \mathbb{P}(A_1 \cap A_2)$.\\\\
+Donc $\mathbb{P}(A_1) + \mathbb{P}(A_2) = \mathbb{P}(A_1 \cap A_2^c) + \mathbb{P}(A_2 \cap A_1^c) + 2\mathbb{P}(A_1 \cap A_2)$.\\\\
+Or, $\mathbb{P}(A_1 \cup A_2) = \mathbb{P}(A_1 \cap A_2^c) + \mathbb{P}(A_2 \cap A_1^c) + \mathbb{P}(A_1 \cap A_2)$.\\\\
+D'où : $\mathbb{P}(A_1) + \mathbb{P}(A_2) = \mathbb{P}(A_1 \cup A_2) + \mathbb{P}(A_1 \cap A_2) \Rightarrow \mathbb{P}(A_1 \cup A_2) = \mathbb{P}(A_1) + \mathbb{P}(A_2) - \mathbb{P}(A_1 \cap A_2)$. $\Box$
+}
+
+\remark{On a toujours que $\mathbb{P}(A^c) = 1 - \mathbb{P}(A)$ car $\mathbb{P}(A) + \mathbb{P}(A^c) = \mathbb{P}(\Omega) = 1$.}
+
+\theorem{Proposition}{Principe d'inclusion-exclusion}{true}{
+    Soit $E_1, E_2, \ldots , E_n \in \mathcal{P}(\Omega)$ alors :
+    \begin{align*}
+        \mathbb{P}\left(\bigcup_{k=1}^{n} E_k\right) = \sum_{k=1}^n (-1)^{k+1} \left( \sum_{1 \leq i_1 < i_2 < \ldots < i_k \leq n} \mathbb{P}\left(E_{i_1} \cap E_{i_2} \cap \ldots \cap E_{i_k}\right) \right)
+    \end{align*}
+}
+
+\training{Dans le cas $n = 3$, exprimer la formule précédente.}
+On a : $\mathbb{P}(E_1 \cup E_2 \cup E_3) = \mathbb{P}(E_1) + \mathbb{P}(E_2) + \mathbb{P}(E_3) - \mathbb{P}(E_1 \cap E_2) - \mathbb{P}(E_1 \cap E_3) - \mathbb{P}(E_2 \cap E_3) + \mathbb{P}(E_1 \cap E_2 \cap E_3)$.
+
+\theorem{Proposition}{}{false}{
+    Si $A \subset B \in \mathcal{P}(\Omega)$ alors $\mathbb{P}(A) \leq \mathbb{P}(B)$.
+}
+\noindent{\textbf{Démonstration :}\\
+$B = A \cup (B \cap A^c)$ avec $A \cap (B \cap A^c) = \emptyset$.\\
+Donc, $\mathbb{P}(B) = \mathbb{P}(A) + \mathbb{P}(B \cap A^c) \geq \mathbb{P}(A)$. $\Box$
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(E_1, E_2, \ldots , E_n)$ une partition de $\Omega$ finie.\\
+    On a $\mathbb{P}(\bigcup_{i=1}^{n} E_i) \leq \sum_{i=1}^{n} \mathbb{P}(E_i)$.
+}
+\ndlr{cf. Laurent pour la preuve (faire une récurrence.)}
+
+\definition{
+    Soit $(E_i)_{i \in \mathbb{N}}$ une suite de $\mathcal{P}(\Omega)$, telle que $E_i \subset E_{i+1}$ pour tout $i \in \mathbb{N}$.\\
+    La \textbf{limite croissante} de la suite $(E_i)$ est l'événement $E = \bigcup_{i=0}^{\infty} E_i$.
+}
+
+\theorem{Proposition}{}{true}{
+    $\mathbb{P}(E_{\infty}) = \lim_{n \to \infty} \mathbb{P}(E_n)$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+$F_0 = E_0$ et $F_i = E_i \setminus E_{i-1}$ pour $i \geq 1$.\\
+Alors, $E_n = \bigcup_{i=0}^{n} F_i$, et $F_i \cap F_j = \emptyset$ pour $i \neq j$.\\
+Donc, $\mathbb{P}(E_n) = \sum_{i=0}^{n} \mathbb{P}(F_i)$.\\
+Or, $E_{\infty} = \bigcup_{i=0}^{\infty} F_i$.\\
+Donc, $\mathbb{P}(E_{\infty}) = \sum_{i=0}^{\infty} \mathbb{P}(F_i) = \lim_{n \to \infty} \sum_{i=0}^{n} \mathbb{P}(F_i) = \lim_{n \to \infty} \mathbb{P}(E_n)$. $\Box$
+}
+
+\example{
+    $(\mathbb{N}^{*}, \mathbb{P})$ avec $\mathbb{P}(\{k\}) = \frac{1}{2^{k}}$ la loi géométrique de paramètre $\frac{1}{2}$.\\
+    $E_i = \{2, 4, \ldots , 2i\}$ alors $E_i \subset E_{i+1}$ et $E_{\infty} = (2\mathbb{N})^{*}$.\\
+    $A_i = \{1,2, \ldots , i\}$ alors $A_i \subset A_{i+1}$ et $A_{\infty} = \mathbb{N}^{*}$.\\
+}
+
+\newpage
+\tableofcontents
 
 \end{document}
