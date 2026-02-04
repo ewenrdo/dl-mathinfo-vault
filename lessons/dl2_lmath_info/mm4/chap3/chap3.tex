@@ -196,6 +196,8 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
 
 \section{Propriétés de la limite uniforme}
 
+\subsection{Bornitude et continuité de la limite uniforme}
+
 \theorem{Proposition}{}{true}{
     Soit $(f_n)$ une suite de fonctions de $I \to E$. On suppose $f_n \to f$ uniformément.\\
     Alors, si $f_n$ est bornée à partir d'un certain rang, alors $f$ est bornée. De plus, $lim_{n \to +\infty} \| f_n \|_{I,\;\infty} = \| f \|_{I,\;\infty}$.
@@ -223,9 +225,141 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     Alors on a $\int_a^b f_n(x) dx \longrightarrow_{n \to +\infty} \int_a^b f(x) dx$.
 }
 
+\ndlr{cf. Laurent}
+
+\subsection{Dérivabilité de la limite uniforme}
+\vocabulary{
+    Soit $A \subset I$.\\
+    On note pour $x \in I$, $1_A(x) = \begin{cases}
+        1 & \text{si } x \in A\\
+        0 & \text{sinon}
+    \end{cases}$.
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $(f_n)$ une suite de fonctions de $I$ dans $E$ telle que :
+    \begin{itemize}
+        \item $\forall n \in \mathbb{N}$, $f_n \in \mathcal{C}^1(I,E)$.
+        \item $\exists x_0 \in I$ tel que la suite $(f_n(x_0))$ converge dans $E$.
+        \item La suite $(f_n')$ converge uniformément sur $I$ vers une fonction $g$.
+    \end{itemize}
+    Alors, $(f_n)$ converge uniformément sur tout segment $[a,b] \subset I$ vers une fonction $f : I \to E$, et de plus $f \in \mathcal{C}^1(I,E)$ et $f' = g$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+    Soit $x \in I$.\\
+    $f_n(x) = f_n(x_0) + \int_{x_0}^x f_n'(t) dt$ (Théorème fondamental de l'analyse).\\
+    On a $f_n(x_0)$ converge par hypothèse.\\
+    Et $\int_{x_0}^x f_n'(t) dt \longrightarrow \int_{x_0}^x g(t) dt$ par le théorème d'intégrabilité de la limite uniforme.\\
+    Donc $f_n(x)$ converge simplement vers $f$ où $f(x) = lim_{n \to +\infty} f_n(x_0) + \int_{x_0}^x g(t) dt$.\\
+    On remarque que $f$ est de classe $\mathcal{C}^1(I,E)$ et $f' = g$.\\\\
+    Il reste à montrer que $f_n \to f$ uniformément sur tout segment $[a,b] \subset I$.\\
+    Soit $x \in I$.\\
+    $|f_n(x) - f(x)| = |f_n'(t)dt + \int_{x_0}^x f_n'(t)dt - lim_{n \to +\infty} f_n(x_0) - \int_{x_0}^x g(t) dt|$\\
+    $\leq |f_n(x_0) - lim_{n \to +\infty} f_n(x_0)| + |\int_{x_0}^x (f_n'(t) - g(t)) dt|$\\
+    D'où $|f_n(x) - f(x)| \leq |f_n(x_0) - lim_{n \to +\infty} f_n(x_0)| + |x - x_0| \| f_n' - g \|_{I,\;\infty}$.\\
+    $\leq |f_n(x_0) - lim_{n \to +\infty} f_n(x_0)| + (max(|a|,|b|)+|x_0|) \| f_n' - g \|_{I,\;\infty} \longrightarrow 0$ indépendamment de $x$.\\
+    D'où la convergence uniforme sur $[a,b]$ de $(f_n)$ vers $f$.  $\Box$
+}
+
+\example{
+    $f_n \to f$ uniformément et $f_n \in \mathcal{C}^1(I,E)$ ne suffit pas à garantir que $f \in \mathcal{C}^1(I,E)$.\\
+    Par exemple, $f_n : [0,1] \to \mathbb{R}, x \mapsto \frac{x^{n+1}}{n+1}$.\\
+    On a $\| f_n \|_{\infty} = \frac{1}{n+1} \longrightarrow 0$. Donc $f_n \to 0$ uniformément vers 0.\\
+    Cependant, $f_n' : [0,1] \to \mathbb{R}, x \mapsto x^n$ qui converge simplement vers la fonction nulle, mais $f_n' \to 1_{1}$ (simplement) mais $f_n' \in \mathcal{C}^0([0,1], \mathbb{R})$ et $1_{\{1\}} \notin \mathcal{C}^0([0,1], \mathbb{R})$.\\
+    Donc $(f_n')$ ne converge pas uniformément. (on ne satisfait pas les hypothèses du théorème).\\
+    Donc la limite simple $1_{\{1\}} \neq  0 = f'$.
+}
+
+\theorem{Théorème (À VÉRIFIER)}{}{true}{
+    Soit $(f_n)$ une suite de fonctions de $I$ dans $E$ telle que :
+    \begin{itemize}
+        \item $\forall n \in \mathbb{N}$, $f_n$ est dérivable
+        \item $\exists x_0 \in I$ tel que $(f_n(x_0))$ converge.
+        \item $(f_n')$ converge uniformément vers $g$ sur $I$.
+    \end{itemize}
+    Alors, $(f_n)$ converge uniformément sur tout segment $[a,b] \subset I$ vers une fonction $f$ dérivable et $f' = g$.
+}
+\remark{Ce théorème est plus général que le précédent. En effet, on ne demande pas que $f_n$ soit de classe $\mathcal{C}^1(I,E)$, mais juste dérivable.}
+
+\ndlr{cf. Laurent pour la preuve}
+\ndlr{Le prof. n'est pas sûr des hypothèses du théorème.}
+
+\section{Séries de fonctions}
+
+\subsection{Convergence d'une série}
+
+\subsubsection{Définitions générales}
+
+\definition{
+    On appelle \textbf{série de fonctions} une suite $(S_n)$ de fonctions de $I$ dans $E$ de la forme : \[S_n = \sum_{k=0}^n f_k\] où $f_k$ est son \textbf{terme général}, une fonction de $I$ dans $E$. On appelle \textbf{somme partielle} de la série la fonction $S_n$.
+}
+
+
+\definition{
+    On dit qu'une série est \textbf{convergente} au point $x \in I$ si la suite des sommes partielles $(S_n(x))$ converge dans $E$.\\\\
+    En particulier, on dit que la série de fonctions $\sum f_n$ converge \textbf{simplement} sur $I$ s'il existe une fonction $S : I \to E$ telle que, pour tout $x \in I$, la série numérique $\sum f_n(x)$ converge dans $E$ et $S(x) = \sum_{n=0}^{+\infty} f_n(x)$.
+}
+
+\definition{
+    On dit qu'une série de fonctions $\sum_{n=0}^{+\infty} f_n$ converge \textbf{uniformément} si $(S_n)$ converge uniformément sur $I$.
+}
+
+\remark{
+    De manière équivalente, on dit qu'une série $\sum_{n\geq0} f_n$ converge uniformément si $\sum_{k=0}^{+\infty} f_k$ existe et $\| \sum_{k=0}^n f_k - \sum_{k=0}^{+\infty} f_k \|_{I,\;\infty} \longrightarrow 0$.\\\\
+    Autrement dit, $\sum_{n=0}^{+\infty} f_n$ converge uniformément $\Leftrightarrow$ $\sum_{n=0}^{+\infty} f_n$ existe et $(\sum_{k=n+1}^{+\infty} f_k)$ converge uniformément vers la fonction nulle.
+}
+\subsubsection{Convergence normale}
+\definition{On dit que $\sum_{n=0}^{+\infty} f_n$ converge \textbf{normalement} sur $I$ si la série numérique $\sum_{n\geq0} \| f_n \|_{I,\;\infty}$ converge.}
+
+\theorem{Théorème}{}{false}{
+    Si $\sum_{n=0}^{+\infty} f_n$ converge normalement sur $I$, alors :
+    \begin{itemize}
+        \item $\sum_{n=0}^{+\infty} f_n$ converge uniformément sur $I$.
+        \item $\forall x \in I, \; \sum_{n=0}^{+\infty} f_n(x)$ converge absolument dans $E$.
+        \item La limite $\sum_{n=0}^{+\infty} f_n$ est une fonction bornée sur $I$.
+    \end{itemize}
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\example{
+    On considère la série $\sum_{n \geq 0} x^n$.
+    \begin{itemize}
+        \item Si $|x| < 1$, $\sum_{n \geq 0} x^n$ converge absolument (série géométrique) donc la limite existe sur $]-1,1[$.\\
+        Si $|x| \geq 1$, $\sum_{n \geq 0} x^n$ diverge grossièrement.
+        \item Soit $0 \leq a < 1$, alors $\sum_{n \geq 0} x^n$ converge normalement sur $[-a, a]$.\\
+        En effet, $\| x^n \|_{[-a,a],\;\infty} = a^n$ et $\sum_{n \geq 0} a^n$ converge (série géométrique). Donc $\sum_{n \geq 0} x^n$ converge uniformément sur $[-a,a]$.
+        \item Exercice : montrer que $\sum_{n \geq 0} x^n$ ne converge pas uniformément sur $[0,1]$.
+    \end{itemize}
+}
+
+\training{Montrer que la série $\sum_{n \geq 0} (-1)^n x^n$ converge uniformément sur $[0,1]$, mais pas normalement.}
+\noindent\carreaux{10}
+
+\subsection{Propriétés de la limite uniforme d'une série de fonctions}
+
+\theorem{Théorème}{}{false}{
+    On suppose que $\sum_{n \geq 0} f_n$ converge uniformément sur $I$.\\
+    \begin{enumerate}
+        \item Si $\forall n, \, f_n$ est bornée, alors $\sum_{n \geq 0} f_n$ est bornée.
+        \item $x_0 \in \overline{I}$. On suppose que $\forall n, \lim_{x \to x_0} f_n(x) = l_n$. Alors la série numérique $\sum_{n\geq0} l_n$ converge et \[ \lim_{x \to x_0} \sum_{n=0}^{+\infty} f_n(x) = \sum_{n=0}^{+\infty} l_n.\]
+        \item Si $\forall n, f_n$ est continue en $x_0 \in I$, alors $\sum_{n \geq 0} f_n$ est continue en $x_0$.
+        \item Si $f_n$ est continue par morceau, alors $\int_a^b \sum_{n=0}^{+\infty} f_n(x) dx = \sum_{n=0}^{+\infty} \int_a^b f_n(x) dx$.
+    \end{enumerate}
+}
+
+\theorem{Théorème}{}{false}{
+    \begin{itemize}
+        \item $f_n$ de classe $\mathcal{C}^1(I,E)$.
+        \item Il existe $x_0 \in I$ tel que $f_n(x_0)$ converge.
+        \item La série $\sum_{n \geq 0} f_n'$ converge uniformément sur $I$.
+    \end{itemize}
+    Alors, la série $\sum_{n \geq 0} f_n$ converge uniformément sur tout segment $[a,b] \subset I$ vers une fonction $f$ dérivable et $(\sum_{n=0}^{+\infty} f_n)' = \sum_{n=0}^{+\infty} f_n'$.
+}
 
 \newpage
 \tableofcontents
 
 
-\end{document}
+\end{document}  
