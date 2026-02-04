@@ -21,7 +21,7 @@
 \begin{document}
 
 \docTitle{Chapitre 3 : Probabilités conditionnelles et indépendance}
-
+\section{Définitions}
 \definition{Soit $B \in \mathcal{P}(\Omega)$ tel que $\mathbb{P}(B) > 0$.\\
 La \textbf{probabilité conditionnelle} de $A$ sachant $B$ est définie par :
 \[
@@ -40,6 +40,8 @@ La \textbf{probabilité conditionnelle} de $A$ sachant $B$ est définie par :
 }
 
 \remark{On a que $\mathbb{P}(A \mid \Omega) = \mathbb{P}(A)$.}
+
+\section{Propriétés des probabilités conditionnelles}
 
 \theorem{Proposition}{}{false}{
     Soit $B \in \mathcal{P}(\Omega)$ tel que $\mathbb{P}(B) > 0$.\\
@@ -124,6 +126,20 @@ D'où le résultat. $\Box$
     \]
     Ainsi, même si le test est positif, la probabilité que la personne soit réellement malade n'est qu'environ de 16.6\%.
 }
+
+%\begin{tikzpicture}
+%    \tikzstyle{level 1}=[level distance=6cm, sibling distance=5cm]
+%    \tikzstyle{level 2}=[level distance=6cm, sibling distance=3.5cm]
+%    \node{$\Omega$}[grow=right]
+%    child{node{$A$}
+%      child{node{$A\cap S$}                     edge from parent node[below]{$\mathbb{P}(S \mid A)\hspace{1cm}$}}
+%      child{node{$A\cap \overline S$}           edge from parent node[above]{$\mathbb{P}(\overline S \mid A)\hspace{1cm}$}}
+%      edge from parent node[below]{$\mathbb{P}(A)\hspace{1cm}$}}
+%    child{node{$\overline A$}
+%      child{node{$\overline A\cap S$}           edge from parent node[below]{$\mathbb{P}(S \mid \overline A)\hspace{1cm}$}}
+%      child{node{$\overline A\cap \overline S$} edge from parent node[above]{$\mathbb{P}(\overline S \mid \overline A)\hspace{1cm}$}}
+%      edge from parent node[above]{$\mathbb{P}(\overline A)\hspace{1cm}$}};
+%\end{tikzpicture}
 
 \newpage
 \tableofcontents
