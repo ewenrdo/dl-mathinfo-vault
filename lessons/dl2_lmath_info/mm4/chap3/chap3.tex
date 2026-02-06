@@ -271,7 +271,7 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     Donc la limite simple $1_{\{1\}} \neq  0 = f'$.
 }
 
-\theorem{Théorème (À VÉRIFIER)}{}{true}{
+\theorem{Théorème}{}{false}{
     Soit $(f_n)$ une suite de fonctions de $I$ dans $E$ telle que :
     \begin{itemize}
         \item $\forall n \in \mathbb{N}$, $f_n$ est dérivable
@@ -280,6 +280,78 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     \end{itemize}
     Alors, $(f_n)$ converge uniformément sur tout segment $[a,b] \subset I$ vers une fonction $f$ dérivable et $f' = g$.
 }
+
+\noindent{\textbf{Démonstration :}\\
+    Montrons que $(f_n)$ est uniformément de Cauchy sur $[a,b]$.\\
+    Sans erte de généralité, on suppose que $x_0 \in [a,b]$.\\
+    Soit $x \in [a,b]$.\\
+    $|f_p(x) - f_q(x)| \leq |(f_p - fq)(x) - (f_p - f_q)(x_0)| + |(f_p - f_q)(x_0)|$\\
+    On utilise le théorème des accroissements finis pour $f_p - f_q$ :\\
+    $\exists \zeta \in ]x,x_0[ ou ]x_0,x[$ tel que $(f_p - f_q)(x) - (f_p - f_q)(x_0) = (f_p' - f_q')(\zeta) \cdot (x - x_0)$.\\
+    D'où $|f_p(x) - f_q(x)| \leq |x - x_0| \| f_p' - f_q' \|_{I,\;\infty} + |f_p(x_0) - f_q(x_0)|$.\\
+    $\leq |b-a| \| f_p' - f_q' \|_{I,\;\infty} + |f_p(x_0) - f_q(x_0)|$.\\
+    Comme $(f_n(x_0))$ converge, $(f_n(x_0))$ est de Cauchy.\\
+    Et comme $(f_n')$ converge uniformément, $(f_n')$ est uniformément de Cauchy.\\
+    On en déduit que $(f_n)$ est uniformément de Cauchy sur $[a,b]$.\\
+    Donc $(f_n)$ converge uniformément sur $[a,b]$ vers une fonction $f$ sa limite uniforme.\\*
+    Il reste à montrer que $f$ est dérivable et que $f' = g$.\\
+    Soit $x_1 \in I$. (on choisit $a,b$ tels que $x_1 \in [a,b] \subset I$)\\
+    Montrons que $f$ est dérivable en $x_1$ et que $f'(x_1) = g(x_1)$.\\
+    On pose pour $x \in [a,b]$.\\
+    \[
+        \varrho(x) = \begin{cases}
+            \frac{f(x) - f(x_1)}{x - x_1} & \text{si } x \neq x_1\\
+            f_n'(x_1) & \text{si } x = x_1
+        \end{cases}
+    \]
+    Comme $f_n$ et $f_n'$ convergent uniformément, on déduit que $(\varrho_n)$ converge simplement vers :
+    \[
+        \varrho(x) = \begin{cases}
+            \frac{f(x) - f(x_1)}{x - x_1} & \text{si } x \neq x_1\\
+            g(x_1) & \text{si } x = x_1
+        \end{cases}
+    \]
+    Il suffit de montrer que $\varrho$ est continue en $x_1$.\\
+    On observe que $f_n$ est continue car sur $[a,b] \setminus \{x_1\}$, $f_n$ est continue en $x_1$, $f_n$ est dérivable d'où :\\
+    $\lim_{x \to x_1} \varrho{x} = \lim_{x \to x_1} \frac{f_n(x) - f_n(x_1)}{x - x_1} = f_n'(x_1)$ = $\varrho_n(x_1)$.\\
+    Montrons que $(\varrho_n)$ converge uniformément vers $\varrho$ sur $[a,b]$.\\
+    On en déduira que $\varrho$ est continue sur $[a,b]$ et en particulier en $x_1$.\\
+    Soit $x \in [a,b] \setminus \{x_1\}$.\\
+    Par le théorème des accroissements finis, $\exists \zeta_1 \in ]x,x_1[ ou ]x_1,x[$ tel que $(f_p - f_q)(x) - (f_p - f_q)(x_1) = (f_p' - f_q')(\zeta_1) \cdot (x - x_1)$.\\
+    On obtient : $|\frac{(f_p - f_q)(x) - (f_p - f_q)(x_1)}{x - x_1}| = |(f_p' - f_q')(\zeta_1)|$.\\
+    D'où $|\varrho_p(x) - \varrho_q(x)| \leq \| f_p' - f_q' \|_{I,\;\infty}$ si $x \neq x_1$.\\
+    et $|\varrho_p(x_1) - \varrho_q(x_1)| = |f_p'(x_1) - f_q'(x_1)| \leq \| f_p' - f_q' \|_{I,\;\infty}$ si $x = x_1$.\\
+    Donc en passant au sup : $\| \varrho_p - \varrho_q \|_{I,\;\infty} \leq \| f_p' - f_q' \|_{I,\;\infty}$.\\
+    Comme $(f_n')$ converge uniformément, $(f_n')$ est uniformément de Cauchy.\\
+    Donc $(\varrho_n)$ est uniformément de Cauchy.\\
+    Donc $(\varrho_n)$ converge uniformément vers $\varrho$.\\
+    Donc $\varrho$ est continue sur $[a,b]$ et en particulier en $x_1$.\\
+    Donc $f$ est dérivable en $x_1$ et $f'(x_1) = g(x_1)$. $\Box$
+}
+
+\cexample{
+    $f_n(x) = \frac{x^{n+1}}{n+1}$.\\
+    $f_n \longrightarrow 0$ sur $[0,1]$ uniformément.\\
+    $f_n' \longrightarrow 1_{\{1\}}$ simplement sur $[0,1]$ (et pas uniformément).\\
+    et $0' = 0 \neq 1_{\{1\}}$.\\
+}
+
+\cexample{
+    $f_n : [0,1] \to \mathbb{R}, x \mapsto \sqrt{x^2 + \frac{1}{n}}$\\
+    \begin{itemize}
+        \item $f_n \longrightarrow x$ (simplement).
+        $|f_n(x) - x| = |\sqrt{x^2 + \frac{1}{n}} - \sqrt{x^2}| = \frac{\frac{1}{n}}{\sqrt{x^2 + \frac{1}{n}} + \sqrt{x^2}}$.\\
+        On obtient : $|f_n(x) - x| \leq \frac{\frac{1}{n}}{\sqrt{\frac{1}{n}}} = \frac{1}{\sqrt{n}} \longrightarrow 0$ (indépendamment de $x$).\\
+        Donc $f_n \to id$ uniformément sur $[0,1]$.
+        \item $f_n' : [0,1] \to \mathbb{R}, x \mapsto \frac{x}{\sqrt{x^2 + \frac{1}{n}}}$\\
+        $f_n' \longrightarrow \begin{cases}
+            0 & \text{si } x = 0\\
+            1 & \text{si } x > 0
+        \end{cases} = 1_{]0,1]}$ simplement sur $[0,1]$.\\
+        Comme $1_{]0,1]}$ n'est pas continue sur $[0,1]$, $f_n'$ ne converge pas uniformément vers $1_{]0,1]}$.
+    \end{itemize}
+}
+
 \remark{Ce théorème est plus général que le précédent. En effet, on ne demande pas que $f_n$ soit de classe $\mathcal{C}^1(I,E)$, mais juste dérivable.}
 
 \ndlr{cf. Laurent pour la preuve}
@@ -350,13 +422,51 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
 }
 
 \theorem{Théorème}{}{false}{
+    Soit $(f_n)$ une suite de fonctions de $I$ (intervalle) dans $E$ telle que :
     \begin{itemize}
-        \item $f_n$ de classe $\mathcal{C}^1(I,E)$.
-        \item Il existe $x_0 \in I$ tel que $f_n(x_0)$ converge.
-        \item La série $\sum_{n \geq 0} f_n'$ converge uniformément sur $I$.
+        \item $\forall n \in \mathbb{N}, \, f_n$ est dérivable sur $I$.
+        \item Il existe $x_0 \in I$ tel que $\sum_{n \geq 0} f_n(x_0)$ converge.
+        \item La série $\sum_{n \geq 0} f_n'$ converge uniformément.
     \end{itemize}
     Alors, la série $\sum_{n \geq 0} f_n$ converge uniformément sur tout segment $[a,b] \subset I$ vers une fonction $f$ dérivable et $(\sum_{n=0}^{+\infty} f_n)' = \sum_{n=0}^{+\infty} f_n'$.
 }
+
+\subsection{Lemme d'Abel}
+
+\theorem{Proposition}{}{false}{
+    Soit $I$ une partie de $\mathbb{R}$.\\
+    Soient $(u_n)$ une suite numérique réelle et $(v_n)$ une suite de fonctions de $I$ dans $E$.\\
+    On pose : $U_n = \sum_{k=0}^n u_k$ et $V_n = \sum_{k=0}^n v_k$.\\
+    Alors :\\
+    $\sum_{n=q+1}^p u_n \cdot v_n = - \sum_{n=q+1}^{p-1} (u_{n+1} - u_n) \cdot V_n + u_p \cdot V_p - u_{q+1} \cdot V_q$. 
+}
+
+\training{Montrer la proposition précédente.}
+\noindent\carreaux{10}
+
+\remark{C'est une formule d'intégration par partie discrète.}
+
+\theorem{Théorème}{}{false}{
+    Soit $I \subset \mathbb{R}$.\\
+    $(u_n)$ une suite numérique réelle décroissante tendant vers $0$.\\
+    $(v_n)$ une suite de fonctions $v_n : I \to E$.\\
+    On suppose que $\| \sum_{k=0}^n v_n \|_{\infty} < +\infty$.\\
+    Alors la série de fonctions $\sum u_n v_n$ converge uniformément.
+}
+
+\remark{On peut remplacer la suite numérique $(u_n)$ par une suite de fonctions $(f_n)$ de $I$ dans $\mathbb{R}$ telle que $\forall x \in I, (f_n(x))$ est décroissante et tend vers $0$.}
+\ndlr{cf. Laurent pour la preuve.}
+
+\example{
+    $\sum u_n v_n$ où $(u_n)$ décroissant vers 0 et $v_n(t) = sin(nt)$ pour $t \in [0, 2\pi]$.\\
+    Si $\alpha \in ]0, \pi[$, alors $\sum u_n v_n$ converge uniformément sur $[\alpha, 2\pi - \alpha]$.\\
+    Il suffit de montrer que $V_n(t) = \sum_{k=0}^n sin(kt)$ est uniformément bornée sur $[\alpha, 2\pi - \alpha]$ lorsque $n \to +\infty$.\\
+    $\sum_{k=0}^n sin(kt) = Im(\sum_{k=0}^n e^{ikt}) = Im(\frac{1 - e^{i(n+1)t}}{1 - e^{it}}) = \ldots =  \frac{sin(\frac{nt}{2} \cdot sin(\frac{(n+1)t}{2})}{sin(\frac{t}{2})}$\\
+    Si $t \in [\alpha, 2\pi - \alpha]$, on obtient $\frac{t}{2} \in [\frac{\alpha}{2}, \pi - \frac{\alpha}{2}]$.\\
+    Donc $\sum_{k=0}^n sin(kt) \leq \frac{1}{sin(\frac{\alpha}{2})}$ pour tout $n \in \mathbb{N}$ et $t \in [\alpha, 2\pi - \alpha]$.\\
+    Et puis on applique le théorème d'Abel pour conclure que $\sum u_n v_n$ converge uniformément sur $[\alpha, 2\pi - \alpha]$.
+}
+\ndlr{cf. Laurent pour le détail, c'était horrible à écrire en LaTeX.}
 
 \newpage
 \tableofcontents

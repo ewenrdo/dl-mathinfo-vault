@@ -1,0 +1,70 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info MM4}
+\fancyhead[C]{Algèbre}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Espaces euclidiens}
+
+\section{Produit scalaire et norme}
+
+\definition{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
+    Un \textbf{produit scalaire} sur $E$ est une application $\langle \cdot, \cdot \rangle : E \times E \to \mathbb{R}$ qui vérifie les propriétés suivantes :
+    \begin{enumerate}
+        \item $\forall x,y \in E, \; \langle x,y \rangle = \langle y,x \rangle$ (symétrie)
+        \item $\forall x,x',y \forall \lambda \in \mathbb{R}, \; \langle \lambda x + x', y \rangle = \lambda \langle x,y \rangle + \langle x',y \rangle$ (linéarité en la première variable)
+        \item $\forall x \in E, \; \langle x,x \rangle \geq 0$ et $\langle x,x \rangle = 0 \Rightarrow x = 0$ (positivité)
+    \end{enumerate}
+    En résumé, un produit scalaire est une application bilinéaire, symétrique et définie positive.
+}
+
+\example{
+    Dans $\mathbb{R}^n$,$\langle x,y \rangle = \sum_{i=1}^n x_i y_i$ est un produit scalaire.\\
+    Dans $\mathcal{C}^0([0,1],\mathbb{R})$, $\langle f,g \rangle = \int_0^1 f(t)g(t) dt$ est un produit scalaire.
+}
+
+\remark{Si $E$ est un espace vectoriel normé de dimension finie, il n'y a pas de produit scalaire canonique \textit{a priori}. (On a vu néanmoins que dans $\mathbb{R}^n$, il existe un produit scalaire canonique.}
+
+\definition{
+    Un $\mathbb{R}$-espace vectoriel $E$ muni d'un produit scalaire est appelé un \textbf{espace euclidien}.\\
+    On le note $(E, \langle \cdot, \cdot \rangle)$.
+}
+
+\theorem{Identités remarquables}{}{false}{
+    $\langle x+y, x+y \rangle = \langle x,x \rangle + 2\langle x,y \rangle + \langle y,y \rangle$\\
+    $\langle x+y, x-y \rangle = \langle x,x \rangle - \langle y,y \rangle$\\
+}
+
+\theorem{Théorème}{Inégalité de Cauchy-Schwarz}{false}{
+    Soit $(E, \langle \cdot, \cdot \rangle)$ un espace euclidien.\\
+    Alors, pour tous $x,y \in E$, on a :
+    \[
+        |\langle x,y \rangle| \leq \sqrt{\langle x,x \rangle} \sqrt{\langle y,y \rangle}
+    \]
+    De plus, l'égalité a lieu si et seulement si $x$ et $y$ sont linéairement dépendants.
+}
+\ndlr{cf. Laurent.}
+
+
+\newpage
+\tableofcontents
+
+
+\end{document}  
