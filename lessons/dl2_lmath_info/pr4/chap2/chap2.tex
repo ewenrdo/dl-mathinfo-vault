@@ -107,9 +107,6 @@ Supposons $E$ et $F$ dénombrales, donc supposons que $E = \mathbb{N}$ et $F = \
     $B=\{$la somme est égale à 4$\}=\{(1, 3), (3, 1), (2, 2)\}$.
     On a donc $|B|=3$ et donc $\mathbb{P}(B)=\frac{3}{36}.$
 } 
-%   Ω={1,2,…,6}={(ω_1,ω_2 ) ∶ω_i∈{1,2,…,6}}.							On a |Ω|=36.	P_uniforme ({ω})=1/36.
-			%A= { résultat du 1e dé est 4} ={(4,ω) ∶ω∈{1,…,6}} ; |A|=6 et P(A)=6/36=1/6
-			%B= {la somme est égale à 4} ={(1,3),(3,1),(2,2)}	P_n (B)=3/36.
 
 \subsection{Propriétés élémentaires}
 
@@ -153,6 +150,16 @@ Donc, $\mathbb{P}(B) = \mathbb{P}(A) + \mathbb{P}(B \cap A^c) \geq \mathbb{P}(A)
     Soit $(E_1, E_2, \ldots , E_n)$ une partition de $\Omega$ finie.\\
     On a $\mathbb{P}(\bigcup_{i=1}^{n} E_i) \leq \sum_{i=1}^{n} \mathbb{P}(E_i)$.
 }
+\noindent{ \textbf{Démonstration : } Par récurrence
+    \begin{itemize}
+        \item Si n = 2, c'est évident.
+        \item Supposons que la propriété est vrai au rang $n$. On montre qu'elle est aussi vraie pour $n+1$\\
+            $\mathbb{P}(\bigcup_{i=1}^{n+1} E_i)=\mathbb{P}(\bigcup_{i=1}^n E_i \cup E_{n+1})=\mathbb{P}(\bigcup_{i=1}^n E_i)+\mathbb{P}(E_{i+1})-\mathbb{P}(\bigcup_{i=1}^n E_i \cap E_{N+1})$\\
+            $\le P(\bigcup_{i=1}^n E_i) + P(E_{n+1})\le \sum_{i=1}^n \mathbb{P}(E_i) + \mathbb{P}(E_{n+1})$ Par récurrence.
+    \end{itemize}
+}
+	%	P(⋃_(i=1)^(n+1)▒E_i )=P(⋃_(i=1)^n▒E_i ∪E_(n+1) )=P(⋃_(i=1)^n▒E_i )+P(E_(n+1) )-P(⋃_(i=1)^n▒E_i ∩E_(n+1) )							≤P(⋃_(i=1)^n▒E_i )+P(E_(n+1) )										
+    %≤∑_(i=1)^n▒P(E_i ) +P(E_(n+1) ) par récurrence.
 \ndlr{cf. Laurent pour la preuve (faire une récurrence.)}
 
 \definition{
