@@ -150,7 +150,7 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
     \textbf{Démonstration} : Soit $\varepsilon>0$.\\
     Pour $ \widetilde{(f_n)}(1)=1$, il existe $ x\in [0, 1[$ tel que $ f_n(x)\ge1-\varepsilon$.\\
     Donc, $\|f_n\|_{[0, 1], \infty}\ge f_n(x)\ge 1-\varepsilon$. (la borne supérieur est un majorant).\\
-    Donc, $\varepsilon \to 0\Rightarrow\|f_n\|_{[0, 1], \infty}\ge 1$.
+    Donc, $\varepsilon \to 0\Rightarrow\|f_n\|_{[0, 1], \infty}\ge 1$. $\Box$
 \end{enumerate}
 }
 
@@ -227,8 +227,10 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     Soit $(f_n)$ une suite de fonctions de $[a,b]$ $(a < b$, finis) dans $\mathbb{R}$. On suppose que $f_n \to f$ uniformément sur $[a,b]$ et $f_n$ continue par morceaux.\\
     Alors on a $\int_a^b f_n(x) dx \longrightarrow_{n \to +\infty} \int_a^b f(x) dx$.
 }
-
-\ndlr{cf. Laurent}
+\noindent{\textbf{Démonstration : }\\
+    $|\int_a^b (f_n(x)-f(x)) dx|\le\int_a^b |f_n(x)-f(x)| dx\le \|f_n-f\|_{[a, b], \infty} \int_a^b dx$\\
+    $|\int_a^b f_n(x) dx - \int_a^b f(x) dx|\le(b-a)\|f_n-f\|_{[a, b], \infty}\to_{n\to +\infty} 0$. $\Box$
+}
 
 \subsection{Dérivabilité de la limite uniforme}
 \vocabulary{
