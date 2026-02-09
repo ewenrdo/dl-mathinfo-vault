@@ -146,10 +146,13 @@ Une \textbf{suite de fonctions} est une application de $\mathbb{N}$ dans $\mathc
 \begin{enumerate}
     \item $f_n$ converge simplement vers la fonction nulle. (CVS)
     \item $\|f_n - 0\|_{[0,1[,\;\infty} = sup_{x \in [0,1[} |x^n - 0| = 1$. En effet, le prolongement par continuité de $f_n$ est $x^n$ sur $[0,1]$ et est continue $1$.\\
-    donc $lim_{x \to 1^-} f_n(x) = 1$. Donc $\| f_n \|_{\infty} \geq 1$.
+    donc $lim_{x \to 1^-} f_n(x) = 1$. Donc $\| f_n \|_{\infty} \geq 1$.\\
+    \textbf{Démonstration} : Soit $\varepsilon>0$.\\
+    Pour $ \widetilde{(f_n)}(1)=1$, il existe $ x\in [0, 1[$ tel que $ f_n(x)\ge1-\varepsilon$.\\
+    Donc, $\|f_n\|_{[0, 1], \infty}\ge f_n(x)\ge 1-\varepsilon$. (la borne supérieur est un majorant).\\
+    Donc, $\varepsilon \to 0\Rightarrow\|f_n\|_{[0, 1], \infty}\ge 1$. $\Box$
 \end{enumerate}
 }
-\ndlr{cf. Laurent pour la démo de $\|f_n\|_{\infty} \geq 1$}
 
 \remark{On sait de plus que $\| f_n \|_{[0,1[,\;\infty} = 1$ car $\forall x \in [0,1[, |f_n(x)| = x^n < 1$. Donc $\| f_n \|_{\infty} \leq 1$. Donc $\| f_n \|_{\infty} = 1$.}
 \example{(suite)
@@ -224,8 +227,10 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     Soit $(f_n)$ une suite de fonctions de $[a,b]$ $(a < b$, finis) dans $\mathbb{R}$. On suppose que $f_n \to f$ uniformément sur $[a,b]$ et $f_n$ continue par morceaux.\\
     Alors on a $\int_a^b f_n(x) dx \longrightarrow_{n \to +\infty} \int_a^b f(x) dx$.
 }
-
-\ndlr{cf. Laurent}
+\noindent{\textbf{Démonstration : }\\
+    $|\int_a^b (f_n(x)-f(x)) dx|\le\int_a^b |f_n(x)-f(x)| dx\le \|f_n-f\|_{[a, b], \infty} \int_a^b dx$\\
+    $|\int_a^b f_n(x) dx - \int_a^b f(x) dx|\le(b-a)\|f_n-f\|_{[a, b], \infty}\to_{n\to +\infty} 0$. $\Box$
+}
 
 \subsection{Dérivabilité de la limite uniforme}
 \vocabulary{
