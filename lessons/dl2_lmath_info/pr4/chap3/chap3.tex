@@ -113,8 +113,8 @@ D'où le résultat. $\Box$
     Imaginons qu'on ait une maladie rare qui touche 1 personne sur 100.\\
     \text{ie} $\mathbb{P}(M) = 0.01$  où $M$ est l'événement "la personne est malade" (prévalence).\\
     De plus, $\mathbb{P}(T + \mid M) = 0.99$ où $T +$ est l'événement "le test est positif" (sensibilité).\\
-    Cependant, le test n'est pas parfait et on a $\mathbb{P}(T - \mid M^c) = 0.95$ où $T -$ est l'événement "le test est négatif" (spécificité).\\
-    Question : Quelle est la probabilité qu'une personne soit malade sachant que son test est positif ?\\
+    Cependant, le test n'est pas parfait et on a $\mathbb{P}(T - \mid M^c) = 0.95$ où $T -$ est l'événement "le test est négatif" (spécificité).\\\\
+    Question : Quelle est la probabilité qu'une personne soit malade sachant que son test est positif ?\\\\
     On cherche donc $\mathbb{P}(M \mid T +)$. Par la formule de Bayes, on a :
     \[
         \mathbb{P}(M \mid T +) = \frac{\mathbb{P}(T + \mid M) \cdot \mathbb{P}(M)}{\mathbb{P}(T + \mid M) \cdot \mathbb{P}(M) + \mathbb{P}(T + \mid M^c) \cdot \mathbb{P}(M^c)}
@@ -140,6 +140,115 @@ D'où le résultat. $\Box$
 %      child{node{$\overline A\cap \overline S$} edge from parent node[above]{$\mathbb{P}(\overline S \mid \overline A)\hspace{1cm}$}}
 %      edge from parent node[above]{$\mathbb{P}(\overline A)\hspace{1cm}$}};
 %\end{tikzpicture}
+
+\section{Indépendance}
+
+Soit $(\Omega, \mathbb{P})$ un espace probabilisé.\\
+\definition{
+    Soient $A, B \in \mathcal{P}(\Omega)$.\\
+    On dit que $A$ et $B$ sont \textbf{indépendants} si $\mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$.
+}
+
+\example{
+    $\Omega = \{1, 2, 3, 4, 5, 6\}$ et $\mathbb{P}(\{i\}) = \frac{1}{6}$ pour tout $i \in \Omega$.\\
+    $A = $"obtenir un nombre pair" = $\{2, 4, 6\}$ et $B = $ "obtenir un nombre multiple de 3" = $\{3, 6\}$.\\
+    On a : $\mathbb{P}(A) = \frac{3}{6} = \frac{1}{2}$ et $\mathbb{P}(B) = \frac{2}{6} = \frac{1}{3}$.\\
+    De plus, $A \cap B = \{6\}$ donc $\mathbb{P}(A \cap B) = \frac{1}{6} = \mathbb{P}(A) \cdot \mathbb{P}(B)$.\\
+    Ainsi, $A$ et $B$ sont indépendants pour la probabilité $\mathbb{P}$.\\\\
+
+    \noindent Regardons maintenant les cas avec un dé truqué où $\mathbb{T}(\{1\}) = 0$ et donc $\mathbb{T}(\{\omega \}) = \frac{1}{5}$ pour tout $\omega \in \{2, 3, 4, 5, 6\}$.\\
+    On a : $\mathbb{T}(A) = \frac{3}{5}$ et $\mathbb{T}(B) = \frac{2}{5}$.\\
+    De plus, $A \cap B = \{6\}$ donc $\mathbb{T}(A \cap B) = \frac{1}{5} \neq \mathbb{T}(A) \cdot \mathbb{T}(B) = \frac{3}{5} \cdot \frac{2}{5} = \frac{6}{25}$.\\
+    Ainsi, $A$ et $B$ ne sont pas indépendants pour la probabilité $\mathbb{T}$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soient $A, B \in \mathcal{P}(\Omega)$ tels que $\mathbb{P}(B) > 0$.\\
+    Alors, $A$ et $B$ sont indépendants si et seulement si $\mathbb{P}(A \mid B) = \mathbb{P}(A)$.
+}
+\noindent{\textbf{Démonstration :} $\mathbb{P}(A \mid B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)} = \frac{\mathbb{P}(A) \cdot \mathbb{P}(B)}{\mathbb{P}(B)} = \mathbb{P}(A)$ $\Box$}
+
+\remark{Autrement dit, la réalisation de $B$ n'apporte aucune information sur la réalisation de $A$.}
+\remark{Si $A$ est tel que $\mathbb{P}(A) = 0$, alors $A$ est indépendant de tout événement $B$.\\
+Tout $B \in \mathcal{P}(\Omega)$ est indépendant de $\Omega$ et de $\emptyset$.}
+
+\theorem{Proposition}{}{false}{
+    Les assertions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $A$ et $B$ sont indépendants
+        \item $A$ et $B^c$ sont indépendants
+        \item $A^c$ et $B$ sont indépendants
+        \item $A^c$ et $B^c$ sont indépendants
+    \end{enumerate} 
+}
+
+\training{Démontrer l'équivalence de ces assertions.}
+\noindent\carreaux{10}
+
+\definition{
+    Soient $E_1, E_2, \dots, E_n \in \mathcal{P}(\Omega)$.\\
+    On dit que $E_1, E_2, \dots, E_n$ sont \textbf{indépendants} \textit{(ou que la famille $(E_i)_{1 \leq i \leq n}$ est indépendante)} si :
+    \[
+      \forall k \in S_n, \, \forall 1 \leq _1 < i_2 < \dots < i_k \leq n, \quad \mathbb{P}(\bigcap_{l=1}^{k} E_{i_l}) = \prod_{l=1}^{k} \mathbb{P}(E_{i_l})
+    \]
+}
+
+\example{
+    On pose $n = 2$, on a $(E_1, E_2)$ et donc la définition usuelle de l'indépendance.\\
+    Si $n = 3$, on a $(E_1, E_2, E_3)$ et la famille est indépendante si :
+\begin{align*}    
+    &k=2 :\\
+    &\mathbb{P}(E_1 \cap E_2) = \mathbb{P}(E_1) \cdot \mathbb{P}(E_2) \\
+    &\mathbb{P}(E_1 \cap E_3) = \mathbb{P}(E_1) \cdot \mathbb{P}(E_3) \\
+    &\mathbb{P}(E_2 \cap E_3) = \mathbb{P}(E_2) \cdot \mathbb{P}(E_3) \\
+    &k=3 :\\
+    &\mathbb{P}(E_1 \cap E_2 \cap E_3) = \mathbb{P}(E_1) \cdot \mathbb{P}(E_2) \cdot \mathbb{P}(E_3)
+\end{align*}
+}
+
+\example{On lance deux pièces équilibrées.\\
+$\Omega = \{P, F\}^2$ et $\mathbb{P}(\{\omega\}) = \frac{1}{4}$ pour tout $\omega \in \Omega$.\\
+On pose : $A = \{PF, PP\}$, $B = \{FP, PP\}$ et $C = \{FF, PP\}$.\\
+On a : $\mathbb{P}(A) = \mathbb{P}(B) = \mathbb{P}(C) = \frac{1}{2}$.\\
+De plus, $\mathbb{P}(A \cap B) = \mathbb{P}(A \cap C) = \mathbb{P}(B \cap C) = \frac{1}{4}$.\\
+Cependant, $\mathbb{P}(A \cap B \cap C) = \mathbb{P}(\{PP\}) = \frac{1}{4} \neq \mathbb{P}(A) \cdot \mathbb{P}(B) \cdot \mathbb{P}(C) = \frac{1}{8}$.\\
+Ainsi, $A$, $B$ et $C$ sont deux à deux indépendants mais pas indépendants en famille.
+}
+
+\theorem{Proposition}{}{true}{
+    Soit $(E_1, E_2, \dots, E_n)$ une famille d'événements indépendants et soit $\forall i \in S_n , F_i \in \{E_i, E_i^c\}$.\\
+    Alors, la famille $(F_1, F_2, \dots, F_n)$ est indépendante.
+}
+
+\example{
+    On prend $(E_1, E_2, E_3)$ une famille d'événements indépendants.\\
+    Alors par exemple $(E_1^c, E_2^c, E_3)$ est aussi une famille d'événements indépendants.
+}
+
+\definition{
+    Soit $(E_n)_{n \in \mathbb{N}}$ une suite dénombrable d'événements.\\
+    On dit que cette suite est \textbf{indépendante} si :
+    \[
+        \forall k \in \mathbb{N}^*, \, \forall 1 \leq i_1 < i_2 < \dots < i_k, \quad \mathbb{P}\left( \bigcap_{l=1}^{k} E_{i_l} \right) = \prod_{l=1}^{k} \mathbb{P}(E_{i_l})
+    \]
+    Autrement dit, cette suite est indépendante si toute famille finie d'événements de cette suite est indépendante.
+}
+
+\theorem{Proposition}{}{true}{
+    Soit $(E_n)_{n \in \mathbb{N}}$ une suite d'événements indépendants.\\
+    Si $(E_n)$ est indépendante, alors pour toute sous-suite $(E_{n_i})$ on a :
+    \[
+        \mathbb{P}\left( \bigcap_{i=1}^{+\infty} E_{n_i} \right) = \prod_{i=1}^{+\infty} \mathbb{P}(E_{n_i}) := \lim_{N \to +\infty} \prod_{i=1}^{N} \mathbb{P}(E_{n_i})
+    \]
+}
+
+\noindent{\textbf{Démonstration :}\\
+$C_N = \bigcap_{i=1}^{N} E_{n_i}$.\\
+D'où $C_{N+1} \subset C_N$.
+$\mathbb{P}(\bigcap_{N} C_N) = \lim_{N \to +\infty} \mathbb{P}(C_N)$.\\
+$\Leftrightarrow \mathbb{P}(\bigcap_{i=1}^{+\infty} E_{n_i}) = \lim_{N \to +\infty} \prod_{i=1}^{N} \mathbb{P}(E_{n_i})$ (par indépendance). $\Box$
+}
+
 
 \newpage
 \tableofcontents
