@@ -21,9 +21,10 @@
 \begin{document}
 
 \docTitle{Chapitre 4 : Espaces euclidiens}
-
 \section{Produit scalaire et norme}
 \subsection{Produit scalaire}
+\textit{On ne rappelera pas les définitions de normes et distances ici et les propositions qui s'ensuivent. Le lecteur est invité à se référer au chapitre 4 du cours AN3.}
+
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
     Un \textbf{produit scalaire} sur $E$ est une application $\langle \cdot, \cdot \rangle : E \times E \to \mathbb{R}$ qui vérifie les propriétés suivantes :
@@ -58,7 +59,7 @@
     \[
         |\langle x,y \rangle| \leq \sqrt{\langle x,x \rangle} \sqrt{\langle y,y \rangle}
     \]
-    De plus, l'égalité a lieu si et seulement si $x$ et $y$ sont linéairement dépendants.
+    De plus, l'égalité a lieu si et seulement si $x$ et $y$ sont colinéaires.
 }
 \ndlr{cf. Laurent.}
 
@@ -84,7 +85,21 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
 }
 
 \remark{$x \mapsto |x|$ est une norme sur $\mathbb{R}$, associée au produit scalaire $\langle x,y \rangle = xy$.}
+\reminder{Une distance sur un ensemble $X$ est une application $d : X \times X \to \mathbb{R}_+$ qui vérifie la séparation, la symétrie et l'inégalité triangulaire.}
 
+\theorem{Proposition}{Lien entre norme et distance}{false}{
+    Soit $N$ une norme sur un $\mathbb{R}$-espace vectoriel $E$.\\
+    Alors $d(x,y) = N(x-y)$ est une distance sur $E$.
+}
+
+\remark{En géométrie affine, si $A$ et $B$ sont deux points, le vecteur $\overrightarrow{AB}$ est défini par $\overrightarrow{AB} = B - A$, et $d(A,B) = \| \overrightarrow{AB} \|$.}
+
+\remark{Un produit scalaire donne une norme ($\| x \| = \sqrt{\langle x,x \rangle}$) et une norme donne une distance ($d(x,y) = \| x-y \|$).}
+\theorem{Propriété}{Norme associée au produit scalaire (identité du parallélogramme)}{false}{
+    $\forall x,y \in E, \; \| x + y \|^2 + \| x - y \|^2 = 2\| x \|^2 + 2\| y \|^2$. \\
+    On peut le vérifier avec $\| x \| = \sqrt{\langle x,x \rangle}$ et les identités remarquables.\\\\
+    D'où si une norme ne vérifie pas l'identité du parallélogramme, elle n'est pas associée à un produit scalaire.
+}
 \newpage
 \tableofcontents
 
