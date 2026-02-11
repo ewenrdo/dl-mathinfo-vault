@@ -123,6 +123,26 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
     Une famille de vecteurs $(x_i)_{i \in I}$ est dite \textbf{orthogonale} si $x_i \perp x_j$ pour tous $i \neq j$, \textit{i.e.} si ses vecteurs sont deux à deux orthogonaux.
 }
 
+\theorem{Théorème de Pythagore}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
+    Soit $(x_1, \ldots, x_k)$ une famille orthogonale (finie) de $E$.\\
+    Alors : \[ \| x_1 + \ldots + x_k \|^2 = \| x_1 \|^2 + \ldots + \| x_k \|^2. \]
+    De plus, si $k=2$, alors $\| x + y \|^2 = \| x \|^2 + \| y \|^2 \Rightarrow x \perp y$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+$\| \sum_{i=1}^k x_i \|^2 = \langle \sum_{i=1}^k x_i, \sum_{j=1}^k x_j \rangle = \text{ (bilinéarité) } \sum_{i=1}^k \sum_{j=1}^k \langle x_i, x_j \rangle = \sum_{i=1}^k \langle x_i, x_i \rangle = \sum_{i=1}^k \| x_i \|^2$.\\\\
+Pour $k = 2$, 
+$\| x + y \| ^ 2 = \|x\|^2 + 2\langle x,y \rangle + \| y \|^2$.\\
+Donc si $\| x + y \|^2 = \| x \|^2 + \| y \|^2$, alors $2\langle x,y \rangle = 0 \Rightarrow x \perp y$. $\Box$
+}
+
+\theorem{Définition}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
+    Une famille de vecteurs $(x_i)_{i \in I}$ est dite \textbf{orthonormée} si elle est orthogonale et que $\| x_i \| = 1$ pour tout $i \in I$.\\\\
+    Autrement dit, c'est une famille de vecteurs unitaires deux à deux orthogonaux.
+}
+
 \newpage
 \tableofcontents
 
