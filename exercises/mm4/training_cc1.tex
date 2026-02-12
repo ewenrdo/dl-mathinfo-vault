@@ -1,0 +1,150 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Séance révision semaine 4}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Dualité & 1\\
+\hline
+Utiliser les théorèmes sur la convergence uniforme & 2,3,4\\
+\hline
+Dénombrer et calculer des probabilités & 4,5,6,7\\ \hline
+\end{tabular}
+
+\vspace{1em}
+
+\exercise{1}{Annales 2023-2024 - Anthony F.}{
+    Soit $E = \mathbb{R}_2[X]$ et soit $\mathcal{B} = (1, X, X^2)$ la base canonique de $E$.
+    \begin{enumerate}
+        \item Soit $\mathcal{B}^* = (\mu_1, \mu_2, \mu_3)$ la base duale de $\mathcal{B}$ de $E$. Calculer $\mu_1(X)$.
+        \item Montrer que la matrice dans la base $\mathcal{B}$ de l'application linéaire $\phi : P(X) \mapsto P(X+1)$ est : \[ A = \begin{pmatrix} 1 & 1 & 1 \\ 0 & 1 & 2 \\ 0 & 0 & 1 \end{pmatrix} \]
+        \item Déterminer la matrice de $\phi^*$ dans la base duale $\mathcal{B}^*$. 
+        \item L'application $P \mapsto P(0) \cdot P(1)$ est-elle une forme linéaire sur $E$ ?
+        \item Indiquer $\lambda_1$, une combinaison linéaire non nulle de $\mathcal{B^*}$, qui s'annule sur le polynôme $1+X+X^2$.
+    \end{enumerate}
+}
+
+
+\exercise{2}{TD3.5}{
+    Pour tout entier \(n \ge 1\), soit  
+    \(f_n : \mathbb{R} \to \mathbb{R}\) la fonction définie par :  
+    \[
+    f_n(x) = \frac{1}{n^2 + x^2}.
+    \]
+
+    \begin{enumerate}
+        \item Montrer que la série \(\sum f_n\) converge simplement sur \(\mathbb{R}\). On note \(s\) la somme de cette série.
+        \item Montrer que \(s\) est continue sur \(\mathbb{R}\).
+        \item Montrer que pour tout réel \(a > 0\), la série \(\sum f_n'\) converge normalement sur \([-a, a]\).
+        \item Montrer que \(s\) est dérivable sur \(\mathbb{R}\).
+    \end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{2}{TD3.6}{
+   Pour tout entier \(n > 0\) et tout réel \(x\), on pose :  
+\[
+f_n(x) = \frac{\arctan(nx)}{n^2},
+\]  
+et on considère  $f(x) = \sum_{n \ge 1} f_n(x)$ définie sur $\mathbb{R}$. On précise de $f$ est impaire.
+
+\begin{enumerate}
+    \item Étudier la convergence normale de \(f\) sur \(\mathbb{R}\), préciser si \(f\) est continue et quelles sont ses limites en \(+\infty\) et en \(-\infty\).
+    \item Montrer que \(f\) est de classe \(C^1\) sur \(\mathbb{R}^*\). Montrer que \(f'\) est décroissante sur \(]0, +\infty[\).
+    \item Montrer que \(f\) n'est pas dérivable en 0.
+\end{enumerate}
+}
+
+\exercise{3}{TD3.7}{
+    Soit \(f : \, ]-1, 1[ \to \mathbb{R}\) la fonction définie par :  
+\[
+f(x) = \sum_{n=1}^{\infty} \frac{x^n \sin(nx)}{n}.
+\]
+
+\begin{enumerate}
+    \item Montrer que \(f\) est de classe \(C^1\) sur \(]-1, 1[\).
+    \item Calculer \(f'(x)\) et en déduire que :  
+    \[
+    f(x) = \arctan\left( \frac{x \sin x}{1 - x \cos x} \right).
+    \]
+\end{enumerate}
+
+}
+
+\exercise{4}{Le banc sexiste}{
+    \begin{enumerate}
+    \item De combien de façons peut-on asseoir en rang 3 garçons et 3 filles (qui sont des individus discernables !) ?
+    \item Même question si les garçons doivent rester ensemble et les filles aussi.
+    \item Même question si seuls les garçons doivent rester ensemble.
+    \item Même question si deux personnes de même sexe ne doivent jamais être voisins
+    \end{enumerate}
+}
+\switchcolumn
+\exercise{5}{Au loto}{
+On range \(p\) boules dans \(n\) cases.  
+Dans chacun des cas suivants, dire combien il y a de rangements possibles, et indiquer les contraintes éventuelles sur \(p\) et \(n\) (par exemple \(p \le n\)) :  
+
+\begin{enumerate}
+    \item Les boules et les cases sont discernables, l'ordre dans chaque case n'est pas pris en compte, chaque case pouvant recevoir un nombre quelconque de boules.
+    \item Les boules et les cases sont discernables, chaque case ne pouvant recevoir qu'une boule au maximum.
+    \item Les boules sont indiscernables, les cases sont discernables, chaque case ne pouvant recevoir qu'une seule boule.
+    \item Les boules sont indiscernables, les cases sont discernables, chaque case pouvant recevoir un nombre quelconque de boules.
+\end{enumerate}
+}
+
+\exercise{6}{Et si elle tombe droite ?}{
+    On joue 4 fois à pile ou face.
+\begin{enumerate}
+\item Donner un espace de probabilité associé à cette expérience.
+\item Quelle est la probabilité d’obtenir au moins 3 faces ou 3 piles consécutivement ?
+\end{enumerate}
+}
+
+\exercise{7}{Secrétaire distrait}{
+    Un secrétaire un peu distrait a tapé \(N\) lettres et préparé \(N\) enveloppes portant les adresses des destinataires, mais il répartit au hasard les lettres dans les enveloppes.  
+Pour \(1 \le j \le N\), on note \(A_j\) l’événement « la \(j\)-ème lettre se trouve dans la bonne enveloppe ».  
+
+\begin{enumerate}
+    \item Définir un espace de probabilité \((\Omega_N, P_N)\) associé à cette expérience aléatoire.
+    \item Calculer \(P_N(A_j)\).
+    \item On fixe \(k\) entiers \(i_1 < i_2 < \dots < i_k\) entre \(1\) et \(N\).  
+    Dénombrer toutes les permutations \(\sigma\) sur \(\{1, \dots, N\}\) telles que \(\sigma(i_1) = i_1, \dots, \sigma(i_k) = i_k\).  
+    En déduire \(P_N(A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_k})\).
+    \switchcolumn
+    \item On note \(B\) l’événement « au moins une des lettres est dans la bonne enveloppe ».  
+    Exprimer \(B\) à l’aide des \(A_j\).
+    \item Utiliser la formule de Poincaré pour calculer \(P_N(B)\) et sa limite quand \(N \to +\infty\).
+\end{enumerate}
+
+}
+
+\switchcolumn
+
+\end{paracol}
+
+\end{document}
