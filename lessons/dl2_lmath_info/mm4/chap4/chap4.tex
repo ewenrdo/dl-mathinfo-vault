@@ -3,7 +3,7 @@
 \usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
 
 \usepackage{../../../../components/components}
-
+\usepackage{hyperref}
 \usepackage{fancyhdr}
 
 
@@ -162,6 +162,16 @@ Soit $x \in E$.\\
 
 \noindent Alors : $x = \sum_{i=1}^n \langle x, e_i \rangle e_i$. (on remarque que ça ressemble à la dualité !)\\
 La $i^{ème}$ coordonnée de $x$ dans la base $(e_1, \ldots, e_n)$ est $\langle x, e_i \rangle$.\\
+
+\section{Procédé d'orthonormalisation Gram-Schmidt}
+
+\href{https://www.youtube.com/watch?v=TeIZSCzyDjA}{Voir cette vidéo pour une explication du procédé d'orthonormalisation Gram-Schmidt.}\\
+
+On obtient l'algorithme suivant :\\
+Soit $(e_1, \ldots, e_n)$ une base de $E$.
+On pose $u_1 = \frac{e_1}{\| e_1 \|}$.\\
+
+Si $(u_1, \ldots, u_{k})$ est construite pour $k \leq n - 1$, on pose $u_{k+1} = \frac{e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i}{\| e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i \|}$.
 \newpage
 \tableofcontents
 
