@@ -167,11 +167,174 @@ La $i^{ème}$ coordonnée de $x$ dans la base $(e_1, \ldots, e_n)$ est $\langle 
 
 \href{https://www.youtube.com/watch?v=TeIZSCzyDjA}{Voir cette vidéo pour une explication du procédé d'orthonormalisation Gram-Schmidt.}\\
 
-On obtient l'algorithme suivant :\\
-Soit $(e_1, \ldots, e_n)$ une base de $E$.
-On pose $u_1 = \frac{e_1}{\| e_1 \|}$.\\
+%On obtient l'algorithme suivant :\\
+%Soit $(e_1, \ldots, e_n)$ une base de $E$.
+%On pose $u_1 = \frac{e_1}{\| e_1 \|}$.\\
+%Si $(u_1, \ldots, u_{k})$ est construite pour $k \leq n - 1$, on pose $u_{k+1} = \frac{e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i}{\| e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i \|}$.
 
-Si $(u_1, \ldots, u_{k})$ est construite pour $k \leq n - 1$, on pose $u_{k+1} = \frac{e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i}{\| e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i \|}$.
+\theorem{Théorème}{}{false}{
+    Soit $E$ un espace euclidien de dimension finie et soit $(e_1, \ldots, e_k)$ une famille libre de $E$.\\
+    Il existe une famille $(u_1, \ldots, u_k)$ orthonormée de $E$ telle que $\forall i \in S_k, \; \text{Vect}(u_1, \ldots, u_i) = \text{Vect}(e_1, \ldots, e_i)$.\\
+    En particulier, si $k = \dim(E)$, alors $(u_1, \ldots, u_k=u_n)$ est une base orthonormée de $E$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+On procède par récurrence sur $k$.\\
+\textbf{Initialisation :} $k=1$.\\
+Alors $(e_1)$ est une famille libre de $E$ si et seulement si $e_1 \neq 0$.\\
+Dans ce cas, on pose $u_1 = \frac{e_1}{\| e_1 \|}$, qui est un vecteur de norme 1.\\
+\textbf{Hérédité :} Supposons que la propriété est vérifiée pour $k \leq n-1$.\\
+Soit $(e_1, \ldots, e_{k+1})$ une famille libre de $E$.\\
+Par hypothèse de récurrence, il existe une famille $(u_1, \ldots, u_k)$ orthonormée de $E$ telle que $\forall i \in S_k, \; \text{Vect}(u_1, \ldots, u_i) = \text{Vect}(e_1, \ldots, e_i)$.\\
+On pose : $\overline{u_{k+1}} = e_{k+1} - \sum_{i=1}^{k} \langle e_{k+1}, u_i \rangle u_i$.\\
+
+Soit $1 \leq i \leq k$.\\
+On a : $\langle \overline{u_{k+1}}, u_i \rangle = \langle e_{k+1}, u_i \rangle - \sum_{j=1}^{k} \langle e_{k+1}, u_j \rangle \underbrace{\langle u_j, u_i \rangle}_{\delta{ij}}$. (car $(u_1, \ldots, u_k)$ est orthonormée)\\
+$\langle \overline{u_{k+1}}, u_j \rangle = \langle e_{k+1}, u_i \rangle - \langle e_{k+1}, u_i \rangle = 0$.\\
+De plus, $\overline{u_{k+1}} \neq 0$ car $e_{k+1} \notin \text{Vect}(e_1, \ldots, e_k) = \text{Vect}(u_1, \ldots, u_k)$.\\
+On pose alors $u_{k+1} = \frac{\overline{u_{k+1}}}{\| \overline{u_{k+1}} \|}$, qui est un vecteur de norme 1.\\
+On a : $(u_1, \ldots, u_{k+1})$ est une famille orthonormée de $E$ qui vérifie $\forall i \in S_{k+1}, \; \text{Vect}(u_1, \ldots, u_i) = \text{Vect}(e_1, \ldots, e_i)$. $\Box$
+}
+
+\theorem{Corollaire}{}{false}{
+    Tout espace euclidien de dimension finie admet une base orthonormée.
+}
+
+\definition{
+    Soient $E, F$ deux espaces euclidiens.\\
+    On appelle \textbf{isométrie} de $E$ dans $F$ toute application $f : E \to F$ qui est un isomorphisme d'espace vectoriel et $\forall x \in E, \; \| f(x) \| = \| x \|$.
+}
+\remark{$\forall x \in E \; \| f(x) \| = \| x \| \Leftrightarrow \forall x,y \in E, \; \langle f(x), f(y) \rangle = \langle x,y \rangle$.}
+\training{Démontrer la remarque précédente.}
+\noindent\carreaux{10}
+
+\definition{
+    Deux espaces euclidiens $E$ et $F$ sont dits \textbf{isométriques} s'il existe une isométrie de $E$ dans $F$.
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $E$ un espace euclidien de dimension $n$.\\
+    Alors $E$ est isométrique à $\mathbb{R}^n$ muni du produit scalaire canonique.
+}
+
+\noindent{\textbf{Démonstration :}\\
+Soit $(e_1, \ldots, e_n)$ une base orthonormée de $E$.\\
+Soit $(\varepsilon_1, \ldots, \varepsilon_n)$ la base canonique de $\mathbb{R}^n$.\\
+On définie l'application linéaire $f : E \to \mathbb{R}^n$ par $f(e_i) = \varepsilon_i$ pour tout $i \in S_n$.\\
+Alors $f$ est un isomorphisme d'espace vectoriel (car l'image d'une base est une base).\\\\
+Soit $x,y \in E$.\\
+$x = \sum_{i=1}^n x_i e_i$ et $y = \sum_{i=1}^n y_i e_i$ avec $x_i, y_i \in \mathbb{R}$.\\
+$\langle x,y \rangle = \langle \sum_{i=1}^n x_i e_i, \sum_{j=1}^n y_j e_j \rangle = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \langle e_i, e_j \rangle$ (bilinéarité)\\
+$= \sum_{i=1}^n x_i y_i$ (car $(e_1, \ldots, e_n)$ est orthonormée) qui est le produit scalaire canonique de $f(x) = \sum_{i=1}^n x_i \varepsilon_i$ et $f(y) = \sum_{i=1}^n y_i \varepsilon_i$.\\
+$= \langle f(x), f(y) \rangle$ (car $f(x) = \sum_{i=1}^n x_i \varepsilon_i$ et $f(y) = \sum_{i=1}^n y_i \varepsilon_i$)\\
+$\Rightarrow f$ est une isométrie de $E$ dans $\mathbb{R}^n$. $\Box$
+}
+
+\section{Projections orthogonales}
+
+\definition{
+    Soit $E$ un espace euclidien et soit $F$ un sous-espace vectoriel de $E$.\\
+    Alors :
+    \begin{enumerate}
+        \item $\forall x \in E \; \exists ! y \in F : (x-y) \perp F$. On dit que $y$ est le \textbf{projeté orthogonal} de $x$ sur $F$.
+        \item L'application $p : E \to F$ qui à $x$ associe son projeté orthogonal sur $F$ est appelée \textbf{projection orthogonale} de $E$ sur $F$ et $ker(p) = \{ z \in E : z \perp F \} = F^\perp$. On a de plus que $p$ est un projecteur (\textit{i.e.} $p^2 = p$).
+    \end{enumerate}
+}
+
+\noindent{\textbf{Démonstration de l'unicité du projeté orthogonal :}\\
+Soit $y$ tel que $y \in F$ et $x - y \perp F$.\\
+$F$ est un espace euclidien en posant comme produit scalaire sur $F$ la restriction à $F \times F$ du produit scalaire de $E$.\\
+Soit $(e_1, \ldots, e_k)$ une base orthonormée de $F$.\\
+Alors : $y = \sum_{i=1}^k \langle y, e_i \rangle e_i$ et on a de plus $\forall i \in S_n \; e_i \perp x - y$.\\
+Donc $0 = \langle x-y, e_i \rangle = \langle x, e_i \rangle - \langle y, e_i \rangle$ donc $y = \sum_{i=1}^k \langle x, e_i \rangle e_i$. $\Box$
+}
+
+\noindent{\textbf{Démonstration de l'existence du projeté orthogonal :}\\
+Le vecteur $y = \sum_{i=1}^k \langle x, e_i \rangle e_i$ vérifie bien $y \in F$ et $x-y \perp F$. $\Box$
+}
+
+\noindent{\textbf{Démonstration de $ker(p)$ :}\\
+$ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
+}
+
+\remark{Soit $p$ la projection orthogonale sur $F$. Alors pour $x \in E, \; p(x)$ est l'unique vecteur de $F$ tel que $\| x - p(x) \| = \min_{z \in F} \| x - z \|$. Autrement dit, $p(x)$ est le point de $F$ le plus proche de $x$.} 
+\ndlr{cf. Laurent pour ce qui s'ensuit. cf. OneNote pour le schéma.}
+
+\remark{On peut retrouver la formule de la distance d'un point à une droite / plan dans $\mathbb{R}^3$. Prendre une base orthonormée du plan $P$ et $d(x, P) = \| x - \sum_{i=1}^2 \langle x, e_i \rangle e_i \|$ où $d(x, F) = \inf_{y \in F} \| x - y \|$.}
+
+\remark{Si $(e_1, \ldots, e_k)$ est une famille libre de $E$. Gram-Schmit définit par récurrence $u_1 = \frac{e_1}{\| e_1 \|}$ et $u_{k+1} = \frac{e_{k+1} - p_i(e_{k+1})}{\| e_{k+1} - p_i(e_{k+1}) \|}$, où $p_i$ est la projection orthogonale sur $\text{Vect}(u_1, \ldots, u_k)$.}
+
+\section{Suppléments orthogonaux}
+
+\definition{
+    Soit $E$ un espace euclidien. Soit $F$ un sous-espace vectoriel de $E$.\\
+    On note \[F^\perp = \{ x \in E \mid \forall y \in F, \; \langle x,y \rangle = 0 \} = \bigcap_{y \in F} ker(x \mapsto \langle x,y \rangle) = \bigcap_{i \in S_k} ker(x \mapsto \langle x,e_i \rangle)\]
+    où $(e_1, \ldots, e_k)$ est une base de $F$. $F^\perp$ est appelé l'\textbf{espace orthogonal} de $F$ dans $E$.
+}
+
+\remark{
+    $x \perp F \Leftrightarrow x \in F^\perp$.
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $E$ un espace euclidien de dimension finie et soit $F$ un sous-espace vectoriel de $E$.\\
+    Alors $E = F \oplus F^\perp$ (c'est même une somme directe orthogonale) et $F^\perp = (F^\perp)^\perp$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+$F^\perp = ker p$ et $F = Im p$ où $p$ est la projection orthogonale de $E$ sur $F$.\\
+D'où $F^\perp \oplus F = ker p \oplus Im p = E$.\\
+On a $dim(F^\perp)^\perp = dim(E) - dim(F^\perp) = dim(F)$ donc il suffit de montrer une inclusion.\\
+Soit $y \in F^\perp$.\\
+Alors $\forall x \in F, \; \langle y,x \rangle = 0$ (en effet, si $x \in F$ alors $\forall y \in F^\perp, \; \langle y,x \rangle = 0$)\\
+D'où $F \subset (F^\perp)^\perp$, d'où $F^\perp \supset (F^\perp)^\perp$. $\Box$
+}
+
+\theorem{Corollaire}{}{false}{
+    Soit $H$ un hyperplan de $E$. Alors il existe $x_0 \in E$ tel que $H = (Vect(x_0))^\perp$.
+}
+\noindent{\textbf{Démonstration :}\\
+Par définition d'un hyperplan, et comme $H^\perp$ est un supplémentaire de $H$, il existe $x_0 \in H^\perp$ tel que $H^\perp = Vect(x_0)$.\\
+Et donc $H = (H^\perp)^\perp = (Vect(x_0))^\perp$. $\Box$
+}
+
+\remark{Si $A \subset E$, on définit $A^\perp = \{ x \in E : \forall a \in A, \; \langle x,a \rangle = 0 \}$.\\
+Alors $A^\perp$ est un sev de $E$ et $A^\perp = (Vect(A))^\perp$.}
+
+\training{Montrer que $F_1 \subset F2 \Rightarrow F_2^\perp \subset F_1^\perp$.}
+\noindent\carreaux{10}
+
+\section{Dual d'espace euclidien}
+
+
+\theorem{Théorème}{Représentation des formes linéaires}{false}{
+    Soit $E$ un espace euclidien. On note $j_E : E \to E^*$ l'application qui à $x$ associe $j_E(x) : y \mapsto \langle x,y \rangle$.\\
+    Alors $j_E$ est un isomorphisme d'espace vectoriel de $E$ dans $E^*$.\\\\
+    Autrement dit, $\forall \varphi \in E^*, \; \exists x \in E : \varphi = \langle x, \cdot \rangle$.
+}
+\noindent{\textbf{Démonstration :}\\
+$j_E$ est linéaire et $dimE = dimE^*$ et $x \in ker(j_E) \Leftrightarrow \forall y \in E, \; \langle x,y \rangle = 0 \Leftrightarrow x = 0$. $\Box$
+}
+
+\remark{Si $\varphi \in E^*, y \in E$ on a le crochet de dualité $\langle \varphi, y \rangle$. Mais aussi si $x$ est tel que $\varphi = \langle x, \cdot \rangle$, on a aussi $\langle x, y \rangle = \langle \varphi, y \rangle$. Donc on peut confondre les deux crochets de dualité. Autrement dit, $\langle j_E(x), y \rangle_{E^* \times E} = \langle x, y \rangle_{E \times E}$ et $j_E$ permet de dire que le crochet de dualité est la même chose que le produit scalaire en identifiant $E$ et $E^*$ de manière canonique.}
+
+\section{Cas des $\mathbb{C}$-espaces vectoriels : espaces hermitiens}
+
+\definition{
+    Soit $E$ un $\mathbb{C}$-espace vectoriel.\\
+    Soit $\langle \cdot, \cdot \rangle : E \times E \to \mathbb{C}$ une application.\\
+    On dit que $\langle \cdot, \cdot \rangle$ est un \textbf{produit scalaire} sur $E$ si :
+    \begin{enumerate}
+        \item $\forall x,y \in E, \; \langle x,y \rangle = \overline{\langle y,x \rangle}$ (hermitianité)
+        \item $\forall x\in E \; y \mapsto \langle x,y \rangle$ est $\mathbb{C}$-linéaire (linéarité en la seconde variable)
+        \item $\forall x \in E, \; \langle x,x \rangle > 0$ si $x\neq 0$ et $\langle x,x\rangle = 0$ si $x=0$ (positivité)
+    \end{enumerate}
+}
+
+\remark{Sesquilinéaire : $\forall y \in E \forall x, x' \in E \lambda \in \mathbb{C} \; \langle \lambda x + x', y \rangle = \overline{\lambda} \langle x,y \rangle + \langle x',y \rangle$. $\forall x \in E \forall y,y' \in E \forall \lambda \in \mathbb{C} \; \langle x, \lambda y + y' \rangle = \lambda \langle x,y \rangle + \langle x,y' \rangle$.}
+
+\example{Dans $\mathbb{C}^n$, $x = (x_i)$ et $y = (y_i)$, $\langle x,y \rangle = \sum_{i=1}^n  \overline{x_i} y_i$ est un produit scalaire (canonique).}
+\remark{Pour $n = 1$, $x,y \in \mathbb{C}$, $\langle x,y \rangle = \overline{x} y$ est un produit scalaire, et $\langle x, x \rangle = |x|^2$ (module au carré).}
 \newpage
 \tableofcontents
 

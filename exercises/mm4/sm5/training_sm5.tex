@@ -1,0 +1,141 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Séance révision semaine 4}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Utiliser les théorèmes sur la convergence des séries des dérivées & 2,3 \\
+\hline
+Dénombrer et calculer des probabilités & 4,5,6,7 \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+
+\exercise{1}{TD3.5}{
+    Pour tout entier \(n \ge 1\), soit  
+    \(f_n : \mathbb{R} \to \mathbb{R}\) la fonction définie par :  
+    \[
+    f_n(x) = \frac{1}{n^2 + x^2}.
+    \]
+
+    \begin{enumerate}
+        \item Montrer que la série \(\sum f_n\) converge simplement sur \(\mathbb{R}\). On note \(s\) la somme de cette série.
+        \item Montrer que \(s\) est continue sur \(\mathbb{R}\).
+        \item Montrer que pour tout réel \(a > 0\), la série \(\sum f_n'\) converge normalement sur \([-a, a]\).
+        \item Montrer que \(s\) est dérivable sur \(\mathbb{R}\).
+    \end{enumerate}
+}
+
+
+\exercise{2}{TD3.7}{
+    Soit \(f : \, ]-1, 1[ \to \mathbb{R}\) la fonction définie par :  
+\[
+f(x) = \sum_{n=1}^{\infty} \frac{x^n \sin(nx)}{n}.
+\]
+
+\begin{enumerate}
+    \item Montrer que \(f\) est de classe \(C^1\) sur \(]-1, 1[\).
+    \item Calculer \(f'(x)\) et en déduire que :  
+    \[
+    f(x) = \arctan\left( \frac{x \sin x}{1 - x \cos x} \right).
+    \]
+\end{enumerate}
+}
+
+\exercise{3}{TD3.2b}{
+    Étudier la convergence de $\sum_{n \geq 1} \frac{1}{n + n^3 x^2}$ sur $\mathbb{R}_{+}^{*}$. 
+}
+
+\switchcolumn
+
+\exercise{4}{TD2.11 : Supplémentaire d'hyperplans}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie et soit $\phi$ une forme linéaire non nulle sur $E$. Montrer que pour tout $u \in E \setminus \ker(\phi)$, $\ker(\phi)$ et $\mathrm{Vect}(u)$ sont supplémentaires dans $E$.
+}
+
+\exercise{5}{TD1.10}{
+    On choisit un nombre au hasard parmi les entiers entre $1$ et $100$. Quel est l'espace probabilisé suggéré par cet énoncé ?
+}
+
+\exercise{6}{TD1.19}{
+    Une urne contient 4 boules blanches et 6 boules noires. On tire au hasard successivement 3 boules sans remise.
+    \begin{enumerate}
+        \item Définir un espace de probabilité $(\Omega, \mathbb{P})$ correspondant à cette expérience.
+        \item Quelle est la probabilité d'obtenir les 3 boules blanches ?
+        \item Quelle est la probabilité d'obtenir une boule noire au 2ème tirage ?
+        \end{enumerate}
+}
+
+\exercise{7}{Paradoxe des anniversaires}{
+    On considère un groupe de n personnes prises au hasard dans la population. Quelle est la probabilité qu’au moins deux d’entre elles aient leur anniversaire le même jour ? Pour simplifier on pourra considérer que toutes les années ont 365 jours.
+}
+
+\exercise{8}{TD1.14}{
+    Pour chacune des expériences aléatoires suivantes, proposer un espace probabilisé adéquat :
+    \begin{enumerate}
+    \item On jette une pièce de monnaie 10 fois de suite en s’intéressant à l’apparition à chaque jet de pile (P) ou face (F).
+    \item On distribue à un joueur 13 cartes d’un jeu de 52 cartes correctement battues.
+    \item On joue à pile ou face jusqu’à obtenir face
+    \end{enumerate}
+}
+
+\noindent\textit{Il conviendra également d'apprendre le reste du cours, en particulier : 
+\begin{itemize}
+    \item le lemme d'Abel (et le théorème qui s'ensuit)
+    \item le cours sur les espaces euclidiens
+\end{itemize}    
+}
+
+\switchcolumn
+\newpage
+
+\exercise{9}{Logique propositionnelle (CAPES sujet 0)}{
+    On désigne par $\mathcal{F}$ un ensemble de fonctions définies sur $\mathbb{R}$. On donne deux assertions $P$ et $Q$ :
+    \[ (P) : \forall f \in \mathcal{F}, \exists x \in \mathbb{R}, f (x) = 0 \]
+    \[ (Q) : \exists x \in \mathbb{R}, \forall f \in \mathcal{F}, f (x) = 0 \]
+Ces deux assertions sont-elles équivalentes ?
+}
+
+\exercise{10}{Polynômes (CAPES sujet 0)}{
+    On désigne par $\mathbb{R}[X]$ l’ensemble des polynômes d'une variable $X$ à coefficients réels. Les affirmations suivantes sont-elles vraies ou fausses ? Justifier votre réponse.
+    \begin{enumerate}
+        \item Tout polynôme $P \in \mathbb{R}[X]$ sans racine réelle est irréductible.
+        \item Le polynôme $P = X^3 + 2X^2 + X$ est le polynôme caractéristique d'une matrice carrée inversible à coefficients réels.
+    \end{enumerate}
+}
+
+\exercise{11}{Calcul intégral de Bibm@th}{
+    Calculer les intégrales suivantes :
+    \[
+    I=\int_1^2 \frac{\ln(1+t)}{t^2} dt \quad J=\int_0^1 x(\arctan x)^2 dx \quad K=\int_0^1 \frac{x\ln x}{(x^2+1)^2} dx
+    \]
+}
+
+
+\end{paracol}
+\end{document}
