@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info PR4}
+\fancyhead[C]{Probabilités}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Espérance}
+
+\section{Définition et exemples}
+
+\reminder{Rappel sur les séries. Soit $(a_n)_{n\in\mathbb{N}}$ une suite de nombres réels.\\
+Si les $a_n$ sont positifs, alors :
+\begin{itemize}
+    \item la série $\sum_{n \geq 1} a_n$ est définie positive
+    \item l'ordre dans lequel on somme les termes n'affecte pas la somme ni la finitude
+    \item Si on partitionnel $\mathbb{N}^*$ en une collection dénombrable $(I_p)_{p\in\mathbb{N}}$ d'ensembles infinis, alors $\sum_{n \geq 1} a_n = \sum_{p \geq 1} \sum_{n \in I_p} a_n$
+\end{itemize}
+}
+
+On suppose à présent que les $a_n$ sont de signes quelconques. 
+Si $\sum_{n \ge 1} |a_n| < +\infty$, alors :
+
+\begin{enumerate}
+    \item la série $\sum_{n \ge 1} a_n$ converge (dans $]-\infty, +\infty[$) ;
+    
+    \item l’ordre dans lequel l’on somme les $a_n$ n’influe pas sur la finitude ni sur la valeur de la série ;
+    
+    \item si l’on partitionne $\mathbb{N}^*$ en une collection dénombrable $(I_p)_{p \ge 1}$ de parties, alors
+    \[
+    \sum_{n \ge 1} a_n 
+    = 
+    \sum_{p \ge 1} \; \sum_{n \in I_p} a_n .
+    \]
+\end{enumerate}
+
+\end{document}

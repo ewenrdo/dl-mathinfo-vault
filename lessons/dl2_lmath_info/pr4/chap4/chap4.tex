@@ -146,6 +146,24 @@
     $\mathbb{P}(N = 0) = \frac{1}{2}$, $\mathbb{P}(N = 1) = \frac{1}{4}$, $\mathbb{P}(N = 2) = \frac{1}{8}$, $\dots$
 }
 
+\subsection{Loi hypergéométrique}
+
+\definition{
+    La loi hypergéométrique de paramètres $n, K, N$ avec $N \geq K \geq 1$ et $N \geq n \geq 1$ est la mesure de probabilité sur $E = \{0, 1, \dots, K\}$ définie par :
+    \[
+        \mu(\{k\}) = \frac{\binom{K}{k} \binom{N-K}{n-k}}{\binom{N}{n}} \quad \text{ pour tout } k \in E
+    \]
+}
+
+\remark{
+    Lorsque $n - k$ est plus grand que $N - K$ ou lorsque $k$ est plus grand que $n$, alors $\mu(\{k\}) = 0$.
+}
+
+\theorem{Proposition}{}{false}{
+    On considère une urne contenant $K$ boules blanches et $N-K$ boules noires. On tire au hasard $n$ boules de l'urne sans remise.\\
+    Le nombre total de boules blanches tirées suit une loi hypergéométrique de paramètres $n, K, N$.
+}
+
 \section{Fonction d'une variable aléatoire}
 
 Soit $(\Omega, \mathbb{P})$ un espace probabilisé. Soit $X$ une variable aléatoire à valeurs dans un ensemble dénombrable $E$.\\
