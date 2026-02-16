@@ -67,10 +67,107 @@
     On la note $Ber(p)$
 }
 
+\section{Lois usuelles}
+
+\subsection{Loi de Bernouilli}
+\definition{
+    Soit $n \geq 1$ un entier.\\
+    La \textbf{loi uniforme sur $\{1, 2, \dots, n\}$} est définie par $\mu(\{k\}) = \frac{1}{n}$ pour tout $k \in \{1, 2, \dots, n\}$.\\
+    On la note $\mathcal{U}(\{1, 2, \dots, n\})$ ou $\mathcal{U}_n$.
+}
+
+\subsection{Loi uniforme}
 \definition{
     Soit $E$ un ensemble fini.\\
     La \textbf{loi uniforme sur $E$} est définie par $\mu(\{x\}) = \frac{1}{|E|}$ pour tout $x \in E$.
     On la note $\mathcal{U}(E)$
+}
+
+% Notes du 16/02
+
+\subsection{Loi binomiale et loi de Poisson}
+
+\definition{
+    Soit $n \geq 1$ un entier et soit $p \in [0, 1]$.\\
+    La \textbf{loi binomiale de paramètres $n$ et $p$} est définie par $\mu(\{k\}) = \binom{n}{k} p^k (1-p)^{n-k}$ pour tout $k \in \{0, 1, \dots, n\}$.\\
+    On la note $Bin(n, p)$ ou $\mathcal{B}(n,p)$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soient $X_1, \ldots, X_n$ des variables indépendantes de loi $Ber(p)$ pour un certain paramètre $p \in [0, 1]$.\\
+    La variable aléatoire $S_n = X_1 + \ldots + X_n$ suit la loi $\mathcal{B}(n, p)$.
+}
+
+\theorem{Corollaire}{}{false}{
+    Soient $n_1, n_2 \geq 1$ des entiers et soient $p_ \in [0, 1]$ un paramètre.\\
+    Soit $S_1$ une variable aléatoire de loi $\mathcal{B}(n_1, p)$ et soit $S_2$ une variable aléatoire de loi $\mathcal{B}(n_2, p)$ indépendantes.\\
+    La loi de $S_1 + S_2$ est $\mathcal{B}(n_1 + n_2, p)$.
+}
+
+\definition{
+    La \textbf{loi de Poisson} de paramètre $\lambda > 0$ est définie par $\mu(\{n\}) = e^{-\lambda} \frac{\lambda^n}{n!}$ pour tout $n \in \mathbb{N}$.\\
+    On la note $\mathcal{P}(\lambda)$ ou $Po(\lambda)$.
+}
+
+\theorem{Proposition}{Approximation de la loi binomiale}{false}{
+    $\forall k \in \mathbb{N}^{*}$ et $\lambda > 0$, alors on a :
+    \[ \lim_{n \to +\infty} \binom{n}{k} \left( \frac{\lambda}{n} \right)^k \left( 1 - \frac{\lambda}{n} \right)^{n-k} = e^{-\lambda} \frac{\lambda^k}{k!} \]
+}
+
+\example{
+    Une usine fabrique 1500 composants électroniques par jour. Chaque composant a une chance sur 1000 d’être défectueux (indépendamment les uns des autres). Le nombre de composants défectueux suit la loi binomiale $\mathcal{B}(1500, \frac{1}{1000})$.\\
+    La proposition assure que cette loi est bien approximée par une loi de Poisson de paramètre $\lambda = \frac{3}{2}$. On notera qu’il est plus pratique de manipuler la loi de Poisson que la loi binomiale :
+    \[
+        e^{-\frac{3}{2}} \frac{\left( \frac{3}{2} \right)^3}{3!}  \quad \text{ vs } \quad \binom{1500}{3} \left( \frac{1}{1000} \right)^3 \left( 1 - \frac{1}{1000} \right)^{1497}
+    \]
+}
+
+\theorem{Proposition}{Transformation affine d'une variable suivant une loi de poisson}{false}{
+    Si $X$ et $Y$ sont deux variables aléatoires indépendantes de lois de Poisson de paramètres respectifs $\lambda$ et $\mu$, alors $X + Y$ suit une loi de Poisson de paramètre $\lambda + \mu$.
+}
+
+\subsection{Loi géométrique}
+\definition{
+    La \textbf{loi géométrique} de paramètre $p \in ]0, 1]$ est la mesure de probabilité sur $\mathbb{N}$ définie par $\mu(\{n\}) = p \cdot (1-p)^n$ pour tout $n \in \mathbb{N}$.\\
+    On la note $Geom(p)$.
+}
+
+\remark{La loi géométrique apparaît lorsqu'on s'intéresse au premier temps (aléatoire !) de succès dans un tirage à pile ou face.}
+
+\theorem{Proposition}{}{false}{
+    Soit $(X_n)_{n \in \mathbb{N}}$ une suite infinie de variables aléatoires indépendantes de la loi $Ber(p)$ pour un certain $p \in ]0, 1]$.\\ 
+    Soit $N = \inf\{ n \in \mathbb{N} : X_n = 1 \}$ le premier temps de succès.\\
+    Alors $N$ suit la loi $Geom(p)$.
+}
+
+\example{
+    On lance une pièce de monnaie équilibrée jusqu'à ce que l'on obtienne un pile.\\
+    La variable aléatoire $N$ qui correspond au nombre de lancers nécessaires pour obtenir un pile suit la loi géométrique de paramètre $p = \frac{1}{2}$.\\
+    $\mathbb{P}(N = 0) = \frac{1}{2}$, $\mathbb{P}(N = 1) = \frac{1}{4}$, $\mathbb{P}(N = 2) = \frac{1}{8}$, $\dots$
+}
+
+\section{Fonction d'une variable aléatoire}
+
+Soit $(\Omega, \mathbb{P})$ un espace probabilisé. Soit $X$ une variable aléatoire à valeurs dans un ensemble dénombrable $E$.\\
+Soit $g : E \to F$ une fonction, avec $F$ un ensemble dénombrable.
+On peut définir une variable aléatoire $Y = g(X)$.
+
+\theorem{Proposition}{}{false}{
+    La variable aléatoire $Y$ est bien définie et sa loi $\mu_Y$ sur $F$ est donnée par :
+    \[
+        \forall A \in \mathcal{P}(F), \quad \mu_Y(A) = \mu_X(g^{-1}(A)) = \mu_X(\{ x \in E : g(x) \in A \})
+    \]
+}
+
+\example{
+    Soit $X$ une variable aléatoire à valeurs dans $E = \{-1,0,1\}$ dont la loi est donnée par :
+    \[
+        \mu_X(\{-1\}) = \frac{1}{6}, \quad \mu_X(\{0\}) = \frac{1}{2}, \quad \mu_X(\{1\}) = \frac{1}{3}
+    \]
+    Soit $Y$ la variable aléatoire à valeurs dans $F = \{0, 1\}$ définie par $Y = X^2$. On trouve alors :
+    \[
+        \mu_Y(\{0\}) = \sum_{x \in E : x^2 = 0} \mu_X(\{x\}) = \mu_X(\{0\}) = \frac{1}{2} \quad \text{ et } \quad \mu_Y(\{1\}) = \sum_{x \in E : x^2 = 1} \mu_X(\{x\}) = \mu_X(\{-1\}) + \mu_X(\{1\}) = \frac{1}{6} + \frac{1}{3} = \frac{1}{2}
+    \]
 }
 
 \newpage
