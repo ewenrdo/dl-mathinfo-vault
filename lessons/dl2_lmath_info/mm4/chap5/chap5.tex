@@ -31,7 +31,7 @@
 
 
 \remark{
-    Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions s'appliquent aux séries entières.
+    Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions s'appliquent aux séries entières. Exception faite sur le théorème touchant aux dérivées, car on ne sait pas encore ce qu'est la dérivée d'une fonction de variable complexe.
 }
 
 \example{
@@ -62,11 +62,26 @@
 }
 
 \noindent{\textbf{Démonstration :}\\
-    Soit $z \in \overline{D}(0, |z_0|)$ et soit $n \in \mathbb{N}$.\\
+    1. Soit $z \in \overline{D}(0, |z_0|)$ et soit $n \in \mathbb{N}$.\\
     On a $|a_n z^n| = |a_n||z|^n \leq |a_n||z_0|^n$.\\
     Et de plus $\sum_{n\geq0} |a_n||z_0|^n$ converge par hypothèse et est indépendant de $z$.\\
 
-    \noindent Donc la série $\sum_{n\geq0} a_n z^n$ converge normalement sur $\overline{D}(0, |z_0|)$.
+    \noindent Donc la série $\sum_{n\geq0} a_n z^n$ converge normalement sur $\overline{D}(0, |z_0|)$.\\\\
+
+    2. Soit $r < |z_0|$.\\
+    Montrons que $\sum_{n\geq0} a_n r^n$ converge absolument.\\
+
+    et $1 \Rightarrow 2$ et $|a_n|r^n = |a_n||z_0|^n \cdot \left(\frac{r}{|z_0|}\right)^n \leq M \cdot \left(\frac{r}{|z_0|}\right)^n$ pour un certain $M = \sup_{n\in\mathbb{N}} |a_n||z_0|^n$.\\
+    et comme série géométrique de raison $\frac{r}{|z_0|} < 1$, la série $\sum_{n\geq0} M \cdot \left(\frac{r}{|z_0|}\right)^n$ converge.\\
+    D'où la série $\sum_{n\geq0} a_n r^n$ converge absolument.\\
+}
+
+\definition{
+    On appelle \textbf{rayon de convergence} de la série $\sum_{n\geq0} a_n z^n$ le nombre $R \in [0, +\infty[]$ défini par $R = \sup \{ r \in [0, +\infty[] : (a_n r^n)_{n\in\mathbb{N}} \text{ est bornée} \} = \sup \{ r \in [0, +\infty[] : \sum_{n\geq0} a_n r^n \text{ converge} \}$.
+}
+
+\definition{
+    On appelle \textbf{disque ouvert de convergence} de la série $\sum_{n\geq0} a_n z^n$ l'ensemble $D(0, R) = \{ z \in \mathbb{C} : |z| < R \}$ où $R$ est le rayon de convergence de la série $\sum_{n\geq0} a_n z^n$.
 }
 
 \newpage
