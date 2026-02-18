@@ -42,10 +42,32 @@
 
 \subsection{Convergence d'une série entière}
 
-\theorem{Proposition}{}{false}{
+\example{
     La série $\sum_{n\geq0} z^n$ converge si et seulement si $|z| < 1$ sur $\{z \in \mathbb{C} : |z| < 1\} = D(0, 1)$
 }
+
+\example{
+    Soit $z \in \mathbb{C}$. On pose $u_n = \frac{z^n}{n!}$. Alors on a $\frac{u_{n+1}}{u_n} = \frac{z^{n+1}}{(n+1)!} \cdot \frac{n!}{z^n} = \frac{z}{n+1} \to 0$ lorsque $n \to +\infty$.\\
+    Par le critère de d'Alembert, la série $\sum_{n\geq0} \frac{z^n}{n!}$ converge pour tout $z \in \mathbb{C}$ et on dira que le rayon de convergence de la série $\sum_{n\geq0} \frac{z^n}{n!}$ est $+\infty$.
+}
+
 \vocabulary{On dit que $1$ est le \textbf{rayon de convergence} de la série $\sum_{n\geq0} z^n$ (et $D(0, 1)$ est le \textbf{disque de convergence} de la série $\sum_{n\geq0} z^n$).}
+
+\theorem{Lemme}{}{false}{
+    Soit $\sum_{n\geq0} a_n z^n$ une série entière et $z_0 \in \mathbb{C}$.
+    \begin{enumerate}
+        \item Si $\sum_{n\geq0} a_n z_0^n$ converge absolument, alors la série $\sum_{n\geq0} a_n z^n$ converge normalement sur $\overline{D}(0, |z_0|) = \{ z \in \mathbb{C} : |z| \leq |z_0| \}$.
+        \item Si $(a_n z_0^n)_{n\in\mathbb{N}}$ est bornée, alors la série $\sum_{n\geq0} a_n z^n$ converge normalement sur $\overline{D}(0, r)$ pour tout $r < |z_0|$
+    \end{enumerate}
+}
+
+\noindent{\textbf{Démonstration :}\\
+    Soit $z \in \overline{D}(0, |z_0|)$ et soit $n \in \mathbb{N}$.\\
+    On a $|a_n z^n| = |a_n||z|^n \leq |a_n||z_0|^n$.\\
+    Et de plus $\sum_{n\geq0} |a_n||z_0|^n$ converge par hypothèse et est indépendant de $z$.\\
+
+    \noindent Donc la série $\sum_{n\geq0} a_n z^n$ converge normalement sur $\overline{D}(0, |z_0|)$.
+}
 
 \newpage
 \tableofcontents
