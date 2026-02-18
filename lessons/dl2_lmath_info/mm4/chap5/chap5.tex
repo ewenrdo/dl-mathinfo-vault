@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info ASF4}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Séries entières}
+
+\section{Introduction}
+
+\definition{
+    Une \textbf{série entière} est une série de fonction dont le $n^{\text{ème}}$ terme général est un monôme de degré $n$.\\
+    C'est-à-dire que c'est une série de la forme $\sum_{n} a_n z^n$ où $(a_n)_{n \in \mathbb{N}}$ est une suite de nombres complexes ($\mathbb{C}^\mathbb{N}$ ou $\mathbb{R}^\mathbb{N}$) et $z$ est une variable complexe.
+}
+
+
+\remark{
+    Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions s'appliquent aux séries entières.
+}
+
+\example{
+    \[
+        \sum_{n\geq0} z^n \hspace{1.25cm} \sum_{n\geq0} \frac{z^n}{n!} \hspace{1.25cm} \sum_{n\geq0} \frac{z^n}{n} \hspace{1.25cm} \cdots
+    \]
+}
+
+\subsection{Convergence d'une série entière}
+
+\theorem{Proposition}{}{false}{
+    La série $\sum_{n\geq0} z^n$ converge si et seulement si $|z| < 1$ sur $\{z \in \mathbb{C} : |z| < 1\} = D(0, 1)$
+}
+\vocabulary{On dit que $1$ est le \textbf{rayon de convergence} de la série $\sum_{n\geq0} z^n$ (et $D(0, 1)$ est le \textbf{disque de convergence} de la série $\sum_{n\geq0} z^n$).}
+
+\newpage
+\tableofcontents
+
+
+\end{document}  

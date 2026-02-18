@@ -11,7 +11,7 @@
 \pagestyle{fancy}
 \fancyhf{} % reset tout
 
-\fancyhead[L]{DL2 Math-Info MM4}
+\fancyhead[L]{DL2 Math-Info ASF4}
 \fancyhead[C]{Algèbre}
 \fancyhead[R]{2025-2026}
 
@@ -335,6 +335,55 @@ $j_E$ est linéaire et $dimE = dimE^*$ et $x \in ker(j_E) \Leftrightarrow \foral
 
 \example{Dans $\mathbb{C}^n$, $x = (x_i)$ et $y = (y_i)$, $\langle x,y \rangle = \sum_{i=1}^n  \overline{x_i} y_i$ est un produit scalaire (canonique).}
 \remark{Pour $n = 1$, $x,y \in \mathbb{C}$, $\langle x,y \rangle = \overline{x} y$ est un produit scalaire, et $\langle x, x \rangle = |x|^2$ (module au carré).}
+
+\remark{}
+$
+\begin{cases}
+    y \mapsto \langle x,y \rangle \text{ est } \mathbb{C}\text{-linéaire} \\
+    \forall x,y \in E,\;
+    \langle x,y \rangle = \overline{\langle y,x \rangle}
+    \text{ (hermitianité)}
+\end{cases}
+$
+implique que $(x,y) \mapsto \langle x,y \rangle$ est sesquilinéaire.
+
+\remark{
+    Dans $\mathcal{C}^0([a,b], \mathbb{C})$, $\langle f, g \rangle = \int_a^b \overline{f}(t) g(t) dt$ est un produit scalaire.
+}
+
+\definition{
+    On appelle \textbf{espace hermitien} un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire (complexe/hermitien).
+}
+
+\definition{
+    Soit $E$ un espace hermitien.\\
+    On appelle \textbf{famille orthonormée} de $E$ une famille de vecteurs normées qui sont deux à deux orthogonaux, c'est à dire $(e_1, \ldots, e_k)$ telle que $\forall i,j \in S_k, \; \langle e_i, e_j \rangle = \delta_{ij}$.
+}
+
+\remark{Le théorème de Pythagore reste vérifié dans les espaces hermitiens.}
+\attention{La réciproque du même théorème ($\langle x,y \rangle = 0 \Rightarrow \| x+y \|^2 = \| x \|^2 + \| y \|^2$) n'est pas vérifiée dans les espaces hermitiens.}
+
+\theorem{Proposition}{}{false}{
+    Si $(e_1, \ldots, e_n)$ est une base orthonormée de $E$ un espace hermitien, et on a $x = \sum_{i=1}^n x_i e_i$ et $y = \sum_{j=1}^n y_j e_j$, alors :
+    \[
+    x_i = \langle x, e_i \rangle \text{ et } y_j = \langle y, e_j \rangle
+     \text{ et } \langle x,y \rangle = \sum_{i=1}^n \overline{x_i} y_i
+    \]
+}
+
+\theorem{Théorème}{Inégalité de Cauchy-Schwarz dans les espaces hermitiens}{false}{
+    Soit $E$ un espace hermitien de dimension finie (et son produit scalaire complexe).\\
+    Alors $\forall x,y \in E, \; |\langle x,y \rangle| \leq \sqrt{\langle x,x \rangle} \sqrt{\langle y,y \rangle}$
+}
+
+\theorem{Corollaire}{}{false}{
+    Si $E$ est un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire complexe, alors $\| x \| = \sqrt{\langle x,x \rangle}$ est une norme sur $E$.
+}
+
+\training{Proposer une démonstration de l'inégalité de Cauchy-Schwarz dans les espaces hermitiens.}
+\noindent\carreaux{10}
+
+
 \newpage
 \tableofcontents
 
