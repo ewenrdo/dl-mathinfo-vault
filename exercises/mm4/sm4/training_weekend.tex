@@ -1,0 +1,166 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Séance révision semaine 4 (bis)}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Calculer des probabilités conditionnelles & 2,3,4,5 \\
+\hline
+Appliquer le procédé de Gram-Schmidt & 6,7,8,9 \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\attention{Ces exercices n'ont pour la plupart pas été traités en cours. Si vous avez besoin d'une correction et que vous n'avez pas accès à ChatGPT, n'hésitez pas à m'envoyer un message ! L'exercice 3 est à faire pour lundi.}
+
+\exercise{1}{Une virée en enfer}{
+    Pour chaque programme, calculer rigoureusement le nombre $\mathcal{A}(n)$ d'opérations $(+, \times)$ en fonction de $n$.
+}
+\begin{lstlisting}[language=Python]
+def foo_1(T) : 
+    return 4 if len(T) == 0 else 6 * foo_1(T[3:]) + 9
+
+def foo_2(T) : 
+	m = len(T) // 3
+	return 1 if m == 0 else 9 * foo_2(T[:m]) + 6 * foo_2(T[m:2*m]) + 4 * foo_2(T[2*m:])
+
+def foo_3(T) : 
+    m = len(T) // 4
+	return 1 if m == 0 else 9 * foo_3(T[2*m:]) + foo_3(T[:2*m]) + 2 * foo_3(T[m:3*m]) * sum(3 for e in T)
+\end{lstlisting}
+
+\exercise{2}{Un petit modèle du Covid}{
+    On considère que dans une population donnée, une personne sur 10000 est atteinte d'une certaine maladie.
+    On dispose d'un test médical qui, si le patient est malade, sera positif avec probabilité $\frac{99}{100}$ et négatif avec probabilité
+    $\frac{1}{100}$. Si le patient est sain, le test est positif avec probabilité $\frac{2}{100}$ et négatif avec probabilité $\frac{98}{100}$. On effectue le test
+    sur une personne choisie au hasard. Calculer :
+    \begin{enumerate}
+        \item La probabilité que le test soit positif.
+        \item La probabilité que le test donne un diagnostic correct.
+        \item La probabilité que le patient soit malade sachant que le résultat du test est positif
+        \item La probabilité que le patient soit sain sachant que le résultat du test est négatif
+    \end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{3}{Condition sur l'indépendance}{
+    Un groupe comporte 4 garçons et 6 filles de première année, 6 garçons de seconde année et n filles de seconde année. Combien doit valoir $n$ si l'on veut que, dans le choix au hasard d'un étudiant, les événements : "être un garçon" et "être en 1ère année" soient indépendants ? 
+}
+
+\exercise{4}{Raclette party}{
+Une classe de $2^{e}$ année organise une grande raclette de fin de semestre. Les élèves sont répartis en trois catégories selon leur niveau d'appétit : 
+\textit{petit appétit}, \textit{appétit moyen} et \textit{gros appétit}.\\
+Les statistiques des années précédentes indiquent que la probabilité qu'un élève reprenne au moins une portion supplémentaire de raclette est respectivement de 5\,\%, 15\,\% et 30\,\% selon la catégorie.
+On estime que dans la classe, 20\,\% des élèves ont un petit appétit, 50\,\% un appétit moyen et 30\,\% un gros appétit.
+On choisit un élève au hasard dans cette classe.
+
+    \begin{enumerate}
+        \item Quelle est la probabilité que l'élève choisi reprenne au moins une portion supplémentaire de raclette ?
+
+        \item Sachant que l'élève n'a pas repris de portion supplémentaire, quelle est la probabilité qu'il ait un petit appétit ?  
+        Quelle est la probabilité qu'il ait un appétit moyen ?
+
+        \item On apprend qu'un élève a repris au moins une portion supplémentaire.  
+        Quelle est la probabilité qu'il appartienne à la catégorie ``gros appétit'' ?  
+        Comparer cette probabilité avec la proportion initiale d'élèves ``gros appétit'' dans la classe et interpréter la différence.
+    \end{enumerate}
+}
+
+\exercise{5}{Urne de Polya}{
+    Une urne contient $b$ boules bleues et $r$ boules rouges. Une boule est tirée au hasard ; on la replace dans l'urne en ajoutant $d$ boules de la même couleur, puis on tire une seconde boule. Quelle est la probabilité :
+    \begin{enumerate}
+    \item que la seconde boule tirée soit rouge ?
+    \item que la première boule soit rouge sachant que la seconde est rouge ?
+    \item que les deux boules soient de la même couleur ?
+    \end{enumerate}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{6}{Espaces préhilbertiens (TD4.7)}{
+Un espace préhilbertien est un espace vectoriel muni d’un produit scalaire, mais pas forcément de dimension finie.  
+
+Soit $(e_1, e_2, \dots, e_n)$ une famille de vecteurs unitaires d’un espace préhilbertien réel $E$ telle que
+\[
+\forall x \in E, \quad \|x\|^2 = \sum_{i=1}^{n} (e_i \mid x)^2.
+\]
+
+Montrer que $(e_1, e_2, \dots, e_n)$ est une base orthonormée de $E$.
+}
+
+
+\exercise{7}{Procédé de Gram-Schmidt (TD4.9)}{
+Soit $\mathbb{R}^3$ muni du produit scalaire canonique.  
+
+Construire une base orthonormée en utilisant le procédé de Gram--Schmidt à partir de la famille $(u, v, w)$ définie par :
+\[
+u = (1,0,1), 
+\qquad
+v = (1,1,1), 
+\qquad
+w = (-1,1,0).
+\]
+}
+
+
+\exercise{8}{Gram-Schmidt dans $\mathbb{R}^3$}{
+Soit $\mathbb{R}^3$ muni du produit scalaire canonique.  
+
+Appliquer le procédé de Gram--Schmidt à la famille $(u_1,u_2,u_3)$ définie par :
+\[
+u_1 = (1,1,0), 
+\qquad
+u_2 = (1,0,1), 
+\qquad
+u_3 = (0,1,1).
+\]
+
+On demandera :
+\begin{enumerate}
+    \item de vérifier que la famille est libre ;
+    \item de construire une base orthogonale ;
+    \item de normaliser cette base.
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+
+
+\exercise{9}{Gram-Schmidt dans un espace de polynômes}{
+On considère l’espace $E = \mathbb{R}_2[X]$ muni du produit scalaire
+\[
+\langle P,Q\rangle = \int_0^1 P(t)Q(t)\,dt.
+\]
+
+À partir de la famille $(1, X, X^2)$, construire une base orthonormée de $E$ en utilisant le procédé de Gram--Schmidt.
+}
+
+\end{paracol}
+\end{document}
