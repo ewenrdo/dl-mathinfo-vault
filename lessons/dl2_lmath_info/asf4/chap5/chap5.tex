@@ -115,7 +115,7 @@ $\sum_{n\geq0} a_n z^n$ une série entière.\\
 Si $(a_n r^n)$ est bornée sur $R \geq r$
 Si $(a_n r^n)$ est non bornée alors $R \leq r$
 
-\theorem{Théorème}{}{false}{
+\theorem{Théorème}{Critères de d'Alembert et Cauchy}{false}{
     Soit $R$ le rayon de convergence de $\sum_{n=0}^{+\infty} a_n z^n$.
     \begin{enumerate}
         \item Si $|a_n|^{\frac{1}{n}} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$
@@ -130,6 +130,19 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
 \example{
     $\sum_{n=0}^{+\infty} \frac{z^n}{n^2}$ a pour rayon de convergence $R = 1$ car $\frac{1}{n^2}^{\frac{1}{n}} \to 1$ lorsque $n \to +\infty$.
 }
+
+\remark{
+    Si $f$ est définie sur $D(0,1)$. Alors $z \mapsto f(az)$ est définie sur $D(0, \frac{1}{a})$.
+}
+
+\ndlr{cf. Laurent pour l'exemple}
+\ndlr{Une proposition hors programme sur la limsup a été vue en cours, mais elle n'est pas au programme, donc pas ici.}
+
+\theorem{Proposition}{}{false}{
+    Soit $\frac{P}{Q}$ une fraction rationnelle. Alors, pour $n_0$ assez grand $\sum_{n \geq n_0} \frac{P(n)}{Q(n)} a_n z^n$ est bien défini et son rayon et convergence est le même que $\sum_{n = 0}^{+\infty} a_n z^n$.
+}
+
+\ndlr{cf. Laurent pour la preuve}
 
 \newpage
 \tableofcontents
