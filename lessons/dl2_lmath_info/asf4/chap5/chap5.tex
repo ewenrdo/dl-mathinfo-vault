@@ -95,10 +95,27 @@
     Une série entière converge absolument en tout point du disque ouvert de convergence et converge normalement sur tout disque fermé inclus dans le disque ouvert de convergence. En particulier, la somme est continue en tout point du disque ouvert de convergence.
 }
 
-\ndlr{cf. Laurent}
+\ndlr{cf. Laurent pour la preuve}
+
+\remark{
+    On déduit que $\{ r \in [0, +\infty[ : \sum_{n\geq0} a_n r^n \text{ converge} \} = [0, R[$ ou $[0, R]$.\\
+    Autrement dit, il y a convergence sur $D(0, R) = \{ z \in \mathbb{C} : |z| < R \}$ et il y a divergence sur $\{ z \in \mathbb{C} : |z| > R \}$.
+    Par contre, on ne peut rien dire sur le cercle $\{ z \in \mathbb{C} : |z| = R \}$.
+}
+
+\example{
+    \begin{itemize}
+        \item $\sum_{n=0}^{+\infty} z^n$ a pour rayon de convergence $R = 1$. En effet, $\sum_{n=0}^{+\infty} z^n$ converge si et seulement si $|z| < 1$. En particulier, il y a divergence si $|z| = 1$.
+        \item $\sum_{n=0}^{+\infty} \frac{z^n}{n^2}$ a pour rayon de convergence $R = 1$. En effet, $\sum_{n=0}^{+\infty} \frac{z^n}{n^2}$ converge si et seulement si $|z| \leq 1$ (sinon, divergence grossière). En particulier, il y a divergence si $|z| > 1$.
+    \end{itemize}
+}
+
+\textbf{Calculs de rayons de convergence :}
+$\sum_{n\geq0} a_n z^n$ une série entière.\\
+Si $(a_n r^n)$ est bornée sur $R \geq r$
+Si $(a_n r^n)$ est non bornée alors $R \leq r$
 
 \newpage
 \tableofcontents
-
 
 \end{document}  
