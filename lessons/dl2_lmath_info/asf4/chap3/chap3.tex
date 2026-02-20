@@ -359,7 +359,6 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
 
 \remark{Ce théorème est plus général que le précédent. En effet, on ne demande pas que $f_n$ soit de classe $\mathcal{C}^1(I,E)$, mais juste dérivable.}
 
-\ndlr{cf. Laurent pour la preuve}
 \ndlr{Le prof. n'est pas sûr des hypothèses du théorème.}
 
 \section{Séries de fonctions}
@@ -398,7 +397,21 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
     \end{itemize}
 }
 
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}\\
+    \begin{itemize}
+        \item $|f(x)|\le \|f_n(x)\|_{I, \infty}$ et $\|f_n\|_{I, \infty}$ converge. Donc $()\sum_n|f_n(x)|$ converge.\\ 
+        Donc, $ \sum_nf_n(x)$ converge absolument.
+        \item Montrons que $(\sum_{k=0}^n|f(x)|)_{n\in\mathbb{N}}$ est uniformément de Cauchy. Soit $p>q$ et $x\in I$.\\
+        $|\sum_{k=0}^qf_n(k)-\sum_{k=0}^pf_n(k)|=|\sum_{k=p+1}^qf_n(k)|$\\
+        $\le\sum_{k=p+1}^q|f_n(k)|\le\sum_{k=p+1}^q\|f_k\|_{I, \infty}\le\sum_{k=p+1}^{+\infty}\|f_k\|_{I, \infty}$\\
+        Comme $\sum_{n=0}^{+\infty}\|f_n\|_{I, \infty}<+\infty$, on a $\lim_{n\to+\infty}\sum_{k=n+1}^{+\infty}\|f_n\|_{I, \infty}=0$\\
+        En passant au sup, $\|\sum_{k=0}^qf_k-\sum_{k=0}^pf_k\|_{I, \infty}\le\sum_{k=p+1}^{+\infty}\|f_n\|_{I, \infty}\to_{p\to+\infty}0$\\
+        Donc, $\sum_{k=0}^nf_k$ est uniformément de Cauchy. Donc converge uniformément.
+        \item $|\sum_{k=0}^nf_k(x)|\le\sum_{k=0}^n|f_k(x)|\le\sum_{k=0}^n\|f_k\|_{I, \infty}\le\sum_{k=0}^{+\infty}\|f_k\|_{I, \infty}$.\\
+        En faisant $n\to+\infty$, par convergence simple, $|\sum_{k=0}^{+\infty}f_k(x)|\le\sum_{k=0}^{+\infty}\|f_k\|_{I, \infty}$.\\
+        Donc, $\sum_{k=0}^{+\infty}f_k$ est bornée par $\sum_{k=0}^{+\infty}\|f_k\|_{I, \infty}$. $\Box$
+    \end{itemize}
+}
 
 \example{
     On considère la série $\sum_{n \geq 0} x^n$.
@@ -460,13 +473,23 @@ et comme $f_n$ est croissante, le maximum est atteint en $a$.}
 }
 
 \remark{On peut remplacer la suite numérique $(u_n)$ par une suite de fonctions $(f_n)$ de $I$ dans $\mathbb{R}$ telle que $\forall x \in I, (f_n(x))$ est décroissante et tend vers $0$.}
-\ndlr{cf. Laurent pour la preuve.}
+
+\noindent{\textbf{Démonstration :} On note $V_n=\sum_{k=0}^nv_k$ et $\|v_k\|_\infty<M$.\\
+Montrons que $\sum u_nv_n$ est uniformémentde Cauchy. Soit $x\in I$.\\
+$\sum_{n=q+1}^pu_nv_n(x)\le\sum_{n=q=1}^(p-1)|u_{n+1}-u_n| |V_n(x)|+|u_p||V_q(x)|\le\|V_n\|_\infty[\sum_{n=q+1}^{p-1}|u_{n+1}-u_n|+|u_p|+|u_q|]$\\
+Comme $(u_n)$ est décroissante, $|u_{n+1}-u_n|=u_n-u_{n+1}$.\\ 
+D'où, $|\sum_{n=q+1}^pu_nv_n(x)\le M[\sum_{n=q+1}^{p-1}(u_n-u_{n+1})+u_p+u_q]=M[u_{q+1}-u_p+u_p+u_q]=M(u_{q+1}+u_q)$.\\
+Soit $n_0\in\mathbb{N}, \forall n\ge n_0, |u_n|\le\varepsilon/2M$. Alors pour $p, q\ge n_0$, $\|\sum_{n=q+1}^pu_nv_n\|_\infty\le M\times(\varepsilon/2M+\varepsilon+2M)\le\varepsilon$.\\
+Donc, $\sum u_nv_n$ est uniformément de Cauchy. Donc $\sum u_nv_n$ converge uniformément.
+}
 
 \example{
     $\sum u_n v_n$ où $(u_n)$ décroissant vers 0 et $v_n(t) = sin(nt)$ pour $t \in [0, 2\pi]$.\\
     Si $\alpha \in ]0, \pi[$, alors $\sum u_n v_n$ converge uniformément sur $[\alpha, 2\pi - \alpha]$.\\
     Il suffit de montrer que $V_n(t) = \sum_{k=0}^n sin(kt)$ est uniformément bornée sur $[\alpha, 2\pi - \alpha]$ lorsque $n \to +\infty$.\\
-    $\sum_{k=0}^n sin(kt) = Im(\sum_{k=0}^n e^{ikt}) = Im(\frac{1 - e^{i(n+1)t}}{1 - e^{it}}) = \ldots =  \frac{sin(\frac{nt}{2} \cdot sin(\frac{(n+1)t}{2})}{sin(\frac{t}{2})}$\\
+    $\sum_{k=0}^n sin(kt) = Im(\sum_{k=0}^n e^{ikt}) = Im(\frac{1 - e^{i(n+1)t}}{1 - e^{it}}) 
+    = Im(\frac{e^{i(n+1)t/2}(e^{-i(n+1)t/2}-e^{i(n+1)t/2})}{e^{it/2}(e^{-it/2}-e^{it/2})}) = Im(\frac{e^{i(n+1)t/2}}{e^{it/2}}\times\frac{-2i sin(\frac{n+1}{2}t)}{-2i sin(t/2)}) = Im(e^{int/2}\times\frac{sin(\frac{n+1}{2}t)}{sin(t/2)})
+    =  \frac{sin(\frac{nt}{2} \cdot sin(\frac{(n+1)t}{2})}{sin(\frac{t}{2})}$\\
     Si $t \in [\alpha, 2\pi - \alpha]$, on obtient $\frac{t}{2} \in [\frac{\alpha}{2}, \pi - \frac{\alpha}{2}]$.\\
     Donc $\sum_{k=0}^n sin(kt) \leq \frac{1}{sin(\frac{\alpha}{2})}$ pour tout $n \in \mathbb{N}$ et $t \in [\alpha, 2\pi - \alpha]$.\\
     Et puis on applique le théorème d'Abel pour conclure que $\sum u_n v_n$ converge uniformément sur $[\alpha, 2\pi - \alpha]$.
