@@ -110,7 +110,7 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
 \remark{Le vecteur normé associé à $x \in E\setminus \{0\}$ est $\frac{x}{\| x \|}$. C'est utile pour calculer des vecteurs unitaires.}
 
 \section{Orthogonalité}
-
+\subsection{Vecteurs orthogonaux, familles orthogonales et orthonormées}
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
     Deux vecteurs $x,y \in E$ sont dits \textbf{orthogonaux} si $\langle x,y \rangle = 0$.\\\\
@@ -163,7 +163,7 @@ Soit $x \in E$.\\
 \noindent Alors : $x = \sum_{i=1}^n \langle x, e_i \rangle e_i$. (on remarque que ça ressemble à la dualité !)\\
 La $i^{ème}$ coordonnée de $x$ dans la base $(e_1, \ldots, e_n)$ est $\langle x, e_i \rangle$.\\
 
-\section{Procédé d'orthonormalisation Gram-Schmidt}
+\subsection{Procédé d'orthonormalisation Gram-Schmidt}
 
 \href{https://www.youtube.com/watch?v=TeIZSCzyDjA}{Voir cette vidéo pour une explication du procédé d'orthonormalisation Gram-Schmidt.}\\
 
@@ -230,7 +230,7 @@ $= \langle f(x), f(y) \rangle$ (car $f(x) = \sum_{i=1}^n x_i \varepsilon_i$ et $
 $\Rightarrow f$ est une isométrie de $E$ dans $\mathbb{R}^n$. $\Box$
 }
 
-\section{Projections orthogonales}
+\subsection{Projections orthogonales}
 
 \definition{
     Soit $E$ un espace euclidien et soit $F$ un sous-espace vectoriel de $E$.\\
@@ -264,7 +264,7 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
 
 \remark{Si $(e_1, \ldots, e_k)$ est une famille libre de $E$. Gram-Schmit définit par récurrence $u_1 = \frac{e_1}{\| e_1 \|}$ et $u_{k+1} = \frac{e_{k+1} - p_i(e_{k+1})}{\| e_{k+1} - p_i(e_{k+1}) \|}$, où $p_i$ est la projection orthogonale sur $\text{Vect}(u_1, \ldots, u_k)$.}
 
-\section{Suppléments orthogonaux}
+\subsection{Suppléments orthogonaux}
 
 \definition{
     Soit $E$ un espace euclidien. Soit $F$ un sous-espace vectoriel de $E$.\\
