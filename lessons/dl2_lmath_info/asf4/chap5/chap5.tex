@@ -115,6 +115,22 @@ $\sum_{n\geq0} a_n z^n$ une série entière.\\
 Si $(a_n r^n)$ est bornée sur $R \geq r$
 Si $(a_n r^n)$ est non bornée alors $R \leq r$
 
+\theorem{Théorème}{}{false}{
+    Soit $R$ le rayon de convergence de $\sum_{n=0}^{+\infty} a_n z^n$.
+    \begin{enumerate}
+        \item Si $|a_n|^{\frac{1}{n}} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$
+        \item Si $a_n \neq 0$ à partir d'un certain rang et si $\frac{|a_{n+1}|}{|a_n|} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$.
+    \end{enumerate}
+}
+
+\remark{
+    Lorsque $R = +\infty, l=0$ et lorsque $R = 0, l = +\infty$.
+}
+
+\example{
+    $\sum_{n=0}^{+\infty} \frac{z^n}{n^2}$ a pour rayon de convergence $R = 1$ car $\frac{1}{n^2}^{\frac{1}{n}} \to 1$ lorsque $n \to +\infty$.
+}
+
 \newpage
 \tableofcontents
 
