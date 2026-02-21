@@ -61,7 +61,19 @@
     \]
     De plus, l'égalité a lieu si et seulement si $x$ et $y$ sont colinéaires.
 }
-\ndlr{cf. Laurent.}
+
+\noindent{ \textbf{Démonstration :}\\
+    \begin{itemize}
+        \item   Soit $t\in\mathbb{R}$. On pose $P(t)=\langle x, y\rangle$. Supposons $y\ne0$.\\
+                $P(t)=\langle x, x\rangle+2t\langle x, y\rangle+t^2\langle y, y\rangle\ge0$ est polynômiale de degré 2 si $y\ne0$. Ainsi $\Delta\le0$.\\
+                $\Delta=(2\langle x, y\rangle)^2-4\langle x, x\rangle\langle y, y\rangle=4(\langle x, y\rangle^2-\langle x, x\rangle\langle y, y\rangle)$. Donc $\langle x, y\rangle\le\langle x, x\rangle\langle y, y\rangle$.
+        \item   Supposons l'égalité. Alors $\Delta=0$. Soit $t_0\in\mathbb{R}$ tel que $P(t_0)=0$.\\
+                On obtient $\langle x+ty, x+ty\rangle=0$, c'est-à-dire que $x+t_0y=0$. Donc $x$ et $y$ sont colinéaires.
+        \item   Réciproquement, si $x$ et $y$ sont colinéaires.\\
+                Si $y\ne0$, on peut écrire $x=\lambda y$ et $|\langle x, y\rangle|=|\langle\lambda y, y\rangle|=|\lambda|\langle y, y\rangle$.\\
+                $\sqrt{\langle x, x\rangle}=\sqrt{\langle\lambda y, \lambda y\rangle}=\sqrt{\lambda^2\langle y, y\rangle}=\lambda\langle y, y\rangle$. D'où l'égalité. 
+    \end{itemize}
+}
 
 \subsection{Normes}
 
@@ -259,7 +271,10 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
 
 \remark{Soit $p$ la projection orthogonale sur $F$. Alors pour $x \in E, \; p(x)$ est l'unique vecteur de $F$ tel que $\| x - p(x) \| = \min_{z \in F} \| x - z \|$. Autrement dit, $p(x)$ est le point de $F$ le plus proche de $x$.} 
 \ndlr{cf. Laurent pour ce qui s'ensuit. cf. OneNote pour le schéma.}
-
+%On a ‖x-z‖^2=‖x-p(x)+p(x)-z‖^2=‖x-p(x)‖^2+‖p(x)-z‖^2 par Pythagore				
+    %≥‖x-p(x)‖^2. Donc p(x) atteint le min┬(z∈F)⁡‖x-z‖.					
+%De plus, le minimum est unique car ‖x-z‖=min┬(z∈F)⁡‖x-z‖
+    %⇒‖p(x)-z‖^2=0⇒p(x)=z.
 \remark{On peut retrouver la formule de la distance d'un point à une droite / plan dans $\mathbb{R}^3$. Prendre une base orthonormée du plan $P$ et $d(x, P) = \| x - \sum_{i=1}^2 \langle x, e_i \rangle e_i \|$ où $d(x, F) = \inf_{y \in F} \| x - y \|$.}
 
 \remark{Si $(e_1, \ldots, e_k)$ est une famille libre de $E$. Gram-Schmit définit par récurrence $u_1 = \frac{e_1}{\| e_1 \|}$ et $u_{k+1} = \frac{e_{k+1} - p_i(e_{k+1})}{\| e_{k+1} - p_i(e_{k+1}) \|}$, où $p_i$ est la projection orthogonale sur $\text{Vect}(u_1, \ldots, u_k)$.}
