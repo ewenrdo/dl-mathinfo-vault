@@ -71,7 +71,7 @@
                 On obtient $\langle x+ty, x+ty\rangle=0$, c'est-à-dire que $x+t_0y=0$. Donc $x$ et $y$ sont colinéaires.
         \item   Réciproquement, si $x$ et $y$ sont colinéaires.\\
                 Si $y\ne0$, on peut écrire $x=\lambda y$ et $|\langle x, y\rangle|=|\langle\lambda y, y\rangle|=|\lambda|\langle y, y\rangle$.\\
-                $\sqrt{\langle x, x\rangle}=\sqrt{\langle\lambda y, \lambda y\rangle}=\sqrt{\lambda^2\langle y, y\rangle}=\lambda\langle y, y\rangle$. D'où l'égalité. 
+                $\sqrt{\langle x, x\rangle}=\sqrt{\langle\lambda y, \lambda y\rangle}=\sqrt{\lambda^2\langle y, y\rangle}=\lambda\langle y, y\rangle$. D'où l'égalité. $\Box$
     \end{itemize}
 }
 
@@ -111,6 +111,11 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
     $\forall x,y \in E, \; \| x + y \|^2 + \| x - y \|^2 = 2\| x \|^2 + 2\| y \|^2$. \\
     On peut le vérifier avec $\| x \| = \sqrt{\langle x,x \rangle}$ et les identités remarquables.\\\\
     D'où si une norme ne vérifie pas l'identité du parallélogramme, elle n'est pas associée à un produit scalaire.
+}
+\noindent{ \textbf{Démonstration :}\\
+    Vérifions avec $\|x\|=\sqrt{\langle x, x\rangle}$.\\
+    $\|x+y\|^2=\|x\|^2+2\langle x, y\rangle+\|y\|^2$ et $\|x-y\|^2=\|x\|^2-2\langle x, y\rangle+\|y\|^2$.\\
+    Donc, $\|x+y\|^2+\|x-y\|^2=2(\|x\|^2+\|y\|^2)$.
 }
 
 \definition{
@@ -161,7 +166,15 @@ Donc si $\| x + y \|^2 = \| x \|^2 + \| y \|^2$, alors $2\langle x,y \rangle = 0
 }
 
 \remark{Si $E$ est de dimension finie, toute famille orthonormée admet au plus $\dim(E)$ vecteurs.}
-\ndlr{cf. Laurent pour les preuves de ces deux dernières propriétés.}
+
+\noindent{ \textbf{Démonstration :}\\
+    Soit $\sum_{i\in J}\lambda_ix_i=0$ une combinaison linéaire nulle de vecteur de la famille $J$, avec $J\subset I$ un ensemble fini. \\
+    Soit $j\in J$, $\langle x_j, \sum_{i\in J}\lambda_ix_i\rangle=0$.\\
+    D'où $\sum_{i\in J}\lambda_i\langle x_j, x_i\rangle=0$ car $ \langle x_j, x_i\rangle=0$ si $i\ne j$.\\
+    D'où $\lambda_j\langle x_i, x_j\rangle=0$; $\langle x_j, x_i\rangle>0$ car $x_j\ne0$.
+    D'où $\lambda_j=0$. D'où $\forall j\in J$, $\lambda_j=0$.\\
+    Donc $(x_i)_{i\in I}$ est libre.
+}
 
 \definition{
     Soit $E$ un espace euclidien.\\
@@ -270,11 +283,13 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
 }
 
 \remark{Soit $p$ la projection orthogonale sur $F$. Alors pour $x \in E, \; p(x)$ est l'unique vecteur de $F$ tel que $\| x - p(x) \| = \min_{z \in F} \| x - z \|$. Autrement dit, $p(x)$ est le point de $F$ le plus proche de $x$.} 
-\ndlr{cf. Laurent pour ce qui s'ensuit. cf. OneNote pour le schéma.}
-%On a ‖x-z‖^2=‖x-p(x)+p(x)-z‖^2=‖x-p(x)‖^2+‖p(x)-z‖^2 par Pythagore				
-    %≥‖x-p(x)‖^2. Donc p(x) atteint le min┬(z∈F)⁡‖x-z‖.					
-%De plus, le minimum est unique car ‖x-z‖=min┬(z∈F)⁡‖x-z‖
-    %⇒‖p(x)-z‖^2=0⇒p(x)=z.
+\noindent{ \textbf{Démonstration :}\\
+    On a $\|x-z\|^2=\|x-p(x)+p(x)-z\|^2=\|x-p(x)\|^2\|p(x)-z\|^2$ par Pythagore.\\
+    $\ge\|x-p(x)\|^2$. Donc $p(x)$ atteint le $\min_{z\in F}\|x-z\|$.\\
+    De plus, le minimum est unique car $\|x-z\|=\min{z\in F}\|x-z\|\Rightarrow\|p(x)-z\|=0\Rightarrow p(x)=z$.
+}
+
+\ndlr{cf. Laurent pour ce qui s'ensuit (fait). cf. OneNote pour le schéma.}
 \remark{On peut retrouver la formule de la distance d'un point à une droite / plan dans $\mathbb{R}^3$. Prendre une base orthonormée du plan $P$ et $d(x, P) = \| x - \sum_{i=1}^2 \langle x, e_i \rangle e_i \|$ où $d(x, F) = \inf_{y \in F} \| x - y \|$.}
 
 \remark{Si $(e_1, \ldots, e_k)$ est une famille libre de $E$. Gram-Schmit définit par récurrence $u_1 = \frac{e_1}{\| e_1 \|}$ et $u_{k+1} = \frac{e_{k+1} - p_i(e_{k+1})}{\| e_{k+1} - p_i(e_{k+1}) \|}$, où $p_i$ est la projection orthogonale sur $\text{Vect}(u_1, \ldots, u_k)$.}
