@@ -34,19 +34,98 @@ Si les $a_n$ sont positifs, alors :
 }
 
 On suppose à présent que les $a_n$ sont de signes quelconques. 
-Si $\sum_{n \ge 1} |a_n| < +\infty$, alors :
+Si $\sum_{n \ge 1} |a_n| < +\infty$ (série absolument convergente), alors :
 
 \begin{enumerate}
     \item la série $\sum_{n \ge 1} a_n$ converge (dans $]-\infty, +\infty[$) ;
     
-    \item l’ordre dans lequel l’on somme les $a_n$ n’influe pas sur la finitude ni sur la valeur de la série ;
+    \item l'ordre dans lequel l'on somme les $a_n$ n'influe pas sur la finitude ni sur la valeur de la série ;
     
-    \item si l’on partitionne $\mathbb{N}^*$ en une collection dénombrable $(I_p)_{p \ge 1}$ de parties, alors
+    \item si l'on partitionne $\mathbb{N}^*$ en une collection dénombrable $(I_p)_{p \ge 1}$ de parties, alors
     \[
     \sum_{n \ge 1} a_n 
     = 
     \sum_{p \ge 1} \; \sum_{n \in I_p} a_n .
     \]
 \end{enumerate}
+
+\definition{
+    Soit $X$ une variable aléatoire discrète définie
+sur un espace probabilisé ($\Omega$, $\mathbb{P}$) et à valeurs dans un ensemble (dénombrable) $E \subset \mathbb{R}_+$.
+Soit $\mu_X$ la loi de $X$. L'espérance de X est définie comme la quantité :
+\[\mathbb{E}[X] = \sum_{x \in E} x \cdot \mu_X(\{x\}) \in [0, +\infty[\]
+}
+
+\definition{
+ Soit $X$ une variable aléatoire discrète
+définie sur un espace probabilisé ($\Omega$, $\mathbb{P}$) et à valeurs dans un ensemble (dénombrable)
+$E \subset \mathbb{R}$. Soit $\mu_X$ la loi de $X$. On dit que $X$ est intégrable si l'espérance de $|X| = \{ |x| : x \in E \}$ est finie, et
+dans ce cas on définit l'espérance de $X$ comme la quantité :
+\[\mathbb{E}[X] := \sum_{x \in E} x \cdot \mu_X(\{x\}) \in ]-\infty, +\infty[ .\]
+}
+
+\vocabulary{On dira que $X$ admet une espérance si l'on est dans le cadre de l'une des deux définitions précédentes.}
+
+\[
+\begin{array}{c|c|c}
+    & \text{Admet une espérance} & \text{Intégrable} \\
+    \hline
+    X \text{ positive et } \mathbb{E}[X] < +\infty & \text{oui (finie)} & \text{oui} \\
+    X \text{ positive et } \mathbb{E}[X] = +\infty & \text{oui (infinie)} & \text{non} \\
+    X \text{ quelconque et } \mathbb{E}[|X|] < +\infty & \text{oui (finie)} & \text{oui} \\
+    X \text{ quelconque et } \mathbb{E}[|X|] = +\infty & \text{non} & \text{non}
+\end{array}
+\]
+\remark{Dans le cas particulier où l’ensemble $E$ est fini, $X$ admet toujours une espérance et $X$ est même toujours intégrable.}
+
+\example{
+    On pose $\Omega = \{1, \ldots, 6\}$, $\mathbb{P}$ la probabilité uniforme et $X(\omega) = \omega$ la variable qui associe à chaque lancer de dé le nombre sur la face supérieure. $X$ prend un nombre fini de valeurs, donc $X$ est intégrable, et est à valeurs positives, donc $X$ admet une espérance. On trouve $\mathbb{E}[X] = \frac{1}{6} \cdot (1 + 2 + 3 + 4 + 5 + 6) = \frac{7}{2}$.
+}
+
+\vocabulary{En vocabulaire sur les séries, on dit que $X$ admet une espérance si la série $\sum_{x \in E} x \cdot \mu_X(\{x\})$ est absolument convergente.}
+
+\section{Formule de transfert et propriétés}
+
+\theorem{Théorème}{Formule de transfert}{false}{
+    Soit $X$ une variable aléatoire sur un espace probabilisé $(\Omega, \mathbb{P})$ à valeurs dans un ensemble dénombrable $E$.\\
+    Soit $g \colon E \to F$ une fonction, avec $F \subset \mathbb{R}$ un ensemble dénombrable.
+    \begin{enumerate}
+        \item Si $g$ est à valeurs positives, alors :
+        \[ \mathbb{E}[g(X)] = \sum_{x \in E} g(x) \cdot \mu_X(\{x\}) .\]
+        \item Si $g$ est de signe quelconque, alors : la variable aléatoire $g(X)$ est intégrable si et seulement si la série $\sum_{x \in E} |g(x)| \cdot \mu_X(\{x\})$ est finie, et dans ce cas :
+        \[ \mathbb{E}[g(X)] = \sum_{x \in E} g(x) \cdot \mu_X(\{x\}) .\]
+    \end{enumerate}
+}
+
+\theorem{Corollaire}{Expression de l'espérance à partir de la loi de $X$}{false}{
+    Soit $X$ une variable aléatoire réelle discrète dans un ensemble $E$.
+    \begin{enumerate}
+        \item Si $X$ est à valeurs positives, alors :
+        \[ \mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega) \cdot \mathbb{P}(\{\omega\}) .\]
+        \item Si $X$ est de signe quelconque, alors : $X$ est intégrable si et seulement si la série $\sum_{\omega \in \Omega} |X(\omega)| \cdot \mathbb{P}(\{\omega\})$ est finie, et dans ce cas :
+        \[ \mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega) \cdot \mathbb{P}(\{\omega\}) .\]
+    \end{enumerate}
+}
+
+On a donc vu que l'espérance d'une variable aléatoire discrète est une série de la forme $\sum_{n \ge 1} a_n$ avec $a_n = x \cdot \mu_X(\{x\})$ ou $a_n = X(\omega) \cdot \mathbb{P}(\{\omega\})$ qui converge absolument. On peut alors appliquer les propriétés des séries absolument convergentes pour obtenir les propriétés suivantes de l'espérance.
+\theorem{Propriété}{}{false}{
+    \begin{enumerate}
+        \item Linéarité : pour toutes variables aléatoires intégrables $X, Y$ et tous réels $a, b$, la variable aléatoire $aX + bY$ est intégrable et $\mathbb{E}[aX + bY] = a \mathbb{E}[X] + b \mathbb{E}[Y]$.
+        \item Monotonie : pour toutes variables aléatoires $X, Y$ admettant une espérance, si $X(\omega) \leq Y(\omega)$ pour tout $\omega \in \Omega$, alors $\mathbb{E}[X] \leq \mathbb{E}[Y]$.
+        \item Valeur absolue : $|\mathbb{E}[X]| \leq \mathbb{E}[|X|]$ pour toute variable aléatoire $X$ admettant une espérance.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $X$ une variable aléatoire discrète. Supposons $X(\omega) \geq 0$ pour tout $\omega \in \Omega$ (ie. $X$ est à valeurs positives).\\
+    Alors $E[X] = 0 \Leftrightarrow \mathbb{P}(X = 0) = 1$.\\\\
+
+    Attention, si $X$ est de signe quelconque, $\Rightarrow$ n'est plus vérifié.
+}
+
+\theorem{Proposition}{Variable aléatoire entière}{false}{
+    Soit $X$ une variable aléatoire à valeurs dans $\mathbb{N}$. Alors :
+    \[ \mathbb{E}[X] = \sum_{k=1}^{+\infty} \mathbb{P}(X \geq k) .\]
+}
 
 \end{document}
