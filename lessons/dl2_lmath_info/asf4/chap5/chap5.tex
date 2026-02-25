@@ -158,6 +158,99 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
     Soient $\sum a_n$ et $\sum b_n$ deux séries absolument convergentes. Alors, la série $\sum_{n=0}^{+\infty} c_n$ où $c_n = \sum_{k=0}^n a_k b_{n-k}$ est absolument convergente et on a $\sum_{n=0}^{+\infty} c_n = \left( \sum_{n=0}^{+\infty} a_n \right) \cdot \left( \sum_{n=0}^{+\infty} b_n \right)$.
 }
 
+\section{Produit de séries entières}
+\theorem{Proposition}{}{false}{
+    Soit $\sum a_n z^n$ et $\sum b_n z^n$ deux séries entières de rayons de convergence respectifs $R_a$ et $R_b$.\\
+    Alors la série entière $\sum c_n z^n$ où $c_n = \sum_{k=0}^n a_k b_{n-k}$ a pour rayon de convergence $R_c \geq min(R_a, R_b)$ et sur le disque ouvert de convergence $D(0,R_c)$, on a $\sum_{n=0}^{+\infty} c_n z^n = \left( \sum_{n=0}^{+\infty} a_n z^n \right) \cdot \left( \sum_{n=0}^{+\infty} b_n z^n \right)$.
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\example{
+    On va définir $exp(z) = \sum_{n=0}^{+\infty} \frac{z^n}{n!}$.\\
+    On pose $a_n = \frac{1}{n!}$.
+    Alors $\frac{a_{n+1}}{a_n} = \frac{1}{(n+1)!} \cdot n! = \frac{1}{n+1} \to 0$ lorsque $n \to +\infty$.\\
+    Par le critère de d'Alembert, $R = +\infty$.\\\\
+
+    Montrer que $\forall z, w \in \mathbb{C} \; exp(z + w) = exp(z) \cdot exp(w)$\\
+    On a $exp(z+w) = \sum_{n=0}^{+\infty} \frac{(z+w)^n}{n!} = \sum_{n=0}^{+\infty} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} z^k w^{n-k} = \left( \sum_{n=0}^{+\infty} \frac{z^n}{n!} \right) \cdot \left( \sum_{n=0}^{+\infty} \frac{w^n}{n!} \right) = exp(z) \cdot exp(w)$ (on utilise le produit de Cauchy de séries entières pour la troisième égalité). 
+}
+
+\section{Dérivabilité}
+\definition{
+    Soit $f : U \to \mathbb{C}$ où $U$ est un disque ouvert de $\mathbb{C}$.
+    On dit que $f$ est \textbf{holomorphe} (ou $\mathbb{C}$-dérivable) en $z_0 \in U$ si :
+    \[
+        \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} \text{ existe dans } \mathbb{C}
+    \]
+    Dans ce cas, $f'(z_0)$ est cette limite. Si $f$ est dérivable en tout point de $U$, on note $f'$ sa dérivée.
+}
+\attention{On étend la notation de la dérivabilité de $\mathbb{R}$ à $\mathbb{C}$, mais il ne faut pas confondre ça avec la différentiabilité.}
+
+\theorem{Proposition}{}{false}{
+    Soit $f$ est $\mathbb{C}$-dérivable (ou holomorphe) en $z_0$.
+    Alors $f$ est différentiable en $z_0$
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\attention{Réciproque fausse}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\remark{Les identités : $\begin{cases}
+        Re(\frac{\partial f}{\partial x}) = Im(\frac{\partial f}{\partial y}) \\
+        Re(\frac{\partial f}{\partial y}) = -Im(\frac{\partial f}{\partial x})
+    \end{cases}$
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $\sum_{n \geq 0} a_n z^n$ une série entière de rayon de convergence $R > 0$.\\
+    Alors la somme de la série entière $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est continue et holomorphe sur le disque ouvert de centre $0$ et de rayon R de dérivée $f'(z) = \sum_{n=1}^{+\infty} n a_n z^{n-1}$.
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Corollaire}{}{false}{
+    Soit $\sum_{n \geq 0} a_n z^n$ une série entière à coefficients réels de rayon de convergence $R > 0$.\\
+    Alors $f(x) = \sum_{n \geq 0} a_n x^n$ est dérivable sur $]-R, R[$ et $f'(x) = \sum_{n=1}^{+\infty} n a_n x^{n-1} = \sum_{n=0}^{+\infty} (n+1) a_{n+1} x^n$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $f$ et $g : U \to \mathbb{C}$ deux fonctions holomorphes sur $U$.\\
+    Alors $(\lambda f + g)' = \lambda f' + g'$, $(fg)' = f'g + fg'$.\\\\
+
+    En particulier, si $f$ et $g$ sont des séries entières de rayon de convergence $\geq R$, alors sur $D(0,R)$, on a $(fg)' = f'g + g'f$.
+}
+
+\theorem{Théorème}{}{false}{
+    Une série entière $\sum_{n=0}^{+\infty} a_n z^n$ de rayon de convergence $R$ est parfois dérivable pour tout $p \in \mathbb{N}$ sur $D(0,R)$ et $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ admet pour dérivée $f^{(p)}(z) = \sum_{n=p}^{+\infty} n(n-1)\cdots(n-p+1) a_n z^{n-p} = \sum_{n=0}^{+\infty} (n+p) \cdot (n+1) a_{n+p} z^n$.
+}
+
+\remark{
+    On a également la formule de Taylor : $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(0)}{n!} z^n$.
+}
+
+\definition{
+    Soit $U$ un ouvert $\mathbb{C}$ et $f : U \to \mathbb{C}$.\\
+    On dit que $f$ est \textbf{analytique} en $z_0 \in U$ s'il existe $r > 0$ tel que sur $D(0,r)$ il existe $\sum_{n=0}^{+\infty} a_n w^n$ une série entière de rayon de convergence $R \geq r$ tel que $\forall z \in \mathbb{C}, |z - z_0| < r \Rightarrow f(z) = \sum_{n=0}^{+\infty} a_n (z-z_0)^n$.\\\\
+    
+    On dit que aussi que $f$ est développable en série entière de $z_0$ (DSE).
+}
+
+\theorem{Corollaire}{}{false}{
+    Si $f$ est DSE en $z_0$, alors $f$ est holomorphe en $z_0$.
+}
+
+\remark{
+    $f$ est DSE en $z_0$ si et seulement si $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ au voisinage de $z_0$.
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $\sum_{n=0}^{+\infty} a_n z^n$ est série entière de rayon de convergence $R$.\\
+    Alors $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est DSE en tout point de $D(0,R)$.\\\\
+
+    Plus précisément $\forall z_0 \in D(0,R), f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ sur $D(z_0, R - |z_0|)$.
+}
 
 \newpage
 \tableofcontents
