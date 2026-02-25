@@ -131,7 +131,7 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
     Deux vecteurs $x,y \in E$ sont dits \textbf{orthogonaux} si $\langle x,y \rangle = 0$.\\\\
-    On note $x \perp y$.
+    On note $x \perp y$. De même, si $F$ est un sous-espace vectoriel de $E$, on dit que $x \perp F$ si $\forall y \in F, \; x \perp y$.
 }
 \remark{L'angle entre deux vecteurs orthogonaux non nuls est $\frac{\pi}{2}$, et tout vecteur est orthogonal au vecteur nul.}
 
@@ -308,7 +308,7 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
 
 \theorem{Théorème}{}{false}{
     Soit $E$ un espace euclidien de dimension finie et soit $F$ un sous-espace vectoriel de $E$.\\
-    Alors $E = F \oplus F^\perp$ (c'est même une somme directe orthogonale) et $F^\perp = (F^\perp)^\perp$.
+    Alors $E = F \oplus F^\perp$ (c'est même une somme directe orthogonale) et $F = (F^\perp)^\perp$.
 }
 
 \noindent{\textbf{Démonstration :}\\
