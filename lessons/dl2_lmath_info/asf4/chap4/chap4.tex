@@ -44,7 +44,7 @@
 \remark{Si $E$ est un espace vectoriel normé de dimension finie, il n'y a pas de produit scalaire canonique \textit{a priori}. (On a vu néanmoins que dans $\mathbb{R}^n$, il existe un produit scalaire canonique.}
 
 \definition{
-    Un $\mathbb{R}$-espace vectoriel $E$ de dimension fini muni d'un produit scalaire est appelé un \textbf{espace euclidien}.\\
+    Un $\mathbb{R}$-espace vectoriel $E$ de \textbf{dimension finie} muni d'un produit scalaire est appelé un \textbf{espace euclidien}.\\
     On le note $(E, \langle \cdot, \cdot \rangle)$.
 }
 
@@ -155,7 +155,7 @@ Donc si $\| x + y \|^2 = \| x \|^2 + \| y \|^2$, alors $2\langle x,y \rangle = 0
 }
 
 \definition{
-    Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
+    Soit $E$ un $\mathbb{R}$-espace vectoriel (ou un espace hermitien), muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
     Une famille de vecteurs $(x_i)_{i \in I}$ est dite \textbf{orthonormée} si elle est orthogonale et que $\| x_i \| = 1$ pour tout $i \in I$.\\\\
     Autrement dit, $\forall i,j \in I, \; \langle x_i, x_j \rangle = \delta_{ij}$.
 }
@@ -385,13 +385,10 @@ implique que $(x,y) \mapsto \langle x,y \rangle$ est sesquilinéaire.
     On appelle \textbf{espace hermitien} un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire (complexe/hermitien).
 }
 
-\definition{
-    Soit $E$ un espace hermitien.\\
-    On appelle \textbf{famille orthonormée} de $E$ une famille de vecteurs normées qui sont deux à deux orthogonaux, c'est à dire $(e_1, \ldots, e_k)$ telle que $\forall i,j \in S_k, \; \langle e_i, e_j \rangle = \delta_{ij}$.
-}
+\remark{On garde toutes les définitions et propriétés vues pour les espaces euclidiens, en remplaçant le produit scalaire par un produit hermitien et en imposant la finitude de la dimension.}
 
-\remark{Le théorème de Pythagore reste vérifié dans les espaces hermitiens.}
-\attention{La réciproque du même théorème ($\langle x,y \rangle = 0 \Rightarrow \| x+y \|^2 = \| x \|^2 + \| y \|^2$) n'est pas vérifiée dans les espaces hermitiens.}
+\attention{La réciproque du même théorème de Pythagore ($\langle x,y \rangle = 0 \Rightarrow \| x+y \|^2 = \| x \|^2 + \| y \|^2$) n'est pas vérifiée dans les espaces hermitiens : il ne permet pas de conclure que $\mathfrak{I}m(\langle x,y \rangle) = 0$ et donc pas que $\langle x,y \rangle = 0$.}
+\remark{Si $E$ est un espace hermitien, alors $\| x \| = \sqrt{\langle x,x \rangle}$ est bien un norme sur $E$.}
 
 \theorem{Proposition}{}{false}{
     Si $(e_1, \ldots, e_n)$ est une base orthonormée de $E$ un espace hermitien, et on a $x = \sum_{i=1}^n x_i e_i$ et $y = \sum_{j=1}^n y_j e_j$, alors :
@@ -401,14 +398,6 @@ implique que $(x,y) \mapsto \langle x,y \rangle$ est sesquilinéaire.
     \]
 }
 
-\theorem{Théorème}{Inégalité de Cauchy-Schwarz dans les espaces hermitiens}{false}{
-    Soit $E$ un espace hermitien de dimension finie (et son produit scalaire complexe).\\
-    Alors $\forall x,y \in E, \; |\langle x,y \rangle| \leq \sqrt{\langle x,x \rangle} \sqrt{\langle y,y \rangle}$
-}
-
-\theorem{Corollaire}{}{false}{
-    Si $E$ est un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire complexe, alors $\| x \| = \sqrt{\langle x,x \rangle}$ est une norme sur $E$.
-}
 
 \training{Proposer une démonstration de l'inégalité de Cauchy-Schwarz dans les espaces hermitiens.}
 \noindent\carreaux{10}
