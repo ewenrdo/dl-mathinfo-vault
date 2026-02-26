@@ -1,0 +1,592 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Révision et remise à niveau (semaine de pause)}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Rattraper son retard et consolider les acquis & $\infty$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\textbf{ANALYSE}\\
+
+\exercise{1}{Convergence uniforme d'une suite de fonctions}{
+Étudier la convergence simple et la convergence uniforme des suites de fonctions \((f_n)_{n \ge 0}\) dans les cas suivants :
+
+\begin{enumerate}
+    \item \(f_n(x) = e^{-nx} \sin(2nx)\) sur \(\mathbb{R}_+\) puis sur \([a, +\infty[\), avec \(a > 0\).
+    \item \(f_n(x) = \frac{1}{(1+x^2)^n}\) sur \(\mathbb{R}\), puis sur \([a, +\infty[\), avec \(a > 0\).
+\end{enumerate}
+}
+
+\exercise{2}{Convergence de séries de fonctions}{
+Étudier les convergences simple, uniforme et normale de la série de fonctions \(\sum f_n\) dans chacun des cas suivants :
+
+\begin{enumerate}
+    \item \(f_n(x) = n x^2 e^{-x\sqrt{n}}\) sur \(\mathbb{R}_+\)
+    \item \(f_n(x) = \frac{1}{n + n^3 x^2}\) sur \(\mathbb{R}_+^*\)
+    \item \(f_n(x) = \frac{(-1)^n x}{(1+x^2)^n}\) sur \(\mathbb{R}\)
+    \item \(f_n(x) = \frac{\sin(n^3 x^2)}{1 + 3n x^2 + 2 n^2}\) pour \(x \in \mathbb{R}\)
+    \item \(f_n(x) = n x \exp(-nx)\) pour \(x \in [0, +\infty[\)
+\end{enumerate}
+}
+
+\exercise{3}{}{
+Soit \(a \in ]-1, 1[\). Pour \(n \in \mathbb{N}\) et \(t \in [0, \pi/2]\), on pose :
+\[
+u_n(t) = a^n \cos^n(t).
+\]
+
+\begin{enumerate}
+    \item Montrer que la série de fonctions \(\sum u_n\) converge uniformément sur \([0, \pi/2]\). Déterminer la somme de cette série.
+    \item En déduire l'égalité suivante :
+    \[
+    \int_0^{\pi/2} \frac{dt}{1 - a \cos t} = \sum_{n=0}^{\infty} \left( \int_0^{\pi/2} \cos^n(t) \, dt \right) a^n.
+    \]
+\end{enumerate}
+}
+\switchcolumn
+\exercise{4}{Convergence normale locale de la série des dérivées}{
+    Pour tout entier \(n \ge 1\), soit  
+    \(f_n : \mathbb{R} \to \mathbb{R}\) la fonction définie par :  
+    \[
+    f_n(x) = \frac{1}{n^2 + x^2}.
+    \]
+
+    \begin{enumerate}
+        \item Montrer que la série \(\sum f_n\) converge simplement sur \(\mathbb{R}\). On note \(s\) la somme de cette série.
+        \item Montrer que \(s\) est continue sur \(\mathbb{R}\).
+        \item Montrer que pour tout réel \(a > 0\), la série \(\sum f_n'\) converge normalement sur \([-a, a]\).
+        \item Montrer que \(s\) est dérivable sur \(\mathbb{R}\).
+    \end{enumerate}
+}
+\exercise{5}{}{
+    Soit \(f : \, ]-1, 1[ \to \mathbb{R}\) la fonction définie par :  
+\[
+f(x) = \sum_{n=1}^{\infty} \frac{x^n \sin(nx)}{n}.
+\]
+
+\begin{enumerate}
+    \item Montrer que \(f\) est de classe \(C^1\) sur \(]-1, 1[\).
+    \item Calculer \(f'(x)\) et en déduire que :  
+    \[
+    f(x) = \arctan\left( \frac{x \sin x}{1 - x \cos x} \right).
+    \]
+\end{enumerate}
+}
+
+\exercise{6}{Rayons de convergence - Exemples}{
+Calculer le rayon de convergence des séries entières de la forme \(\sum a_n z^n\) lorsque la suite \((a_n)\) est donnée par :
+
+\begin{enumerate}
+    \item \(a_n = \frac{1}{n \pi^n}\)
+    \item \(a_n = \frac{n^2 \log n}{2^{3n}}\)
+    \item \(a_n = \frac{1}{n^\alpha}, \ \alpha \in \mathbb{R}\)
+    \item \(a_n = \frac{n^n}{n!}\)
+   \end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{7}{Rayons de convergence - Exemples}{
+Calculer le rayon de convergence des séries entières de la forme \(\sum a_n z^n\) lorsque la suite \((a_n)\) est donnée par :
+
+\begin{enumerate}
+    \item \(a_n = n^{\sqrt{n}}\)
+    \item \(a_n = n^n\)
+    \item \(a_n = n^{\ln n}\)
+    \item \(a_n = \begin{cases} 2^p & \text{si } n = 2p \\ 0 & \text{si n impair} \end{cases}\)
+\end{enumerate}
+}
+
+\exercise{8}{Rayons de convergence – Séries données}{
+Calculer le rayon de convergence des séries entières suivantes :
+
+\begin{enumerate}
+    \item \(\sum_{n \ge 0} \frac{z^n}{9^n}\)
+    \item \(\sum_{n \ge 0} \frac{z^{2n}}{9^n}\)
+    \item \(\sum_{n \ge 0} \frac{z^{n^2}}{9^n}\)
+\end{enumerate}
+}
+
+\exercise{9}{Rayons et sommes par séries connues}{
+En se ramenant à des séries entières bien connues, calculer le rayon de convergence et la somme des séries suivantes :
+
+\begin{enumerate}
+    \item \(\sum_{n \ge 1} \frac{(n+2)^2}{(n+2)!} x^n\)
+    \item \(\sum_{n \ge 0} \frac{\sin(n \alpha)}{n!} x^n\)
+\end{enumerate}
+}
+\exercise{10}{Développement en série entière}{
+À l'aide des théorèmes d'interversion, donner le développement en série entière de :
+
+\begin{enumerate}
+    \item \(\arctan\left(\frac{1 - x^2}{1 + x^2}\right)\) en \(0\)
+    \item \(\ln(x + a)\) en \(0\), avec \(a > 0\)
+\end{enumerate}
+}
+\switchcolumn
+\exercise{11}{Développement en série de \(f(x) = \frac{e^x}{1-x}\)}{
+Pour tout \(x \neq 1\), posons \(f(x) = \frac{e^x}{1-x}\).
+
+\begin{enumerate}
+    \item Montrer que \(f\) est développable en série entière au voisinage de 0. \\
+          \textit{On note \(f(x) = \sum_{n=0}^{\infty} a_n x^n\) ce développement et \(R\) le rayon de convergence.}
+    \item Montrer que \(R \ge 1\) et que \(f(x) = \sum_{n=0}^{\infty} a_n x^n\) pour tout \(x \in ]-1, 1[\).
+    \item En calculant un produit de séries, montrer que \(a_n = \sum_{k=0}^{n} \frac{1}{k!}\).
+    \item En raisonnant par l'absurde, montrer que \(R = 1\).
+\end{enumerate}
+}
+
+\exercise{12}{Rayons de convergence et sommes – Applications}{
+À l'aide des théorèmes d'interversion, calculer le rayon de convergence et la somme des séries entières suivantes :
+
+\begin{enumerate}
+    \item \(\sum_{n \ge 0} n^2 x^n\)
+    \item \(\sum_{n \ge 1} \frac{(-1)^n}{ 2^{2n-1}} x^{2n}\)
+    \item \(\sum_{n \ge 1} \frac{x^n}{1 + 2 + \dots + n}\)
+\end{enumerate}
+}
+
+\textbf{ALGÉBRE LINÉAIRE}\\\\
+
+\exercise{13}{Permutation dans \(S_8\)}{
+Soit 
+\[
+\sigma =
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+3 & 5 & 6 & 7 & 1 & 2 & 4
+\end{pmatrix}
+\in S_8.
+\]
+
+\begin{enumerate}
+    \item Décomposer \(\sigma\) en produit de cycles à supports disjoints.
+    \item Donner la signature de \(\sigma\).
+    \item Décomposer \(\sigma\) en produit de transpositions.
+    \item Calculer \(\sigma^{2021}\).
+\end{enumerate}
+}
+\switchcolumn
+\exercise{14}{Permutation dans \(S_{10}\)}{
+Soit \(\sigma\) la permutation de \(S_{10}\) donnée par :
+\[
+\sigma =
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+5 & 6 & 7 & 4 & 8 & 9 & 3 & 10 & 2 & 1
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Écrire l’inverse de \(\sigma\).
+    \item Décomposer \(\sigma\) en cycles.
+    \item Calculer sa signature.
+    \item Quel est le plus petit entier non nul \(n\) tel que \(\sigma^n = \mathrm{id}\) ?
+    \item Calculer \(\sigma^{147}\).
+\end{enumerate}
+}
+
+\exercise{15}{Permutation dans \(S_9\)}{
+Soit \(\sigma\) la permutation de \(S_9\) donnée par :
+\[
+\sigma =
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+3 & 7 & 8 & 9 & 4 & 5 & 2 & 1 & 6
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Déterminer le nombre d’inversions de \(\sigma\) et sa signature.
+    \item Décomposer \(\sigma\) en produit de cycles disjoints.
+    \item Décomposer \(\sigma\) en produit de transpositions.
+    \item On dit qu’une transposition est simple si elle est de la forme \((i\ i+1)\). Décomposer \(\sigma\) en produit de transpositions simples.
+    \item Quel est l’ordre de \(\sigma\) dans \(S_9\) ? Calculer \(\sigma^{1000}\).
+\end{enumerate}
+}
+
+\switchcolumn
+\textbf{ALGÉBRE BILINÉAIRE}\\\\
+
+\exercise{17}{Gram-Schmidt dans \(\mathbb{R}^3\)}{
+Soit \(\mathbb{R}^3\) muni du produit scalaire canonique. Construire une base orthonormée en utilisant le procédé de Gram-Schmidt à partir de la famille \((u, v, w)\) définie par :
+\[
+u = (1, 0, 1), \quad v = (1, 1, 1), \quad w = (-1, 1, 0).
+\]
+}
+
+\exercise{17}{Projection orthogonale dans \(\mathbb{R}^4\)}{
+Soit \(\mathbb{R}^4\) muni du produit scalaire usuel. On se donne :
+\[
+u = (2, 1, 1, -1), \quad v = (1, 1, 3, -1),
+\]
+et on pose \(F = \mathrm{Vect}(u, v)\).
+
+\begin{enumerate}
+    \item Déterminer une base orthonormale de \(F\)
+    \item Donner un système d’équations cartésiennes de \(F^\perp\)
+    \item Donner la projection de \(w = (1, 2, -2, 2)\) sur \(F\) et sur \(F^\perp\)
+    \item En déduire la distance de \(w\) à \(F\)
+\end{enumerate}
+}
+
+\exercise{18}{Supplémentaire orthogonal et distance à un plan dans \(\mathbb{R}^3\)}{
+On munit \(\mathbb{R}^3\) du produit scalaire usuel. Soit \(P\) le plan d’équation :
+\[
+2x + y - z + 2 = 0.
+\]
+Déterminer le supplémentaire orthogonal de \(P\) et donner la distance de 
+\[
+u = (3, 4, 5)
+\]
+à \(P\).
+}
+
+\switchcolumn
+\newpage
+
+\exercise{19}{Projection orthogonale sur un plan dans \(\mathbb{R}^3\)}{
+On munit \(\mathbb{R}^3\) de son produit scalaire canonique. Soit \(H\) le plan d’équation :
+\[
+2x + y - z = 0.
+\]
+
+\begin{enumerate}
+    \item Donner les coordonnées d’un vecteur non nul orthogonal à \(H\)
+    \item Déterminer les coordonnées
+    \(\begin{pmatrix} x \\ y \\ z \end{pmatrix}\)
+    du projeté orthogonal sur \(H\) d’un vecteur 
+    \(\begin{pmatrix} a \\ b \\ c \end{pmatrix}\)
+    \item Donner la matrice dans la base canonique de la projection orthogonale sur \(H\)
+    \item Déterminer une base orthonormée de \(H\)
+\end{enumerate}
+}
+
+\exercise{20}{Produit scalaire sur \(C^0([a,b],\mathbb{R})\)}{
+On considère l’espace \(E = C^0([a, b], \mathbb{R})\) muni du produit scalaire suivant :
+\[
+\langle f \mid g \rangle = \int_a^b f(t) g(t) \, dt.
+\]
+
+\begin{enumerate}
+    \item Justifier qu’il s’agit bien d’un produit scalaire.
+    \item Soit \(f\) une fonction strictement positive sur \([a, b]\). On pose :
+    \[
+    l(f) = \left(\int_a^b f(t) \, dt\right) \left( \int_a^b \frac{dt}{f(t)} \right).
+    \]
+    Montrer que \(l(f) \ge (b-a)^2\). Étudier les cas d’égalité.
+\end{enumerate}
+}
+
+\exercise{21}{Identité de Polarisation}{
+Soit \(E\) un espace euclidien, et \(x, y \in E\). Interpréter et montrer l’égalité :
+\[
+\|x + y\|^2 + \|x - y\|^2 = 2(\|x\|^2 + \|y\|^2).
+\]
+}
+\switchcolumn
+
+\exercise{22}{Projection orthogonale}{
+Soit \(E\) un espace euclidien et \(F\) un sous-espace vectoriel de \(E\). Montrer que l’ensemble 
+\(\{\|x - y\| \mid y \in F\}\) admet un minimum et que ce minimum est atteint en un unique vecteur \(v \in F\), donné par 
+\( v = p_F(x), \)
+la projection orthogonale de \(x\) sur \(F\).
+}
+
+\exercise{23}{Base duale dans \(\mathbb{R}_n[X]\)}{
+Soit \(E = \mathbb{R}_n[X]\). Soit \(B = (1, X, \dots, X^n)\) la base canonique de \(E\), et soit \(B^* = (f_0, \dots, f_n)\) la base duale de \(B\).
+
+\begin{enumerate}
+    \item Soit \(P = a_0 + \dots + a_n X^n\). Pour tout \(i \in \{0, \dots, n\}\), exprimer \(f_i(P)\) en fonction de \(a_0, \dots, a_n\).
+    \item Soient \(\phi\) et \(\psi\) les deux éléments de \(E^*\) définis par :
+    \[
+    \forall P \in E, \quad \phi(P) = P(1), \quad \psi(P) = P'(0).
+    \]
+    Déterminer les coordonnées de \(\phi\) et \(\psi\) dans la base \(B^*\).
+\end{enumerate}
+}
+
+\exercise{24}{Critère pour une base de \(E^*\)}{
+Soit \(E\) un espace vectoriel de dimension finie \(n\) et soient \(\ell_1, \ell_2, \dots, \ell_n\) des formes linéaires sur \(E\). On suppose que :
+\[
+\bigcap_{1 \le k \le n} \ker \ell_k = \{0\}.
+\]
+On considère l’application linéaire \(L : E \to \mathbb{R}^n\) définie pour \(x \in E\) par :
+\[
+L(x) = 
+\begin{pmatrix}
+\ell_1(x) \\
+\ell_2(x) \\
+\vdots \\
+\ell_n(x)
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Montrer que \(L\) est un isomorphisme d’espaces vectoriels.
+    \item En déduire l’existence d’une base \((e_1, \dots, e_n)\) de \(E\) telle que :
+    \[
+    \forall j,k \in \{1, \dots, n\}, \quad \ell_k(e_j) = \delta_{j,k}.
+    \]
+    \item En déduire que \((\ell_1, \dots, \ell_n)\) est une base de \(E^*\).
+\end{enumerate}
+}
+\exercise{25}{Supplémentaire d’un hyperplan}{
+Soit \(E\) un \(\mathbb{R}\)-espace vectoriel de dimension finie et soit \(\varphi\) une forme linéaire non nulle sur \(E\). Montrer que pour tout \(u \in E \setminus \ker(\varphi)\), \(\ker(\varphi)\) et \(\mathrm{Vect}(u)\) sont supplémentaires dans \(E\).
+}
+\switchcolumn
+
+\textbf{PROBABILITÉS}\\\\
+\exercise{26}{Deux boîtes}{
+On considère deux boîtes : l’une contient une bille noire et une blanche, et l’autre deux noires et une blanche.  
+On choisit une boîte au hasard, puis on tire une bille dans cette boîte.
+
+\begin{enumerate}
+    \item Quelle est la probabilité que la bille tirée soit noire ?
+    \item Sachant que la bille est blanche, quelle est la probabilité que ce soit la première boîte qui ait été choisie ?
+\end{enumerate}
+}
+
+\exercise{27}{Jeu de cartes}{
+A propose à B le jeu suivant : tirer \(r\) cartes parmi 52 ; si l’as de pique figure parmi les \(r\) cartes, B a gagné.
+
+\begin{enumerate}
+    \item Quelle est la probabilité que B gagne ?
+    \item A envisage de tricher de la façon suivante : il subtilise \(k\) cartes (\(k \le 52 - r\)) avant que B ne tire ses \(r\) cartes (ces \(k\) cartes étant prises au hasard).  
+    Quelle est alors la probabilité que B gagne ?
+\end{enumerate}
+}
+
+\exercise{28}{Formule des probabilités composées}{
+Montrer que si \(n\) événements \((E_i)_{1 \le i \le n}\) vérifient
+\[
+P\left(\bigcap_{i=1}^{n-1} E_i\right) > 0,
+\]
+alors
+\[
+P(E_1 \cap \cdots \cap E_n)
+= P(E_1)\, P(E_2 \mid E_1)\, P(E_3 \mid E_1 \cap E_2)\, \cdots \, P(E_n \mid E_1 \cap \cdots \cap E_{n-1}).
+\]
+}
+\exercise{29}{Somme et produit de variables uniformes}{
+Soient \(X\) et \(Y\) deux variables aléatoires indépendantes et uniformes sur l’ensemble \(\{0,1,2\}\).  
+
+Calculer les lois de \(X + Y\) et de \(XY\).
+}
+
+\switchcolumn
+\newpage
+\exercise{30}{Indépendance}{
+\begin{enumerate}
+    \item On munit \(\Omega := \{0,1\}^2\) de la probabilité uniforme et l’on considère les événements :
+    \[
+    A = \{0\} \times \{0,1\}, \quad
+    B = \{0,1\} \times \{0\}, \quad
+    C = \{(0,1),(1,0)\}.
+    \]
+    Montrer que les événements \(A, B, C\) sont deux-à-deux indépendants mais non mutuellement indépendants.
+
+    \item On munit \(\Omega := \{0,1\}^3\) de la probabilité uniforme et l’on considère les événements :
+    \[
+    A = \{0\} \times \{0,1\}^2,
+    \]
+    \[
+    B = \{0,1\}^2 \times \{0\},
+    \]
+    \[
+    C = \{(0,0,0),(0,0,1),(0,1,1),(1,1,1)\}.
+    \]
+    Montrer que
+    \[
+    P(A \cap B \cap C) = P(A)P(B)P(C).
+    \]
+    Les événements \(A, B, C\) sont-ils mutuellement indépendants ?
+\end{enumerate}
+}
+
+\exercise{31}{Suite de lancers d’une pièce}{
+On effectue une suite de \(n\) lancers d’une pièce à pile ou face. On suppose les lancers indépendants et on note \(p\) la probabilité d’obtenir pile à un lancer donné (\(0 \le p \le 1\)).
+
+\begin{enumerate}
+    \item Décrire l’espace probabilisé associé à cette expérience.
+    \item Calculer la probabilité :
+    \begin{enumerate}
+        \item d’obtenir au moins un pile au cours des \(n\) lancers (\(n \ge 1\)),
+        \item d’obtenir exactement \(k\) pile (\(0 \le k \le n\)).
+    \end{enumerate}
+    \item Décrire le nouvel espace obtenu lorsqu’on conditionne par l’événement « obtenir exactement \(k\) pile au cours des \(n\) lancers ».
+    \item On prend \(n = 6\). Calculer la probabilité, sachant qu’on a obtenu exactement deux piles, que ces deux piles soient consécutifs.
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+\exercise{32}{Deux dés distinguables}{
+On lance deux dés distinguables.
+
+\begin{enumerate}
+    \item Définir un espace probabilisé décrivant l’expérience aléatoire.
+    \item Soit \(S\) la variable aléatoire représentant la somme des deux nombres obtenus.  
+    Donner l’expression de \(S\) et déterminer sa loi.
+    \item Soit \(Z\) la variable aléatoire donnant la valeur absolue de la différence entre les valeurs des deux dés.  
+    Donner l’expression de \(Z\) et déterminer sa loi.
+\end{enumerate}
+}
+
+\exercise{33}{Marche aléatoire à trois pas}{
+On lance une pièce équilibrée trois fois de suite. Pour chaque pile obtenu, on fait un pas en avant, et pour chaque face obtenu, on fait un pas en arrière.  
+
+Soit \(D\) la distance entre le point d’arrivée et le point de départ (en nombre de pas).
+
+\begin{enumerate}
+    \item Définir un espace probabilisé décrivant l’expérience.
+    \item Donner une expression de la variable aléatoire \(D\) (on pourra introduire la variable aléatoire \(X\) donnant le nombre de piles obtenus).
+    \item Déterminer la loi de \(D\).
+\end{enumerate}
+}
+
+\exercise{34}{Lois d’images et loi conjointe}{
+On considère \(\Omega = \{a,b,c,d,e\}\) muni de la probabilité uniforme.  
+
+Soient \(X\) et \(Y\) deux variables aléatoires définies par :
+\[
+X(a)=X(b)=X(c)=1, \quad X(d)=2, \quad X(e)=3,
+\]
+\[
+Y(b)=Y(d)=1, \quad Y(a)=Y(c)=Y(e)=2.
+\]
+
+Calculer les lois de \(X\), \(Y\), \(X+Y\) et du couple \((X,Y)\).
+}
+\switchcolumn
+\newpage
+\exercise{35}{Loi géométrique et absence de mémoire}{
+Soit \(X\) une variable aléatoire géométrique de paramètre \(p\), c’est-à-dire
+\[
+P(X=n) = p(1-p)^n \quad \text{pour } n \ge 0.
+\]
+
+\begin{enumerate}
+    \item Calculer \(P(X \ge n)\) pour tout entier \(n\).
+    \item En déduire la propriété d’absence de mémoire :
+    \[
+    P(X \ge n+m \mid X \ge n) = P(X \ge m)
+    \quad \text{pour tous } n,m.
+    \]
+\end{enumerate}
+}
+
+\exercise{36}{Somme d’indicatrices}{
+Soient \(A\), \(B\), \(C\) trois événements tels que :
+\[
+P(A)=\frac{1}{2}, \quad
+P(B)=P(C)=\frac{5}{12},
+\]
+\[
+P(A \cap B)=P(B \cap C)=\frac{4}{12}, \quad
+P(A \cap C)=\frac{3}{12}, \quad
+P(A \cap B \cap C)=\frac{3}{12}.
+\]
+
+Chercher la loi de la variable aléatoire
+\[
+X = \mathbf{1}_A + \mathbf{1}_B + \mathbf{1}_C.
+\]
+}
+
+\textbf{LANGAGE C}\\\\
+
+\exercise{37}{Apprentissage du cours}{Voir et s'entraîner sur l'allocation mémoire dynamique et les pointeurs.\\}
+
+\textbf{ÉLÉMENTS D'ALGORITHMIQUE}\\\\
+
+\exercise{38}{Apprentissage du cours}{
+    Revoir les notions suivantes des algorithmes :
+    \begin{enumerate}
+        \item Complexité des additions/multiplications en fonction de la taille du nombre
+        \item Algorithme de multiplication naïf et de Karatsuba
+        \item Algorithme de Fibonacci naïf et de Fibonacci rapide
+        \item Algorithmes de tri : tri par insertion, tri par sélection, tri fusion
+    \end{enumerate}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{39}{Problème de l’élément le plus original}{
+    On s’intéresse au problème suivant : étant donné une liste $L$ de nombres \textit{(non nécessairement entiers)} de longueur $n \geq 2$, déterminer l’élément le plus original de $L$, \textit{i.e.} celui qui y apparaît le moins de fois (ou l’un quelconque d’entre eux, en cas d’égalité).\\
+    \begin{enumerate}
+        \item Décrire un algorithme naïf permettant de résoudre ce problème sans modifier la liste $L$, et avec mémoire auxiliaire constante.
+        \item Quel est l’ordre de grandeur de sa complexité en temps dans le pire cas ? Justifier.
+        \item Comment résoudre ce problème avec une complexité en temps strictement meilleure ? Laquelle ?
+    \end{enumerate}
+}
+
+\exercise{40}{Algorithme de Karatsuba revisié}{
+    On rappelle l’identité remarquable $2ab = (a + b)^2 - a^2 - b^2$. En déduire une expression de $(2p \cdot a + b)^2$ faisant intervenir uniquement des puissances de 2 et les trois carrés $a^2$, $b^2$ et $(a + b)^2$.
+    \begin{enumerate}
+        \item En déduire un algorithme de type "diviser pour régner" inspiré de l’algorithme de Karatsuba pour
+        \item Calculer le carré d’un entier de $n$ bits en temps $\Theta(n^{\log_2 3})$.
+        \item Justifier la complexité de cet algorithme.
+    \end{enumerate}
+}
+\switchcolumn
+\exercise{41}{Montagne}{
+On dit qu’un tableau \(T\) de \(n\) entiers est une \emph{montagne} s’il est constitué d’une première partie strictement croissante, suivie d’une deuxième strictement décroissante, chacune pouvant éventuellement être vide.  
+
+Autrement dit, \(T\) est une montagne s’il est strictement croissant ou strictement décroissant, ou s’il existe un indice \(m \in \llbracket 1, n-2 \rrbracket\) tel que :
+\[
+T[0] < T[1] < \dots < T[m]
+\quad \text{et} \quad
+T[m] > T[m+1] > \dots > T[n-1].
+\]
+
+\begin{enumerate}
+    \item Proposer un algorithme \texttt{est\_une\_montagne(T)} de complexité en temps optimale\footnote{C’est-à-dire l’algorithme qui vous semble le plus efficace ; il ne vous est pas demandé de prouver son optimalité.} qui teste si \(T\) est une montagne.  
+    Justifier rapidement sa correction et sa complexité.
+
+    \item \textbf{On suppose maintenant que \(T\) est une montagne.}\\  
+    Proposer un algorithme \texttt{pied(T)} de complexité en temps optimale\footnotemark[1] qui renvoie le plus petit élément de \(T\).  
+    Justifier sa correction et sa complexité.
+
+    \item Étant donné un indice \(i\), comment tester en temps constant si \(i < m\), où \(m\) est l’indice (inconnu a priori) du maximum de \(T\) ?
+
+    \item En déduire un algorithme \texttt{sommet(T)} de complexité en temps optimale\footnotemark[1] qui renvoie le plus grand élément de \(T\).  
+    Justifier rapidement sa correction et sa complexité.
+
+    \item Proposer un algorithme \texttt{nivelle(T)} de complexité en temps optimale\footnotemark[1] qui renvoie un tableau trié contenant les mêmes éléments que \(T\).  
+    Justifier rapidement sa correction et sa complexité.
+\end{enumerate}
+}
+
+\end{paracol}
+\end{document}

@@ -44,6 +44,21 @@
 \training{Vérifier en montrant les axiomes de la probabilité que $\mu_X$ est bien une probabilité sur $E$.}
 \noindent\carreaux{7}
 
+\definition{
+    Soient $(X_1, \ldots, X_n)$ $n$ variables aléatoires définies sur $\mathbb{K}$ et à valeur dans $(E_1, \ldots, E_n)$.\\
+    On dit que ces variables aléatoires sont indépendantes si pour tout ensembles $F_1 \subset E_1, \ldots, F_n \subset E_n$ on a :\\
+    \[
+        \mathbb{P}({x_1 \in F_1} \cap {x_2 \in F_2} \cap \ldots \cap {x_n \in F_n}) = \prod_{i=1}^n \mathbb{P}(X_i=x_i)
+    \]
+}
+
+\theorem{Proposition}{Indépendance de deux variables}{false}{
+    Soient $X, Y$ deux variables aléatoires.
+    Si $\forall A,B \; \mathbb{P}(X^{-1}(A) \cap Y^{-1}(A)) = \mathbb{P}(X^{-1}(A)) \cdot \mathbb{P}(Y^{-1}(B))$, alors $X$ et $Y$ sont indépendantes.
+}
+
+\ndlr{A vérifier}
+
 \example{
     On lance deux dés. $\Omega = \{1, 2, 3, 4, 5, 6\}^2 = \{ (\omega_1, \omega_2) : \omega_i \in \{1, 2, 3, 4, 5, 6\} \}$ et $\mathbb{P}$ est la probabilité uniforme.\\
     On pose $S : \Omega \to \{2, 3, \dots, 12\}$ définie par $S((\omega_1, \omega_2)) = \omega_1 + \omega_2$.\\
