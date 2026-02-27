@@ -266,6 +266,26 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
 
 \remark{De manière générale, toute fonction analytique vérifie le théorème des zéros isolés (il suffit de le translater pour que le zéro soit en $0$).}
 
+\theorem{Corollaire}{Unicité du DSE en un point}{false}{
+    Si $f \colon U \to \mathbb{C}$ où $U$ est un ouvert de $\mathbb{C}$ est DSE en $z_0 \in U$, alors la série entière qui développe $f$ en $z_0$ de la forme $\sum_{n=0}^{+\infty} a_n (z-z_0)^n$ est unique.
+}
+
+\definition{
+    On dit qu'un ensemble que $U \subset \mathbb{C}$ est \textbf{connexe} si toute écriture $U = V \sqcup W$ avec $V$ et $W$ ouverts de $U$ implique que $V = \emptyset$ ou $W = \emptyset$.
+}
+\ndlr{Cette définition n'est pas au programme, mais le prof a demandé si on la voulait quand même. Étant donné qu'elle était nécessaire pour ce qui suit, Alex (alex.theophilos@etu.u-paris.fr, \href{https://instagram.com/alex.\_jth}{@alex.\_jth}) lui a demandé de la donner. Le prof a dit "si vous ne comprenez rien, c'est normal".}
+\remark{Un ouvert de $U$ est un ensemble de la forme $U \cap O$ où $O$ est un ouvert de $\mathbb{C}$.}
+
+\definition{
+    Soit $U$ un sous-ensemble de $\mathbb{C}$, on dit que $z \in U$ est un point d'accumulation de $U$ si $\exists (z_n)$ tel que $z_n \in U, z_n \neq z$ et $z_n \to z$.
+}
+
+\remark{$z$ est un point d'accumulation de $U$ si et seulement si il n'est pas isolé dans $U$.}
+
+\theorem{Théorème}{Prolongement analytique}{false}{
+    Si $f$ et $g$ sont deux fonctions analytiques sur un ouvert connexe $U$ de $\mathbb{C}$ qui sont égales sur une partie de $U$ de la forme $\{ z_{\infty} \} \cup \{z_n \in \mathbb{N}\}$ où $z_n \to z_{\infty}$ ($z_{\infty}$ est alors un point d'accumulation de $U$), alors $f$ et $g$ sont égales sur tout $U$. 
+}
+\ndlr{cf. Laurent pour la preuve}
 
 \newpage
 \tableofcontents
