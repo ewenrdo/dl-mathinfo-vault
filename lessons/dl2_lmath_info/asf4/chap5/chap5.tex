@@ -237,10 +237,6 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
     On dit que aussi que $f$ est développable en série entière de $z_0$ (DSE).
 }
 
-\theorem{Corollaire}{}{false}{
-    Si $f$ est DSE en $z_0$, alors $f$ est holomorphe en $z_0$.
-}
-
 \remark{
     $f$ est DSE en $z_0$ si et seulement si $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ au voisinage de $z_0$.
 }
@@ -251,6 +247,25 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
 
     Plus précisément $\forall z_0 \in D(0,R), f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ sur $D(z_0, R - |z_0|)$.
 }
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Corollaire}{}{false}{
+    Si $f$ est DSE en $z_0$, alors $f$ est holomorphe en $z_0$.
+}
+\ndlr{Car une série entière est holomorphe sur son disque de convergence.}
+
+\vocabulary{Soit $A \subset \mathbb{C}$. On dit que $x \in A$ est isolé dans $A$ s'il existe $r > 0$ tel que $D(x,r) \cap A = \{x\}$}
+
+\theorem{Théorème}{Zéros isolés}{false}{
+    Soit $\sum_{n=0}^{+\infty} a_n z^n$ une série entière à coefficients non tous nuls de rayon de convergence $R$ et de somme $f$.\\
+    Alors si $f$ s'annule en $0$, alors $\exists r > 0$ tel $D(0,r) \cap f^{-1}(\{0\}) = \{0\}$, c'est-à-dire que $f$ n'a pas d'autres zéros que $0$ dans le disque ouvert de centre $0$ et de rayon $r$.
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\remark{Ici, "zéro isolé" signifie que tous les points de $f^{-1}(\{0\})$ sont isolés.}
+
+\remark{De manière générale, toute fonction analytique vérifie le théorème des zéros isolés (il suffit de le translater pour que le zéro soit en $0$).}
+
 
 \newpage
 \tableofcontents
