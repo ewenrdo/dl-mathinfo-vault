@@ -169,7 +169,10 @@
     On a $exp(z+w) = \sum_{n=0}^{+\infty} \frac{(z+w)^n}{n!} = \sum_{n=0}^{+\infty} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} z^k w^{n-k} = \left( \sum_{n=0}^{+\infty} \frac{z^n}{n!} \right) \cdot \left( \sum_{n=0}^{+\infty} \frac{w^n}{n!} \right) = exp(z) \cdot exp(w)$ (on utilise le produit de Cauchy de séries entières pour la troisième égalité). 
 }
 
-\section{Dérivabilité}
+\section{Dérivabilité et analyticitée d'une série entière}
+
+\subsection{Fonctions holomorphes}
+
 \definition{
     Soit $f : U \to \mathbb{C}$ où $U$ est un disque ouvert de $\mathbb{C}$.
     On dit que $f$ est \textbf{holomorphe} (ou $\mathbb{C}$-dérivable) en $z_0 \in U$ si :
@@ -196,9 +199,9 @@
     \end{cases}$
 }
 
-\theorem{Théorème}{}{false}{
-    Soit $\sum_{n \geq 0} a_n z^n$ une série entière de rayon de convergence $R > 0$.\\
-    Alors la somme de la série entière $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est continue et holomorphe sur le disque ouvert de centre $0$ et de rayon R de dérivée $f'(z) = \sum_{n=1}^{+\infty} n a_n z^{n-1}$.
+\theorem{Théorème}{Dérivation terme à terme}{false}{
+    Soit $\sum_{n \geq 0} a_n z^n$ une série entière de rayon de convergence $R > 0$.\\\\
+    Alors $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est continue et holomorphe sur le disque ouvert $D(0,R)$ de dérivée $f'(z) = \sum_{n=1}^{+\infty} n a_n z^{n-1}$ et le rayon de convergence de la série de terme $na_n z^{n-1}$ est aussi $R$.
 }
 
 \ndlr{cf. Laurent pour la preuve}
@@ -223,11 +226,13 @@
     On a également la formule de Taylor : $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(0)}{n!} z^n$.
 }
 
+\subsection{Fonctions analytiques : développement en série entière}
+
 \definition{
     Soit $U$ un ouvert $\mathbb{C}$ et $f : U \to \mathbb{C}$.\\
     On dit que $f$ est \textbf{analytique} en $z_0 \in U$ s'il existe $r > 0$ tel que sur $D(0,r)$ il existe $\sum_{n=0}^{+\infty} a_n w^n$ une série entière de rayon de convergence $R \geq r$ tel que $\forall z \in \mathbb{C}, |z - z_0| < r \Rightarrow f(z) = \sum_{n=0}^{+\infty} a_n (z-z_0)^n$.\\\\
     
-    On dit que aussi que $f$ est développable en série entière de $z_0$ (DSE).
+    On dit que aussi que $f$ est développable en série entière \textit{(DSE)} en $z_0$ .
 }
 
 \remark{
