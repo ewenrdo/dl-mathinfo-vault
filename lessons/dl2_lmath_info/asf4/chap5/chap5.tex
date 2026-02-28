@@ -22,7 +22,7 @@
 
 \docTitle{Chapitre 5 : Séries entières}
 
-\section{Introduction}
+\section{Introduction et convergence d'une série entière}
 
 \definition{
     Une \textbf{série entière} est une série de fonction dont le $n^{\text{ème}}$ terme général est un monôme de degré $n$.\\
@@ -30,30 +30,15 @@
 }
 
 
-\remark{
-    Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions s'appliquent aux séries entières. Exception faite sur le théorème touchant aux dérivées, car on ne sait pas encore ce qu'est la dérivée d'une fonction de variable complexe.
-}
+\remark{Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions, exceptées celles sur la dérivation, s'appliquent aux séries entières.}
 
-\example{
+\example{Quelques séries entières :
     \[
         \sum_{n\geq0} z^n \hspace{1.25cm} \sum_{n\geq0} \frac{z^n}{n!} \hspace{1.25cm} \sum_{n\geq0} \frac{z^n}{n} \hspace{1.25cm} \cdots
     \]
 }
 
 \reminder{Le $sup$ d'une partie de $\mathbb{R}$ est défini par $sup(A) = min\{ x \in \mathbb{R} : A \subset ]-\infty, x] \}$ et le $inf$ d'une partie de $\mathbb{R}$ est défini par $inf(A) = max\{ x \in \mathbb{R} : A \subset [x, +\infty[ \}$.}
-
-\subsection{Convergence d'une série entière}
-
-\example{
-    La série $\sum_{n\geq0} z^n$ converge si et seulement si $|z| < 1$ sur $\{z \in \mathbb{C} : |z| < 1\} = D(0, 1)$
-}
-
-\example{
-    Soit $z \in \mathbb{C}$. On pose $u_n = \frac{z^n}{n!}$. Alors on a $\frac{u_{n+1}}{u_n} = \frac{z^{n+1}}{(n+1)!} \cdot \frac{n!}{z^n} = \frac{z}{n+1} \to 0$ lorsque $n \to +\infty$.\\
-    Par le critère de d'Alembert, la série $\sum_{n\geq0} \frac{z^n}{n!}$ converge pour tout $z \in \mathbb{C}$ et on dira que le rayon de convergence de la série $\sum_{n\geq0} \frac{z^n}{n!}$ est $+\infty$.
-}
-
-\vocabulary{On dit que $1$ est le \textbf{rayon de convergence} de la série $\sum_{n\geq0} z^n$ (et $D(0, 1)$ est le \textbf{disque de convergence} de la série $\sum_{n\geq0} z^n$).}
 
 \theorem{Lemme}{}{false}{
     Soit $\sum_{n\geq0} a_n z^n$ une série entière et $z_0 \in \mathbb{C}$.
@@ -86,10 +71,17 @@
     On appelle \textbf{disque ouvert de convergence} de la série $\sum_{n\geq0} a_n z^n$ l'ensemble $D(0, R) = \{ z \in \mathbb{C} : |z| < R \}$ où $R$ est le rayon de convergence de la série $\sum_{n\geq0} a_n z^n$.
 }
 
-\remark{
-    Si $R = 0$, $D(0, R) = \emptyset$\\
-    Si $R = +\infty$, $D(0, R) = \mathbb{C}$
+\remark{Si $R = 0$, $D(0, R) = \emptyset$  et si $R = +\infty$, $D(0, R) = \mathbb{C}$}
+
+\example{
+    La série $\sum_{n\geq0} z^n$ converge si et seulement si $|z| < 1$ sur $\{z \in \mathbb{C} : |z| < 1\} = D(0, 1)$
 }
+
+\example{
+    Soit $z \in \mathbb{C}$. On pose $u_n = \frac{z^n}{n!}$. Alors on a $\frac{u_{n+1}}{u_n} = \frac{z^{n+1}}{(n+1)!} \cdot \frac{n!}{z^n} = \frac{z}{n+1} \to 0$ lorsque $n \to +\infty$.\\
+    Par le critère de d'Alembert, la série $\sum_{n\geq0} \frac{z^n}{n!}$ converge pour tout $z \in \mathbb{C}$ et on dira que le rayon de convergence de la série $\sum_{n\geq0} \frac{z^n}{n!}$ est $+\infty$.
+}
+
 
 \theorem{Théorème}{}{false}{
     Une série entière converge absolument en tout point du disque ouvert de convergence et converge normalement sur tout disque fermé inclus dans le disque ouvert de convergence. En particulier, la somme est continue en tout point du disque ouvert de convergence.
@@ -103,6 +95,11 @@
     Par contre, on ne peut rien dire sur le cercle $\{ z \in \mathbb{C} : |z| = R \}$.
 }
 
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{./images/convergence_series_entieres.png}
+    \captionof{figure}{Conditions de convergence d'une série entière}
+\end{center}
+
 \example{
     \begin{itemize}
         \item $\sum_{n=0}^{+\infty} z^n$ a pour rayon de convergence $R = 1$. En effet, $\sum_{n=0}^{+\infty} z^n$ converge si et seulement si $|z| < 1$. En particulier, il y a divergence si $|z| = 1$.
@@ -110,10 +107,7 @@
     \end{itemize}
 }
 
-\textbf{Calculs de rayons de convergence :}
-$\sum_{n\geq0} a_n z^n$ une série entière.\\
-Si $(a_n r^n)$ est bornée sur $R \geq r$
-Si $(a_n r^n)$ est non bornée alors $R \leq r$
+\remark{$\sum_{n\geq0} a_n z^n$ une série entière. Si $(a_n r^n)$ est bornée sur $R \geq r$, sinon $R \leq r$}
 
 \theorem{Théorème}{Critères de d'Alembert et Cauchy}{false}{
     Soit $R$ le rayon de convergence de $\sum_{n=0}^{+\infty} a_n z^n$.
@@ -121,10 +115,9 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
         \item Si $|a_n|^{\frac{1}{n}} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$
         \item Si $a_n \neq 0$ à partir d'un certain rang et si $\frac{|a_{n+1}|}{|a_n|} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$.
     \end{enumerate}
-}
 
-\remark{
-    Lorsque $R = +\infty, l=0$ et lorsque $R = 0, l = +\infty$.
+    On pose les conventions suites : lorsque $l = 0$, $R = +\infty$ et lorsque $l = +\infty$, $R = 0$.
+
 }
 
 \example{
