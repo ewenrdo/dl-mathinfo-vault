@@ -211,15 +211,15 @@
     Alors $f(x) = \sum_{n \geq 0} a_n x^n$ est dérivable sur $]-R, R[$ et $f'(x) = \sum_{n=1}^{+\infty} n a_n x^{n-1} = \sum_{n=0}^{+\infty} (n+1) a_{n+1} x^n$.
 }
 
-\theorem{Proposition}{}{false}{
+\theorem{Proposition}{Linéarité et la règle du produit pour les fonctions holomorphes}{false}{
     Soit $f$ et $g : U \to \mathbb{C}$ deux fonctions holomorphes sur $U$.\\
     Alors $(\lambda f + g)' = \lambda f' + g'$, $(fg)' = f'g + fg'$.\\\\
 
-    En particulier, si $f$ et $g$ sont des séries entières de rayon de convergence $\geq R$, alors sur $D(0,R)$, on a $(fg)' = f'g + g'f$.
+    En particulier, si $f$ et $g$ sont des sommes de séries entières de rayon de convergence $\geq R$, alors sur $D(0,R)$, on a $(fg)' = f'g + g'f$.
 }
 
 \theorem{Théorème}{}{false}{
-    Une série entière $\sum_{n=0}^{+\infty} a_n z^n$ de rayon de convergence $R$ est parfois dérivable pour tout $p \in \mathbb{N}$ sur $D(0,R)$ et $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ admet pour dérivée $f^{(p)}(z) = \sum_{n=p}^{+\infty} n(n-1)\cdots(n-p+1) a_n z^{n-p} = \sum_{n=0}^{+\infty} (n+p) \cdot (n+1) a_{n+p} z^n$.
+    Une série entière $\sum_{n=0}^{+\infty} a_n z^n$ de rayon de convergence $R$ est $p$ fois dérivable pour tout $p \in \mathbb{N}$ sur $D(0,R)$ et $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ admet pour dérivée $f^{(p)}(z) = \sum_{n=p}^{+\infty} n(n-1)\cdots(n-p+1) a_n z^{n-p} = \sum_{n=0}^{+\infty} (n+1) \cdot \ldots \cdot (n+p) a_{n+p} z^n$.
 }
 
 \remark{
