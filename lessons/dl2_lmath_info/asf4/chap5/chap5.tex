@@ -287,6 +287,56 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
 }
 \ndlr{cf. Laurent pour la preuve}
 
+
+\ndlr{Exemple d'application sur OneNote}
+
+\theorem{Proposition}{}{false}{
+    $f$ analytique sur $\mathbb{C} \Rightarrow f$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{C} \Rightarrow f$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{R}$
+}
+
+\ndlr{cf. Laurent pour la preuve}
+\attention{La réciproque de la dernière implication est fausse.}
+
+\section{Fonction exponentielle et fonctions trigonométriques}
+
+\definition{
+    On a les fonctions suivantes :
+    \[
+        exp(z) = \sum_{n=0}^{+\infty} \frac{z^n}{n!} \hspace{1.25cm} cos(z) = \frac{exp(iz) + exp(-iz)}{2} \hspace{1.25cm} sin(z) = \frac{exp(iz) - exp(-iz)}{2i}
+    \]
+    Et on a aussi :
+    \[
+        cosh(z) = \frac{exp(z) + exp(-z)}{2} \hspace{1.25cm} sinh(z) = \frac{exp(z) - exp(-z)}{2}
+    \]
+    En particulier $cos(z) = cosh(iz)$ et $sin(z) = \frac{sinh(iz)}{i}$.
+}
+
+\theorem{Propriété}{}{false}{
+    $exp(iz) = cos(z) + i sin(z) = cosh(iz) + sh(z)$\\
+    $cos' = -sin$, $sin' = cos$, et $cosh' = sinh$, $sinh' = cosh$\\
+    $cos$ et $cosh$ sont paires, et $sin$ et $sinh$ sont impaires.\\\\
+    $cosh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n}}{(2n)!}$ et $sinh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n+1}}{(2n+1)!}$\\
+    D'où $cosh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n}}{(2n)!}$ et $sinh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n+1}}{(2n+1)!}$.\\\\
+    $exp(z+z') = exp(z) \cdot exp(z')$, $cos(z+z') = cos(z) \cdot cos(z') - sin(z) \cdot sin(z')$, et $sin(z+z') = sin(z) \cdot cos(z') + cos(z) \cdot sin(z')$.\\\\
+
+    $cos^2(z) + sin^2(z) = 1$ et $cosh^2(z) - sinh^2(z) = 1$.
+}
+
+\theorem{Théorème}{Propriétés de la fonction exponentielle}{false}{
+    \begin{itemize}
+        \item $\forall a,b \in \mathbb{C} \; exp(a+b) = exp(a) \cdot exp(b)$
+        \item $\forall z \in \mathbb{C} \; exp(z) \neq 0$ et $exp(-z) = \frac{1}{exp(z)}$
+        \item $exp' = exp$
+        \item ${exp(\overline{z})} = \overline{exp(z)}$
+        \item $exp_{|\mathbb{R}} > 0$ et est strictement croissante et $lim_{x \to +\infty} exp(x) = +\infty$ et $lim_{x \to -\infty} exp(x) = 0$
+        \item Sur $]0,2[$ $x \mapsto sin(x)$ est positive et $x \mapsto cosx$ est de classe $\mathcal{C}^\infty$ et strictement décroissante.
+        \item $\exists \pi \in ]0,4[$ tel quie $exp(i \frac{\pi}{2}) = i$
+        \item La fonction $exp$ est période de période $2i\pi$ et $exp(z) = exp(z') \Leftrightarrow z - z' \in 2i\pi\mathbb{Z}$
+        \item $exp : \mathbb{C} \to \mathbb{C}^*$ est surjective
+        \item $exp_{\mathbb{R}}(i\cdot) : \mathbb{R} \to \mathbb{U}$ est surjective $2 \pi$-périodique où  $\mathbb{U} = \{ z \in \mathbb{C} : |z| = 1 \}$.
+    \end{itemize}
+}
+
 \newpage
 \tableofcontents
 
