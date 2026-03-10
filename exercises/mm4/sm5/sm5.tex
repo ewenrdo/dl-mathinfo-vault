@@ -1,0 +1,160 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Séance révision semaine 5}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Savoir-faire} & \textbf{Exercices} \\
+\hline
+Calculer des probabilités conditionnelles & 2,3,4,5 \\
+\hline
+Appliquer le procédé de Gram-Schmidt & 6,7,8,9 \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\remark{L'objectif de cette semaine est de consolider les acquis en analyse et de préparer le chapitre sur les séries de fonctions, ainsi que d'avancer sur le programme de probabilités.}
+
+\exercise{1}{Louis Le Grand}{
+    Voici une courte sélection d'exercises issus du fameux polycopié de Louis Le Grand. Il est pertinent de les faire pour se remettre dans le bain des complexes et de la géométrie dans le plan complexe.
+    \begin{enumerate}
+        \item Soit $z = - \frac{4}{1 + i \sqrt{3}}$. Écrire $z$ sous forme trigonométrique puis calculer $z^3$.
+        \item Pour $n \in \mathbb{N}$, calculer $i^n$.
+        \item Calculer $\sum_{k=0}^{n} i^k$.
+        \item Soit $a \in \mathbb{C}$. Quelle est l’image de l’ensemble $\{a + 2e^{i\theta} ; \theta \in \mathbb{R}\}$ ?
+        \item Soient $a \in \mathbb{C}, \alpha \in \mathbb{R}$. Quelle est l’image de l’ensemble des nombres complexes de la forme $a + re^{i\alpha}$ lorsque $r$ décrit $\mathbb{R}$ ? $\mathbb{R}_+$ ? $[0, R]$ où $R \in \mathbb{R}_+$ est fixé ?
+    \end{enumerate}
+}
+
+\exercise{2}{Un peu de limites embêtantes}{
+Déterminer la limite éventuelle des suites suivantes et justifier soigneusement.
+
+\[
+\begin{array}{llll}
+u_n = \sin\!\left(\frac{1}{n}\right) 
+& v_n = n \left(\cos\!\left(\frac{1}{n}\right) - 1\right) 
+& w_n = \dfrac{\sin n}{n} 
+& x_n = \dfrac{n}{n+1} \\[0.6em]
+
+y_n = (-1)^n \sin\!\left(\frac{1}{n}\right) 
+& z_n = n\!\left(\sqrt{1 + \frac{1}{n}} - 1\right) 
+& t_n = n^2\!\left(\ln\!\left(1 + \frac{1}{n}\right) - \frac{1}{n}\right) 
+& a_n = \dfrac{\cos\!\left(\frac{1}{n}\right)}{1 + \frac{1}{n^2}} \\[0.6em]
+
+b_n = n \tan\!\left(\frac{1}{n}\right)
+& & &
+\end{array}
+\]
+}
+
+\switchcolumn
+
+\exercise{3}{L'exo-type sur les séries}{
+    Pour tout entier \(n \ge 1\), soit  
+    \(f_n : \mathbb{R} \to \mathbb{R}\) la fonction définie par :  
+    \[
+    f_n(x) = \frac{1}{n^2 + x^2}.
+    \]
+
+    \begin{enumerate}
+        \item Montrer que la série \(\sum f_n\) converge simplement sur \(\mathbb{R}\). On note \(s\) la somme de cette série.
+        \item Montrer que \(s\) est continue sur \(\mathbb{R}\).
+        \item Montrer que pour tout réel \(a > 0\), la série \(\sum f_n'\) converge normalement sur \([-a, a]\).
+        \item Montrer que \(s\) est dérivable sur \(\mathbb{R}\).
+    \end{enumerate}
+}
+
+\exercise{4}{Vade retro}{
+    On considère pour tout entier $n \geq 1$ la fonction $f_n : \mathbb{R} \to \mathbb{R}$ définie par :
+    \[
+        f_n(x) = n \cdot \sin\frac{nx}{1+n^2}
+    \]
+    \begin{enumerate}
+        \item Étudier la converge simple de la suite $(f_n)_{n \geq 1}$.
+        \item Montrer que la convergence n'est pas uniforme sur $\mathbb{R}$.
+        \item En utilisant l'inégalité $|sin(y) - y| \leq \frac{|y|^3}{6}$ pour $y \in \mathbb{R}$, montrer que $\forall x \in \mathbb{R}$
+        \[
+            \left|f_n(x) - x\right| \leq \frac{n^4 |x|^3}{(1+n^2)^3} + |x| \cdot |\frac{n^2}{1+n^2} - 1|
+        \]
+        \item En déduire que la convergence est uniforme sur $[-t, t]$ pour tout $t > 0$.
+    \end{enumerate}
+}
+
+\exercise{5}{Ballons colorés}{
+    On a un sac contenant \textbf{10 ballons} : 4 rouges et 6 bleus. On tire \textbf{3 ballons sans remise}. On définit la variable aléatoire $W$ comme le nombre de ballons rouges tirés.
+    \begin{enumerate}
+        \item $W$ suit-elle une loi binomiale ? Pourquoi ?
+        \item Quelle loi décrit $W$ ? Calculer la probabilité que $W = 2$.
+    \end{enumerate}
+}
+\switchcolumn
+\newpage 
+
+\exercise{6}{Crêpes surprises}{
+    Régis prépare une pile de 20 crêpes. Sur chaque crêpe, on met au hasard une garniture choisie parmi trois options : \textbf{sucre, chocolat, confiture}, avec une probabilité égale pour chaque garniture.  
+    On définit la variable aléatoire $X$ comme suit :
+    \[
+        X =
+        \begin{cases}
+            1 & \text{si la crêpe choisie au hasard est au chocolat} \\
+            0 & \text{sinon}
+        \end{cases}
+    \]
+    \begin{enumerate}
+        \item Déterminer l'ensemble des valeurs possibles de $X$.
+        \item Quelle est la probabilité que $X = 1$ ?
+        \item Quelle loi suit $X$ ?
+        \item Si on choisit deux crêpes au hasard, peut-on définir une nouvelle variable aléatoire $Y$ correspondant au nombre de crêpes au chocolat parmi les deux ? Si oui, quelles seraient ses valeurs possibles ?
+    \end{enumerate}
+}
+
+\exercise{7}{La fabrique à exams}{
+    Un professeur de mathématiques prépare un contrôle de 5 questions. Pour chaque question, il existe deux niveaux de difficulté : \textbf{facile} ou \textbf{très difficile}.  
+    On suppose que la probabilité qu'une question soit très difficile est de 0,6 et que les questions sont indépendantes.  
+    On définit la variable aléatoire $Z$ comme le nombre de questions très difficiles dans le contrôle.
+    \begin{enumerate}
+        \item Déterminer l'ensemble des valeurs possibles de $Z$.
+        \item Quelle loi suit $Z$ ? Justifier.
+        \item Calculer la probabilité que le contrôle contienne exactement 3 questions très difficiles.
+        \item Calculer la probabilité que toutes les questions soient très difficiles.
+    \end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{8}{TD4.10}{
+    Soit $R^4$ muni du produit scalaire usuel. On se donne $u = (2, 1, 1, -1)$ et $v = (1, 1, 3, -1)$. On pose $F = Vect(u, v)$.
+    \begin{enumerate}
+    \item Déterminer une base orthonormale de $F$
+    \item Donner un système d’équations cartésiennes de $F^\perp$
+    \item Donner la projection de $w = (1, 2, -2, 2)$ sur F et sur $F^\perp$
+    \item En déduire la distance de $w$ à $F$
+        \end{enumerate}
+}
+
+\exercise{9}{TD4.11}{Construire une base orthonormée de $\mathbb{R}^3$ dont deux vecteurs appartiennent au plan d’équation $x + y + z = 0$.}
+\end{paracol}
+\end{document}

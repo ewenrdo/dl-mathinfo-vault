@@ -22,7 +22,7 @@
 
 \docTitle{Chapitre 5 : Séries entières}
 
-\section{Introduction}
+\section{Introduction et convergence d'une série entière}
 
 \definition{
     Une \textbf{série entière} est une série de fonction dont le $n^{\text{ème}}$ terme général est un monôme de degré $n$.\\
@@ -30,30 +30,15 @@
 }
 
 
-\remark{
-    Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions s'appliquent aux séries entières. Exception faite sur le théorème touchant aux dérivées, car on ne sait pas encore ce qu'est la dérivée d'une fonction de variable complexe.
-}
+\remark{Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions, exceptées celles sur la dérivation, s'appliquent aux séries entières.}
 
-\example{
+\example{Quelques séries entières :
     \[
         \sum_{n\geq0} z^n \hspace{1.25cm} \sum_{n\geq0} \frac{z^n}{n!} \hspace{1.25cm} \sum_{n\geq0} \frac{z^n}{n} \hspace{1.25cm} \cdots
     \]
 }
 
 \reminder{Le $sup$ d'une partie de $\mathbb{R}$ est défini par $sup(A) = min\{ x \in \mathbb{R} : A \subset ]-\infty, x] \}$ et le $inf$ d'une partie de $\mathbb{R}$ est défini par $inf(A) = max\{ x \in \mathbb{R} : A \subset [x, +\infty[ \}$.}
-
-\subsection{Convergence d'une série entière}
-
-\example{
-    La série $\sum_{n\geq0} z^n$ converge si et seulement si $|z| < 1$ sur $\{z \in \mathbb{C} : |z| < 1\} = D(0, 1)$
-}
-
-\example{
-    Soit $z \in \mathbb{C}$. On pose $u_n = \frac{z^n}{n!}$. Alors on a $\frac{u_{n+1}}{u_n} = \frac{z^{n+1}}{(n+1)!} \cdot \frac{n!}{z^n} = \frac{z}{n+1} \to 0$ lorsque $n \to +\infty$.\\
-    Par le critère de d'Alembert, la série $\sum_{n\geq0} \frac{z^n}{n!}$ converge pour tout $z \in \mathbb{C}$ et on dira que le rayon de convergence de la série $\sum_{n\geq0} \frac{z^n}{n!}$ est $+\infty$.
-}
-
-\vocabulary{On dit que $1$ est le \textbf{rayon de convergence} de la série $\sum_{n\geq0} z^n$ (et $D(0, 1)$ est le \textbf{disque de convergence} de la série $\sum_{n\geq0} z^n$).}
 
 \theorem{Lemme}{}{false}{
     Soit $\sum_{n\geq0} a_n z^n$ une série entière et $z_0 \in \mathbb{C}$.
@@ -86,10 +71,17 @@
     On appelle \textbf{disque ouvert de convergence} de la série $\sum_{n\geq0} a_n z^n$ l'ensemble $D(0, R) = \{ z \in \mathbb{C} : |z| < R \}$ où $R$ est le rayon de convergence de la série $\sum_{n\geq0} a_n z^n$.
 }
 
-\remark{
-    Si $R = 0$, $D(0, R) = \emptyset$\\
-    Si $R = +\infty$, $D(0, R) = \mathbb{C}$
+\remark{Si $R = 0$, $D(0, R) = \emptyset$  et si $R = +\infty$, $D(0, R) = \mathbb{C}$}
+
+\example{
+    La série $\sum_{n\geq0} z^n$ converge si et seulement si $|z| < 1$ sur $\{z \in \mathbb{C} : |z| < 1\} = D(0, 1)$
 }
+
+\example{
+    Soit $z \in \mathbb{C}$. On pose $u_n = \frac{z^n}{n!}$. Alors on a $\frac{u_{n+1}}{u_n} = \frac{z^{n+1}}{(n+1)!} \cdot \frac{n!}{z^n} = \frac{z}{n+1} \to 0$ lorsque $n \to +\infty$.\\
+    Par le critère de d'Alembert, la série $\sum_{n\geq0} \frac{z^n}{n!}$ converge pour tout $z \in \mathbb{C}$ et on dira que le rayon de convergence de la série $\sum_{n\geq0} \frac{z^n}{n!}$ est $+\infty$.
+}
+
 
 \theorem{Théorème}{}{false}{
     Une série entière converge absolument en tout point du disque ouvert de convergence et converge normalement sur tout disque fermé inclus dans le disque ouvert de convergence. En particulier, la somme est continue en tout point du disque ouvert de convergence.
@@ -103,6 +95,11 @@
     Par contre, on ne peut rien dire sur le cercle $\{ z \in \mathbb{C} : |z| = R \}$.
 }
 
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{./images/convergence_series_entieres.png}
+    \captionof{figure}{Conditions de convergence d'une série entière}
+\end{center}
+
 \example{
     \begin{itemize}
         \item $\sum_{n=0}^{+\infty} z^n$ a pour rayon de convergence $R = 1$. En effet, $\sum_{n=0}^{+\infty} z^n$ converge si et seulement si $|z| < 1$. En particulier, il y a divergence si $|z| = 1$.
@@ -110,10 +107,7 @@
     \end{itemize}
 }
 
-\textbf{Calculs de rayons de convergence :}
-$\sum_{n\geq0} a_n z^n$ une série entière.\\
-Si $(a_n r^n)$ est bornée sur $R \geq r$
-Si $(a_n r^n)$ est non bornée alors $R \leq r$
+\remark{$\sum_{n\geq0} a_n z^n$ une série entière. Si $(a_n r^n)$ est bornée sur $R \geq r$, sinon $R \leq r$}
 
 \theorem{Théorème}{Critères de d'Alembert et Cauchy}{false}{
     Soit $R$ le rayon de convergence de $\sum_{n=0}^{+\infty} a_n z^n$.
@@ -121,10 +115,9 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
         \item Si $|a_n|^{\frac{1}{n}} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$
         \item Si $a_n \neq 0$ à partir d'un certain rang et si $\frac{|a_{n+1}|}{|a_n|} \to l$ lorsque $n \to +\infty$, alors $R = \frac{1}{l}$.
     \end{enumerate}
-}
 
-\remark{
-    Lorsque $R = +\infty, l=0$ et lorsque $R = 0, l = +\infty$.
+    On pose les conventions suites : lorsque $l = 0$, $R = +\infty$ et lorsque $l = +\infty$, $R = 0$.
+
 }
 
 \example{
@@ -149,15 +142,198 @@ Si $(a_n r^n)$ est non bornée alors $R \leq r$
 }
 
 \theorem{Proposition}{}{false}{
-    $\sum a_n z^n$ de rayon de convergence $R_a$.\\
-    $\sum b_n z^n$ de rayon de convergence $R_b$.\\
+    Soient $\sum a_n z^n$ et $\sum b_n z^n$ deux séries entières de rayons de convergence respectifs $R_a$ et $R_b$.\\
     Alors $\sum (a_n + b_n) z^n$ a pour rayon de convergence $R \geq min(R_a, R_b)$.
 }
 
-\theorem{Proposition}{Produit de Cauchy de séries absolument convergentes}{false}{
+\section{Produit de séries entières}
+
+\reminder{\textbf{Produit de Cauchy de séries absolument convergentes :}\\
     Soient $\sum a_n$ et $\sum b_n$ deux séries absolument convergentes. Alors, la série $\sum_{n=0}^{+\infty} c_n$ où $c_n = \sum_{k=0}^n a_k b_{n-k}$ est absolument convergente et on a $\sum_{n=0}^{+\infty} c_n = \left( \sum_{n=0}^{+\infty} a_n \right) \cdot \left( \sum_{n=0}^{+\infty} b_n \right)$.
 }
 
+\theorem{Proposition}{}{false}{
+    Soit $\sum a_n z^n$ et $\sum b_n z^n$ deux séries entières de rayons de convergence respectifs $R_a$ et $R_b$.\\\\
+    Alors la série entière $\sum c_n z^n$ où $c_n = \sum_{k=0}^n a_k b_{n-k}$ a pour rayon de convergence $R_c \geq min(R_a, R_b)$ et sur le disque ouvert de convergence $D(0,R_c)$, on a $\sum_{n=0}^{+\infty} c_n z^n = \left( \sum_{n=0}^{+\infty} a_n z^n \right) \cdot \left( \sum_{n=0}^{+\infty} b_n z^n \right)$.
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\example{
+    On va définir $exp(z) = \sum_{n=0}^{+\infty} \frac{z^n}{n!}$.\\
+    On pose $a_n = \frac{1}{n!}$.
+    Alors $\frac{a_{n+1}}{a_n} = \frac{1}{(n+1)!} \cdot n! = \frac{1}{n+1} \to 0$ lorsque $n \to +\infty$.\\
+    Par le critère de d'Alembert, $R = +\infty$.\\\\
+
+    Montrer que $\forall z, w \in \mathbb{C} \; exp(z + w) = exp(z) \cdot exp(w)$\\
+    On a $exp(z+w) = \sum_{n=0}^{+\infty} \frac{(z+w)^n}{n!} = \sum_{n=0}^{+\infty} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} z^k w^{n-k} = \left( \sum_{n=0}^{+\infty} \frac{z^n}{n!} \right) \cdot \left( \sum_{n=0}^{+\infty} \frac{w^n}{n!} \right) = exp(z) \cdot exp(w)$ (on utilise le produit de Cauchy de séries entières pour la troisième égalité). 
+}
+
+\section{Dérivabilité et analyticitée d'une série entière}
+
+\subsection{Fonctions holomorphes}
+
+\definition{
+    Soit $f : U \to \mathbb{C}$ où $U$ est un disque ouvert de $\mathbb{C}$.
+    On dit que $f$ est \textbf{holomorphe} (ou $\mathbb{C}$-dérivable) en $z_0 \in U$ si :
+    \[
+        \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} \text{ existe dans } \mathbb{C}
+    \]
+    Dans ce cas, $f'(z_0)$ est cette limite. Si $f$ est dérivable en tout point de $U$, on note $f'$ sa dérivée.
+}
+\attention{On étend la notation de la dérivabilité de $\mathbb{R}$ à $\mathbb{C}$, mais il ne faut pas confondre ça avec la différentiabilité.}
+
+\theorem{Proposition}{}{false}{
+    Soit $f$ est $\mathbb{C}$-dérivable (ou holomorphe) en $z_0$.
+    Alors $f$ est différentiable en $z_0$
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\attention{Réciproque fausse}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\remark{Les identités : $\begin{cases}
+        Re(\frac{\partial f}{\partial x}) = Im(\frac{\partial f}{\partial y}) \\
+        Re(\frac{\partial f}{\partial y}) = -Im(\frac{\partial f}{\partial x})
+    \end{cases}$
+}
+
+\theorem{Théorème}{Dérivation terme à terme}{false}{
+    Soit $\sum_{n \geq 0} a_n z^n$ une série entière de rayon de convergence $R > 0$.\\\\
+    Alors $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est continue et holomorphe sur le disque ouvert $D(0,R)$ de dérivée $f'(z) = \sum_{n=1}^{+\infty} n a_n z^{n-1}$ et le rayon de convergence de la série de terme $na_n z^{n-1}$ est aussi $R$.
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Corollaire}{}{false}{
+    Soit $\sum_{n \geq 0} a_n z^n$ une série entière à coefficients réels de rayon de convergence $R > 0$.\\
+    Alors $f(x) = \sum_{n \geq 0} a_n x^n$ est dérivable sur $]-R, R[$ et $f'(x) = \sum_{n=1}^{+\infty} n a_n x^{n-1} = \sum_{n=0}^{+\infty} (n+1) a_{n+1} x^n$.
+}
+
+\theorem{Proposition}{Linéarité et la règle du produit pour les fonctions holomorphes}{false}{
+    Soit $f$ et $g : U \to \mathbb{C}$ deux fonctions holomorphes sur $U$.\\
+    Alors $(\lambda f + g)' = \lambda f' + g'$, $(fg)' = f'g + fg'$.\\\\
+
+    En particulier, si $f$ et $g$ sont des sommes de séries entières de rayon de convergence $\geq R$, alors sur $D(0,R)$, on a $(fg)' = f'g + g'f$.
+}
+
+\theorem{Théorème}{}{false}{
+    Une série entière $\sum_{n=0}^{+\infty} a_n z^n$ de rayon de convergence $R$ est $p$ fois dérivable pour tout $p \in \mathbb{N}$ sur $D(0,R)$ et $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ admet pour dérivée $f^{(p)}(z) = \sum_{n=p}^{+\infty} n(n-1)\cdots(n-p+1) a_n z^{n-p} = \sum_{n=0}^{+\infty} (n+1) \cdot \ldots \cdot (n+p) a_{n+p} z^n$.
+}
+
+\remark{
+    On a également la formule de Taylor : $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(0)}{n!} z^n$.
+}
+
+\subsection{Fonctions analytiques : développement en série entière}
+
+\definition{
+    Soit $U$ un ouvert $\mathbb{C}$ et $f : U \to \mathbb{C}$.\\
+    On dit que $f$ est \textbf{analytique} en $z_0 \in U$ s'il existe $r > 0$ tel que sur $D(0,r)$ il existe $\sum_{n=0}^{+\infty} a_n w^n$ une série entière de rayon de convergence $R \geq r$ tel que $\forall z \in \mathbb{C}, |z - z_0| < r \Rightarrow f(z) = \sum_{n=0}^{+\infty} a_n (z-z_0)^n$.\\\\
+    
+    On dit que aussi que $f$ est développable en série entière \textit{(DSE)} en $z_0$ .
+}
+
+\remark{
+    $f$ est DSE en $z_0$ si et seulement si $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ au voisinage de $z_0$.
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $\sum_{n=0}^{+\infty} a_n z^n$ est série entière de rayon de convergence $R$.\\
+    Alors $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est DSE en tout point de $D(0,R)$.\\\\
+
+    Plus précisément $\forall z_0 \in D(0,R), f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ sur $D(z_0, R - |z_0|)$.
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Corollaire}{}{false}{
+    Si $f$ est DSE en $z_0$, alors $f$ est holomorphe en $z_0$.
+}
+\ndlr{Car une série entière est holomorphe sur son disque de convergence.}
+
+\vocabulary{Soit $A \subset \mathbb{C}$. On dit que $x \in A$ est isolé dans $A$ s'il existe $r > 0$ tel que $D(x,r) \cap A = \{x\}$}
+
+\theorem{Théorème}{Zéros isolés}{false}{
+    Soit $\sum_{n=0}^{+\infty} a_n z^n$ une série entière à coefficients non tous nuls de rayon de convergence $R$ et de somme $f$.\\
+    Alors si $f$ s'annule en $0$, alors $\exists r > 0$ tel $D(0,r) \cap f^{-1}(\{0\}) = \{0\}$, c'est-à-dire que $f$ n'a pas d'autres zéros que $0$ dans le disque ouvert de centre $0$ et de rayon $r$.
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\remark{Ici, "zéro isolé" signifie que tous les points de $f^{-1}(\{0\})$ sont isolés.}
+
+\remark{De manière générale, toute fonction analytique vérifie le théorème des zéros isolés (il suffit de le translater pour que le zéro soit en $0$).}
+
+\theorem{Corollaire}{Unicité du DSE en un point}{false}{
+    Si $f \colon U \to \mathbb{C}$ où $U$ est un ouvert de $\mathbb{C}$ est DSE en $z_0 \in U$, alors la série entière qui développe $f$ en $z_0$ de la forme $\sum_{n=0}^{+\infty} a_n (z-z_0)^n$ est unique.
+}
+
+\definition{
+    On dit qu'un ensemble que $U \subset \mathbb{C}$ est \textbf{connexe} si toute écriture $U = V \sqcup W$ avec $V$ et $W$ ouverts de $U$ implique que $V = \emptyset$ ou $W = \emptyset$.
+}
+\ndlr{Cette définition n'est pas au programme, mais le prof a demandé si on la voulait quand même. Étant donné qu'elle était nécessaire pour ce qui suit, Alex (alex.theophilos@etu.u-paris.fr, \href{https://instagram.com/alex.\_jth}{@alex.\_jth}) lui a demandé de la donner. Le prof a dit "si vous ne comprenez rien, c'est normal".}
+\remark{Un ouvert de $U$ est un ensemble de la forme $U \cap O$ où $O$ est un ouvert de $\mathbb{C}$.}
+
+\definition{
+    Soit $U$ un sous-ensemble de $\mathbb{C}$, on dit que $z \in U$ est un point d'accumulation de $U$ si $\exists (z_n)$ tel que $z_n \in U, z_n \neq z$ et $z_n \to z$.
+}
+
+\remark{$z$ est un point d'accumulation de $U$ si et seulement si il n'est pas isolé dans $U$.}
+
+\theorem{Théorème}{Prolongement analytique}{false}{
+    Si $f$ et $g$ sont deux fonctions analytiques sur un ouvert connexe $U$ de $\mathbb{C}$ qui sont égales sur une partie de $U$ de la forme $\{ z_{\infty} \} \cup \{z_n \in \mathbb{N}\}$ où $z_n \to z_{\infty}$ ($z_{\infty}$ est alors un point d'accumulation de $U$), alors $f$ et $g$ sont égales sur tout $U$. 
+}
+\ndlr{cf. Laurent pour la preuve}
+
+
+\ndlr{Exemple d'application sur OneNote}
+
+\theorem{Proposition}{}{false}{
+    $f$ analytique sur $\mathbb{C} \Rightarrow f$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{C} \Rightarrow f$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{R}$
+}
+
+\ndlr{cf. Laurent pour la preuve}
+\attention{La réciproque de la dernière implication est fausse.}
+
+\section{Fonction exponentielle et fonctions trigonométriques}
+
+\definition{
+    On a les fonctions suivantes :
+    \[
+        exp(z) = \sum_{n=0}^{+\infty} \frac{z^n}{n!} \hspace{1.25cm} cos(z) = \frac{exp(iz) + exp(-iz)}{2} \hspace{1.25cm} sin(z) = \frac{exp(iz) - exp(-iz)}{2i}
+    \]
+    Et on a aussi :
+    \[
+        cosh(z) = \frac{exp(z) + exp(-z)}{2} \hspace{1.25cm} sinh(z) = \frac{exp(z) - exp(-z)}{2}
+    \]
+    En particulier $cos(z) = cosh(iz)$ et $sin(z) = \frac{sinh(iz)}{i}$.
+}
+
+\theorem{Propriété}{}{false}{
+    $exp(iz) = cos(z) + i sin(z) = cosh(iz) + sh(z)$\\
+    $cos' = -sin$, $sin' = cos$, et $cosh' = sinh$, $sinh' = cosh$\\
+    $cos$ et $cosh$ sont paires, et $sin$ et $sinh$ sont impaires.\\\\
+    $cosh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n}}{(2n)!}$ et $sinh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n+1}}{(2n+1)!}$\\
+    D'où $cosh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n}}{(2n)!}$ et $sinh(z) = \sum_{n=0}^{+\infty} \frac{z^{2n+1}}{(2n+1)!}$.\\\\
+    $exp(z+z') = exp(z) \cdot exp(z')$, $cos(z+z') = cos(z) \cdot cos(z') - sin(z) \cdot sin(z')$, et $sin(z+z') = sin(z) \cdot cos(z') + cos(z) \cdot sin(z')$.\\\\
+
+    $cos^2(z) + sin^2(z) = 1$ et $cosh^2(z) - sinh^2(z) = 1$.
+}
+
+\theorem{Théorème}{Propriétés de la fonction exponentielle}{false}{
+    \begin{itemize}
+        \item $\forall a,b \in \mathbb{C} \; exp(a+b) = exp(a) \cdot exp(b)$
+        \item $\forall z \in \mathbb{C} \; exp(z) \neq 0$ et $exp(-z) = \frac{1}{exp(z)}$
+        \item $exp' = exp$
+        \item ${exp(\overline{z})} = \overline{exp(z)}$
+        \item $exp_{|\mathbb{R}} > 0$ et est strictement croissante et $lim_{x \to +\infty} exp(x) = +\infty$ et $lim_{x \to -\infty} exp(x) = 0$
+        \item Sur $]0,2[$ $x \mapsto sin(x)$ est positive et $x \mapsto cosx$ est de classe $\mathcal{C}^\infty$ et strictement décroissante.
+        \item $\exists \pi \in ]0,4[$ tel quie $exp(i \frac{\pi}{2}) = i$
+        \item La fonction $exp$ est période de période $2i\pi$ et $exp(z) = exp(z') \Leftrightarrow z - z' \in 2i\pi\mathbb{Z}$
+        \item $exp : \mathbb{C} \to \mathbb{C}^*$ est surjective
+        \item $exp_{\mathbb{R}}(i\cdot) : \mathbb{R} \to \mathbb{U}$ est surjective $2 \pi$-périodique où  $\mathbb{U} = \{ z \in \mathbb{C} : |z| = 1 \}$.
+    \end{itemize}
+}
 
 \newpage
 \tableofcontents
