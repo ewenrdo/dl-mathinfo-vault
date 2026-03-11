@@ -87,8 +87,12 @@
 \theorem{Théorème}{}{false}{
     Une série entière converge absolument en tout point du disque ouvert de convergence et converge normalement sur tout disque fermé inclus dans le disque ouvert de convergence. En particulier, la somme est continue en tout point du disque ouvert de convergence.
 }
-
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration :}\\
+    Soit $r<R$. Montrons que $f(z)=\sum_{n=0}^{+\infty}$ converge normalement sur $\overline{D}(0, R)$.
+    Soit $r'>0$ tel que $r<r'<R$, on a pour $z\in \overline{D(0, R)}$ :\\
+        $|a_n||z|^n\le|a_n|(r')^n(\frac{|z|}{r'})^n\le|a_n|(r')^n(\frac{r}{r'})^n\le M(\frac{r}{r'})^n$ car $a_n(r')^n$ est bornée.\\
+    On définit $\forall r<R, \forall z\in\overline{D(0, R)}$, $f(z)=\sum_{n=0}^{+\infty}a_nz^n$ converge absolument et $f$ est continue dans $\overline{D(0, R)}$ et on remarque que $D(0, R)= \bigcup_{r<R}\overline{D(0, R)}$. 
+}
 
 \remark{
     On déduit que $\{ r \in [0, +\infty[ : \sum_{n\geq0} a_n r^n \text{ converge} \} = [0, R[$ ou $[0, R]$.\\
