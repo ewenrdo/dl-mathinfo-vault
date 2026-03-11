@@ -29,6 +29,7 @@
     C'est-à-dire que c'est une série de la forme $\sum_{n} a_n z^n$ où $(a_n)_{n \in \mathbb{N}}$ est une suite de nombres complexes ($\mathbb{C}^\mathbb{N}$ ou $\mathbb{R}^\mathbb{N}$) et $z$ est une variable complexe.
 }
 
+\remark{De manière \textbf{intuitive}, une série entière est un polynôme infini.}
 
 \remark{Comme séries de fonctions, les propositions vues sur le chapitre sur les séries de fonctions, exceptées celles sur la dérivation, s'appliquent aux séries entières.}
 
@@ -334,6 +335,34 @@
         \item $exp_{\mathbb{R}}(i\cdot) : \mathbb{R} \to \mathbb{U}$ est surjective $2 \pi$-périodique où  $\mathbb{U} = \{ z \in \mathbb{C} : |z| = 1 \}$.
     \end{itemize}
 }
+
+\section{Applications des développement en séries entières}
+\subsection{Fonctions usuelles}
+
+On va partir de ça :
+$\frac{1}{1+z} = \sum_{n=0}^{+\infty} (-1)^n z^n$ pour $|z| < 1$.
+
+\remark{Toute fraction rationnelle est développable en série entière en tout point sauf en ses pôles.}
+En primitivant $\frac{1}{1+z}$ on a $ln(1 + z) = \sum_{n=0}^{+\infty} \frac{(-1)^{n}}{n+1} z^{n+1} = \sum_{n=1}^{+\infty} \frac{(-1)^{n+1}}{n} z^n$ pour $|z| < 1$.\\
+Ou $ln(1+z) = \sum_{n=0}^{+\infty} \frac{ln^{(n)}(1+z)}{n!} z^n$ pour $|z| < 1$.\\\\
+
+De même, pour $\frac{1}{1+z^2} = \sum_{n=0}^{+\infty} (-1)^n z^{2n}$ pour $|z| < 1$, on a $arctan(z) = \sum_{n=0}^{+\infty} \frac{(-1)^n}{2n+1} z^{2n+1}$ pour $|z| < 1$ en primitivant $\frac{1}{1+z^2}$.
+
+\subsection{Développements limités}
+
+\theorem{Proposition}{}{false}{
+    Soit $f(x) = \sum_{n=0}^{+\infty} a_n z^n$ une fonction développable en série entière en $0$.\\
+    Alors $f$ admet un développement limité en $0$ à tout ordre, et on a :\\
+    $f(z) = a_0 + a_1 z + \cdots + a_n z^n + o(z^n)$ lorsque $z \to 0$.
+}
+\noindent{\textbf{Preuve :} On le sait déjà car la série entière est égale à sa série de Taylor.}
+
+\subsection{Équations différentielles}
+
+Pour les équations différentielles, on peut chercher des solutions de la forme $y = \sum_{n=0}^{+\infty} a_n z^n$ et on trouve alors des relations de récurrence sur les $a_n$.\\
+On réalisé en fait un raisonnement par analyse-synthèse et par identification de coefficients.\\
+
+\example{cf. l'exercice 12 du TD.}
 
 \newpage
 \tableofcontents
