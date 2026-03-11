@@ -50,21 +50,24 @@ Si $\sum_{n \ge 1} |a_n| < +\infty$ (série absolument convergente), alors :
 \end{enumerate}
 
 \definition{
-    Soit $X$ une variable aléatoire discrète définie
-sur un espace probabilisé ($\Omega$, $\mathbb{P}$) et à valeurs dans un ensemble (dénombrable) $E \subset \mathbb{R}_+$.
-Soit $\mu_X$ la loi de $X$. L'espérance de X est définie comme la quantité :
-\[\mathbb{E}[X] = \sum_{x \in E} x \cdot \mu_X(\{x\}) \in [0, +\infty[\]
+    Soit $X$ une variable aléatoire définie sur un espace probabilisé ($\Omega$, $\mathbb{P}$) et à valeurs dans un $\mathbb{R}_+$.
+    L'\textbf{espérance de X} est définie comme la quantité :
+\[\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega) \cdot \mathbb{P}(\{\omega\}) \in [0, +\infty]\]
 }
 
 \definition{
- Soit $X$ une variable aléatoire discrète
-définie sur un espace probabilisé ($\Omega$, $\mathbb{P}$) et à valeurs dans un ensemble (dénombrable)
-$E \subset \mathbb{R}$. Soit $\mu_X$ la loi de $X$. On dit que $X$ est intégrable si l'espérance de $|X| = \{ |x| : x \in E \}$ est finie, et
-dans ce cas on définit l'espérance de $X$ comme la quantité :
-\[\mathbb{E}[X] := \sum_{x \in E} x \cdot \mu_X(\{x\}) \in ]-\infty, +\infty[ .\]
+    Soit $X : \Omega \to \mathbb{R}$ une variable aléatoire. On dit que $X$ est \textbf{intégrable} si $\mathbb{E}[|X|] < +\infty$.
 }
 
-\vocabulary{On dira que $X$ admet une espérance si l'on est dans le cadre de l'une des deux définitions précédentes.}
+\definition{
+    Soit $X : \Omega \to \mathbb{R}$ une variable aléatoire intégrable.\\
+    Posons $X^+ = \max(X, 0)$ et $X^- = \max(-X, 0)$. On définit l'\textbf{espérance de $X$} comme la quantité : $\mathbb{E}[X] = \mathbb{E}[X^+] - \mathbb{E}[X^-] \in \mathbb{R}$.
+}
+
+\theorem{Proposition}{Intégrabilité et espérance}{false}{
+    Soit $X$ une variable aléatoire réelle intégrable.\\
+    Alors $X$ admet une espérance et $\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega) \cdot \mathbb{P}(\{\omega\})$.
+}
 
 \[
 \begin{array}{c|c|c}
@@ -76,7 +79,7 @@ dans ce cas on définit l'espérance de $X$ comme la quantité :
     X \text{ quelconque et } \mathbb{E}[|X|] = +\infty & \text{non} & \text{non}
 \end{array}
 \]
-\remark{Dans le cas particulier où l’ensemble $E$ est fini, $X$ admet toujours une espérance et $X$ est même toujours intégrable.}
+\remark{Dans le cas particulier où l'ensemble $E$ est fini, $X$ admet toujours une espérance et $X$ est même toujours intégrable.}
 
 \example{
     On pose $\Omega = \{1, \ldots, 6\}$, $\mathbb{P}$ la probabilité uniforme et $X(\omega) = \omega$ la variable qui associe à chaque lancer de dé le nombre sur la face supérieure. $X$ prend un nombre fini de valeurs, donc $X$ est intégrable, et est à valeurs positives, donc $X$ admet une espérance. On trouve $\mathbb{E}[X] = \frac{1}{6} \cdot (1 + 2 + 3 + 4 + 5 + 6) = \frac{7}{2}$.
@@ -85,6 +88,8 @@ dans ce cas on définit l'espérance de $X$ comme la quantité :
 \vocabulary{En vocabulaire sur les séries, on dit que $X$ admet une espérance si la série $\sum_{x \in E} x \cdot \mu_X(\{x\})$ est absolument convergente.}
 
 \section{Formule de transfert et propriétés}
+
+\subsection{Énoncés}
 
 \theorem{Théorème}{Formule de transfert}{false}{
     Soit $X$ une variable aléatoire sur un espace probabilisé $(\Omega, \mathbb{P})$ à valeurs dans un ensemble dénombrable $E$.\\
@@ -106,6 +111,8 @@ dans ce cas on définit l'espérance de $X$ comme la quantité :
         \[ \mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega) \cdot \mathbb{P}(\{\omega\}) .\]
     \end{enumerate}
 }
+
+\subsection{Conséquences}
 
 On a donc vu que l'espérance d'une variable aléatoire discrète est une série de la forme $\sum_{n \ge 1} a_n$ avec $a_n = x \cdot \mu_X(\{x\})$ ou $a_n = X(\omega) \cdot \mathbb{P}(\{\omega\})$ qui converge absolument. On peut alors appliquer les propriétés des séries absolument convergentes pour obtenir les propriétés suivantes de l'espérance.
 \theorem{Propriété}{}{false}{
@@ -187,7 +194,7 @@ Pour les lois usuelles vu au chapitre 4 (Variables aléatoires), on trouve les r
 \hline
 \textbf{Loi / Paramètres} & \textbf{Espérance} & \textbf{Variance} \\
 \hline
-Bernoulli $\mathcal{B}(p)$ & $p$ & $p(1-p)$ \\
+Bernoulli $\mathcal{Ber}(p)$ & $p$ & $p(1-p)$ \\
 \hline
 Uniforme $\mathcal{U}(\{1, \ldots, n\})$ & $\dfrac{n+1}{2}$ & $\dfrac{n^2-1}{12}$ \\
 \hline
@@ -232,5 +239,6 @@ Il existe des liens entre l'espérance et l'indépendance de variables aléatoir
     Ces variables sont indépendantes si et seulement si pour toutes fonctions $f_1, \ldots, f_N$ \textbf{bornées} de $E_1, \ldots, E_N$ dans $\mathbb{R}$, on a :
     \[ \mathbb{E}\left[ \prod_{k=1}^N f_k(X_k) \right] = \prod_{k=1}^N \mathbb{E}[f_k(X_k)] .\]
 }
+
 
 \end{document}
