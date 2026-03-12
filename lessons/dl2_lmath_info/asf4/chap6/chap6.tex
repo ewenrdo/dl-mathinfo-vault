@@ -73,19 +73,19 @@ Plus particulièrement, l'application $y \to (x \to \langle x,y\rangle)$ est un 
 
 \attention{Ce résultat n'est pas vrai si la base n'est pas orthonormée.}
 
-\subsection{Endomorphismes autoadjoints}
+\subsection{Endomorphismes auto-adjoints}
 
 \definition{
-    Soit $E$ un espace euclidien. Un endomorphisme $u \in \mathcal{L}(E)$ est dit \textbf{autoadjoint} si $u = u^*$.
+    Soit $E$ un espace euclidien. Un endomorphisme $u \in \mathcal{L}(E)$ est dit \textbf{auto-adjoint} si $u = u^*$.
 }
 
 \theorem{Proposition}{Caractérisation}{false}{
     Soit $E$ un espace euclidien.\\
-    Un endomorphisme $u \in \mathcal{L}(E)$ est autoadjoint si et seulement si, dans toute base orthonormée de $E$, la matrice de $u$ est symétrique.
+    Un endomorphisme $u \in \mathcal{L}(E)$ est auto-adjoint si et seulement si, dans toute base orthonormée de $E$, la matrice de $u$ est symétrique.
 }
 
 \theorem{Proposition}{Stabilité du supplémentaire orthogonal}{false}{
-    Soit $E$ un espace euclidien et $F$ un sous-espace vectoriel de $E$ stable par $u \in \mathcal{L}(E)$ autoadjoint.\\
+    Soit $E$ un espace euclidien et $F$ un sous-espace vectoriel de $E$ stable par $u \in \mathcal{L}(E)$ auto-adjoint.\\
     Alors $F^\perp$ est stable par $u$.\\
 }
 
@@ -176,6 +176,7 @@ $\| R_\theta(\begin{pmatrix}
 
 \vocabulary{Les vecteurs propres associés à la valeur propre $1$ sont appelés \textbf{points fixes} de $u$.}
 
+\subsection{Décomposition des isométries comme produits de réflexions}
 \definition{
     Soit $E$ un espace euclidien, et soit $F \subset E$ un sous-espace vectoriel.\\
     Considérons $p$ la projection orthogonale sur $F$. La \textbf{symétrie orthogonale} par rapport à $F$ est l'endomorphisme $s \in \mathcal{L}(E)$ défini par :
@@ -183,7 +184,99 @@ $\| R_\theta(\begin{pmatrix}
         s(x) = 2p(x) - x.
     \]
     Si $F$ est un hyperplan de $E$, alors $s$ est appelée une \textbf{réflexion}.
-
 }
+
+\remark{On démontre assez facilement que les symétries orthogonales sont des isométries, et que les réflexions sont des isométries dont les points fixes forment un hyperplan.}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un espace euclidien de dimension $n$ et soit $f$ une isométrie de $E$.\\
+    Alors $f$ peut s'écrire comme un produit $f = s_k \circ s_{k-1} \circ \ldots \circ s_1$ de $k$ réflexions, avec $k \leq n$.
+}
+
+\theorem{Lemme}{Échange par une réflexion}{false}{
+    Soit $E$ un espace euclidien, et soient $x_1, x_2 \in E$ deux distincts de même norme.\\
+    Alors la réflexion par rapport à l'hyperplan $(x_1 - x_2)^\perp$ échange $x_1$ et $x_2$.
+}
+
+\theorem{Lemme}{Stabilité du sous-espace orthogonal}{false}{
+    Soit $E$ un espace euclidien, et soit $f \in \mathcal{L}(E)$ une isométrie.\\
+    Si $F \subset E$ est un sous-espace vectoriel stable par $f$, alors $F^\perp$ est également stable par $f$.
+}
+
+\subsection{Réduction des endomorphismes auto-adjoints}
+
+\theorem{Lemme}{}{false}{
+    Soit $E$ un espace euclidien de dimension $n$ et soit $u \in \mathcal{L}(E)$ auto-adjoint.\\
+    Alors $u$ possède $n$ valeurs propres réelles (non nécessairement distinctes).
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $A \in \mathcal{M}_n(\mathbb{C})$. Alors il existe une unique matrice $A^* \in \mathcal{M}_n(\mathbb{C})$ telle que $\langle A^*X,Y \rangle = \langle X, AY \rangle$ pour tous $X, Y \in \mathbb{C}^n$. De plus, $A^* = {}^t \overline{A}$, où $\overline{A}$ est la matrice obtenue en prenant les conjugués des coefficients de $A$.
+}
+\remark{Dans le cas où $A$ est à coefficients réels, on a $A^* = {}^t A$.}
+
+\theorem{Théorème}{Réduction des endomorphismes auto-adjoints}{false}{
+    Soit $E$ un espace euclidien de dimension $n$ et soit $u \in \mathcal{L}(E)$.\\
+    Si $u$ est auto-adjoint, alors $u$ est diagonalisable dans une base orthonormée.\\\\
+    En particulier, les sous-espaces propres de $u$ sont deux à deux orthogonaux.
+}
+
+\remark{
+    Réduire un endomorphisme auto-adjoint est plus fort que la réduction d'un endomorphisme quelconque, car on obtient une base de vecteurs propres \textbf{réels} qui est \textbf{orthonormée} pour le produit scalaire usuel de $\mathbb{R}^n$.
+}
+
+\theorem{Corollaire}{Version matricielle du théorème}{false}{
+    Toute matrice symétrique réelle est diagonalisable et admet une base de vecteurs propres qui est orthonormée pour le produit scalaire usuel de $\mathbb{R}^n$.
+}
+
+\example{
+    Considérons $u \in \mathcal{L}(E)$ tel que $u(x,y) = (2x+y, x+2y)$. La matrice de $u$ dans la base canonique de $\mathbb{R}^2$ est $A = \begin{pmatrix}
+        2 & 1 \\
+        1 & 2 
+    \end{pmatrix}$.\\
+    On observe que ${ }^t A = A$, donc $A$ est symétrique, et $u$ est auto-adjoint.\\\\
+    \textbf{Étape 1 : Calcul des valeurs propres}\\\\
+    \[det(A - \lambda I_2) = det\begin{pmatrix}
+        2 - \lambda & 1 \\
+        1 & 2 - \lambda
+    \end{pmatrix} = (2 - \lambda)^2 - 1 = \lambda^2 - 4\lambda + 3\]
+    Les racines de ce polynôme sont $\lambda_1 = 3$ et $\lambda_2 = 1$.\\\\
+    \textbf{Étape 2 : Calcul des sous-espaces propres}\\
+    \begin{enumerate}
+    \item On résout $(A-3I)X = 0$ pour trouver les vecteurs propres associés à $\lambda_1 = 3$ :
+    \[\begin{pmatrix}
+        -1 & 1 \\
+        1 & -1
+    \end{pmatrix} X = 0\]
+    Cela donne $X = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$ (à un scalaire près).\\
+    Donc l'équation de $E_3$ est $y = x$.
+
+    \item De même, on trouve que $E_1$ est engendré par $X = \begin{pmatrix} 1 \\ -1 \end{pmatrix}$, et l'équation de $E_1$ est $y = -x$.
+    \end{enumerate}
+
+    \noindent\textbf{Étape 3 (optionnelle) : Vérification de l'orthogonalité}\\
+
+    On a que $(1,1) \cdot (1, -1) = 1 - 1 = 0$ donc les vecteurs propres sont orthogonaux.\\
+    \textit{Cette partie n'est pas nécessaire, car le théorème garantit déjà que les sous-espaces propres sont orthogonaux.}\\\\
+
+    \noindent\textbf{Étape 4 : Normalisation des vecteurs propres}\\
+    On a que $\| (1,1) \| = \sqrt(2)$ et $\| (1,-1) \| = \sqrt(2)$, donc une base orthonormée de vecteurs propres est donnée par :
+    \[
+        \mathcal{B} = \left\{ \frac{1}{\sqrt{2}}(1,1), \frac{1}{\sqrt{2}}(1,-1) \right\}.
+    \]
+
+    \noindent\textbf{Étape 5 : Matrice de $u$ dans la base $\mathcal{B}$}\\
+    La matrice $D$ de $u$ dans cette base est : 
+    \[
+        D = \begin{pmatrix}
+            3 & 0 \\
+            0 & 1
+        \end{pmatrix}.
+    \]
+
+    \noindent On a donc la réduction orthogonale $A = PD { }^t P$ où $P$ est la matrice de passage de la base canonique à la base $\mathcal{B}$.
+}
+\newpage
+\tableofcontents
 
 \end{document}
