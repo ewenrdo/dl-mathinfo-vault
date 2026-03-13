@@ -361,6 +361,40 @@ De même, pour $\frac{1}{1+z^2} = \sum_{n=0}^{+\infty} (-1)^n z^{2n}$ pour $|z| 
 }
 \noindent{\textbf{Preuve :} On le sait déjà car la série entière est égale à sa série de Taylor.}
 
+Un rappel des développements limités de fonctions usuelles :
+\renewcommand{\arraystretch}{1.8} % augmente l'espacement vertical
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Fonction} & \textbf{Développement limité} \\
+\hline
+$(1+x)^\alpha$ & $1 + \alpha x + \frac{\alpha(\alpha-1)}{2} x^2 + \frac{\alpha(\alpha-1)(\alpha-2)}{3!} x^3 + ...$ \\
+\hline
+$e^x$ & $1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$ \\
+\hline
+$\cos x$ & $1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots$ \\
+\hline
+$\arctan x$ & $x - \frac{x^3}{3} + \frac{x^5}{5} + \cdots$ (primitiver $(1+x^2)^{-1}$) \\
+
+\hline
+$\ln(1+x)$ & primitiver $(1-x)^{-1}$\\
+\hline
+$\sin x$ & primitiver $\cos x$ \\
+\hline
+$\tan x$ & $\frac{\sin x}{\cos x}$ \\
+\hline
+$\arcsin x$ & primitiver $(1-x^2)^{-\frac{1}{2}}$ \\
+\hline
+$\arccos x$ & $\frac{\pi}{2} - arcsin x$ \\
+\hline
+$\sinh x$ & partie impaire de $e^x$ \\
+\hline
+$\cosh x$ & partie paire de $e^x$ \\
+\hline
+\end{tabular}
+\end{center}
+
 \subsection{Équations différentielles}
 
 Pour les équations différentielles, on peut chercher des solutions de la forme $y = \sum_{n=0}^{+\infty} a_n z^n$ et on trouve alors des relations de récurrence sur les $a_n$.\\
