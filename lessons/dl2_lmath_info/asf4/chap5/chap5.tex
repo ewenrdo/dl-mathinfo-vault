@@ -132,10 +132,34 @@
 \remark{
     Si $f$ est définie sur $D(0,1)$. Alors $z \mapsto f(az)$ est définie sur $D(0, \frac{1}{a})$.
 }
-
+\noindent{\textbf{Démonstration :}
+    \begin{enumerate}
+        \item Supposons que $\ell>0$ et $\ell<+\infty$. Fixons $\varepsilon>0$.\\
+                Il existe $n_0\in\mathbb{N}$, $\forall n\ge n_0, \ell-\varepsilon\le|a_n|^{1/n}\le\ell+\varepsilon$.\\
+                Donc, pour $n_0\in\mathbb{N}, (\ell-\varepsilon)^n\le|a_n|\le(\ell+\varepsilon)^n$. D'où $r^n|a_n|\le r^n(\ell+\varepsilon)^n$.
+                \begin{itemize}
+                    \item Si $r<R$, alors $r^n|a_n|\to_{n\to+\infty}0$, donc $r^n(\ell-\varepsilon)^n\to0$. Donc, $r(\ell-\varepsilon)<1$, donc $r<\frac{1}{\ell-\varepsilon}$.\\
+                            En passant au sup, $R\le\frac{1}{\ell-\varepsilon}$. Maintenant, $\varepsilon\to0\Rightarrow R\le1/\ell$.
+                    \item Si $r>R$,$(|a_n|r^n)_{n\in\mathbb{N}}$ est non bornée, alors $r^n(\ell+\varepsilon)^n$ est non bornée, donc $r(\ell+\varepsilon)>1$, donc $r>\frac{1}{\ell+\varepsilon}$.\\
+                        En faisant $r\to R$, on obtient $R>\frac{1}{\ell+\varepsilon}$. En faisant $\varepsilon\to0$, on obtient $R>1/\ell$.\\
+                        Donc, $R=1/\ell$.
+                    \item Si $\ell=0$, on a $\forall\varepsilon>0, r^n|a_n|\le r^n\varepsilon^n$ à partir d'un certain rang, donc $(r^na_n)_{n\in\mathbb{N}}$ est bornée si $r=1/\varepsilon$.\\
+                            Donc, $R\ge1/\varepsilon$, on fait $\varepsilon\to0$ pour conclure que $R=+\infty$.
+                    \item Si $\ell=+\infty$, soit $A>0,\exists n_0\in\mathbb{N}, \forall n\ge n_0, |a_n|^{1/n}\ge A$.\\
+                            D'où, pour $n\ge n_0, r>0, r^n|a_n|\ge A^nr^n$, donc si $r=1/A$, $(r^n|a_n|)_{n\in\mathbb{N}}$ est non bornée.\\
+                            Donc, $R\le1/A$., en faisant $A\to+\infty$, on obtient $R=0$.
+                \end{itemize}
+        \item Supposons que pour $n\ge n_0$, $a_n\ne0$ et que $|a_{n+1}/a_n|\to_{n\to+\infty}\ell$.\\
+                On en déduit $ln(|a_{n+1}|)-ln(|a_n|)\to_{n\to+\infty}ln(\ell)$.\\
+                Donc, par moyenne de Cesaro, $\frac{1}{n}\sum_{k=0}^{+\infty}ln(|a_{k+1}|)-ln(|a_k|)\to_{n\to+\infty}ln(\ell)$.\\
+                D'où $\frac{1}{n}ln(|a_n|)-\frac{ln(|a_0|)}{n}\to_{n\to+\infty}$.
+                D'où $ln(|a_0)/n\to_{n\to+\infty}ln(\ell)$.
+                D'où $|a_n|^(1/n)\to{n\to+\infty}ln(\ell)$. On applique le critère de Cauchy et on obtient $R=1/\ell$.
+    \end{enumerate}
+}
 \ndlr{cf. Laurent pour l'exemple}
 \ndlr{Une proposition hors programme sur la limsup a été vue en cours, mais elle n'est pas au programme, donc pas ici.}
-
+	
 \theorem{Proposition}{}{false}{
     Soit $\frac{P}{Q}$ une fraction rationnelle. Alors, pour $n_0$ assez grand $\sum_{n \geq n_0} \frac{P(n)}{Q(n)} a_n z^n$ est bien défini et son rayon et convergence est le même que $\sum_{n = 0}^{+\infty} a_n z^n$.
 }
