@@ -220,8 +220,14 @@
     Soit $\sum a_n z^n$ et $\sum b_n z^n$ deux séries entières de rayons de convergence respectifs $R_a$ et $R_b$.\\\\
     Alors la série entière $\sum c_n z^n$ où $c_n = \sum_{k=0}^n a_k b_{n-k}$ a pour rayon de convergence $R_c \geq min(R_a, R_b)$ et sur le disque ouvert de convergence $D(0,R_c)$, on a $\sum_{n=0}^{+\infty} c_n z^n = \left( \sum_{n=0}^{+\infty} a_n z^n \right) \cdot \left( \sum_{n=0}^{+\infty} b_n z^n \right)$.
 }
-
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }\\
+    Soit $A_n=\sum_{k=0}^n a_k$, $A_n'=\sum_{k=0}^n|a_k|$ ; $B_n=\sum_{k=0}^nb_k$, $B_n'=\sum_{k=0}^n|b_k|$ ; $C_n=\sum_{k=0}^nc_k$; $C_n'=\sum_{k=0}^n|c_k|$; $C_n''=\sum_{k=0}^nc_k'$ où $c_k'=\sum_{k=0}^n|a_k||b_{n-k}|$.\\
+    $C_n'=\sum_{k=0}^n|\sum_{i=0}^ka_kb_{k-i}|\le\sum_{k=0}^n(\sum_{i=0}^k|a_i||b_{k-i}|)\le C_n''$.\\
+    $C_n'' = \sum_{k=0}^n(\sum_{i+j=k}|a_i||b_j|)\le\sum_{i=0}^n(\sum_{j=0}^n|a_i|b_j|)=A_n'B_n'$.\\
+    Donc, $C_n'\le A_n'B_n'$ converge, donc $C_n'$ converge. Donc, $C_n$ converge normalement.\\
+    $A_nB_n=\sum_{i=0}^n(\sum_{j=0}^na_ib_j)-\sum_{k=0}^n(\sum_{i+j=k}a_ib_j)=\sum_{(i, j)\in[1, n], i+j\ge n+1}a_ib_j$.\\
+    $|A_nB_n-C_n|\le\sum_{(i, j)\in[1, n], i+j\ge n+1}|a_i||b_j|=|A_n'B_n'-C_n''\to_{n\to+\infty}0$.
+}
 
 \example{
     On va définir $exp(z) = \sum_{n=0}^{+\infty} \frac{z^n}{n!}$.\\
