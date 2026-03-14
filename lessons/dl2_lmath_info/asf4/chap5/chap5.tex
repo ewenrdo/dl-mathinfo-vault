@@ -183,8 +183,23 @@
 \theorem{Proposition}{}{false}{
     Soit $\frac{P}{Q}$ une fraction rationnelle. Alors, pour $n_0$ assez grand $\sum_{n \geq n_0} \frac{P(n)}{Q(n)} a_n z^n$ est bien défini et son rayon et convergence est le même que $\sum_{n = 0}^{+\infty} a_n z^n$.
 }
-
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration :}\\
+    On pose $b_n=\frac{P(n)}{Q(n)}a_n$. On note $R$ le rayon de convergence de $\sum a_nz^n$ et $\rho$ le rayon de convergence de $\sum b_nz^n$. 
+    \begin{itemize}
+        \item Montrons que $\rho\ge R$.
+            \begin{itemize}
+                \item Si $R=0$, c'est évident.
+                \item Supposons que $R>0$. Soit $r\in[0, R[$ et $r'\in]r, R[$.\\
+                        On a $|b_n|r^n=|\frac{P(n)}{Q(n)}||a_n|r^n = (\frac{r}{r'}|\frac{P(n)}{Q(n)})^n|a_n|(r')^n$ et comme $\frac{r}{r'}<1$, $(\frac{r}{r'})^n\frac{P(n)}{Q(n)}\to0$, \\
+                        de plus, $\sum|a_n|(r')^n$ converge car $r'<R$. 
+                        \\Donc, $\sum|b_n|r^n$ converge, donc $0\ge r$. $\rho\ge r$ est vrai pour tout $r<R$.\\
+                        En passant au sup, on a $rho\ge R$.
+            \end{itemize}
+        \item Il reste à montrer que $\rho\le R$.\\
+                Dans ce cas, $a_n-\frac{Q(n)}{P(n)}b_n$, d'apèrs ce qui précède (en échangeant le rôle de $(a_n)$ et $(b_n)$), on obtient $\rho\le R$.
+    \end{itemize}
+    D'où $\rho=R$.
+}
 
 \example{
     $\sum a_nz^n$, $\sum \frac{a_n}{n} z^n$, $\sum \frac{a_n}{n^2} z^n$ ont le même rayon de convergence.
