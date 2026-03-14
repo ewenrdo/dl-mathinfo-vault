@@ -354,7 +354,14 @@
     Soit $\sum_{n=0}^{+\infty} a_n z^n$ une série entière à coefficients non tous nuls de rayon de convergence $R$ et de somme $f$.\\
     Alors si $f$ s'annule en $0$, alors $\exists r > 0$ tel $D(0,r) \cap f^{-1}(\{0\}) = \{0\}$, c'est-à-dire que $f$ n'a pas d'autres zéros que $0$ dans le disque ouvert de centre $0$ et de rayon $r$.
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration :} $f(0)=0$\\
+    $m=min(n\in\mathbb{N}, a_n\ne0)$. L'ensemble ${n\in\mathbb{N}, a_n\ne0}$ est non vide par hypothèse (les coefficients sont non tous nuls). $m\ge1$ car $a_0=0$ car $f(0)=0$.\\
+    On écrit $f(z)=\sum_{n=m}^{+\infty}a_nz^n = z^m\sum_{n=m}^{+\infty}a_nz^{n-m}=z^m\sum_{p=0}^{+\infty}a_(p+m)z^p$.\\
+    On définit, $g(z)=\sum_{p=0}^{+\infty}a_{p+m}z^p$. On a $g(0)=a_n\ne0$ et $g$ est continue sur $D(0, R)$.\\
+    Soit $r>0$ tel que $\forall z\in D(0, r), g(z)\ne0$. En effet, par continuité de $g$, il existe $r>0$ tel que $\forall z\in\mathbb{C}, |z-0|\le r\Rightarrow-g(z)-g(0)\le|g(0)\sum \cdots$.\\
+    Par inégalité triangulaire, $|g(z)|\ge|g(0)|-|g(z)-g(0)|\ge|g(0)|/2$.\\
+    Donc, sur $D(0, r), f(z)=z^mg(z)$ ne s'annule qu'en 0. 
+}
 
 \remark{Ici, "zéro isolé" signifie que tous les points de $f^{-1}(\{0\})$ sont isolés.}
 
