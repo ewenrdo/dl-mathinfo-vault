@@ -331,7 +331,23 @@
 
     Plus précisément $\forall z_0 \in D(0,R), f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ sur $D(z_0, R - |z_0|)$.
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration :}\\
+    Montrons que $\sum_{k=0}^{+\infty}\frac{f^{(n)}(z_0)}{n!}(z-z_0)^n$ converge sur $D(z_0, R-|z_0|)$.\\
+    On a $f^{(p)}(z_0)=\sum_{n=p}^{+\infty}n\cdot(n-1)\cdots(n-p+1)a_nz_0^{n-p}=\sum_{n=p}^{+\infty}\frac{n!}{(n-p)!}a_nz^{n-p}$. Donc $|f^{(p)}(z_0)\le\sum_{n=p}^{+\infty}\frac{n!}{(n-p)!}|a_n||z_0|^{n-p}$.\\
+    Donc pour $N\in\mathbb{N}^*$, $\sum_{p=0}^N\frac{|f^{(p)}(z_0)|}{p!}|z-z_0|^n\le\sum_{p=0}^N(\sum_{n=p}^{+\infty}\frac{n|a_n|}{(n-p)!p!}|z_0|^{n-p}|z-z_0|^p)$\\
+    $=\sum_{n=0}^{+\infty}|a_n|\sum_{p\le min(n, N)}(\begin{matrix}n\\p\end{matrix})|z_0|^{n-p}|z-z_0|^p\le\sum_{k=0}^{+\infty}(|a_n|\sum_{p=0}^n(\begin{matrix}n\\p\end{matrix})|z_0|^{n-p}|z-z_0|^n)$.\\
+    $\sum_{p=0}^N\frac{|f^{(p)}(z_0)}{p!}|z-z_0|^p\le\sum_{n=0}^{+\infty}|a_n|(|z-z_0|+|z_0|)^n$ converge si $|z-z_0|+|z|<R$, c'est-à-dire $z\in D(z_0, R-|z_0|)$.\\
+    La série double $\sum_{p=0}^{+\infty}\frac{n!}{(n-p)!p!}a_nz_0^{n-p}(z-z_0)^p$ est donc absolument converegent.\\
+    D'où $\sum_{p=0}^{+\infty}\frac{f^{(p)}(z_0)}{p!}(z-z_0)^p=\sum_{p=0}^{+\infty}(\sum_{n=0}^{+\infty}(\begin{matrix}n\\p\end{matrix})a_nz_0^{n-p}(z-z_0)^p)=\sum_{n=0}^{+\infty}(a_n\sum_{p=0}^{+\infty}(\begin{matrix}n\\p\end{matrix})z_0^{n-p}(z-z_0)^p)$\\
+    $=\sum_{n=0}^{+\infty}a_n(z-z_0+z_0)^n =\sum_{n=0}^{+\infty}a_nz^n$.
+}
+
+\ndlr{cf. Laurent pour la preuve}				
+%D’où ∑_(p=0)^(+∞)▒〖(f^((p) ) (z_0 ))/p! (z-z_0 )^p 〗
+    %=∑_(p=0)^(+∞)▒∑_(n=0)^(+∞)▒〖(■(n@p)) a_n z_0^(n-p) (z-z_0 )^p 〗							
+    %=∑_(n=0)^(+∞)▒〖a_n ∑_(p=0)^(+∞)▒〖(■(n@p)) z_0^(n-p) (z-z_0 )^p 〗〗							
+    %=∑_(n=0)^(+∞)▒〖a_n (z-z_0+z_0 )^n 〗=∑_(n=0)^(+∞)▒〖a_n z^n 〗.
+
 
 \theorem{Corollaire}{}{false}{
     Si $f$ est DSE en $z_0$, alors $f$ est holomorphe en $z_0$.
