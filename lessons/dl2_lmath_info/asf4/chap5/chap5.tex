@@ -257,12 +257,30 @@
     Soit $f$ est $\mathbb{C}$-dérivable (ou holomorphe) en $z_0$.
     Alors $f$ est différentiable en $z_0$
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration :}
+    On a $f(z)-f(z_0)=f'(z_0)\cdot(z-z_0)+o_{z\to z_0}(|z-z_0|)$ par définition de la dérivée où $o(|z-z_0|)$ est une fonction de la forme $\varepsilon(|z-z_0|)(z-z_0) $ où $\varepsilon(r)\to_{r\to0}0$.\\
+            $f'(z_0)=a+ib$, donc $z-z_0=x+iy$. \\
+            On a $(a+ib)(x+iy) = ax-by+i(ay+bx)$. Donc, $f$ est différentiable en $z_0$ et $Df(z_0)\cdot(x+iy)=(ax-by)+i(ay+bx)$.
+}
 
 \attention{Réciproque fausse}
 
-\ndlr{cf. Laurent pour la preuve}
+\example{
+    La fonction $f(x+iy)=x$ n'est pas holomorphe.\\
+    $\frac{\partial f}{\partial x}=1+i\cdot0$ et $\frac{\partial f}{\partial y}=0+i\cdot0$, mais si $f$ était holomorphe, on aurait la matrice jacobienne en $z_0=x_0+i\cdot y_0$
+    $\begin{pmatrix}
+        Re(\frac{\partial f}{\partial x}(z_0)) && Re(\frac{\partial f}{\partial x}(z_0))\\
+        Im(\frac{\partial f}{\partial x}(z_0)) && Im(\frac{\partial f}{\partial y}(z_0))
+    \end{pmatrix}$ 
+    où $a+ib=f'(z_0)$ et ce n'est pas vrai pour $f(x+iy)=x$.
+}
 
+
+\ndlr{cf. Laurent pour la preuve}
+%Exemple f(x+iy)=x n’est pas holomorphe.				
+%∂f/∂x=1+i0 ; ∂f/∂y=0+i0, mais si f était holomorphe, on aurait que la matrice	jacobienne en z_0=x_0+iy_0 est 
+%(■(Re(∂f/∂x)(z_0 )&Re(∂f/∂y)(z_0 )@Im(∂f/∂x)(z_0 )&Im(∂f/∂y  )(z_0 ) ))=(■(a&-b@b&a)) 				
+%où a+ib=f^' (z_0 ) et ce n’est pas vrai pour f(x+iy)=x.
 \remark{Les identités : $\begin{cases}
         Re(\frac{\partial f}{\partial x}) = Im(\frac{\partial f}{\partial y}) \\
         Re(\frac{\partial f}{\partial y}) = -Im(\frac{\partial f}{\partial x})
