@@ -126,7 +126,28 @@
 }
 
 \example{
-    $\sum_{n=0}^{+\infty} \frac{z^n}{n^2}$ a pour rayon de convergence $R = 1$ car $\frac{1}{n^2}^{\frac{1}{n}} \to 1$ lorsque $n \to +\infty$.
+    \begin{itemize}
+        \item $\sum_{n=0}^{+\infty}z^n$ : Elle a pour rayon de convergence 1.\\
+                En effet, $\sum_{n=0}^{+\infty}$ converge si et seulement si $|z|<1$.\\
+                En particulier, $\sum z^n$ diverge si $|z|=1$ (divergence sur tout le bord du disque ouvert).
+        \item $\sum_{n=0}^{+\infty} \frac{z^n}{n^2}$ a pour rayon de convergence $R = 1$
+        \begin{itemize}
+            \item Si $|z|>1$, alors $\frac{|z|^n}{n^2}\to_{n\to+\infty}+\infty$ par croissance comparée, donc $R<1$.
+            \item Si $|z|<1$, alors $\frac{|z|^n}{n^2}\le|z|^n$ et $\sum z^n$ convergence, donc $R\ge1$.
+        \end{itemize}
+        Donc $R=1$.\\
+        Autre méthode (by Ewen) : car $\frac{1}{n^2}^{\frac{1}{n}} \to 1$ lorsque $n \to +\infty$.
+        \begin{itemize}
+            \item Si $|z|=1$, $\frac{|z|^n}{n^2}=1/n^2$ et $\sum 1/n^2$ converge,\\ 
+            donc, $\sum1/n^2$ converge sur le bord du disque de convergence.
+        \end{itemize}
+        \item $\sum_{n=1}^{+\infty}\frac{z^n}{n}$ : 
+        \begin{itemize}
+            \item $R=1$, car $|z|>1\Rightarrow\frac{|z|^n}{n}\to+\infty$ et $|z|<1\Rightarrow\sum \frac{|z|^n}{n}$ converge.
+            \item Si $z=1$ : $\sum_{n=0}^{+\infty}1/n$ diverge.
+            \item Si $z=-1$ : $\sum_{n=0}^{+\infty}\frac{(-1)^n}{n}$ converge par critères des séries alternées.
+        \end{itemize}
+    \end{itemize}
 }
 
 \remark{
@@ -157,7 +178,6 @@
                 D'où $|a_n|^(1/n)\to{n\to+\infty}ln(\ell)$. On applique le critère de Cauchy et on obtient $R=1/\ell$.
     \end{enumerate}
 }
-\ndlr{cf. Laurent pour l'exemple}
 \ndlr{Une proposition hors programme sur la limsup a été vue en cours, mais elle n'est pas au programme, donc pas ici.}
 	
 \theorem{Proposition}{}{false}{
