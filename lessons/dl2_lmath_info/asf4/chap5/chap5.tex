@@ -285,6 +285,21 @@
     Soit $\sum_{n \geq 0} a_n z^n$ une série entière de rayon de convergence $R > 0$.\\\\
     Alors $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est continue et holomorphe sur le disque ouvert $D(0,R)$ de dérivée $f'(z) = \sum_{n=1}^{+\infty} n a_n z^{n-1}$ et le rayon de convergence de la série de terme $na_n z^{n-1}$ est aussi $R$.
 }
+\noindent{\textbf{Démonstration :}\\
+    $\sum_{n\ge1}na_n^{n-1}$ a le même rayon de convergence que $\sum_{n=0}^{+\infty}a_nz^n$. ($\approx \sum \frac{P(n)}{Q(n)}a_nz^n$ et ensuite proposition sur les fractions rationnelles de polynôme). \\
+    Or, si on pose $f_n(z)=a_nz^n$, alors $f_n'(z)=na_nz^n$. Comme $\sum f_n(z)$ converge normalement sur $D(0, R)$ pour $r<R$, alors $\sum f_n'(z)$ converge normalement sur $(0, r)$ pour $r<R$.\\
+    Le théorème de dérivations des séries complexe impose que $f$ est $\mathbb{C}$-dérivable et $f'(z)=\sum_{n=1}^{+\infty}na_nz^{n-1}$. Montrons que $(z^n)'=nz^{n-1}$.\\
+    On a $z^n-z_0^n=(z-z_0)\sum_{k=0}^{n-1}z^kz_0^{n-1-k}$. Donc $\frac{z^n-z_0^n}{z_n-z_0}=\sum_{k=0}^{n-1}z^kz_0^{n-k-1}\to_{z\to z_0}\sum_{k=0}^{n-1}z_0^{n-1}=nz_0^{n-1}$.
+}
+
+%∑_(n≥1)▒〖na_n z^(n-1) 〗 a le même rayon de convergence que ∑_(n=0)^(+∞)▒〖a_n z^n 〗. 					
+%(≈∑▒〖P(n)/Q(n)  a_n z^n 〗 et ensuite proposition sur les fractions rationnelles de polynômes)
+%Or, si on pose f_n (z)=a_n z^n, alors f_n^' (z)=na_n z^n.
+%Comme ∑▒〖f_n (z) 〗 converge normalement sur D(0,r) pour r<R, 			∑▒〖f_n^' (z) 〗 converge normalement sur D(0,r) pour r<R.
+%Le théorème de dérivations des séries complexe impose que f est C-dérivable et f^' (z)=∑_(n=1)^(+∞)▒〖na_n z^(n-1) 〗.
+%Montrons que (z^n )^'=nz^(n-1).
+%On a z^n-z_0^n=(z-z_0 ) ∑_(k=0)^(n-1)▒〖z^k z_0^(n-1-k) 〗, 
+%Donc (z^n-z_0^n)/(z-z_0 )=∑_(k=0)^(n-1)▒〖z^k z_0^(n-k-1) 〗 □(→┬(z→z_0 ) ) ∑_(k=0)^(n-1)▒z_0^(n-1) =nz_0^(n-1).
 
 \ndlr{cf. Laurent pour la preuve}
 
