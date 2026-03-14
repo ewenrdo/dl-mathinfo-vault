@@ -386,7 +386,15 @@
 \theorem{Théorème}{Prolongement analytique}{false}{
     Si $f$ et $g$ sont deux fonctions analytiques sur un ouvert connexe $U$ de $\mathbb{C}$ qui sont égales sur une partie de $U$ de la forme $\{ z_{\infty} \} \cup \{z_n \in \mathbb{N}\}$ où $z_n \to z_{\infty}$ ($z_{\infty}$ est alors un point d'accumulation de $U$), alors $f$ et $g$ sont égales sur tout $U$. 
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }\\
+    Notons $z_0$ un point accumulateur de $U$. Comme $U$ est ouvert, soit $r>0$ tel que $D(z_0, r)\subset U$.\\
+    $f$ et $g$ coïncident sur $D(z_0, r)$ par le théorème des zéros isolés. En effet, $(f-g)(z_n)=0$ avec $z_n\to z_0$ et $z_n\ne z_0$ par hypothèse.\\
+    Donc, $f=g$ sur $D(z_0, r)$.\\
+    On pose $F={z\in U, f(z)=g(z)}$. Montrons que $F$ est un ouvert-fermé de $U$.\\
+    $F=U\cap((f-g)^{-1}({0}))$ qui est fermé car ${0}$ est fermé et $f-g$ est continue.\\
+    Donc, $F$ est un fermé de $U$.\\
+    Montrons que $F$ est un ouvert (exercice)
+}
 
 
 \ndlr{Exemple d'application sur OneNote}
@@ -394,8 +402,10 @@
 \theorem{Proposition}{}{false}{
     $f$ analytique sur $\mathbb{C} \Rightarrow f$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{C} \Rightarrow f$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{R}$
 }
+\noindent{\textbf{Démonstration :} 
+    On a vu qu'une série entière est de classe $C^\infty$ sur $D(0, R)$ et sur $]-R, R[$.\\
+}
 
-\ndlr{cf. Laurent pour la preuve}
 \attention{La réciproque de la dernière implication est fausse.}
 
 \section{Fonction exponentielle et fonctions trigonométriques}
