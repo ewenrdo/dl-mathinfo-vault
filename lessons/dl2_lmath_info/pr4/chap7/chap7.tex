@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info PR4}
+\fancyhead[C]{Probabilités}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 7 : Outils probabilistes}
+
+\section{Inégalités sur l'espérance}
+\subsection{Inégalité de Markov}
+
+\theorem{Proposition}{Inégalité de Markov}{false}{
+    Si $X \geq 0$ et $a > 0$, alors :
+    \[ \mathbb{P}(X \geq a) \leq \frac{\mathbb{E}[X]}{a} .\]
+}
+
+\example{
+    On jette $n$ fois une pièce équilibrée et on note $S_n$ le nombre de Piles obtenues.\\
+    On a $\mathbb{E}[S_n] = \frac{n}{2}$ par linéarité de l'espérance.\\
+    En appliquant l'inégalité de Markov, on obtient :
+    \[ \mathbb{P}\left(S_n \geq \frac{3n}{4}\right) \leq \frac{\mathbb{E}[S_n]}{\frac{3n}{4}} = \frac{\frac{n}{2}}{\frac{3n}{4}} = \frac{2}{3} .\]
+    L'inégalité est correcte, mais quelque peu décevante car la borne ne décroit pas avec n.
+}
+
+\subsection{Inégalité de Bienaymé-Tchebychev}
+
+\theorem{Proposition}{Inégalité de Bienaymé-Tchebychev}{false}{
+    Soit $X$ une variable aléatoire réelle discrète de carré intégrable.
+    \[
+       \forall a > 0, \quad \mathbb{P}(|X - \mathbb{E}[X]| \geq a) \leq \frac{\mathrm{Var}(X)}{a^2} .
+    \]
+    \textit{En particulier,} si $Var(X) > 0$, on a : $\mathbb{P}(|X - \mathbb{E}[X]| \geq c \sqrt{\mathrm{Var}(X)}) \leq \frac{1}{c^2}$ pour tout $c > 0$.
+}
+
+\noindent{\textbf{Preuve :} Appliquer l'inégalité de Markov à la variable aléatoire $(X - \mathbb{E}[X])^2$ qui est positive.}
+
+\remark{L'inégalité de Bienaymé-Tchebychev permet de majorer la probabilité que $X$ s'écarte de sa moyenne de plus de $a$ en fonction de la variance de $X$.}
+\example{Reprenons l'exemple du lancer de pièce. On a $Var(S_n) = \frac{n}{4}$. On observe que $\{ S_n \geq \frac{3n}{4} \} \subset \{ |S_n - \mathbb{E}[S_n]| \geq \frac{n}{4} \}$.\\
+Puisque $S_n$ est de carré intégrable, on peut appliquer l'inégalité de Bienaymé-Tchebychev :
+\[
+    \mathbb{P}\left(S_n \geq \frac{3n}{4}\right) \leq \mathbb{P}\left(|S_n - \mathbb{E}[S_n]| \geq \frac{n}{4}\right) \leq \frac{\mathrm{Var}(S_n)}{\left(\frac{n}{4}\right)^2} = \frac{\frac{n}{4}}{\frac{n^2}{16}} = \frac{4}{n} .
+\]
+Cette majoration est plus satisfaisante que celle obtenue avec l'inégalité de Markov, car elle tend vers 0 lorsque $n$ tend vers l'infini.
+}
+
+\subsection{Inégalité de Cauchy-Schwarz}
+
+\theorem{Proposition}{Inégalité de Cauchy-Schwarz}{false}{
+    Soit $X$ et $Y$ deux variables aléatoires réelles discrètes de carré intégrable. Alors la variable aléatoire $XY$ est intégrable et on a :
+    \[
+        |\mathbb{E}[XY]| \leq \sqrt{\mathbb{E}[X^2]} \sqrt{\mathbb{E}[Y^2]} .
+    \]
+}
+
+\theorem{Corollaire}{Borne sur le coefficient de corrélation}{false}{
+    Soit $X$ et $Y$ deux variables aléatoires réelles discrètes de carré intégrable. Le coefficient de corrélation $\rho(X,Y) = \frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)} \sqrt{\mathrm{Var}(Y)}}$ est bien défini et vérifie $|\rho(X,Y)| \leq 1$.
+}
+\noindent{\textbf{Preuve :} On peut faire une belle preuve en posant dans $\mathbb{R}^2$ le produit scalaire $\langle X, Y \rangle = \mathbb{E}[XY]$ et la norme $\|X\| = \sqrt{\mathbb{E}[X^2]}$. L'inégalité de Cauchy-Schwarz est alors une conséquence directe de l'inégalité de Cauchy-Schwarz dans les espaces euclidiens.}
+
+\remark{L'inégalité de Cauchy-Schwarz est un outil fondamental dans les espaces euclidiens et trouve de nombreuses applications en probabilité, notamment dans l'étude de la covariance et du coefficient de corrélation.}
+
+\newpage
+\tableofcontents
+
+\end{document}
