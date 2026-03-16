@@ -132,6 +132,38 @@ Soient $X_1, \ldots, X_d$ des variables aléatoires réelles à valeur dans des 
     On conclut par la $\sigma$-additivité de la probabilité.
 }
 
+\example{
+    (pour $d=2$) Soient $X,Y$ deux variables aléatoires à valeurs dans $E, F$.\\\\
+    La loi marginale de $X$ est donnée par $\mathbb{P}(X=x) = \sum_{y \in F} \mathbb{P}(X=x, Y=y)$ pour $x \in E$.\\
+    De même, la loi marginale de $Y$ est donnée par $\mathbb{P}(Y=y) = \sum_{x \in E} \mathbb{P}(X=x, Y=y)$ pour $y \in F$.
+}
+
+\subsection{Indépendance et loi conditionnelle}
+
+\theorem{Proposition}{}{false}{
+    Soient $X$ et $Y$ deux variables aléatoires à valeurs dans des ensembles dénombrables $E$ et $F$.\\
+    Ces variables sont indépendantes si et seulement si il existe deux fonctions positives $f,g$ telles que pour tout $x \in E$ et $y \in F$ on ait :
+    \[
+        \mathbb{P}(X=x, Y=y) = f(x)g(y)
+    \]
+    Dans ce cas, on a $\mathbb{P}(X=x) = \frac{f(x)}{\sum_{x' \in E} f(x')}$ et $\mathbb{P}(Y=y) = \frac{g(y)}{\sum_{y' \in F} g(y')}$.
+}
+\remark{Cette proposition est valable pour plus de deux variables aléatoires.}
+
+\definition{
+    Soient $X$ et $Y$ deux variables aléatoires à valeurs dans des ensembles dénombrables $E$ et $F$.\\
+    La \textbf{loi conditionnelle} de $Y$ sachant $X=x$ est la mesure de probabilité sur $F$ définie par :
+    \[
+        \mathbb{P}(Y=y | X=x) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(X=x)}, \; \text{pour } y \in F
+    \]
+}
+
+\section{Tableaux de lois jointes}
+
+Il est souvent pratique de représenter la loi jointe de deux variables à valeurs dans des espaces finis par un tableau à double entrée.\\\\
+Pour obtenir les lois marginales à partir de ce tableau, il suffit de faire la somme des probabilités sur les lignes (pour la loi marginale de $X$) ou sur les colonnes (pour la loi marginale de $Y$).\\\\
+Pour obtenir la loi conditionnelle de $Y$ sachant $X=x$, il suffit de diviser les probabilités de la ligne correspondant à $X=x$ par la probabilité marginale $\mathbb{P}(X=x)$.
+
 \newpage
 \tableofcontents
 
