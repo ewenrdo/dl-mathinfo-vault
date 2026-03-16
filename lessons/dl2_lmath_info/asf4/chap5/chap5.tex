@@ -316,17 +316,16 @@
 
 \definition{
     Soit $U$ un ouvert $\mathbb{C}$ et $f : U \to \mathbb{C}$.\\
-    On dit que $f$ est \textbf{analytique} en $z_0 \in U$ s'il existe $r > 0$ tel que sur $D(z_0,r)$ il existe $\sum_{n=0}^{+\infty} a_n w^n$ une série entière de rayon de convergence $R \geq r$ tel que $\forall z \in \mathbb{C}, |z - z_0| < r \Rightarrow f(z) = \sum_{n=0}^{+\infty} a_n (z-z_0)^n$.\\\\
+    On dit que $f$ est \textbf{analytique} ou \textbf{développable en série entière (DSE)} en $z_0 \in U$ s'il existe $r > 0$ tel que sur $D(z_0,r) \subset U$ et une suite de coefficients $(a_n)_{n\in\mathbb{N}}$ tels que \[\forall z \in D(z_0,r), f(z) = \sum_{n=0}^{+\infty} a_n (z-z_0)^n\]
     
-    On dit que aussi que $f$ est développable en série entière \textit{(DSE)} en $z_0$ .
 }
 
 \remark{
-    $f$ est DSE en $z_0$ si et seulement si $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ au voisinage de $z_0$.
+    $f$ est DSE en $z_0$ si et seulement si $f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ au voisinage de $z_0$ (formule de Taylor).
 }
 
-\theorem{Théorème}{}{false}{
-    Soit $\sum_{n=0}^{+\infty} a_n z^n$ est série entière de rayon de convergence $R$.\\
+\theorem{Théorème}{Translation du DSE}{false}{
+    Soit $\sum_{n=0}^{+\infty} a_n z^n$ une série entière de rayon de convergence $R$.\\
     Alors $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ est DSE en tout point de $D(0,R)$.\\\\
 
     Plus précisément $\forall z_0 \in D(0,R), f(z) = \sum_{n=0}^{+\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$ sur $D(z_0, R - |z_0|)$.
@@ -342,10 +341,11 @@
     $=\sum_{n=0}^{+\infty}a_n(z-z_0+z_0)^n =\sum_{n=0}^{+\infty}a_nz^n$.
 }
 
+\remark{De manière intuitive, ce théorème nous autorise à "translater" le DSE de $0$ à n'importe quel point du disque ouvert de convergence, en réduisant le rayon de convergence d'autant que la distance entre le point de translation et $0$.}
 
 \theorem{Corollaire}{}{false}{
     Si $f$ est DSE en $z_0$, alors $f$ est holomorphe en $z_0$.
-}
+}la
 \ndlr{Car une série entière est holomorphe sur son disque de convergence.}
 
 \vocabulary{Soit $A \subset \mathbb{C}$. On dit que $x \in A$ est isolé dans $A$ s'il existe $r > 0$ tel que $D(x,r) \cap A = \{x\}$}
@@ -362,6 +362,7 @@
     Par inégalité triangulaire, $|g(z)|\ge|g(0)|-|g(z)-g(0)|\ge|g(0)|/2$.\\
     Donc, sur $D(0, r), f(z)=z^mg(z)$ ne s'annule qu'en 0. 
 }
+\remark{En particulier, si $f$ est nulle sur un voisinage de $z_0$, alors $f$ est nulle sur tout le disque de convergence.}
 
 \remark{Ici, "zéro isolé" signifie que tous les points de $f^{-1}(\{0\})$ sont isolés.}
 
@@ -370,10 +371,28 @@
 \theorem{Corollaire}{Unicité du DSE en un point}{false}{
     Si $f \colon U \to \mathbb{C}$ où $U$ est un ouvert de $\mathbb{C}$ est DSE en $z_0 \in U$, alors la série entière qui développe $f$ en $z_0$ de la forme $\sum_{n=0}^{+\infty} a_n (z-z_0)^n$ est unique.
 }
-
+\noindent{\textbf{Preuve :} \textit{(n'est pas celle du cours)}
+    Supposons que $f$ admet deux développements en série entière en $0$ sur $D(0, R)$ de la forme :
+    \begin{itemize}
+        \item $f(z) = \sum_{n=0}^{+\infty} a_n z^n$ sur $D(0,R)$
+        \item $f(z) = \sum_{n=0}^{+\infty} b_n z^n$ sur $D(0,R)$
+    \end{itemize}
+    Avec $a_n$ et $b_n$ deux suites complexes ayant au moins un rang $N$ tel que $a_N \neq b_N$.\\
+    Considérons $h(z) = \sum_{n=0}^{+\infty} (a_n - b_n) z^n$ sur $D(0,R)$.\\
+    Comme les deux séries convergent vers $f$ sur $D(0,R)$, on a $h(z) = 0$ pour tout $z \in D(0,R)$.\\\\
+    
+    \noindent D'autre part, $(a_n - b_n)_{n\in\mathbb{N}}$ n'est pas la suite nulle (car $a_N \neq b_N$).\\
+    Donc $\sum_{n=0}^{+\infty} (a_n - b_n) z^n$ est une série entière à coefficients non tous nuls de rayon de convergence $R$ et de somme $h$.\\
+    Par le théorème des zéros isolés, les zéros de $h$ sont isolés.\\
+    C'est absurde : $h$ est nulle sur $D(0,R)$, donc tous les points de $D(0,R)$ sont des zéros de $h$, donc les zéros de $h$ ne sont pas isolés.\\
+    Donc $h = 0$ sur $D(0,R)$, donc $\forall n \in \mathbb{N}, a_n - b_n = 0$, donc $\forall n \in \mathbb{N}, a_n = b_n$.\\
+    Donc la série entière qui développe $f$ en $0$ sur $D(0,R)$ est unique.
+    On généralise ce raisonnement pour tout $z_0$ en utilisant la translation du DSE.
+}
 \definition{
     On dit qu'un ensemble que $U \subset \mathbb{C}$ est \textbf{connexe} si toute écriture $U = V \sqcup W$ avec $V$ et $W$ ouverts de $U$ implique que $V = \emptyset$ ou $W = \emptyset$.
 }
+\remark{De manière intuitive, un ensemble est connexe s'il est constitué d'une seule "partie".}
 \ndlr{Cette définition n'est pas au programme, mais le prof a demandé si on la voulait quand même. Étant donné qu'elle était nécessaire pour ce qui suit, Alex (alex.theophilos@etu.u-paris.fr, \href{https://instagram.com/alex.\_jth}{@alex.\_jth}) lui a demandé de la donner. Le prof a dit "si vous ne comprenez rien, c'est normal".}
 \remark{Un ouvert de $U$ est un ensemble de la forme $U \cap O$ où $O$ est un ouvert de $\mathbb{C}$.}
 
@@ -384,7 +403,7 @@
 \remark{$z$ est un point d'accumulation de $U$ si et seulement si il n'est pas isolé dans $U$.}
 
 \theorem{Théorème}{Prolongement analytique}{false}{
-    Si $f$ et $g$ sont deux fonctions analytiques sur un ouvert connexe $U$ de $\mathbb{C}$ qui sont égales sur une partie de $U$ de la forme $\{ z_{\infty} \} \cup \{z_n \in \mathbb{N}\}$ où $z_n \to z_{\infty}$ ($z_{\infty}$ est alors un point d'accumulation de $U$), alors $f$ et $g$ sont égales sur tout $U$. 
+    Si $f$ et $g$ sont deux fonctions analytiques sur un ouvert connexe $U$ de $\mathbb{C}$ qui sont égales sur une partie de $U$ de la forme $\{ z_{\infty} \} \cup \{z_n \mid n \in \mathbb{N}\}$ où $z_n \to z_{\infty}$ ($z_{\infty}$ est alors un point d'accumulation de $U$), alors $f$ et $g$ sont égales sur tout $U$. 
 }
 \noindent{\textbf{Démonstration : }\\
     Notons $z_0$ un point accumulateur de $U$. Comme $U$ est ouvert, soit $r>0$ tel que $D(z_0, r)\subset U$.\\
@@ -395,6 +414,7 @@
     Donc, $F$ est un fermé de $U$.\\
     Montrons que $F$ est un ouvert (exercice)
 }
+\remark{Si la valeur de $f$ et $g$ sur une infinité de points qui se serrent de plus en plus (point d'accumulation), alors $f = g$ sur tout l'ouvert connexe. C'est une onde qui se propage.}
 
 
 \ndlr{Exemple d'application sur OneNote}
@@ -486,7 +506,7 @@ $\cos x$ & $1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots$ \\
 $\arctan x$ & $x - \frac{x^3}{3} + \frac{x^5}{5} + \cdots$ (primitiver $(1+x^2)^{-1}$) \\
 
 \hline
-$\ln(1+x)$ & primitiver $(1-x)^{-1}$\\
+$\ln(1+x)$ & primitiver $(1+x)^{-1}$\\
 \hline
 $\sin x$ & primitiver $\cos x$ \\
 \hline
