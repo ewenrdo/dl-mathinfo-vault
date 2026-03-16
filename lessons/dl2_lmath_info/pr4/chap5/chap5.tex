@@ -189,26 +189,30 @@ On a donc vu que l'espérance d'une variable aléatoire discrète est une série
 Pour les lois usuelles vu au chapitre 4 (Variables aléatoires), on trouve les résultats suivants :
 
 \begin{center}
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|l|c|c|}
+\renewcommand{\arraystretch}{2.5}
+\begin{tabular}{|l|c|c|c|}
 \hline
-\textbf{Loi / Paramètres} & \textbf{Espérance} & \textbf{Variance} \\
+\textbf{Loi / Paramètres} & \textbf{$\mathbb{P}(X=k)$} & \textbf{Espérance} & \textbf{Variance} \\
 \hline
-Bernoulli $Ber(p)$ & $p$ & $p(1-p)$ \\
+Uniforme $\mathcal{U}(\{1, \ldots, n\})$ sur $\{1,\ldots,n\}$ & $\dfrac{1}{n}$ & $\dfrac{n+1}{2}$ & $\dfrac{n^2-1}{12}$ \\
 \hline
-Uniforme $\mathcal{U}(\{1, \ldots, n\})$ & $\dfrac{n+1}{2}$ & $\dfrac{n^2-1}{12}$ \\
+Bernoulli $Ber(p)$ sur $\{0,1\}$ & $p^k(1-p)^{1-k}$ & $p$ & $p(1-p)$ \\
 \hline
-Binomiale $\mathcal{B}(n,p)$ & $np$ & $np(1-p)$ \\
+Binomiale $\mathcal{B}(n,p)$ sur $\{0,\ldots,n\}$ & $\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$ \\
 \hline
-Poisson $\mathcal{P}(\lambda)$ & $\lambda$ & $\lambda$ \\
+Poisson $\mathcal{P}(\lambda)$ sur $\mathbb{N}$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ & $\lambda$ & $\lambda$ \\
 \hline
-Géométrique $\mathcal{G}(p)$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ \\
+Géométrique $\mathcal{G}(p)$ sur $\mathbb{N}$ & $p(1-p)^{k}$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ \\
 \hline
-Hypergéométrique $\mathcal{H}(N,n,K)$ & $\dfrac{nK}{N}$ & $n\dfrac{K}{N}\left(1-\dfrac{K}{N}\right)\dfrac{N-n}{N-1}$ \\
+Hypergéométrique $\mathcal{H}$ sur $\mathcal{A}$ & $\dfrac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$ & $\dfrac{nK}{N}$ & $n\dfrac{K}{N}\left(1-\dfrac{K}{N}\right)\dfrac{N-n}{N-1}$ \\
 \hline
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 \end{center}
+
+\smallskip
+\noindent
+Ici, $\mathcal{A} = \{\max(0,n-(N-K)),\ldots,\min(n,K)\} = \{k \in \mathbb{N} : k \leq K, n-k \leq N-K\}$.
 
 \section{Espérance et indépendance}
 
