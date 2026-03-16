@@ -1,0 +1,138 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info PR4}
+\fancyhead[C]{Probabilités}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 6 : Vecteurs aléatoires}
+
+\section{Covariance}
+
+\definition{
+    Soient $X,Y$ deux variables aléatoires réelles discrètes de carrés intégrables. On appelle \textbf{covariance} de $X$ et $Y$ la quantité suivante :
+    \[\text{Cov}(X,Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]\]
+}
+
+\remark{Souvent, si deux variables ont tendance à être plus grandes que leurs moyennes en même temps (respectivement plus petites), on aura $Cov(X,Y) > 0$. Si au contraire, lorsque l'une est plus grande que sa moyenne, l'autre a tendance à être plus petite, on aura $Cov(X,Y) < 0$.} 
+
+\example{
+    On tire un dé standard avec des faces numérotées de 1 à 6. On pose :
+    \begin{itemize}
+        \item $X = 1$ si le résultat est pair et 0 sinon,
+        \item $Y = 1$ si on a tiré un 6 et 0 sinon,
+        \item $Z = 1$ si on a tiré un 1 et 0 sinon.
+    \end{itemize}
+    Ces trois variables sont toutes différentes. Après calcul, on trouve que $\mathbb{E}[X] = \frac{1}{2}$, $\mathbb{E}[Y] = \frac{1}{6}$, $\mathbb{E}[Z] = \frac{1}{6}$.\\
+    De plus, on remarque que $XY = Y$ (car $Y=1$ implique $X=1$), $XZ = 0$ et $YZ =0$ (car les variables ne peuvent pas valoir $1$ en même temps).\\
+    On a donc : 
+    \[
+    \text{Cov}(X,Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = \frac{1}{6} - \frac{1}{2}\cdot\frac{1}{6} = \frac{1}{12}
+    \]
+    Ainsi que :
+    \[
+    \text{Cov}(X,Z) = -\frac{1}{12} \quad \text{et} \quad \text{Cov}(Y,Z) = -\frac{1}{36}
+    \]
+    Ainsi, $X$ et $Y$ sont positivement corrélés, tandis que $X$ et $Z$ ainsi que $Y$ et $Z$ sont négativement corrélés.
+}
+
+\problem{On retrouve le même problème que pour la variance quand on s'intéresse aux unités. Par exemple, si $X$ et $Y$ sont des variables aléatoires mesurant des longueurs en mètres, alors $\text{Cov}(X,Y)$ aura des unités de mètres carrés, ce qui peut rendre l'interprétation difficile.}
+
+\definition{
+    Soient $X,Y$ deux variables aléatoires réelles discrètes de carrés intégrables. On appelle \textbf{coefficient de corrélation} de $X$ et $Y$ la quantité suivante :
+    \[\rho(X,Y) = \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)}\sqrt{\text{Var}(Y)}}\]
+}
+
+\remark{Le coefficient de corrélation $\rho(X,Y)$ est un nombre sans unité qui mesure la force et la direction de la relation linéaire entre $X$ et $Y$. Il est compris entre -1 et 1, où 1 indique une corrélation positive parfaite, -1 une corrélation négative parfaite, et 0 aucune corrélation linéaire.}
+
+\theorem{Proposition}{Identités de la variance et covariance}{false}{
+    Soient $X, X', Y, Y'$ des variables aléatoires réelles de carrés intégrables et $a, b \in \mathbb{R}$. On a :
+    \begin{enumerate}
+        \item $\text{Cov}(X,X) = \text{Var}(X)$
+        \item $\text{Cov}(X+a,Y+b) = \text{Cov}(X,Y)$
+        \item $\text{Cov}(aX,bY) = ab\text{Cov}(X,Y)$
+        \item $\text{Var}(aX+b) = a^2\text{Var}(X)$ (ne pas confondre avec $\mathbb{E}[aX+b] = a\mathbb{E}[X]+b$)
+        \item $\text{Cov}(X,Y) = \text{Cov}(Y,X)$
+        \item $\text{Cov}(X+X',Y+Y') = \text{Cov}(X,Y) + \text{Cov}(X,Y') + \text{Cov}(X',Y) + \text{Cov}(X',Y')$
+        \item $\text{Var}(X+X') = \text{Var}(X) + 2\text{Cov}(X,X') + \text{Var}(X')$
+    \end{enumerate}
+}
+
+\training{Démontrer les différentes propriétés de la proposition précédente.}
+\noindent \carreaux{10}
+
+\theorem{Proposition}{Lien entre covariance et indépendance}{false}{
+    Soient $X,Y$ deux variables aléatoires réelles de carrés intégrables. On a :
+    \[
+        X \text{ et } Y \text{ sont indépendantes} \Rightarrow \text{Cov}(X,Y) = 0
+    \]
+}
+
+\attention{La réciproque n'est pas vraie : il est possible que $\text{Cov}(X,Y) = 0$ alors que $X$ et $Y$ ne sont pas indépendantes.}
+
+\theorem{Corollaire}{Variance d'une somme de variables aléatoires}{false}{
+    Soient $X_1, \ldots, X_n$ des variables aléatoires réelles de carrés intégrables. On a :
+    \[
+        Var(\sum_{i=1}^n X_i) = \sum_{i=1}^n Var(X_i) + 2\sum_{1 \leq i < j \leq n} Cov(X_i, X_j)
+    \]
+    De plus, si les variables sont indépendantes, alors : $Var(\sum_{i=1}^n X_i) = \sum_{i=1}^n Var(X_i)$.
+}
+
+\example{
+    Soit $X_1, \ldots, X_n$ des variables aléatoires indépendantes de loi de Bernoulli de paramètre $p$.\\
+    On pose $S_n = \sum_{i=1}^n X_i$ ($S_n \sim \text{B}(n,p)$).\\
+    On a $Var(X_i) = p(1-p)$ pour tout $i$, et $Cov(X_i, X_j) = 0$ pour $i \neq j$.\\
+    Donc : $Var(S_n) = \sum_{i=1}^n Var(X_i) = np(1-p)$.
+}
+
+\section{Loi jointe, loi marginale}
+
+Soient $X_1, \ldots, X_d$ des variables aléatoires réelles à valeur dans des espaces dénombrables $E_1, \ldots, E_d$. Notons $(X_1, \ldots, X_d)$ la variable aléatoire à valeur dans $E_1 \times \cdots \times E_d$ définie par $(X_1, \ldots, X_d)(\omega) = (X_1(\omega), \ldots, X_d(\omega))$.\\
+
+\definition{
+    Soient $X_1, \ldots, X_d$ comme ci-dessus. On appelle \textbf{loi jointe} de $X_1, \ldots, X_d$ la loi de la variable aléatoire $(X_1, \ldots, X_d)$, c'est-à-dire la mesure de probabilité sur $E_1 \times \cdots \times E_d$ définie par :
+    \[
+        \mathbb{P}(X_1 = x_1, \ldots, X_d = x_d), \; \text{pour } x_1 \in E_1, \ldots, x_d \in E_d
+    \]
+}
+
+\remark{La loi jointe de $X_1, \ldots, X_d$ contient toute l'information sur la distribution conjointe de ces variables.}
+
+\definition{
+    Soient $X_1, \ldots, X_d$ comme ci-dessus. On appelle \textbf{loi marginale} de $X_i$ la loi de la variable aléatoire $X_i$, c'est-à-dire la mesure de probabilité sur $E_i$ définie par :
+    \[
+        \mathbb{P}(X_i = x_i), \; \text{pour } x_i \in E_i
+    \]
+}
+
+\theorem{Proposition}{Calcul de la loi marginale}{false}{
+    Soient $X_1, \ldots, X_d$ comme ci-dessus. La loi marginale de $X_i$ se calcule à partir de la loi jointe par :
+    \[
+        \mathbb{P}(X_i = x_i) = \sum_{\substack{x_1 \in E_1 \\ \vdots \\ x_{i-1} \in E_{i-1} \\ x_{i+1} \in E_{i+1} \\ \vdots \\ x_d \in E_d}} \mathbb{P}(X_1 = x_1, \ldots, X_d = x_d)
+    \]
+}
+
+\noindent{\textbf{Preuve :}\\
+    On a que $\{ X_i = x_i \} = \bigcup_{x_1\in E_1} \cdots \bigcup_{x_{i-1} \in E_{i-1}} \bigcup_{x_{i+1} \in E_{i+1}} \cdots \bigcup_{x_d \in E_d} \{ X_1 = x_1, \ldots, X_d = x_d \}$, et que ces événements sont disjoints, donc l'union est disjointe.\\
+    On conclut par la $\sigma$-additivité de la probabilité.
+}
+
+\newpage
+\tableofcontents
+
+\end{document}
