@@ -73,7 +73,29 @@ Soit $E$ un espace euclidien orienté tel que $dim(E) = 3$.
     Théorème de représentation de Riesz: pour toute forme linéaire $f$ sur $E$, il existe un unique vecteur $v_f$ tel que pour tout $x \in E$, $f(x) = \langle v_f, x \rangle$.
 }
 
+\noindent Soient $x,y \in E$, alors : $z \mapsto [x,y,z]$ est une application linéaire.
+On appliquant le théorème de représentation de Riesz, il existe un unique vecteur noté $x \wedge y$ tel que $\forall z \in E, [x,y,z] = \langle x \wedge y, z \rangle$. 
 
+\definition{
+    Soit $E$ un espace euclidien orienté de dimension 3. Soient $x,y \in E$.\\
+    On appelle \textbf{produit vectoriel} de $x$ et $y$ le vecteur $x \wedge y$ défini par : $\forall z \in E, [x,y,z] = \langle x \wedge y, z \rangle$.
+}
+
+\theorem{Propriétés}{}{false}{
+    \begin{enumerate}
+        \item \function{*}{E \times E \to E}{(x,y) \mapsto x \wedge y} est une application bilinéaire antisymétrique.
+        \item $\forall x,y,z \in E \; \langle x \wedge y, z \rangle = \langle z \wedge x, y \rangle = \langle y \wedge z, x \rangle$.
+        \item $\langle x \wedge y, x \rangle = \langle x \wedge y, y \rangle = 0$.
+        \item Si $\exists \lambda \in \mathbb{R}$ tel que $x = \lambda y$, alors $x \wedge y = 0$.
+    \end{enumerate}
+}
+
+\training{Démontrer les propriétés du produit vectoriel.}
+\remark{Le produit vectoriel $\wedge$ n'est pas associatif. En revanche, si $a,b,c \in E$, on peut définir $a \wedge (b \wedge c) = \langle a, c \rangle b - \langle a, b \rangle c$.}
+
+\training{Montrer que $\forall x,y,z \in E$, on a l'identité de Jacobi : $x \wedge (y \wedge z) + y \wedge (z \wedge x) + z \wedge (x \wedge y) = 0$.}
+\noindent \carreaux{7}
+\textit{Pour la culture, $(\mathbb{R}^3, \wedge)$ est un exemple de \textbf{algèbre de Lie}  ($SO(3)$).}
 
 \newpage
 \tableofcontents
