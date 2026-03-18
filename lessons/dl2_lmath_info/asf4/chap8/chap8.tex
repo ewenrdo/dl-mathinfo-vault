@@ -54,8 +54,26 @@ On dira : $\mathcal{B} = (e_1, \ldots, e_n) \sim (e_1', \ldots, e_n') = \mathcal
 \section{Espaces euclidiens et produits mixtes}
 
 \definition{
-    Un espace euclidien orienté est un espace euclidien muni d'une orientation.
+    Un \textbf{espace euclidien orienté} est un espace euclidien muni d'une orientation.
 }
+
+\definition{
+    Soient $x_1, \ldots x_n$ des vecteurs d'un espace euclidien orienté. On appelle \textbf{produit mixte} ou \textbf{déterminant} la quantité :
+    \[
+        Det(x_1, \ldots, x_n) = [x_1, \ldots, x_n] = det_{\mathcal{B}}(x_1, \ldots, x_n) \; \text{ où } \mathcal{B} \text{ est une base orthonormée directe quelconque de } E
+    \]
+}
+\remark{On met bien $Det$ en majuscules pour différencier du déterminant de matrices / de familles de vecteurs usuel.}
+\training{Démontrer que le produit mixte est bien défini.}
+
+\section{Produit vectoriel en dimension 3}
+Soit $E$ un espace euclidien orienté tel que $dim(E) = 3$.
+
+\reminder{
+    Théorème de représentation de Riesz: pour toute forme linéaire $f$ sur $E$, il existe un unique vecteur $v_f$ tel que pour tout $x \in E$, $f(x) = \langle v_f, x \rangle$.
+}
+
+
 
 \newpage
 \tableofcontents
