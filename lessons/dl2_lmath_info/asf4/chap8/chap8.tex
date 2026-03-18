@@ -97,6 +97,36 @@ On appliquant le théorème de représentation de Riesz, il existe un unique vec
 \noindent \carreaux{7}
 \textit{Pour la culture, $(\mathbb{R}^3, \wedge)$ est un exemple de \textbf{algèbre de Lie}  ($SO(3)$).}
 
+\theorem{Proposition}{Calcul dans une B.O.N. directe}{false}{
+    Soit $\mathcal{B} = (e_1, e_2, e_3)$ une base orthonormée directe de $E$.\\
+    Alors pour tous $x,y \in E$, on a : $x \wedge y = (x_2y_3 - x_3y_2)e_1 + (x_3y_1 - x_1y_3)e_2 + (x_1y_2 - x_2y_1)e_3$.
+}
+\noindent{\textbf{Preuve:}\\
+On pose $x = \sum_{i=1}^3 x_i e_i$ et $y = \sum_{i=1}^3 y_i e_i$.\\
+$x \wedge y = \langle x \wedge y, e_1 \rangle e_1 + \langle x \wedge y, e_2 \rangle e_2 + \langle x \wedge y, e_3 \rangle e_3$\\
+
+Or $\langle x \wedge y \rangle = \begin{vmatrix}
+x_1 & y_1 & 1 \\
+x_2 & y_2 & 0 \\
+x_3 & y_3 & 0
+\end{vmatrix} = (x_2y_3 - x_3y_2)$, $\langle x \wedge y, e_2 \rangle = \begin{vmatrix}
+x_1 & y_1 & 0 \\    
+x_2 & y_2 & 1 \\
+x_3 & y_3 & 0
+\end{vmatrix} = (x_3y_1 - x_1y
+_3)$ et $\langle x \wedge y, e_3 \rangle = \begin{vmatrix}
+x_1 & y_1 & 0 \\
+x_2 & y_2 & 0 \\
+x_3 & y_3 & 1
+\end{vmatrix} = (x_1y_2 - x_2y_1)$.\\
+D'où $x \wedge y = \begin{vmatrix}
+x_1 & y_1 & e_1 \\
+x_2 & y_2 & e_2 \\
+x_3 & y_3 & e_3
+\end{vmatrix}$. $Box$
+
+}
+
 \newpage
 \tableofcontents
 
