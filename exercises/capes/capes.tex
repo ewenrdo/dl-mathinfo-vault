@@ -1,0 +1,353 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{stmaryrd}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{CAPES}
+\fancyhead[C]{Première épreuve d'admissibilité}
+\fancyhead[R]{18 mars 2026, L3}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+
+\theorem{Consignes}{}{false}{
+    La qualité de la rédaction du candidat sera appréciée par le correcteur. L'usage de la calculatrice en mode examen est autorisé. Tout document et tout autre appareil électronique sont rigoureusement interdits.
+}
+
+\vspace{1em}
+\exercise{1}{Vrai / Faux}{
+Les assertions suivantes sont-elles vraies ou fausses ? Justifier soigneusement chaque réponse.
+
+\begin{enumerate}
+    \item Soit $f$ une fonction dérivable sur $\mathbb{R}$. S'il existe $a \in \mathbb{R}$ tel que $f'(a) = 0$, alors $f$ admet en $a$ un minimum local ou un maximum local.
+    
+    \item Pour tout $n \in \mathbb{N}$,
+    \[
+        \int_0^\pi \sin^n(x)\,dx = \frac{\pi}{2}.
+    \]
+    
+    \item Soit $t \in \mathbb{R} \setminus \{1\}$. Dans le plan complexe, on note $A$ le point d'affixe $t$, $B$ le point d'affixe $1$, et $C$ le point d'affixe $1 + i(1-t)$.  
+    Le triangle $ABC$ est isocèle et rectangle.
+    
+    \item On note $\mathbb{R}[X]$ l'espace vectoriel des polynômes à coefficients réels.  
+    Si $P \in \mathbb{R}[X]$ est de degré impair, alors il existe $x \in \mathbb{R}$ tel que $P(x) = 0$.
+    
+    \item On considère $\mathbb{R}_1[X]$ l'espace des polynômes de degré $\leq 1$.  
+    L'application
+    \[
+        \langle P, Q \rangle = P(0)Q(0) + P(1)Q(1)
+    \]
+    est un produit scalaire sur $\mathbb{R}_1[X]$.
+    
+    \item Soit $n \geq 2$. Soient $\omega_0,\dots,\omega_{n-1} \in \mathbb{C}$ les racines $n$-ièmes de l'unité.  
+    Pour tout $p \in \{1,\dots,n-1\}$,
+    \[
+        \sum_{k=0}^{n-1} \omega_k^p = 0.
+    \]
+    
+    \item L'équation différentielle
+    \[
+        (1 - x)y'(x) + y(x) = 0
+    \]
+    admet une solution non nulle définie sur $\mathbb{R}$.
+\end{enumerate}
+}
+\switchcolumn  
+
+\exercise{2}{Une suite d'intégrales}{
+\begin{enumerate}
+    \item Rappeler le développement en série entière de la fonction exponentielle en précisant le rayon de convergence.
+    
+    \medskip
+    
+    Dans cet exercice, on étudie la suite $(I_n)$ définie par :
+    \[
+        I_0 = 1 \; I_n = \int_0^1 \frac{dx}{\prod_{k=1}^n (x+k)} = \int_0^1 \frac{dx}{(x+1)(x+2)\cdots(x+n)} \quad \text{pour } n \geq 1.
+    \]
+    
+    On rappelle que $0! = 1$.
+    
+    \item 
+    \begin{enumerate}
+        \item Calculer $I_1$.
+        
+        \item Déterminer $a$ et $b$ tels que pour tout $x \in [0,1]$ :
+        \[
+            \frac{1}{(x+1)(x+2)} = \frac{a}{x+1} + \frac{b}{x+2}.
+        \]
+        
+        \item Calculer $I_2$.
+    \end{enumerate}
+    
+    \item 
+    \begin{enumerate}
+        \item Montrer que pour tout entier naturel $n$ :
+        \[
+            \frac{1}{(n+1)!} \leq I_n \leq \frac{1}{n!}.
+        \]
+        
+        \item En déduire que la série de terme général $I_n$ converge et déterminer un réel $\alpha$ tel que :
+        \[
+            \alpha - 1 \leq \sum_{n=0}^{+\infty} I_n \leq \alpha.
+        \]
+    \end{enumerate}
+    
+    \item On rappelle que pour deux suites $(u_n)$ et $(v_n)$, on dit que $u_n$ est un \textbf{équivalent} de $v_n$ lorsque $n$ tend vers $+\infty$ si $\lim_{n \to +\infty} \frac{u_n}{v_n} = 1$. On note alors $u_n \sim v_n$.
+    
+    \begin{enumerate}
+        \item Justifier que pour tout réel $t \in [0,1]$ :
+        \[
+            1 + t \leq e^t
+        \]
+        
+        \item Établir que, pour tout réel $t \in [0,1]$ :
+        \[
+            t - t^2 \leq \ln(1+t)
+        \]
+        puis que, pour tout réel $t \in [0,1]$ :
+        \[
+            e^{t - t^2} \leq 1 + t
+        \]
+    \end{enumerate}
+    \switchcolumn
+    \newpage
+    Dans la suite, pour tout entier naturel $n$, on pose :
+    \[
+        H_n = \sum_{k=1}^n \frac{1}{k}, \quad S_n = \sum_{k=1}^n \frac{1}{k^2}.
+    \]
+    \setcounter{enumi}{4}
+    
+    \item 
+    \begin{enumerate}
+        \item Rappeler ce qu'est une série de Riemann et quelle condition nécessaire et suffisante assure sa convergence.
+        
+        \item En déduire que la suiite $(S_n)$ converge.
+        
+        \item Préciser la limite de la suite $(H_n)$ quand $n$ tend vers $+\infty$.
+    \end{enumerate}
+    
+    \item Soit $n \in \mathbb{N}^*$.
+    
+    \begin{enumerate}
+        \item Établir que, pour tout réel $x \in [0,1]$ :
+        \[
+            n! \cdot exp(xH_n + x^2 S_n) \leq \prod_{k=1}^n (x+k) \leq n! \cdot exp(xH_n).
+        \]
+        
+        \textit{Indication : Vérifier que $\prod_{k=1}^n (x+k) = n! \cdot \left(\sum_{k=1}^n \left(1 + \frac{x}{k}\right)\right)$ et utiliser les inégalités établies à la question 4.}
+        
+        \item En déduire que, pour tout réel $x \in [0,1]$ :
+        \[
+            \frac{1}{n!} exp(-xH_n) \leq \frac{1}{\prod_{k=1}^n (x+k)} \leq \frac{1}{n!} exp(-(xH_n + S_n))
+        \]
+
+        \item Démontrer alors que :
+        \[
+            \frac{1 - exp(-H_n)}{n!H_n} \leq I_n \leq \frac{1 - exp(-(H_n - S_n))}{n!(H_n - S_n)}.
+        \]
+
+        \item Établir que $I_n \sim \frac{1}{n!H_n}$ lorsque $n$ tend vers $+\infty$.
+    \end{enumerate}
+
+    \item On pose, pour tout entier $n \geq 2 \; u_n = H_n - ln(n)$
+    \begin{enumerate}
+        \item Démontrer que pour tout entier $n \geq 2$, $u_n = \frac{1}{n} + \sum_{k=1}^{n-1}  \left(\frac{1}{k} - \int_k^{k+1} \frac{dt}{t}\right)$.
+        \item En déduire que $(u_n)_{n \geq 2}$ est une suite décroissante à valeurs positives.
+        \item En déduire que la suite $(u_n)_{n \geq 2}$ converge puis que $I_n \sim \frac{1}{n!ln(n)}$ lorsque $n$ tend vers $+\infty$.
+        
+    \end{enumerate}
+        
+\end{enumerate}
+}
+\switchcolumn
+
+\exercise{4}{Exercice de probabilités}{
+Toutes les variables aléatoires introduites ci-après sont définies sur un même espace probabilisé $(\Omega, \mathcal{A}, \mathbb{P})$. Soit $m \in \mathbb{N}^*$ et soit $q \in ]0,1[$. On rappelle que la variable aléatoire $X$ suit la loi binomiale de premier paramètre $m$ et de second paramètre $q$ si :
+\begin{itemize}
+    \item $X(\Omega) = \llbracket 0,m \rrbracket$
+    \item $\forall k \in \llbracket 0,m \rrbracket,\ \mathbb{P}(X = k) = \binom{m}{k} q^k (1-q)^{m-k}$
+\end{itemize}
+
+On rappelle que, lorsqu'on répète $m$ fois, et de façon indépendante, la même expérience de Bernoulli dont la probabilité de succès vaut $q$, alors la loi du nombre de succès obtenus est la loi binomiale de premier paramètre $m$ et de second paramètre $q$.
+
+On rappelle aussi que si $B$ est un événement de probabilité non nulle et si $A$ est un événement quelconque, on note $\mathbb{P}(A \mid B)$ la probabilité de « $A$ sachant $B$ ».
+
+\begin{enumerate}
+    \item \textbf{Préliminaire : une suite arithmético-géométrique}
+
+    Dans tout l'exercice, $(p_n)_{n \in \mathbb{N}^*}$ désigne la suite définie par :
+    \[
+        p_1 = \frac{1}{6}, \qquad \forall n \in \mathbb{N}^*,\ p_{n+1} = \frac{5}{6}p_n + \frac{1}{6}.
+    \]
+    
+    Déterminer, pour tout entier naturel $n$ non nul, une expression explicite de $p_n$ en fonction de $n$.
+
+    \item Soit $N \in \mathbb{N}^*$. Un joueur dispose de $N$ dés classiques à six faces. Il effectue un premier lancer des $N$ dés. À l'issue de ce premier lancer, il met de côté les dés ayant donné 6 et relance les autres (s'il en reste). Il continue ainsi avec pour objectif que tous les dés aient donné 6. Pour tout $\omega \in \Omega$, univers des possibles qu'on ne cherchera pas à expliciter, on note $S_n(\omega)$ le nombre total de dés ayant, après $n$ lancers, donné 6.
+    
+    On admet que $S_n$ définit bien une variable aléatoire. Si pour un certain rang $n_0$, tous les dés ont donné 6, c'est-à-dire si $S_{n_0} = N$, alors on considérera que $S_n = N$ pour tout entier $n \geq n_0$.
+    
+    \begin{enumerate}
+        \item Soit $n \in \mathbb{N}^*$. Préciser $S_n(\Omega)$, l'univers image de la variable aléatoire $S_n$.
+        
+        \item Quelle est la loi de $S_1$ ? On précisera, en le justifiant, ses paramètres.
+    \end{enumerate}
+    \switchcolumn
+    \setcounter{enumi}{2}
+
+    L'objectif des questions 3 à 5 est d'établir que, pour tout $n \in \mathbb{N}^*$, $S_n$ suit la loi binomiale de paramètres $N$ et $p_n$.
+    
+    \item Soit $n \in \mathbb{N}^*$, soit $k \in \llbracket 0,N \rrbracket$, et soit $i \in \llbracket 0,k \rrbracket$. Justifier que :
+    \[
+        \mathbb{P}(S_{n+1} = k \mid S_n = i)
+        =
+        \binom{N-i}{k-i}
+        \left(\frac{1}{6}\right)^{k-i}
+        \left(\frac{5}{6}\right)^{N-k}.
+    \]
+    
+    \item Dans cette question et dans cette question seulement, on se donne $n \in \mathbb{N}^*$ et on suppose que $S_n$ suit une loi binomiale de premier paramètre $N$ et de second paramètre $p_n$.
+    
+    \begin{enumerate}
+        \item Démontrer que, pour tout $k \in \llbracket 0,N \rrbracket$ :
+        \[
+            \mathbb{P}(S_{n+1} = k)
+            =
+            \sum_{i=0}^{k}
+            \binom{N}{i}
+            p_n^i (1-p_n)^{N-i}
+            \binom{N-i}{k-i}
+            \left(\frac{1}{6}\right)^{k-i}
+            \left(\frac{5}{6}\right)^{N-k}.
+        \]
+        
+        \textit{Indication : on pourra appliquer la formule des probabilités totales en remarquant que $(\{S_n = i\})_{i \in \llbracket 0,N \rrbracket}$ est un système complet d'événements.}
+        
+        \item Vérifier que pour tout $k \in \llbracket 0,N \rrbracket$, pour tout $i \in \llbracket 0,k \rrbracket$ :
+        \[
+            \binom{N}{i} \binom{N-i}{k-i}
+            =
+            \binom{N}{k} \binom{k}{i}.
+        \]
+        \item Obtenir alors que, pour tout $k \in \llbracket 0,N \rrbracket$ :
+        \[
+            \mathbb{P}(S_{n+1} = k)
+            =
+            \binom{N}{k}
+            \left(\frac{1+5p_n}{6}\right)^k
+            \left(1 - \frac{1+5p_n}{6}\right)^{N-k}.
+            \]
+    \end{enumerate}
+    \item Démontrer par récurrence et grâce aux questions précédents, que pour tout $n \in \mathbb{N}^*$, $S_n$ suit une loi binonamiale de premier paramètre $N$ et de second paramètre $1 - (\frac{5}{6})^n$.
+    \item Dans la suite de l'exercice, on définit la variable aléatoire $T$ par :
+    \[
+        \forall \omega \in \Omega, T(\omega) = \begin{cases}
+        \min\{n \in \mathbb{N}^* : S_n(\omega) = N\} & \text{si } \{n \in \mathbb{N}^* : S_n(\omega) = N\} \neq \emptyset \\
+        0 & \text{sinon}.
+        \end{cases}
+    \]
+    Ainsi, $T$ représente le nombre de lancers nécessaires pour que tous les dés aient donné 6, en posant $T = 0$ si on n'obitent jamais tous les 6.
+    \begin{enumerate}
+        \item Justifier que, pour tout $n \in \mathbb{N}^*$, $\mathbb{P}(1 \leq T \leq n) = (1 - (\frac{5}{6})^n)^N$.
+        \item En déduire la valeur de $\sum_{k=1}^{+\infty} \mathbb{P}(T = k)$ puis démontrer que $\mathbb{P}  (T = 0) = 0$. Comment interpréter ce résultat ?
+    \end{enumerate}
+\end{enumerate}
+}
+\switchcolumn
+\exercise{5}{Puissances universelles}{
+Dans cet exercice, on se place dans un ensemble $E$ muni d'une structure d'anneau $(E, +, \times)$ et, pour $a$ appartenant à $E$ et $k$ appartenant à $\mathbb{N}^*$, on s'intéresse à l'existence de solutions à l'équation $x^k = a$, d'inconnue $x$ appartenant à $E$. Plus précisément, soit $a$ un élément de $E$ :
+\begin{itemize}
+    \item étant donné un entier naturel non nul $k$, on dit que $a$ est une puissance $k$-ième s'il existe $x$ appartenant à $E$ tel que $x^k = a$ ;
+    \item on dit que $a$ est une puissance universelle si, pour tout $k \in \mathbb{N}^*$, $a$ est une puissance $k$-ième.
+\end{itemize}
+Pour tout anneau $E$, les éléments $0_E$ et $1_E$ (respectivement éléments neutres pour $+$ et $\times$) sont des puissances universelles de $E$ car pour tout $k \in \mathbb{N}^*$, $0_E^k = 0_E$ et $1_E^k = 1_E$.
+L'exercice a pour objectif d'étudier certains cas particuliers et d'établir quelques résultats généraux, dans divers anneaux usuels. Les deux parties sont indépendantes.
+
+\textbf{Première partie – dans $\mathbb{Z}/n\mathbb{Z}$}
+
+Dans cette partie, $n$ est un entier supérieur ou égal à $2$, et $E$ désigne $\mathbb{Z}/n\mathbb{Z}$ muni de ses lois usuelles $+$ et $\times$. On notera $\bar{0}, \bar{1}, \dots, \overline{n-1}$ les éléments de $\mathbb{Z}/n\mathbb{Z}$.
+
+\begin{enumerate}
+    \item \textbf{Un premier exemple.} \\
+    Dans cette question seulement, $n = 6$. Ainsi, $E = \mathbb{Z}/6\mathbb{Z} = \{\bar{0}, \bar{1}, \bar{2}, \bar{3}, \bar{4}, \bar{5}\}$.
+    \begin{enumerate}
+        \item Calculer $\bar{2}^2, \bar{3}^2, \bar{4}^2$ et $\bar{5}^2$, images respectives de $\bar{2}, \bar{3}, \bar{4}$ et $\bar{5}$ par l'application $x \mapsto x^2$.
+        \item En déduire que $\bar{0}$ et $\bar{1}$ ne sont pas les seules puissances universelles de $\mathbb{Z}/6\mathbb{Z}$.
+    \end{enumerate}
+
+    \item \textbf{Un deuxième exemple.} \\
+    Dans cette question seulement, $n = 4$. Ainsi, $E = \mathbb{Z}/4\mathbb{Z} = \{\bar{0}, \bar{1}, \bar{2}, \bar{3}\}$. \\
+    Démontrer, en s'inspirant éventuellement de la question précédente, que $\bar{0}$ et $\bar{1}$ sont les seules puissances universelles de $E = \mathbb{Z}/4\mathbb{Z}$.
+    
+    \item \textbf{Le cas particulier où $n$ est premier.} \\
+    Dans cette question uniquement, $n$ est un entier premier, et, par souci de clarté, $n$ sera plutôt désigné par la lettre $p$.
+    \begin{enumerate}
+        \item Énoncer le petit théorème de Fermat.
+        \item En déduire à la fois que tout élément de $\mathbb{Z}/p\mathbb{Z}$ est une puissance $p$-ième, et que $\bar{0}$ et $\bar{1}$ sont les seules puissances universelles de $\mathbb{Z}/p\mathbb{Z}$.
+        \switchcolumn
+    
+    \setcounter{enumi}{2}
+        \item L'hypothèse "$n$ est premier" est-elle une condition nécessaire pour que $\bar{0}$ et $\bar{1}$ soient les seules puissances universelles de $\mathbb{Z}/n\mathbb{Z}$ ?
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Deuxième partie – dans $\mathcal{M}_n(\mathbb{R})$}
+
+Dans cette partie $E = \mathcal{M}_n(\mathbb{R})$, ensemble des matrices carrées de taille $n$ et à coefficients réels, et $A$ est un élément de $E$. Rappelons qu'étudier si $A$ est une puissance $k$-ième, c'est chercher s'il existe une matrice $M$ appartenant à $\mathcal{M}_n(\mathbb{R})$ telle que $M^k = A$. Étudier si $A$ est une puissance universelle, c'est étudier si, pour tout entier naturel non nul $k$, $A$ est une puissance $k$-ième.
+
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item Dans cette question seulement $n = 1$ et on confond $\mathcal{M}_1(\mathbb{R})$ et $\mathbb{R}$. Démontrer que l'ensemble des puissances universelles de $\mathbb{R}$ est $\mathbb{R}^+$.
+
+    \item Dans cette question, $n \geq 2$ et $A, P$ et $D$ sont trois éléments de $\mathcal{M}_n(\mathbb{R})$ tels que $P$ est inversible, $D$ est diagonale et $A = PDP^{-1}$.
+    \begin{enumerate}
+        \item Soit $k \in \mathbb{N}^*$ et soit $N \in \mathcal{M}_n(\mathbb{R})$. Vérifier que si $N^k = D$, alors $(PNP^{-1})^k = A$.
+        \item Démontrer que $A$ est une puissance universelle si, et seulement si, $D$ est une puissance universelle.
+    \end{enumerate}
+
+    \item Dans cette question, $n \geq 2$ et $D \in \mathcal{M}_n(\mathbb{R})$ est la matrice diagonale suivante :
+    \[
+    D = \begin{pmatrix} \lambda_1 & & \\ & \lambda_2 & & \\ & & \ddots & \\ & & & \lambda_n \end{pmatrix}
+    \]
+    où les réels $\lambda_1, \dots, \lambda_n$ sont tous deux à deux distincts.
+    \begin{enumerate}
+        \item Soit $M \in \mathcal{M}_n(\mathbb{R})$ une matrice qui commute avec $D$. Démontrer que $M$ est une matrice diagonale.
+        \item Soit $M \in \mathcal{M}_n(\mathbb{R})$ et soit $k \in \mathbb{N}^*$. Vérifier que si $M^k = D$, alors $M$ et $D$ commutent. En déduire que $D$ est une puissance universelle dans $\mathcal{M}_n(\mathbb{R})$ si, et seulement si, ses éléments diagonaux sont positifs.
+        \item Supposons que $A$ est une matrice possédant $n$ valeurs propres réelles et deux à deux distinctes. Quelle est la condition nécessaire et suffisante afin que la matrice $A$ soit une puissance universelle dans $\mathcal{M}_n(\mathbb{R})$ ? Justifier.
+    \end{enumerate}
+    \switchcolumn
+    
+    \setcounter{enumi}{6}
+    \item Pour tout $\theta \in \mathbb{R}$, on pose :
+    \[
+    R_\theta = \begin{pmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{pmatrix}
+    \]
+    \begin{enumerate}
+        \item Démontrer par récurrence que, pour tout $\theta \in \mathbb{R}$ et pour tout $k \in \mathbb{N}^*$, $(R_\theta)^k = R_{k\theta}$. Donner une interprétation géométrique de cette égalité.
+        \item Démontrer que la matrice $R_\pi = \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}$ est une puissance universelle.
+    \end{enumerate}
+
+    \item Dans la question 6 (b) on a montré la propriété suivante :\\
+    « Soit $D$ une matrice diagonale à coefficients diagonaux réels deux à deux distincts. $D$ est une puissance universelle si, et seulement si, ses coefficients diagonaux sont positifs »\\
+    Peut-on affirmer la propriété suivante ?\\
+    « Soit $D$ une matrice diagonale à coefficients réels. $D$ est une puissance universelle si, et seulement si, ses coefficients diagonaux sont positifs »\\
+    Justifier votre réponse.
+\end{enumerate}
+}
+
+\end{paracol}
+\end{document}
