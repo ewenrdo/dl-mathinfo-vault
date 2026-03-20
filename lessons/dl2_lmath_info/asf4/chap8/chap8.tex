@@ -184,6 +184,26 @@ Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
     $1 \in Sp(u)$
 }
 \ndlr{cf. Laurent pour la preuve du lemme.}
+
+\ndlr{BEAUCOUP DE TRUCS PAS ECRITS, JE VAIS REPASSER SUR LE POLY}
+
+\definition{
+    On dira que $(e_1, e_2)$ base de $n^\perp$ est directe si $(e_1, e_2, n)$ est une base directe de $E$.
+}
+
+\theorem{Théorème}{}{false}{
+    Dans un espace euclidien orienté $E$ de dimension 3, une isométrie directe non triviale (une rotation en dimension 3), est déterminée par la donnée de :
+    \begin{itemize}
+        \item un axe orienté, c'est à dire un choix de vecteur unitaire $d$ dirigeant la droite $D = ker(u - id_E)$
+        \item un angle de rotation $\theta \in ]-\pi, \pi]$
+    \end{itemize}
+    L'orientation de l'axe détermine une orientation du plan $D^\perp$ et si $(e_1, e_2)$ est orthonormée directe dans $D^\perp$ alors la matrice de $u$ dans la base $(d,e_1,e_2)$ est de la forme $\begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & \cos \theta & -\sin \theta \\
+        0 & \sin \theta & \cos \theta
+    \end{pmatrix}$.
+}
+
 \newpage
 \tableofcontents
 
