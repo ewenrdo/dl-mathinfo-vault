@@ -67,6 +67,7 @@ On dira : $\mathcal{B} = (e_1, \ldots, e_n) \sim (e_1', \ldots, e_n') = \mathcal
 \training{Démontrer que le produit mixte est bien défini.}
 
 \section{Produit vectoriel en dimension 3}
+\subsection{Définition et propriétés du produit vectoriel}
 Soit $E$ un espace euclidien orienté tel que $dim(E) = 3$.
 
 \reminder{
@@ -124,9 +125,65 @@ x_1 & y_1 & e_1 \\
 x_2 & y_2 & e_2 \\
 x_3 & y_3 & e_3
 \end{vmatrix}$. $\Box$
-
 }
 
+
+\subsection{Étude du groupe des isométries en dimension 2 et 3}
+On se place dans un espace euclidien $E$ muni du produit scalaire $\langle \cdot, \cdot \rangle$.\\
+On étudie $O(E)$, spécialement pour les isométries de dimension 2 et 3.
+
+\remark{$det$ est un morphisme de groupes, donc si $u \in O(E)$, $det(uu^*) = 1 = det(u)det(u^*) = det(u)^2$. Donc $det(u) \in \{-1, 1\}$.}
+
+\theorem{Proposition}{}{false}{
+    On a que $ker(det)$ est un sous groupe de $O(E)$, noté $SO(E)$.
+}
+\vocabulary{On appelle les éléments de $SO(E)$ les \textbf{isométries directes}.}
+\attention{L'ensemble des isométries indirectes n'est pas un sous-groupe, car le produit de deux isométries indirectes est une isométrie directe.}
+
+\remark{Si $u \in O(E)$, $Sp(u) \subset \{-1 , 1\}$. Soient $x \in E_\lambda \setminus \{0\}$, alors $\langle x, x \rangle = \langle u(x), u(x) \rangle = \langle \lambda x, \lambda x \rangle = |\lambda|^2 \langle x, x \rangle$. Donc $|\lambda|^2 = 1$.}
+
+\subsubsection{Isométries en dimension 2}
+Ici, on s'intéresse à l'étude de $SO(\mathbb{R}^2) \equiv SO_2(\mathbb{R}) = \{ A \in M_2(\mathbb{R}) | A^tA = I_2 \}$.\\
+\example{Posons $A = \begin{pmatrix}
+    \alpha & \beta \\
+    \gamma & \delta
+\end{pmatrix}$.\\
+On a bien $A^tA = I_2$ si et seulement si $\alpha^2 + \gamma^2 = 1$, $\beta^2 + \delta^2 = 1$ et $\alpha \delta - \beta \gamma = 1$.}
+\ndlr{cf. Laurent pour la suite de l'exemple un peu "long" à écrire sur \LaTeX.}
+
+\example{
+    Considérons \function{\varphi}{(\mathbb{R}, +) \to SO_2(\mathbb{R}, \circ)}{\theta \mapsto \begin{pmatrix}
+        \cos \theta & -\sin \theta \\
+        \sin \theta & \cos \theta
+    \end{pmatrix}}.\\
+    On montre rapidement que $\varphi$ est un morphisme de groupes (laissé à l'apprécisation du lecteur).\\
+}
+
+\theorem{Proposition}{}{false}{
+    $SO_2(\mathbb{R})$ est un groupe abélien.
+}
+\remark{En fait, $SO_2(\mathbb{R})$ est isomorphe à $(\mathbb{R}/2\pi\mathbb{Z}, +)$. On remarque que $\mathbb{R}/2\pi\mathbb{Z} = \{ e^{i\theta} | \theta \in \mathbb{R} \}$,.}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un espace euclidien orienté de dimension 2. Soit $u \in SO_2(E)$.\\
+    Alors $\exists \theta \in ]-\pi, \pi]$ tel que dans toute base orthonormée directe la matrice de $u$ est de la forme $\begin{pmatrix}
+        \cos \theta & -\sin \theta \\
+        \sin \theta & \cos \theta   
+    \end{pmatrix}$.
+}
+
+\subsubsection{Isométries indirectes d'un espace euclidien de dimension 2}
+Si $s \in O_{-}(E)$, $det s = -1$. Alors le polynôme caractéristique de $s$ est scindé sur $\mathbb{R}$ et a pour racines $1$ et $-1$.\\
+Donc $\xi_S(X) = (X-1)(X+1)$. Ainsi $s$ est une symétrie vectorielle par rapport à $ker(s - id_E)$.
+
+\subsubsection{Isométries en dimension 3}
+Commerçons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$.\\
+Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
+
+\theorem{Lemme}{}{false}{
+    $1 \in Sp(u)$
+}
+\ndlr{cf. Laurent pour la preuve du lemme.}
 \newpage
 \tableofcontents
 
