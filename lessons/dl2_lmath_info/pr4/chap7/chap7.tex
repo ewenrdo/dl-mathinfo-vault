@@ -47,8 +47,23 @@
     \]
     \textit{En particulier,} si $Var(X) > 0$, on a : $\mathbb{P}(|X - \mathbb{E}[X]| \geq c \sqrt{\mathrm{Var}(X)}) \leq \frac{1}{c^2}$ pour tout $c > 0$.
 }
-
 \noindent{\textbf{Preuve :} Appliquer l'inégalité de Markov à la variable aléatoire $(X - \mathbb{E}[X])^2$ qui est positive.}
+
+\theorem{Proposition}{Loi faible des grands nombres}{false}{
+Soit $(X_n)_{n\geq1}$ une suite de variables aléatoires indépendantes et identiquement distribuées (i.i.d.) de carré intégrable.
+On note $\mathbb{E}[X_1] = \mu$ et on définit la moyenne empirique $M_n = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2$.
+\[
+\forall \varepsilon > 0, \quad \lim_{n \to \infty} \mathbb{P}(|M_n - \mu| \geq \varepsilon) = 0
+\]
+}
+\remark{La loi faible des grands nombres affirme que la moyenne empirique $M_n$ converge en probabilité vers la moyenne théorique $\mu$. En d'autres termes, pour tout $\varepsilon > 0$, la probabilité que $M_n$ s'écarte de $\mu$ de plus de $\varepsilon$ tend vers 0 lorsque $n$ tend vers l'infini.}
+\example{
+    Reprenons l'exemple du lancer de pièce. On a $S_n = \sum_{i=1}^n X_i$ où les $X_i$ sont des variables aléatoires de Bernoulli de paramètre $\frac{1}{2}$. On a $\mathbb{E}[X_i] = \frac{1}{2}$ et $\mathrm{Var}(X_i) = \frac{1}{4}$. La moyenne empirique est donnée par $M_n = \frac{1}{n} \sum_{i=1}^n (X_i - \frac{1}{2})^2$. Par la loi faible des grands nombres, on a :
+    \[
+        \forall \varepsilon > 0, \quad \lim_{n \to \infty} \mathbb{P}\left(\left|M_n - \frac{1}{4}\right| \geq \varepsilon\right) = 0 .
+    \]
+}
+\ndlr{Vérifier sur le cours de MME. Yuen}
 
 \remark{L'inégalité de Bienaymé-Tchebychev permet de majorer la probabilité que $X$ s'écarte de sa moyenne de plus de $a$ en fonction de la variance de $X$.}
 \example{Reprenons l'exemple du lancer de pièce. On a $Var(S_n) = \frac{n}{4}$. On observe que $\{ S_n \geq \frac{3n}{4} \} \subset \{ |S_n - \mathbb{E}[S_n]| \geq \frac{n}{4} \}$.\\
@@ -57,6 +72,10 @@ Puisque $S_n$ est de carré intégrable, on peut appliquer l'inégalité de Bien
     \mathbb{P}\left(S_n \geq \frac{3n}{4}\right) \leq \mathbb{P}\left(|S_n - \mathbb{E}[S_n]| \geq \frac{n}{4}\right) \leq \frac{\mathrm{Var}(S_n)}{\left(\frac{n}{4}\right)^2} = \frac{\frac{n}{4}}{\frac{n^2}{16}} = \frac{4}{n} .
 \]
 Cette majoration est plus satisfaisante que celle obtenue avec l'inégalité de Markov, car elle tend vers 0 lorsque $n$ tend vers l'infini.
+}
+
+\theorem{Proposition}{Loi (faible) des grands nombres}{false}{
+    Soit $(X_n)_{n \geq 1}$ une suite de variables aléatoires réelles discrètes de carré intégrable. Supposons que la suite $(\mathrm{Var}(X_n))_{n \geq 1}$ est bornée et que la suite $(\mathbb{E}[X_n])_{n \geq 1}$ converge vers une limite $\ell$. Alors la suite $(X_n)_{n \geq 1}$ converge en probabilité vers $\ell$.
 }
 
 \subsection{Inégalité de Cauchy-Schwarz}
@@ -74,6 +93,15 @@ Cette majoration est plus satisfaisante que celle obtenue avec l'inégalité de 
 \noindent{\textbf{Preuve :} On peut faire une belle preuve en posant dans $\mathbb{R}^2$ le produit scalaire $\langle X, Y \rangle = \mathbb{E}[XY]$ et la norme $\|X\| = \sqrt{\mathbb{E}[X^2]}$. L'inégalité de Cauchy-Schwarz est alors une conséquence directe de l'inégalité de Cauchy-Schwarz dans les espaces euclidiens.}
 
 \remark{L'inégalité de Cauchy-Schwarz est un outil fondamental dans les espaces euclidiens et trouve de nombreuses applications en probabilité, notamment dans l'étude de la covariance et du coefficient de corrélation.}
+
+\subsection{Inégalité de Jensen}
+
+\theorem{Proposition}{Inégalité de Jensen}{false}{
+    Soit $X$ une variable aléatoire réelle discrète et $f : \mathbb{R} \to \mathbb{R}_{+}$ une fonction convexe. Alors $f(X)$ est intégrable et on a :
+    \[
+        f(\mathbb{E}[X]) \leq \mathbb{E}[f(X)] .
+    \]
+}
 
 \newpage
 \tableofcontents
