@@ -20,7 +20,113 @@
 
 \begin{document}
 
-\docTitle{Chapitre non vu en cours}
+\docTitle{Chapitre 7 : Intégrales dépendantes d'un paramètre}
+
+\section{Intégrales définies à un paramètre}
+
+Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\
+On va s'intéresse aux intégrales de la forme :
+\[
+F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
+\]
+
+\subsection{Continuité et limites de $F$}
+
+\theorem{Théorème}{Continuité des intégrales définies à un paramètre}{false}{
+    Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. Soit une fonction $f : I \times J$.\\    
+    Si $f$ est continue, alors $F : I \to \mathbb{R}$ telle que $x \mapsto \int_a^b f(x,t) dt$ est bien définie et continue sur $I$.
+}
+\ndlr{cf. Laurent pour la preuve (s'il a envie)}
+
+\reminder{
+    $f(x, \cdot)$ converge uniformément vers $h$ sur $J$ signifie qu'il existe une fonction $\alpha$ définie sur $I$ telle que $\alpha(x) \to 0$ lorsque $x \to x_0$ et pour tout $t \in J$, $|f(x,t) - h(t)| \leq \alpha(x)$.
+}
+
+\theorem{Théorème}{Limites des intégrales définies à un paramètre}{false}{
+    Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\    
+    Supposons que :
+    \begin{itemize}
+        \item $f$ est continue,
+        \item $x_0 \in \overline{I}$,
+        \item $lim_{x \to x_0} f(x,t) = h(t)$ en supposant que la convergence de $f(x, \cdot)$ est uniforme sur $J$.
+    \end{itemize}
+
+    Alors $h$ est continue et on a l'intervertibilité de l'intégrale et de la limite : \[lim_{x \to x_0} F(x) = \int_a^b h(t) dt\].
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\attention{
+    La condition de convergence uniforme est essentielle pour garantir que la limite de $F(x)$ est égale à l'intégrale de la limite de $f(x,t)$.
+}
+
+\subsection{Dérivabilité de $F$}
+
+\theorem{Théorème}{}{false}{
+    Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\    
+    Supposons que $\frac{\partial f}{\partial x}$ existe et est continue sur $I \times J$.\\
+    Alors $F$ est de classe $\mathcal{C}^1$ sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_a^b \frac{\partial f}{\partial x}(x,t) dt\].
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\section{Intégrales généralisées à un paramètre}
+
+Soit $I$ un intervalle de $\mathbb{R}$. On considère une fonction $f : I \times [0,+\infty[$ continue.\\
+On s'intéresse aux propriétés de la fonction $F : I \to \mathbb{R}$ définie, sous réserve d'existence, par ::
+\[
+    F : I \to \mathbb{R}, \; x \mapsto \int_0^{+\infty} f(x,t) dt
+\]
+
+On adapter sans difficulté les énoncés suivants à des intervalles différents de $[0,+\infty[$.
+\subsection{Convergence de l'intégrale}
+\definition{
+    L'intégrale $F(x) = \int_0^{+\infty} f(x,t) dt$ est dite \textbf{simplement convergente} sur $I$ si pour tout $x \in I$, l'intégrale $\int_0^{+\infty} f(x,t) dt$ converge.
+}
+
+\definition{
+    L'intégrale $F(x) = \int_0^{+\infty} f(x,t) dt$ est dite \textbf{normalement convergente} sur $I$ s'il existe une fonction $g : [0,+\infty[ \to \mathbb{R}_+$ continue telle que pour tout $x \in I$ et tout $t \in [0,+\infty[$, on a $|f(x,t)| \leq g(t)$ et l'intégrale $\int_0^{+\infty} g(t) dt$ converge.
+}
+\vocabulary{Si une telle fonction existe, on dit que $g$ est une \textbf{fonction de domination} de $f$.}
+\remark{
+    Si on a la convergence normale sur $I$, alors en particulier l'intégrale converge absolument pour tout $x \in I$, et donc elle converge simplement.
+}
+
+\theorem{Lemme}{}{false}{
+    Supposons $F(x)$ converge normalement sur $I$. Pour tout $n \in \mathbb{N}$, soit $\varphi_n : I \to \mathbb{R}$ définie par $\varphi_n(x) = \int_0^n f(x,t) dt$. Alors la suite de fonctions $(\varphi_n)_{n \in \mathbb{N}}$ converge uniformément vers $F$ sur $I$.
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\subsection{Continuité et limites de $F$}
+\theorem{Théorème}{Continuité des intégrales généralisées à un paramètre}{false}{
+    Supposons que $f : I \times [0,+\infty[ \to \mathbb{R}$ est continue et que $F(x) = \int_0^{+\infty} f(x,t) dt$ converge normalement sur $I$. Alors $F : I \to \mathbb{R}$ est continue sur $I$.
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Limite des intégrales généralisées à un paramètre}{}{false}{
+    Soit $I$ un intervalle de $\mathbb{R}$ et $x_0 \in \overline{I}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$ étant \textbf{continue} sur $I \times [0,+\infty[$.\\
+    Supposons que :
+    \begin{itemize}
+        \item $F(x)$ converge normalement sur $I$,
+        \item $\forall t \in [0,+\infty[$, $h(t) := lim_{x \to x_0} f(x,t)$ existe,
+        \item cette convergence est uniforme en $t$ sur chaque intervalle de la forme $[0,A]$ avec $A > 0$.
+    \end{itemize}
+    Alors $h$ est continue d'intégrale $\int_0^{+\infty} h(t) dt$ absolument convergente et on a : \[lim_{x \to x_0} F(x) = \int_0^{+\infty} h(t) dt\].
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\subsection{Dérivabilité de $F$}
+
+\theorem{Théorème}{Dérivabilité des intégrales généralisées à un paramètre}{false}{
+    Soit $I$ un intervalle de $\mathbb{R}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$.\\
+    Supposons que :
+    \begin{itemize}
+        \item $F(x)$ converge simplement sur $I$,
+        \item $f$ a une dérivée partielle par rapport à $x$, qui est continue sur $I \times [0,+\infty[$,
+        \item l'intégrale $\int_0^{+\infty} \frac{\partial f}{\partial x}(x,t) dt$ converge normalement sur $I$.
+    \end{itemize}
+    Alors $F$ est dérivable sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_0^{+\infty} \frac{\partial f}{\partial x}(x,t) dt\].
+}
+\ndlr{cf. Laurent pour la preuve}
+
 \newpage
 \tableofcontents
 
