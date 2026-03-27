@@ -46,6 +46,16 @@
     right=8pt,
     top=5pt,
     bottom=5pt,
+  },
+  warningStyle/.style={
+    colframe=danger,
+    colback=white,
+    boxrule=1.5pt,
+    arc=0pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt,
   }
 }
 
@@ -82,6 +92,13 @@
   \end{tcolorbox}
 }
 
+% Attention en boite  
+\newcommand{\warning}[1]{%
+  \begin{tcolorbox}[warningStyle]
+    {\color{danger}\textbf{ATTENTION :}} #1
+  \end{tcolorbox}
+}
+
 % Théorème / Propriété
 \newcommand{\theorem}[4]{%
   \begin{tcolorbox}[theoremStyle]
@@ -96,6 +113,7 @@
     \par\vspace{0.5em}#4
   \end{tcolorbox}
 }
+
 
 % Remarque
 \newcommand{\remark}[1]{%

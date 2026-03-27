@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info ASF4}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 9 : Intégrales doubles}
+
+\warning{
+    Cours non finalisé, non structuré et contenant beaucoup d'oublis.\\
+    Il est pour l'instant peu sûr de réviser à partir de ce cours, mais il peut être intéressant de le parcourir pour se faire une idée du sujet.
+}
+
+\section{Définition et propriétés des intégrales doubles}
+
+\subsection{Définition}
+
+Soit $f : [a,b] \times [c,d] \to \mathbb{R}$. On veut définir $\iint_{[a,b] \times [c,d]} f(x,y) \, dx \, dy$.
+Représentation géométrique :
+\begin{itemize}
+    \item l'intégrale simple évalue l'aire entre la courbe et l'axe des abscisses,
+    \item l'intégrale double évalue le volume entre la courbe et les deux axes.
+\end{itemize}
+
+\reminder{
+    $f$ est continue en $(x_0, y_0) \in [a,b] \times [c,d]$ 
+    \begin{itemize}
+        \item $\Leftrightarrow \; \lim_{x \to x_0, \; y \to y_0} f(x,y) = f(x_0, y_0)$,
+        \item $\Leftrightarrow \; \forall \varepsilon > 0, \; \exists \delta > 0, \; \forall (x,y) \in [a,b] \times [c,d], \; |(x,y) - (x_0, y_0)| < \delta \Rightarrow |f(x,y) - f(x_0, y_0)| < \varepsilon$.
+        \item $\Leftrightarrow$ pour toute suite $(x_n, y_n)$ de $[a,b] \times [c,d]$ qui converge vers $(x_0, y_0)$, la suite $f(x_n, y_n)$ converge vers $f(x_0, y_0)$.
+    \end{itemize}
+    Pour s'entrainer et avoir plus de formalisme sur la topologie sur $\mathbb{R}^n$, le cours \href{https://ewenrdo.fr/ressources}{est disponible ici} dans "Mathématiques > Licence 2 > Analyse 3 > Chapitre 4 : Topologie".
+}
+
+\theorem{Théorème de Fubini}{}{false}{
+    Soit $f : [a,b] \times [c,d] \to \mathbb{R}$ continue. Alors :
+    \[
+    \iint_{[a,b] \times [c,d]} f(x,y) \, dx \, dy = \int_a^b \left( \int_c^d f(x,y) \, dy \right) dx = \int_c^d \left( \int_a^b f(x,y) \, dx \right) dy
+    \]
+}
+\remark{L'ordre d'intégration n'a pas d'importance, ce qui est cohérent avec l'idée que l'intégrale double évalue un volume : je peux commencer par calculer l'aire de la section verticale (en intégrant par rapport à $y$) ou l'aire de la section horizontale (en intégrant par rapport à $x$), le résultat est le même.}
+
+
+\example{
+    Considérons la fonction définie sur $\mathbb{R}^2$ par :
+    \[
+        f(x,y) = \begin{cases}
+            \frac{xy}{x^4 + y^4} & \text{si (x,y) $\neq$ (0,0)} \\
+            0 & \text{si (x,y)=(0,0)}
+        \end{cases}
+    \]
+    Si $x$ est fixé, on a : $f(0,y)= 0$ et $y \neq 0, \; f(x,y) = \frac{xy}{x^4 + y^4}$. Quel que soit $y$, les deux fonctions sont continues.\\
+    De même, si $y$ est fixé, on a : $f(x,0)= 0$ et $x \neq 0, \; f(x,y) = \frac{xy}{x^4 + y^4}$. Quel que soit $x$, les deux fonctions sont continues.\\
+    Cependant, $f$ n'est pas continue en $(0,0)$.\\
+    Prenons en effet $(x_n, y_n) = \left( \frac{1}{n}, \frac{1}{n} \right)$, alors $f(x_n, y_n) = \frac{1/n^2}{2/n^4} = \frac{n^2}{2}$ qui ne converge pas vers $0$.
+}
+
+\example{
+    Considérons la fonction définie sur $\mathbb{R}^2$ par :
+    \[
+        f(x,y) = \begin{cases}
+            \frac{xy}{\sqrt{x^2 + y^2}} & \text{si (x,y) $\neq$ (0,0)} \\
+            0 & \text{si (x,y)=(0,0)}
+        \end{cases}
+    \]
+    Posons $f(x_n, y_n) = \frac{x_n y_n}{\sqrt{x_n^2 + y_n^2}}$. On sait que $|x_n y_n| \leq \frac{x_n^2 + y_n^2}{2}$.\\
+    Donc $0 \leq |f(x_n, y_n)| \leq \frac{\sqrt{x_n^2 + y_n^2}}{2}$ qui converge vers $0$.\\ Donc $f$ est continue en $(0,0)$ et donc continue sur $\mathbb{R}^2$.
+}
+\remark{Ce nouveau type d'intégral est particulièrement intéressant, notamment lorsqu'on s'intéresse au domaine $D$ d'intégration qui n'est pas un rectangle, mais une région plus générale du plan.}
+\example{
+    \begin{itemize}
+        \item $D = \{ (x,y) \in \mathbb{R}^2 \; | \; x^2 + y^2 \leq 1\}$ est le disque de centre $0$ et de rayon $1$,
+        \item $D = \{ (x,y) \in \mathbb{R}^2 \; | \frac{1}{2}x = x^2+y^2\}$ est un donut entre les cercles de rayon $\frac{1}{2}$ et $1$,
+    \end{itemize}    
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $D \subset \mathbb{R}^2$ un sous-ensemble fermé borné quarrable.\\
+    Soit $f : D \to \mathbb{R}$ une fonction continue.\\
+    Alors, on peut définir l'intégrale double $\iint_D f \, dx \, dy$ telle que :
+    \begin{enumerate}
+        \item \textbf{Linéarité :} $\iint_D (\alpha f(x,y) + \beta g(x,y)) \, dx \, dy = \alpha \iint_D f(x,y) \, dx \, dy + \beta \iint_D g(x,y) \, dx \, dy$ (où $g : D \to \mathbb{R}$ est une autre fonction continue et $\alpha, \beta \in \mathbb{R}$),
+        \item \textbf{Positivité :} si $f$ est positive sur $D$, alors $\iint_D f(x,y) \, dx \, dy \geq 0$,
+        \item \textbf{Analogue de la relation de Chasles :} si $D = \bigsqcup_{i=1}^n D_i$ où les $D_i$ sont des sous-ensembles fermés bornés quarrables de $\mathbb{R}^2$, alors $\iint_D f(x,y) \, dx \, dy = \sum_{i=1}^n \iint_{D_i} f(x,y) \, dx \, dy$,
+        \item Si $f \geq 0$, et $D \subset D'$, alors $\iint_D f(x,y) \, dx \, dy \leq \iint_{D'} f(x,y) \, dx \, dy$,
+        \item Si $f \geq 0$ et que $\iint_D f(x,y) \, dx \, dy = 0$, alors $f$ est nulle sur $D$,
+        \item \textbf{Inégalité triangulaire :} $|\iint_D f(x,y) \, dx \, dy| \leq \iint_D |f(x,y)| \, dx \, dy$,
+        \item \textbf{Inégalité de Cauchy-Schwarz :} $\left| \iint_D f(x,y) g(x,y) \, dx \, dy \right| \leq \sqrt{\iint_D f(x,y)^2 \, dx \, dy} \sqrt{\iint_D g(x,y)^2 \, dx \, dy}$,
+    \end{enumerate}
+}
+
+\ndlr{cf. le diable pour la preuve de ce théorème}
+
+\example{
+    Intégrons $f(x,y) = \frac{1+x^2}{1+y^2}$ sur le carré $[0,1] \times [0,1]$.\\
+    En intégrant d'abord par rapport à $y$, on trouve : $\int_0^1 \frac{1+x^2}{1+y^2} dy = (1+x^2) \int_0^1 \frac{1}{1+y^2} dy = (1+x^2) \left[ \arctan(y) \right]_0^1 = (1+x^2) \frac{\pi}{4}$.\\
+    En intégrant ensuite par rapport à $x$, on trouve : $\int_0^1 (1+x^2) \frac{\pi}{4} dx = \frac{\pi}{4} \int_0^1 (1+x^2) dx = \frac{\pi}{4} \left[ x + \frac{x^3}{3} \right]_0^1 = \frac{\pi}{4} \cdot \frac{4}{3} = \frac{\pi}{3}$.\\
+    Donc $\iint_{[0,1] \times [0,1]} \frac{1+x^2}{1+y^2} dx dy = \frac{\pi}{3}$.
+}
+
+\newpage
+\tableofcontents
+
+\end{document}
