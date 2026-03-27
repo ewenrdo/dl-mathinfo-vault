@@ -1,0 +1,228 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info AN2}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Intégration}
+
+\section{Fonctions continues par morceau}
+\subsection{Fonctions escalier}
+\definition{
+    Une \textbf{subdivision} de $[a,b]$ est une famille finie de réels $(x_i)_{0 \leq i \leq n}$ telle que $a = x_0 < x_1 < \ldots < x_n = b$.
+}
+\example{
+    $[0,1]$ est un segment de $\mathbb{R}$. Une subdivision de $[0,1]$ est par exemple $0 = x_0 < x_1 = \frac{1}{3} < x_2 = \frac{2}{3} < x_3 = 1$.
+}
+
+\definition{
+    Soit une fonction $f : [a,b] \to \mathbb{R}$.\\
+    On dit que $f$ est une \textbf{fonction escalier} s'il existe une subdivision de $[a,b]$ telle que $f$ est constante sur chaque intervalle ouvert $]x_i, x_{i+1}[$ pour $0 \leq i \leq n-1$.
+}
+\vocabulary{Si une telle subdivision existe, on dit qu'elle est \textbf{adaptée} à $f$.}
+
+\subsection{Fonctions continues par morceau}
+
+\definition{
+    Soit une fonction $f : [a,b] \to \mathbb{R}$.\\
+    On dit que $f$ est une \textbf{fonction continue par morceau} s'il existe une subdivision de $[a,b]$ telle  :
+    \begin{itemize}
+        \item $f_{|]x_i, x_{i+1}[}$ est continue pour tout $0 \leq i \leq n-1$,
+        \item $f$ admet une limite à gauche et à droite en chaque point de la subdivision.
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{false}{
+    Toute fonction continue par morceau est bornée et admet un maximum et un minimum.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$.\\
+    $f$ est continue par morceau $\Leftrightarrow$ $\exists g : [a,b] \to \mathbb{R}$ une fonction continue et $\exists h : [a,b] \to \mathbb{R}$ une fonction escalier telles que $f = g + h$.
+}
+
+\subsection{Primitives par morceaux}
+\subsubsection{Généralités et propriétés}
+\reminder{
+    Soit $f : I \to \mathbb{R}$ une fonction continue sur I un intervalle.\\
+    On dit que $F : I \to \mathbb{R}$ est une primitive de $f$ si $F$ est continue et dérivable et $F' = f$ sur $I$.
+}
+
+\definition{
+    Soient $f,F : [a,b] \to \mathbb{R}$ avec $f$ une fonction continue par morceau.\\
+    Alors on dit que $F$ est une \textbf{primitive par morceaux} de $f$ si :
+    \begin{itemize}
+        \item $F$ est continue et dérivable \textit{sauf peut-être en un nombre fini de points},
+        \item $F' = f$ sur $[a,b]$ sauf peut-être en un nombre fini de points.
+    \end{itemize}
+}
+
+\remark{Les points où $F$ n'est pas dérivable sont exactement les points de la subdivision adaptée à $f$.}
+
+
+\theorem{Proposition}{Croissance de la primitive par morceaux}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction continue par morceau et $F$ une primitive par morceaux de $f$.\\
+    Alors $F$ est croissante (resp. décroissante) si et seulement si $f$ est positive (resp. négative).
+}
+
+\remark{C'est intuitif : si $f$ est positive sur $[a,b]$, alors la pente de $F$ des tangentes à la courbe de $F$ est positive en tout point, donc $F$ est croissante.}
+
+\theorem{Proposition}{Constance de la primitive par morceaux}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction continue par morceau et $F$ une primitive par morceaux de $f$.\\
+    Alors $F$ est constante si et seulement si $f$ est nulle \textit{(sauf peut-être en un nombre fini de points)}.
+}
+
+\theorem{Corollaire}{}{false}{
+    Soient $f : [a,b] \to \mathbb{R}$ une fonction continue par morceau et $F,G$ deux primitives par morceaux de $f$.\\
+    Alors $F - G$ est constante.
+}
+\remark{C'est à dire que les primitives par morceaux de $f$ ne diffèrent que d'une constante.}
+
+\theorem{Corollaire}{}{false}{
+    Soient $f,g : [a,b] \to \mathbb{R}$ des fonctions continues par morceau.\\
+    Si $f = g$ \textit{(sauf peut-être en un nombre fini de points)}, alors les primitives par morceaux de $f$ et de $g$ ne diffèrent que d'une constante.
+}
+
+\theorem{Corollaire}{Inégalité des accroissements finis}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction continue par morceau et $F$ une primitive par morceaux de $f$.\\
+    Supposons que $\exists M \in \mathbb{R} : f(x) \leq M$ pour tout $x \in [a,b]$ \textit{(sauf peut-être en un nombre fini de points)}.\\
+    Alors on a :
+    \[
+        F(b) - F(a) \leq M(b-a)
+    \]
+}
+\subsubsection{Existence de primitives par morceaux}
+
+Il est admis que les fonctions continues admettent des primitives. On sait que les fonctions en escalier admettent des primitives par morceaux.
+
+\theorem{Proposition}{}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction escalier.\\
+    Alors $f$ admet une infinité de primitives par morceaux.
+}
+\theorem{Proposition}{}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction continue par morceaux.\\
+    Alors $f$ admet au moins une primitive par morceaux.
+}
+
+\section{Intégrales}
+
+\definition{
+    Soient $a,b \in \mathbb{R}$ et $f$ une fonction définie sur un intervalle contenant $a$ et $b$ \textit{(notons-le $I$)}.\\
+    Supposons $f$ continue par morceaux sur $I$ et notons $F$ une primitive par morceaux de $f$.\\
+    Alors on définit l'intégrale de $f$ entre $a$ et $b$, et on la note $\int_a^b f(t) dt$, par :
+    \[
+        \int_a^b f(t) dt = F(b) - F(a)
+    \]
+}
+
+\remark{L'intégrale de $f$ entre $a$ et $b$ ne dépend pas du choix de la primitive par morceaux de $f$.}
+
+\theorem{Proposition}{Relation de Chasles}{false}{
+    Soit $f : I \to \mathbb{R}$ une fonction continue par morceau et $a,b,c \in I$.\\
+    Alors on a :
+    \[
+        \int_a^c f(t) dt = \int_a^b f(t) dt + \int_b^c f(t) dt
+    \]
+}
+
+\theorem{Propriétés}{}{false}{
+    Soit $f : I \to \mathbb{R}$ une fonction continue par morceau et $a,b \in I$.\\
+    Alors on a :
+    \begin{itemize}
+        \item \textbf{Linéarité} : $\forall \lambda, \mu \in \mathbb{R}, \; \int_a^b (\lambda f(t) + \mu g(t)) dt = \lambda \int_a^b f(t) dt + \mu \int_a^b g(t) dt$,
+        \item \textbf{Positivité} : si $f(t) \geq 0$ pour tout $t \in [a,b]$ \textit{(sauf peut-être en un nombre fini de points)}, alors $\int_a^b f(t) dt \geq 0$,
+        \item \textbf{Croissance} : si $f(t) \leq g(t)$ pour tout $t \in [a,b]$ \textit{(sauf peut-être en un nombre fini de points)}, alors $\int_a^b f(t) dt \leq \int_a^b g(t) dt$,
+        \item \textbf{Inégalité triangulaire} : $|\int_a^b f(t) dt| \leq \int_a^b |f(t)| dt$.
+        \item \textbf{Inégalité de la moyenne} : si $f$ est positive sur $[a,b]$ \textit{(sauf peut-être en un nombre fini de points)} et qu'il existe un $M$ tel que $f(t) \leq M$ pour tout $t \in [a,b]$ \textit{(sauf peut-être en un nombre fini de points)}, alors $\int_a^b f(t) dt \leq M(b-a)$.
+    \end{itemize}
+}
+
+\theorem{Théorème fondamental du calcul intégral}{}{false}{
+    Soit $f$ une fonction continue sur $I$ un intervalle et $a \in I$.\\
+    Alors $x \mapsto \int_a^x f(t) dt$ est continue et dérivable sur $I$ et pour tout $x \in I$, on a : \[\frac{d}{dx} \int_a^x f(t) dt = f(x)\]
+    C'est l'unique primitive de $f$ qui s'annule en $a$.
+}
+
+\theorem{Corollaire}{}{false}{
+    Soit $f$ continue sur $I$ un intervalle.\\
+    Soient $u,v : J \to I$ deux fonctions dérivables.\\
+
+    Alors la fonction $g : J \to \mathbb{R}$ définie par $g(x) = \int_{u(x)}^{v(x)} f(t) dt$ est continue et dérivable sur $I$ et pour tout $x \in J$, on a :
+    \[g'(x) = v'(x)f(v(x)) - u'(x)f(u(x))\]
+}
+
+\theorem{Proposition}{Égalité de la moyenne}{false}{
+    Soit $a < b \in \mathbb{R}$ et $f : [a,b] \to \mathbb{R}$ une fonction continue (pas CPM !).\\
+    Donc $\exists c \in [a,b]$ tel que $\int_a^b f(t) dt = (b-a)f(c)$.
+}
+\noindent{\textbf{Preuve :} Appliquer le théorème des accroissements finis à une primitive de $f$.}
+
+\theorem{Proposition}{Nullité}{false}{
+    Soient $a < b \in \mathbb{R}$ et $f : [a,b] \to \mathbb{R}$ une fonction continue.\\
+    Si $f$ est positive ou nulle sur $[a,b]$ et que $\int_a^b f(t) dt = 0$, alors $f$ est identiquement nulle sur $[a,b]$.
+}
+\section{Transformation d'intégrales}
+\theorem{Proposition}{Intégration par parties}{false}{
+    Soient $u,v : [a,b] \to \mathbb{R}$ deux fonctions de classe $\mathcal{C}^1$.\\
+    Alors on a :
+    \[
+        \int_a^b u(t)v'(t) dt = [u(t)v(t)]_a^b - \int_a^b u'(t)v(t) dt
+    \]
+}
+\noindent{\textbf{Preuve :} Appliquer le théorème fondamental du calcul intégral à la fonction $t \mapsto u(t)v(t)$.}
+
+\theorem{Corollaire}{Formule de Taylor avec reste intégral}{false}{
+    Soit $f : I \to \mathbb{R}$ une fonction de classe $\mathcal{C}^{n+1}$ sur un intervalle $I$ et $a \in I$.\\
+    Alors pour tout $x \in I$, on a :
+    \[
+        f(x) = f(a) + f'(a)(x-a) + \ldots + \frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1} + \int_a^x \frac{f^{(n)}(t)}{(n-1)!}(x-t)^{n-1} dt
+    \]
+}
+
+\theorem{Proposition}{Changement de variable}{false}{
+    Soient $I, J$ deux intervalles et $f : I \to \mathbb{R}$ une fonction continue.\\
+    Soit $\varphi : J \to I$ une fonction de classe $\mathcal{C}^1$.\\
+    Soient $a,b \in J$.\\
+    \[
+        \int_{\varphi(a)}^{\varphi(b)} f(t) dt = \int_a^b f(\varphi(s)) \varphi'(s) ds
+    \]
+}
+\section{Approximations par les sommes de Riemann}
+
+\definition{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction continue et $(x_i)_{i_n}$ une subdivision adaptée à $f$.\\
+    On considère $f_{N|]x_i, x_{i+1}[} = f(y_i^N)$ où $y_i^N \in ]x_i, x_{i+1}[$.\\
+
+    Alors :
+    \[
+        R_n(f) = \sum_{i=0}^{n-1} f(y_i^N)(x_{i+1} - x_i) = \frac{b-a}{n} \sum_{i=0}^{n-1} f(y_i^N)
+    \]
+}   
+
+\theorem{Proposition}{}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une fonction continue.\\
+    Alors :
+    \[
+        \lim_{N \to +\infty} R_N(f) = \int_a^b f(t) dt
+    \]
+}
+
+\newpage
+\tableofcontents
+
+\end{document}
