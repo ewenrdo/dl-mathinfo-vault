@@ -51,16 +51,18 @@
 
 \theorem{Proposition}{Loi faible des grands nombres}{false}{
 Soit $(X_n)_{n\geq1}$ une suite de variables aléatoires indépendantes et identiquement distribuées (i.i.d.) de carré intégrable.
-On note $\mathbb{E}[X_1] = \mu$ et on définit la moyenne empirique $M_n = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2$.
+On note $\mathbb{E}[X_1] = \mu$ et on définit la moyenne $M_n = \frac{1}{n} \sum_{i=1}^n X_i$.\\
+Alors $M_n$ converge en probabilité vers $\mu$, c'est à dire :
 \[
 \forall \varepsilon > 0, \quad \lim_{n \to \infty} \mathbb{P}(|M_n - \mu| \geq \varepsilon) = 0
 \]
 }
 \remark{La loi faible des grands nombres affirme que la moyenne empirique $M_n$ converge en probabilité vers la moyenne théorique $\mu$. En d'autres termes, pour tout $\varepsilon > 0$, la probabilité que $M_n$ s'écarte de $\mu$ de plus de $\varepsilon$ tend vers 0 lorsque $n$ tend vers l'infini.}
 \example{
-    Reprenons l'exemple du lancer de pièce. On a $S_n = \sum_{i=1}^n X_i$ où les $X_i$ sont des variables aléatoires de Bernoulli de paramètre $\frac{1}{2}$. On a $\mathbb{E}[X_i] = \frac{1}{2}$ et $\mathrm{Var}(X_i) = \frac{1}{4}$. La moyenne empirique est donnée par $M_n = \frac{1}{n} \sum_{i=1}^n (X_i - \frac{1}{2})^2$. Par la loi faible des grands nombres, on a :
+    Reprenons l'exemple du lancer de pièce. On a $S_n = \sum_{i=1}^n X_i$ où les $X_i$ sont des variables aléatoires de Bernoulli de paramètre $\frac{1}{2}$. On a $\mathbb{E}[X_i] = \frac{1}{2}$ et $\mathrm{Var}(X_i) = \frac{1}{4}$. La moyenne empirique est donnée par $M_n = \frac{1}{n} \sum_{i=1}^n X_i$.\\
+    Par la loi faible des grands nombres, on a :
     \[
-        \forall \varepsilon > 0, \quad \lim_{n \to \infty} \mathbb{P}\left(\left|M_n - \frac{1}{4}\right| \geq \varepsilon\right) = 0 .
+        \forall \varepsilon > 0, \quad \lim_{n \to \infty} \mathbb{P}\left(\left|M_n - \frac{1}{2}\right| \geq \varepsilon\right) = 0 .
     \]
 }
 \ndlr{Vérifier sur le cours de MME. Yuen}
@@ -96,10 +98,170 @@ Cette majoration est plus satisfaisante que celle obtenue avec l'inégalité de 
 
 \subsection{Inégalité de Jensen}
 
+\definition{
+    Une fonction $f : \mathbb{R} \to \mathbb{R}$ est dite convexe sur un intervalle $I$ si pour tous $x, y \in I$ et pour tout $\lambda \in [0,1]$, on a :
+    \[
+        f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y) .
+    \]
+}
+
+\theorem{Proposition}{Critère de convexité}{false}{
+    Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction de classe $\mathcal{C}^2$. Si $f''(x) \geq 0$ pour tout $x \in \mathbb{R}$, alors $f$ est convexe.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction de classe $\mathcal{C}^2$ telle que $f''(x) \geq 0$ pour tout $x \in I$ où $I$ est un intervalle.\\
+Comme $f''(x) \geq 0$, la fonction $f'$ est croissante.\\
+Soient $x, y \in I$ et $\lambda \in [0,1]$. Sans perte de généralité, supposons que $x < y$.\\
+Par le théorème des accroissements finis, il existe $c \in ]x,y[$ tel que :
+\[
+    f(y) - f(x) = f'(c)(y - x) .
+\]
+Comme $f'$ est croissante, on a $f'(x) \leq f'(c) \leq f'(y)$.\\
+Donc : $f'(x) (y - x) \leq f(y) - f(x) \leq f'(y) (y - x)$.\\
+En interprétant $f'(x)$ et $f'(y)$ comme des pentes de tangentes à la courbe de $f$, on voit que la courbe de $f$ est située au-dessus de la corde reliant les points $(x, f(x))$ et $(y, f(y))$.\\
+En d'autres termes, pour tout $\lambda \in [0,1]$, on a : $f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y)$, ce qui montre que $f$ est convexe. $\Box$
+}
+
+\ndlr{Preuve non donnée en cours, à vérifier.}
+
 \theorem{Proposition}{Inégalité de Jensen}{false}{
     Soit $X$ une variable aléatoire réelle discrète et $f : \mathbb{R} \to \mathbb{R}_{+}$ une fonction convexe. Alors $f(X)$ est intégrable et on a :
     \[
         f(\mathbb{E}[X]) \leq \mathbb{E}[f(X)] .
+    \]
+}
+
+\example{
+    Si $f(x) = x^2$, qui est convexe, alors l'inégalité de Jensen nous dit que :
+    \[
+        (\mathbb{E}[X])^2 = f(\mathbb{E}[X]) \leq \mathbb{E}[f(X)] = \mathbb{E}[X^2] .  
+    \]
+    Cela dit, on le sait déjà : $\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \geq 0$.
+}
+
+\section{Caractérisation d'une loi}
+On a vu qu'une loi de probabilité $\mu$ sur un ensemble $E$ (dénombrable) est caractérisée par la donnée $\mu(\{ a \})$ pour tout $a \in E$. Cependant, il existe d'autres façons de caractériser une loi de probabilité, c'est ce que nous allons voir ci-après.
+
+\subsection{Fonctions de répartition}
+
+\definition{
+    Soit $X$ une variable aléatoire réelle discrète. La fonction de répartition de $X$ est la fonction $F_X : \mathbb{R} \to \mathbb{R}$ définie par :
+        \[
+        F_X(x) = \mathbb{P}(X \leq x) .
+    \]
+}
+\remark{Cette fonction est positive, croissante et tend vers $0$ en $-\infty$ et vers $1$ en $+\infty$.}
+
+\example{
+    Si $X \sim \mathcal{B}(p)$, alors $F_X(x) = \begin{cases}
+        0 & \text{si } x < 0 \\
+        1-p & \text{si } 0 \leq x < 1 \\
+        1 & \text{si } x \geq 1
+    \end{cases}$.
+}
+
+
+\theorem{Proposition}{}{false}{
+    Soit $X$ une variable aléatoire réelle discrète. Pour tout $a \in \mathbb{R}$, on a :
+    \[
+        \mathbb{P}(X = a) = F_X(a) - \lim_{x \to a^-} F_X(x) .
+    \]
+}
+
+\subsection{Fonctions génératrices}
+
+On introduit à présent une caractérisation de la loi qui est spécifique aux variables aléatoires entières : la fonction génératrice.
+\definition{
+    Soit $X$ une variable aléatoire entière. La fonction génératrice de $X$ est la fonction $G_X : [-1,1] \to \mathbb{R}$ définie par :
+    \[
+        G_X(z) = \mathbb{E}[z^X] = \sum_{n=0}^{\infty} z^n \mathbb{P}(X = n) .
+    \]
+}
+
+\theorem{Proposition}{Caractérisation de la loi}{false}{
+    La fonction génératrice caractérise la loi. Plus précisément, soient $X$ et $Y$ deux variables aléatoires entières.\\
+    $X$ et $Y$ sont de même loi si et seulement si leurs fonctions génératrices sont égales, c'est à dire $G_X(z) = G_Y(z)$ pour tout $z \in [-1,1]$.
+}
+
+\remark{
+    $G_X(1) = \mathbb{E}[1^X] = 1$. De plus, $G_X$ est une fonction convexe sur $[0,1]$.
+}
+
+\theorem{Proposition}{Dérivées de la fonction génératrice}{false}{
+    Soit $X$ une variable aléatoire entière. Pour tout $k \in \mathbb{N}$, la quantité suivante est bien définie :
+    \[
+        \lim_{z \to 1^-} G_X^{(k)}(z) = \mathbb{E}[X(X-1)\cdots(X-k+1)] \in [0, +\infty] .
+    \]
+    Par ailleurs, $\mathbb{E}[X^k] < +\infty$ si et seulement si $\lim_{z \to 1^-} G_X^{(k)}(z) < +\infty$.
+}
+
+\theorem{Proposition}{Variance}{false}{
+    Soit $X$ une variable aléatoire entière. Alors $\mathbb{E}[X] = \lim_{z \to 1^-} G_X'(z)$ et si de plus $X$ est de carré intégrable, on a :
+    \[
+        \mathrm{Var}(X) = \lim_{z \to 1^-} G_X''(z) + \lim_{z \to 1^-} G_X'(z) - (\lim_{z \to 1^-} G_X'(z))^2 .
+    \]
+}
+\noindent{\textbf{Preuve :}\\
+$\mathbb{E}[X] = \lim_{z \to 1^-} G_X'(z)$ est immédiat (application de la proposition précédente pour $k=1$, resp. $k=2$).\\
+Et $Var(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$ et la définition de la variance, d'où en appliquant la proposition précédente pour $k=2$ et $k=1$, on trouve :
+\[
+    \mathrm{Var}(X) = \lim_{z \to 1^-} G_X''(z) + \lim_{z \to 1^-} G_X'(z) - (\lim_{z \to 1^-} G_X'(z))^2 .
+\]
+On a donc la formule annoncée. $\Box$
+}
+
+\example{
+    Soit $X \sim \mathcal{P}(\lambda)$ avec $\lambda > 0$. Alors :
+    \[
+        G_X(z) = \mathbb{E}[z^X] = \sum_{n=0}^{\infty} z^n \frac{\lambda^n e^{-\lambda}}{n!} = e^{\lambda(z-1)} .
+    \]
+    Ainsi, :
+    $G'_X(z) = \lambda e^{\lambda(z-1)}$ et $G''_X(z) = \lambda^2 e^{\lambda(z-1)}$.\\
+    Par conséquent, $\mathbb{E}[X] = \lim_{z \to 1^-} G'_X(z) = \lambda$ et $\mathrm{Var}(X) = \lim_{z \to 1^-} G''_X(z) + \lim_{z \to 1^-} G'_X(z) - (\lim_{z \to 1^-} G'_X(z))^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
+}
+\remark{La fonction génératrice est particulièrement adaptée lorsque l'on manipule des variables aléatoires indépendantes.}
+
+\theorem{Proposition}{Produit de fonctions génératrices}{false}{
+    Soient $X$ et $Y$ deux variables aléatoires entières indépendantes. Alors pour tout $z \in [-1,1]$, on a :
+    \[
+        G_{X+Y}(z) = G_X(z) G_Y(z) .
+    \]
+}
+
+\subsection{Fonction caractéristique}
+On peut étendre la caractérisation précédente à des variables aléatoires réelles discrètes en introduisant la fonction caractéristique.
+
+\definition{
+    Soit $X$ une variable aléatoire réelle discrète. La fonction caractéristique de $X$ est la fonction $\varphi_X : \mathbb{R} \to \mathbb{C}$ définie par :
+    \[
+        \varphi_X(t) = \mathbb{E}[e^{itX}]
+    \]
+}
+
+\theorem{Proposition}{Caractérisation de la loi par la fonction caractéristique}{true}{
+    Soient $X$ et $Y$ deux variables aléatoires réelles discrètes.\\
+    $X$ et $Y$ sont de même loi si et seulement si leurs fonctions caractéristiques sont égales, c'est à dire $\varphi_X(t) = \varphi_Y(t)$ pour tout $t \in \mathbb{R}$.
+}
+\ndlr{Proposition admise et non démontrée en cours.}
+
+\section{Convolution discrète}
+Ici, on souhaite déterminer la loi de la somme de deux variables à valeur dans $\mathbb{Z}$.
+
+\definition{
+    Soient $\mu$ et $\nu$ deux lois de probabilité sur $\mathbb{Z}$. On appelle la \textbf{convolée} et on note $\mu * \nu$ la loi de probabilité sur $\mathbb{Z}$ définie par :
+    \[
+        (\mu * \nu)(\{ k \}) = \sum_{m\in\mathbb{Z}} \mu(\{ m \}) \nu(\{ k-m \}), \quad \forall k \in \mathbb{Z} .
+    \]
+}
+
+\remark{Intuitivement, la convolée $\mu * \nu$ correspond à la loi de la somme de deux variables aléatoires indépendantes de lois respectives $\mu$ et $\nu$.}
+
+\theorem{Proposition}{}{false}{
+    Soient $X$ et $Y$ deux variables aléatoires indépendantes à valeur dans $\mathbb{Z}$.\\
+    La loi de $X + Y$ est donnée par la convolée des lois de $X$ et $Y$, c'est à dire :
+    \[
+        \mathbb{P}(X + Y = k) = \sum_{m\in\mathbb{Z}} \mathbb{P}(X = m) \mathbb{P}(Y = k-m), \quad \forall k \in \mathbb{Z} .
     \]
 }
 
