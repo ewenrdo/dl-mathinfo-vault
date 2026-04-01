@@ -164,6 +164,7 @@ On étudie ici le groupe $SO(\mathbb{R}^2)$, c'est à dire le groupe des isomét
         \sin \theta & \cos \theta
     \end{pmatrix} \].
 }
+
 \noindent\textbf{Preuve :}\
 Soit $u\in SO_2(\mathbb{R})$ et $(e_1, e_2)$ une base orthonormée directe. Posons $u(e_1) = \begin{pmatrix} a \\ b \end{pmatrix}$.\\
 Comme $\|u(e_1)\| = 1$, on a $a^2 + b^2 = 1$.\\
@@ -228,6 +229,21 @@ Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. S
     \end{pmatrix}$.
 }
 \remark{Une conséquence importante de cela est que toute isométrie directe de $\mathbb{R}^3$ est une rotation autour d'un axe.}
+
+\theorem{Formule de Rodrigues}{}{false}{
+    Soit $u \in SO_3(\mathbb{R})$ une rotation d'angle $\theta$ autour de l'axe dirigé par le vecteur unitaire $d$. Alors pour tout $x \in \mathbb{R}^3$, on a :
+    \[
+        u(x) = \cos \theta x + (1 - \cos \theta) \langle x, d \rangle d + \sin \theta (d \wedge x)
+    \]
+}
+\noindent{\textbf{Preuve :}\\
+Décomposons $x$ en $x = x_1 + x_2$, où $x_1 \in D$ et $x_2 \in D^\perp$.\\
+Alors $u(x) = u(x_1) + u(x_2)$.\\
+Or $u(x_1) = x_1$ et $u(x_2) = \cos \theta x_2 + \sin \theta (d \wedge x_2)$, d'où $u(x) = \cos \theta x + (1 - \cos \theta) \langle x, d \rangle d + \sin \theta (d \wedge x)$. $\Box$
+}
+
+\remark{La formule de Rodrigues est très utilisée en physique pour calculer la rotation d'un vecteur dans l'espace.}
+\ndlr{Cette formule est dans le polycopié de Romain Petrides, mais n'a pas été abordée en cours. Mais le nom était cool, alors je l'ai mise.}
 
 \example{
     Considérons le groupe $SO_3(\mathbb{R})$ des isométries directes de $\mathbb{R}^3$.\\
