@@ -158,7 +158,19 @@ $\| R_\theta(\begin{pmatrix}
 \subsection{Adjoint d'une isométrie}
 
 \theorem{Proposition}{}{false}{
-    Soit $E$ un espace euclidien. $u \in \mathcal{L}(E)$ une isométrie si et seulement si $u^* = u^{-1}$.
+    Soit $E$ un espace euclidien. $u \in \mathcal{L}(E)$ est une isométrie si et seulement si $u^* = u^{-1}$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+$\Rightarrow /$ Soient $x,y \in E$, supposons $\langle u(x), u(y) \rangle = \langle x, y \rangle$.\\
+Notons $u^*$ l'adjoint de $u$, on a alors :\\
+$\langle u(x), u(y) \rangle = \langle x, u^*(u(y)) \rangle = \langle x, y \rangle$.\\
+$\Leftrightarrow \langle x, u^*(u(y)) - y \rangle = 0$.\\
+$\Leftrightarrow u^*(u(y)) - y = 0$ (car $x$ est arbitraire).\\
+$\Leftrightarrow u^* \circ u = Id_E$.\\
+$\Leftrightarrow u^* = u^{-1}$.\\\\
+$\Leftarrow /$ Soient $x,y \in E$, supposons $u^* = u^{-1}$.\\
+$\langle u(x), u(y) \rangle = \langle x, u^*(u(y)) \rangle = \langle x, y \rangle$.
 }
 
 \theorem{Corollaire}{}{false}{

@@ -114,6 +114,73 @@ Représentation géométrique :
     Donc $\iint_{[0,1] \times [0,1]} \frac{1+x^2}{1+y^2} dx dy = \frac{\pi}{3}$.
 }
 
+\theorem{Théorème de Fubini}{}{false}{
+    Soient $[a,b]$ un segment et $c,d : [a,b] \to \mathbb{R}$ des fonctions continues.\\
+    On pose $D = \{ (x,y) \in \mathbb{R}^2 \; | \; x \in [a,b], \; c(x) \leq y \leq d(x) \}$.\\
+    Soit $f : D \to \mathbb{R}$ une fonction continue. Alors :
+    \[
+    \iint_D f(x,y) \, dx \, dy = \int_a^b \left( \int_{c(x)}^{d(x)} f(x,y) \, dy \right) dx
+    \]
+}
+
+\section{Changement de variables}
+
+\subsection{Matrice jacobienne et jacobien}
+\definition{
+    Soit $g : \mathbb{R}^2 \to \mathbb{R}^2$ de classe $\mathcal{C}^1$.\\
+    La \textbf{matrice jacobienne} de $g$ est la matrice $Jac_g(x,y) = \begin{pmatrix}
+        \frac{\partial g_1}{\partial x}(x,y) & \frac{\partial g_1}{\partial y}(x,y) \\
+        \frac{\partial g_2}{\partial x}(x,y) & \frac{\partial g_2}{\partial y}(x,y)
+    \end{pmatrix}$.
+}
+
+\vocabulary{On appelle le \textbf{jacobien} de $g$ le déterminant de la matrice jacobienne de $g$, c'est à dire $det(Jac_g(x,y)) = \frac{\partial g_1}{\partial x}(x,y) \cdot \frac{\partial g_2}{\partial y}(x,y) - \frac{\partial g_1}{\partial y}(x,y) \cdot \frac{\partial g_2}{\partial x}(x,y)$}
+
+\definition{
+    Soit $D$ et $\Delta$ deux domaines quarrables de $\mathbb{R}^2$.\\
+    Soit $g : D \to \Delta$.\\
+    On dit que $g$ est un $\mathcal{C}^1\text{-diffeomorphisme}$ si :
+    \begin{itemize}
+        \item $g$ est de classe $\mathcal{C}^1$,
+        \item $g$ est un bijection de $D$ sur $\Delta$,
+        \item $\forall (x,y) \in D, \; det(Jac_g(x,y)) \neq 0$.
+    \end{itemize}
+}
+
+\theorem{Théorème de changement de variables}{}{false}{
+    Soit $D$ et $\Delta$ deux domaines quarrables de $\mathbb{R}^2$.\\
+    Soit $g : D \to \Delta$ un $\mathcal{C}^1\text{-diffeomorphisme}$.\\
+    Soit $f : \Delta \to \mathbb{R}$ une fonction continue. Alors :
+    \[
+    \iint_\Delta f(u,v) du dv = \iint_D f(g(x,y)) |det(Jac_g(x,y))| dx dy
+    \]
+}
+
+\example{
+    Calculons l'intégrale de $f(x,y) = x^2 + y^2$ sur le disque unité $\Delta = \{ (x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$.
+    
+    On utilise le passage en coordonnées polaires défini par l'application :
+    \[ g : D \to \Delta, \quad (r,\theta) \mapsto (r \cos\theta, r \sin\theta) \]
+    où le domaine de départ est le rectangle $D = [0,1] \times [0,2\pi]$.
+    
+    \begin{enumerate}
+        \item \textbf{Jacobien :} Le déterminant de la matrice jacobienne est $\det(Jac_g(r,\theta)) = r$. Comme $r \geq 0$ sur $D$, la valeur absolue est inutile ($|r| = r$).
+        \item \textbf{Transformation de la fonction :} $f(g(r,\theta)) = (r\cos\theta)^2 + (r\sin\theta)^2 = r^2$.
+        \item \textbf{Calcul de l'intégrale :}
+    \end{enumerate}
+    
+    \[
+    \iint_\Delta (x^2 + y^2) \, dx \, dy = \iint_D r^2 \cdot r \, dr \, d\theta = \int_0^{2\pi} \left( \int_0^1 r^3 \, dr \right) d\theta
+    \]
+    
+    Par intégrations successives :
+    \begin{itemize}
+        \item Intégration selon $r$ : $\displaystyle \int_0^1 r^3 \, dr = \left[ \frac{r^4}{4} \right]_0^1 = \frac{1}{4}$.
+        \item Intégration selon $\theta$ : $\displaystyle \int_0^{2\pi} \frac{1}{4} \, d\theta = \left[ \frac{\theta}{4} \right]_0^{2\pi} = \frac{2\pi}{4} = \frac{\pi}{2}$.
+    \end{itemize}
+    
+    Finalement : $\displaystyle \iint_\Delta (x^2 + y^2) \, dx \, dy = \frac{\pi}{2}$.
+}
 \newpage
 \tableofcontents
 
