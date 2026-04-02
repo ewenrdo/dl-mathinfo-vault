@@ -82,9 +82,11 @@ Alors $u^\perp = (-y,x)$, et $\langle u^\perp, v \rangle = -yx' + xy' = [u,v]$. 
 \remark{Le déterminant représente l'aire du parallélogramme formé par les vecteurs $x$ et $y$, avec un signe qui dépend de l'orientation (sens trigonométrique ou sens horaire).}
 
 \example{
-    Image à venir
+    \begin{center}
+        \includegraphics[width=0.25\textwidth]{./images/eg3.png}
+        \captionof{figure}{Schéma du produit mixte (aire du rectangle) en dimension 2}
+    \end{center}
 }
-\ndlr{cf. OneNote}
 
 \subsubsection{Cas particulier de la dimension 3 : le produit vectoriel}
 Soit $E$ un espace euclidien orienté tel que $dim(E) = 3$.
@@ -205,7 +207,6 @@ Or $\det(u) = 1$, ce qui impose la première solution. Donc la matrice de $u$ es
 
 \vocabulary{On appelle $\theta$ l'angle de rotation de $u$. On appelle les éléments de $SO_2(\mathbb{R})$ les \textbf{rotations} du plan.}
 
-
 \theorem{Proposition}{}{false}{
     $SO_2(\mathbb{R})$ est un groupe abélien isomorphe à $(\mathbb{R}/2\pi\mathbb{Z}, +)$.
 }
@@ -234,6 +235,8 @@ Dans une base orthonormée directe quelconque, la matrice d'une réflexion est d
 Elle est toujours de trace nulle, et de déterminant égal à -1.
 }
 
+\vocabulary{On appelle $\theta$ l'angle de la réflexion $s$ et l'axe de symétrie de $s$ est la droite $\Delta = \ker(s - id_E)$.}
+
 \remark{Contrairement aux rotations, le produit de deux réflexions n'est pas une réflexion, mais une rotation. $O_{-}(E)$ n'est donc pas un groupe.}
 
 \subsection{Classification des isométries en dimension 3}
@@ -260,21 +263,6 @@ Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. S
     \end{pmatrix}$.
 }
 \remark{Une conséquence importante de cela est que toute isométrie directe de $\mathbb{R}^3$ est une rotation autour d'un axe.}
-
-\theorem{Formule de Rodrigues}{}{false}{
-    Soit $u \in SO_3(\mathbb{R})$ une rotation d'angle $\theta$ autour de l'axe dirigé par le vecteur unitaire $d$. Alors pour tout $x \in \mathbb{R}^3$, on a :
-    \[
-        u(x) = \cos \theta x + (1 - \cos \theta) \langle x, d \rangle d + \sin \theta (d \wedge x)
-    \]
-}
-\noindent{\textbf{Preuve :}\\
-Décomposons $x$ en $x = x_1 + x_2$, où $x_1 \in D$ et $x_2 \in D^\perp$.\\
-Alors $u(x) = u(x_1) + u(x_2)$.\\
-Or $u(x_1) = x_1$ et $u(x_2) = \cos \theta x_2 + \sin \theta (d \wedge x_2)$, d'où $u(x) = \cos \theta x + (1 - \cos \theta) \langle x, d \rangle d + \sin \theta (d \wedge x)$. $\Box$
-}
-
-\remark{La formule de Rodrigues est très utilisée en physique pour calculer la rotation d'un vecteur dans l'espace.}
-\ndlr{Cette formule est dans le polycopié de Romain Petrides, mais n'a pas été abordée en cours. Mais le nom était cool, alors je l'ai mise.}
 
 \example{
     Considérons le groupe $SO_3(\mathbb{R})$ des isométries directes de $\mathbb{R}^3$.\\
