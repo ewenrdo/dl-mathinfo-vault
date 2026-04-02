@@ -36,8 +36,9 @@
         \includegraphics[width=0.5\textwidth]{./images/eg1.png}
         \captionof{figure}{Schéma de différentes orientations de $\mathbb{R}^2$}
     \end{center}
-    L'orientation "classique" de $\mathbb{R}^3$ correspond à la "règle de la main droite".
+    L'orientation "classique" de $\mathbb{R}^3$ correspond à la "règle de la main droite". Une méthode plus sûre est de calculer le déterminant de la matrice de passage entre la base canonique et la base donnée.
 }
+\remark{De manière usuelle, on choisit toujours la base canonique de $\mathbb{R}^n$ pour définir l'orientation "classique" de $\mathbb{R}^n$.}
 
 %\example{
 %    $E = \mathbb{R}^3$ muni de $(\vec{i}, \vec{j}, \vec{k})$ la base canonique.\\ L'orientation "classique" de $\mathbb{R}^3$ correspond à la "règle de la main droite".
@@ -59,6 +60,8 @@
 }
 \remark{On met bien $Det$ en majuscules pour le différencier du déterminant de matrices / de familles de vecteurs usuel.}
 
+\subsubsection{Cas particulier de la dimension 2}
+
 \example{
     Soit $E$ un espace euclidien orienté de dimension 2. Soient $x,y \in E$.\\
     Alors $[x,y] = \begin{vmatrix}
@@ -66,6 +69,22 @@
         x_2 & y_2
     \end{vmatrix}$, où $(e_1, e_2)$ est une base orthonormée directe de $E$.
 }
+
+\theorem{Proposition}{Caractérisation du produit mixte en dimension 2}{false}{
+    Soient $u,v \in E$.\\ Alors on a que $[u,v] = \langle u^\perp, v \rangle$.
+}
+\noindent{\textbf{Preuve :}\\
+Soit $(e_1, e_2)$ une base orthonormée directe de $E$.\\
+Posons $u = (x,y)$ et $v = (x',y')$ dans cette base.\\
+Alors $u^\perp = (-y,x)$, et $\langle u^\perp, v \rangle = -yx' + xy' = [u,v]$. $\Box$
+}
+
+\remark{Le déterminant représente l'aire du parallélogramme formé par les vecteurs $x$ et $y$, avec un signe qui dépend de l'orientation (sens trigonométrique ou sens horaire).}
+
+\example{
+    Image à venir
+}
+\ndlr{cf. OneNote}
 
 \subsubsection{Cas particulier de la dimension 3 : le produit vectoriel}
 Soit $E$ un espace euclidien orienté tel que $dim(E) = 3$.
@@ -81,7 +100,7 @@ On appliquant le théorème de représentation de Riesz, il existe un unique vec
     Soit $E$ un espace euclidien orienté de dimension 3. Soient $x,y \in E$.\\
     On appelle \textbf{produit vectoriel} de $x$ et $y$ le vecteur $x \wedge y$ défini par : $\forall z \in E, [x,y,z] = \langle x \wedge y, z \rangle$.
 }
-
+\attention{Le produit vectoriel n'est pas égal au produit mixte, mais il est défini à partir du produit mixte.}
 \attention{Le produit vectoriel $\wedge$ n'est pas associatif. En revanche, si $a,b,c \in E$, on peut définir $a \wedge (b \wedge c) = \langle a, c \rangle b - \langle a, b \rangle c$.}
 
 \theorem{Propriétés}{}{false}{
@@ -131,6 +150,18 @@ x_3 & y_3 & e_3
     Soient $x = (1,2,3)$ et $y = (4,5,6)$.\\
     Alors $x \wedge y = (2 \cdot 6 - 3 \cdot 5)\vec{i} + (3 \cdot 4 - 1 \cdot 6)\vec{j} + (1 \cdot 5 - 2 \cdot 4)\vec{k} = (-3,6,-3)$.\\
     On vérifie que $\langle x \wedge y, x \rangle = \langle x \wedge y, y \rangle = 0$ et que $[x,y,z] = \langle x \wedge y, z \rangle$ pour tout $z \in E$.
+}
+
+\example{
+    On pose $u = (1,0,1)$ et $v = (0,2,0)$.\\
+    Notons $u \wedge v = (x,y,z)$.\\
+    On a que :
+    $\begin{vmatrix}
+        1 & 0 & x \\
+        0 & 2 & y \\
+        1 & 0 & z
+    \end{vmatrix} = -2x+2z$
+    Donc $-2x+2z = 0$, d'où $u \wedge v = (2,0,2)$. (à une constante près).
 }
 
 \section{Étude du groupe des isométries en dimension 2 et 3}
