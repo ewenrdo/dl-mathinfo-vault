@@ -1,0 +1,130 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info ASF4}
+\fancyhead[C]{Algèbre}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 10 : Formes bilinéaires et formes quadratiques}
+
+\section{Formes bilinéaires}
+\subsection{Généralités}
+\definition{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
+    Une \textbf{forme bilinéaire} sur $E$ est une application $f : E \times E \to \mathbb{R}$ telle que :
+    \begin{itemize}
+        \item pour tout $x \in E$, l'application $y \mapsto f(x,y)$ est linéaire,
+        \item pour tout $y \in E$, l'application $x \mapsto f(x,y)$ est linéaire.
+        \item autrement dit, $f$ est linéaire par rapport à chacune de ses variables.
+    \end{itemize}
+}
+
+\example{Le produit scalaire est une forme bilinéaire.}
+
+\definition{
+    On dit qu'une forme bilinéaire $f$ est \textbf{symétrique} si $f(x,y) = f(y,x)$ pour tous $x,y \in E$.
+}
+
+\definition{
+    Soit $f$ une forme bilinéaire sur $E$, alors : 
+    \begin{enumerate}
+        \item $ker(f) = \{ x \in E \mid \forall y \in E f(x,y) = 0 \}$,
+        \item $rg(f) = \dim(E) - \dim(ker(f))$.
+    \end{enumerate}
+}
+\vocabulary{On dit que $f$ est \textbf{non-dégénérée} si $ker(f) = \{0\}$, c'est à dire si $rg(f) = \dim(E)$.}
+
+\theorem{Théorème}{}{false}{
+Soit $(e_1, \ldots, e_n)$ une base de $E$, et $A_{ij} = f(e_i, e_j)$, alors on a :
+\begin{enumerate}
+    \item $f$ est non dégénérée si et seulement si $A$ est inversible,
+    \item $ker(f) = \{ x \in E \mid A X = 0 \}$,
+    \item $rg(f) = rg(A)$.
+\end{enumerate}
+}
+
+\noindent{\textbf{Démonstration :}\\
+Posons $f : E \times E \to \mathbb{R}$ telle que $f : x \mapsto (y \mapsto f(x,y))$.
+Posons aussi $d : E \to E*$.\\
+Comme $f$ est bilinéaire, $d$ est linéaire.\\
+Ainsi, $ker(f) = ker(d)$ et $rg(f) = rg(d)$.\\
+Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, \ldots, e_n^*)$, on a $ker(d) = \{ x \in E \mid A X = 0 \}$ et $rg(d) = rg(A)$.
+}
+
+\example{
+    Un produit scalaire est une forme bilinéaire symétrique non dégénérée.\\
+    En effet, si $f$ est un produit scalaire, alors $f(x,y) = f(y,x)$ pour tous $x,y \in E$, et $ker(f) = \{0\}$ (car $f(x,x) > 0$ pour tout $x \neq 0$).
+}
+
+\subsection{Orthogonalité}
+
+\definition{
+    Soit $\varphi$ une forme bilinéaire symétrique sur $E$ un $\mathbb{R}$-espace vectoriel.
+    \begin{enumerate}
+        \item Deux vecteurs $x, y \in E$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, on note $x \perp y$.
+        \item L'orthogonal d'une partie $X \subseteq E$ est le sous-espace vectoriel $H^\perp = \{ z \in E \mid \forall x \in X, x \perp z \}$.
+        \item Un vecteur $x \in E$ est dit \textbf{isotrope} si $x \perp x$.
+    \end{enumerate}
+}
+
+\remark{Une forme bilinéaire symétrique qui n'a pas de vecteur isotrope est nécessairement non dégénérée.}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie $n$, et $\varphi$ une forme bilinéaire symétrique sur $E \times E$.\\
+    Soit $F$ un sous-espace vectoriel de $E$.
+    \begin{enumerate}
+        \item On suppose qu'aucun vecteur non nul de $F$ n'est orthogonal à $E$ tout entier. Alors : $dim(F) + dim(F^\perp) = n$.
+        \item Le résultat s'applique à tout sous-espace vectoriel $F$ de $E$ si $\varphi$ est non dégénérée.
+    \end{enumerate}
+}
+
+\theorem{Corollaire}{}{false}{
+    Si $\varphi$ est un forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
+}
+
+\subsection{Restriction d'une forme bilinéaire symétrique}
+Si $b$ est un produit scalaire sur $E$, il est clair que la restriction de $b$ à tout sous-espace vectoriel $F$ de $E$ est encore un produit scalaire sur $F$. En revanche, l'exemple suivant montre qu'une forme bilinéaire symétrique non dégénérée peut avoir des restrictions qui sont
+dégénérées.
+
+\example{
+    Soit $E = \mathbb{R}^2$ et $b$ la forme bilinéaire symétrique définie par $b((x_1, y_1), (x_2, y_2)) = x_1 x_2 - y_1 y_2$.\\
+    Alors $b$ est non dégénérée, mais la restriction de $b$ à la droite vectorielle $F = \{ (x, x) \mid x \in \mathbb{R} \}$ est dégénérée.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et soit $\varphi$ une forme bilinéaire symétrique sur $E \times E$.\\
+    Soit $F$ un sous-espace vectoriel de $E$. Alors :
+    \[
+         \varphi_{|F \times F} \text{ est non dégénérée } \Leftrightarrow F \cap F^\perp = \{0\} \Leftrightarrow F \oplus F^\perp = E
+    \]
+}
+
+\section{Formes quadratiques}
+Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norme" avait des propriétés remarquables, en particulier vis-à-vis de l'orthogonalité grâce au théorème de Pythagore. La généralisation de cette fonction dans le cadre des formes bilinéaires conduit à la notion de forme quadratique.
+
+\definition{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
+    Une fonction $q : E \to \mathbb{R}$ est une \textbf{forme quadratique} sur $E$ s'il existe une forme bilinéaire symétrique $\varphi$ sur $E \times E$ \textit{(a priori non symétrique)} telle que $q(x) = \varphi(x,x)$ pour tout $x \in E$.
+}
+
+\remark{Toute forme quadratique $q$ vérifie : $q(\lambda x) = \lambda^2 q(x)$ pour tout $\lambda \in \mathbb{R}$ et tout $x \in E$. En particulier, $q(0) = 0$.}
+
+\newpage
+\tableofcontents
+
+\end{document}
