@@ -243,12 +243,9 @@ Elle est toujours de trace nulle, et de déterminant égal à -1.
 \subsubsection{Isométries directes}
 Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
 
-\theorem{Lemme}{}{false}{
-    $1 \in Sp(u)$
-}
-\ndlr{cf. Laurent pour la preuve du lemme.}
 
 \definition{On dira que $(e_1, e_2)$ base de $n^\perp$ est directe si $(e_1, e_2, n)$ est une base directe de $E$ \textit{(on parle aussi d'orientation induite sur $n^\perp$)}.}
+\remark{Si $u \in SO_3(\mathbb{R})$, alors $1 \in Sp(u)$ \textit{(c'est primordial pour démontrer le théorème qui suit)}.}
 
 \theorem{Théorème}{}{false}{
     Dans un espace euclidien orienté $E$ de dimension 3, une isométrie directe non triviale (une rotation en dimension 3), est déterminée par la donnée de :
@@ -262,16 +259,41 @@ Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. S
         0 & \sin \theta & \cos \theta
     \end{pmatrix}$.
 }
+\vocabulary{On appelle les éléments de $SO_3(\mathbb{R})$ les \textbf{rotations} de l'espace.}
 \remark{Une conséquence importante de cela est que toute isométrie directe de $\mathbb{R}^3$ est une rotation autour d'un axe.}
 
 \example{
-    Considérons le groupe $SO_3(\mathbb{R})$ des isométries directes de $\mathbb{R}^3$.\\
-    Soit $u \in SO_3(\mathbb{R})$ tel que $ker(u - id_E) = \mathbb{R}d$ avec $d = \frac{1}{\sqrt{3}}(1,1,1)$ et que l'angle de rotation de $u$ soit $\theta = \frac{\pi}{2}$.\\
-    Alors la matrice de $u$ dans la base $(d, e_1, e_2)$, où $e_1 = \frac{1}{\sqrt{2}}(1,-1,0)$ et $e_2 = \frac{1}{\sqrt{6}}(1,1,-2)$ est de la forme $\begin{pmatrix}
-        1 & 0 & 0 \\
-        0 & 0 & -1 \\
-        0 & 1 & 0
-    \end{pmatrix}$.
+    Soit $M \in \mathcal{SO}_3(\mathbb{R})$ la matrice d'une rotation telle que :
+\[ M = \frac{1}{3}\begin{pmatrix}
+    2 & -1 & 2 \\
+    2 & 2 & -1 \\
+    -1 & 2 & 2
+\end{pmatrix} \]
+
+    \textbf{1. Recherche de l'axe $\Delta$}
+    $3\ker(M - I_3) = Vect((1,1,1))$. Posons $d = (1,1,1)$, alors $d$ est un vecteur directeur de l'axe de rotation $\Delta$. (la constante $3$ ne joue aucun rôle)\\
+
+    \textbf{2. Détermination de la valeur absolue de $\theta$}
+    On utilise la trace de la matrice $M$ qui est la même dans toutes les bases.\\
+    $ \text{Tr}(M) = 1 + 2\cos\theta \implies \cos\theta = \frac{\text{Tr}(M) - 1}{2} = \frac{\frac{6}{3} - 1}{2} = \frac{1}{2}$.\\
+    Donc $\theta \in \{-\frac{\pi}{3}, \frac{\pi}{3}\}$.\\
+
+    \textbf{3. Détermination du signe de $\theta$ (Produit Mixte)}
+    Pour trancher, on étudie le signe de $\sin\theta$. On choisit un vecteur $x$ non colinéaire à $d$ (souvent $e_1$) et on calcule le produit mixte :
+    Prenons $x = e_1$, alors :
+    \[ [{d}, {x}, u({x})] = \det({d}, {x}, M{x}) = \begin{vmatrix}
+        1 & 1 & \frac{2}{3} \\
+        1 & 0 & \frac{2}{3} \\
+        1 & 0 & -\frac{1}{3}
+    \end{vmatrix} = 1 \]
+
+    \noindent Le signe du produit mixte est le même que celui de $\sin\theta$, donc $\sin\theta > 0$.\\
+    Donc $\theta > 0$, il s'ensuit que $\theta = \frac{\pi}{3}$.\\
+    Plus généralement, on a :
+    \begin{itemize}
+        \item Si $\det(d, x, M(x)) > 0 \implies \sin\theta > 0 \implies \theta = \frac{\pi}{3}$
+        \item Si $\det(d, x, M(x)) < 0 \implies \sin\theta < 0 \implies \theta = -\frac{\pi}{3}$
+    \end{itemize}
 }
 
 \subsubsection{Isométries indirectes}
@@ -280,16 +302,13 @@ Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. S
     Une isométrie indirecte est soit une réflexion, soit la composée d'une réflexion et d'une rotation. Dans ce cas on parle d'\textbf{anti-rotation}.
 }
 \noindent{\textbf{Preuve :}\\
-Soit $u \in O_{-}(E)$. Par un raisonnement similaire au cas de $SO_3(\mathbb{R})$, on trouve que $-1 \in Sp(u)$.\\
-Raisonnons maintenant sur $dim(ker(u + id_E))$ :
+Soit $u \in O_{-}(E)$. Par un raisonnement similaire au cas de $SO_3(\mathbb{R})$, on trouve que $-1 \in Sp(u)$. Raisonnons maintenant sur $dim(ker(u + id_E))$ :
 \begin{itemize}
     \item Si $dim(ker(u + id_E)) = 3$, alors $u = -id_E$.
     \item Si $dim(ker(u + id_E)) = 2$ : impossible (car $u$ est une isométrie, donc les sous-espaces propres sont orthogonaux, et $ker(u + id_E) = ker(u - id_E)^\perp$).
 \end{itemize}
-Il reste à étudier le cas où $dim(ker(u + id_E)) = 1$.\\
-Soit $s$ la réflexion orthogonale par rapport à $ker(u + id_E)^\perp$.\\
-Considérons l'isométrie directe $S$, alors $S \circ u = s$ est une rotation.\\
-Ainsi, $u$ est soit une réflexion (si $S = id_E$), soit la composée d'une réflexion et d'une rotation (si $S \neq id_E$). $\Box$
+Il reste à étudier le cas où $dim(ker(u + id_E)) = 1$. Soit $s$ la réflexion orthogonale par rapport à $ker(u + id_E)^\perp$.\\
+Considérons l'isométrie directe $S$, alors $S \circ u = s$ est une rotation. Ainsi, $u$ est soit une réflexion (si $S = id_E$), soit la composée d'une réflexion et d'une rotation (si $S \neq id_E$). $\Box$
 }
 
 \theorem{Théorème}{}{false}{
