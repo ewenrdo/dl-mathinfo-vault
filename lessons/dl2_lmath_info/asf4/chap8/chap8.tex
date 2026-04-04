@@ -202,7 +202,13 @@ Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
 \theorem{Lemme}{}{false}{
     $1 \in Sp(u)$
 }
-\ndlr{cf. Laurent pour la preuve du lemme.}
+\noindent{\textbf{Démonstration : } \\
+    Le polynôme caractéristiques de $u$ est $\chi_u$ admet un moins une racine réelle (car c'est le polynôme à coefficient réelle). Cette racine est soit 1, soit -1.
+    \begin{itemize}
+        \item Si c'est 1, c'est ok.
+        \item Si c'est -1, les deux autres racines ne peuvent être complexes, et sont alors réels, leur produit doit valeur -1, donc la seule possibilité est qu'ils sont 1 et -1, donc 1 est racine.
+    \end{itemize}
+}
 
 \definition{
     On dira que $(e_1, e_2)$ base de $n^\perp$ est directe si $(e_1, e_2, n)$ est une base directe de $E$.
