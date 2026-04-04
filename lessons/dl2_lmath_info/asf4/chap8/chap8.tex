@@ -228,7 +228,21 @@ Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
 }
 
 \subsubsection{Les isométries indirectes d'un espace euclidien de dimension 3}
-\ndlr{cf. Laurent / Alex}
+
+\noindent{
+    Soit $u\in O(E)$, $det(u)=-1$ par un raisonnement analogue à $SO(E)$. \\
+    On conclut que nécessairement $-1\in Sp(u)$.\\
+    On raisonne sur $dim(Ker(u+id_E))$ : 
+    \begin{enumerate}
+        \item $dim(Ker(u+id_E))=3$, c'est-à-dire $u=-id_E$ ;
+        \item $dim(Ker(u+id_E))=2$, impossible ;
+        \item $dim(Ker(u+id_E))=1$.
+    \end{enumerate}
+    Dans ce dernier cas, soit $s$ la réflexion orthogonale par rapport à $Ker(u+id_E)^\bot$.\\
+    Considérons l'isométrie directe $S$, alors $Sou=id\cdot Sou = s$ une rotation.\\
+    Conclusion : Une isométrie indirecte est soit une réflexion, soit la composée d'une réflexion et d'une rotation. \\
+    Dans ce cas, on parle d'anti-rotation.\\
+}
 
 \theorem{Théorème}{}{false}{
     Spot $u \in O_{-}(E)$. Soit $u - id_E$.\\
