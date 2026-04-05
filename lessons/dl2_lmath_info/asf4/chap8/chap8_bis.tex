@@ -328,6 +328,43 @@ Considérons l'isométrie directe $S$, alors $S \circ u = s$ est une rotation. A
     \item Si $\theta=\pi$, $u=-id_E$ est la \textbf{symétrie centrale}.
     \end{itemize}
 }
+\theorem{Proposition}{Classification par la trace}{false}{
+Soit $M \in O_3^-(\mathbb{R})$.
+\begin{itemize}
+    \item Si $Tr(M) = 1$, $M$ est une \textbf{réflexion} par rapport au plan $\ker(M-I_3)$.
+    \item Si $Tr(M) = -3$, $M = -I_3$ est la \textbf{symétrie centrale}.
+    \item Sinon, $M$ est une \textbf{anti-rotation} d'angle $\theta$ tel que $Tr(M) = -1 + 2\cos\theta$.
+\end{itemize}
+}
+
+\noindent{\textbf{Démonstration pour la réflexion :}\\
+Une réflexion $s$ a pour valeurs propres $(1, 1, -1)$. Sa trace est donc $1+1+(-1) = 1$. Réciproquement, si $u \in O_3^-$ et $Tr(u)=1$, alors $-1 + 2\cos\theta = 1 \implies \cos\theta = 1$, soit $\theta=0$. La matrice dans la base adaptée est donc $diag(-1, 1, 1)$, ce qui correspond bien à une réflexion par rapport au plan $Vect(e_1, e_2)$. $\Box$
+}
+
+\example{
+    Soit $C \in O_3^-(\mathbb{R})$ la matrice suivante :
+    \[ C = \frac{1}{9}\begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmatrix} \]
+
+    \textbf{1. Nature de l'isométrie} \\
+    $\det(C) = -1$ (isométrie indirecte) et $Tr(C) = \frac{1}{9}(7+8-8) = \frac{7}{9}$.\\
+    Comme $Tr(C) \neq 1$, $C$ est une \textbf{anti-rotation}.
+
+    \textbf{2. Recherche de l'axe $d$} \\
+    On cherche $d$ tel que $Cu = -d$, soit $d \in \ker(C + I_3)$.
+    \[ (C+I_3)X = 0 \iff \begin{pmatrix} 16 & 4 & 4 \\ -4 & 17 & -1 \\ 4 & 1 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = 0 \]
+    Les lignes 1 et 3 donnent $4x + y + z = 0$. La ligne 2 donne $-4x + 17y - z = 0$.
+    Par somme, $18y = 0 \implies y=0$, d'où $z = -4x$.
+    On choisit l'axe orienté par $d = \begin{pmatrix} 1 \\ 0 \\ -4 \end{pmatrix}$.
+
+    \textbf{3. Détermination de l'angle $\theta$} \\
+    $Tr(C) = -1 + 2\cos\theta \implies \frac{7}{9} = -1 + 2\cos\theta \implies \cos\theta = \frac{8}{9}$.\\
+    Ainsi $\theta = \pm \arccos(\frac{8}{9})$.
+
+    \textbf{4. Signe de l'angle} \\
+    On calcule le produit mixte $[d, e_2, C(e_2)]$ avec $e_2 = (0,1,0)^T$ :
+    \[ \det(d, e_2, C e_2) = \begin{vmatrix} 1 & 0 & 4/9 \\ 0 & 1 & \frac{8}{9} \\ -4 & 0 & 1/9 \end{vmatrix} = \frac{1}{9} - (-4)(\frac{4}{9}) = \frac{17}{9} > 0 \]
+    Le sinus est positif, donc $\theta = \arccos(\frac{8}{9})$.
+}
 \newpage
 \tableofcontents
 
