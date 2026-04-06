@@ -147,9 +147,28 @@ Ici, on s'intéresse à l'étude de $SO(\mathbb{R}^2) \equiv SO_2(\mathbb{R}) = 
 \example{Posons $A = \begin{pmatrix}
     \alpha & \beta \\
     \gamma & \delta
-\end{pmatrix}$.\\
+\end{pmatrix}$. On a, $^tA = \begin{pmatrix}
+    \alpha & \gamma \\ \beta & \delta 
+\end{pmatrix}$. \\
+Donc, $A^tA=\begin{pmatrix}
+    \alpha & \beta \\ \gamma & \delta
+\end{pmatrix}\begin{pmatrix}
+    \alpha & \gamma \\ \beta & \delta 
+\end{pmatrix} = \begin{pmatrix}
+    \alpha^2+\beta^2 & \alpha\gamma+\beta\delta \\ \alpha\gamma+\beta\delta & \gamma^2+\delta^2
+\end{pmatrix}$. Donc $det(A)=1\Leftrightarrow\alpha\delta-\beta\gamma=1$.\\
+$2A\in SO(\mathbb{R})$, donc $\begin{cases}
+    \alpha^2+\beta^2=1 \\ \gamma^2+\delta^2=1 \\ \alpha\gamma+\beta\delta=0 \\ \alpha\delta-\beta\gamma=1
+\end{cases}\Leftrightarrow \exists \theta, \theta'\in\mathbb{R}, \begin{cases}
+    \alpha = cos(\theta), \gamma = sin(\theta') \\ \beta = sin(\theta), \delta = cos(\theta') \\
+    cos(\theta)sin(\theta')+sin(\theta)cos(\theta')=0 \\ cos(\theta)sin(\theta')-sin(\theta)cos(\theta')=0
+\end{cases}\Leftrightarrow\theta, \theta'\in\mathbb{R}, \begin{cases}
+    \alpha = cos(\theta), \gamma = sin(\theta') \\ \beta = sin(\theta), \delta = cos(\theta') \\
+    sin(\theta+\theta')=0 \\ cos(\theta+\theta')=0
+\end{cases}$.\\
+Donc, $\exists \theta, \theta'\in \mathbb{R}, \begin{cases} sin(\theta+\theta')=0 \\ cos(\theta+\theta')=0 \end{cases}\Leftrightarrow \theta\equiv\theta'[2\pi]$.
+\\
 On a bien $A^tA = I_2$ si et seulement si $\alpha^2 + \gamma^2 = 1$, $\beta^2 + \delta^2 = 1$ et $\alpha \delta - \beta \gamma = 1$.}
-\ndlr{cf. Laurent pour la suite de l'exemple un peu "long" à écrire sur \LaTeX.}
 
 \example{
     Considérons \function{\varphi}{(\mathbb{R}, +) \to SO_2(\mathbb{R}, \circ)}{\theta \mapsto \begin{pmatrix}
@@ -183,7 +202,13 @@ Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
 \theorem{Lemme}{}{false}{
     $1 \in Sp(u)$
 }
-\ndlr{cf. Laurent pour la preuve du lemme.}
+\noindent{\textbf{Démonstration : } \\
+    Le polynôme caractéristiques de $u$ est $\chi_u$ admet un moins une racine réelle (car c'est le polynôme à coefficient réelle). Cette racine est soit 1, soit -1.
+    \begin{itemize}
+        \item Si c'est 1, c'est ok.
+        \item Si c'est -1, les deux autres racines ne peuvent être complexes, et sont alors réels, leur produit doit valeur -1, donc la seule possibilité est qu'ils sont 1 et -1, donc 1 est racine.
+    \end{itemize}
+}
 
 \definition{
     On dira que $(e_1, e_2)$ base de $n^\perp$ est directe si $(e_1, e_2, n)$ est une base directe de $E$.
@@ -203,7 +228,21 @@ Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
 }
 
 \subsubsection{Les isométries indirectes d'un espace euclidien de dimension 3}
-\ndlr{cf. Laurent / Alex}
+
+\noindent{
+    Soit $u\in O(E)$, $det(u)=-1$ par un raisonnement analogue à $SO(E)$. \\
+    On conclut que nécessairement $-1\in Sp(u)$.\\
+    On raisonne sur $dim(Ker(u+id_E))$ : 
+    \begin{enumerate}
+        \item $dim(Ker(u+id_E))=3$, c'est-à-dire $u=-id_E$ ;
+        \item $dim(Ker(u+id_E))=2$, impossible ;
+        \item $dim(Ker(u+id_E))=1$.
+    \end{enumerate}
+    Dans ce dernier cas, soit $s$ la réflexion orthogonale par rapport à $Ker(u+id_E)^\bot$.\\
+    Considérons l'isométrie directe $S$, alors $Sou=id\cdot Sou = s$ une rotation.\\
+    Conclusion : Une isométrie indirecte est soit une réflexion, soit la composée d'une réflexion et d'une rotation. \\
+    Dans ce cas, on parle d'anti-rotation.\\
+}
 
 \theorem{Théorème}{}{false}{
     Spot $u \in O_{-}(E)$. Soit $u - id_E$.\\
