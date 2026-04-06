@@ -71,31 +71,59 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     En effet, si $f$ est un produit scalaire, alors $f(x,y) = f(y,x)$ pour tous $x,y \in E$, et $ker(f) = \{0\}$ (car $f(x,x) > 0$ pour tout $x \neq 0$).
 }
 
+\theorem{Proposition}{}{false}{
+    Soit $f$ une forme bilinéaire sur $E$.\\
+    Alors $f$ est symétrique si et seulement si sa matrice dans une base quelconque de $E$ est orthogonale.
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Proposition}{Changement de base}{false}{
+    Soient $B=(e_1,\ldots,e_n)$ et $B'=(e_1',\ldots,e_n')$ deux bases de $E$, et $P_{B\to B'}$ la matrice de passage de $B$ à $B'$.\\
+    Soit $f$ une forme bilinéaire. Alors \[ Mat_{B'}(f) = {}^t P_{B\to B'} Mat_B(f) P_{B\to B'} \]
+}
+\ndlr{cf. Laurent pour la preuve}
+
+
+\theorem{Proposition}{}{false}{
+    Soit $f$ une forme bilinéaire symétrique. Alors :
+    \begin{enumerate}
+        \item $f$ est non-dégénérée si et seulement si $rg(f) = \dim(E)$,
+        \item Soit $B=(e_1,\ldots,e_n)$ une base de $E$. Alors $rg(Mat_B(f)) = rg(f)$.\\
+        On a de plus que $f$ est non-dégénérée si et seulement si $Mat_B(f)$ est inversible.
+    \end{enumerate}
+}
+
 \subsection{Orthogonalité}
+
 
 \definition{
     Soit $\varphi$ une forme bilinéaire symétrique sur $E$ un $\mathbb{R}$-espace vectoriel.
     \begin{enumerate}
-        \item Deux vecteurs $x, y \in E$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, on note $x \perp y$.
-        \item L'orthogonal d'une partie $X \subseteq E$ est le sous-espace vectoriel $H^\perp = \{ z \in E \mid \forall x \in X, x \perp z \}$.
-        \item Un vecteur $x \in E$ est dit \textbf{isotrope} si $x \perp x$.
+        \item Deux vecteurs $x, y \in E$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, on note $x \perp_\varphi y$.
+        \item L'orthogonal d'une partie $X \subseteq E$ est le sous-espace vectoriel $H^\perp = \{ z \in E \mid \forall x \in X, x \perp_\varphi z \}$.\\
+        Si $\varphi$ est un produit scalaire, alors $H^\perp \cap H = \{0\}$.
+        \item Un vecteur $x \in E$ est dit \textbf{isotrope} si $x \perp_\varphi x$.
     \end{enumerate}
 }
 
 \remark{Une forme bilinéaire symétrique qui n'a pas de vecteur isotrope est nécessairement non dégénérée.}
 
 \theorem{Proposition}{}{false}{
-    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie $n$, et $\varphi$ une forme bilinéaire symétrique sur $E \times E$.\\
-    Soit $F$ un sous-espace vectoriel de $E$.
-    \begin{enumerate}
-        \item On suppose qu'aucun vecteur non nul de $F$ n'est orthogonal à $E$ tout entier. Alors : $dim(F) + dim(F^\perp) = n$.
-        \item Le résultat s'applique à tout sous-espace vectoriel $F$ de $E$ si $\varphi$ est non dégénérée.
-    \end{enumerate}
+    Soit $f$ une forme bilinéaire symétrique. Soit $F$ un sous-espace vectoriel de $E$.\\
+    Alors :
+    \[
+        dim(F^\perp) = dim(E) - dim(F) + dim(F \cap ker(f))
+    \]
+    Si $f$ est non dégénérée, alors $dim(F^\perp) = dim(E) - dim(F)$.
 }
+
+\ndlr{cf. Laurent pour la preuve}
 
 \theorem{Corollaire}{}{false}{
     Si $\varphi$ est un forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
 }
+\ndlr{cf. Laurent pour la preuve}
 
 \subsection{Restriction d'une forme bilinéaire symétrique}
 Si $b$ est un produit scalaire sur $E$, il est clair que la restriction de $b$ à tout sous-espace vectoriel $F$ de $E$ est encore un produit scalaire sur $F$. En revanche, l'exemple suivant montre qu'une forme bilinéaire symétrique non dégénérée peut avoir des restrictions qui sont
@@ -113,6 +141,7 @@ dégénérées.
          \varphi_{|F \times F} \text{ est non dégénérée } \Leftrightarrow F \cap F^\perp = \{0\} \Leftrightarrow F \oplus F^\perp = E
     \]
 }
+\ndlr{cf. Laurent pour la preuve}
 
 \section{Formes quadratiques}
 Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norme" avait des propriétés remarquables, en particulier vis-à-vis de l'orthogonalité grâce au théorème de Pythagore. La généralisation de cette fonction dans le cadre des formes bilinéaires conduit à la notion de forme quadratique.
