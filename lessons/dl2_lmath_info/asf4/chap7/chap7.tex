@@ -44,29 +44,24 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
 
 \theorem{Théorème}{Limites des intégrales définies à un paramètre}{false}{
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\    
-    Supposons que :
+    Supposons que, étant donné $x_0 \in \overline{I}$, on a :
     \begin{itemize}
         \item $f$ est continue,
-        \item $x_0 \in \overline{I}$,
-        \item $lim_{x \to x_0} f(x,t) = h(t)$ en supposant que la convergence de $f(x, \cdot)$ est uniforme sur $J$.
+        \item $lim_{x \to x_0} f(x,t) = h(t)$ en supposant que la convergence de $f(x, \cdot)$ est \textbf{uniforme} sur $J$.
     \end{itemize}
 
     Alors $h$ est continue et on a l'intervertibilité de l'intégrale et de la limite : \[lim_{x \to x_0} F(x) = \int_a^b h(t) dt\].
 }
 \ndlr{cf. Laurent pour la preuve}
 
-\attention{
-    La condition de convergence uniforme est essentielle pour garantir que la limite de $F(x)$ est égale à l'intégrale de la limite de $f(x,t)$.
-}
-
 \subsection{Dérivabilité de $F$}
 
-\theorem{Théorème}{}{false}{
+\theorem{Théorème}{Dérivation sous le signe intégral}{false}{
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\    
-    Supposons que $\frac{\partial f}{\partial x}$ existe et est continue sur $I \times J$.\\
-    Alors $F$ est de classe $\mathcal{C}^1$ sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_a^b \frac{\partial f}{\partial x}(x,t) dt\].
+    Si $\frac{\partial f}{\partial x}$ existe et est continue sur $I \times J$, alors $F$ est de classe $\mathcal{C}^1$ sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_a^b \frac{\partial f}{\partial x}(x,t) dt\]
 }
 \ndlr{cf. Laurent pour la preuve}
+\toTrain{exercices 1 et 2 du TD7}
 
 \section{Intégrales généralisées à un paramètre}
 
@@ -76,7 +71,7 @@ On s'intéresse aux propriétés de la fonction $F : I \to \mathbb{R}$ définie,
     F : I \to \mathbb{R}, \; x \mapsto \int_0^{+\infty} f(x,t) dt
 \]
 
-On adapter sans difficulté les énoncés suivants à des intervalles différents de $[0,+\infty[$.
+On adapte sans difficulté les énoncés suivants à des intervalles différents de $[0,+\infty[$.
 \subsection{Convergence de l'intégrale}
 \definition{
     L'intégrale $F(x) = \int_0^{+\infty} f(x,t) dt$ est dite \textbf{simplement convergente} sur $I$ si pour tout $x \in I$, l'intégrale $\int_0^{+\infty} f(x,t) dt$ converge.
