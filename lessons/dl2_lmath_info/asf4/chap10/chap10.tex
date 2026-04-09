@@ -33,15 +33,31 @@
         \item autrement dit, $f$ est linéaire par rapport à chacune de ses variables.
     \end{itemize}
 }
-
+\vocabulary{On note $\mathcal{B}(E)$ l'ensemble des formes bilinéaires sur $E$.}
 \example{Le produit scalaire est une forme bilinéaire.}
+
+\subsection{Formes symétriques}
 
 \definition{
     On dit qu'une forme bilinéaire $f$ est \textbf{symétrique} si $f(x,y) = f(y,x)$ pour tous $x,y \in E$.
 }
 
 \definition{
-    Soit $f$ une forme bilinéaire sur $E$, alors : 
+    Soit $\varphi : E \times E \to \mathbb{R}$.\\
+    L'application $D_\varphi : E \to E^*$ telle que $\forall x,y \in E, \; \varphi(x,y) = \langle D_\varphi(x), y \rangle$ est appelée l'\textbf{application linéaire canonique} de $\varphi$.
+}
+
+\subsection{Changement de base}
+\theorem{Proposition}{Changement de base}{false}{
+    Soient $B=(e_1,\ldots,e_n)$ et $B'=(e_1',\ldots,e_n')$ deux bases de $E$, et $P_{B\to B'}$ la matrice de passage de $B$ à $B'$.\\
+    Soit $f$ une forme bilinéaire. Alors \[ Mat_{B'}(f) = {}^t P_{B\to B'} Mat_B(f) P_{B\to B'} \]
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\subsection{Rang et noyau d'une forme bilinéaire symétrique}
+
+\definition{
+    Soit $f$ une forme bilinéaire symétrique sur $E$, alors : 
     \begin{enumerate}
         \item $ker(f) = \{ x \in E \mid \forall y \in E f(x,y) = 0 \}$,
         \item $rg(f) = \dim(E) - \dim(ker(f))$.
@@ -71,19 +87,6 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     En effet, si $f$ est un produit scalaire, alors $f(x,y) = f(y,x)$ pour tous $x,y \in E$, et $ker(f) = \{0\}$ (car $f(x,x) > 0$ pour tout $x \neq 0$).
 }
 
-\theorem{Proposition}{}{false}{
-    Soit $f$ une forme bilinéaire sur $E$.\\
-    Alors $f$ est symétrique si et seulement si sa matrice dans une base quelconque de $E$ est orthogonale.
-}
-
-\ndlr{cf. Laurent pour la preuve}
-
-\theorem{Proposition}{Changement de base}{false}{
-    Soient $B=(e_1,\ldots,e_n)$ et $B'=(e_1',\ldots,e_n')$ deux bases de $E$, et $P_{B\to B'}$ la matrice de passage de $B$ à $B'$.\\
-    Soit $f$ une forme bilinéaire. Alors \[ Mat_{B'}(f) = {}^t P_{B\to B'} Mat_B(f) P_{B\to B'} \]
-}
-\ndlr{cf. Laurent pour la preuve}
-
 
 \theorem{Proposition}{}{false}{
     Soit $f$ une forme bilinéaire symétrique. Alors :
@@ -101,7 +104,7 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     Soit $\varphi$ une forme bilinéaire symétrique sur $E$ un $\mathbb{R}$-espace vectoriel.
     \begin{enumerate}
         \item Deux vecteurs $x, y \in E$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, on note $x \perp_\varphi y$.
-        \item L'orthogonal d'une partie $X \subseteq E$ est le sous-espace vectoriel $H^\perp = \{ z \in E \mid \forall x \in X, x \perp_\varphi z \}$.\\
+        \item L'orthogonal d'une partie $H \subseteq E$ est le sous-espace vectoriel $H^\perp = \{ z \in E \mid \forall x \in H, x \perp_\varphi z \}$.\\
         Si $\varphi$ est un produit scalaire, alors $H^\perp \cap H = \{0\}$.
         \item Un vecteur $x \in E$ est dit \textbf{isotrope} si $x \perp_\varphi x$.
     \end{enumerate}
@@ -113,17 +116,18 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     Soit $f$ une forme bilinéaire symétrique. Soit $F$ un sous-espace vectoriel de $E$.\\
     Alors :
     \[
-        dim(F^\perp) = dim(E) - dim(F) + dim(F \cap ker(f))
+        dim(F^\perp_f) = dim(E) - dim(F) + dim(F \cap ker(f))
     \]
-    Si $f$ est non dégénérée, alors $dim(F^\perp) = dim(E) - dim(F)$.
+    Si $f$ est non dégénérée, alors $dim(F^\perp_f) = dim(E) - dim(F)$.
 }
 
 \ndlr{cf. Laurent pour la preuve}
 
 \theorem{Corollaire}{}{false}{
-    Si $\varphi$ est un forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
+    Si $f$ est un forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp_f)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
 }
 \ndlr{cf. Laurent pour la preuve}
+\ndlr{$f$ est une forme bilinéaire symétrique ou juste bilinéaire ?}
 
 \subsection{Restriction d'une forme bilinéaire symétrique}
 Si $b$ est un produit scalaire sur $E$, il est clair que la restriction de $b$ à tout sous-espace vectoriel $F$ de $E$ est encore un produit scalaire sur $F$. En revanche, l'exemple suivant montre qu'une forme bilinéaire symétrique non dégénérée peut avoir des restrictions qui sont
@@ -138,7 +142,7 @@ dégénérées.
     Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et soit $\varphi$ une forme bilinéaire symétrique sur $E \times E$.\\
     Soit $F$ un sous-espace vectoriel de $E$. Alors :
     \[
-         \varphi_{|F \times F} \text{ est non dégénérée } \Leftrightarrow F \cap F^\perp = \{0\} \Leftrightarrow F \oplus F^\perp = E
+         \varphi_{|F \times F} \text{ est non dégénérée } \Leftrightarrow F \cap F^\perp_f = \{0\} \Leftrightarrow F \oplus F^\perp_f = E
     \]
 }
 \ndlr{cf. Laurent pour la preuve}
@@ -146,12 +150,123 @@ dégénérées.
 \section{Formes quadratiques}
 Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norme" avait des propriétés remarquables, en particulier vis-à-vis de l'orthogonalité grâce au théorème de Pythagore. La généralisation de cette fonction dans le cadre des formes bilinéaires conduit à la notion de forme quadratique.
 
+\subsection{Généralités}
+
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
     Une fonction $q : E \to \mathbb{R}$ est une \textbf{forme quadratique} sur $E$ s'il existe une forme bilinéaire symétrique $\varphi$ sur $E \times E$ \textit{(a priori non symétrique)} telle que $q(x) = \varphi(x,x)$ pour tout $x \in E$.
 }
 
 \remark{Toute forme quadratique $q$ vérifie : $q(\lambda x) = \lambda^2 q(x)$ pour tout $\lambda \in \mathbb{R}$ et tout $x \in E$. En particulier, $q(0) = 0$.}
+
+% Retour de Romain Petrides.
+
+\example{
+    Dans $\mathbb{R}^4$, $q : (x,y,z,t) \mapsto x^2 + y^2 + z^2 - x^2 \cdot t^2$ est une forme quadratique.\\
+    En effet, on peut définir $\varphi((x_1, y_1, z_1, t_1), (x_2, y_2, z_2, t_2)) = x_1 x_2 + y_1 y_2 + z_1 z_2 - c^2t_1t_2$.\\
+    On a que $q(x,y,z,t) = \varphi((x,y,z,t), (x,y,z,t))$ pour tout $(x,y,z,t) \in \mathbb{R}^4$.
+}
+
+\subsection{Polarisation d'une forme quadratique}
+
+\theorem{Proposition}{}{false}{
+    Soit $q : E \to \mathbb{R}$ une forme quadratique.\\
+    Alors, $\exists ! \varphi \in \mathcal{B}(E)$ symétrique telle que $\forall  x\in E, \; q(x) = \varphi(x,x)$.\\
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\remark{$\mathcal{B}(E)$ désigne l'ensemble des formes bilinéaires sur $E$.}
+\vocabulary{On appelle $\varphi$ la \textbf{forme polaire} de $q$.}
+
+\example{
+    Soit $(x,y,z) \in \mathbb{R}^3$.\\
+    Considérons $q(x,y,z) = xy + 2x^2 - y^2 + 3zx - zy$.\\
+    La forme polaire de $q$ est $\varphi : ((x_1, y_1, z_1), (x_2, y_2, z_2)) \mapsto 2x_1x_2 - y_1 y_2 + \frac{x_1y_2+y_1x_2}{2} + 3 \cdot \frac{z_1x_2+x_1z_2}{2} - \frac{z_1y_2+z_2y_1}{2}$.\\
+    De plus, si $e$ est la base canonique de $\mathbb{R}^3$, alors $Mat_e(q) = Mat_e(\varphi) = \begin{pmatrix}
+2 & \frac{1}{2} & \frac{3}{2} \\
+\frac{1}{2} & -1 & -\frac{1}{2} \\
+\frac{3}{2} & -\frac{1}{2} & 0
+\end{pmatrix}$. 
+}
+
+\definition{
+    Soit $q : E \to \mathbb{R}$ une forme quadratique sur $E$, où $E$ est un $\mathbb{R}$-espace vectoriel de dimension finie muni d'une base $e$.\\
+    \begin{itemize}
+        \item $Mat_e(q) = Mat_e(\varphi) = Mat_(e,e^*)(D_\varphi)$, où $\varphi$ est la forme polaire de $q$.
+        \item $Ker(q) = Ker(\varphi) = Ker(D_\varphi)$,
+        \item $rg(q) = rg(\varphi) = rg(D_\varphi)$.
+        \item $q$ est \textbf{dégénérée} si $Ker(D_\varphi) = \{0\}$.
+    \end{itemize}
+}
+
+\ndlr{Vérifier le dernier point, semble être une erreur de frappe, devrait être "non dégénérée" au lieu de "dégénérée".}
+\ndlr{Qu'est-ce que $D_\varphi$ ?}
+
+\remark{On observe que $Mat_e(q)$ est symétrique.}
+
+\subsection{Bases q-orthogonales}
+\subsubsection{Définitions et propriétés}
+\definition{
+    Soient $x,y \in E$ et $q$ une forme quadratique sur $E$.\\
+    \begin{itemize}
+        \item $x$ est \textbf{isotrope} si $q(x) = 0$,
+        \item On dit que $x$ et $y$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, où $\varphi$ est la forme polaire de $q$.
+    \end{itemize}
+}
+\remark{$x$ est isotrope si et seulement si $x \perp x$.}
+
+\ndlr{Revoir la définition ci-dessus, semble être un duplicata de ce qu'on a vu auparavant.}
+
+\definition{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et $q$ une forme quadratique sur $E$.\\
+    Considérons $e=(e_1, \ldots, e_n)$ une base de $E$.\\
+    On dit que $e$ est une \textbf{base $q$-orthogonale} si les éléments de $e$ sont deux à deux orthogonaux, c'est à dire si $\varphi(e_i, e_j) = 0$ pour tous $i \neq j$, où $\varphi$ est la forme polaire de $q$.
+}
+
+\remark{
+    Si $e$ est une base $q$-orthogonale de $E$, alors $Mat_e(q)$ est une matrice diagonale.
+}
+
+\remark{
+    L'application $q = N^2$ où $N$ est une norme sur $E$ est une forme quadratique.
+}
+
+\example{
+    Considérns $q(x,y,z) = x^2 - y^2 + 2z^2$ une forme quadratique sur $\mathbb{R}^3$.\\
+    Alors, la base canonique de $\mathbb{R}^3$ est une base $q$-orthogonale. En effet, les éléments de la base canonique sont deux à deux orthogonaux, et on a $q(e_1) = 1$, $q(e_2) = -1$ et $q(e_3) = 2$.
+}
+
+\subsubsection{Détermination d'une base $q$-orthogonale}
+
+\training{
+Si $q(x) = e_1(\ell_1(x))^2 + e_2(\ell_2(x))^2 + \cdots + e_k(\ell_k(x))^2$ où $(\ell_1, \ldots, \ell_k)$ une famille libre de $E^*$ et $c_1, \ldots, c_k \in \mathbb{R}$.
+
+\begin{enumerate}
+    \item On complète $(\ell_1, \ldots, \ell_k)$ en une base de $E^*$, disons $(\ell_1, \ldots, \ell_n)$.
+    \item On calcule la base antéduale de $(\ell_1, \ldots, \ell_n)$, disons $(e_1, \ldots, e_n)$.
+\end{enumerate}
+Alors, $(e_1, \ldots, e_n)$ est $q$-orthogonale.\\
+On a $\langle \ell_j, e_i \rangle = \delta_{ij}$. Soit $\varphi$ la forme linéaire de $q$.\\
+Alors $\varphi(x,y) = \sum_{s=1}^k c_s \ell_s(x) \ell_s(y)$ et $\varphi(e_i, e_j) = \sum_{s=1}^k c_s \ell_s(e_i) \ell_s(e_j) = \sum_{s=1}^k c_s \delta_{si} \delta_{sj} = 0$ si $i \neq j$.
+}
+\example{
+    Soit $q(x,y,z) = x^2 + (y+z)^2$ une forme quadratique sur $\mathbb{R}^3$.\\
+    On a :
+    \[
+        \ell_1(x,y,z) = x, \quad \ell_2(x,y,z) = y+z, \quad \ell_3(x,y,z) = z.
+    \]
+    On a de plus que $P_{can \to (\ell_1, \ell_2, \ell_3)} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 1 & 1
+\end{pmatrix}$, et par pivot de Gauss, on trouve que $P_{can \to (\ell_1, \ell_2, \ell_3)}^{-1} = \begin{pmatrix}
+1 & 0 & 0 \\    
+0 & 1 & -1 \\
+0 & 0 & 1
+\end{pmatrix}$.\\
+    Donc, la base antéduale de $(\ell_1, \ell_2, \ell_3)$ est $(e_1, e_2, e_3 - e_2)$, et cette base est $q$-orthogonale.
+}
 
 \newpage
 \tableofcontents
