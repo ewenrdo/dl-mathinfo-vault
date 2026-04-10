@@ -340,16 +340,15 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
 
 \subsubsection{Signature d'une forme quadratique}
 
-\theorem{Théorème}{}{false}{
-    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie $n$, et $q$ une forme quadratique sur $E$.\\
-    Alors le couple $(p,r)$ d'entiers tels que $q = \ell_1^2 + \cdots + \ell_p^2 - \ell_{p+1}^2 - \cdots - \ell_{p+r}^2$ (pour $\ell_1, \ldots, \ell_{p+r}$ des formes linéaires indépendantes) ne dépend pas de $(\ell_1, \ldots, \ell_{p+r})$.
-}
-\ndlr{cf. Laurent pour la preuve (qui devrait être après le lemme qui suit)}
-
 \definition{
     Soit $q$ une forme quadratique sur $E$.\\
     On dit que $q$ est \textbf{positive} si $q(x) \geq 0$ pour tout $x \in E$, et que $q$ est \textbf{négative} si $q(x) \leq 0$ pour tout $x \in E$.\\
     On dit que $q$ est \textbf{définie positive} (resp. \textbf{définie négative}) si $q(x) > 0 \Leftrightarrow x \neq 0$ (resp. $q(x) < 0 \Leftrightarrow x \neq 0$).
+}
+
+\theorem{Théorème}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie $n$, et $q$ une forme quadratique sur $E$.\\
+    Alors le couple $(p,r)$ d'entiers tels que $q = \ell_1^2 + \cdots + \ell_p^2 - \ell_{p+1}^2 - \cdots - \ell_{p+r}^2$ (pour $\ell_1, \ldots, \ell_{p+r}$ des formes linéaires indépendantes) ne dépend pas de $(\ell_1, \ldots, \ell_{p+r})$.
 }
 
 \theorem{Lemme}{}{false}{
@@ -360,7 +359,8 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
         \item Si $q(e_i) > 0$ pour tout $i$, alors $q$ est définie positive.
     \end{enumerate}
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{cf. Laurent pour la preuve du lemme}
+\ndlr{cf. Laurent pour la preuve du théorème}
 
 \newpage
 \tableofcontents
