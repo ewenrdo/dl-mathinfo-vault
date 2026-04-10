@@ -325,6 +325,43 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
 
 \ndlr{cf. Laurent pour le dernier exemple $q(x_1, x_2, x_3, x_4) = x_1x_2 + x_2x_3 +2x_1x_3 + 3x_1x_4 - x_3x_4$}
 
+\theorem{Proposition}{}{true}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie de dimension $n$, et $q$ une forme quadratique sur $E$.\\
+    Alors il existe $\ell_1, \ldots, \ell_p, \ldots, \ell_{p+r}$ des formes linéaires indépendantes telles que :
+    \[
+        q = \ell_1^2 + \cdots + \ell_p^2 - \ell_{p+1}^2 - \cdots - \ell_{p+r}^2
+    \]
+}
+\remark{Cela découle directement de la décomposition de Gauss.}
+
+\remark{
+    Dans ce cas, $Mat_e(q) = Diag(\underbrace{1, \ldots, 1}_{p \text{ fois}}, \underbrace{-1, \ldots, -1}_{r \text{ fois}}, 0, \ldots, 0)$, et $rg(q) = rg(Mat_e(q)) = p + r$.
+}
+
+\subsubsection{Signature d'une forme quadratique}
+
+\theorem{Théorème}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie $n$, et $q$ une forme quadratique sur $E$.\\
+    Alors le couple $(p,r)$ d'entiers tels que $q = \ell_1^2 + \cdots + \ell_p^2 - \ell_{p+1}^2 - \cdots - \ell_{p+r}^2$ (pour $\ell_1, \ldots, \ell_{p+r}$ des formes linéaires indépendantes) ne dépend pas de $(\ell_1, \ldots, \ell_{p+r})$.
+}
+\ndlr{cf. Laurent pour la preuve (qui devrait être après le lemme qui suit)}
+
+\definition{
+    Soit $q$ une forme quadratique sur $E$.\\
+    On dit que $q$ est \textbf{positive} si $q(x) \geq 0$ pour tout $x \in E$, et que $q$ est \textbf{négative} si $q(x) \leq 0$ pour tout $x \in E$.\\
+    On dit que $q$ est \textbf{définie positive} (resp. \textbf{définie négative}) si $q(x) > 0 \Leftrightarrow x \neq 0$ (resp. $q(x) < 0 \Leftrightarrow x \neq 0$).
+}
+
+\theorem{Lemme}{}{false}{
+    Soit $q$ une forme quadratique sur $E$ de dimension finie.\\
+    Soit $(e_1, \ldots, e_n)$ une base q-orthogonale de $E$.\\
+    \begin{enumerate}
+        \item Si $q(e_i) \geq 0$ pour tout $i$, alors $q$ est positive,
+        \item Si $q(e_i) > 0$ pour tout $i$, alors $q$ est définie positive.
+    \end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve}
+
 \newpage
 \tableofcontents
 
