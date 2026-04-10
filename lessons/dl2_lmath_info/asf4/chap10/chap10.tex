@@ -272,6 +272,59 @@ Alors $\varphi(x,y) = \sum_{s=1}^k c_s \ell_s(x) \ell_s(y)$ et $\varphi(e_i, e_j
     Donc, la base antéduale de $(\ell_1, \ell_2, \ell_3)$ est $(e_1, e_2, e_3 - e_2)$, et cette base est $q$-orthogonale.
 }
 
+\ndlr{Voir Laurent pour vérifier que ce qui suit est bien rédigé, j'ai perdu l'habitude de prendre des notes. Merci à Saint Laurent.}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et $q$ une forme quadratique sur $E$.\\
+    Considérons $q(x) = \sum_{i=1}^k c_i (\ell_i(x))^2$ où $(\ell_1, \ldots, \ell_k)$ une famille libre de $E^*$ et $c_1, \ldots, c_k \in \mathbb{R}$.\\ 
+    Alors :
+    \begin{enumerate}
+        \item La forme quadratique $q$ est de rang $k$,
+        \item Soit $(l_{k+1}, \ldots, l_n)$ une famille de $E^*$ telle que $(\ell_1, \ldots, \ell_k, l_{k+1}, \ldots, l_n)$ soit une base de $E^*$. On note $e$ la base antéduale de $(\ell_1, \ldots, \ell_k, l_{k+1}, \ldots, l_n)$. Alors $e$ est une base $q$-orthogonale de $E$.\\
+        De manière équivalente, \[
+\mathrm{Mat}_e(q) =
+\begin{pmatrix}
+c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+0 & c_2 & \cdots & 0 & 0 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots &  & \vdots \\
+0 & 0 & \cdots & c_k & 0 & \cdots & 0 \\
+0 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+\vdots & \vdots &  & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 0 & 0 & \cdots & 0
+\end{pmatrix}
+\in \mathcal{M}_n(\mathbb{R})
+\]
+    \end{enumerate}
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+\subsubsection{Décomposition de Gauss}
+\noindent\href{https://www.youtube.com/watch?v=X9xQ9xiFC9M&t=1s}{Cliquer ici pour une vidéo sur la décomposition de Gauss}
+
+\remark{Le but est d'écrire une forme quadratique quelconque sur $E$ de dimension finie sous la forme $q(x) = \sum_{i=1}^k c_i (\ell_i(x))^2$ où $(\ell_1, \ldots, \ell_k)$ une famille libre de $E^*$ et $c_1, \ldots, c_k \in \mathbb{R}$.}
+
+\example{
+    La forme quadratique "contient un carré". On considère $q(x,y,z) = x^2 - 2y^2 + xy - xz$.\\
+    On a $q(x,y,z) = (x + \frac{1}{2}y - \frac{1}{2}z)^2 -(\frac{1}{2}y - \frac{1}{2}z)^2 - 2y^2$.\\
+    Ici on peut directement poser $\ell_1(x,y,z) = x + \frac{1}{2}y - \frac{1}{2}z$, $\ell_2(x,y,z) = \frac{1}{2}y - \frac{1}{2}z$ et $\ell_3(x,y,z) = y$ pour trouver la base $q$-orthogonale associée à $q$.
+}
+
+\example{
+    On prend $q(x,y,z) = x^2 - 2xy + xz - y^2 + 2yz$.\\
+    On a $q(x,y,z) = (x - y + \frac{1}{2}z)^2 - (-y + \frac{1}{2}z)^2 - y^2 + 2yz - z^2$.\\
+    $= (x-y + \frac{1}{2}z)^2 - 2y^2 + 3yz - \frac{5}{4}z^2$.\\
+    $= (x-y + \frac{1}{2}z)^2 - 2(y - \frac{3}{4}z)^2 + \frac{9}{8}z^2$ - $\frac{5}{4}z^2$.\\
+    $= (x-y + \frac{1}{2}z)^2 - 2(y - \frac{3}{4}z)^2 - \frac{1}{8}z^2$.
+}
+
+\example{
+    À un moment dans l'algorithme, la forme quadratique "ne contient pas/plus de carré".\\
+    Exemple le plus simple : $q(x,y) = xy = \frac{1}{4}((x+y)^2 - (x-y)^2)$.
+}
+
+\ndlr{cf. Laurent pour le dernier exemple $q(x_1, x_2, x_3, x_4) = x_1x_2 + x_2x_3 +2x_1x_3 + 3x_1x_4 - x_3x_4$}
+
 \newpage
 \tableofcontents
 
