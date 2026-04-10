@@ -362,6 +362,32 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
 \ndlr{cf. Laurent pour la preuve du lemme}
 \ndlr{cf. Laurent pour la preuve du théorème}
 
+\definition{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et $q$ une forme quadratique sur $E$.\\
+    On appelle \textbf{signature} de $q$ le couple d'entiers $(p,r)$ tel que $q = \ell_1^2 + \cdots + \ell_p^2 - \ell_{p+1}^2 - \cdots - \ell_{p+r}^2$ pour $\ell_1, \ldots, \ell_{p+r}$ des formes linéaires indépendantes.\\
+
+    De manière équivalente, la signature de $q$ est le couple d'entiers $(p,r)$ tel que pour toute base $q$-orthogonale $e$ de $E$, on a $p = \#\{ i \mid q(e_i) > 0 \}$ et $r = \#\{ i \mid q(e_i) < 0 \}$.
+}
+
+\example{
+    \begin{itemize}
+        \item Un produit scalaire est de signature $(dim(E), 0)$.
+        \item $q(x,y,z,t) = x^2 + y^2 + z^2 - c^2 t^2$ est de signature $(3, 1)$.
+        \item $q(x,y) = xy$ est de signature $(1, 1)$.
+    \end{itemize}
+}
+
+\subsubsection{Liens entre signature et matrices symétriques}
+
+Soit $q$ une forme quadratique sur $E$. Soit $\varphi$ sa forme polaire.\\
+Soit $e=(e_1, \ldots, e_n)$ une base quelconque de $E$.\\
+Posons $A = Mat_e(q) = Mat_e(\varphi) = (\varphi(e_i, e_j))_{1 \leq i,j \leq n}$.\\
+Par définition $A$ est symétrique. Donc $A$ est représente la matrice d'un endomorphisme auto-adjoint.\\
+Donc $\exists P \in O_n(\mathbb{R})$ tel que ${}^t P A P = Diag(\lambda_1, \ldots, \lambda_n)$, où $\lambda_1, \ldots, \lambda_n$ sont les valeurs propres de $A$.\\
+Soit $(e_1', \ldots, e_n')$ la base de $E$ telle que $P = P_{e \to e'}$, \textit{i.e.} $e'_j = \sum_{i=1}^n P_{ij} e_i$ pour tout $j$.\\
+Alors $e'$ est une base $q$-orthogonale de $E$, et $Mat_{e'}(q) = Diag(\lambda_1, \ldots, \lambda_n)$.\\
+Donc, la signature de $q$ est donnée par le nombre de valeurs propres strictement positives et le nombre de valeurs propres strictement négatives de $A$.
+
 \newpage
 \tableofcontents
 
