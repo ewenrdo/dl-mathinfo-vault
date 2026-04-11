@@ -118,13 +118,22 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
 \theorem{Lemme}{}{false}{
     Supposons $F(x)$ converge normalement sur $I$. Pour tout $n \in \mathbb{N}$, soit $\varphi_n : I \to \mathbb{R}$ définie par $\varphi_n(x) = \int_0^n f(x,t) dt$. Alors la suite de fonctions $(\varphi_n)_{n \in \mathbb{N}}$ converge uniformément vers $F$ sur $I$.
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{Le prof n'a pas énoncé le lemme}
 
 \subsection{Continuité et limites de $F$}
 \theorem{Théorème}{Continuité des intégrales généralisées à un paramètre}{false}{
     Supposons que $f : I \times [0,+\infty[ \to \mathbb{R}$ est continue et que $F(x) = \int_0^{+\infty} f(x,t) dt$ converge normalement sur $I$. Alors $F : I \to \mathbb{R}$ est continue sur $I$.
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }\\
+    Soit $x_0\in I$. $lim_{x\to x_0}\int_0^{+\infty} f(x, t) dt = \int_0^{+\infty} f(x_0, t) dt$. \\
+    Donc, $lim_{x\to x_0}\int_0^{+\infty} f(x, t)-f(x_0, t) dt =0$. \\
+    Pour $c>0$, $\int_0^{+\infty} f(x, t)-f(x_0, t) dt = \int_0^c f(x,t)-f(x_0,t) dt + \int_c^{+\infty} f(x,t)-f(x_0,t) dt$. \\
+    Donc $|\int_c^{+\infty} f(x,t)-f(x_0,t) dt \le \int_c^{+\infty}|f(x,t)-f(x_0,t)| dt \le \int_c^{+\infty} 2g(t) dt$. \\
+    Soit $\varepsilon>0$. Comme $\int_c^{+\infty} g(t) dt$ existe, $\exists c>0$ tel que $\int_c^{+\infty} g(t) dt \le \varepsilon/4$.
+    Par théorème de la continuité des intégrales (celles du I), $lim_{x\to x_0} \int_0^c f(x,t)-f(x_0,t) dt = 0$.\\
+    Donc il existe $\delta>0$ tel que si $|x-x_0|<\delta$, $|\int_0^c f(x,t) dt - \int_0^c f(x_0,t) dt|<\varepsilon/2$.\\
+    $|\int_0^{+\infty} f(x,t)-f(x_0,t) dt|\le |\int_0^c f(x,t)-f(x_0,t) dt|+|\int_c^{+\infty} f(x,t)-f(x_0,t) dt$\\ $\le \varepsilon/2+2\int_c^{+\infty} g(t) dt \le \varepsilon/2+2\times \varepsilon/4=\varepsilon$.
+}
 
 \theorem{Limite des intégrales généralisées à un paramètre}{}{false}{
     Soit $I$ un intervalle de $\mathbb{R}$ et $x_0 \in \overline{I}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$ étant \textbf{continue} sur $I \times [0,+\infty[$.\\
@@ -136,7 +145,7 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
     \end{itemize}
     Alors $h$ est continue d'intégrale $\int_0^{+\infty} h(t) dt$ absolument convergente et on a : \[lim_{x \to x_0} F(x) = \int_0^{+\infty} h(t) dt\].
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{La proposition n'a pas été énoncé}
 
 \subsection{Dérivabilité de $F$}
 
@@ -150,7 +159,7 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
     \end{itemize}
     Alors $F$ est dérivable sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_0^{+\infty} \frac{\partial f}{\partial x}(x,t) dt\].
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{La preuve n'a pas été énoncé}
 
 \newpage
 \tableofcontents
