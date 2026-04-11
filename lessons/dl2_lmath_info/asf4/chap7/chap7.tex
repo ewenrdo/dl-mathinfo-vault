@@ -36,6 +36,7 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. Soit une fonction $f : I \times J$.\\    
     Si $f$ est continue, alors $F : I \to \mathbb{R}$ telle que $x \mapsto \int_a^b f(x,t) dt$ est bien définie et continue sur $I$.
 }
+
 \noindent{\textbf{Démonstration :}\\
     Soit $x\in I$, la fonction $t\mapsto f(x, t)$ est continue sur un segment. Donc, $\int_a^bf(x, t) dt$ est bien définie.\\
     Soit $x_0\in I$, on veut démontrer que $x\mapsto \int_a^bf(x, t) dt$ est continue en $x_0$.\\
@@ -62,7 +63,13 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
 
     Alors $h$ est continue et on a l'intervertibilité de l'intégrale et de la limite : \[lim_{x \to x_0} F(x) = \int_a^b h(t) dt\].
 }
-\ndlr{cf. Laurent pour la preuve}
+
+\noindent{\textbf{Démonstration :}\\
+    Posons $f_n(t) = f(n, t)$ une suite de fonction continue qui converge vers $h(t)$ uniformément. Donc $h$ est continue.\\
+    $|\int_a^bf(x, t)dt-\int_a^bh(t) dt| = |\int_a^bf(x, t)-h(t) dt|\le \int_a^b|f(x, t)-h(t)| dt$\\
+            $\le \int_a^b \|f(x, t)-h(t)\|_{\infty, J} dt = \|f(x, t)-h(t)\|_{J, \infty}(b-a)$.\\
+    Donc, $lim_{x\to+\infty}\int_a^b f(x, t) dt = \int_a^b h(t) dt$.
+}
 
 \subsection{Dérivabilité de $F$}
 
@@ -70,7 +77,20 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\    
     Si $\frac{\partial f}{\partial x}$ existe et est continue sur $I \times J$, alors $F$ est de classe $\mathcal{C}^1$ sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_a^b \frac{\partial f}{\partial x}(x,t) dt\]
 }
-\ndlr{cf. Laurent pour la preuve}
+
+\noindent{\textbf{Démonstration : }\\
+    On peut supposer que $I$ est un intervalle fermé et borné.\\
+    Soit $h>0$, on veut calculer $lim_{h\to0}\frac{F(x+h)-F(x)}{h}$.\\
+    On a $\frac{F(x+h)-F(x)}{h}=\int_a^b \frac{f(x+h)-f(x)}{h}$.
+    Posons $G(x, h, t) = \begin{cases}
+        \frac{f(x+h)-f(x)}{h},  h\ne0\\ \frac{\partial f}{\partial x}(x, t), h =0
+    \end{cases}$. \\
+    $G$ est continue car $\partial f/\partial x : I\times J\to \mathbb{R}$ est continue.\\
+    Donc, par le théorème précédent, $lim_{h\to0}\int_a^bG(x, h, t) dt = \int_a^b lim_{h\to0} G(x, h, t) dt$ et $lim_{h\to0}\frac{\partial f}{\partial x}(x, t) dt$. \\
+    Donc, on a démontré que $F$ est dérivable et $F'(x)=\int_a^b \frac{\partial f}{\partial x} (x, t) dt$.
+    Comme $\partial f/\partial x$ est continu par le théorème sur la continuité des intégrales à un paramètre, $x\mapsto \int_a^b \frac{\partial f}{\partial x}(x, t) dt$ est continue. Donc $F$ est $C^1$.
+}
+
 \toTrain{exercices 1 et 2 du TD7}
 
 \section{Intégrales généralisées à un paramètre}
