@@ -36,8 +36,18 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. Soit une fonction $f : I \times J$.\\    
     Si $f$ est continue, alors $F : I \to \mathbb{R}$ telle que $x \mapsto \int_a^b f(x,t) dt$ est bien définie et continue sur $I$.
 }
-\ndlr{cf. Laurent pour la preuve (s'il a envie)}
-
+\noindent{\textbf{Démonstration :}\\
+    Soit $x\in I$, la fonction $t\mapsto f(x, t)$ est continue sur un segment. Donc, $\int_a^bf(x, t) dt$ est bien définie.\\
+    Soit $x_0\in I$, on veut démontrer que $x\mapsto \int_a^bf(x, t) dt$ est continue en $x_0$.\\
+    Soit $x_0\in I'\subseteq I$, un segment fermé qui contient $x_0$.  \\
+    (Si $I= ]a, b[$ où $[a, b]$, $a<x_0<b$; $I'=[x-\varepsilon, x+\varepsilon]$ assez petit, $I'\subseteq I$. Si $I=[a, b[$, on a $x_0=a$ et $I'=[a, a+\varepsilon]$.)\\
+    On a $I'\times J$ compact, donc $f : I'\times J\to \mathbb{R}$ est continue sur un compact. Alors, $f$ est uniformément continue sur $I'\times K$. (Théorème de Heine, cf. Chapitre 11 (11.20)).\\
+    Soit $\varepsilon>0$, $\exists\delta>0$ tel que $\forall (x, t), (x', t')\in I'\times J$. Si $|(x, t)-(x', t')|<\delta$, $|f(x, t)-f(x', t')|<\varepsilon$.\\
+    Si $|x-x'|<\delta$, alors $|(x, t)-(x', t)|<\delta$, $\forall t\in[a, b]$, et donc, $|f(x, t)-f(x', t)|<\varepsilon$.\\
+    Donc, $|F(x)-F(x')|=|\int_a^bf(x, t)-\int_a^bf(x', t)|=|\int_a^bf(x, t)-f(x', t)|$\\
+                        $\le \int_a^b|f(x, t)-f(x', t)| dt<\int_a^b \varepsilon dt = \varepsilon (b-a)$.\\
+    Donc, on a démontrer que $\forall\varepsilon>0, \exists\delta>0$, tel que si $|x-x'|<\delta$, alors $|F(x)-F(x')|<\varepsilon(b-a)$. Donc $f$ est continue.
+}
 \reminder{
     $f(x, \cdot)$ converge uniformément vers $h$ sur $J$ signifie qu'il existe une fonction $\alpha$ définie sur $I$ telle que $\alpha(x) \to 0$ lorsque $x \to x_0$ et pour tout $t \in J$, $|f(x,t) - h(t)| \leq \alpha(x)$.
 }
