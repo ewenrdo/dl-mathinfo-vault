@@ -36,8 +36,19 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. Soit une fonction $f : I \times J$.\\    
     Si $f$ est continue, alors $F : I \to \mathbb{R}$ telle que $x \mapsto \int_a^b f(x,t) dt$ est bien définie et continue sur $I$.
 }
-\ndlr{cf. Laurent pour la preuve (s'il a envie)}
 
+\noindent{\textbf{Démonstration :}\\
+    Soit $x\in I$, la fonction $t\mapsto f(x, t)$ est continue sur un segment. Donc, $\int_a^bf(x, t) dt$ est bien définie.\\
+    Soit $x_0\in I$, on veut démontrer que $x\mapsto \int_a^bf(x, t) dt$ est continue en $x_0$.\\
+    Soit $x_0\in I'\subseteq I$, un segment fermé qui contient $x_0$.  \\
+    (Si $I= ]a, b[$ où $[a, b]$, $a<x_0<b$; $I'=[x-\varepsilon, x+\varepsilon]$ assez petit, $I'\subseteq I$. Si $I=[a, b[$, on a $x_0=a$ et $I'=[a, a+\varepsilon]$.)\\
+    On a $I'\times J$ compact, donc $f : I'\times J\to \mathbb{R}$ est continue sur un compact. Alors, $f$ est uniformément continue sur $I'\times K$. (Théorème de Heine, cf. Chapitre 11 (11.20)).\\
+    Soit $\varepsilon>0$, $\exists\delta>0$ tel que $\forall (x, t), (x', t')\in I'\times J$. Si $|(x, t)-(x', t')|<\delta$, $|f(x, t)-f(x', t')|<\varepsilon$.\\
+    Si $|x-x'|<\delta$, alors $|(x, t)-(x', t)|<\delta$, $\forall t\in[a, b]$, et donc, $|f(x, t)-f(x', t)|<\varepsilon$.\\
+    Donc, $|F(x)-F(x')|=|\int_a^bf(x, t)-\int_a^bf(x', t)|=|\int_a^bf(x, t)-f(x', t)|$\\
+                        $\le \int_a^b|f(x, t)-f(x', t)| dt<\int_a^b \varepsilon dt = \varepsilon (b-a)$.\\
+    Donc, on a démontrer que $\forall\varepsilon>0, \exists\delta>0$, tel que si $|x-x'|<\delta$, alors $|F(x)-F(x')|<\varepsilon(b-a)$. Donc $f$ est continue.
+}
 \reminder{
     $f(x, \cdot)$ converge uniformément vers $h$ sur $J$ signifie qu'il existe une fonction $\alpha$ définie sur $I$ telle que $\alpha(x) \to 0$ lorsque $x \to x_0$ et pour tout $t \in J$, $|f(x,t) - h(t)| \leq \alpha(x)$.
 }
@@ -52,7 +63,13 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
 
     Alors $h$ est continue et on a l'intervertibilité de l'intégrale et de la limite : \[lim_{x \to x_0} F(x) = \int_a^b h(t) dt\].
 }
-\ndlr{cf. Laurent pour la preuve}
+
+\noindent{\textbf{Démonstration :}\\
+    Posons $f_n(t) = f(n, t)$ une suite de fonction continue qui converge vers $h(t)$ uniformément. Donc $h$ est continue.\\
+    $|\int_a^bf(x, t)dt-\int_a^bh(t) dt| = |\int_a^bf(x, t)-h(t) dt|\le \int_a^b|f(x, t)-h(t)| dt$\\
+            $\le \int_a^b \|f(x, t)-h(t)\|_{\infty, J} dt = \|f(x, t)-h(t)\|_{J, \infty}(b-a)$.\\
+    Donc, $lim_{x\to+\infty}\int_a^b f(x, t) dt = \int_a^b h(t) dt$.
+}
 
 \subsection{Dérivabilité de $F$}
 
@@ -60,7 +77,20 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Soit $I$ un intervalle de $\mathbb{R}$ et $J = [a,b]$ un segment de $\mathbb{R}$. On considère une fonction $f : I \times J$.\\    
     Si $\frac{\partial f}{\partial x}$ existe et est continue sur $I \times J$, alors $F$ est de classe $\mathcal{C}^1$ sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_a^b \frac{\partial f}{\partial x}(x,t) dt\]
 }
-\ndlr{cf. Laurent pour la preuve}
+
+\noindent{\textbf{Démonstration : }\\
+    On peut supposer que $I$ est un intervalle fermé et borné.\\
+    Soit $h>0$, on veut calculer $lim_{h\to0}\frac{F(x+h)-F(x)}{h}$.\\
+    On a $\frac{F(x+h)-F(x)}{h}=\int_a^b \frac{f(x+h)-f(x)}{h}$.
+    Posons $G(x, h, t) = \begin{cases}
+        \frac{f(x+h)-f(x)}{h},  h\ne0\\ \frac{\partial f}{\partial x}(x, t), h =0
+    \end{cases}$. \\
+    $G$ est continue car $\partial f/\partial x : I\times J\to \mathbb{R}$ est continue.\\
+    Donc, par le théorème précédent, $lim_{h\to0}\int_a^bG(x, h, t) dt = \int_a^b lim_{h\to0} G(x, h, t) dt$ et $lim_{h\to0}\frac{\partial f}{\partial x}(x, t) dt$. \\
+    Donc, on a démontré que $F$ est dérivable et $F'(x)=\int_a^b \frac{\partial f}{\partial x} (x, t) dt$.
+    Comme $\partial f/\partial x$ est continu par le théorème sur la continuité des intégrales à un paramètre, $x\mapsto \int_a^b \frac{\partial f}{\partial x}(x, t) dt$ est continue. Donc $F$ est $C^1$.
+}
+
 \toTrain{exercices 1 et 2 du TD7}
 
 \section{Intégrales généralisées à un paramètre}
@@ -88,13 +118,22 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
 \theorem{Lemme}{}{false}{
     Supposons $F(x)$ converge normalement sur $I$. Pour tout $n \in \mathbb{N}$, soit $\varphi_n : I \to \mathbb{R}$ définie par $\varphi_n(x) = \int_0^n f(x,t) dt$. Alors la suite de fonctions $(\varphi_n)_{n \in \mathbb{N}}$ converge uniformément vers $F$ sur $I$.
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{Le prof n'a pas énoncé le lemme}
 
 \subsection{Continuité et limites de $F$}
 \theorem{Théorème}{Continuité des intégrales généralisées à un paramètre}{false}{
     Supposons que $f : I \times [0,+\infty[ \to \mathbb{R}$ est continue et que $F(x) = \int_0^{+\infty} f(x,t) dt$ converge normalement sur $I$. Alors $F : I \to \mathbb{R}$ est continue sur $I$.
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }\\
+    Soit $x_0\in I$. $lim_{x\to x_0}\int_0^{+\infty} f(x, t) dt = \int_0^{+\infty} f(x_0, t) dt$. \\
+    Donc, $lim_{x\to x_0}\int_0^{+\infty} f(x, t)-f(x_0, t) dt =0$. \\
+    Pour $c>0$, $\int_0^{+\infty} f(x, t)-f(x_0, t) dt = \int_0^c f(x,t)-f(x_0,t) dt + \int_c^{+\infty} f(x,t)-f(x_0,t) dt$. \\
+    Donc $|\int_c^{+\infty} f(x,t)-f(x_0,t) dt \le \int_c^{+\infty}|f(x,t)-f(x_0,t)| dt \le \int_c^{+\infty} 2g(t) dt$. \\
+    Soit $\varepsilon>0$. Comme $\int_c^{+\infty} g(t) dt$ existe, $\exists c>0$ tel que $\int_c^{+\infty} g(t) dt \le \varepsilon/4$.
+    Par théorème de la continuité des intégrales (celles du I), $lim_{x\to x_0} \int_0^c f(x,t)-f(x_0,t) dt = 0$.\\
+    Donc il existe $\delta>0$ tel que si $|x-x_0|<\delta$, $|\int_0^c f(x,t) dt - \int_0^c f(x_0,t) dt|<\varepsilon/2$.\\
+    $|\int_0^{+\infty} f(x,t)-f(x_0,t) dt|\le |\int_0^c f(x,t)-f(x_0,t) dt|+|\int_c^{+\infty} f(x,t)-f(x_0,t) dt$\\ $\le \varepsilon/2+2\int_c^{+\infty} g(t) dt \le \varepsilon/2+2\times \varepsilon/4=\varepsilon$.
+}
 
 \theorem{Limite des intégrales généralisées à un paramètre}{}{false}{
     Soit $I$ un intervalle de $\mathbb{R}$ et $x_0 \in \overline{I}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$ étant \textbf{continue} sur $I \times [0,+\infty[$.\\
@@ -106,7 +145,7 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
     \end{itemize}
     Alors $h$ est continue d'intégrale $\int_0^{+\infty} h(t) dt$ absolument convergente et on a : \[lim_{x \to x_0} F(x) = \int_0^{+\infty} h(t) dt\].
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{La proposition n'a pas été énoncé}
 
 \subsection{Dérivabilité de $F$}
 
@@ -120,7 +159,7 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
     \end{itemize}
     Alors $F$ est dérivable sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_0^{+\infty} \frac{\partial f}{\partial x}(x,t) dt\].
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{La preuve n'a pas été énoncé}
 
 \newpage
 \tableofcontents
