@@ -122,8 +122,9 @@
     \end{enumerate}
 
     On pose les conventions suites : lorsque $l = 0$, $R = +\infty$ et lorsque $l = +\infty$, $R = 0$.
-
 }
+
+\toTrain{Exercices 1 et 2 de la feuille de TD}
 
 \example{
     \begin{itemize}
@@ -238,6 +239,8 @@
     Montrer que $\forall z, w \in \mathbb{C} \; exp(z + w) = exp(z) \cdot exp(w)$\\
     On a $exp(z+w) = \sum_{n=0}^{+\infty} \frac{(z+w)^n}{n!} = \sum_{n=0}^{+\infty} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} z^k w^{n-k} = \left( \sum_{n=0}^{+\infty} \frac{z^n}{n!} \right) \cdot \left( \sum_{n=0}^{+\infty} \frac{w^n}{n!} \right) = exp(z) \cdot exp(w)$ (on utilise le produit de Cauchy de séries entières pour la troisième égalité). 
 }
+
+\ndlr{Exercice 4 de la feuille de TD}
 
 \section{Dérivabilité et analyticitée d'une série entière}
 
@@ -412,8 +415,9 @@
     On pose $F={z\in U, f(z)=g(z)}$. Montrons que $F$ est un ouvert-fermé de $U$.\\
     $F=U\cap((f-g)^{-1}({0}))$ qui est fermé car ${0}$ est fermé et $f-g$ est continue.\\
     Donc, $F$ est un fermé de $U$.\\
-    Montrons que $F$ est un ouvert (exercice)
+    Montrons que $F$ est un ouvert (laissé en exercice, preuve non achevée).
 }
+
 \remark{Si la valeur de $f$ et $g$ sur une infinité de points qui se serrent de plus en plus (point d'accumulation), alors $f = g$ sur tout l'ouvert connexe. C'est une onde qui se propage.}
 
 
@@ -488,7 +492,7 @@ De même, pour $\frac{1}{1+z^2} = \sum_{n=0}^{+\infty} (-1)^n z^{2n}$ pour $|z| 
     $f(z) = a_0 + a_1 z + \cdots + a_n z^n + o(z^n)$ lorsque $z \to 0$.
 }
 \noindent{\textbf{Preuve :} On le sait déjà car la série entière est égale à sa série de Taylor.}
-
+\newpage
 Un rappel des développements limités de fonctions usuelles :
 \renewcommand{\arraystretch}{1.8} % augmente l'espacement vertical
 
@@ -528,7 +532,7 @@ $\cosh x$ & partie paire de $e^x$ \\
 Pour les équations différentielles, on peut chercher des solutions de la forme $y = \sum_{n=0}^{+\infty} a_n z^n$ et on trouve alors des relations de récurrence sur les $a_n$.\\
 On réalisé en fait un raisonnement par analyse-synthèse et par identification de coefficients.\\
 
-\example{cf. l'exercice 12 du TD.}
+\toTrain{Exercice 12 de la feuille de TD}
 
 \newpage
 \tableofcontents

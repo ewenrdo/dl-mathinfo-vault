@@ -239,6 +239,8 @@ Elle est toujours de trace nulle, et de déterminant égal à -1.
 
 \remark{Contrairement aux rotations, le produit de deux réflexions n'est pas une réflexion, mais une rotation. $O_{-}(E)$ n'est donc pas un groupe.}
 
+\toTrain{Exercice 1 de la feuille de TD}
+
 \subsection{Classification des isométries en dimension 3}
 \subsubsection{Isométries directes}
 Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. Soit $u \in SO_3(\mathbb{R})$. Alors $Sp(u) \subset \{-1, 1\}$.\\
@@ -253,7 +255,7 @@ Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. S
         \item un axe orienté, c'est à dire un choix de vecteur unitaire $d$ dirigeant la droite $D = ker(u - id_E)$
         \item un angle de rotation $\theta \in ]-\pi, \pi]$
     \end{itemize}
-    L'orientation de l'axe détermine une orientation du plan $D^\perp$ et si $(e_1, e_2)$ est orthonormée directe dans $D^\perp$ alors la matrice de $u$ dans la base $(d,e_1,e_2)$ est de la forme $\begin{pmatrix}
+    L'orientation de l'axe détermine une orientation du plan $D^\perp$ et si $(e_1, e_2)$ est \textbf{orthonormée directe} dans $D^\perp$ alors la matrice de $u$ dans la base $(d,e_1,e_2)$ est de la forme $\begin{pmatrix}
         1 & 0 & 0 \\
         0 & \cos \theta & -\sin \theta \\
         0 & \sin \theta & \cos \theta
@@ -261,6 +263,8 @@ Commençons par $E = \mathbb{R}^3$ et déterminons $SO(3) = SO_3(\mathbb{R})$. S
 }
 \vocabulary{On appelle les éléments de $SO_3(\mathbb{R})$ les \textbf{rotations} de l'espace.}
 \remark{Une conséquence importante de cela est que toute isométrie directe de $\mathbb{R}^3$ est une rotation autour d'un axe.}
+
+\toTrain{Exercice 4 de la feuille de TD}
 
 \example{
     Soit $M \in \mathcal{SO}_3(\mathbb{R})$ la matrice d'une rotation telle que :
@@ -322,6 +326,8 @@ Considérons l'isométrie directe $S$, alors $S \circ u = s$ est une rotation. A
         \end{pmatrix}$.
     \end{itemize}
 }
+\toTrain{Exercice 3 de la feuille de TD}
+
 \remark{On a ces quelques cas particuliers :
     \begin{itemize}
     \item Si $\theta=0$, $u$ est une \textbf{réflexion} par rapport au plan $d^\perp$.
@@ -336,6 +342,8 @@ Soit $M \in O_3^-(\mathbb{R})$.
     \item Sinon, $M$ est une \textbf{anti-rotation} d'angle $\theta$ tel que $Tr(M) = -1 + 2\cos\theta$.
 \end{itemize}
 }
+\toTrain{Exercice 6 de la feuille de TD}
+
 
 \noindent{\textbf{Démonstration pour la réflexion :}\\
 Une réflexion $s$ a pour valeurs propres $(1, 1, -1)$. Sa trace est donc $1+1+(-1) = 1$. Réciproquement, si $u \in O_3^-$ et $Tr(u)=1$, alors $-1 + 2\cos\theta = 1 \implies \cos\theta = 1$, soit $\theta=0$. La matrice dans la base adaptée est donc $diag(-1, 1, 1)$, ce qui correspond bien à une réflexion par rapport au plan $Vect(e_1, e_2)$. $\Box$

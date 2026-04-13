@@ -22,11 +22,6 @@
 
 \docTitle{Chapitre 9 : Intégrales doubles}
 
-\warning{
-    Cours non finalisé, non structuré et contenant beaucoup d'oublis.\\
-    Il est pour l'instant peu sûr de réviser à partir de ce cours, mais il peut être intéressant de le parcourir pour se faire une idée du sujet.
-}
-
 \section{Définition et propriétés des intégrales doubles}
 
 \subsection{Définition}
@@ -92,7 +87,7 @@ Représentation géométrique :
 
 \theorem{Théorème}{}{false}{
     Soit $D \subset \mathbb{R}^2$ un sous-ensemble fermé borné quarrable.\\
-    Soit $f : D \to \mathbb{R}$ une fonction continue.\\
+    Soit $f : D \to \mathbb{R}$ une fonction \textbf{continue}.\\
     Alors, on peut définir l'intégrale double $\iint_D f \, dx \, dy$ telle que :
     \begin{enumerate}
         \item \textbf{Linéarité :} $\iint_D (\alpha f(x,y) + \beta g(x,y)) \, dx \, dy = \alpha \iint_D f(x,y) \, dx \, dy + \beta \iint_D g(x,y) \, dx \, dy$ (où $g : D \to \mathbb{R}$ est une autre fonction continue et $\alpha, \beta \in \mathbb{R}$),
@@ -105,7 +100,7 @@ Représentation géométrique :
     \end{enumerate}
 }
 
-\ndlr{cf. le diable pour la preuve de ce théorème}
+\ndlr{La preuve de ce théorème est laissée à l'appréciation du lecteur.}
 
 \example{
     Intégrons $f(x,y) = \frac{1+x^2}{1+y^2}$ sur le carré $[0,1] \times [0,1]$.\\
@@ -122,7 +117,7 @@ Représentation géométrique :
     \iint_D f(x,y) \, dx \, dy = \int_a^b \left( \int_{c(x)}^{d(x)} f(x,y) \, dy \right) dx
     \]
 }
-
+\toTrain{Exercices 1 et 2 de la feuille de TD}
 \section{Changement de variables}
 
 \subsection{Matrice jacobienne et jacobien}
@@ -147,14 +142,18 @@ Représentation géométrique :
     \end{itemize}
 }
 
+\subsection{Formule de changement de variables}
+
 \theorem{Théorème de changement de variables}{}{false}{
     Soit $D$ et $\Delta$ deux domaines quarrables de $\mathbb{R}^2$.\\
     Soit $g : D \to \Delta$ un $\mathcal{C}^1\text{-diffeomorphisme}$.\\
     Soit $f : \Delta \to \mathbb{R}$ une fonction continue. Alors :
     \[
-        \iint_\Delta f(x,y) \, dx \, dy = \iint_D f(g(x,y)) \cdot det(Jac_g(x,y)) \, dx \, dy
+        \iint_\Delta f(x,y) \, dx \, dy = \iint_D f(g(x,y)) \cdot |det(Jac_g(x,y))| \, dx \, dy
     \]
 }
+
+\toTrain{Exercice 3 de la feuille de TD}
 
 \example{
     Calculons l'intégrale de $f(x,y) = x^2 + y^2$ sur le disque unité $\Delta = \{ (x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 1\}$.

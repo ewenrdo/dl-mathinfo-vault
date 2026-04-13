@@ -47,8 +47,9 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Si $|x-x'|<\delta$, alors $|(x, t)-(x', t)|<\delta$, $\forall t\in[a, b]$, et donc, $|f(x, t)-f(x', t)|<\varepsilon$.\\
     Donc, $|F(x)-F(x')|=|\int_a^bf(x, t)-\int_a^bf(x', t)|=|\int_a^bf(x, t)-f(x', t)|$\\
                         $\le \int_a^b|f(x, t)-f(x', t)| dt<\int_a^b \varepsilon dt = \varepsilon (b-a)$.\\
-    Donc, on a démontrer que $\forall\varepsilon>0, \exists\delta>0$, tel que si $|x-x'|<\delta$, alors $|F(x)-F(x')|<\varepsilon(b-a)$. Donc $f$ est continue.
+    Donc, on a démontrer que $\forall\varepsilon>0, \exists\delta>0$, tel que si $|x-x'|<\delta$, alors $|F(x)-F(x')|<\varepsilon(b-a)$. Donc $f$ est continue. $\Box$
 }
+
 \reminder{
     $f(x, \cdot)$ converge uniformément vers $h$ sur $J$ signifie qu'il existe une fonction $\alpha$ définie sur $I$ telle que $\alpha(x) \to 0$ lorsque $x \to x_0$ et pour tout $t \in J$, $|f(x,t) - h(t)| \leq \alpha(x)$.
 }
@@ -68,7 +69,7 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Posons $f_n(t) = f(n, t)$ une suite de fonction continue qui converge vers $h(t)$ uniformément. Donc $h$ est continue.\\
     $|\int_a^bf(x, t)dt-\int_a^bh(t) dt| = |\int_a^bf(x, t)-h(t) dt|\le \int_a^b|f(x, t)-h(t)| dt$\\
             $\le \int_a^b \|f(x, t)-h(t)\|_{\infty, J} dt = \|f(x, t)-h(t)\|_{J, \infty}(b-a)$.\\
-    Donc, $lim_{x\to+\infty}\int_a^b f(x, t) dt = \int_a^b h(t) dt$.
+    Donc, $lim_{x\to+\infty}\int_a^b f(x, t) dt = \int_a^b h(t) dt$. $\Box$
 }
 
 \subsection{Dérivabilité de $F$}
@@ -88,7 +89,7 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     $G$ est continue car $\partial f/\partial x : I\times J\to \mathbb{R}$ est continue.\\
     Donc, par le théorème précédent, $lim_{h\to0}\int_a^bG(x, h, t) dt = \int_a^b lim_{h\to0} G(x, h, t) dt$ et $lim_{h\to0}\frac{\partial f}{\partial x}(x, t) dt$. \\
     Donc, on a démontré que $F$ est dérivable et $F'(x)=\int_a^b \frac{\partial f}{\partial x} (x, t) dt$.
-    Comme $\partial f/\partial x$ est continu par le théorème sur la continuité des intégrales à un paramètre, $x\mapsto \int_a^b \frac{\partial f}{\partial x}(x, t) dt$ est continue. Donc $F$ est $C^1$.
+    Comme $\partial f/\partial x$ est continu par le théorème sur la continuité des intégrales à un paramètre, $x\mapsto \int_a^b \frac{\partial f}{\partial x}(x, t) dt$ est continue. Donc $F$ est $C^1$.$\Box$
 }
 
 \toTrain{exercices 1 et 2 du TD7}
@@ -101,7 +102,7 @@ On s'intéresse aux propriétés de la fonction $F : I \to \mathbb{R}$ définie,
     F : I \to \mathbb{R}, \; x \mapsto \int_0^{+\infty} f(x,t) dt
 \]
 
-On adapte sans difficulté les énoncés suivants à des intervalles différents de $[0,+\infty[$.
+\noindent On adapte sans difficulté les énoncés suivants à des intervalles différents de $[0,+\infty[$.
 \subsection{Convergence de l'intégrale}
 \definition{
     L'intégrale $F(x) = \int_0^{+\infty} f(x,t) dt$ est dite \textbf{simplement convergente} sur $I$ si pour tout $x \in I$, l'intégrale $\int_0^{+\infty} f(x,t) dt$ converge.
@@ -149,7 +150,7 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
 
 \subsection{Dérivabilité de $F$}
 
-\theorem{Théorème}{Dérivabilité des intégrales généralisées à un paramètre}{false}{
+\theorem{Théorème}{Dérivabilité des intégrales généralisées à un paramètre}{true}{
     Soit $I$ un intervalle de $\mathbb{R}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$.\\
     Supposons que :
     \begin{itemize}
@@ -159,7 +160,8 @@ On adapte sans difficulté les énoncés suivants à des intervalles différents
     \end{itemize}
     Alors $F$ est dérivable sur $I$ et pour tout $x \in I$, on a : \[F'(x) = \int_0^{+\infty} \frac{\partial f}{\partial x}(x,t) dt\].
 }
-\ndlr{La preuve n'a pas été énoncé}
+
+\toTrain{Exercice 5 de la feuille de TD}
 
 \newpage
 \tableofcontents

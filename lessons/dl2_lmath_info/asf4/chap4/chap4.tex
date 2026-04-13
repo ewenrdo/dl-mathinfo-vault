@@ -224,7 +224,8 @@ On a : $(u_1, \ldots, u_{k+1})$ est une famille orthonormée de $E$ qui vérifie
 \theorem{Corollaire}{}{false}{
     Tout espace euclidien de dimension finie admet une base orthonormée.
 }
-
+\toTrain{Exercice 9 de la feuille de TD}
+\subsection{Isométries}
 \definition{
     Soient $E, F$ deux espaces euclidiens.\\
     On appelle \textbf{isométrie} de $E$ dans $F$ toute application $f : E \to F$ qui est un isomorphisme d'espace vectoriel et $\forall x \in E, \; \| f(x) \| = \| x \|$.
@@ -283,16 +284,12 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
 }
 
 \remark{Soit $p$ la projection orthogonale sur $F$. Alors pour $x \in E, \; p(x)$ est l'unique vecteur de $F$ tel que $\| x - p(x) \| = \min_{z \in F} \| x - z \|$. Autrement dit, $p(x)$ est le point de $F$ le plus proche de $x$.} 
-\noindent{ \textbf{Démonstration :}\\
-    On a $\|x-z\|^2=\|x-p(x)+p(x)-z\|^2=\|x-p(x)\|^2\|p(x)-z\|^2$ par Pythagore.\\
-    $\ge\|x-p(x)\|^2$. Donc $p(x)$ atteint le $\min_{z\in F}\|x-z\|$.\\
-    De plus, le minimum est unique car $\|x-z\|=\min{z\in F}\|x-z\|\Rightarrow\|p(x)-z\|=0\Rightarrow p(x)=z$.
-}
+\noindent{ \textbf{Démonstration :} La plus petite distance entre $x$ et un plan est la droite perpendiculaire au plan passant par $x$. $\Box$}
 
-\ndlr{cf. Laurent pour ce qui s'ensuit (fait). cf. OneNote pour le schéma.}
 \remark{On peut retrouver la formule de la distance d'un point à une droite / plan dans $\mathbb{R}^3$. Prendre une base orthonormée du plan $P$ et $d(x, P) = \| x - \sum_{i=1}^2 \langle x, e_i \rangle e_i \|$ où $d(x, F) = \inf_{y \in F} \| x - y \|$.}
 
 \remark{Si $(e_1, \ldots, e_k)$ est une famille libre de $E$. Gram-Schmit définit par récurrence $u_1 = \frac{e_1}{\| e_1 \|}$ et $u_{k+1} = \frac{e_{k+1} - p_i(e_{k+1})}{\| e_{k+1} - p_i(e_{k+1}) \|}$, où $p_i$ est la projection orthogonale sur $\text{Vect}(u_1, \ldots, u_k)$.}
+\toTrain{Exercice 12 de la feuille de TD}
 
 \subsection{Suppléments orthogonaux}
 
@@ -332,7 +329,7 @@ Et donc $H = (H^\perp)^\perp = (Vect(x_0))^\perp$. $\Box$
 Alors $A^\perp$ est un sev de $E$ et $A^\perp = (Vect(A))^\perp$.}
 
 \training{Montrer que $F_1 \subset F2 \Rightarrow F_2^\perp \subset F_1^\perp$.}
-\noindent\carreaux{10}
+\noindent\carreaux{6}
 
 \section{Dual d'espace euclidien}
 
@@ -349,6 +346,8 @@ $j_E$ est linéaire et $dimE = dimE^*$ et $x \in ker(j_E) \Leftrightarrow \foral
 \remark{Si $\varphi \in E^*, y \in E$ on a le crochet de dualité $\langle \varphi, y \rangle$. Mais aussi si $x$ est tel que $\varphi = \langle x, \cdot \rangle$, on a aussi $\langle x, y \rangle = \langle \varphi, y \rangle$. Donc on peut confondre les deux crochets de dualité. Autrement dit, $\langle j_E(x), y \rangle_{E^* \times E} = \langle x, y \rangle_{E \times E}$ et $j_E$ permet de dire que le crochet de dualité est la même chose que le produit scalaire en identifiant $E$ et $E^*$ de manière canonique.}
 
 \section{Cas des $\mathbb{C}$-espaces vectoriels : espaces hermitiens}
+
+\ndlr{Cette section ne semble pas être au programme.}
 
 \definition{
     Soit $E$ un $\mathbb{C}$-espace vectoriel.\\
