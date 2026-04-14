@@ -43,12 +43,14 @@ Ce livret propose des révisions sur les matières d'Éléments d'algorithmique,
 \medskip
 
 \noindent
-Le contenu n'est sans doute pas exhaustif. S'il y a une erreur, une coquille ou un énoncé ambigu, merci de me contacter pour que je puisse corriger rapidement.
+Le programme n'est sans doute pas exhaustif. S'il y a une erreur, une coquille ou un énoncé ambigu, merci de me contacter pour que je puisse corriger cela rapidement.
 
 \medskip
 
 \noindent
-Si besoin d'un corrigé, vous pouvez aussi me contacter, mais pas avant le Jour J : il est possible que je ne l'aie pas encore rédigé. Je rappelle que je suis étudiant, il est possible (voire probable) que je ne fasse pas de corrigé exhaustif lorsque je n'arrive pas moi-même à résoudre un exercice. \textbf{Réciproquement, si vous avez un corrigé à proposer pour un exercice, n'hésitez pas à me le faire parvenir !}
+Si besoin d'un corrigé, vous pouvez aussi me contacter. Je rappelle que je suis étudiant, il est possible (voire probable) que je ne fasse pas de corrigé exhaustif lorsque je n'arrive pas moi-même à résoudre un exercice. \textbf{Réciproquement, si vous avez un corrigé à proposer pour un exercice, n'hésitez pas à me le faire parvenir !}
+
+\remark{Je conseille de faire les exercices avec son cours à proximité. Il peut être nécessaire de passer par des résultats vus en cours pour résoudre les exercices, et c'est aussi l'occasion de les revoir.}
 
 \begin{flushright}
 \textbf{Bonnes vacances \faSmile}
@@ -56,6 +58,24 @@ Si besoin d'un corrigé, vous pouvez aussi me contacter, mais pas avant le Jour 
 
 \newpage
 
+\section*{Crédits}
+\subsection{Mathématiques}
+\begin{itemize}
+\item TD et annales de l'Université Paris Cité de 2020-2021 à 2024-2025.
+\item Bibmath, section Math-Spé
+\item Ministère de l'Éducation nationale, de la Jeunesse et des Sports, annales du CAPES de mathématiques 2025.
+\item Sujet de contrôle continu de Pierre Faugere pour l'année 2025-2026.
+\end{itemize}
+
+\subsection{Informatique}
+\begin{itemize}
+\item Cours et épreuves de Dominique Poulalhon à l'Université Paris Cité pour les années 2023-2024 et 2024-2025.
+\item Sujet de projet de Juliusz Chroboczek en Langage C pour l'année 2025-2026.
+\end{itemize}
+
+\tableofcontents
+
+\newpage
 \renewcommand{\arraystretch}{1.3}
 \section{Jour 1}
 
@@ -156,7 +176,7 @@ On note $F$ le sous-espace vectoriel de $\mathbb{R}^4$ engendré par les vecteur
 \newpage
 
 \section{Jour 2}
-\subsection{Probabilités}
+\subsection{Probabilités : Variables aléatoires, conditionnement}
 
 \exercise{1}{Mario et Luigi}{
     \begin{enumerate}
@@ -193,7 +213,7 @@ On note $F$ le sous-espace vectoriel de $\mathbb{R}^4$ engendré par les vecteur
     \end{enumerate}
 }
 
-\subsection{Algèbre}
+\subsection{Algèbre : Endomorphismes des espaces euclidiens}
 \exercise{1}{Endomorphismes préservant l'orthogonalité}{
     Soit $E$ un espace euclidien et $f \in \mathcal{L}(E)$ tel que
 \[ \forall x, y \in E, x \perp y \Rightarrow f(x) \perp f(y) \]
@@ -202,7 +222,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
 \textit{Indication : considérer une base orthonormée $(e_1, e_2, \dots, e_n)$, poser $\lambda_i = \|f(e_i)\|$, et calculer $\langle f(e_i + e_j), f(e_i - e_j) \rangle$}
 }
 
-\subsection{Algorithmique}
+\subsection{Algorithmique : Tas binaires}
 
 \exercise{1}{Tas-max}{
     On souhaite comparer deux algorithmes différents permettant de construire un tas-max contenant les éléments d’un tableau $T$ :
@@ -230,7 +250,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
 
 \newpage
 \section{Jour 3}
-    \subsection{Analyse}
+    \subsection{Analyse : Séries de fonctions}
 
     \exercise{1}{Cours}{
         En précisant les hypothèses nécessaires à leur application, énoncer:
@@ -253,7 +273,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
     \end{enumerate} 
     }
 
-    \subsection{Probabilités}
+    \subsection{Probabilités : Probabilités conditionnelles et variables aléatoires}
 
     
     \exercise{1}{Indépendance et loi}{
@@ -280,7 +300,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
 
 \newpage
 \section{Jour 4}
-    \subsection{Analyse}
+    \subsection{Analyse : Séries entières}
     \exercise{1}{Formule de Cauchy}{
         Soit $\sum_{n \ge 0} a_n z^n$ une série entière de rayon de convergence $R > 0$. On pose, pour tout complexe $z$ de module strictement inférieur à $R$,
         \[ f(z) = \sum_{n \ge 0} a_n z^n. \]
@@ -315,7 +335,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
     }
 \noindent\textit{Tourner la page.}
 \newpage
-    \subsection{Probabilités}
+    \subsection{Probabilités : Fonctions de répartition et génératrices}
     \remark{On se concentre ici sur les fonctions de répartition et génératrices.}
     \exercise{1}{Fonction génératrice et loi}{
         Soit $X$ une variable aléatoire entière dont la fonction génératrice est donnée par $G_X(z) = \frac{1}{27}(2+z)^3$. Donner la loi de $X$.
@@ -333,7 +353,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
     }
 
 
-    \subsection{Algorithmique}
+    \subsection{Algorithmique : Arbres binaires de recherche}
     \exercise{1}{Algorithme sur les ABR}{
         Exprimer dans le langage de votre choix des algorithmes optimaux (dont on justifiera le caractère optimal de la complexité) pour les problèmes suivants :
         \begin{enumerate}
@@ -346,7 +366,7 @@ Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
 
 \newpage
 \section{Jour 5}
-    \subsection{Algèbre}
+    \subsection{Algèbre : Isométries de l'espace euclidien}
     \exercise{1}{Une étude complète}{
         On munit $\mathbb{R}^3$ de sa structure euclidienne usuelle, et de l'orientation donnée par la base canonique. Soit $X = \begin{pmatrix} x \\ y \\ z \end{pmatrix}$ un vecteur de $\mathbb{R}^3$. On considère la matrice
 \[ M_X = \frac{1}{4} \begin{pmatrix} 1 & -3 & x \\ -3 & 1 & y \\ \sqrt{6} & \sqrt{6} & z \end{pmatrix} \]
@@ -368,7 +388,9 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
 \]
     }
 
-    \subsection{Probabilités}
+    \textit{Pour aller plus vite : Commencer par calculer le déterminant et la trace de chaque matrice.}
+
+    \subsection{Probabilités : Inégalités}
     \exercise{1}{Paris Cité en sueur}{Le nombre $X$ de cyberattaques quotidiennes ciblant l'université Paris Cité suit une loi Poisson(10). Le service informatique peut sans peine lutter contre une dizaine d'attaques, mais à partir de 30 attaques, il n'y arrive plus.
 \begin{enumerate}
     \item En utilisant rigoureusement l'inégalité de Markov, estimer la probabilité pour qu'au moins 30 attaques surviennent dans la même journée.
@@ -391,7 +413,7 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
     \end{enumerate}
 }
 
-    \subsection{Algorithmique}
+    \subsection{Algorithmique : Hachage à adressage ouvert}
     \exercise{1}{Double hache}{
         Une stratégie de hachage, à adressage ouvert, est le \textit{double hachage} : au lieu d'avancer case par case, on utilise un second pas $h_2(k)$ qui dépend de la clé. On sonde successivement les cases
 \[ h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m \quad \text{pour } i = 0, 1, 2, \dots \]
@@ -401,16 +423,14 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
     \[ h_1(k) = k \bmod m \quad \text{et} \quad h_2(k) = 1 + (k \bmod (m - 1)). \]
     Détailler les sondages effectués lorsqu'il y a collision.
 
-    \item Pour continuer à insérer des éléments dans le tableau, redimensionnez-le en doublant sa taille, puis insérez-en 10, 4, 83 et 28 à l'aide des mêmes fonctions avec $m = 10$.
-
+    \item Pour continuer à insérer des éléments dans le tableau, redimensionnez-le en doublant sa taille, puis insérez-en 10, 4, 83 et 28 à l'aide des mêmes fonctions avec $m = 10$ (pensez à réinsérer les clés de la table initiale dans la nouvelle table).
     \item Proposez une condition sur $m$ et $h_2$ qui garantisse que le sondage à double hachage examine toutes les cases.
 \end{enumerate}
     }
 \newpage
 \section{Jour 6}
-    ASF4 : intégrales d'un paramètre + exo partiels
 
-    \subsection{Probabilités}
+    \subsection{Probabilités : Chaînes de Markov}
 
     \exercise{1}{Chaînes de Markov et matrice de transition}{
         Soit $E = \{1, 2, 3\}$ et $P$ la matrice de transition suivante :
@@ -426,7 +446,7 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
         \end{enumerate}
     }
 
-    \subsection{Analyse}
+    \subsection{Analyse : Intégrales à paramètre}
 
     \exercise{1}{Première approche aux intégrales d'un paramètre}{
         Soit $f : \mathbb{R} \to \mathbb{R}$ la fonction définie par $f(x) = \frac{1}{\pi} \int_{0}^{\pi} \cos(x \sin t) dt$
@@ -440,10 +460,6 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
 
     \exercise{2}{Étude de la fonction Gamma}{
         \begin{enumerate}
-        \item Montrer que pour tout réel $x > 0$, l'intégrale impropre $\Gamma(x) = \int_{0}^{+\infty} e^{-t} t^{x-1} dt$ est convergente.
-        \item Montrer que pour tout $x > 0$, on a $\Gamma(x+1) = x\Gamma(x)$ ; en déduire la valeur $\Gamma(n)$ pour $n$ entier strictement positif.
-        \item Montrer que la fonction $\Gamma$ est de classe $C^2$ et convexe. En déduire que $\Gamma$ atteint son minimum en un point de l'intervalle $]1, 2[$.
-        \item Montrer que $\lim_{x \to 0} (x\Gamma(x)) = 1$ et dessiner l'allure du graphe de $\Gamma$.
         \item Montrer que pour tout réel $x > 0$, l'intégrale impropre $\Gamma(x) = \int_{0}^{+\infty} e^{-t} t^{x-1} dt$ est convergente.
         \item Montrer que pour tout $x > 0$, on a $\Gamma(x+1) = x\Gamma(x)$ ; en déduire la valeur $\Gamma(n)$ pour $n$ entier strictement positif.
         \item Montrer que la fonction $\Gamma$ est de classe $C^2$ et convexe. En déduire que $\Gamma$ atteint son minimum en un point de l'intervalle $]1, 2[$.
@@ -489,7 +505,7 @@ Pour simplifier l'analyse de l'algorithme, on supposera ici plus précisément q
     \item Quelle est dans le meilleur cas la complexité de \texttt{insere(x, B, i)} ? Quelle est la complexité cumulée de toutes les insertions ? Quelle est donc la complexité dans le meilleur cas de l'algorithme ? Justifier que cette borne est atteinte.
     \item Quelle est dans le pire cas la complexité de \texttt{insere(x, B, i)} ? Quelle est la complexité cumulée de toutes les insertions ? Quelle est donc la complexité dans le pire cas de l'algorithme ? Justifier que cette borne est atteinte.
 \end{enumerate}
-    \subsection{Analyse}
+    \subsection{Analyse : Intégrales à paramètre}
 
 
     \exercise{1}{Intégrale d'un paramètre et fonctions trigonométriques}{
@@ -503,7 +519,7 @@ Pour simplifier l'analyse de l'algorithme, on supposera ici plus précisément q
         \end{enumerate}
     }
 
-    \subsection{Langage C}
+    \subsection{Langage C : Lecture et écriture de fichiers}
     Considérons deux fichiers "data.txt" contenant une liste de nombres entiers, un par ligne, et "result.txt", \textit{a priori} vide.\\
     Écrire un programme en langage C qui :
     \begin{itemize}
@@ -516,18 +532,61 @@ Pour simplifier l'analyse de l'algorithme, on supposera ici plus précisément q
 \newpage
 \section{Jour 8}
 
-    \subsection{Algèbre}
-    \ndlr{À venir : exercice d'approche sur les formes bilinéaires et quadratiques.}
+    \subsection{Algèbre : Formes quadratiques}
+    \exercise{1}{Application du cours}{
+        Soit $q$ la forme quadratique définie sur $\mathbb{R}^3$ par :
+        \[ q(x, y, z) = x^2 + 2y^2 - 3z^2 + 4xy - 2xz \]
 
-    \subsection{Analyse}
-    \ndlr{À venir : exercice sur les intégrales doubles.}
+        \begin{enumerate}
+            \item Déterminer la forme polaire $f$ associée à $q$ (c'est-à-dire la forme bilinéaire symétrique telle que $f(u, u) = q(u)$).
+            \item Écrire la matrice de $q$ dans la base canonique de $\mathbb{R}^3$.
+        \end{enumerate}
+    }
 
-    \subsection{Probabilités}
-    \ndlr{À venir : exercice d'examen sur les variables aléatoires et/ou les probabilités conditionnelles.}
 
+    \exercise{2}{Décomposition en carrés (Méthode de Gauss)}{
+        On considère la forme quadratique $q$ définie sur $\mathbb{R}^3$ par :
+        \[ q(x, y, z) = x^2 + xy + xz + yz \]
+
+        \begin{enumerate}
+            \item En utilisant la méthode de Gauss, décomposer $q$ en une somme de carrés de formes linéaires indépendantes.
+            \item En déduire le rang et la signature de $q$.
+            \item La forme quadratique $q$ est-elle définie positive ? Justifier.
+        \end{enumerate}
+    }
+    
+    \subsection{Analyse : Intégrales doubles}
+    \exercise{1}{Calcul d'intégrales doubles}{
+        Calculer les intégrales doubles $\iint_D f(x,y) \, dxdy$ dans les cas suivants :
+
+        \begin{enumerate}
+            \item $D = [0, \pi]^2$, $f(x,y) = (x + y) \cos(x) \cos(y)$.
+            \item $D = [0, a]^2$, $f(x,y) = ye^{xy}$.
+            \item $D$ est le triangle dont les sommets sont $(0,0)$, $(1,0)$, et $(0,1)$, $f(x,y) = xy^2$.
+        \end{enumerate}
+    }
+    \exercise{2}{Calcul d'intégrales doubles (plus compliqué)}{
+        Calculer les intégrales doubles $\iint_D f(x,y) \, dxdy$ dans les cas suivants :
+
+        \begin{enumerate}
+            \item $D = \left\{ (x,y) : x \ge 0, y \ge 0, \frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1 \right\}$, $f = 2x^3 - y$.
+            \item $D = \{ (x,y) : x \ge 0, y \ge 0, 1 \le x^2 + y^2 \le 4 \}$, $f = \frac{xy}{x^2 + y^2}$.
+            \item $D = \{ (x,y) : 1 \ge x \ge 0, 1 \ge y \ge 0, 0 \le x^2 + y^2 \le 1 \}$, $f = \frac{1}{1+x^2+y^2}$.
+            \item $D = \{ (x,y) : x \ge 0, 1 \le x^2 + y^2 \le 2y \}$, $f = \sqrt{x^2 + y^2}$.
+        \end{enumerate}
+    }
+
+    \subsection{Probabilités : Indépendance de variables aléatoires}
+    Soient $\varepsilon_1, \varepsilon_2, \varepsilon_3$ des variables aléatoires indépendantes suivant la loi de Rademacher, c'est-à-dire, $\mathbb{P}(\varepsilon_i = 1) = \mathbb{P}(\varepsilon_i = -1) = \frac{1}{2}$ pour tout $i \in \{1, 2, 3\}$. Soient $X = \varepsilon_1 \varepsilon_2$, $Y = \varepsilon_1 \varepsilon_3$ et $Z = \varepsilon_2 \varepsilon_3$.
+    \begin{enumerate}
+        \item Exprimer les événements $\{X = 1\}$, $\{Y = 1\}$ et $\{Z = -1\}$ à l'aide des variables aléatoires $\varepsilon_1, \varepsilon_2, \varepsilon_3$.
+        \item Déterminer les lois de $X, Y$ et $Z$.
+        \item Les événements $\{X = 1\}$, $\{Y = 1\}$ et $\{Z = -1\}$ sont-ils deux à deux indépendants ? Sont-ils mutuellement indépendants ?
+    \end{enumerate}
+    
 \newpage
 \section{Jour 9}
-    \subsection{Algèbre}
+    \subsection{Algèbre : Formes bilinéaires et quadratiques}
     \exercise{1}{Formes bilinéaires}{
         Soient les matrices :
 \[ A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 1 & 2 \end{pmatrix} \quad B = \begin{pmatrix} 1 & 0 & 4 \\ 0 & 1 & 1 \\ 4 & 1 & 0 \end{pmatrix} \]
@@ -544,16 +603,7 @@ Pour simplifier l'analyse de l'algorithme, on supposera ici plus précisément q
     }
 
 
-\exercise{3}{Forme bilinéaire $\to$ forme quadratique}{
-Soit la forme bilinéaire symétrique de $\mathbb{R}^3$ définie par :
-\[ b(u, v) = 2u_1v_1 + 4u_1v_2 + 4u_2v_1 + 8u_2v_2 + 3u_3v_3 \]
-\begin{enumerate}
-    \item Écrire la forme quadratique $q$ associée à $b$.
-    \item Écrire la matrice de $q$ dans la base canonique.
-\end{enumerate}
-}
-
-\exercise{4}{Forme quadratique sur $\mathbb{R}^3$}{
+\exercise{3}{Forme quadratique sur $\mathbb{R}^3$}{
 Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\mathbb{R}^3$ par :
 \[ q(x, y, z) = m(x^2 + y^2 + z^2) + 2(xy + yz - zx) \]
 \begin{enumerate}
@@ -564,13 +614,36 @@ Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\
 \end{enumerate}
 }
 
-    \subsection{Analyse}
-    \ndlr{À venir : exercice sur les séries entières/fonctions, avec CVU
-}
+    \subsection{Analyse : Séries de fonctions et séries entières}
+    \exercise{1}{Etude d'une série de fonctions}{
+        Pour $x \in I = [0, 1]$, $a \in \mathbb{R}$ et $n \geq 1$, on pose $u_n(x) = n^a x^n (1 - x)$.
+
+\begin{enumerate}
+    \item Étudier la convergence simple sur $I$ de la série de terme général $u_n$. On notera dans la suite $S$ la somme de la série.
+    \item Étudier la convergence normale sur $I$ de la série de terme général $u_n$.
+    \item On suppose dans cette question que $a = 0$. Calculer $S$ sur $[0, 1[$. En déduire que la convergence n'est pas uniforme sur $[0, 1]$.
+    \item On suppose $a > 0$. Démontrer que la convergence n'est pas uniforme sur $I$.
+\end{enumerate}
+    }
+
+    \textit{Tourner la page.}
+    \newpage
+
+    \exercise{2}{Développement en série entière et convergence}{
+        On considère la fonction $f : x \mapsto \ln(x^2 - 3x + 2)$.
+
+\begin{enumerate}
+    \item Quel est le domaine de définition de $f$ ?
+    \item Déterminer le développement en série entière en 0 de cette fonction, et préciser le rayon de convergence de cette série entière.
+    \item En déduire la valeur de $f^{(n)}(0)$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+    }
+
+
 
 \newpage
 \section{Jour 10}
-    \subsection{Algorithmique}
+    \subsection{Algorithmique : Tri de tableaux}
 
     Donner les algorithmes (dans le langage de votre choix) ainsi qu'une application sur le tableau $T = [7, 2, 6, 8, 4, 5, 1, 3]$ pour :
     \begin{itemize}
@@ -580,7 +653,7 @@ Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\
         \item le tri par tas.
     \end{itemize}
     
-    \subsection{Analyse}
+    \subsection{Analyse : Intégrales à paramètre}
 
     \exercise{1}{Question de cours}{
         Soit $f : \mathbb{R} \times [0, 1] \to \mathbb{R}$ une fonction de deux variables réelles.\\
@@ -599,7 +672,7 @@ Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\
         \end{enumerate}
     }
 
-    \subsection{Probabilités}
+    \subsection{Probabilités : Indépendance et covariance}
 
 \exercise{1}{Covariance et indépendance}{
     Soient $X$ et $Y$ deux variables aléatoires indépendantes. Montrer que $Cov(X, Y) = 0$. La réciproque est-elle vraie ? Justifier votre réponse.
@@ -624,7 +697,7 @@ Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\
 
 \newpage
 \section{Jour 11}
-    \subsection{Algèbre}
+    \subsection{Algèbre : Orthogonalité et dualité}
 
     \exercise{1}{Orthogonalité}{
         On munit $\mathbb{R}^3$ de son produit scalaire canonique. Soit $H$ le plan de $\mathbb{R}^3$ d'équation :
@@ -655,7 +728,7 @@ Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\
 \end{enumerate}
     }
 
-    \subsection{Algorithmique / Langage C}
+    \subsection{Algorithmique / Langage C : Manipulation de structures de données arborescentes}
     Considérons la structure donnée par le code suivant :
     \begin{lstlisting}[language=C]
 struct noeud ;
@@ -685,7 +758,7 @@ typedef struct liste_noeud liste_noeud ;
 
 \newpage
 \section{Jour 12}
-    \subsection{Algèbre}
+    \subsection{Algèbre : Formes quadratiques}
 
 
 \exercise{1}{Forme quadratique sur $\mathbb{R}_2[X]$}{
