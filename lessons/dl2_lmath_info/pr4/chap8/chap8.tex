@@ -23,7 +23,96 @@
 
 \docTitle{Chapitre 8 : Chaînes de Markov}
 
-\ndlr{À venir}
+\section{Processus stochastique et propriété de Markov}
+\definition{
+    Soit $(\Omega, \mathcal{P})$ un espace probabilisé et soit $E$ un espace dénombrable.\\
+    Une suite $(X_n)_{n \in \mathbb{N}}$ de variables aléatoires à valeurs dans $E$ est appelée un \textbf{processus stochastique} à valeurs dans $E$.
+}
+
+\example{
+    On peut appliquer ça à l'évolution du capital d'un joueur dans un casino, du stock de baguettes d'une boulangerie ou encore à la météo (soleil, pluie, nuageux, etc.).
+}
+
+\definition{
+    Une \textbf{chaîne de Markov} à valeurs dans $E$ est un processus stochastique à temps discret et à valeurs dans E tel que :
+    \[
+        \mathbb{P}(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = \mathbb{P}(X_{n+1} = j | X_n = i), \; \text{ avec } i,j \in E \forall k \in \{1, \ldots, n-1\} i_k \in E
+    \]
+}
+\ndlr{Vérifier la partie "avec..."}
+
+\example{
+    Soit $(\varepsilon_n)$ une suite de variables aléatoires indépendantes telles que $\mathbb{P}(\varepsilon_n = \pm 1) = \frac{1}{2}$.\\
+    $S_{n+1} = S_n + \varepsilon_{n} = a \in \mathbb{Z}$ est une chaîne de Markov.
+}
+
+\definition{
+    Une chaîne de Markov est dite \textbf{homogène} si :
+    \[
+        \mathbb{P}(X_{n+1} = j | X_n = i) = \mathbb{P}(X_1 = j | X_0 = i) := p_{ij} \; \forall n \in \mathbb{N}, i,j \in E
+    \]
+}
+\vocabulary{
+    On dit que $p_{ij}$ est la \textbf{probabilité de transition} entre l'état $i$ et $j$.
+}
+\remark{$\sum_{j \in E} p_{ij} = 1$ pour tout $i \in E$.}
+
+\section{Matrices de transition et probabilité $n$ pas}
+
+\definition{
+    Soit $E$ un ensemble fini.\\
+    On définit la \textbf{matrice de transition} $P = (p_{ij})_{i,j \in E}$.
+}
+
+\example{
+    Météo : $E = \{soleil, pluie\}$. On a :
+    \begin{itemize}
+        \item $P(X_1 = pluie | X_0 = soleil) = p_{sp}$
+        \item $P(X_1 = soleil | X_0 = pluie) = p_{ps}$
+        \item $P(X_1 = soleil | X_0 = soleil) = p_{ss}$
+        \item $P(X_1 = pluie | X_0 = pluie) = p_{pp}$
+    \end{itemize}
+    $P = \begin{pmatrix}p_{ss} & p_{sp} \\ p_{ps} & p_{pp}\end{pmatrix} = \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix}$.
+}
+
+\definition{
+    Une matrice $A=(a_{ij})_{i,j \in E}$ est dite \textbf{stochastique} si :
+    \[
+        \sum_{j \in E} a_{ij} = 1 \; \forall i \in E
+    \]
+}
+
+\definition{
+    On note $\mu_u$ la loi de $X_n$, \textit{i.e.} $\mu_u(k) = \mathbb{P}(X_n = k)$ et $\mu_n = (\mathbb{P}(X_n = k))_{k \in E}$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un ensemble fini.\\
+    Alors : $\mu_{u+1} = \mu_u P$
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\definition{
+    La \textbf{matrice de transition $n$ pas} est définie par $P^{(n)}_{ij} = \mathbb{P}(X_n = j | X_0 = i)$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E$ un ensemble fini.\\
+    $P^{(n)} = P^n \Leftrightarrow P^{(n)}_{ij} = P^n_{ij} \; \forall i,j \in E$
+}
+
+\ndlr{cf. Laurent pour la preuve}
+
+
+\theorem{Corollaire}{}{false}{
+    On a : $\mu_n = \mu_0 P^n$
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\example{
+    Considérons $P = \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix}$ et $\mu_0 = (1,0)$.\\
+    Alors : $\mu_1 = \mu_0 P = (0.8, 0.2)$, $\mu_2 = \mu_1 P = (0.68, 0.32)$
+}
 
 \newpage
 \tableofcontents
