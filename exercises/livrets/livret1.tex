@@ -1,0 +1,475 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{../../components/components}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info}
+\fancyhead[C]{Révisions de Pâques}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\newcommand{\doctitle}{Révisions pour les vacances de Pâques}
+
+\vspace*{\fill}
+
+\begin{center}
+    {\LARGE\textbf{\doctitle}}\\[0.6em]
+    {\Large Double licence 2 Mathématiques et Informatique  Fondamentale}\\[2em]
+    {\large Année universitaire 2025-2026}\\[0.25em]
+    {\large par \textit{Ewen Rodrigues de Oliveira}}
+\end{center}
+
+\vfill
+
+\noindent
+\textbf{Le livret peut être utilisé par les étudiants en licence simple, à condition de sauter les exercices d'informatique (respectivement de mathématiques). Il est constitué de douze jours de révisions, dont il n'est pas nécessaire de suivre l'ordre (avec certains plus légers que d'autres).}
+\medskip
+
+\noindent
+Ce livret propose des révisions sur les matières d'Éléments d'algorithmique, de Probabilités Discrètes, ainsi que d'Analyse et d'Algèbre \textit{(et un peu de langage C)}. Je n'ai pas créé ces exercices : j'ai surtout rassemblé des exercices intéressants issus d'annales et de feuilles de TD de l'\href{https://u-pariscite.fr/}{Université Paris Cité}.
+
+\medskip
+
+\noindent
+Le contenu n'est sans doute pas exhaustif. S'il y a une erreur, une coquille ou un énoncé ambigu, merci de me contacter pour que je puisse corriger rapidement.
+
+\medskip
+
+\noindent
+Si besoin d'un corrigé, vous pouvez aussi me contacter, mais pas avant le Jour J : il est possible que je ne l'aie pas encore rédigé. Je rappelle que je suis étudiant, il est possible (voire probable) que je ne fasse pas de corrigé exhaustif.
+
+\begin{flushright}
+\textbf{Bonnes vacances \faSmile}
+\end{flushright}
+
+\newpage
+
+\renewcommand{\arraystretch}{1.3}
+\section{Jour 1}
+
+\subsection{Algorithmique : Sous-tableau maximal}
+Dans cet exercice, $T$ désigne un tableau de $n$ entiers (positifs ou négatifs, sinon le problème a fort peu d'intérêt). Le problème du sous-tableau maximal consiste à déterminer les indices $i$ et $j$ (avec $i \le j$) maximisant la somme des éléments du sous-tableau $T[i:j]$ (c'est-à-dire de l'indice $i$ à l'indice $j - 1$ inclus). 
+
+Pour simplifier un peu l'écriture des algorithmes, on se contentera ici de calculer la somme du sous-tableau maximal (notée $sstm(T)$), et non les indices $i$ et $j$. Le but de cet exercice est de comparer plusieurs solutions à ce problème.
+
+\subsubsection{Approche naïve}
+
+\begin{enumerate}
+    \item On considère tout d'abord l'algorithme \texttt{sstm\_naif(T)} suivant :
+    
+\begin{lstlisting}
+def sstm_naif(T):
+    max_val = 0
+    for i in range(len(T)):
+        for j in range(i, len(T) + 1):
+            somme = sum(T[i:j])
+            if somme > max_val:
+                max_val = somme
+    return max_val
+\end{lstlisting}
+
+    Justifier sa correction et déterminer sa complexité en temps, en précisant quelles opérations élémentaires sont pertinentes pour évaluer cette complexité.
+
+    \item Modifier légèrement \texttt{sstm\_naif(T)} pour obtenir une complexité en temps strictement meilleure et une complexité en espace constante.
+\end{enumerate}
+
+\subsubsection{Recherche d'une solution de type « diviser pour régner »}
+
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item Supposons que $T = T_1 + T_2$ ; $sstm(T)$ dépend-elle uniquement de $sstm(T_1)$ et $sstm(T_2)$ ?
+    
+    \item Écrire un algorithme de complexité linéaire \texttt{sstm\_aux(T, deb, mil, fin)} calculant la somme maximale d'un sous-tableau $T[i:j]$ de $T$ avec $deb \le i \le mil < j \le fin$.
+    
+    \item En déduire un algorithme \texttt{sstm\_dpr(T, deb, fin)} de type « diviser pour régner » pour calculer $sstm(T[deb:fin])$.
+    
+    \item Soit $C(n)$ le nombre d'opérations élémentaires effectuées par \texttt{sstm\_dpr(T, 0, n)}. Quelle est la relation de récurrence naturellement satisfaite par $C(n)$ ? En déduire l'ordre de grandeur de $C(n)$ (sans démonstration).
+\end{enumerate}
+
+\subsubsection{Recherche d'une solution de type « programmation dynamique »}
+
+Pour tout indice $k \le n$, on considère les deux sommes suivantes :
+\begin{itemize}
+    \item $M_k$ la somme maximale de tous les sous-tableaux $T[i:j]$ avec $i \le j \le k$ (autrement dit, $M_k = sstm(T[:k])$), et
+    \item $S_k$ la somme maximale de tous les sous-tableaux $T[i:k]$ avec $i \le k$.
+\end{itemize}
+
+\begin{enumerate}
+    \setcounter{enumi}{6}
+    \item Exprimer récursivement $M_k$ et $S_k$ en fonction de $M_{k-1}$, $S_{k-1}$ et $T[k - 1]$.
+    
+    \item En déduire un algorithme \texttt{sstm\_dyn(T)} de complexité linéaire calculant $sstm(T)$.
+    
+    \item Justifier l'optimalité de \texttt{sstm\_dyn(T)}.
+\end{enumerate}
+
+\subsection{Algèbre : Espaces euclidiens}
+On munit $\mathbb{R}^4$ du produit scalaire usuel. On considère les vecteurs $u_1, u_2, u_3$ définis par leurs coordonnées dans la base canonique :
+\[ u_1 = \frac{1}{3}(1, 2, 2, 0) \quad u_2 = \frac{1}{3}(0, -2, 2, 1) \quad u_3 = \frac{1}{3}(2, -1, 0, -2) \]
+On note $F$ le sous-espace vectoriel de $\mathbb{R}^4$ engendré par les vecteurs $u_1, u_2, u_3$.
+
+\begin{enumerate}
+    \item Montrer que la famille de vecteurs $(u_1, u_2, u_3)$ est orthonormée.
+    \item Déterminer un vecteur $u_4$ tel que la famille de vecteurs $(u_1, u_2, u_3, u_4)$ soit orthonormale.
+    \item Exprimer le projecteur orthogonal $p_F$ sur $F$ dans la base $(u_1, u_2, u_3, u_4)$.
+    \item Déterminer les matrices de $p_F$ dans la base canonique et dans la base $(u_1, u_2, u_3, u_4)$.
+    \item Que peut-on dire de la matrice de passage $P$ de la base canonique à la base $(u_1, u_2, u_3, u_4)$ ?
+\end{enumerate}
+
+\subsection{Probabilités : Chaînes de Markov}
+\remark{Il s'agit ici de découvrir le chapitre des chaînes de Markov, qui n'arrive qu'à la rentrée mais est au programme de l'examen. Le cours est disponible \href{https://ewenrdo.fr/ressources?slug=probabilites-4-chapitre-8-chaines-de-markov}{sur ewenrdo.fr}.}
+
+\exercise{1}{Questions de cours}{
+\begin{itemize}
+    \item Qu'est-ce qu'un processus stochastique ?
+    \item Qu'est-ce qu'une chaîne de Markov ?
+    \item Qu'est-ce qu'une chaîne de Markov homogène ?
+    \item Qu'est-ce que la matrice de transition d'une chaîne de Markov ?
+\end{itemize}
+}
+
+\exercise{2}{Exemple (simple) d'application}{
+    On considère une chaîne de Markov à valeurs dans $E = \{soleil, pluie\}$, dont la matrice de transition est donnée par :
+    \[
+        P = \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix}
+    \]
+    où $p_{ss} = 0.8$, $p_{sp} = 0.2$, $p_{ps} = 0.4$ et $p_{pp} = 0.6$.
+    \begin{enumerate}
+        \item Interpréter les coefficients de la matrice de transition.
+        \item Si aujourd'hui il fait soleil, quelle est la probabilité qu'il fasse soleil dans deux jours ?
+        \item Si aujourd'hui il fait pluie, quelle est la probabilité qu'il fasse soleil dans trois jours ?
+    \end{enumerate}
+}
+
+\newpage
+
+\section{Jour 2}
+\subsection{Probabilités}
+
+\exercise{1}{Mario et Luigi}{
+    \begin{enumerate}
+        \item Soient $T_1$ une variable aléatoire géométrique sur $\mathbb{N}^*$ de paramètre $p \in ]0, 1[$ et $T_2$ une variable aléatoire géométrique sur $\mathbb{N}^*$ de paramètre $p' \in ]0, 1[$ dont on suppose qu'elles sont indépendantes.
+        \begin{enumerate}
+            \item[(a)] Pour tout $k \in \mathbb{N}$, calculer $\mathbb{P}(T_2 > k)$.
+            \item[(b)] Exprimer l'événement $\{ T_1 < T_2 \}$ à l'aide des événements $(\{ T_1 = k \})_{k \geq 1}$ et $(\{ T_2 > k \})_{k \geq 1}$.
+            \item[(c)] En déduire que \[ \mathbb{P}(T_1 < T_2) = \frac{p - pp'}{p+p'-pp'} \]
+        \end{enumerate}
+
+        \item Mario joue contre Luigi au jeu suivant.\\
+        Ils disposent d'une pièce équilibrée et de deux dés : l'un est équilibré, l'autre est biaisé et donne 6 avec probabilité $p$. On suppose que tous les lancers effectués au cours du jeu sont indépendants.\\
+        Mario lance d'abord la pièce. Si elle tombe sur pile, il prend le dé biaisé et Luigi le dé équilibré ; si elle tombe sur face, ils échangent les rôles.\\
+        Chacun lance ensuite son dé jusqu'à obtenir un 6. Le vainqueur est celui qui obtient un 6 strictement avant l'autre. Si les deux joueurs obtiennent un 6 au même tour, personne ne gagne.
+        \begin{enumerate}
+            \item[(a)] On note M l'événement "Mario gagne". On note aussi $U$ la variable aléatoire qui vaut 1 si la pièce tombe sur pile et 0 sinon. Enfin, on note $T_{eq}$ (resp. $T_{b}$) le nombre de lancers nécessaires pour obtenir un 6 avec le dé équilibré (resp. biaisé).\\
+            On admet alors que :
+            \[
+                M = (\{ U = 1 \} \cap \{ T_{b} < T_{eq} \}) \cup (\{ U = 0 \} \cap \{ T_{eq} < T_{b} \})
+            \]
+            Montrer que \[ \mathbb{P}(M \mid U = 1) = \frac{5p}{5p+1} \]
+            \item[(b)] Calculer la probabilité de Mario gagne.
+            \item[(c)] Sachant que Mario a gagné, quelle est la probabilité qu'il ait joué avec le dé biaisé ?
+        \end{enumerate}
+    \end{enumerate}
+}
+
+\exercise{2}{Loi de Poisson et transformations}{
+    Soit $X$ de loi de Poisson de paramètre $\lambda$.
+
+    \begin{enumerate}
+        \item[(a)] Calculer $E[Y]$, où $Y = X!$.
+        \item[(b)] Calculer $E[Z]$, où $Z = \dfrac{1}{1 + X}$.
+    \end{enumerate}
+}
+
+\subsection{Algèbre}
+\exercise{1}{Endomorphismes préservant l'orthogonalité}{
+    Soit $E$ un espace euclidien et $f \in \mathcal{L}(E)$ tel que
+\[ \forall x, y \in E, x \perp y \Rightarrow f(x) \perp f(y) \]
+Montrer qu'il existe $\lambda \in \mathbb{R}^+$ tel que
+\[ \forall x \in E, \|f(x)\| = \lambda \|x\| \]
+\textit{Indication : considérer une base orthonormée $(e_1, e_2, \dots, e_n)$, poser $\lambda_i = \|f(e_i)\|$, et calculer $\langle f(e_i + e_j), f(e_i - e_j) \rangle$}
+}
+
+\subsection{Algorithmique}
+
+\exercise{1}{Tas-max}{
+    On souhaite comparer deux algorithmes différents permettant de construire un tas-max contenant les éléments d’un tableau $T$ :
+\begin{itemize}
+    \item[(i)] l’algorithme vu en cours pour transformer un tableau en tas-max ;
+    \item[(ii)] l’algorithme consistant à insérer successivement $T[0], T[1], \dots$ dans un tas initialement vide.
+\end{itemize}
+
+\begin{enumerate}
+    \item Appliquer chacun des deux algorithmes à $T = [1, 2, 3, 4, 5, 6, 7]$ en indiquant précisément les comparaisons et les échanges (ne pas hésiter à passer à une représentation sous forme d’arbre).
+    
+    \item Plus généralement, que peut-on en déduire quant à la complexité dans le pire cas de la deuxième méthode ? Et quant à la complexité comparée des deux méthodes ?
+\end{enumerate}
+}
+
+\exercise{2}{Algorithmes liés aux tas}{
+    On considère un tableau d'entiers positifs $T$, sans aucune hypothèse sur l'ordre des éléments.
+    \begin{enumerate}
+        \item Ecrire un algorithme qui, étant donné un tas-max $H$, entasse correctement l'élément en $i$-ème position de $H$. Votre fonction aura pour prototype \texttt{entasser\_max(H, i)}.
+        \item Ecrire une fonction \texttt{creer\_tas\_max(T)} qui, étant donné un tableau $T$, construit un tas-max à partir de $T$.
+        \item Donner un algorithme pour extraire le maximum dans un tableau $T$, quelle est sa complexité ?
+    \end{enumerate}
+
+}
+
+\newpage
+\section{Jour 3}
+    \subsection{Analyse}
+
+    \exercise{1}{Cours}{
+        En précisant les hypothèses nécessaires à leur application, énoncer:
+        \begin{enumerate}
+            \item le théorème de dérivation des séries de fonctions, 
+            \item le théorème d'intégration des séries de fonctions.
+        \end{enumerate}
+    }
+
+    \exercise{2}{Une étude complète}{
+        Pour tout entier $n > 0$ et tout réel $x$ on pose :
+    \[ f_n(x) = \frac{\arctan(nx)}{n^2} , \]
+    et on considère $f(x) = \sum_{n \ge 1} f_n(x)$.
+
+    \begin{enumerate}
+        \item Déterminer le domaine de définition de $f$ et sa parité éventuelle.
+        \item Étudier la convergence normale de $f$ sur $\mathbb{R}$, préciser si $f$ est continue et quelles sont ses limites en $+\infty$ et en $-\infty$.
+        \item Montrer que $f$ est de classe $C^1$ sur $\mathbb{R}^*$. Montrer que $f'$ est décroissante sur $]0, +\infty[$.
+        \item Montrer que $f$ n'est pas dérivable en $0$.
+    \end{enumerate} 
+    }
+
+    \subsection{Probabilités}
+
+    
+    \exercise{1}{Indépendance et loi}{
+        On tire un dé équilibré à quatre faces, et l'on note $X$ le résultat du lancer : il s'agit d'une variable aléatoire à valeurs dans l'ensemble $\{1, 2, 3, 4\}$. On pose alors :
+\[ A := \{X \in \{1, 2\}\} , \quad B := \{X \in \{1, 3\}\} , \quad C := \{X \in \{2, 3\}\} \]
+
+        \begin{enumerate}
+            \item Les événements $A, B$ et $C$ sont-ils deux-à-deux indépendants ? Sont-ils mutuellement indépendants ?
+            \item On note $Y := \mathbf{1}_A + \mathbf{1}_B + \mathbf{1}_C$. Déterminer la loi de $Y$.
+        \end{enumerate}
+    }
+
+    \exercise{2}{Cartes à jouer}{
+        On considère un paquet contenant 20 cartes : 10 cartes rouges numérotées de 1 à 10 et 10 cartes noires numérotées de 1 à 10. On tire deux cartes successivement et sans remise.
+
+        \begin{enumerate}
+            \item Proposer un espace de probabilité pour cette expérience aléatoire.
+            \item Quelle est la probabilité que les deux cartes tirées soient de la même couleur ?
+            \item Quelle est la probabilité que les deux cartes tirées aient le même numéro ?
+            \item Quelle est la probabilité que la deuxième carte tirée ait un numéro strictement supérieur à la première carte tirée ?
+            \item Sachant que la deuxième carte tirée est rouge, quelle est la probabilité que la première carte tirée soit noire ?
+        \end{enumerate}
+    }
+
+\newpage
+\section{Jour 4}
+    \subsection{Analyse}
+    \exercise{1}{Formule de Cauchy}{
+        Soit $\sum_{n \ge 0} a_n z^n$ une série entière de rayon de convergence $R > 0$. On pose, pour tout complexe $z$ de module strictement inférieur à $R$,
+        \[ f(z) = \sum_{n \ge 0} a_n z^n. \]
+        Soit $r \in ]0, R[$. Pour un entier $k$ fixé, on pose $g_n(\theta) = a_n r^n e^{i(n-k)\theta}$ où $\theta \in \mathbb{R}$.
+
+        \begin{enumerate}
+            \item Montrer que la série de fonctions $\sum g_n$ converge normalement sur $\mathbb{R}$.
+            \item En déduire que
+            \[ 2\pi r^k a_k = \int_0^{2\pi} f(re^{i\theta})e^{-ik\theta} \, d\theta. \]
+            \item \textit{Application} : on suppose $R = +\infty$ et que $f$ est bornée sur $\mathbb{C}$. Montrer que $f$ est constante (ce résultat est appelé le \textit{théorème de Liouville}).
+        \end{enumerate}
+    }
+
+    \exercise{2}{Série de fonctions et équation différentielle}{
+        On considère la suite $(a_n)_{n \ge 0}$ définie par la récurrence :
+\[ a_1 = a_0 = 1 \quad , \quad (S) \quad (n+1)a_{n+1} = a_n + a_{n-1} \quad , \forall n \in \mathbb{N}^*. \]
+
+\begin{enumerate}
+    \item Montrer que $|a_n| \le 1$ pour tout $n \in \mathbb{N}$. \textit{Indication : on établira par récurrence la propriété $\mathcal{P}_n$ suivante, pour tout $n \ge 1$ :}
+    \[ (\mathcal{P}_n) \quad |a_n| \le 1 \quad \text{et} \quad |a_{n-1}| \le 1. \]
+    
+    \item Montrer que la série entière $\sum a_n x^n$ a un rayon de convergence $R$ supérieur ou égal à $1$.
+    
+    \item Soit $f : ]-R, R[ \to \mathbb{R}$ la fonction définie par $f(x) = \sum_{n=0}^{\infty} a_n x^n$. En utilisant la relation $(S)$, montrer que $f$ est une solution de l'équation différentielle
+    \[ (E) \quad y'(x) - (x+1)y(x) = 0. \]
+    
+    \item Calculer toutes les solutions de $(E)$. En déduire que $f$ est, sur l'intervalle $]-R, R[$, l'unique solution de $(E)$ telle que $f(0) = 1$. Exprimer $f$ comme le produit de deux fonctions exponentielles $f(x) = e^{g(x)} e^{h(x)}$, où $h$ et $g$ désignent des fonctions monomiales. (On rappelle qu'une fonction monomiale est une fonction de la forme $x \mapsto \alpha x^n$ avec $\alpha \in \mathbb{R}$ et $n \in \mathbb{N}$.)
+    
+    \item Déterminer la valeur exacte de $R$ et démontrer que
+    \[ a_n = \sum_{k \ge 0, l \ge 0, k+2l=n} \frac{1}{k! \, 2^l \, l!} \quad , \forall n \in \mathbb{N}. \]
+\end{enumerate}
+    }
+\noindent\textit{Tourner la page.}
+\newpage
+    \subsection{Probabilités}
+    \remark{On se concentre ici sur les fonctions de répartition et génératrices.}
+    \exercise{1}{Fonction génératrice et loi}{
+        Soit $X$ une variable aléatoire entière dont la fonction génératrice est donnée par $G_X(z) = \frac{1}{27}(2+z)^3$. Donner la loi de $X$.
+    }
+
+    \exercise{2}{Fonction de répartition et génératrice}{
+        Soit $X$ la variable aléatoire donnant le résultat d'un lancer de dé équilibré.
+
+    \begin{enumerate}
+        \item Calculer la fonction de répartition de $X$.
+        \item Calculer la fonction génératrice de $X$.
+        \item En déduire $\mathbb{E}(X)$.
+        \item Exprimer la fonction génératrice de $Y = 2X$ à partir de la fonction génératrice de $X$.
+    \end{enumerate}
+    }
+
+
+    \subsection{Algorithmique}
+    \exercise{1}{Algorithme sur les ABR}{
+        Exprimer dans le langage de votre choix des algorithmes optimaux (dont on justifiera le caractère optimal de la complexité) pour les problèmes suivants :
+        \begin{enumerate}
+            \item rechercher un élément dans un arbre binaire de recherche (ABR) ;
+            \item insérer un élément dans un ABR ;
+            \item vérifier si un arbre binaire est un ABR ;
+            \item supprimer un élément d'un ABR.
+        \end{enumerate}
+    }
+
+\newpage
+\section{Jour 5}
+    \subsection{Algèbre}
+    \exercise{1}{Une étude complète}{
+        On munit $\mathbb{R}^3$ de sa structure euclidienne usuelle, et de l'orientation donnée par la base canonique. Soit $X = \begin{pmatrix} x \\ y \\ z \end{pmatrix}$ un vecteur de $\mathbb{R}^3$. On considère la matrice
+\[ M_X = \frac{1}{4} \begin{pmatrix} 1 & -3 & x \\ -3 & 1 & y \\ \sqrt{6} & \sqrt{6} & z \end{pmatrix} \]
+et on appelle $u_X$ l'endomorphisme de $\mathbb{R}^3$ dont la matrice dans la base canonique est $M_X$.
+
+\begin{enumerate}
+    \item Déterminer à quelles conditions sur $X$ l'endomorphisme $u_X$ est une isométrie de $\mathbb{R}^3$.
+    \item Montrer que les seuls vecteurs satisfaisant ces conditions sont $X_1 = \begin{pmatrix} \sqrt{6} \\ \sqrt{6} \\ 2 \end{pmatrix}$ et $X_2 = -X_1$.
+    \item On suppose dans cette question que $X = X_2 = -X_1$. Déterminer la nature de l'isométrie $u_{X_2}$ et les caractéristiques géométriques de cette isométrie.
+\end{enumerate}
+    }
+
+    \exercise{2}{Isométries en dimension 3}{
+        Soit $E$ un espace euclidien orienté de dimension 3, muni d'une base orthonormée directe $\mathcal{B} = (i, j, k)$. Après avoir prouvé que ce sont des isométries, déterminer les éléments caractéristiques des endomorphismes de $E$ déterminés par leurs matrices dans la base $\mathcal{B}$, données par :
+\[ 
+A = \frac{1}{3} \begin{pmatrix} 2 & 2 & 1 \\ 1 & -2 & 2 \\ 2 & -1 & -2 \end{pmatrix} 
+\quad 
+B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmatrix} 
+\]
+    }
+
+    \subsection{Probabilités}
+    \exercise{1}{Paris Cité en sueur}{Le nombre $X$ de cyberattaques quotidiennes ciblant l'université Paris Cité suit une loi Poisson(10). Le service informatique peut sans peine lutter contre une dizaine d'attaques, mais à partir de 30 attaques, il n'y arrive plus.
+\begin{enumerate}
+    \item En utilisant rigoureusement l'inégalité de Markov, estimer la probabilité pour qu'au moins 30 attaques surviennent dans la même journée.
+    \item À l'aide de l'intégalité de Markov, démontrer l'inégalité de Bienaymé-Tchebychev. Vous en préciserez les hypothèses nécessaires et suffisantes.
+    \item Faire la même estimation, mais avec l'inégalité de Bienaymé-Tchebychev.
+\end{enumerate}}
+
+\exercise{2}{Loi uniforme}{On considère une variable aléatoire réelle $X$ de loi uniforme sur $\{1, \dots, 9\}$.
+\begin{enumerate}
+    \item Calculer l'espérance et la variance de $X$.
+    \item Majorer la quantité $P(|X - 5| > 3)$ grâce à l'inégalité de Bienaymé Tchebychev. Que vaut en fait cette probabilité ? Commentez.
+\end{enumerate}}
+
+\exercise{3}{C'est pas la taille qui compte}{
+    On s’intéresse à la taille en centimètres des individus d’une population donnée. On suppose que cette taille suit une certaine loi de probabilité sur les entiers, que l’espérance sous cette probabilité vaut $170$ et que la variance est de $10$. \\
+    On tire un individu au hasard dans la population et l’on note $X$ sa taille.
+    \begin{enumerate}
+        \item En utilisant une inégalité du cours, majorer $\mathbb{P}(X \geq 180)$.
+        \item En utilisant une inégalité du cours, minorer $\mathbb{P}(165 \leq X \leq 175)$ et $\mathbb{P}(160 \leq X \leq 175)$.
+    \end{enumerate}
+}
+
+    \subsection{Algorithmique}
+    \exercise{1}{Double hache}{
+        Une stratégie de hachage, à adressage ouvert, est le \textit{double hachage} : au lieu d'avancer case par case, on utilise un second pas $h_2(k)$ qui dépend de la clé. On sonde successivement les cases
+\[ h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m \quad \text{pour } i = 0, 1, 2, \dots \]
+
+\begin{enumerate}
+    \item Insérer successivement les clés 2, 7, 8, 23 dans une table $T$ de taille $m = 5$, initialement vide, en utilisant le double hachage avec
+    \[ h_1(k) = k \bmod m \quad \text{et} \quad h_2(k) = 1 + (k \bmod (m - 1)). \]
+    Détailler les sondages effectués lorsqu'il y a collision.
+
+    \item Pour continuer à insérer des éléments dans le tableau, redimensionnez-le en doublant sa taille, puis insérez-en 10, 4, 83 et 28 à l'aide des mêmes fonctions avec $m = 10$.
+
+    \item Proposez une condition sur $m$ et $h_2$ qui garantisse que le sondage à double hachage examine toutes les cases.
+\end{enumerate}
+    }
+\newpage
+\section{Jour 6}
+    ASF4 : focus isométries dim 3 (suite)
+    ASF4 : intégrales d'un paramètre + exo partiels
+    PR4 : questions de cours et Chaînes de Markov (exercices simples)
+
+\newpage
+\section{Jour 7}
+    EA4 : exo2 partiel 2023-2024
+    ASF4 : intégrales d'un paramètre, intégrales doubles (début)
+    LC4 : Rapide check I/O + mémoire
+
+
+\newpage
+\section{Jour 8}
+    ASF4 : intégrales doubles + Formes quadratiques (Remonté - Réduction de Gauss)
+    PR4 : exercices TD5 et TD4 (synthèse)
+
+\newpage
+\section{Jour 9}
+    ASF4 : Formes quadratiques et bilinéaires (exercices partiels)
+    ASF4 : Séries entières et de fonctions (révision rapide)
+    EA4 : Sujet partiel (entraînement)
+
+\newpage
+\section{Jour 10}
+    \subsection{Algorithmique}
+    \ndlr{À venir : questions de cours}
+    \subsection{Algèbre}
+    \ndlr{À venir : exercices d'examen sur les intégrales d'un paramètre et doubles}
+    \subsection{Probabilités}
+
+\exercise{1}{Covariance et indépendance}{
+    Soient $X$ et $Y$ deux variables aléatoires indépendantes. Montrer que $Cov(X, Y) = 0$. La réciproque est-elle vraie ? Justifier votre réponse.
+}
+\exercise{2}{Loi géométrique}{
+    Soit $p \in ]0, 1[$. Soient $X \sim \mathcal{G}(p)$ et $Y \sim \mathcal{G}(p)$ deux variables aléatoires indépendantes de loi géométrique de paramètre $p$ sur $\mathbb{N}$ (et pas $\mathbb{N}^*$).
+    \begin{enumerate}
+        \item Calculer $E(X)$ et $Var(X)$.
+        \item Calculer $Cov(X, Y)$.
+    \end{enumerate}
+}
+
+\exercise{3}{Formules de cours}{
+    Énoncer rigoureusement, hypothèses comprises, les formules suivantes :
+    \begin{enumerate}
+        \item Formule de Bayes
+        \item Formule des probabilités totales
+        \item Formule de transfert
+        \item Crible de Poincaré (ou inclusion-exclusion)
+    \end{enumerate}
+}
+
+\newpage
+\section{Jour 11}
+    ASF4 : partiel dualité, exercices orthogonalité
+    EA4 : exercices TD restants
+    LC4 : Révision express structures chaînées
+
+\newpage
+\section{Jour 12}
+    ASF4 : Focus final formes quadratiques et Dualité
+    PR4 : exercices partiels (tous chapitres)
+    Relecture globale des fiches de cours
+
+
+
+\end{document}
