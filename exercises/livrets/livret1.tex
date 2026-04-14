@@ -5,6 +5,7 @@
 \usepackage{colortbl}
 \usepackage{array}
 \usepackage{hyperref}
+\usepackage{stmaryrd}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -47,7 +48,7 @@ Le contenu n'est sans doute pas exhaustif. S'il y a une erreur, une coquille ou 
 \medskip
 
 \noindent
-Si besoin d'un corrigé, vous pouvez aussi me contacter, mais pas avant le Jour J : il est possible que je ne l'aie pas encore rédigé. Je rappelle que je suis étudiant, il est possible (voire probable) que je ne fasse pas de corrigé exhaustif.
+Si besoin d'un corrigé, vous pouvez aussi me contacter, mais pas avant le Jour J : il est possible que je ne l'aie pas encore rédigé. Je rappelle que je suis étudiant, il est possible (voire probable) que je ne fasse pas de corrigé exhaustif lorsque je n'arrive pas moi-même à résoudre un exercice. \textbf{Réciproquement, si vous avez un corrigé à proposer pour un exercice, n'hésitez pas à me le faire parvenir !}
 
 \begin{flushright}
 \textbf{Bonnes vacances \faSmile}
@@ -128,7 +129,7 @@ On note $F$ le sous-espace vectoriel de $\mathbb{R}^4$ engendré par les vecteur
 \end{enumerate}
 
 \subsection{Probabilités : Chaînes de Markov}
-\remark{Il s'agit ici de découvrir le chapitre des chaînes de Markov, qui n'arrive qu'à la rentrée mais est au programme de l'examen. Le cours est disponible \href{https://ewenrdo.fr/ressources?slug=probabilites-4-chapitre-8-chaines-de-markov}{sur ewenrdo.fr}.}
+\remark{Il s'agit ici de découvrir le chapitre des chaînes de Markov, qui n'arrive qu'à la rentrée mais est au programme de l'examen. Le cours est disponible \href{https://ewenrdo.fr/ressources?slug=probabilites-4-chapitre-8-chaines-de-markov}{sur ewenrdo.fr/ressources}.}
 
 \exercise{1}{Questions de cours}{
 \begin{itemize}
@@ -407,34 +408,197 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
     }
 \newpage
 \section{Jour 6}
-    ASF4 : focus isométries dim 3 (suite)
     ASF4 : intégrales d'un paramètre + exo partiels
-    PR4 : questions de cours et Chaînes de Markov (exercices simples)
+
+    \subsection{Probabilités}
+
+    \exercise{1}{Chaînes de Markov et matrice de transition}{
+        Soit $E = \{1, 2, 3\}$ et $P$ la matrice de transition suivante :
+        \[
+            P = \begin{pmatrix} 0.5 & 0.3 & 0.2 \\ 0.1 & 0.6 & 0.3 \\ 0.4 & 0.4 & 0.2 \end{pmatrix}
+        \]
+        On considère une chaîne de Markov homogène à valeurs dans $E$ dont la matrice de transition est $P$.
+
+        \begin{enumerate}
+            \item Si la chaîne commence à l'état $1$, quelle est la probabilité qu'elle soit à l'état $2$ au bout de deux étapes ?
+            \item Si la chaîne commence à l'état $2$, quelle est la probabilité qu'elle soit à l'état $3$ au bout de trois étapes ?
+            \item Si la chaîne commence à l'état $3$, quelle est la probabilité qu'elle soit à l'état $1$ au bout de quatre étapes ?
+        \end{enumerate}
+    }
+
+    \subsection{Analyse}
+
+    \exercise{1}{Première approche aux intégrales d'un paramètre}{
+        Soit $f : \mathbb{R} \to \mathbb{R}$ la fonction définie par $f(x) = \frac{1}{\pi} \int_{0}^{\pi} \cos(x \sin t) dt$
+
+        \begin{enumerate}
+            \item Montrer que la fonction $f$ est de classe $C^1$. Pour tout nombre réel $x$, exprimer $f'(x)$ comme intégrale à paramètre.
+            \item Montrer que la fonction $f$ est de classe $C^2$.
+            \item Montrer que $f$ est solution de l'équation différentielle $xy'' + y' + xy = 0$.
+        \end{enumerate}
+    }
+
+    \exercise{2}{Étude de la fonction Gamma}{
+        \begin{enumerate}
+        \item Montrer que pour tout réel $x > 0$, l'intégrale impropre $\Gamma(x) = \int_{0}^{+\infty} e^{-t} t^{x-1} dt$ est convergente.
+        \item Montrer que pour tout $x > 0$, on a $\Gamma(x+1) = x\Gamma(x)$ ; en déduire la valeur $\Gamma(n)$ pour $n$ entier strictement positif.
+        \item Montrer que la fonction $\Gamma$ est de classe $C^2$ et convexe. En déduire que $\Gamma$ atteint son minimum en un point de l'intervalle $]1, 2[$.
+        \item Montrer que $\lim_{x \to 0} (x\Gamma(x)) = 1$ et dessiner l'allure du graphe de $\Gamma$.
+        \item Montrer que pour tout réel $x > 0$, l'intégrale impropre $\Gamma(x) = \int_{0}^{+\infty} e^{-t} t^{x-1} dt$ est convergente.
+        \item Montrer que pour tout $x > 0$, on a $\Gamma(x+1) = x\Gamma(x)$ ; en déduire la valeur $\Gamma(n)$ pour $n$ entier strictement positif.
+        \item Montrer que la fonction $\Gamma$ est de classe $C^2$ et convexe. En déduire que $\Gamma$ atteint son minimum en un point de l'intervalle $]1, 2[$.
+        \item Montrer que $\lim_{x \to 0} (x\Gamma(x)) = 1$ et dessiner l'allure du graphe de $\Gamma$.
+        \end{enumerate}
+    }
 
 \newpage
 \section{Jour 7}
-    EA4 : exo2 partiel 2023-2024
-    ASF4 : intégrales d'un paramètre, intégrales doubles (début)
-    LC4 : Rapide check I/O + mémoire
+
+    \subsection{Algorithmique}
+
+Le tri du bibliothécaire est un tri inspiré du tri par insertion, et d'une pratique courante pour quiconque gère une bibliothèque : laisser des espaces libres sur chaque étagère pour pouvoir insérer de nouveaux livres sans avoir à décaler d'autres livres que ceux initialement présents sur la même étagère ; bien sûr, au fur et à mesure des ajouts, il devient nécessaire d'acheter de nouvelles bibliothèques, et de répartir à nouveau les livres sur l'ensemble des étagères disponibles pour recréer des espaces sur chacune.
+
+Considérons un tableau $T$, dont on supposera par souci de simplification que la longueur $n$ est une puissance de 2, et que les éléments sont des entiers tous distincts.
+
+\begin{enumerate}
+    \item Rappeler quelle est la complexité, au pire, au mieux et en moyenne, de la $i^e$ étape du tri par insertion de $T$.
+\end{enumerate}
+
+Pour améliorer cette complexité, l'algorithme de tri du bibliothécaire construit, à partir de $T$, un tableau $B$ de longueur $\alpha n$, avec $\alpha > 1$, contenant les $n$ éléments de $T$ triés en ordre croissant, et $(\alpha-1)n$ cases vides réparties dans tout le tableau. L'algorithme procède en plusieurs tours, dont le $k^e$ a pour but d'achever le tri des $2^k$ premiers éléments de $T$. Chacun de ces tours comprend deux phases :
+\begin{itemize}
+    \item[(a)] un tableau $B_k$ (suffisamment grand) est initialisé, à partir du tableau $B_{k-1}$ obtenu au tour précédent (où par convention $B_0 = [T[0]]$), avec les $2^{k-1}$ premiers éléments de $T$ triés en ordre croissant et espacés aussi régulièrement que possible ;
+    \item[(b)] chacun des $2^{k-1}$ éléments suivants de $T$ est inséré dans $B_k$, en décalant si besoin (vers la droite) certains des éléments déjà présents si la case où l'élément doit s'insérer n'est pas vide.
+\end{itemize}
+
+Pour simplifier l'analyse de l'algorithme, on supposera ici plus précisément que la phase (a) initialise $B_k$ en laissant exactement deux cases libres avant chaque élément, par exemple pour $k=3$ et $B_2$ contenant les $2^2=4$ éléments 17, 32, 37 et 53, on initialise $B_3$ à :
+
+\begin{center}
+    \texttt{\underline{\quad} \underline{\quad} 17 \underline{\quad} \underline{\quad} 32 \underline{\quad} \underline{\quad} 37 \underline{\quad} \underline{\quad} 53 \ldots}
+\end{center}
+
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item Simuler le tri du bibliothécaire pour le tableau $T = [7, 2, 6, 8, 4, 5, 1, 3]$.
+    \item Quelle doit être au minimum, en fonction de $k$, la taille du tableau $B_k$ pour que la phase (b) puisse toujours être réalisée sans débordement ? En particulier, quelle est la taille du tableau résultat $B$ ?
+    \item Écrire une fonction \texttt{disperse(B, k)} aussi efficace que possible permettant de réaliser la phase (a) de la $k^e$ étape en modifiant en place le contenu du tableau $B$ passé en paramètre.
+    \item Quelle est la complexité en temps de \texttt{disperse(B, k)} ? Quelle est donc la complexité cumulée des phases (a) de toutes les étapes du tri ?
+    \item Écrire une fonction \texttt{cherche(x, B, fin)} aussi efficace que possible permettant de déterminer la position à laquelle l'élément $x$ doit être inséré dans $B$, en supposant que la dernière case remplie de $B$ est en position $fin-1$. Si deux cases vides sont possibles, on choisira la première.
+    \item Quelle est la complexité de \texttt{cherche(x, B, fin)} ? Quelle est donc la complexité cumulée de toutes les recherches effectuées lors du tri ?
+    \item Écrire une fonction \texttt{insere(x, B, i)} aussi efficace que possible qui insère l'élément $x$ à la position $i$ dans $B$ en décalant des éléments vers la droite si nécessaire.
+    \item Décrire explicitement l'algorithme \texttt{triBibliothecaire(T)} à l'aide des fonctions précédentes.
+    \item Quelle est dans le meilleur cas la complexité de \texttt{insere(x, B, i)} ? Quelle est la complexité cumulée de toutes les insertions ? Quelle est donc la complexité dans le meilleur cas de l'algorithme ? Justifier que cette borne est atteinte.
+    \item Quelle est dans le pire cas la complexité de \texttt{insere(x, B, i)} ? Quelle est la complexité cumulée de toutes les insertions ? Quelle est donc la complexité dans le pire cas de l'algorithme ? Justifier que cette borne est atteinte.
+\end{enumerate}
+    \subsection{Analyse}
 
 
+    \exercise{1}{Intégrale d'un paramètre et fonctions trigonométriques}{
+        On pose, pour $x \in \mathbb{R}$,
+        \[ F(x) = \int_{0}^{+\infty} \frac{\sin(xt)}{t} e^{-t} dt \]
+
+        \begin{enumerate}
+            \item Justifier que $F$ est bien définie sur $\mathbb{R}$.
+            \item Montrer que la fonction $F$ est de classe $C^1$. Pour tout nombre réel $x$, calculer $F'(x)$.
+            \item En déduire une expression explicite de $F(x)$.
+        \end{enumerate}
+    }
+
+    \subsection{Langage C}
+    Considérons deux fichiers "data.txt" contenant une liste de nombres entiers, un par ligne, et "result.txt", \textit{a priori} vide.\\
+    Écrire un programme en langage C qui :
+    \begin{itemize}
+        \item lit ce fichier,
+        \item calcule la somme de tous les nombres,
+        \item affiche le résultat dans le terminal,
+        \item puis écrit le résultat dans le fichier "result.txt".
+    \end{itemize}
+    Assurez-vous que votre programme gère correctement les erreurs, telles que l'absence du fichier "data.txt" ou des données non valides.
 \newpage
 \section{Jour 8}
-    ASF4 : intégrales doubles + Formes quadratiques (Remonté - Réduction de Gauss)
-    PR4 : exercices TD5 et TD4 (synthèse)
+
+    \subsection{Algèbre}
+    \ndlr{À venir : exercice d'approche sur les formes bilinéaires et quadratiques.}
+
+    \subsection{Analyse}
+    \ndlr{À venir : exercice sur les intégrales doubles.}
+
+    \subsection{Probabilités}
+    \ndlr{À venir : exercice d'examen sur les variables aléatoires et/ou les probabilités conditionnelles.}
 
 \newpage
 \section{Jour 9}
-    ASF4 : Formes quadratiques et bilinéaires (exercices partiels)
-    ASF4 : Séries entières et de fonctions (révision rapide)
-    EA4 : Sujet partiel (entraînement)
+    \subsection{Algèbre}
+    \exercise{1}{Formes bilinéaires}{
+        Soient les matrices :
+\[ A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 1 & 2 \end{pmatrix} \quad B = \begin{pmatrix} 1 & 0 & 4 \\ 0 & 1 & 1 \\ 4 & 1 & 0 \end{pmatrix} \]
+Écrire l'expression de la forme bilinéaire symétrique sur $\mathbb{R}^3$ associée dans la base canonique à chacune de ces matrices.
+    }
+    
+    \exercise{2}{Forme quadratique à partir d'une forme bilinéaire}{
+        Soit la forme bilinéaire symétrique de $\mathbb{R}^3$ définie par :
+\[ b(u, v) = 2u_1v_1 + 4u_1v_2 + 4u_2v_1 + 8u_2v_2 + 3u_3v_3 \]
+\begin{enumerate}
+    \item Écrire la forme quadratique $q$ associée à $b$.
+    \item Écrire la matrice de $q$ dans la base canonique.
+\end{enumerate}
+    }
+
+
+\exercise{3}{Forme bilinéaire $\to$ forme quadratique}{
+Soit la forme bilinéaire symétrique de $\mathbb{R}^3$ définie par :
+\[ b(u, v) = 2u_1v_1 + 4u_1v_2 + 4u_2v_1 + 8u_2v_2 + 3u_3v_3 \]
+\begin{enumerate}
+    \item Écrire la forme quadratique $q$ associée à $b$.
+    \item Écrire la matrice de $q$ dans la base canonique.
+\end{enumerate}
+}
+
+\exercise{4}{Forme quadratique sur $\mathbb{R}^3$}{
+Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\mathbb{R}^3$ par :
+\[ q(x, y, z) = m(x^2 + y^2 + z^2) + 2(xy + yz - zx) \]
+\begin{enumerate}
+    \item Quelle est sa forme polaire ?
+    \item Quelle est sa matrice dans la base canonique ?
+    \item Quel est son rang ? Pour quelles valeurs de $m$ est-elle dégénérée ?
+    \item Lorsque $q$ est dégénérée, trouver une base de son noyau.
+\end{enumerate}
+}
+
+    \subsection{Analyse}
+    \ndlr{À venir : exercice sur les séries entières/fonctions, avec CVU
+}
 
 \newpage
 \section{Jour 10}
     \subsection{Algorithmique}
-    \ndlr{À venir : questions de cours}
-    \subsection{Algèbre}
-    \ndlr{À venir : exercices d'examen sur les intégrales d'un paramètre et doubles}
+
+    Donner les algorithmes (dans le langage de votre choix) ainsi qu'une application sur le tableau $T = [7, 2, 6, 8, 4, 5, 1, 3]$ pour :
+    \begin{itemize}
+        \item le tri par insertion,
+        \item le tri rapide,
+        \item le tri par sélection,
+        \item le tri par tas.
+    \end{itemize}
+    
+    \subsection{Analyse}
+
+    \exercise{1}{Question de cours}{
+        Soit $f : \mathbb{R} \times [0, 1] \to \mathbb{R}$ une fonction de deux variables réelles.\\
+        Énoncer une condition suffisante pour que la fonction $x \mapsto F(x) = \displaystyle\int_{0}^{1} f(x,t) dt$ soit bien définie et continue sur $\mathbb{R}$.
+    }
+
+    \exercise{2}{Continuité, différentiabilité et intégrale d'un paramètre}{
+        Considérons la fonction $f : \mathbb{R}^2 \to \mathbb{R}$ définie par :
+        \[ f(x,y) = \frac{y^4}{x^2 + y^2} \text{ si } (x,y) \neq (0,0) \text{ et } f(0,0) = 0 \]
+
+        \begin{enumerate}
+            \item Montrer que $f$ est continue sur $\mathbb{R}^2$.
+            \item Montrer que $f$ admet des dérivées partielles sur $\mathbb{R}^2$.
+            \item Montrer que $f$ est $C^1$ sur $\mathbb{R}^2$.
+            \item On considère la fonction $F(x) = \displaystyle\int_{0}^{1} f(x,y) dy$. Montrer que $F$ est de classe $C^1$ sur $\mathbb{R}$ et donner une expression de sa dérivée sous la forme d'une intégrale.
+        \end{enumerate}
+    }
+
     \subsection{Probabilités}
 
 \exercise{1}{Covariance et indépendance}{
@@ -460,16 +624,166 @@ B = \frac{1}{9} \begin{pmatrix} 7 & 4 & 4 \\ -4 & 8 & -1 \\ 4 & 1 & -8 \end{pmat
 
 \newpage
 \section{Jour 11}
-    ASF4 : partiel dualité, exercices orthogonalité
-    EA4 : exercices TD restants
-    LC4 : Révision express structures chaînées
+    \subsection{Algèbre}
+
+    \exercise{1}{Orthogonalité}{
+        On munit $\mathbb{R}^3$ de son produit scalaire canonique. Soit $H$ le plan de $\mathbb{R}^3$ d'équation :
+\[ 2x + y - z = 0 \]
+
+\begin{enumerate}
+    \item Donner les coordonnées d'un vecteur non nul et orthogonal de $H$.
+    \item Déterminer les coordonnées $\begin{pmatrix} x \\ y \\ z \end{pmatrix}$ du projeté orthogonal sur $H$ d'un vecteur $\begin{pmatrix} a \\ b \\ c \end{pmatrix}$.
+    \item Donner la matrice dans la base canonique de la projection orthogonale sur $H$.
+    \item Déterminer une base orthonormée de $H$.
+\end{enumerate}
+    }
+
+    \exercise{2}{Polynômes d'interpolation et dualité}{
+        Soient $E = \mathbb{R}_n[X]$. On se donne une famille de $n+1$ réels $(a_0, \dots, a_n)$ deux à deux distincts. On définit pour $k \in \{0, \dots, n\}$ la forme linéaire $f_k : E \to \mathbb{R}$ par $f_k(P) = P(a_k)$, pour tout $P \in E$.
+
+\begin{enumerate}
+    \item En utilisant le résultat de l'exercice 6, montrer que $(f_k)_{0 \le k \le n}$ est une base de $E^*$.
+    \item Déterminer la base dont elle est duale. \textit{Indication : on pourra introduire les polynômes d'interpolation de Lagrange définis par :}
+    \[ L_k(X) = \prod_{\substack{0 \le j \le n \\ j \neq k}} \frac{X - a_j}{a_k - a_j} \]
+    \item En déduire que tout polynôme de degré inférieur ou égal à $n$ est déterminé par sa valeur en $n+1$ points distincts de $\mathbb{R}$.
+    \item \textbf{Exemple d'application.} On pose $E = \mathbb{R}_3[X]$, et on considère la famille $f = (f_0, f_1, f_2, f_3)$ d'éléments de $E^*$ définie par :
+    \[ \forall i \in \{0, 1, 2, 3\} \quad \forall P \in E \quad f_i(P) = P(i). \]
+    \begin{enumerate}
+        \item Montrer que $f$ est une base de $E^*$.
+        \item Déterminer la base antéduale de $f$.
+    \end{enumerate}
+\end{enumerate}
+    }
+
+    \subsection{Algorithmique / Langage C}
+    Considérons la structure donnée par le code suivant :
+    \begin{lstlisting}[language=C]
+struct noeud ;
+struct liste_noeud ;
+struct noeud {
+    bool est_dossier ;
+    char nom [100];
+    struct noeud * pere ;
+    struct noeud * racine ; // convention : racine d'un arbre = son propre père
+    struct liste_noeud * fils ;
+};
+
+struct liste_noeud {
+    struct noeud * no ;
+    struct liste_noeud * succ ;
+};
+
+typedef struct noeud noeud ;
+typedef struct liste_noeud liste_noeud ;
+\end{lstlisting}
+
+À partir de cette structure, créer les deux fonctions suivantes avec une complexité optimale, dont on justifiera la complexité :
+\begin{itemize}
+    \item \texttt{noeud* delete\_noeud(noeud* n)} : cette fonction supprime le noeud pointé par $n$ et tous ses descendants, et retourne un pointeur vers le père du noeud supprimé (ou NULL si le noeud supprimé est la racine).
+    \item \texttt{noeud* move\_noeud(noeud* n, noeud* new\_pere)} : cette fonction déplace le noeud pointé par $n$ et tous ses descendants pour les faire devenir des fils du noeud pointé par $new\_pere$. La fonction retourne un pointeur vers le père du noeud déplacé avant le déplacement (ou NULL si le noeud déplacé est la racine).
+\end{itemize}
 
 \newpage
 \section{Jour 12}
-    ASF4 : Focus final formes quadratiques et Dualité
-    PR4 : exercices partiels (tous chapitres)
-    Relecture globale des fiches de cours
+    \subsection{Algèbre}
 
 
+\exercise{1}{Forme quadratique sur $\mathbb{R}_2[X]$}{
+Soit $E = \mathbb{R}_2[X]$. On considère l'application $q : E \to \mathbb{R}$ définie par :
+\[ q(P) = \int_{0}^{1} P(x)^2 \, dx \]
+\begin{enumerate}
+    \item Montrer que $q$ est une forme quadratique. Déterminer sa forme polaire et sa matrice dans la base $(1, X, X^2)$.
+    \item Soient les polynômes :
+    \[ P_1 = 1 \quad P_2 = X - \frac{1}{2} \quad P_3 = \frac{1}{6} - X + X^2 \]
+    Montrer que $(P_1, P_2, P_3)$ est une base de $E$. Donner la matrice de $q$ dans cette base et montrer que $q$ est non dégénérée.
+\end{enumerate}
+}
+
+\exercise{2}{Base orthogonale}{
+Soit $q$ la forme quadratique sur $\mathbb{R}^3$ définie par :
+\[ q(x, y, z) = x^2 + 3y^2 + z^2 - 2xy - 2xz + 2yz \]
+\begin{enumerate}
+    \item Écrire la forme polaire de $q$ et la matrice de $q$ dans la base canonique.
+    \item Calculer le rang de $q$ et déterminer son noyau.
+    \item Trouver une base orthogonale pour $q$. Donner la matrice de $q$ dans cette base.
+    \item Mêmes questions pour $q(x, y, z) = x^2 + 4y^2 + z^2 - 4xy + 4xz - 2yz$.
+\end{enumerate}
+}
+    \subsection{Probabilités}
+
+Toutes les variables aléatoires introduites ci-après sont définies sur un même espace probabilisé $(\Omega, \mathcal{A}, \mathbb{P})$. Soit $m \in \mathbb{N}^*$ et soit $q \in ]0,1[$. On rappelle que la variable aléatoire $X$ suit la loi binomiale de premier paramètre $m$ et de second paramètre $q$ si :
+\begin{itemize}
+    \item $X(\Omega) = \llbracket 0,m \rrbracket$
+    \item $\forall k \in \llbracket 0,m \rrbracket,\ \mathbb{P}(X = k) = \binom{m}{k} q^k (1-q)^{m-k}$
+\end{itemize}
+
+On rappelle que, lorsqu'on répète $m$ fois, et de façon indépendante, la même expérience de Bernoulli dont la probabilité de succès vaut $q$, alors la loi du nombre de succès obtenus est la loi binomiale de premier paramètre $m$ et de second paramètre $q$.
+
+On rappelle aussi que si $B$ est un événement de probabilité non nulle et si $A$ est un événement quelconque, on note $\mathbb{P}(A \mid B)$ la probabilité de « $A$ sachant $B$ ».
+
+\begin{enumerate}
+    \item \textbf{Préliminaire : une suite arithmético-géométrique}
+
+    Dans tout l'exercice, $(p_n)_{n \in \mathbb{N}^*}$ désigne la suite définie par :
+    \[
+        p_1 = \frac{1}{6}, \qquad \forall n \in \mathbb{N}^*,\ p_{n+1} = \frac{5}{6}p_n + \frac{1}{6}.
+    \]
+    
+    Déterminer, pour tout entier naturel $n$ non nul, une expression explicite de $p_n$ en fonction de $n$.
+
+    \item Soit $N \in \mathbb{N}^*$. Un joueur dispose de $N$ dés classiques à six faces. Il effectue un premier lancer des $N$ dés. À l'issue de ce premier lancer, il met de côté les dés ayant donné 6 et relance les autres (s'il en reste). Il continue ainsi avec pour objectif que tous les dés aient donné 6. Pour tout $\omega \in \Omega$, univers des possibles qu'on ne cherchera pas à expliciter, on note $S_n(\omega)$ le nombre total de dés ayant, après $n$ lancers, donné 6.
+    
+    On admet que $S_n$ définit bien une variable aléatoire. Si pour un certain rang $n_0$, tous les dés ont donné 6, c'est-à-dire si $S_{n_0} = N$, alors on considérera que $S_n = N$ pour tout entier $n \geq n_0$.
+    
+    \begin{enumerate}
+        \item Soit $n \in \mathbb{N}^*$. Préciser $S_n(\Omega)$, l'univers image de la variable aléatoire $S_n$.
+        
+        \item Quelle est la loi de $S_1$ ? On précisera, en le justifiant, ses paramètres.
+    \end{enumerate}
+
+    L'objectif des questions 3 à 5 est d'établir que, pour tout $n \in \mathbb{N}^*$, $S_n$ suit la loi binomiale de paramètres $N$ et $p_n$.
+    
+    \item Soit $n \in \mathbb{N}^*$, soit $k \in \llbracket 0,N \rrbracket$, et soit $i \in \llbracket 0,k \rrbracket$. Justifier que :
+    \[
+        \mathbb{P}(S_{n+1} = k \mid S_n = i)
+        =
+        \binom{N-i}{k-i}
+        \left(\frac{1}{6}\right)^{k-i}
+        \left(\frac{5}{6}\right)^{N-k}.
+    \]
+    
+    \item Dans cette question et dans cette question seulement, on se donne $n \in \mathbb{N}^*$ et on suppose que $S_n$ suit une loi binomiale de premier paramètre $N$ et de second paramètre $p_n$.
+    
+    \begin{enumerate}
+        \item Démontrer que, pour tout $k \in \llbracket 0,N \rrbracket$ :
+        \[
+            \mathbb{P}(S_{n+1} = k)
+            =
+            \sum_{i=0}^{k}
+            \binom{N}{i}
+            p_n^i (1-p_n)^{N-i}
+            \binom{N-i}{k-i}
+            \left(\frac{1}{6}\right)^{k-i}
+            \left(\frac{5}{6}\right)^{N-k}.
+        \]
+        
+        \textit{Indication : on pourra appliquer la formule des probabilités totales en remarquant que $(\{S_n = i\})_{i \in \llbracket 0,N \rrbracket}$ est un système complet d'événements.}
+        
+        \item Vérifier que pour tout $k \in \llbracket 0,N \rrbracket$, pour tout $i \in \llbracket 0,k \rrbracket$ :
+        \[
+            \binom{N}{i} \binom{N-i}{k-i}
+            =
+            \binom{N}{k} \binom{k}{i}.
+        \]
+        \item Obtenir alors que, pour tout $k \in \llbracket 0,N \rrbracket$ :
+        \[
+            \mathbb{P}(S_{n+1} = k)
+            =
+            \binom{N}{k}
+            \left(\frac{1+5p_n}{6}\right)^k
+            \left(1 - \frac{1+5p_n}{6}\right)^{N-k}.
+            \]
+    \end{enumerate}
+\end{enumerate}
 
 \end{document}
