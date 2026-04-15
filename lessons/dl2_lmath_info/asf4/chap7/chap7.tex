@@ -65,6 +65,8 @@ F : I \to \mathbb{R}, \; x \mapsto \int_a^b f(x,t) dt
     Alors $h$ est continue et on a l'intervertibilité de l'intégrale et de la limite : \[lim_{x \to x_0} F(x) = \int_a^b h(t) dt\].
 }
 
+\remark{En particulier, $I$ peut être un intervalle de la forme $]a, +\infty[$ et $x_0 = +\infty$.}
+
 \noindent{\textbf{Démonstration :}\\
     Posons $f_n(t) = f(n, t)$ une suite de fonction continue qui converge vers $h(t)$ uniformément. Donc $h$ est continue.\\
     $|\int_a^bf(x, t)dt-\int_a^bh(t) dt| = |\int_a^bf(x, t)-h(t) dt|\le \int_a^b|f(x, t)-h(t)| dt$\\
@@ -116,10 +118,10 @@ On s'intéresse aux propriétés de la fonction $F : I \to \mathbb{R}$ définie,
     Si on a la convergence normale sur $I$, alors en particulier l'intégrale converge absolument pour tout $x \in I$, et donc elle converge simplement.
 }
 
-\theorem{Lemme}{}{false}{
-    Supposons $F(x)$ converge normalement sur $I$. Pour tout $n \in \mathbb{N}$, soit $\varphi_n : I \to \mathbb{R}$ définie par $\varphi_n(x) = \int_0^n f(x,t) dt$. Alors la suite de fonctions $(\varphi_n)_{n \in \mathbb{N}}$ converge uniformément vers $F$ sur $I$.
-}
-\ndlr{Le prof n'a pas énoncé le lemme}
+%\theorem{Lemme}{}{false}{
+%    Supposons $F(x)$ converge normalement sur $I$. Pour tout $n \in \mathbb{N}$, soit $\varphi_n : I \to \mathbb{R}$ définie par $\varphi_n(x) = \int_0^n f(x,t) dt$. Alors la suite de fonctions $(\varphi_n)_{n \in \mathbb{N}}$ converge uniformément vers $F$ sur $I$.
+%}
+% Non énoncé en cours
 
 \subsection{Continuité et limites de $F$}
 \theorem{Théorème}{Continuité des intégrales généralisées à un paramètre}{false}{
@@ -136,17 +138,17 @@ On s'intéresse aux propriétés de la fonction $F : I \to \mathbb{R}$ définie,
     $|\int_0^{+\infty} f(x,t)-f(x_0,t) dt|\le |\int_0^c f(x,t)-f(x_0,t) dt|+|\int_c^{+\infty} f(x,t)-f(x_0,t) dt$\\ $\le \varepsilon/2+2\int_c^{+\infty} g(t) dt \le \varepsilon/2+2\times \varepsilon/4=\varepsilon$.
 }
 
-\theorem{Limite des intégrales généralisées à un paramètre}{}{false}{
-    Soit $I$ un intervalle de $\mathbb{R}$ et $x_0 \in \overline{I}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$ étant \textbf{continue} sur $I \times [0,+\infty[$.\\
-    Supposons que :
-    \begin{itemize}
-        \item $F(x)$ converge normalement sur $I$,
-        \item $\forall t \in [0,+\infty[$, $h(t) := lim_{x \to x_0} f(x,t)$ existe,
-        \item cette convergence est uniforme en $t$ sur chaque intervalle de la forme $[0,A]$ avec $A > 0$.
-    \end{itemize}
-    Alors $h$ est continue d'intégrale $\int_0^{+\infty} h(t) dt$ absolument convergente et on a : \[lim_{x \to x_0} F(x) = \int_0^{+\infty} h(t) dt\].
-}
-\ndlr{La proposition n'a pas été énoncé}
+%\theorem{Limite des intégrales généralisées à un paramètre}{}{false}{
+%    Soit $I$ un intervalle de $\mathbb{R}$ et $x_0 \in \overline{I}$. Considérons une fonction $f : I \times [0,+\infty[ \to \mathbb{R}$ étant \textbf{continue} sur $I \times [0,+\infty[$.\\
+%    Supposons que :
+%    \begin{itemize}
+%        \item $F(x)$ converge normalement sur $I$,
+%        \item $\forall t \in [0,+\infty[$, $h(t) := lim_{x \to x_0} f(x,t)$ existe,
+%        \item cette convergence est uniforme en $t$ sur chaque intervalle de la forme $[0,A]$ avec $A > 0$.
+%    \end{itemize}
+%    Alors $h$ est continue d'intégrale $\int_0^{+\infty} h(t) dt$ absolument convergente et on a : \[lim_{x \to x_0} F(x) = \int_0^{+\infty} h(t) dt\].
+%}
+% Non énoncé en cours
 
 \subsection{Dérivabilité de $F$}
 
