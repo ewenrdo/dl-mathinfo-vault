@@ -140,7 +140,7 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     $D$ est une application linéaire car $f$ est bilinéaire. \\
     $x\in Ker(D)$, donc $D(x)=0$ si et seulement si $\forall y\in E, f(x, y)=0$. Donc $Ker(D)=Ker(f)$. \\
     Si $B$ est non-dégénérée, alors $Ker(D)={0}$. Donc $D$ est un isomorphisme.\\
-    Soit $L={\ell\in E^* : \ell|_F=0}$.\\
+    Soit $L={\ell\in E^* : \ell_F|=0}$.\\
     Donc, $D(F^\bot)=L$. Donc $dim(F^{\bot_f})=dim(L)=dim(E)-dim(F)$. (d'après la remarque en dessous)\\
 }
 
@@ -171,7 +171,20 @@ dégénérées.
          \varphi_{|F \times F} \text{ est non dégénérée } \Leftrightarrow F \cap F^\perp_f = \{0\} \Leftrightarrow F \oplus F^\perp_f = E
     \]
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }
+    \begin{itemize}
+        \item "$\varphi_{|F\times F}$ est non dégénérée $\Rightarrow F\cap F^{\bot_f} = \{0\}$" : Soit $x\in F\cap F^\bot$, alors $\forall y\in F, \varphi(x, y)=0$\\
+        Donc $x\in Ker(f_{|F\times F})$. Donc, si $f_{|F\times F}$ est non-dégénérée, alors $x=y$.
+        \item "$F\cap F^{\bot_f}={0}\Rightarrow F\oplus F^{\bot_f}=E$ " : $dim(F^\bot)=dim(E)-dim(F)+dim(F\cap Ker(f))$. \\
+        Si $x\in F\cap Ker(f)$, alors $f(x, y)=0, \forall y\in E$. Donc, $x\in F^\bot$, donc $x\in F\cap F^\bot=\{0\}$, donc $x=0$.\\
+        Donc, $dim(F\cap Ker(f))=0$. \\
+        On a donc, $dim(F^\bot)=dim(E)-dim(F)$. Donc $dim(E)=dim(F)+dim(F^\bot)$ et $F\cap F^\bot=\{0\}$. \\
+        Ainsi, $E= F\oplus F^\bot$.
+        \item "$F\oplus F^\bot\Rightarrow \varphi_{|F\times F}$" : Si $x\in Ker(\varphi_{|F\times F})$. Donc, $x\in F$ et $\varphi(x, y)=0, \forall y\in F$. Donc, $x\in F$ et $x\in F^(\bot_\varphi)$. \\
+        Donc $x\in F\cap F^{\bot_\varphi}$. Mais si $E=F\cap F^{\bot_\varphi}$, alors $F\cap F^{\bot_\varphi}=0$.
+    \end{itemize}
+
+}
 
 \section{Formes quadratiques}
 Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norme" avait des propriétés remarquables, en particulier vis-à-vis de l'orthogonalité grâce au théorème de Pythagore. La généralisation de cette fonction dans le cadre des formes bilinéaires conduit à la notion de forme quadratique.
