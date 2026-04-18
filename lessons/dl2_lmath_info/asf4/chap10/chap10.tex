@@ -133,6 +133,7 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     \]
     Si $f$ est non dégénérée, alors $dim(F^\perp_f) = dim(E) - dim(F)$.
 }
+
 \noindent{\textbf{Démonstration :}\\
     On regarde l'application $D : \begin{matrix}    E\to E^*\\
                                                     x\mapsto (y\mapsto f(x, y)) \end{matrix}$.\\
@@ -142,13 +143,17 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
     Soit $L={\ell\in E^* : \ell|_F=0}$.\\
     Donc, $D(F^\bot)=L$. Donc $dim(F^{\bot_f})=dim(L)=dim(E)-dim(F)$. (d'après la remarque en dessous)\\
 }
+
 \remark{ $D(x)\in L\Leftrightarrow \forall y\in F, D(x)(y)=0\Leftrightarrow f(x, y)=0 \forall y\in F \Leftrightarrow x\in F^\bot$.}	
 
 \theorem{Corollaire}{}{false}{
-    Si $f$ est un forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp_f)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
+    Si $f$ est une forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp_f)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
 }
-\ndlr{cf. Laurent pour la preuve}
-\ndlr{$f$ est une forme bilinéaire symétrique ou juste bilinéaire ?}
+
+\noindent{\textbf{Démonstration : }\\
+    $dim((F^{\bot_f})^{\bot_f})=dim(E)-dim(F^{\bot_f})=dim(E)-(dim(E)-dim(F))=dim(F)$.\\
+    L'inclusion $F\subseteq (F^{\bot_f})^{\bot_F}$ est automatique car $x\in F$, alors $\forall y\in F^{\bot_f}, f(x, y)=0$, alors $x\in (F^{\bot_f})^{\bot_f}$.\\
+}
 
 \subsection{Restriction d'une forme bilinéaire symétrique}
 Si $b$ est un produit scalaire sur $E$, il est clair que la restriction de $b$ à tout sous-espace vectoriel $F$ de $E$ est encore un produit scalaire sur $F$. En revanche, l'exemple suivant montre qu'une forme bilinéaire symétrique non dégénérée peut avoir des restrictions qui sont
