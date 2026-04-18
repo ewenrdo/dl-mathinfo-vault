@@ -1,0 +1,219 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL2 Math-Info ASF4}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 11 : Fonctions de plusieurs variables}
+
+\section{Rappels et Continuité}
+
+Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^n$. Une fonction de plusieurs variables est définie par :
+\[ f : \mathcal{U} \to \mathbb{R}, \quad x \mapsto f(x) = f(x_1, \dots, x_n) \]
+où $(x_1, \dots, x_n)$ sont les coordonnées dans $\mathbb{R}^n$.
+
+\definition{
+    Soit $x_0 \in \mathcal{U}$. On dit que $f$ est continue en $x_0$ si :
+    \[ \forall \epsilon > 0, \exists \alpha > 0, \forall x \in \mathcal{U}, \quad \|x - x_0\| \le \alpha \Rightarrow |f(x) - f(x_0)| < \epsilon \]
+    On dit que $f$ est continue sur $\mathcal{U}$ si elle est continue en tout point de $\mathcal{U}$.
+}
+
+\remark{Par équivalence des normes en dimension finie, la notion de continuité ne dépend pas de la norme choisie dans $\mathbb{R}^n$.}
+
+\attention{Il ne suffit pas que les applications partielles soient continues pour que $f$ soit continue.}
+
+\cexample{
+    Soit $f(x,y) = \begin{cases} \frac{xy}{x^2+y^2} & \text{si } (x,y) \neq (0,0) \\ 0 & \text{sinon} \end{cases}$.\\
+    Ici, $f$ n'est pas continue en $(0,0)$. Pourtant, les applications partielles $x \mapsto f(x,y)$ et $y \mapsto f(x,y)$ sont continues. Cependant :
+    \[ f(x,x) = \frac{x^2}{x^2+x^2} = \frac{1}{2} \xrightarrow[x \to 0]{} \frac{1}{2} \neq f(0,0) \]
+}
+
+\definition{
+    $f$ est continue en $x_0$ si et seulement si pour toute suite $(x_n)_{n \in \mathbb{N}}$ telle que $\|x_n - x_0\| \xrightarrow[n \to +\infty]{} 0$, on a $f(x_n) \xrightarrow[n \to +\infty]{} f(x_0)$.
+}
+\vocabulary{On parle alors de continuité séquentielle.}
+
+\section{Dérivées partielles et Différentiabilité}
+
+\definition{
+    Soit $v \in \mathbb{R}^n \setminus \{0\}$ et $x_0 \in \mathcal{U}$. On dit que $f$ admet une dérivée en $x_0$ dans la direction $v$ si $t \mapsto f(x_0 + tv)$ est dérivable en $0$, c'est-à-dire si la limite suivante existe :
+    \[ \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t} \]
+}
+
+\definition{
+    On dit que $f$ admet des dérivées partielles en $x_0$ si elle admet une dérivée dans les vecteurs de la base canonique $(e_1, \dots, e_n)$. On note alors :
+    \[ \frac{\partial f}{\partial x_i}(x_0) = \lim_{t \to 0} \frac{f(x_0 + te_i) - f(x_0)}{t} \]
+}
+
+\remark{De manière équivalente, $f$ admet des dérivées partielles si et seulement si $\forall i \in \{1, \dots, n\}$, la fonction $x \mapsto f(a_1, \dots, a_{i-1}, x, a_{i+1}, \dots, a_n)$ est dérivable en $a_i$.}
+
+\cexample{
+    La fonction $f(x,y) = \frac{xy}{x^2+y^2}$ admet des dérivées partielles nulles en $(0,0)$ car $f(x,0)=0$ et $f(0,y)=0$, mais elle n'est pas continue.
+}
+
+\definition{
+    On dit que $f$ est \textbf{différentiable} en $x_0$ s'il existe une forme linéaire $L : \mathbb{R}^n \to \mathbb{R}$ telle que :
+    \[ \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0) - L(h)}{\|h\|} = 0 \]
+    Cette forme linéaire est unique, on la note $Df(x_0)$ (la différentielle). On a alors le développement :
+    \[ f(x+h) = f(x) + Df(x) \cdot h + o(\|h\|) \]
+}
+
+\remark{La différentielle ne dépend pas du choix du de la norme, car en dimension finie, toutes les normes sont équivalentes.}
+
+\theorem{Proposition}{Lien différentielle et dérivées partielles}{false}{
+    Si $f$ est différentiable en $x_0$, alors elle admet des dérivées partielles et :
+    \[ Df(x_0) : \mathbb{R}^n \to \mathbb{R}, \quad h  \mapsto \sum_{i=1}^n h_i \frac{\partial f}{\partial x_i}(x_0) \]
+}
+
+\definition{
+    Soit $f$ différentiable en $x_0$.\\
+    Le gradient de $f$ en $x_0$, noté $\nabla f(x_0)$, est le vecteur colonne :
+    \[ \nabla f(x_0) = \begin{pmatrix} \frac{\partial f}{\partial x_1}(x_0) \\ \vdots \\ \frac{\partial f}{\partial x_n}(x_0) \end{pmatrix} \]
+}
+
+\section{Extrema et Points Critiques}
+
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ différentiable. On dit que $x_0 \in \mathcal{U}$ est un point critique de $f$ si $Df(x_0) = 0$ (ou $\nabla f(x_0) = 0$).
+}
+
+\theorem{Proposition}{Condition nécessaire du premier ordre}{false}{
+    Si $f$ admet un extremum en $x_0$, alors $x_0$ est un point critique de $f$.
+}
+
+\noindent{\textbf{Démonstration :}\\
+    Soit $1 \le i \le n$. La fonction d'une variable $t \mapsto f(x_0 + t e_i)$ admet un extremum en $t=0$. Sa dérivée est donc nulle en 0, d'où $\frac{\partial f}{\partial x_i}(x_0) = 0$ pour tout $i$. $\Box$
+}
+
+\remark{La réciproque est fausse. Par exemple $f(x)=x^3$ en $0$, ou $f(x,y)=x^2-y^2$ (point selle).}
+
+\definition{
+    On dit que $x_0$ est un minimum (resp. maximum) local de $f$ si il existe un voisinage $V$ de $x_0$ tel que pour tout $x \in V$, on a $f(x) \ge f(x_0)$ (resp. $f(x) \le f(x_0)$).
+}
+
+\section{Conditions du second ordre (Dimension 1)}
+
+\theorem{Condition suffisante}{}{false}{
+    Soit $f$ deux fois dérivable en $x_0$ :
+    \begin{itemize}
+        \item $f'(x_0) = 0$ et $f''(x_0) > 0 \Rightarrow x_0$ est un minimum local strict.
+        \item $f'(x_0) = 0$ et $f''(x_0) < 0 \Rightarrow x_0$ est un maximum local strict.
+    \end{itemize}
+}
+
+\noindent{\textbf{Démonstration :}\\
+    On utilise le développement de Taylor-Young à l'ordre 2 :
+    \[ f(x_0+h) - f(x_0) = f'(x_0)h + \frac{f''(x_0)}{2}h^2 + o(h^2) \]
+    Si $f'(x_0)=0$ et $f''(x_0)>0$, alors pour $h$ assez petit :
+    \[ \frac{f(x_0+h) - f(x_0)}{h^2} = \frac{f''(x_0)}{2} + o(1) > 0 \]
+    D'où $f(x_0+h) > f(x_0)$. $\Box$
+}
+
+\definition{
+    Soient $E,F$ deux espaces vectoriels normés de dimension finie et $\mathcal{U}$ un ouvert de de $E$.\\
+    Soit $x_0 \in \mathcal{U}$. Soit $f : \mathcal{U} \to F$.\\
+    On dit que $f$ est $2$-fois différentiable en $x_0$ si $f$ est différentiable au voisinage $V$ de $x_0$ et $Df : V \to \mathcal{L}(E,F)$ est différentiable en $x_0$.
+}
+
+\remark{On note $D^2f(x_0)$ la différentielle de $Df$ en $x_0$, et on a $D^2f \in \mathcal{L}(E, \mathcal{L}(E,F)) \simeq \mathcal{B}(E, F)$ (formes bilinéaires continues).}
+
+\definition{
+    Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^n$ et $f : \mathcal{U} \to \mathbb{R}$.\\
+    On dit que $f$ est de classe $\mathcal{C}^1$ si elle est différentiable sur $\mathcal{U}$ et que $Df : \mathcal{U} \to \mathcal{L}(\mathbb{R}^n, \mathbb{R})$ est continue.
+}
+
+\theorem{Proposition}{Caractérisation de la classe $\mathcal{C}^1$}{false}{
+    Soit $f$ comme dans la définition précédente. Alors :
+    $f$ est de classe $\mathcal{C}^1$ si et seulement si $f$ admet des dérivées partielles continues sur $\mathcal{U}$.\\\\
+
+    Plus généralement, $f$ est de classe $\mathcal{C}^k$ si et seulement si $f$ admet des dérivées partielles continues jusqu'à l'ordre $k$ (inclu).
+}
+
+\ndlr{Nécessite un exemple}
+
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ une fonction deux fois différentiable en $x_0$.\\
+    On appelle \textbf{Hessienne} de $f$ en $x_0$ la matrice de $D^2f(x_0)$ dans la base canonique. On a :
+    \[
+        Hess(f)(x_0) = \begin{pmatrix}
+            \frac{\partial^2 f}{\partial x_1^2}(x_0) & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n}(x_0) \\
+            \vdots & \ddots & \vdots \\
+            \frac{\partial^2 f}{\partial x_n \partial x_1}(x_0) & \cdots & \frac{\partial^2 f}{\partial x_n^2}(x_0)
+        \end{pmatrix}
+    \]
+}
+
+\ndlr{Nécessite un exemple}
+
+\theorem{Théorème de Schwarz}{}{false}{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ une fonction deux fois différentiable.\\
+    Alors pour tout $i,j \in \{1, \dots, n\}$, on a :
+    \[ \frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i} \]
+
+    Autrement dit, la matrice de l'Hessienne est symétrique.
+}
+
+\theorem{Théorème de Taylor-Young à l'ordre 2}{}{false}{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ une fonction deux fois différentiable en $x_0$. On a :\\
+    \[ f(x_0 + h) = f(x_0) + Df(x_0) \cdot h + \frac{1}{2} D^2f(x_0)(h,h) + o(\|h\|^2) \]
+}
+
+\section{Extrema}
+
+\ndlr{cf. Laurent, je le recopie asap}
+
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ avec $\mathcal{U}$ ouvert de $\mathbb{R}^n$ et soit $x_0 \in \mathcal{U}$.\\
+    On suppose que $f$ est différentiable en $x_0$.
+    \begin{enumerate}
+        \item Si $f$ admet un extrumum en $x_0$, alors $Df(x_0) = 0$.
+        \item Si $f$ est deux fois différentiable en $x_0$ et $f$ admet :
+        \begin{itemize}
+            \item un minimum local en $x_0$, alors $Df(x_0) = 0$ et $\forall h \in \mathbb{R}^n, D^2f(x_0)(h,h) \ge 0$.
+            \item un maximum local en $x_0$, alors $Df(x_0) = 0$ et $\forall h \in \mathbb{R}^n, D^2f(x_0)(h,h) \le 0$.
+        \end{itemize}
+        \item Si $f$ est deux fois dérivable en $x_0$ et $Df(x_0) = 0$, et :
+        \begin{itemize}
+            \item $\forall h \in \mathbb{R}^n \setminus \{ 0 \}, D^2f(x_0)(h,h) > 0$, alors $f$ admet un minimum local strict en $x_0$.
+            \item $\forall h \in \mathbb{R}^n \setminus \{ 0 \}, D^2f(x_0)(h,h) < 0$, alors $f$ admet un maximum local strict en $x_0$.
+        \end{itemize}
+    \end{enumerate}
+}
+
+\remark{
+    Pour résumer, on a :
+    \begin{itemize}
+        \item $Df(x_0) = 0$ et $D^2f(x_0)$ définie positive $\Rightarrow$ minimum local strict en $x_0$.
+        \item $Df(x_0) = 0$ et $D^2f(x_0)$ définie négative $\Rightarrow$ maximum local strict en $x_0$.
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $x_0$ un point critique de $f : \mathcal{U} \to \mathbb{R}$.
+    \begin{itemize}
+        \item Si la symétrie de $D^2f(x_0)$ est $\frac{(n,0)}{(0,n)}$, alors $f$ admet un minimum/maximum local strict en $x_0$.
+        \item Si la symétrie de $D^2f(x_0)$ est $(p,q)$, alors $x_0$ est un point selle de $f$.
+        \item Si $D^2f(x_0)$ est dégénérée, alors on ne peut rien conclure.
+    \end{itemize}
+}
+
+\vocabulary{On dit que $x_0$ est un point selle de $f$ si $x_0$ est un point critique de $f$ et que $f$ n'admet pas d'extrémum local (minimum/maximum) en $x_0$.}
+
+\newpage
+\tableofcontents
+
+\end{document}
