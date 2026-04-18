@@ -373,7 +373,12 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
     Exemple le plus simple : $q(x,y) = xy = \frac{1}{4}((x+y)^2 - (x-y)^2)$.
 }
 
-\ndlr{cf. Laurent pour le dernier exemple $q(x_1, x_2, x_3, x_4) = x_1x_2 + x_2x_3 +2x_1x_3 + 3x_1x_4 - x_3x_4$}
+\example{
+    $q=(x_1, x_2, x_3, x_4)=x_1x_2+x_2x_3+2x_1x_3+3x_1x_4-x_3x_4=[x_1x_2+x_2x_3+2x_1x_3+3x_1x_4]-x_3x_4$\\
+    $=(x_1+x_3)(x_2+2x_3+3x_4)-x_3(2x_3+3x_4)-x_3x_4$\\
+    $=(1/4)[(x_1+x_3+x_2+2x_3+3x_4)^2-(x_1+x_3-(x_2+2x_3+3x_4))^2]-2x_3^2-4x_3x_4$\\
+    $=(x_1+x_2+3x_3+3x_4 )^2/4-(x_1-x_2-x_3-3x_4 )^2/4-2(x_3+x_4 )^2+2x_4^2$.
+}
 
 \theorem{Proposition}{}{true}{
     Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie de dimension $n$, et $q$ une forme quadratique sur $E$.\\
