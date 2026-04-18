@@ -210,10 +210,20 @@ Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norm
 
 \theorem{Proposition}{}{false}{
     Soit $q : E \to \mathbb{R}$ une forme quadratique.\\
-    Alors, $\exists ! \varphi \in \mathcal{B}(E)$ symétrique telle que $\forall  x\in E, \; q(x) = \varphi(x,x)$.\\
+    Alors, $\exists ! \varphi \in \mathcal{B}(E)$ symétrique telle que $\forall  x\in E, \; q(x) = \varphi(x,x)$.
 }
 
-\ndlr{cf. Laurent pour la preuve}
+\noindent{  \textbf{Démonstration : }
+    \begin{itemize}
+        \item \underbar{Analyse} : Soit $\varphi$ une forme bilinéaire symétrique telle que $q(x)=\varphi(x, x)$.\\
+        Alors, $q(x+y) = \varphi(x+y, x+y) = \varphi(x, x)+\varphi(x, y)+\varphi(y, x)+\varphi(y, y) = \varphi(x, x)+2\varphi(x, y)+\varphi(y, y)$\\
+        $=q(x)+2\varphi(x, y)+q(y)$. Donc, $\varphi(x, y)=\frac{q(x+y)-q(x)-q(y)}{2}$.\\
+        Si une telle forme bilinéaire symétrique existe, alors elle est unique.
+        \item \underbar{Synthèse} : On pose $\varphi(x, y)=\frac{q(x+y)-q(x)-q(y)}{2}$. Il reste à montrer que $\varphi$ est bilinéaire.\\
+        Soit $\psi\in\mathcal{B}(E)$ telle que $\forall x\in E, q(x)=\psi(x, x)$.\\
+        On a $\varphi(x, y)=\frac{q(x+y)-q(x)-q(y)}{2}=\frac{\psi(x+y, x+y)-\psi(x, x)-\psi(y, y)}{2}$ et $\varphi\in\mathcal{B}(E)$ car $\varphi$ est combinaison linéaire de $\psi(x, y)$ et $\psi(y, x)$.
+    \end{itemize}
+}
 
 \remark{$\mathcal{B}(E)$ désigne l'ensemble des formes bilinéaires sur $E$.}
 \vocabulary{On appelle $\varphi$ la \textbf{forme polaire} de $q$.}
