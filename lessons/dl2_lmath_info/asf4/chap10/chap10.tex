@@ -414,7 +414,33 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
         \item Si $q(e_i) > 0$ pour tout $i$, alors $q$ est définie positive.
     \end{enumerate}
 }
-\ndlr{cf. Laurent pour la preuve du lemme}
+
+\noindent{\textbf{Démonstration : }\\
+    Soit $x=\sum_{i=1}^n x_ie_i \in E$.\\
+    $q(x)=\varphi(x, x)=\sum_{(i, j)}x_ix_j\varphi(e_i, e_j)=\sum_{i=1}^n x_i^2\varphi(e_i, e_i)=\sum_{i=1}^n x_i^2q(e_i)$ avec $\varphi$ une forme bilinéaire.\\
+    Si $\forall i$, $q(e_i)\ge0$, alors $\forall x\in E, q(x)>0$ et si $\forall i$, $q(e_i)>0$, alors $\forall x\in E, q(x)\le0$\\
+    et si $\forall i$, $q(e_i)=0$, alors $\sum_{i=1}^n x_i^2q(e_i)=0$.\\
+    Donc, $\forall i, x_i^2 q(e_i)=0$, mais $q(e_i)\ne0$, donc $\forall i, x_i=0$.\\
+    Donc $x_i=0$.\\
+}
+
+\noindent{\textbf{Démonstration du théorème : }\\
+    Soit $(e_1, ..., e_n)$ une famille q-orthogonale. Quitte à réordonner, on peut supposer $q(e_i )>0$ pour $1\le i\le p$,\\ $q(e_i)<0$ pour $p+1\le i\le p+r$, $q(e_i)=0$ pour $i\ge p+r+1$.\\
+    Soit $q=l_1^2+...+l_{p'}^2-l_{p'+1}^2-...-l_{p'+r'}^2$ où $(l_1, ..., l_{p'+r'})$ est libre dans $E^*$. Montrons que $p'=p$ et $r'=r$. \\
+    Soit $(e_1' ... e_n' )$ la base antéduale de $(l_1 ... l_n)$ où $(l_1 ... l_n)$ est une base $E^*$ qui complète $(l_1 ... l_{p'+r'})$.\\
+    %Posons $F=Vect(e_1 ... e_p)$ et $G=Vect(e_{p+1}, ...,e_{p+r})$					F'=Vect(e_1^'…e_p^' ) et G^'=Vect(e_(p^'+1)^',…,e_(p^'+r^')^' ).
+%Montrons que dim⁡F=dim⁡〖F^' 〗 et dim⁡G=dim⁡〖G^' 〗.
+%On sait que dim⁡F+dim⁡G=p+r=p^'+r^'=dim⁡〖F^' 〗+dim⁡〖G^' 〗.
+%Considérons 〖q\|〗_(F∩G^' ).
+%Par le lemme, et q(e_i )>0 pour 1≤i≤p, on obtient que q est bien défini positif sur F.
+%De même, par le lemme pour tout p^'+1≤i≤n, q(e_i )≤0, donc q est négative sur G^'.
+%Donc, 〖q\|〗_(F∩G^' ) est à la fois défini positif et négative, 			donc F∩G^'={0}.
+%De manière symétrique, on a F^'∩G={0}..
+%On a donc dim⁡F+dim⁡〖G^' 〗=dim⁡(F+G^' )≤n				et dim⁡〖F^' 〗+dim⁡G=dim⁡(F^'+G)≤n				⇔p+n-p^'≤n et p^'+n-p≤n Donc p≤p^' et p^'≤p.
+%Donc p=p^'. De plus p+r=p^'+r^' implique que r=r^'.
+
+
+}
 \ndlr{cf. Laurent pour la preuve du théorème}
 
 \definition{
