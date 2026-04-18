@@ -317,8 +317,6 @@ Alors $\varphi(x,y) = \sum_{s=1}^k c_s \ell_s(x) \ell_s(y)$ et $\varphi(e_i, e_j
     Donc, la base antéduale de $(\ell_1, \ell_2, \ell_3)$ est $(e_1, e_2, e_3 - e_2)$, et cette base est $q$-orthogonale.
 }
 
-\ndlr{Voir Laurent pour vérifier que ce qui suit est bien rédigé, j'ai perdu l'habitude de prendre des notes. Merci à Saint Laurent.}
-
 \theorem{Proposition}{}{false}{
     Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et $q$ une forme quadratique sur $E$.\\
     Considérons $q(x) = \sum_{i=1}^k c_i (\ell_i(x))^2$ où $(\ell_1, \ldots, \ell_k)$ une famille libre de $E^*$ et $c_1, \ldots, c_k \in \mathbb{R}$.\\ 
@@ -342,7 +340,14 @@ c_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
     \end{enumerate}
 }
 
-\ndlr{cf. Laurent pour la preuve}
+\remark{$q$ est une forme quadratique de forme polaire $\varphi(x, y)=\sum_{i=1}^kc_i\ell_i(x)\ell_i(y)$.}
+
+\noindent{\textbf{Démonstration : }\\
+    Il suffit de montrer 2. : $2)\Rightarrow rg(q)=rg(...) = k$ ("..." représente la matrice de la proposition)\\
+    Montrons 2) : $Mat(q, e)=\sum_{i=1}^kc_s\ell_s(e_i)\ell_(e_j)=\sum_{s=1}^kc_s\delta_{si}\delta_{sj}$. Or, $\delta_{si}\delta_{sj}=1$ si $s=i=j$ et 0 sinon.\\
+    Donc, $\varphi(e_i, e_j)=0$ si $i\ne j$ ou $i>k$ ou $j>k$ ; 0 sinon. 
+}
+
 
 \subsubsection{Décomposition de Gauss}
 \noindent\href{https://www.youtube.com/watch?v=X9xQ9xiFC9M&t=1s}{Cliquer ici pour une vidéo sur la décomposition de Gauss}
