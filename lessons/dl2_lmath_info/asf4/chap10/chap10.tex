@@ -56,7 +56,16 @@
     Soient $B=(e_1,\ldots,e_n)$ et $B'=(e_1',\ldots,e_n')$ deux bases de $E$, et $P_{B\to B'}$ la matrice de passage de $B$ à $B'$.\\
     Soit $f$ une forme bilinéaire. Alors \[ Mat_{B'}(f) = {}^t P_{B\to B'} Mat_B(f) P_{B\to B'} \]
 }
-\ndlr{cf. Laurent pour la preuve}
+
+\noindent{\textbf{Démonstration :}\\
+    Soient $x, y\in E$, on a $P_{B\to B'}$ la matrice de passage de $B$ à $B'$. \\
+    Posons $X$ la matrice de $x$ dans la base $B$ ; $X'$ la matrice de $x$ dans la base $B'$ ;\\
+    $Y$ la matrice de $y$ dans la base $B$ ; $Y'$ la matrice de $y$ dans la base $B'$. \\
+    La matrice de passage $P$ satisfait $ X=PX'$ et $Y=PX'$.\\
+    On sait de plus que $f(x, y) = {}^t XMat_B(f)Y = {}^t X' Mat_{B'}(f)Y'$.\\
+    Donc ${}^tX Mat_B(f)Y = {}^t X' Mat_{B'}(f) Y'\Leftrightarrow {}^tP\cdot Mat_B(f)\cdot PY'={}^tX'\cdot Mat_{B'}(f)Y'$.\\
+    Donc, ${}^tP\cdot Mat_B(f)\cdot P = Mat_{B'}(f)$.
+}
 
 \subsection{Rang et noyau d'une forme bilinéaire symétrique}
 
