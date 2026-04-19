@@ -97,7 +97,6 @@
         p_{11} && \cdots && p_{1f} \\ \vdots && \ddots && \vdots \\ p_{\ell1} && \cdots && p_{\ell f}
     \end{pmatrix}   =(\mu_{n+1}(1), ...,\mu_{n+1}(l))$.\\
 }
-\ndlr{cf. Laurent pour la preuve}
 
 \definition{
     La \textbf{matrice de transition $n$ pas} est définie par $P^{(n)}_{ij} = \mathbb{P}(X_n = j | X_0 = i)$.
@@ -108,6 +107,20 @@
     $P^{(n)} = P^n \Leftrightarrow P^{(n)}_{ij} = P^n_{ij} \; \forall i,j \in E$
 }
 
+\noindent{\textbf{Démonstration :} Par récurrence
+    \begin{itemize}
+        \item $n=0$ : $P^{(0)}=P^0=Id$.
+        \item On suppose que $P{(n)}=P^n$.\\
+        $P_{ij}^{(n+1)}=\mathbb{P}(X_{n+1}=j|X_0=i)
+            =\sum_{k\in E}\mathbb{P}(X_{n+1}=j, X_n=k|X_0=i)$\\
+            $=\sum_{k\in E}\mathbb{P}(X_{n+1}=j,X_n=k, X_0=i)/\mathbb{P}(X_0=i)
+            =\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k, X_0=i)\mathbb{P}(X_n=k, X_0=i)$\\
+            $=\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k)\mathbb{P}(X_0=i)$ 
+            avec $\mathbb{P}(X_0=i)=\mathbb{P}(X_n=k|X_0=i)$\\
+            $=\sum_k P_{kj} P_{ij}^{(n)}$ par chaîne de Markov.\\
+            $=\sum_k P_{ik}^n P_{kj}=P_{ij}^{n+1}$ par hypothèse de récurrence.
+    \end{itemize}
+}
 \ndlr{cf. Laurent pour la preuve}
 
 
