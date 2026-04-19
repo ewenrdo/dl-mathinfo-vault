@@ -90,6 +90,13 @@
     Soit $E$ un ensemble fini.\\
     Alors : $\mu_{u+1} = \mu_u P$
 }
+
+\noindent{\textbf{Démonstration : }\\
+    $\mathbb{P}(X_{n+1}=j)=\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k)\mathbb{P}(X_n=k)=\sum_{k\in E}p_{kj} \mathbb{P}(X_n=k)=\sum_{k\in E}\mu_u(k)p_{kj}$\\
+    $=(\mu_u(1), \mu_u (2), ..., \mu_n (l))\cdot    \begin{pmatrix}
+        p_{11} && \cdots && p_{1f} \\ \vdots && \ddots && \vdots \\ p_{\ell1} && \cdots && p_{\ell f}
+    \end{pmatrix}   =(\mu_{n+1}(1), ...,\mu_{n+1}(l))$.\\
+}
 \ndlr{cf. Laurent pour la preuve}
 
 \definition{
