@@ -20,38 +20,21 @@
 
 \begin{document}
 
-\docTitle{Chapitre 10 : Formes bilinéaires et formes quadratiques}
+\docTitle{Chapitre 10 : Formes bilinéaires et quadratiques}
 
-\warning{
-    Cours non finalisé, non structuré et contenant beaucoup d'oublis.\\
-    Il est pour l'instant peu sûr de réviser à partir de ce cours, mais il peut être intéressant de le parcourir pour se faire une idée du sujet.
-}
 \section{Formes bilinéaires}
-\subsection{Généralités}
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
     Une \textbf{forme bilinéaire} sur $E$ est une application $f : E \times E \to \mathbb{R}$ telle que :
     \begin{itemize}
         \item pour tout $x \in E$, l'application $y \mapsto f(x,y)$ est linéaire,
         \item pour tout $y \in E$, l'application $x \mapsto f(x,y)$ est linéaire.
-        \item autrement dit, $f$ est linéaire par rapport à chacune de ses variables.
     \end{itemize}
+    \textit{Autrement dit, $f$ est linéaire par rapport à chacune de ses variables.}
 }
 \vocabulary{On note $\mathcal{B}(E)$ l'ensemble des formes bilinéaires sur $E$.}
 \example{Le produit scalaire est une forme bilinéaire.}
 
-\subsection{Formes symétriques}
-
-\definition{
-    On dit qu'une forme bilinéaire $f$ est \textbf{symétrique} si $f(x,y) = f(y,x)$ pour tous $x,y \in E$.
-}
-
-\definition{
-    Soit $\varphi : E \times E \to \mathbb{R}$.\\
-    L'application $D_\varphi : E \to E^*$ telle que $\forall x,y \in E, \; \varphi(x,y) = \langle D_\varphi(x), y \rangle$ est appelée l'\textbf{application linéaire canonique} de $\varphi$.
-}
-
-\subsection{Changement de base}
 \theorem{Proposition}{Changement de base}{false}{
     Soient $B=(e_1,\ldots,e_n)$ et $B'=(e_1',\ldots,e_n')$ deux bases de $E$, et $P_{B\to B'}$ la matrice de passage de $B$ à $B'$.\\
     Soit $f$ une forme bilinéaire. Alors \[ Mat_{B'}(f) = {}^t P_{B\to B'} Mat_B(f) P_{B\to B'} \]
@@ -67,46 +50,61 @@
     Donc, ${}^tP\cdot Mat_B(f)\cdot P = Mat_{B'}(f)$.
 }
 
+\section{Formes bilinéaires symétriques}
+
+\subsection{Définitions et propriétés}
+
+\definition{
+    Soit $\varphi \in \mathcal{B}(E)$.\\
+    On dit que $\varphi$ est \textbf{symétrique} si $\varphi(x,y) = \varphi(y,x)$ pour tous $x,y \in E$.
+}
+
+\definition{
+    Soit $\varphi \in \mathcal{B}(E)$.\\
+    L'application $D_\varphi : E \to E^*$ telle que $\forall x,y \in E, \; \varphi(x,y) = \langle D_\varphi(x), y \rangle$ est appelée l'\textbf{application linéaire canonique} de $\varphi$.
+}
+
 \subsection{Rang et noyau d'une forme bilinéaire symétrique}
 
 \definition{
-    Soit $f$ une forme bilinéaire symétrique sur $E$, alors : 
+    Soit $\varphi \in \mathcal{B}(E)$, supposons $\varphi$ symétrique. Alors :
     \begin{enumerate}
-        \item $ker(f) = \{ x \in E \mid \forall y \in E f(x,y) = 0 \}$,
-        \item $rg(f) = \dim(E) - \dim(ker(f))$.
+        \item $ker(\varphi) = \{ x \in E \mid \forall y \in E \varphi(x,y) = 0 \}$,
+        \item $rg(\varphi) = \dim(E) - \dim(ker(\varphi))$.
     \end{enumerate}
 }
-\vocabulary{On dit que $f$ est \textbf{non-dégénérée} si $ker(f) = \{0\}$, c'est à dire si $rg(f) = \dim(E)$.}
+\vocabulary{On dit que $\varphi$ est \textbf{non-dégénérée} si $ker(\varphi) = \{0\}$, c'est à dire si $rg(\varphi) = \dim(E)$.}
 
 \theorem{Théorème}{}{false}{
-Soit $(e_1, \ldots, e_n)$ une base de $E$, et $A_{ij} = f(e_i, e_j)$, alors on a :
-\begin{enumerate}
-    \item $f$ est non dégénérée si et seulement si $A$ est inversible,
-    \item $ker(f) = \{ x \in E \mid A X = 0 \}$,
-    \item $rg(f) = rg(A)$.
-\end{enumerate}
+    Soit $\varphi \in \mathcal{B}(E)$, supposons $\varphi$ symétrique.\\
+    Soit $(e_1, \ldots, e_n)$ une base de $E$, et $A_{ij} = \varphi(e_i, e_j)$, alors on a :
+    \begin{enumerate}
+        \item $\varphi$ est non dégénérée si et seulement si $A$ est inversible,
+        \item $ker(\varphi) = \{ x \in E \mid A X = 0 \}$,
+        \item $rg(\varphi) = rg(A)$.
+    \end{enumerate}
 }
 
 \noindent{\textbf{Démonstration :}\\
-Posons $f : E \times E \to \mathbb{R}$ telle que $f : x \mapsto (y \mapsto f(x,y))$.
+Posons $\varphi : E \times E \to \mathbb{R}$ telle que $\varphi : x \mapsto (y \mapsto \varphi(x,y))$.
 Posons aussi $d : E \to E*$.\\
-Comme $f$ est bilinéaire, $d$ est linéaire.\\
-Ainsi, $ker(f) = ker(d)$ et $rg(f) = rg(d)$.\\
+Comme $\varphi$ est bilinéaire, $d$ est linéaire.\\
+Ainsi, $ker(\varphi) = ker(d)$ et $rg(\varphi) = rg(d)$.\\
 Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, \ldots, e_n^*)$, on a $ker(d) = \{ x \in E \mid A X = 0 \}$ et $rg(d) = rg(A)$.
 }
 
 \example{
     Un produit scalaire est une forme bilinéaire symétrique non dégénérée.\\
-    En effet, si $f$ est un produit scalaire, alors $f(x,y) = f(y,x)$ pour tous $x,y \in E$, et $ker(f) = \{0\}$ (car $f(x,x) > 0$ pour tout $x \neq 0$).
+    En effet, si $\varphi$ est un produit scalaire, alors $\varphi(x,y) = \varphi(y,x)$ pour tous $x,y \in E$, et $ker(\varphi) = \{0\}$ (car $\varphi(x,x) > 0$ pour tout $x \neq 0$).
 }
 
 
 \theorem{Proposition}{}{false}{
-    Soit $f$ une forme bilinéaire symétrique. Alors :
+    Soit $\varphi \in \mathcal{B}(E)$, supposons $\varphi$ symétrique. Alors :
     \begin{enumerate}
-        \item $f$ est non-dégénérée si et seulement si $rg(f) = \dim(E)$,
-        \item Soit $B=(e_1,\ldots,e_n)$ une base de $E$. Alors $rg(Mat_B(f)) = rg(f)$.\\
-        On a de plus que $f$ est non-dégénérée si et seulement si $Mat_B(f)$ est inversible.
+        \item $\varphi$ est non-dégénérée si et seulement si $rg(\varphi) = \dim(E)$,
+        \item Soit $B=(e_1,\ldots,e_n)$ une base de $E$. Alors $rg(Mat_B(\varphi)) = rg(\varphi)$.\\
+        On a de plus que $\varphi$ est non-dégénérée si et seulement si $Mat_B(\varphi)$ est inversible.
     \end{enumerate}
 }
 
@@ -114,45 +112,45 @@ Comme $A$ est la matrice de $d$ dans les bases $(e_1, \ldots, e_n)$ et $(e_1^*, 
 
 
 \definition{
-    Soit $\varphi$ une forme bilinéaire symétrique sur $E$ un $\mathbb{R}$-espace vectoriel.
+    Soit $E$ un $\mathbb{R}$-espace vectoriel. Soit $\varphi \in \mathcal{B}(E)$, supposons $\varphi$ symétrique. Alors :
     \begin{enumerate}
         \item Deux vecteurs $x, y \in E$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, on note $x \perp_\varphi y$.
         \item L'orthogonal d'une partie $H \subseteq E$ est le sous-espace vectoriel $H^\perp = \{ z \in E \mid \forall x \in H, x \perp_\varphi z \}$.\\
-        Si $\varphi$ est un produit scalaire, alors $H^\perp \cap H = \{0\}$.
-        \item Un vecteur $x \in E$ est dit \textbf{isotrope} si $x \perp_\varphi x$.
+        Si de plus $\varphi$ est un produit scalaire, alors $H^\perp \cap H = \{0\}$.
+        \item Un vecteur $x \in E$ est dit \textbf{isotrope} si $x \perp_\varphi x$. \textit{Autrement dit, $x$ est isotrope si $\varphi(x,x) = 0$.}
     \end{enumerate}
 }
 
 \remark{Une forme bilinéaire symétrique qui n'a pas de vecteur isotrope est nécessairement non dégénérée.}
 
 \theorem{Proposition}{}{false}{
-    Soit $f$ une forme bilinéaire symétrique. Soit $F$ un sous-espace vectoriel de $E$.\\
+    Soit $\varphi \in \mathcal{B}(E)$, supposons $\varphi$ symétrique. Soit $F$ un sous-espace vectoriel de $E$.\\
     Alors :
     \[
-        dim(F^\perp_f) = dim(E) - dim(F) + dim(F \cap ker(f))
+        dim(F^\perp_\varphi) = dim(E) - dim(F) + dim(F \cap ker(\varphi))
     \]
-    Si $f$ est non dégénérée, alors $dim(F^\perp_f) = dim(E) - dim(F)$.
+    Si $\varphi$ est non dégénérée, alors $dim(F^\perp_\varphi) = dim(E) - dim(F)$.
 }
 
 \noindent{\textbf{Démonstration :}\\
     On regarde l'application $D : \begin{matrix}    E\to E^*\\
-                                                    x\mapsto (y\mapsto f(x, y)) \end{matrix}$.\\
-    $D$ est une application linéaire car $f$ est bilinéaire. \\
-    $x\in Ker(D)$, donc $D(x)=0$ si et seulement si $\forall y\in E, f(x, y)=0$. Donc $Ker(D)=Ker(f)$. \\
-    Si $B$ est non-dégénérée, alors $Ker(D)={0}$. Donc $D$ est un isomorphisme.\\
+                                                    x\mapsto (y\mapsto \varphi(x, y)) \end{matrix}$.\\
+    $D$ est une application linéaire car $\varphi$ est bilinéaire. \\
+    $x\in Ker(D)$, donc $D(x)=0$ si et seulement si $\forall y\in E, \varphi(x, y)=0$. Donc $Ker(D)=Ker(\varphi)$. \\
+    Si $\varphi$ est non-dégénérée, alors $Ker(D)={0}$. Donc $D$ est un isomorphisme.\\
     Soit $L={\ell\in E^* : \ell_F|=0}$.\\
-    Donc, $D(F^\bot)=L$. Donc $dim(F^{\bot_f})=dim(L)=dim(E)-dim(F)$. (d'après la remarque en dessous)\\
+    Donc, $D(F^\bot)=L$. Donc $dim(F^{\bot_\varphi})=dim(L)=dim(E)-dim(F)$. (d'après la remarque en dessous)\\
 }
 
-\remark{ $D(x)\in L\Leftrightarrow \forall y\in F, D(x)(y)=0\Leftrightarrow f(x, y)=0 \forall y\in F \Leftrightarrow x\in F^\bot$.}	
+\remark{ $D(x)\in L\Leftrightarrow \forall y\in F, D(x)(y)=0\Leftrightarrow \varphi(x, y)=0 \forall y\in F \Leftrightarrow x\in F^\bot$.}	
 
 \theorem{Corollaire}{}{false}{
-    Si $f$ est une forme bilinéaire symétrique non dégénérée sur $E \times E$, avec $E$ de dimension finie, alors $(F^\perp_f)^\perp = F$ pour tout sous-espace vectoriel $F$ de $E$.
+    Si $\varphi \in \mathcal{B}(E)$ est \textbf{symétrique et non dégénérée}, alors $\forall F \subseteq E, (F^\perp_\varphi)^\perp = F$.
 }
 
 \noindent{\textbf{Démonstration : }\\
-    $dim((F^{\bot_f})^{\bot_f})=dim(E)-dim(F^{\bot_f})=dim(E)-(dim(E)-dim(F))=dim(F)$.\\
-    L'inclusion $F\subseteq (F^{\bot_f})^{\bot_F}$ est automatique car $x\in F$, alors $\forall y\in F^{\bot_f}, f(x, y)=0$, alors $x\in (F^{\bot_f})^{\bot_f}$.\\
+    $dim((F^{\bot_\varphi})^{\bot_\varphi})=dim(E)-dim(F^{\bot_\varphi})=dim(E)-(dim(E)-dim(F))=dim(F)$.\\
+    L'inclusion $F\subseteq (F^{\bot_\varphi})^{\bot_\varphi}$ est automatique car $x\in F$, alors $\forall y\in F^{\bot_\varphi}, \varphi(x, y)=0$, alors $x\in (F^{\bot_\varphi})^{\bot_\varphi}$.\\
 }
 
 \subsection{Restriction d'une forme bilinéaire symétrique}
@@ -193,12 +191,10 @@ Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norm
 
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel.\\
-    Une fonction $q : E \to \mathbb{R}$ est une \textbf{forme quadratique} sur $E$ s'il existe une forme bilinéaire symétrique $\varphi$ sur $E \times E$ \textit{(a priori non symétrique)} telle que $q(x) = \varphi(x,x)$ pour tout $x \in E$.
+    Une fonction $q : E \to \mathbb{R}$ est une \textbf{forme quadratique} sur $E$ s'il existe $\varphi \in \mathcal{B}(E)$ telle que $q(x) = \varphi(x,x)$ pour tout $x \in E$.
 }
 
 \remark{Toute forme quadratique $q$ vérifie : $q(\lambda x) = \lambda^2 q(x)$ pour tout $\lambda \in \mathbb{R}$ et tout $x \in E$. En particulier, $q(0) = 0$.}
-
-% Retour de Romain Petrides.
 
 \example{
     Dans $\mathbb{R}^4$, $q : (x,y,z,t) \mapsto x^2 + y^2 + z^2 - x^2 \cdot t^2$ est une forme quadratique.\\
@@ -225,7 +221,6 @@ Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norm
     \end{itemize}
 }
 
-\remark{$\mathcal{B}(E)$ désigne l'ensemble des formes bilinéaires sur $E$.}
 \vocabulary{On appelle $\varphi$ la \textbf{forme polaire} de $q$.}
 
 \example{
@@ -240,32 +235,28 @@ Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norm
 }
 
 \definition{
-    Soit $q : E \to \mathbb{R}$ une forme quadratique sur $E$, où $E$ est un $\mathbb{R}$-espace vectoriel de dimension finie muni d'une base $e$.\\
+    Soit $q : E \to \mathbb{R}$ une forme quadratique sur $E$, où $E$ est un $\mathbb{R}$-espace vectoriel de dimension finie muni d'une base $e$.
     \begin{itemize}
-        \item $Mat_e(q) = Mat_e(\varphi) = Mat_(e,e^*)(D_\varphi)$, où $\varphi$ est la forme polaire de $q$.
+        \item $Mat_e(q) = Mat_e(\varphi) = Mat_{e,e^*}(D_\varphi)$, où $\varphi$ est la forme polaire de $q$.
         \item $Ker(q) = Ker(\varphi) = Ker(D_\varphi)$,
         \item $rg(q) = rg(\varphi) = rg(D_\varphi)$.
-        \item $q$ est \textbf{dégénérée} si $Ker(D_\varphi) = \{0\}$.
+        \item $q$ est \textbf{non dégénérée} si $Ker(D_\varphi) = \{0\}$.
     \end{itemize}
 }
 
-\ndlr{Vérifier le dernier point, semble être une erreur de frappe, devrait être "non dégénérée" au lieu de "dégénérée".}
-\ndlr{Qu'est-ce que $D_\varphi$ ?}
 
 \remark{On observe que $Mat_e(q)$ est symétrique.}
 
 \subsection{Bases q-orthogonales}
 \subsubsection{Définitions et propriétés}
-\definition{
-    Soient $x,y \in E$ et $q$ une forme quadratique sur $E$.\\
+\remark{
+    Soient $x,y \in E$ et $q$ une forme quadratique sur $E$.
     \begin{itemize}
-        \item $x$ est \textbf{isotrope} si $q(x) = 0$,
-        \item On dit que $x$ et $y$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, où $\varphi$ est la forme polaire de $q$.
+        \item $x$ est \textbf{isotrope} si $q(x) = 0$, ($Leftarrow$ $x \perp x$),
+        \item On dit que $x$ et $y$ sont \textbf{orthogonaux} si $\varphi(x,y) = 0$, où $\varphi$ est la forme polaire de $q$. 
     \end{itemize}
 }
-\remark{$x$ est isotrope si et seulement si $x \perp x$.}
 
-\ndlr{Revoir la définition ci-dessus, semble être un duplicata de ce qu'on a vu auparavant.}
 
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel de dimension finie, et $q$ une forme quadratique sur $E$.\\
@@ -282,7 +273,7 @@ Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norm
 }
 
 \example{
-    Considérns $q(x,y,z) = x^2 - y^2 + 2z^2$ une forme quadratique sur $\mathbb{R}^3$.\\
+    Considérons $q(x,y,z) = x^2 - y^2 + 2z^2$ une forme quadratique sur $\mathbb{R}^3$.\\
     Alors, la base canonique de $\mathbb{R}^3$ est une base $q$-orthogonale. En effet, les éléments de la base canonique sont deux à deux orthogonaux, et on a $q(e_1) = 1$, $q(e_2) = -1$ et $q(e_3) = 2$.
 }
 
