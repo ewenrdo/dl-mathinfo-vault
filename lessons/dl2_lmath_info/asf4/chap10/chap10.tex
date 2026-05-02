@@ -223,17 +223,36 @@ Dans le cadre des produits scalaires, on a vu que la fonction "carré de la norm
 
 \vocabulary{On appelle $\varphi$ la \textbf{forme polaire} de $q$.}
 
-\example{
-    Soit $(x,y,z) \in \mathbb{R}^3$.\\
-    Considérons $q(x,y,z) = xy + 2x^2 - y^2 + 3zx - zy$.\\
-    La forme polaire de $q$ est $\varphi : ((x_1, y_1, z_1), (x_2, y_2, z_2)) \mapsto 2x_1x_2 - y_1 y_2 + \frac{x_1y_2+y_1x_2}{2} + 3 \cdot \frac{z_1x_2+x_1z_2}{2} - \frac{z_1y_2+z_2y_1}{2}$.\\
-    De plus, si $e$ est la base canonique de $\mathbb{R}^3$, alors $Mat_e(q) = Mat_e(\varphi) = \begin{pmatrix}
-2 & \frac{1}{2} & \frac{3}{2} \\
-\frac{1}{2} & -1 & -\frac{1}{2} \\
-\frac{3}{2} & -\frac{1}{2} & 0
-\end{pmatrix}$. 
+\theorem{Méthode du dédoublement}{}{false}{
+    Soit $q$ une forme quadratique sur $E$ définie par une expression polynomiale en les coordonnées $(x, y, z, \dots)$. Pour obtenir l'expression de la forme polaire $\varphi(u, v)$ avec $u=(x, y, z, \dots)$ et $v=(x', y', z', \dots)$, on applique les règles suivantes :
+    \begin{itemize}
+        \item Les carrés sont remplacés par des produits mixtes : $x^2 \longrightarrow xx'$, $y^2 \longrightarrow yy'$, etc.
+        \item Les termes croisés sont remplacés par la moyenne symétrique : $xy \longrightarrow \frac{1}{2}(xy' + x'y)$, $xz \longrightarrow \frac{1}{2}(xz' + x'z)$, etc.
+    \end{itemize}
+    Cette méthode assure que $\varphi$ est bilinéaire, symétrique et que $\varphi(u, u) = q(u)$.
 }
 
+\example{
+    Soit $q(x, y, z) = x^2 + 2y^2 - 3z^2 + 4xy - 2xz$. 
+    
+    En appliquant le dédoublement pour $u=(x,y,z)$ et $v=(x',y',z')$, on obtient la forme polaire :
+    $$\varphi(u, v) = xx' + 2yy' - 3zz' + 2(xy' + x'y) - (xz' + x'z)$$
+    
+    La matrice se construit en plaçant les variables de $u$ en lignes et celles de $v$ en colonnes :
+    
+    \[
+    Mat_e(q) = 
+    \begin{array}{cc}
+        & \begin{array}{ccc} x' & y' & z' \end{array} \\
+        \begin{array}{c} x \\ y \\ z \end{array} &
+        \left( \begin{array}{ccc}
+            1 & 2 & -1 \\
+            2 & 2 & 0 \\
+            -1 & 0 & -3
+        \end{array} \right)
+    \end{array}
+    \]
+}
 \definition{
     Soit $q : E \to \mathbb{R}$ une forme quadratique sur $E$, où $E$ est un $\mathbb{R}$-espace vectoriel de dimension finie muni d'une base $e$.
     \begin{itemize}
