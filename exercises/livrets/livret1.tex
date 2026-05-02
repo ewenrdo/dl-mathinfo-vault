@@ -712,20 +712,20 @@ Soit $m$ un paramètre réel. On considère la forme quadratique définie sur $\
     }
 
     \exercise{2}{Polynômes d'interpolation et dualité}{
-        Soit $E = \mathbb{R}_n[X]$. On se donne une famille de $n+1$ réels $(a_0, \dots, a_n)$ deux à deux distincts. On définit pour $k \in \{0, \dots, n\}$ la forme linéaire $f_k : E \to \mathbb{R}$ par $f_k(P) = P(a_k)$, pour tout $P \in E$.
-
-\begin{enumerate}
-    \item En utilisant le résultat de l'exercice 6, montrer que $(f_k)_{0 \le k \le n}$ est une base de $E^*$.
-    \item Déterminer la base dont elle est duale. \textit{Indication : on pourra introduire les polynômes d'interpolation de Lagrange définis par :}
-    \[ L_k(X) = \prod_{\substack{0 \le j \le n \\ j \neq k}} \frac{X - a_j}{a_k - a_j} \]
-    \item En déduire que tout polynôme de degré inférieur ou égal à $n$ est déterminé par sa valeur en $n+1$ points distincts de $\mathbb{R}$.
-    \item \textbf{Exemple d'application.} On pose $E = \mathbb{R}_3[X]$, et on considère la famille $f = (f_0, f_1, f_2, f_3)$ d'éléments de $E^*$ définie par :
-    \[ \forall i \in \{0, 1, 2, 3\} \quad \forall P \in E \quad f_i(P) = P(i). \]
-    \begin{enumerate}
-        \item Montrer que $f$ est une base de $E^*$.
-        \item Déterminer la base antéduale de $f$.
-    \end{enumerate}
-\end{enumerate}
+        Soit $E = \mathbb{R}_n[X]$. On se donne une famille de $n+1$ réels $(a_0, \dots, a_n)$ deux à deux distincts. On définit pour $k \in \{0, \dots, n\}$ la forme linéaire $f_k : E \to \mathbb{R}$ par $f_k(P) = P(a_k)$, pour tout $P \in E$.\\
+        On admet que \[\bigcap_{k=0}^n \ker(f_k) = \{0\} \Rightarrow (f_0, \dots, f_n) \text{ est une famille libre de } E^*\]
+        \begin{enumerate}
+            \item En utilisant le résultat de l'exercice 6, montrer que $(f_k)_{0 \le k \le n}$ est une base de $E^*$.
+            \item Déterminer la base dont elle est duale. \textit{Indication : on pourra introduire les polynômes d'interpolation de Lagrange définis par :}
+            \[ L_k(X) = \prod_{\substack{0 \le j \le n \\ j \neq k}} \frac{X - a_j}{a_k - a_j} \]
+            \item En déduire que tout polynôme de degré inférieur ou égal à $n$ est déterminé par sa valeur en $n+1$ points distincts de $\mathbb{R}$.
+            \item \textbf{Exemple d'application.} On pose $E = \mathbb{R}_3[X]$, et on considère la famille $f = (f_0, f_1, f_2, f_3)$ d'éléments de $E^*$ définie par :
+            \[ \forall i \in \{0, 1, 2, 3\} \quad \forall P \in E \quad f_i(P) = P(i). \]
+            \begin{enumerate}
+                \item Montrer que $f$ est une base de $E^*$.
+                \item Déterminer la base antéduale de $f$.
+            \end{enumerate}
+        \end{enumerate}
     }
 
     \subsection{Algorithmique / Langage C : Manipulation de structures de données arborescentes}
