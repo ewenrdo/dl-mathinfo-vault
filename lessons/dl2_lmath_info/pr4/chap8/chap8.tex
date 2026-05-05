@@ -123,7 +123,9 @@
 }
 
 \theorem{Corollaire}{}{false}{
-    On a : $\mu_n = \mu_0 P^n$
+    Soit $\mu_n$ le vecteur ligne de probabilité à l'instant $n$, tel que $(\mu_n)_j = \mathbb{P}(X_n = j)$. 
+    Alors pour tout $n \in \mathbb{N}$ :
+    \[ \mu_n = \mu_0 P^n \]
 }
 
 \noindent{\textbf{Démonstration : } 
@@ -133,6 +135,87 @@
 \example{
     Considérons $P = \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix}$ et $\mu_0 = (1,0)$.\\
     Alors : $\mu_1 = \mu_0 P = (0.8, 0.2)$, $\mu_2 = \mu_1 P = (0.68, 0.32)$
+}
+
+\definition{
+    Soit une chaîne de Markov de distribution initiale $\delta_i$ (\textit{i.e.} $\delta_i(j) = \delta_{ij}$).\\
+    La \textbf{probabilité de transition à $n$ pas} de $i$ vers $j$ est donnée par $\mathbb{P}_i(X_n = j)$, où $\mathbb{P}_i$ est la loi de la chaîne de Markov.
+}
+
+\remark{On définit une matrice $P_{ij}^{(n)} = \mathbb{P}_i(X_n = j)$, qui est la matrice de transition à $n$ pas.}
+
+\definition{
+    Soit $(X_n)_{n\in\mathbb{N}}$ une chaîne de Markov à valeurs dans $E$ de matrice de transition $P$.\\
+    On dit qu'une loi $\pi$ sur $E$ est une \textbf{loi stationnaire} de la chaîne de Markov si $\pi P = \pi$.
+}
+\vocabulary{On appelle aussi \textbf{distribution stationnaire} une loi stationnaire.}
+
+\theorem{Théorème}{}{true}{
+    Soit $E$ un ensemble fini. Pour toute chaîne de Markov à valeurs dans $E$, il existe une loi stationnaire.
+}
+
+\example{
+    Soit $P = \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix}$.\\
+    On cherche $\pi$ tel que $\pi P = \pi$.\\
+    $\pi_1 = 0.8\pi_1 + 0.4\pi_2$ et $\pi_2 = 0.2\pi_1 + 0.6\pi_2$.\\
+    En résolvant ce système, on trouve $\pi = (\frac{2}{3}, \frac{1}{3})$.
+}
+\example{
+    On pose $E = \{0,1,2\}$ et $P = \begin{pmatrix} 0 & 1 & 0 \\ \frac{1}{2} & 0 & \frac{1}{2} \\ 0 & 0 & 1 \end{pmatrix}$.\\
+    On a : $\pi = (0,0,1)$ tel que $\pi P = \pi$.
+}
+
+\section{Classes de communication}
+
+\definition{
+    Soit $E$ un espace d'état et $(X_n)_{n\in\mathbb{N}}$ une chaîne de Markov à valeurs dans $E$ dont on note $P$ la matrice de transition. Soient $i,j \in E$.\\\\
+    On dit que $i$ \textbf{communique vers} $j$ (noté $i \rightarrow j$) si $\exists n \in \mathbb{N}$ tel que $p_{ij}^{(n)} > 0$.
+}
+\vocabulary{On dit que $i$ et $j$ \textbf{communiquent} si $i \rightarrow j$ et $j \rightarrow i$. On note alors $i \leftrightarrow j$.}
+
+\theorem{Proposition}{}{false}{
+    La relation de communication $\leftrightarrow$ est une relation d'équivalence.
+}
+\noindent{\textbf{Démonstration :} On montre trivialement que $\leftrightarrow$ est réflexive, symétrique et transitive.}
+
+\vocabulary{On appelle \textbf{classes de communication} les classes d'équivalence de la relation $\leftrightarrow$.}
+
+\definition{
+    On dit d'une chaîne de Markov qu'elle est \textbf{irréductible} si elle n'a qu'une seule classe de communication, c'est-à-dire que tous les états communiquent entre eux.
+}
+
+\definition{
+    Soit $i \in E$. On dit que $i$ est un \textbf{état absorbant} si $p_{ii} = 1$.
+}
+
+\definition{
+    Soit $(X_n)_{n\in\mathbb{N}}$ une chaîne de Markov à valeurs dans $E$. Soit $i \in E$.\\
+    On définit la \textbf{période} de $i$ par $d(i) = pgcd\{n \in \mathbb{N}^* : P_{ii}^{(n)} > 0\}$.
+}
+\vocabulary{On dit d'un état $i$ qu'il est \textbf{apériodique} si $d(i) = 1$.}
+
+\remark{Si une chaîne de Markov est irréductible, alors tous les états ont la même période (qu'on appelle la période de la chaîne).}
+
+\example{
+    Posons $E = \{0,1,2\}$ et $P = \begin{pmatrix} 0 & 1 & 0 \\ \frac{1}{2} & 0 & \frac{1}{2} \\ 0 & 0 & 1 \end{pmatrix}$.
+    
+    L'analyse de la structure de la chaîne montre que :
+    \begin{itemize}
+        \item $0$ et $1$ communiquent entre eux ($0 \leftrightarrow 1$) car $P_{01} > 0$ et $P_{10} > 0$.
+        \item $0$ et $1$ peuvent aller vers $2$ ($0 \to 1 \to 2$), mais le retour est impossible car $P_{20} = P_{21} = 0$.
+        \item L'état $2$ est un \textbf{état absorbant} (une classe fermée à lui seul), car $P_{22} = 1$.
+    \end{itemize}
+    On distingue donc deux classes de communication : $\{0, 1\}$ et $\{2\}$.
+    Les périodes sont : $d(0) = 2$ (car on peut revenir à $0$ en 2 étapes via $1$), $d(1) = 2$ (car on peut revenir à $1$ en 2 étapes via $0$), et $d(2) = 1$ (apériodique, car c'est un état absorbant).
+}
+
+\theorem{Théorème}{}{true}{
+    Soit $(X_n)_{n\in\mathbb{N}}$ une chaîne de Markov à valeurs dans $E$. Notons $P$ sa matrice de transition.\\
+    Supposons que la chaîne soit \textbf{irréductible} et \textbf{apériodique}. Alors :
+    \begin{enumerate}
+        \item[i)] il existe une unique loi stationnaire,
+        \item[ii)] pour toute loi initiale $\mu_0$, on a $\lim_{n \to \infty} \mu_0 P^n = \pi$ (convergence vers la loi stationnaire).
+    \end{enumerate}
 }
 
 \newpage
