@@ -309,22 +309,38 @@ Alors, $(e_1, \ldots, e_n)$ est $q$-orthogonale.\\
 On a $\langle \ell_j, e_i \rangle = \delta_{ij}$. Soit $\varphi$ la forme linéaire de $q$.\\
 Alors $\varphi(x,y) = \sum_{s=1}^k c_s \ell_s(x) \ell_s(y)$ et $\varphi(e_i, e_j) = \sum_{s=1}^k c_s \ell_s(e_i) \ell_s(e_j) = \sum_{s=1}^k c_s \delta_{si} \delta_{sj} = 0$ si $i \neq j$.
 }
+
 \example{
-    Soit $q(x,y,z) = x^2 + (y+z)^2$ une forme quadratique sur $\mathbb{R}^3$.\\
-    On a :
+    Soit $q(x,y,z) = x^2 + (y+z)^2$ une forme quadratique sur $E = \mathbb{R}^3$. \\
+    Par réduction de Gauss, on obtient une base de $E^*$ notée $B^* = (\ell_1, \ell_2, \ell_3)$ :
     \[
         \ell_1(x,y,z) = x, \quad \ell_2(x,y,z) = y+z, \quad \ell_3(x,y,z) = z.
     \]
-    On a de plus que $P_{can \to (\ell_1, \ell_2, \ell_3)} = \begin{pmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 1 & 1
-\end{pmatrix}$, et par pivot de Gauss, on trouve que $P_{can \to (\ell_1, \ell_2, \ell_3)}^{-1} = \begin{pmatrix}
-1 & 0 & 0 \\    
-0 & 1 & -1 \\
-0 & 0 & 1
-\end{pmatrix}$.\\
-    Donc, la base antéduale de $(\ell_1, \ell_2, \ell_3)$ est $(e_1, e_2, e_3 - e_2)$, et cette base est $q$-orthogonale.
+    La matrice de passage de la base canonique duale $B_c^*$ vers la base $B^*$ (contenant les coefficients des $\ell_i$ en colonnes) est :
+    \[
+        P_{B_c^* \to B^*} = \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 1 & 1
+        \end{pmatrix}.
+    \]
+    On cherche la base $B$ de $E$ antéduale de $B^*$. On utilise la relation fondamentale entre les matrices de passage des bases et de leurs duales :
+    \[
+        P_{B_c \to B} = ({}^t P_{B_c^* \to B^*})^{-1} = {}^t(P_{B_c^* \to B^*}^{-1}).
+    \]
+    Par pivot de Gauss, on calcule l'inverse :
+    \[
+        P_{B_c^* \to B^*}^{-1} = \begin{pmatrix} 
+        1 & 0 & 0 \\ 
+        0 & 1 & 0 \\ 
+        0 & -1 & 1 
+        \end{pmatrix} \implies {}^t(P_{B_c^* \to B^*}^{-1}) = \begin{pmatrix}
+        1 & 0 & 0 \\    
+        0 & 1 & -1 \\
+        0 & 0 & 1
+        \end{pmatrix}.
+    \]
+    On en déduit la matrice de passage $P_{B_c \to B}$. En lisant ses colonnes, la base antéduale est $B = (e_1, e_2, -e_2 + e_3)$. Cette base est, par construction, $q$-orthogonale.
 }
 
 \theorem{Proposition}{}{false}{
