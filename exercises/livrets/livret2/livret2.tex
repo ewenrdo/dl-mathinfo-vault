@@ -266,30 +266,335 @@ et on considère $f(x) = \sum_{n \ge 1} f_n(x)$.
 
 \newpage
 \section{Jour 4}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
+
+\subsection{Algèbre}
+\exercise{1}{Base duale}{Soit $E = \mathbb{R}_n[X]$. Soit $\mathcal{B} = (1, X, \dots, X^n)$ la base canonique de $E$, et soit $\mathcal{B}^* = (f_0, \dots, f_n)$ la base duale de $\mathcal{B}$.
+\begin{enumerate}
+    \item Soit $P = a_0 + \dots + a_n X^n$. Pour tout $i \in \{0, \dots, n\}$, exprimer $f_i(P)$ en fonction de $a_0, \dots, a_n$.
+    \item Soit $\phi$ et $\psi$ les deux éléments de $E^*$ définis par :
+    \[ \forall P \in E \quad \phi(P) = P(1), \qquad \forall P \in E \quad \psi(P) = P'(0). \]
+    Déterminer les coordonnées de $\phi$ et de $\psi$ dans la base $\mathcal{B}^*$.
+\end{enumerate}}
+
+\exercise{2}{Polynômes trigonométriques}{Soit $E$ l'espace vectoriel des fonctions $f : \mathbb{R} \to \mathbb{R}$ de la forme $f(x) = a \cos(x) + b \sin(x) + c$ avec $a, b$ et $c$ dans $\mathbb{R}$. On considère la forme bilinéaire symétrique $\phi$ sur $E$ définie par
+\[ \phi(f, g) = \int_0^{\pi} f(x)g(x) dx. \]
+\begin{enumerate}
+    \item Déterminer la matrice de $\phi$ dans la base $(e_1, e_2, e_3)$ où les $e_i$ sont définis par :
+    \[ e_1(x) = \cos(x) \qquad e_2(x) = \sin(x) \qquad e_3(x) = 1. \]
+    Est-ce que $\phi$ définit un produit scalaire sur $E$ ?
+    \item Déterminer le sous-espace vectoriel $F$ des vecteurs orthogonaux à $e_1$ et $e_3$ pour $\phi$. En déduire une base orthogonale pour $\phi$ de $E$.
+\end{enumerate}}
+
+\exercise{3}{Forme quadratique sur $\mathbb{R}_2[X]$ (2021-2022)}{On définit l'application $\varphi$ sur $\mathbb{R}_2[X] \times \mathbb{R}_2[X]$ par :
+\[ \forall A, B \in \mathbb{R}_2[X], \quad \varphi(A, B) = A'(1)B'(1) - A'(0)B'(0). \]
+\begin{enumerate}
+    \item Si $A \in \mathbb{R}_2[X]$, on note $(a_0, a_1, a_2)$ ses coordonnées dans la base canonique de $\mathbb{R}_2[X]$, $A = a_0 + a_1 X + a_2 X^2$.
+    \begin{enumerate}
+        \item Montrer que $\varphi$ est une forme bilinéaire symétrique.
+        \item Montrer que la forme quadratique associée $q(A) = \varphi(A, A)$ est donnée par :
+        \[ q(a_0 + a_1 X + a_2 X^2) = 4a_1 a_2 + 4a_2^2. \]
+        \item Déterminer la matrice de $q$ dans la base canonique de $\mathbb{R}_2[X]$.
+    \end{enumerate}
+    Dans la suite, l'orthogonalité $\perp$ désigne l'orthogonalité $\perp_q$ au sens de la forme quadratique $q$.
+    \item Déterminer $\{1\}^\perp$.
+    \item Déterminer une base de $\{X^2\}^\perp$.
+\end{enumerate}}
 
 \newpage
 \section{Jour 5}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
+\subsection{Analyse}
+\exercise{1}{Étude d'une suite et série entière (2021-2022)}{
+On définit la suite $(a_n)_{n \in \mathbb{N}}$ par $a_0 = 1$ et pour tout $n \geqslant 1$ :
+$$na_n = 2 \sum_{k=0}^{n-1} a_k.$$
+On pose $b_0 = a_0$ et pour tout $n \geqslant 1$ :
+$$b_n = \sum_{k=0}^{n} a_k.$$
+On définit $f(x) = \sum_{n=0}^{+\infty} a_n x^n$ et $g(x) = \sum_{n=0}^{+\infty} b_n x^n$.
 
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item Calculer $a_1$ et $a_2$ puis montrer que pour tout $n \geqslant 1$, $1 \leqslant a_n \leqslant 2^n$.
+        \item En déduire que le rayon de convergence $R$ de la série entière $\sum a_n x^n$ vérifie $\frac{1}{2} \leqslant R \leqslant 1$.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item Montrer que la série entière $\sum b_n x^n$ a un rayon de convergence supérieur ou égal à $\frac{1}{2}$.
+        \item Montrer que $(1 - x)g(x) = f(x)$ sur $]-\frac{1}{2}, \frac{1}{2}[$.
+    \end{enumerate}
+    \item Montrer que $f$ est solution sur $]-\frac{1}{2}, \frac{1}{2}[$ de l'équation différentielle $(E)$ :
+    $$(1 - x)y' - 2y = 0.$$
+    \item Montrer que si $h$ est une solution de l'équation différentielle $(E)$ sur $]-\frac{1}{2}, \frac{1}{2}[$, alors la fonction $(1 - x)^2h(x)$ est constante sur cet intervalle.
+    \item Montrer que pour tout $x \in ]-1, 1[$,
+    $$\sum_{n=0}^{+\infty} (n+2)(n+1)x^n = \frac{2}{(1 - x)^3}.$$
+    \item Déduire des questions précédentes la valeur de $b_n$ en fonction de $n$, puis déterminer $a_n$.
+\end{enumerate}}
+
+\noindent \textit{S'il vous reste du temps, prenez le temps de revoir le cours du chapitre sur les séries entières.}
+
+\subsection{Algorithmique}
+\exercise{1}{Complexité des algorithmes de tri}{Faire un tableau avec les complexités en temps dans le meilleur, pire et moyen cas des algorithmes de tri suivants : tri par sélection, tri par insertion, tri fusion, tri rapide, tri par tas. Vous préciserez s'ils sont en place ou non.}
+\exercise{2}{Elections à la majorité absolue (2023)}{
+Le but de cet exercice est de comparer plusieurs solutions au problème suivant :
+\begin{quote}
+    \textit{Étant donné une liste de $n$ éléments, déterminer s'il existe parmi eux un élément \textbf{majoritaire}, c'est-à-dire apparaissant strictement plus que $\frac{n}{2}$ fois.}
+\end{quote}
+
+Certaines solutions suggérées sont des applications directes des algorithmes vus en cours. Il vous est demandé de les utiliser, \textbf{pas de les réécrire}. Vous pouvez énoncer sans démonstration (mais précisément) les résultats de complexité vus en cours.
+
+Dans la suite, T désigne un tableau de taille $n$. Les différents algorithmes demandés devront renvoyer l'élément majoritaire s'il existe, et \texttt{None} sinon.
+
+\begin{enumerate}
+    \item \textit{Solution 1 (naïve, pour des éléments quelconques)} Décrire un algorithme permettant de résoudre le problème posé sans faire aucune hypothèse sur la nature des éléments de T, sans modifier T, et avec une complexité en espace constante. Quelle est sa complexité en temps ? Préciser le meilleur et le pire cas, selon que la recherche est fructueuse ou infructueuse.
+
+    \item \textit{Solution 2 (pour des éléments comparables)} Proposer une solution plus efficace (en temps) dans le cas où il existe une relation d'ordre sur les éléments de T. Préciser les complexités en espace et en temps (au mieux, au pire et en moyenne).
+
+    \item \textit{Solution 3 (pour des entiers)}
+    \begin{enumerate}
+        \item Proposer une solution plus efficace (en temps) dans le cas où les éléments de T sont des entiers compris entre 0 et une constante $m$. Préciser les complexités en espace et en temps, dans le meilleur et le pire cas.
+        \item Généraliser cette solution à des éléments entiers quelconques. Que deviennent les complexités en espace et en temps ?
+    \end{enumerate}
+
+    \item \textit{Solution 4 (pour des éléments quelconques)} Comment le principe de la solution précédente se généralise-t-il à des éléments quelconques ? Préciser les complexités en espace et en temps (au mieux, au pire et en moyenne).
+\end{enumerate}
+
+\textbf{Dorénavant, la seule opération autorisée sur les éléments de T est le test d'égalité.}
+
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item \textit{Solution 5 (« diviser pour régner »)}
+    \begin{enumerate}
+        \item Soit T1 et T2 tels que T = T1 + T2. Si $x$ est majoritaire dans T, qu'en est-il dans T1 et dans T2 ? Et réciproquement ?
+        \item En déduire un algorithme de type « diviser pour régner » pour résoudre le problème.
+        \item Soit $C(n)$ le nombre de comparaisons nécessaires, dans le pire cas, pour un tableau de longueur $n$. Écrire l'équation satisfaite par $C(n)$, et en déduire son ordre de grandeur.
+    \end{enumerate}
+
+    \item \textit{Solution 6 (presque optimale)} \\
+    Pour améliorer la complexité, on relâche un peu la contrainte, et on cherche un algorithme \texttt{peutEtreMajoritaires(T)} qui renvoie un couple d'éléments de T (éventuellement identiques) tel qu'\textbf{aucun autre} élément de T n'est majoritaire.
+    \begin{enumerate}
+        \item Comment obtenir \texttt{majoritaire(T)} à partir de \texttt{peutEtreMajoritaires(T)} ?
+    \end{enumerate}
+    On dit qu'un élément de T est \textit{\textbf{quasi-majoritaire}} s'il y apparaît au moins $\frac{n}{2}$ fois.
+    \begin{enumerate}
+        \setcounter{enumii}{1}
+        \item Que peut-on dire d'un tableau possédant deux éléments quasi-majoritaires ?
+        \item Supposons que, pour tout $i$ tel que $2i + 1 < \text{len}(T)$, $T[2*i] \neq T[2*i+1]$. À quelle condition T possède-t-il un élément quasi-majoritaire ? (\textit{on pourra distinguer selon la parité de} \texttt{len(T)})
+        \item Supposons que, pour tout $i$ tel que $2i + 1 < \text{len}(T)$, $T[2*i] = T[2*i+1]$. Si T possède un élément quasi-majoritaire $x$, qu'en est-il de $T[::2]$ ?
+        \item (*) En déduire un algorithme récursif \texttt{peutEtreMajoritaires(T)} utilisant un sous-tableau de T de longueur au plus $\lceil \frac{n}{2} \rceil$.
+        \item Quelle est la complexité (au pire) de l'algorithme \texttt{majoritaire(T)} obtenu ?
+    \end{enumerate}
+\end{enumerate}}
+
+\subsection{Probabilités}
+
+\exercise{1}{Lois de extrema (2025)}{Soient $X$ et $Y$ deux v.a. indépendantes, toutes deux de loi géométrique de (même) paramètre $p \in ]0, 1[$. Soient $U = \min(X, Y)$ et $V = \max(X, Y)$.
+
+\begin{enumerate}
+    \item Donner la loi de $X$, la loi de $Y$, et la loi du couple $(X, Y)$.
+    
+    \item Calculer $\mathbb{P}(X \geq n)$ et $\mathbb{P}(X \leq n)$.
+    
+    \item Pour $n, m$ des entiers satisfaisant $0 \leq n \leq m$, calculer $\mathbb{P}(X \in [n, m])$.
+    
+    \item Pour $n, m$ des entiers satisfaisant $0 \leq n \leq m$, décrire l'événement $\{U = n, V = m\}$ en termes des valeurs du couple $(X, Y)$.
+    
+    \item Calculer la loi du couple $(U, V)$.
+\end{enumerate}}
+
+\exercise{2}{Modélisation probabiliste}{
+Pour chacune des expériences aléatoires suivantes, proposer un modèle probabiliste en précisant soigneusement chacun des éléments du triplet composant ce modèle.
+
+\begin{enumerate}
+    \item[(a)] On lance un dé équilibré.
+    \item[(b)] On lance deux dés équilibrés de couleurs différentes.
+    \item[(c)] On tire trois cartes au hasard dans un jeu de 52 cartes.
+\end{enumerate}}
+
+\exercise{3}{Chaîne de Markov sur $\mathbb{N}$}{
+On considère la chaîne de Markov sur $\mathbb{N}$ définie de la manière suivante :
+$$\mathbb{P}(X_{n+1} = k + 1 \mid X_n = k) = p, \quad \mathbb{P}(X_{n+1} = 0 \mid X_n = k) = 1 - p,$$
+pour tout $k \in \mathbb{N}$, où $p \in ]0, 1[$ est fixé.
+
+\begin{enumerate}
+    \item[(a)] Montrer qu'il s'agit bien d'une chaîne de Markov homogène.
+    \item[(b)] Écrire sa matrice de transition.
+    \item[(c)] Montrer que la loi 
+    $$\pi_k = (1 - p)p^k, \quad k \in \mathbb{N},$$
+    est une distribution de probabilité.
+    \item[(d)] Montrer que $\pi$ est stationnaire.
+\end{enumerate}}
 \newpage
 \section{Jour 6}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
 
+\subsection{Algorithmique}
+
+\exercise{1}{Cours}{
+    Revoir les algorithmes de tas et le tri par tas. On pourra s'entraîner au besoin sur les feuilles de TD.
+}
+
+\exercise{1}{Hachage (2023)}{On considère une table de hachage T à adressage ouvert, de longueur initiale $m = 8$ avec la fonction de hachage $h(k) = k \mod m$. La résolution des collisions se fait par sondage linéaire, et la table a un taux de remplissage maximal autorisé de $\frac{3}{4}$.
+
+\begin{enumerate}
+    \item Insérer successivement les clés 5, 28, 19, 15, 20, 35, 37, 26 et 10 en donnant toutes les indications nécessaires à la compréhension ; en particulier, indiquer clairement les cases sondées pour chaque insertion, et détailler précisément le cas de la clé 37.
+    
+    \item Décrire précisément la suppression des clés 26, 19 puis 20, puis l'insertion de la clé 67.
+    
+    \item On poursuit ensuite les insertions : 11, 17, 31, 8, 47, 25, 51... Quand le redimensionnement suivant se produit-il ?
+\end{enumerate}}
+
+\subsection{Langage C}
+\textit{Revoir les cours sur les pointeurs et sur l'allocation dynamique, ainsi que les cours 11 et 12.}
+
+\subsection{Algèbre}
+\exercise{1}{Matrice d'une symétrie orthogonale}{Soit $E$ un espace euclidien de dimension 3 muni d'une base orthonormée $e = (i, j, k)$. Former la matrice dans la base $e$ de la symétrie orthogonale par rapport au plan $P$ d'équation $x = z$.}
+
+\exercise{2}{Équation d'un hyperplan}{Soit $E$ un espace vectoriel muni d'un produit scalaire $\langle \cdot, \cdot \rangle$. Soit $a \in E$ non nul et $\lambda \in \mathbb{R}$, donner l'ensemble $\mathcal{S}$ des vecteurs solutions de l'équation $\langle a, x \rangle = \lambda$ d'inconnue $x \in E$.}
+
+\exercise{3}{Distance à un plan}{On munit $\mathbb{R}^3$ du produit scalaire usuel. Soit $P$ le plan d'équation $2x + y - z + 2 = 0$. Déterminer le supplémentaire orthogonal de $P$ et donner la distance de $u = (3, 4, 5)$ à $P$.}
 \newpage
 \section{Jour 7}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
+\subsection{Algèbre}
 
+\exercise{1}{Étude d'une rotation (2023)}{Dans l'espace $\mathbb{R}^3$ muni de sa structure euclidienne usuelle et de l'orientation donnée par la base canonique, on considère l'endomorphisme $r$ dont la matrice dans la base canonique est
+$$M = \frac{1}{3} \begin{pmatrix} -2 & -2 & 1 \\ -2 & 1 & -2 \\ 1 & -2 & -2 \end{pmatrix}$$
+
+\begin{enumerate}
+    \item Montrer que $M$ est orthogonale.
+    \item Montrer que $r$ est une rotation.
+    \item Déterminer l'axe et l'angle de cette rotation.
+\end{enumerate}}
+
+\exercise{2}{Isométrie en dimension 4 (2023)}{Soit $E$ un espace euclidien de dimension 4 et $f$ une isométrie de $E$ ayant un vecteur propre $u$.
+
+\begin{enumerate}
+    \item Montrer qu'il existe un vecteur $v$ orthogonal à $u$ et qui est aussi vecteur propre de $f$.
+    \item Montrer qu'il existe un plan $P$ de $E$ tel que $P$ et $P^\perp$ sont stables par $f$ et tel que la restriction de l'endomorphisme $f$ à $P$ est diagonalisable.
+    \item Montrer qu'il existe une base de $E$ dans laquelle la matrice de $f$ est de la forme
+    $$\begin{pmatrix} \varepsilon_1 & 0 & 0 & 0 \\ 0 & \varepsilon_2 & 0 & 0 \\ 0 & 0 & \varepsilon_3 & 0 \\ 0 & 0 & 0 & \varepsilon_4 \end{pmatrix} \quad \text{ou bien} \quad \begin{pmatrix} \varepsilon_1 & 0 & 0 & 0 \\ 0 & \varepsilon_2 & 0 & 0 \\ 0 & 0 & \cos \theta & -\sin \theta \\ 0 & 0 & \sin \theta & \cos \theta \end{pmatrix}$$
+    avec $\varepsilon_i = \pm 1$ et $\theta \in ]0, 2\pi[ - \{\pi\}$.
+\end{enumerate}}
 \newpage
 \section{Jour 8}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
+\warning{Nous arrivons au lundi 18 mai 2026. Il s'agit du premier jour d'examen (informatique). Le livret s'en trouve adapté et a pour but de réduire progressivement les exercices.\\\\Bon courage pour les épreuves à venir !}
+\subsection{Algèbre}
+\exercise{1}{Cours}{
+    Rappeler l'identité de polarisation \textit{(celle qu'on utilise dans la réduction de Gauss)}. Par un calcul direct, vérifier que l'identité de polarisation est vérifiée pour la forme quadratique $q(x, y) = 3x^2 + 2xy + y^2$.
+}
+\exercise{2}{Réduction de Gauss}{Soit $q$ une forme quadratique définie sur $E = \mathbb{R}^n$. Réduire en sommes de carrés de formes linéaires indépendantes les formes quadratiques suivantes, puis en déduire leur rang et leur signature :
+
+\begin{enumerate}
+    \item \textit{Cas standard dans $\mathbb{R}^3$ :}
+    $$q_1(x, y, z) = x^2 + 2y^2 + 2z^2 + 2xy - 4yz - 2xz$$
+
+    \item \textit{Cas avec absence de certains carrés dans $\mathbb{R}^3$ :}
+    $$q_2(x, y, z) = x^2 + 4xy + 4xz + 4yz$$
+
+    \item \textit{Cas "sans aucun carré" dans $\mathbb{R}^3$ (méthode du produit) :}
+    $$q_3(x, y, z) = xy + yz + xz$$
+
+    \item \textit{Cas mixte dans $\mathbb{R}^4$ :}
+    $$q_4(x, y, z, t) = x^2 + y^2 + 2xy + 2xt + 2yt + 4zt$$
+
+    \item \textit{Cas "pur produit" dans $\mathbb{R}^4$ :}
+    $$q_5(x, y, z, t) = xy + zt$$
+\end{enumerate}}
+
+\subsection{Langage C}
+
+\textit{Il convient de relire les cours et de s'entraîner rapidement à programmer des fonctions simples en C, notamment celles demandées dans les exercices précédents.}
 
 \newpage
 \section{Jour 9}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
+\subsection{Probabilités}
+\exercise{1}{Loi jointe et indicatrices}{
+Soit $(\Omega, \mathbb{P})$ un espace probabilisé. On considère deux événements $A, B \subset \Omega$ tels que $\mathbb{P}(A) = \frac{1}{2}$, $\mathbb{P}(A \cap B) = \frac{1}{8}$ et $\mathbb{P}(B) = \frac{3}{8}$. On considère les v.a. $X = \mathbb{1}_A + \mathbb{1}_B$ et $Y = \mathbb{1}_{A \cap B}$, où $\mathbb{1}_A$, $\mathbb{1}_B$ et $\mathbb{1}_{A \cap B}$ sont les fonctions indicatrices des ensembles $A$, $B$ et $A \cap B$ respectivement (i.e., ces fonctions valent 1 sur les ensembles en question et 0 sur leur complémentaire).
 
+\begin{enumerate}
+    \item Montrer que la loi jointe du couple $(X, Y)$ est donnée par le tableau suivant :
+    \begin{center}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    {$X$} \ {$Y$} & 0 & 1 \\
+    \hline
+    0 & $\frac{2}{8}$ & 0 \\
+    \hline
+    1 & $\frac{5}{8}$ & 0 \\
+    \hline
+    2 & 0 & $\frac{1}{8}$ \\
+    \hline
+    \end{tabular}
+    \end{center}
+    On demande de justifier soigneusement toutes les valeurs.
+
+    \item Donner les lois marginales de $X$ et de $Y$. Justifier soigneusement le calcul de $\mathbb{P}(X=1)$ et de $\mathbb{P}(Y=0)$. Les autres valeurs peuvent être données sans justification.
+
+    \item Donner la loi de $Z = XY$.
+
+    \item Calculer $\mathbb{E}X$, $\mathbb{E}Y$, $\text{Var}X$ et $\text{Var}Y$.
+
+    \item Calculer $\text{Cov}(X, Y)$ et $\text{Var}(X - Y)$.
+
+    \item Les v.a. $X$ et $Y$ sont-elles indépendantes ?
+\end{enumerate}}
+
+\exercise{2}{Loi uniforme}{On considère une variable aléatoire réelle $X$ de loi uniforme sur $\{1, \dots, 9\}$. 
+ \begin{enumerate} 
+     \item Calculer l'espérance et la variance de $X$. 
+
+     \item Majorer la quantité $P(|X - 5| > 3)$ grâce à l'inégalité 
+de Bienaymé Tchebychev. Que vaut en fait cette probabilité ? Commentez. 
+ \end{enumerate}} 
+\textit{Tourner la page pour les exercices suivants.}
+\newpage
+\subsection{Analyse}
+\exercise{1}{Séries de fonctions}{Soit pour $n \in \mathbb{N}^*$, la fonction $f_n$ donnée pour $x \geq 0$ par $f_n(x) = (-1)^n \frac{n}{x^2 + n^2}$.
+
+\begin{enumerate}
+    \item Montrer que $\sum f_n$ converge simplement sur $\mathbb{R}_+$ vers une fonction que l'on notera $S(x)$.
+    \item Montrer que pour tout $A > 0$, la série de fonctions $\sum_{n \in \mathbb{N}^*} f_n$ converge uniformément vers $S$ sur $[0, A]$.
+    \item La convergence de $\sum_{n \in \mathbb{N}^*} f_n$ vers $S$ est-elle normale, uniforme, sur $[0, +\infty[$ ?
+    \item Montrer que $S$ est dérivable sur $\mathbb{R}_+$.
+    \item Montrer que pour tout $A > 0$, la série de fonctions $\sum F_n(x)$ définie par $F_n(x) = (-1)^n \arctan\left(\frac{x}{n}\right)$ converge uniformément sur $[0, A]$.
+    \item Montrer pour tout $x \geq 0$ l'égalité
+    $$\int_0^x S(t) dt = \sum_{n=1}^{+\infty} \arctan\left( \frac{(-1)^n x}{n} \right).$$
+\end{enumerate}}
+
+\exercise{3}{Séries de fonctions et intégration}{Soit pour $n \in \mathbb{N}^*$, la fonction $f_n$ donnée pour $x \geq 0$ par $f_n(x) = \frac{x}{x^2 + n^2}$.
+
+\begin{enumerate}
+    \item Montrer que $\sum f_n$ converge simplement sur $\mathbb{R}_+$ vers une fonction que l'on notera $S(x)$.
+    \item Montrer que pour tout $A > 0$, la série de fonctions $\sum_{n \in \mathbb{N}^*} f_n$ converge normalement vers $S$ sur $[0, A]$.
+    \item Montrer pour tout $n \geq 1$ l'inégalité $\displaystyle \sum_{k=n+1}^{2n} \frac{n}{n^2 + k^2} \geq \frac{1}{5}$.
+    \item En utilisant l'inégalité précédente, montrer que la série $\sum_{n \in \mathbb{N}^*} f_n$ ne converge pas uniformément vers $S$ sur $\mathbb{R}_+$ ?
+    \item Montrer que $S$ est dérivable sur $\mathbb{R}_+$.
+    \item Montrer que pour tout $A > 0$, la série de fonctions $\sum F_n(x)$ définie par $F_n(x) = \frac{1}{2}(\ln(x^2 + n^2) - \ln(n^2))$ converge normalement sur $[0, A]$.
+    \item Montrer pour tout $x \geq 0$ l'égalité
+    $$\int_0^x S(t) dt = \sum_{n=1}^{+\infty} \ln \left( \sqrt{1 + \frac{x^2}{n^2}} \right).$$
+\end{enumerate}}
 \newpage
 \section{Jour 10}
-Sera complété ultérieurement \textit{(les nouveaux jours seront ajoutés le 13 mai 2026)}.
+\subsection{Algèbre}
+\exercise{1}{Réduction et géométrie euclidienne}{On considère la matrice de taille $6 \times 6$ définie par :
+$$A = \begin{pmatrix}
+1 & 1 & 1 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+1 & 1 & 1 & 1 & 1 & 1 
+\end{pmatrix}$$
 
+\begin{enumerate}
+    \item La matrice $A$ est-elle diagonalisable ?
+    \item Quel est le rang de $A$ ?
+    \item En déduire que $0$ est valeur propre de $A$. Quel est son ordre de multiplicité ?
+    \item Soit $f$ l'endomorphisme de $\mathbb{R}^6$, associé à $A$ (on munit $\mathbb{R}^6$ du produit scalaire usuel).
+    \begin{enumerate}
+        \item Donner une base de l'image de $f$.
+        \item En déduire une base orthonormée $\mathcal{B}$ de $\text{im } f$.
+        \item Montrer que $\text{im } f = (\ker f)^\perp$.
+        \item On considère $h = f_{|\text{im } f}$, la restriction de l'endomorphisme $f$ à $\text{im } f$ :
+        $$h : \left\{ \begin{matrix} \text{im } f \to \text{im } f \\ x \mapsto f(x) \end{matrix} \right.$$
+        Écrire la matrice $B$ de $h$ dans la base orthonormée de $\text{im } f$ trouvée précédemment. \textit{Indication : se demander d'abord quelle doit être la taille de la matrice $B$.}
+    \end{enumerate}
+    \item Écrire la matrice de $f$ dans une base orthonormée de $\mathbb{R}^6$ dont les premiers vecteurs sont les vecteurs de la base $\mathcal{B}$.
+\end{enumerate}}
+\noindent \textit{Bon courage pour les épreuves, et n'oubliez pas de vous reposer un peu avant de les commencer !}
 \end{document}
