@@ -6,6 +6,8 @@
 
 \usepackage{hyperref}
 \usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
 
 
 % Configuration des en-têtes et pieds de page
@@ -81,37 +83,42 @@
 }
 
 \definition{
-    On note $\mu_u$ la loi de $X_n$, \textit{i.e.} $\mu_u(k) = \mathbb{P}(X_n = k)$ et $\mu_n = (\mathbb{P}(X_n = k))_{k \in E}$.
+    On note $\mu_n$ la loi de $X_n$, \textit{i.e.} $\mu_n(k) = \mathbb{P}(X_n = k)$ et $\mu_n = (\mathbb{P}(X_n = k))_{k \in E}$.\\
+    $\mu_n$ est un vecteur ligne de probabilité.
+}
+\example{
+    Supposons $X_0 \sim Ber(p)$, alors $\mu_0 = (1-p, p)$.
 }
 
 \theorem{Proposition}{}{false}{
-    Soit $E$ un ensemble fini.\\
-    Alors : $\mu_{u+1} = \mu_u P$
+    Soit $E$ un ensemble fini. Alors $\mu_{n+1} = \mu_n P$
 }
 
 \noindent{\textbf{Démonstration : }\\
-    $\mathbb{P}(X_{n+1}=j)=\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k)\mathbb{P}(X_n=k)=\sum_{k\in E}p_{kj} \mathbb{P}(X_n=k)=\sum_{k\in E}\mu_u(k)p_{kj}$\\
-    $=(\mu_u(1), \mu_u (2), ..., \mu_n (l))\cdot    \begin{pmatrix}
+    $\mathbb{P}(X_{n+1}=j)=\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k)\mathbb{P}(X_n=k)=\sum_{k\in E}p_{kj} \mathbb{P}(X_n=k)=\sum_{k\in E}\mu_n(k)p_{kj}$\\
+    $=(\mu_n(1), \mu_n (2), ..., \mu_n (l))\cdot    \begin{pmatrix}
         p_{11} && \cdots && p_{1f} \\ \vdots && \ddots && \vdots \\ p_{\ell1} && \cdots && p_{\ell f}
     \end{pmatrix}   =(\mu_{n+1}(1), ...,\mu_{n+1}(l))$.\\
 }
 
 \definition{
-    La \textbf{matrice de transition $n$ pas} est définie par $P^{(n)}_{ij} = \mathbb{P}(X_n = j | X_0 = i)$.
+    La \textbf{matrice de transition à $n$ pas} est définie par $P^{(n)}_{ij} = \mathbb{P}(X_n = j | X_0 = i)$.
 }
-
-\theorem{Proposition}{}{false}{
-    Soit $E$ un ensemble fini.\\
-    $P^{(n)} = P^n \Leftrightarrow P^{(n)}_{ij} = P^n_{ij} \; \forall i,j \in E$
+\theorem{Proposition}{Relation entre $P^{(n)}$ et $P$}{false}{
+    Soit $(X_n)_{n \in \mathbb{N}}$ une chaîne de Markov \textbf{homogène} sur un ensemble d'états $E$. Alors :
+    \[ P^{(n)} = P^n \]
+    Autrement dit, pour tous $i, j \in E$ :
+    \[ \mathbb{P}(X_n = j \mid X_0 = i) = (P^n)_{ij} \]
 }
 
 \noindent{\textbf{Démonstration :} Par récurrence
     \begin{itemize}
         \item $n=0$ : $P^{(0)}=P^0=Id$.
-        \item On suppose que $P{(n)}=P^n$.\\
+        \item On utiliser le fait que $P^{(n)} = P^n \Leftrightarrow P^{(n)}_{ij} = P_{ij}^n$ pour tout $i,j \in E$.\\
+        On suppose que $P{(n)}=P^n$.\\
         $P_{ij}^{(n+1)}=\mathbb{P}(X_{n+1}=j|X_0=i)
             =\sum_{k\in E}\mathbb{P}(X_{n+1}=j, X_n=k|X_0=i)$\\
-            $=\sum_{k\in E}\mathbb{P}(X_{n+1}=j,X_n=k, X_0=i)/\mathbb{P}(X_0=i)
+            $=\sum_{k\in E} \frac{\mathbb{P}(X_{n+1}=j,X_n=k, X_0=i)}{\mathbb{P}(X_0=i)} 
             =\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k, X_0=i)\mathbb{P}(X_n=k, X_0=i)$\\
             $=\sum_{k\in E}\mathbb{P}(X_{n+1}=j|X_n=k)\mathbb{P}(X_0=i)$ 
             avec $\mathbb{P}(X_0=i)=\mathbb{P}(X_n=k|X_0=i)$\\
@@ -148,13 +155,13 @@
 }
 \vocabulary{On appelle aussi \textbf{distribution stationnaire} une loi stationnaire.}
 
-\theorem{Théorème}{}{true}{
+\theorem{Théorème}{Existence de lois stationnaires}{true}{
     Soit $E$ un ensemble fini. Pour toute chaîne de Markov à valeurs dans $E$, il existe une loi stationnaire.
 }
 
 \example{
     Soit $P = \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix}$.\\
-    On cherche $\pi$ tel que $\pi P = \pi$.\\
+    On cherche $\pi = (\pi_1, \pi_2)$ tel que $\pi P = \pi$.\\
     $\pi_1 = 0.8\pi_1 + 0.4\pi_2$ et $\pi_2 = 0.2\pi_1 + 0.6\pi_2$.\\
     En résolvant ce système, on trouve $\pi = (\frac{2}{3}, \frac{1}{3})$.
 }
@@ -164,14 +171,14 @@
 }
 
 \section{Classes de communication}
-
+\subsection{Définitions et propriétés}
 \definition{
     Soit $E$ un espace d'état et $(X_n)_{n\in\mathbb{N}}$ une chaîne de Markov à valeurs dans $E$ dont on note $P$ la matrice de transition. Soient $i,j \in E$.\\\\
     On dit que $i$ \textbf{communique vers} $j$ (noté $i \rightarrow j$) si $\exists n \in \mathbb{N}$ tel que $p_{ij}^{(n)} > 0$.
 }
 \vocabulary{On dit que $i$ et $j$ \textbf{communiquent} si $i \rightarrow j$ et $j \rightarrow i$. On note alors $i \leftrightarrow j$.}
 
-\theorem{Proposition}{}{false}{
+\theorem{Proposition}{Relation de communication}{false}{
     La relation de communication $\leftrightarrow$ est une relation d'équivalence.
 }
 \noindent{\textbf{Démonstration :} On montre trivialement que $\leftrightarrow$ est réflexive, symétrique et transitive.}
@@ -206,8 +213,36 @@
     On distingue donc deux classes de communication : $\{0, 1\}$ et $\{2\}$.
     Les périodes sont : $d(0) = 2$ (car on peut revenir à $0$ en 2 étapes via $1$), $d(1) = 2$ (car on peut revenir à $1$ en 2 étapes via $0$), et $d(2) = 1$ (apériodique, car c'est un état absorbant).
 }
+\subsection{Graphes de transition}
 
-\theorem{Théorème}{}{true}{
+\example{
+    Soit $E = \{1,2,3\}$ et $P = \begin{pmatrix} 0 & 1 & 0 \\ \frac{1}{2} & 0 & \frac{1}{2} \\ 0 & 0 & 1 \end{pmatrix}$.\\
+    On représente le graphe de transition de la chaîne de Markov de transition $P$ en ligne comme suit :
+    \begin{center}
+        \begin{tikzpicture}[shorten >=1pt, node distance=2cm, on grid, auto]
+           \node[state] (1) {1};
+           \node[state] (2) [right=of 1] {2};
+           \node[state] (3) [below=of 2] {3};
+
+           \path[->] (1) edge[bend left] node[midway, above] {1} (2);
+           \path[->] (2) edge[bend left] node[midway, below] {0.5} (1);
+           \path[->] (2) edge node {0.5} (3);
+           \path[->] (3) edge [loop below] node {1} ();
+        \end{tikzpicture}
+    \end{center}
+}
+
+\remark{Dans le graphe, on peut alors lire, entre autres :
+    \begin{itemize}
+        \item $1$ communique vers $2$ (car il y a une flèche de $1$ vers $2$),
+        \item la chaîne de Markov n'est pas irréductible (car $3$ est un état absorbant qui ne communique pas avec les autres),
+        \item les périodes sont $d(1) = 2$, $d(2) = 2$ et $d(3) = 1$.
+    \end{itemize}
+}
+
+\subsection{Ergodicité}
+
+\theorem{Théorème d'ergodicité}{}{true}{
     Soit $(X_n)_{n\in\mathbb{N}}$ une chaîne de Markov à valeurs dans $E$. Notons $P$ sa matrice de transition.\\
     Supposons que la chaîne soit \textbf{irréductible} et \textbf{apériodique}. Alors :
     \begin{enumerate}
