@@ -32,14 +32,12 @@
 \example{
     On peut appliquer ça à l'évolution du capital d'un joueur dans un casino, du stock de baguettes d'une boulangerie ou encore à la météo (soleil, pluie, nuageux, etc.).
 }
-
 \definition{
-    Une \textbf{chaîne de Markov} à valeurs dans $E$ est un processus stochastique à temps discret et à valeurs dans E tel que :
+    Une \textbf{chaîne de Markov} à valeurs dans un ensemble au plus dénombrable $E$ est un processus stochastique $(X_n)_{n\in\mathbb{N}}$ tel que pour tout $n \in \mathbb{N}$ et pour tout $(i_0, \ldots, i_{n-1}, i, j) \in E^{n+2}$ :
     \[
-        \mathbb{P}(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = \mathbb{P}(X_{n+1} = j | X_n = i), \; \text{ avec } i,j \in E \forall k \in \{1, \ldots, n-1\} i_k \in E
+        \mathbb{P}(X_{n+1} = j \mid X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = \mathbb{P}(X_{n+1} = j \mid X_n = i)
     \]
 }
-\ndlr{Vérifier la partie "avec..."}
 
 \example{
     Soit $(\varepsilon_n)$ une suite de variables aléatoires indépendantes telles que $\mathbb{P}(\varepsilon_n = \pm 1) = \frac{1}{2}$.\\
