@@ -1,0 +1,83 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info LC4}
+\fancyhead[C]{Langage C}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Fiche de révision}
+
+\section{Entrées / sorties}
+\subsection{Fonctions de base}
+
+On ouvre un fichier en mode lecture ou écriture avec \texttt{fopen} et on le referme avec \texttt{fclose}.\\
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|p{5cm}|p{4.5cm}|}
+\hline
+\textbf{Fonction} & \textbf{Type} & \textbf{Exemple de code} & \textbf{Description de l'action} \\ \hline
+putc & Caractère & \texttt{putc('A', fp);} & Écrit un seul caractère ('A') dans le fichier \texttt{fp}. \\
+\hline
+getc & Caractère & \texttt{int c = getc(fp);} & Lit le caractère suivant depuis le fichier. \\
+\hline
+fwrite & Binaire & \texttt{fwrite(tab, sizeof(int), 10, fp);} & Écrit un bloc de données (ex: 10 entiers) vers le fichier. \\
+\hline
+fread & Binaire & \texttt{fread(tab, sizeof(int), 10, fp);} & Lit un bloc de données brutes pour remplir un tableau. \\
+\hline
+\end{tabular}
+\caption{Manipulation de caractères et de blocs binaires en C}
+\label{tab:putc_getc_binary}
+\end{table}
+
+\attention{En cas d'erreur, les deux premières fonctions renvoient \texttt{EOF} (équivalent à -1). C'est pour cela que \texttt{getc} retourne un \texttt{int} et pas un \texttt{char}.}
+\remark{\texttt{fwrite} et \texttt{fread} renvoient, sauf erreur, le nombre d'éléments effectivement écrits ou lus (ex: 10 pour le code ci-dessus).}
+\training{Pour récupèrer le premier caractère d'un fichier, on peut faire :}
+\begin{lstlisting}[language=C]
+int c;
+c = getc(input);
+char corresponding_char = (char) c; // Convertit l'entier en caractère
+printf("Le premier caractère est : %c\n", corresponding_char);
+\end{lstlisting}
+
+\remark{Toutes ces fonctions n'écrivent pas directement sur le disque, elles utilisent un tampon en mémoire. Il faut appeler \texttt{fflush} pour forcer l'écriture immédiate.}
+
+\subsection{Formatage de données}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|p{8cm}|p{6cm}|}
+\hline
+\textbf{Fonction} & \textbf{Entrée} & \textbf{Exemple de code} & \textbf{Description de l'action} \\ \hline
+fprintf & Fichier & \texttt{fprintf(fp, "Score: \%d $\backslash$n", score);} & Enregistre la valeur du score dans le fichier \texttt{fp}. \\
+\hline
+fscanf & Fichier & \texttt{fscanf(fp, "\%d/\%d/\%d", \&j, \&m, \&a);} & Récupère trois entiers séparés par des '/' depuis le fichier. \\
+\hline
+snprintf & Chaîne & \texttt{snprintf(buf, sizeof(buf), "\%s", msg);} & Copie le message dans \texttt{buf} sans risquer de déborder. \\
+\hline
+sscanf & Chaîne & \texttt{sscanf(str, "\%f \%f", \&x, \&y);} & Convertit le texte de \texttt{str} en deux nombres flottants. \\
+\hline
+\end{tabular}
+\caption{Récapitulatif des fonctions de formatage en C et actions associées}
+\label{tab:recap_fonctions_c}
+\end{table}
+
+\remark{\texttt{printf} et \texttt{scanf} sont des cas particuliers de \texttt{fprintf} et \texttt{fscanf} qui utilisent respectivement \texttt{stdout} et \texttt{stdin}.}
+
+
+\end{document}
