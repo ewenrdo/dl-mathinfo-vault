@@ -79,5 +79,107 @@ sscanf & Chaîne & \texttt{sscanf(str, "\%f \%f", \&x, \&y);} & Convertit le tex
 
 \remark{\texttt{printf} et \texttt{scanf} sont des cas particuliers de \texttt{fprintf} et \texttt{fscanf} qui utilisent respectivement \texttt{stdout} et \texttt{stdin}.}
 
+\section{Les Unions}
+
+Une \texttt{union} est un type de donnée qui permet de stocker différents types de variables à la \textbf{même adresse mémoire}. Contrairement à une \texttt{struct}, une seule de ses variables peut être utilisée à la fois.\\
+C'est-à-dire que c'est une structure ou un seul des champs est réellement utilisé par une "instance" de l'union. L'union occupe en mémoire la taille du plus grand de ses champs, et tous les champs partagent le même espace mémoire.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|p{6cm}|p{7cm}|}
+\hline
+\textbf{Concept} & \textbf{Définition / Syntaxe} & \textbf{Conséquence en mémoire} \\ \hline
+Déclaration & \texttt{union u \{ int i; char *s; \};} & \texttt{i} et \texttt{s} partagent exactement le même espace. \\ \hline
+Taille & \texttt{sizeof(union u)} & Égale à la taille de son plus grand membre. \\ \hline
+Accès & \texttt{mon\_union.i = 10;} & Écrase toute valeur précédemment stockée dans \texttt{s}. \\ \hline
+\end{tabular}
+\caption{Fonctionnement des unions en C}
+\end{table}
+
+\remark{On utilise souvent une union à l'intérieur d'une structure avec un "tag" (énumération ou entier) pour savoir quel membre de l'union est actuellement valide.}
+
+\training{Exemple d'une expression pouvant être soit un entier, soit une variable :}
+\begin{lstlisting}[language=C]
+struct exp {
+    int type; // 0 pour constante, 1 pour variable
+    union {
+        int value;
+        char *name;
+    } data;
+};
+
+void print_exp(struct exp e) {
+    if (e.type == 0) printf("%d", e.data.value);
+    else printf("%s", e.data.name);
+}
+\end{lstlisting}
+
+\attention{Lire un membre d'une union qui n'est pas celui qui a été écrit en dernier provoque un comportement indéfini (interprétation erronée des octets).}
+
+\section{Expressions constantes}
+\subsection{Énumérations}
+
+Une \texttt{enum} est un type de donnée qui permet de définir un ensemble de constantes entières symboliques.\\
+\begin{lstlisting}[language=C]
+enum Color { RED, GREEN, BLUE }; // RED=0, GREEN=1, BLUE=2
+enum Status { OK = 1, ERROR = -1, UNKNOWN = 0 }; // OK=1, ERROR=-1, UNKNOWN=0
+\end{lstlisting}
+
+\subsection{Constantes}
+
+On utilise le mot-clé \texttt{const} pour déclarer une variable dont la valeur ne peut pas être modifiée après son initialisation.\\
+\begin{lstlisting}[language=C]
+const int MAX_SIZE = 100; // MAX_SIZE est une constante entière
+const char *GREETING = "Hello, World!"; // GREETING est une constante (string)
+\end{lstlisting}
+
+\remark{On peut en réalité tout de même modifier la valeur pointée par un pointeur constant (ex: \texttt{GREETING[0] = 'h';} est techniquement possible mais conduit à un comportement indéfini).}
+
+
+\subsection{Switch}
+Le \texttt{switch} permet d'éviter de longues séries de \texttt{if-else} lorsque l'on compare une expression à plusieurs constantes \textbf{entières} ou des valeurs d'\texttt{enum}.\\
+\begin{lstlisting}[language=C]
+switch (expression) {
+    case constant1: 
+        // code à exécuter si expression == constant1 (int ou valeur d'enum)
+        break;
+    case 42:
+        // ...
+        break;
+    case 1 + 1: // équivalent à case 2:
+        // ...
+    case 'A': // équivalent à case 65:
+        // ...
+        break;
+    // ...
+    default:
+        // code à exécuter si expression ne correspond à aucun cas
+}
+
+\end{lstlisting}
+
+\section{Matrices (tableaux à 2 dimensions)}
+\subsection{Version "Java"}
+On peut faire un tableau à 2 dimensions en C de manière similaire à Java, c'est-à-dire en utilisant un tableau de pointeurs.\\
+\begin{lstlisting}[language=C]
+int **matrix = malloc(rows * sizeof(int *)); // Allocation du tableau de pointeurs
+for (int i = 0; i < rows; i++) {
+    matrix[i] = malloc(cols * sizeof(int)); // Allocation de chaque ligne
+}
+\end{lstlisting}
+\remark{Cette approche permet d'avoir des lignes de tailles différentes (tableau "jagged"), mais nécessite une gestion manuelle de la mémoire (libération avec \texttt{free}).}
+\attention{Cette méthode est plus lente que l'utilisation d'un tableau contigu en mémoire à cause de la fragmentation et du nombre d'allocations.}
+
+\subsection{Représentation contiguë en mémoire}
+
+Une autre approche pour représenter une matrice est d'utiliser un tableau à une dimension et de calculer les indices manuellement.\\
+\begin{lstlisting}[language=C]
+int *matrix = malloc(rows * cols * sizeof(int)); // Allocation d'un tableau contigu
+// Accès à l'élément (i, j)
+int value = matrix[i * cols + j];
+\end{lstlisting}
+\remark{Cette méthode est plus rapide et plus efficace en termes de mémoire, mais nécessite de calculer les indices à chaque accès.}
+
+\attention{Le langage C permet d'ailleurs d'utiliser cette méthode nativement via, par exemple, \texttt{int matrix[rows][cols];} qui est équivalent à un tableau contigu.}
 
 \end{document}
