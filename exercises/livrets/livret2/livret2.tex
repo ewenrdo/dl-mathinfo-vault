@@ -499,14 +499,14 @@ $$M = \frac{1}{3} \begin{pmatrix} -2 & -2 & 1 \\ -2 & 1 & -2 \\ 1 & -2 & -2 \end
 \section{Jour 9}
 \subsection{Probabilités}
 \exercise{1}{Loi jointe et indicatrices}{
-Soit $(\Omega, \mathbb{P})$ un espace probabilisé. On considère deux événements $A, B \subset \Omega$ tels que $\mathbb{P}(A) = \frac{1}{2}$, $\mathbb{P}(A \cap B) = \frac{1}{8}$ et $\mathbb{P}(B) = \frac{3}{8}$. On considère les v.a. $X = \mathbb{1}_A + \mathbb{1}_B$ et $Y = \mathbb{1}_{A \cap B}$, où $\mathbb{1}_A$, $\mathbb{1}_B$ et $\mathbb{1}_{A \cap B}$ sont les fonctions indicatrices des ensembles $A$, $B$ et $A \cap B$ respectivement (i.e., ces fonctions valent 1 sur les ensembles en question et 0 sur leur complémentaire).
+Soit $(\Omega, \mathbb{P})$ un espace probabilisé. On considère deux événements $A, B \subset \Omega$ tels que $\mathbb{P}(A) = \frac{1}{2}$, $\mathbb{P}(A \cap B) = \frac{1}{8}$ et $\mathbb{P}(B) = \frac{3}{8}$. On considère les v.a. $X = 1_A + 1_B$ et $Y = 1_{A \cap B}$, où $1_A$, $1_B$ et $1_{A \cap B}$ sont les fonctions indicatrices des ensembles $A$, $B$ et $A \cap B$ respectivement (i.e., ces fonctions valent 1 sur les ensembles en question et 0 sur leur complémentaire).
 
 \begin{enumerate}
     \item Montrer que la loi jointe du couple $(X, Y)$ est donnée par le tableau suivant :
     \begin{center}
     \begin{tabular}{|c|c|c|}
     \hline
-    {$X$} \ {$Y$} & 0 & 1 \\
+    {$X$} $\backslash$ {$Y$} & 0 & 1 \\
     \hline
     0 & $\frac{2}{8}$ & 0 \\
     \hline
@@ -522,7 +522,7 @@ Soit $(\Omega, \mathbb{P})$ un espace probabilisé. On considère deux événeme
 
     \item Donner la loi de $Z = XY$.
 
-    \item Calculer $\mathbb{E}X$, $\mathbb{E}Y$, $\text{Var}X$ et $\text{Var}Y$.
+    \item Calculer $\mathbb{E}[X]$, $\mathbb{E}[Y]$, $\text{Var}[X]$ et $\text{Var}[Y]$.
 
     \item Calculer $\text{Cov}(X, Y)$ et $\text{Var}(X - Y)$.
 
