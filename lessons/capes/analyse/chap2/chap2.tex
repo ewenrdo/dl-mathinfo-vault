@@ -21,9 +21,214 @@
 
 \begin{document}
 
-\docTitle{Chapitre 2 : Équations différentielles}
+\docTitle{Chapitre 2 : Équations différentielles et variables séparables}
 Ce cours se propose de traiter les équations différentielles linéaires : d'ordre 1 à coefficients constants, d'ordre 1 à variables séparables et d'ordre 2 à coefficients constants.
-\warning{Ce document est en cours de rédaction.}
+
+\section{Généralités et structure des solutions}
+
+Avant d'entrer dans les calculs, il est crucial de comprendre la nature algébrique de l'ensemble des solutions d'une équation différentielle linéaire.
+
+\definition{
+    Soit $I$ un intervalle de $\mathbb{R}$. Une équation différentielle linéaire du premier ordre est de la forme :
+    \[
+        (E) : \quad a(t)x'(t) + b(t)x(t) = c(t)
+    \]
+    où $a, b, c$ sont des fonctions continues sur $I$. Si $c(t) = 0$ pour tout $t \in I$, l'équation est dite \textbf{homogène} ou \textbf{sans second membre}, notée $(E_0)$.
+}
+
+\vocabulary{Un \textbf{problème de Cauchy} est un problème de résolution d'une équation différentielle avec des conditions initiales spécifiées.}
+
+
+\theorem{Théorème}{Structure de l'ensemble des solutions}{false}{
+    Soit $(E) : ax' + bx = c$ une équation différentielle linéaire.
+    \begin{enumerate}
+        \item L'ensemble $S_0$ des solutions de l'équation homogène associés $(E_0)$ est un \textbf{espace vectoriel} (sous-espace de $\mathcal{C}^1(I, \mathbb{R})$).
+        \item L'ensemble $S$ des solutions de l'équation complète $(E)$ est un \textbf{espace affine} de direction $S_0$. Autrement dit, si $x_p$ est une solution particulière de $(E)$, alors :
+        \[
+            S = \{ x_0 + x_p \quad \text{où} \quad x_0 \in S_0 \}
+        \]
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :}\\
+1. Considérons l'application linéaire $L : \mathcal{C}^1(I, \mathbb{R}) \to \mathcal{C}^0(I, \mathbb{R})$ définie par $L(x) = ax' + bx$. Par linéarité de la dérivation et de la multiplication par une fonction, $L$ est un morphisme d'espaces vectoriels. L'ensemble $S_0$ des solutions de $(E_0)$ n'est autre que $\ker(L)$. C'est donc un sous-espace vectoriel de $\mathcal{C}^1(I, \mathbb{R})$.\\
+2. Si $x$ et $x_p$ sont deux solutions de $(E)$, alors par linéarité $L(x - x_p) = L(x) - L(x_p) = c - c = 0$. Donc $(x - x_p) \in \ker(L) = S_0$. Ainsi, toute solution s'écrit comme la somme d'une solution homogène et d'une solution particulière. $\Box$}
+
+
+\theorem{Théorème}{Théorème de Cauchy-Lipschitz linéaire}{false}{
+    Soient $a, b, c$ des fonctions continues sur $I$, avec \textbf{$a(t) \neq 0$ pour tout $t \in I$}.\\
+    Pour tout $t_0 \in I$ et tout $x_0 \in \mathbb{R}$, il existe \textbf{une unique} solution $x$ de l'équation $a(t)x'(t) + b(t)x(t) = c(t)$ définie sur $I$ telle que :
+    \[
+        x(t_0) = x_0
+    \]
+}
+
+
+\theorem{Proposition}{Principe de superposition}{false}{
+    Soit $(E)$ une équation différentielle linéaire. Si $x_1$ et $x_2$ sont deux solutions de $(E)$, alors pour tous $\lambda, \mu \in \mathbb{R}$, la fonction $\lambda x_1 + \mu x_2$ est également une solution de $(E)$.
+}
+
+\noindent{\textbf{Preuve :}\\
+Cela découle directement de la linéarité de l'opérateur de dérivation. En effet :
+\[
+    L(\lambda x_1 + \mu x_2) = (\lambda x_1 + \mu x_2)' - \alpha(\lambda x_1 + \mu x_2)
+\]
+\[
+    = \lambda(x_1' - \alpha x_1) + \mu(x_2' - \alpha x_2) = \lambda L(x_1) + \mu L(x_2) = \lambda \beta_1(t) + \mu \beta_2(t) \quad \Box
+\]}
+
+
+\section{Équations du premier ordre}
+
+\subsection{Équations d'ordre 1 à coefficients constants}
+
+Il s'agit du cas le plus simple où $a$ et $b$ sont des constantes réelles (avec $a \neq 0$). Quitte à diviser par $a$, on se ramène à la forme $x'(t) - \alpha x(t) = \beta(t)$.
+
+\theorem{Théorème}{Résolution du cas homogène à coefficients constants}{false}{
+    Soit $\alpha \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'équation homogène $x'(t) - \alpha x(t) = 0$ sont les fonctions de la forme :
+    \[
+        x(t) = C \cdot e^{\alpha t} \quad \text{où} \quad C \in \mathbb{R}
+    \]
+    L'espace des solutions $S_0$ est un espace vectoriel de \textbf{dimension 1} dont la famille $(t \mapsto e^{\alpha t})$ est une base.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soit $x$ une solution de l'équation. Posons la fonction auxiliaire $g(t) = x(t)e^{-\alpha t}$. Elle est dérivable sur $\mathbb{R}$ et :
+\[ g'(t) = x'(t)e^{-\alpha t} - \alpha x(t)e^{-\alpha t} = (x'(t) - \alpha x(t))e^{-\alpha t} = 0 \]
+Puisque $g'=0$ sur l'intervalle $\mathbb{R}$, $g$ est une fonction constante. Il existe donc $C \in \mathbb{R}$ tel que $g(t) = C$, ce qui donne immédiatement $x(t) = C e^{\alpha t}$. Réciproquement, on vérifie aisément que ces fonctions sont solutions. $\Box$}
+
+\subsubsection{Recherche d'une solution particulière}
+
+Pour résoudre l'équation complète $x'(t) - \alpha x(t) = \beta(t)$, il est nécessaire de trouver une solution particulière $x_p$. Deux méthodes principales sont à connaître au CAPES selon la forme du second membre.
+
+\theorem{Théorème}{Second membre de la forme $P(t)e^{\omega t}$}{false}{
+    Soient $\alpha, \omega \in \mathbb{R}$ et $P \in \mathbb{R}[X]$. Considérons l'équation :
+    \[
+        (E) : \quad x'(t) - \alpha x(t) = P(t)e^{\omega t}
+    \]
+    $(E)$ admet une solution particulière de la forme $x_p(t) = Q(t)e^{\omega t}$ où $Q$ est un polynôme tel que :
+    \begin{itemize}
+        \item \textbf{Si $\omega \neq \alpha$ :} $\deg(Q) = \deg(P)$.
+        \item \textbf{Si $\omega = \alpha$ :} $Q(t) = t \cdot R(t)$ avec $\deg(R) = \deg(P)$ (le degré de $Q$ est égal à $\deg(P) + 1$, sans terme constant).
+    \end{itemize}
+}
+
+\remark{
+    Ce théorème est très général :
+    \begin{itemize}
+        \item Si $\omega = 0$, on retrouve le cas d'un second membre purement polynomial $\beta(t) = P(t)$.
+        \item Si $P(t) = 1$ (polynôme constant), on retrouve le cas d'un second membre exponentiel pur $\beta(t) = e^{\omega t}$.
+    \end{itemize}
+}
+
+\example{
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = (t+1)e^{3t}$.\\
+    Ici, $\alpha = 2$, $\omega = 3$ et $P(t) = t+1$ (de degré 1). Comme $\omega \neq \alpha$, on cherche $x_p(t) = (at+b)e^{3t}$.\\
+    En dérivant : $x_p'(t) = a e^{3t} + 3(at+b)e^{3t} = (3at + a + 3b)e^{3t}$.\\
+    En injectant dans $(E)$ et en simplifiant par $e^{3t} > 0$ :
+    \[
+        (3at + a + 3b) - 2(at+b) = t+1 \iff at + (a+b) = t+1
+    \]
+    Par identification, on trouve $a=1$ puis $1+b=1 \implies b=0$. Ainsi, $x_p(t) = t e^{3t}$.
+}
+
+\example{
+    Considérons le cas de résonance : $x'(t) - 2x(t) = e^{2t}$.\\
+    Ici, $\alpha = 2$, $\omega = 2$ et $P(t) = 1$ (de degré 0). Comme $\omega = \alpha$, on cherche $x_p(t) = a t e^{2t}$.\\
+    En dérivant : $x_p'(t) = a e^{2t} + 2at e^{2t}$.\\
+    En injectant dans l'équation : $(a e^{2t} + 2at e^{2t}) - 2(at e^{2t}) = e^{2t} \iff a e^{2t} = e^{2t} \implies a = 1$.\\
+    Une solution particulière est donc $x_p(t) = t e^{2t}$.
+}
+
+\theorem{Théorème}{Méthode de variation de la constante}{false}{
+    Soit $\alpha \in \mathbb{R}$ et $\beta: I \to \mathbb{R}$ une fonction continue quelconque. Pour trouver une solution particulière de l'équation $x'(t) - \alpha x(t) = \beta(t)$, on cherche une fonction sous la forme :
+    \[
+        x_p(t) = C(t) e^{\alpha t}
+    \]
+    où $C: I \to \mathbb{R}$ est une fonction dérivable. L'équation se réduit alors à trouver une primitive de :
+    \[
+        C'(t) = \beta(t) e^{-\alpha t}
+    \]
+}
+
+\noindent{\textbf{Preuve :}\\
+Soit $x_p(t) = C(t)e^{\alpha t}$. En dérivant cette fonction comme un produit, on obtient :
+\[
+    x_p'(t) = C'(t)e^{\alpha t} + \alpha C(t)e^{\alpha t}
+ Reds\]
+En injectant cette expression dans l'équation différentielle complète $x_p'(t) - \alpha x_p(t) = \beta(t)$, les termes contenant $C(t)$ se simplifient :
+\[
+    \left(C'(t)e^{\alpha t} + \alpha C(t)e^{\alpha t}\right) - \alpha C(t)e^{\alpha t} = \beta(t) \iff C'(t)e^{\alpha t} = \beta(t)
+\]
+En multipliant chaque membre par $e^{-\alpha t}$, on trouve bien $C'(t) = \beta(t)e^{-\alpha t}$. $\Box$}
+
+\example{
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = e^{3t}$.\\
+    En appliquant la méthode de variation de la constante, on cherche une solution particulière de la forme $x_p(t) = C(t)e^{2t}$. En injectant dans l'équation, on trouve :
+    \[
+        C'(t)e^{2t} = e^{3t} \iff C'(t) = e^{t}
+    \]
+    En intégrant, on obtient $C(t) = e^{t} + K$ où $K$ est une constante d'intégration. Une solution particulière est donc :
+    \[
+        x_p(t) = (e^{t} + K)e^{2t} = e^{3t} + K e^{2t}
+    \]
+    En choisissant $K=0$, on peut retenir la solution particulière $x_p(t) = e^{3t}$.
+}
+
+
+\remark{
+    Ce principe est extrêmement utile lorsque le second membre est une somme de fonctions de natures différentes (par exemple $\beta(t) = t + e^{3t}$). On traite chaque morceau séparément avant de sommer les solutions particulières obtenues. \textbf{Note :} Ce principe reste entièrement valable pour les équations linéaires d'ordre 2.
+}
+
+\training{Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = t + e^{2t}$ en combinant la méthode du second membre polynomial, la méthode de variation de la constante et le principe de superposition.}
+\noindent\carreaux{10}
+
+\section{Équations linéaires du second ordre à coefficients constants}
+
+On s'intéresse ici aux équations de la forme $(E) : a x''(t) + b x'(t) + c x(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$. L'analyse algébrique repose entièrement sur les racines d'un polynôme.
+
+\definition{
+    L'équation algébrique $a r^2 + b r + c = 0$ est appelée \textbf{l'équation caractéristique} associée à l'équation différentielle homogène $a x'' + b x' + c x = 0$. On note $\Delta = b^2 - 4ac$ son discriminant.
+}
+
+\theorem{Théorème}{Résolution du second ordre homogène}{false}{
+    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a x'' + b x' + c x = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa description dépend du signe du discriminant $\Delta$ :
+    \begin{itemize}
+        \item \textbf{Si $\Delta > 0$ :} L'équation caractéristique possède deux racines réelles distinctes $r_1$ et $r_2$.
+        \[ x(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t} \quad (C_1, C_2 \in \mathbb{R}) \]
+        \item \textbf{Si $\Delta = 0$ :} L'équation caractéristique possède une racine double réelle $r_0$.
+        \[ x(t) = (C_1 t + C_2) e^{r_0 t} \quad (C_1, C_2 \in \mathbb{R}) \]
+        \item \textbf{Si $\Delta < 0$ :} L'équation caractéristique possède deux racines complexes conjuguées $r = \alpha \pm i\beta$.
+        \[ x(t) = e^{\alpha t} \left( C_1 \cos(\beta t) + C_2 \sin(\beta t) \right) \quad (C_1, C_2 \in \mathbb{R}) \]
+    \end{itemize}
+}
+
+\noindent{\textbf{Preuve (pour le cas $\Delta = 0$) :}\\
+Si $\Delta = 0$, la racine double vaut $r_0 = -\frac{b}{2a}$, ce qui implique $2ar_0 + b = 0$ et $ar_0^2 + br_0 + c = 0$. \\
+Soit $x$ une solution. Posons $g(t) = x(t)e^{-r_0 t}$, soit $x(t) = g(t)e^{r_0 t}$. Dérivons deux fois :
+\[ x'(t) = (g'(t) + r_0 g(t))e^{r_0 t} \]
+\[ x''(t) = (g''(t) + 2r_0 g'(t) + r_0^2 g(t))e^{r_0 t} \]
+En injectant dans l'équation $a x'' + b x' + c x = 0$ et en simplifiant par $e^{r_0 t} > 0$, on obtient :
+\[ a g''(t) + (2a r_0 + b) g'(t) + (a r_0^2 + b r_0 + c) g(t) = 0 \]
+En utilisant les propriétés de $r_0$, l'équation se réduit trivialement à : $a g''(t) = 0 \implies g''(t) = 0$. \\
+Une fonction dont la dérivée seconde est nulle est une fonction affine. Il existe donc $K_1, K_2 \in \mathbb{R}$ tels que $g(t) = K_1 t + K_2$. On en déduit bien $x(t) = (K_1 t + K_2)e^{r_0 t}$. $\Box$}
+
+\example{
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $x''(t) + x(t) = 0$. L'équation caractéristique est $r^2 + 1 = 0$, dont les racines sont $r = \pm i$. La solution générale de l'équation homogène est donc :
+    \[
+        x(t) = C_1 \cos(t) + C_2 \sin(t) \quad (C_1, C_2 \in \mathbb{R})
+    \]
+}
+
+\training{Résoudre sur $\mathbb{R}$ le problème de Cauchy suivant :
+\[
+    \begin{cases}
+        x''(t) + x(t) = 0 \\
+        x(0) = 1 \\
+        x'(0) = 0
+    \end{cases}
+\]}
+\noindent\carreaux{8}
 
 \newpage
 \tableofcontents
