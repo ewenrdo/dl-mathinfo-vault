@@ -22,8 +22,257 @@
 \begin{document}
 
 \docTitle{Chapitre 1 : Convexité et inégalité de Jensen}
-\warning{Ce document est en cours de rédaction.}
 
+
+\section{Définition et interprétation}
+
+\subsection{Convexité d'un ensemble}
+
+\definition{
+    Un ensemble $C \subseteq \mathbb{R}$ est dit \textbf{convexe} si pour tous $x, y \in C$ et pour tout $t \in [0, 1]$, on a :
+    \[
+        tx + (1-t)y \in C.
+    \]
+}
+
+\example{
+    L'intervalle $[a, b]$ est un ensemble convexe pour tous $a, b \in \mathbb{R}$ avec $a < b$.\\
+    En effet, soient $x, y \in [a, b]$ et $t \in [0, 1]$, alors :
+    \[ tx + (1-t)y \geq ta + (1-t)a = a \quad \text{et} \quad tx + (1-t)y \leq tb + (1-t)b = b, \]
+    donc $tx + (1-t)y \in [a, b]$.
+}
+
+\training{Montrer que l'ensemble $C = \{x \in \mathbb{R} : x^2 \leq 1\}$ est convexe.}
+\noindent\carreaux{7}
+
+\subsection{Cordes et convexité}
+
+Approchons de manière intuitive la notion de convexité à l'aide de la géométrie. Considérons une fonction $f: I \to \mathbb{R}$ définie sur un intervalle $I$. Pour deux points $x, y \in I$, on peut tracer la corde (le segment) reliant les points $(x, f(x))$ et $(y, f(y))$ sur le graphique de $f$. La convexité de la fonction est liée à la position de sa courbe par rapport à cette corde.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5, >=stealth]
+    % Axes
+    \draw[->, thick] (-0.5, 0) -- (4.5, 0) node[right] {$x$};
+    \draw[->, thick] (0, -0.5) -- (0, 3.5) node[above] {$y$};
+    
+    % Courbe de la fonction convexe (ici une parabole modifiée)
+    \draw[domain=0.5:3.5, smooth, variable=\x, blue, ultra thick] 
+        plot ({\x}, {0.35*(\x-1)^2 + 0.5}) node[right] {$\mathcal{C}_f$};
+        
+    % Points x et y sur l'axe
+    \coordinate (X) at (1, 0);
+    \coordinate (Y) at (3, 0);
+    \draw[dashed] (1,0) node[below] {$x$} -- (1, 0.5);
+    \draw[dashed] (3,0) node[below] {$y$} -- (3, 1.9);
+    
+    % Points A et B sur la courbe
+    \coordinate (A) at (1, 0.5);
+    \coordinate (B) at (3, 1.9);
+    \fill[red] (A) circle (1.5pt) node[left, black] {$A(x, f(x))$};
+    \fill[red] (B) circle (1.5pt) node[right, black] {$B(y, f(y))$};
+    
+    % La corde [AB]
+    \draw[red, thick] (A) -- (B) node[midway, above left] {Corde $[AB]$};
+    
+    % Point générique sur la corde et la courbe (pour l'intuition du paramètre t)
+    \coordinate (M_courbe) at (2, 0.85);
+    \coordinate (M_corde) at (2, 1.2);
+    \draw[dashed] (2,0) node[below] {$tx+(1-t)y$} -- (2, 1.2);
+    \fill[black] (M_courbe) circle (1pt);
+    \fill[black] (M_corde) circle (1pt);
+    
+    % Fleche d'explication
+    \draw[<->, >=stealth, darkgray] (2, 0.9) -- (2, 1.15) node[midway, right, scale=0.8] {$f(tx+(1-t)y) \leq tf(x)+(1-t)f(y)$};
+\end{tikzpicture}
+\end{center}
+
+\noindent La convexité est donc une notion globale qui concerne la forme de la courbe d'une fonction.
+
+\subsection{Convexité d'une fonction}
+Pour définir une fonction convexe, il est nécessaire que \textbf{son domaine de définition soit un ensemble convexe} de $\mathbb{R}$, c'est-à-dire un intervalle.
+
+\definition{
+    Soit $I$ un intervalle de $\mathbb{R}$. Une fonction $f: I \to \mathbb{R}$ est dite \textbf{convexe} si pour tous $x, y \in I$ et pour tout $t \in [0, 1]$, on a :
+    \[
+        f(tx + (1-t)y) \leq tf(x) + (1-t)f(y).
+    \]
+    Une fonction $f$ est dite \textbf{concave} si $-f$ est convexe.
+}
+
+\remark{
+    \begin{itemize}
+        \item Le terme $tx + (1-t)y$ décrit les points de l'axe des abscisses situés entre $x$ et $y$.
+        \item Le terme $tf(x) + (1-t)f(y)$ représente l'ordonnée du point situé sur la corde (le segment) reliant les points $(x, f(x))$ et $(y, f(y))$.
+        \item Géométriquement, une fonction est convexe si sa courbe représentative est située \textbf{en dessous} de ses cordes. En particulier, une fonction $f$ est convexe la courbe représentative de $f$ est située au-dessus de toutes ses tangentes.
+    \end{itemize}
+}
+
+\example{
+    La fonction affine $f: x \mapsto mx + p$ est à la fois convexe et concave sur $\mathbb{R}$.\\
+    En effet, pour tous $x, y \in \mathbb{R}$ et $t \in [0, 1]$ :
+    \[
+        f(tx + (1-t)y) = m(tx + (1-t)y) + p = t(mx+p) + (1-t)(my+p) = tf(x) + (1-t)f(y).
+    \]
+    L'égalité est vérifiée au sens large dans les deux sens ($\le$ et $\ge$).
+}
+
+\training{Soit $f: I \to \mathbb{R}$ une fonction convexe. Montrer que pour tout $\lambda \geq 0$, la fonction $\lambda f$ est convexe.}
+\noindent\carreaux{7}
+
+\section{L'inégalité des pentes}
+
+La définition algébrique avec le paramètre $t$ est parfois difficile à manipuler. Heureusement, la convexité possède une traduction géométrique simple en termes de pentes de cordes.
+
+\theorem{Théorème}{Inégalité des trois pentes}{false}
+{
+    Soit $f : I \to \mathbb{R}$ une fonction. Les propriétés suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $f$ est convexe sur $I$.
+        \item Pour tous $a, b, c \in I$ tels que $a < b < c$, on a :
+        \[
+            \frac{f(b) - f(a)}{b - a} \leq \frac{f(c) - f(a)}{c - a} \leq \frac{f(c) - f(b)}{c - b}
+        \]
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve :}\\
+Soient $a, b, c \in I$ tels que $a < b < c$. On peut écrire $b$ comme une combinaison convexe de $a$ et $c$. En posant $t = \frac{c-b}{c-a}$, on vérifie facilement que $t \in ]0, 1[$ et que $1-t = \frac{b-a}{c-a}$. On a alors $b = ta + (1-t)c$.\\
+$\bullet$ Supposons $f$ convexe. Par définition :
+\[ f(b) \leq t f(a) + (1-t) f(c) = \frac{c-b}{c-a} f(a) + \frac{b-a}{c-a} f(c) \]
+En soustrayant $f(a)$ de chaque côté puis en réordonnant, on obtient :
+\[ f(b) - f(a) \leq \frac{b-a}{c-a} (f(c) - f(a)) \iff \frac{f(b) - f(a)}{b - a} \leq \frac{f(c) - f(a)}{c - a} \]
+De la même manière, en soustrayant $f(c)$ au lieu de $f(a)$, on obtient la seconde inégalité :
+\[ \frac{f(c) - f(a)}{c - a} \leq \frac{f(c) - f(b)}{c - b} \]
+$\bullet$ Réciproquement, si l'inégalité des pentes est vraie, on peut remonter les calculs exacts en sens inverse pour retrouver $f(b) \leq t f(a) + (1-t) f(c)$ pour tout $b \in ]a, c[$, ce qui valide la définition de la convexité. $\Box$}
+
+\remark{
+    Géométriquement, ce théorème signifie que si on fixe un point sur la courbe d'une fonction convexe et qu'on fait glisser un second point vers la droite, la pente de la corde reliant ces deux points ne fait qu'augmenter.
+}
+
+\training{Soit $f: \mathbb{R} \to \mathbb{R}$ une fonction convexe. On suppose qu'il existe deux réels $a < b$ tels que $f(a) = f(b) = 0$. 
+\begin{enumerate}
+    \item À l'aide de l'inégalité des pentes, déterminer le signe de $f(x)$ pour $x \in [a, b]$.
+    \item Déterminer le signe de $f(x)$ pour $x \in ]-\infty, a] \cup [b, +\infty[$.
+\end{enumerate}}
+\noindent\carreaux{12}
+
+
+\section{Propriétés différentielles}
+
+Dans la pratique et les problèmes du CAPES, les fonctions de référence sont presque toujours dérivables. Les dérivées offrent des critères locaux très puissants pour vérifier la convexité.
+
+\subsection{Caractérisation par la dérivée première}
+
+\theorem{Théorème}{Caractérisation par la dérivée première}{false}{
+    Soit $f : I \to \mathbb{R}$ une fonction dérivable sur $I$.
+    \begin{enumerate}
+        \item $f$ est convexe si et seulement si sa fonction dérivée $f'$ est \textbf{croissante} sur $I$.
+        \item $f$ est convexe si et seulement si sa courbe représentative $\mathcal{C}_f$ est \textbf{au-dessus de toutes ses tangentes}. 
+    \end{enumerate}
+    C'est-à-dire que pour tout $a \in I$ et pour tout $x \in I$ :
+    \[
+        f(x) \geq f'(a)(x - a) + f(a)
+    \]
+}
+
+\noindent{\textbf{Preuve :}\\
+1. $\implies$ Supposons $f$ convexe. Soient $u < v$ dans $I$. Pour tout $h > 0$ assez petit tel que $u < u+h < v$, l'inégalité des pentes donne :
+\[ \frac{f(u+h) - f(u)}{h} \leq \frac{f(v) - f(u)}{v - u} \leq \frac{f(v) - f(v-h)}{h} \]
+En passant à la limite quand $h \to 0^+$, on obtient par définition du nombre dérivé : $f'(u) \leq \frac{f(v)-f(u)}{v-u} \leq f'(v)$, ce qui montre que $f'$ est croissante.\\
+1. $\impliedby$ Réciproquement, si $f'$ est croissante, prenons $a < b < c$. Par le théorème des accroissements finis (TAF), il existe $c_1 \in ]a, b[$ et $c_2 \in ]b, c[$ tels que $\frac{f(b)-f(a)}{b-a} = f'(c_1)$ et $\frac{f(c)-f(b)}{c-b} = f'(c_2)$. Comme $c_1 < c_2$ et $f'$ est croissante, on a $f'(c_1) \leq f'(c_2)$, ce qui valide l'inégalité des pentes, donc la convexité.\\
+2. Pour les tangentes : si $f$ est convexe, l'inégalité des pentes entre $a$, $x$ (avec $a < x$) donne $\frac{f(x)-f(a)}{x-a} \geq \frac{f(t)-f(a)}{t-a}$ pour $t \in ]a, x[$. En faisant tendre $t$ vers $a^+$, on trouve $\frac{f(x)-f(a)}{x-a} \geq f'(a) \implies f(x) \geq f'(a)(x-a) + f(a)$. Le raisonnement est analogue si $x < a$. $\Box$}
+
+\subsection{Caractérisation par la dérivée seconde}
+
+\theorem{Théorème}{Caractérisation par la dérivée seconde}{false}{
+    Soit $f : I \to \mathbb{R}$ une fonction deux fois dérivable sur $I$. \\
+    $f$ est convexe si et seulement si sa dérivée seconde est positive ou nulle sur $I$ :
+    \[
+        \forall x \in I, \quad f''(x) \geq 0
+    \]
+}
+
+\noindent{\textbf{Preuve :}\\
+D'après le théorème précédent, $f$ est convexe si et seulement si $f'$ est croissante sur $I$. Or, $f'$ est une fonction dérivable sur $I$ (car $f$ est deux fois dérivable) et sa dérivée est $f''$. \\
+D'après les propriétés de base de la dérivation, une fonction dérivable est croissante sur un intervalle si et seulement si sa dérivée y est positive ou nulle. Ainsi, $f'$ est croissante si et seulement si $\forall x \in I, f''(x) \geq 0$. $\Box$}
+
+\example{
+    Considérons la fonction exponentielle $f: x \mapsto e^x$ sur $\mathbb{R}$. \\
+    Elle est deux fois dérivable et pour tout $x \in \mathbb{R}$, $f''(x) = e^x > 0$. La fonction exponentielle est donc strictement convexe sur $\mathbb{R}$.\\
+    En appliquant la propriété des tangentes en $a=0$, on retrouve instantanément l'inégalité classique :
+    \[
+        \forall x \in \mathbb{R}, \quad e^x \geq x + 1
+    \]
+}
+
+\training{Déterminer la convexité de la fonction $g: x \mapsto x \ln(x)$ définie sur $I = ]0, +\infty[$.}
+\noindent\carreaux{6}
+
+\subsection{Points d'inflexion}
+
+\definition{
+    Soit $f: I \to \mathbb{R}$ une fonction dérivable. Un point $A(a, f(a))$ est un \textbf{point d'inflexion} de la courbe $\mathcal{C}_f$ si la courbe traverse sa tangente en ce point.
+}
+
+\theorem{Théorème}{Points d'inflexion}{false}{
+    Soit $f: I \to \mathbb{R}$ une fonction deux fois dérivable. 
+    $A(a, f(a))$ est un point d'inflexion si et seulement si $f''$ \textbf{s'annule en changeant de signe} en $a$.
+}
+
+\noindent{\textbf{Preuve :}\\
+La courbe traverse sa tangente en $a$ si et seulement si la fonction écart d'approximation $d(x) = f(x) - [f'(a)(x-a) + f(a)]$ change de signe en $a$. \\
+La dérivée de cet écart est $d'(x) = f'(x) - f'(a)$ et sa dérivée seconde est $d''(x) = f''(x)$. \\
+Si $f''$ s'annule en changeant de signe en $a$, alors $d''$ change de signe, ce qui signifie que $d'$ admet un extremum local en $a$ avec $d'(a) = 0$. Ainsi, $d'$ garde un signe constant autour de $a$ (elle est soit positive, soit négative). Par conséquent, la fonction $d$ est strictement monotone autour de $a$. Comme $d(a) = 0$, elle change nécessairement de signe en passant par $a$, ce qui démontre le changement de position relative entre la courbe et sa tangente. $\Box$}
+
+\section{L'inégalité de Jensen}
+
+L'inégalité de Jensen est la généralisation par récurrence de la définition de la convexité à une combinaison de $n$ points (appelée combinaison convexe). C'est un outil puissant pour démontrer de nombreuses inégalités classiques en analyse.
+
+\theorem{Théorème}{Inégalité de Jensen discrète}{false}{
+    Soit $f: I \to \mathbb{R}$ une fonction convexe sur un intervalle $I$. \\
+    Pour tout entier $n \geq 2$, pour tous $x_1, x_2, \dots, x_n \in I$ et pour tous réels $\lambda_1, \lambda_2, \dots, \lambda_n \in [0, 1]$ tels que $\sum_{i=1}^n \lambda_i = 1$, on a :
+    \[
+        f\left( \sum_{i=1}^n \lambda_i x_i \right) \leq \sum_{i=1}^n \lambda_i f(x_i)
+    \]
+}
+
+\noindent{\textbf{Preuve :}\\
+Montrons le résultat par récurrence sur $n \geq 2$.\\
+$\bullet$ \textbf{Initialisation ($n=2$):} Pour $n=2$, on a $\lambda_1 + \lambda_2 = 1 \implies \lambda_2 = 1 - \lambda_1$. L'inégalité devient $f(\lambda_1 x_1 + (1-\lambda_1)x_2) \leq \lambda_1 f(x_1) + (1-\lambda_1)f(x_2)$, ce qui est exactement la définition d'une fonction convexe. L'initialisation est vérifiée.\\
+$\bullet$ \textbf{Hérédité:} Supposons la propriété vraie à un rang $n \geq 2$. Soient $x_1, \dots, x_{n+1} \in I$ et $\lambda_1, \dots, \lambda_{n+1} \in [0,1]$ tels que $\sum_{i=1}^{n+1} \lambda_i = 1$. Si $\lambda_{n+1} = 1$, alors tous les autres $\lambda_i$ sont nuls et l'inégalité est triviale. Supposons donc $\lambda_{n+1} < 1$. On peut écrire :
+\[ \sum_{i=1}^{n+1} \lambda_i x_i = \left( \sum_{i=1}^n \lambda_i x_i \right) + \lambda_{n+1} x_{n+1} = (1-\lambda_{n+1}) \sum_{i=1}^n \frac{\lambda_i}{1-\lambda_{n+1}} x_i + \lambda_{n+1} x_{n+1} \]
+Par convexité de $f$ (cas $n=2$ avec les poids $1-\lambda_{n+1}$ et $\lambda_{n+1}$), on obtient :
+\[ f\left( \sum_{i=1}^{n+1} \lambda_i x_i \right) \leq (1-\lambda_{n+1}) f\left( \sum_{i=1}^n \frac{\lambda_i}{1-\lambda_{n+1}} x_i \right) + \lambda_{n+1} f(x_{n+1}) \]
+Comme $\sum_{i=1}^n \frac{\lambda_i}{1-\lambda_{n+1}} = \frac{1}{1-\lambda_{n+1}} \sum_{i=1}^n \lambda_i = \frac{1-\lambda_{n+1}}{1-\lambda_{n+1}} = 1$, on peut appliquer l'hypothèse de récurrence au rang $n$ à la première partie :
+\[ f\left( \sum_{i=1}^n \frac{\lambda_i}{1-\lambda_{n+1}} x_i \right) \leq \sum_{i=1}^n \frac{\lambda_i}{1-\lambda_{n+1}} f(x_i) \]
+En réinjectant, les termes $(1-\lambda_{n+1})$ se simplifient :
+\[ f\left( \sum_{i=1}^{n+1} \lambda_i x_i \right) \leq \sum_{i=1}^n \lambda_i f(x_i) + \lambda_{n+1} f(x_{n+1}) = \sum_{i=1}^{n+1} \lambda_i f(x_i) \]
+L'hérédité est démontrée. La propriété est donc vraie pour tout $n \geq 2$. $\Box$}
+
+\remark{
+    En termes probabilistes, si $X$ est une variable aléatoire discrète prenant un nombre fini de valeurs dans $I$, l'inégalité de Jensen se réécrit simplement :
+    \[
+        f(\mathbb{E}[X]) \leq \mathbb{E}[f(X)]
+    \]
+}
+
+\example{
+    La fonction $x \mapsto -\ln(x)$ est convexe sur $]0, +\infty[$ (car sa dérivée seconde est $x \mapsto \frac{1}{x^2} > 0$). En lui appliquant l'inégalité de Jensen avec des poids égaux $\lambda_i = \frac{1}{n}$, on obtient pour tous $x_1, \dots, x_n > 0$ :
+    \[
+        -\ln\left( \frac{1}{n} \sum_{i=1}^n x_i \right) \leq -\frac{1}{n} \sum_{i=1}^n \ln(x_i) = -\ln\left( \prod_{i=1}^n x_i \right)^{\frac{1}{n}}
+    \]
+    Par décroissance de la fonction $-\ln$, on en déduit l'inégalité \textbf{arithmético-géométrique} :
+    \[
+        \sqrt[n]{x_1 x_2 \dots x_n} \leq \frac{x_1 + x_2 + \dots + x_n}{n}
+    \]
+}
+
+\training{Soit $n \in \mathbb{N}^*$ et $x_1, x_2, \dots, x_n$ des réels strictement positifs. En utilisant la convexité d'une fonction de référence bien choisie, montrer que :
+\[
+    \frac{n}{\frac{1}{x_1} + \frac{1}{x_2} + \dots + \frac{1}{x_n}} \leq \frac{x_1 + x_2 + \dots + x_n}{n}
+\]
+(Autrement dit, la moyenne harmonique est toujours inférieure ou égale à la moyenne arithmétique).}
+\noindent\carreaux{20}
 \newpage
 \tableofcontents
 \end{document}
