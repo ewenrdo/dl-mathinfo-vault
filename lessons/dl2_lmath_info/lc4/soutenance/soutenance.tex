@@ -1,0 +1,211 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL2 Math-Info LC4}
+\fancyhead[C]{Langage C}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Notes de soutenance}
+
+\section{Introduction}
+\textit{par William Fijean}
+
+\section{Abstraction}
+\textit{par William Fijean}
+
+\section{Traitement du fichier}
+\subsection{Conversion du fichier en commandes}
+\begin{enumerate}
+    \item On lit le fichier ligne par ligne (\texttt{fgets}),
+    \item Pour chaque ligne, on crée un \texttt{TokenSlice} en utilisant la fonction \texttt{strtok} pour découper la ligne en tokens (en utilisant les espaces comme séparateurs),
+    \item On crée un \texttt{CommandSlice} qui contient tous les \texttt{TokenSlice} du fichier, et on utilise la fonction \texttt{parseCommand} pour chaque \texttt{TokenSlice} afin d'exécuter les commandes correspondantes.
+\end{enumerate}
+\subsection{Gestion des chemins}
+On utilise un slice de tableau de chaînes de caractères :
+\begin{verbatim}
+typedef struct chemin {
+    char *original;  // chemin original
+    char **tokens;   // tableau (dynamique) de sous-chaînes
+    int nbTokens;    // nombre de sous-chaînes
+    int capacity;    // capacité actuelle du tableau
+} Path;
+\end{verbatim}
+
+\section{Commandes}
+\subsection{cp, mv, touch/mkdir}
+\textit{par William Fijean}
+
+\subsection{pwd}
+
+Idée de l'algorithme :
+\begin{enumerate}
+    \item On crée un slice de chaînes de caractères,
+    \item On remonte du noeud courant jusqu'à la racine, et à chaque fois on ajoute le nom du noeud courant en fin de slice,
+    \item On parcourt le slice à l'envers pour construire le chemin absolu comme suit :
+\end{enumerate}
+
+\begin{lstlisting}[language=C]
+    result[0] = '\0';
+
+    if (iterator == 0)
+    {
+        strcpy(result, "/");
+    }
+    else
+    {
+        for (int i = iterator - 1; i >= 0; i--)
+        {
+            strcat(result, "/");
+            strcat(result, basenames[i]);
+        }
+    }
+\end{lstlisting}
+
+\subsection{rm}
+
+\begin{enumerate}
+    \item On cherche le noeud parent du noeud à supprimer (en utilisant la fonction getParentFromPathIfExists),
+    \item On cherche dans les fils directs du noeud parent celui qu'on veut supprimer,
+    \item Si on le trouve, on vérifie que ce n'est pas un parent du noeud courant (ou le noeud courant lui-même), sinon on affiche un message d'erreur,
+    \item Si c'est bon, on supprime le noeud (en utilisant la fonction removeNode).
+\end{enumerate}
+
+\subsection{find}
+
+On ne regarde que le cas "classique" demandé par le sujet (\texttt{find NAME}) :
+
+\begin{enumerate}
+    \item On parcourt récursivement l'arbre à partir du noeud de départ,
+    \item À chaque noeud, on vérifie si son nom contient le motif recherché (en utilisant la fonction strstr),
+    \item Si c'est le cas, on affiche le chemin absolu de ce noeud (en utilisant la commande \texttt{pwd}).
+\end{enumerate}
+
+On a trois autres cas, sur lesquels ont reviendra dans la partie \textit{Bonus}.
+
+\section{Bonus}
+
+
+\subsection{Arguments de find et automates}
+
+On utlise une fonction \texttt{match} qui prend en argument une chaîne de caractères et un motif, et qui retourne un booléen indiquant si la chaîne correspond au motif.\\
+On a décidé de traité trois cas, je ne présente que les deux qui sont opérationnels :
+\begin{itemize}
+    \item \texttt{find *abc} : \texttt{strcmp(node->nom + (nameLength - (len - 1)), patern + 1) == 0} (on vérifie que le motif est à la fin du nom),
+    \item \texttt{find abc*} : \texttt{strncmp(node->nom, patern, len - 1) == 0}
+\end{itemize}
+
+\subsection{Interpréteur de commandes shell}
+
+On a cette boucle infinie :
+\begin{enumerate}
+    \item On stocke le caractère entré dans un \texttt{buffer} (dont on gère la taille),
+    \item Quand on reçoit un retour à la ligne, on crée un \texttt{TokenSlice} comme dans le cas de l'interprète fichier et on utilise \texttt{parseCommand}.
+\end{enumerate}
+
+\subsection{Options de ls, help et printLine}
+\textit{par William Fijean}
+
+\section{Bugs}
+\begin{enumerate}
+    \item Certains textes sont en anglais (problème d'uniformisation),
+    \item Le \texttt{find *abc*} ne fonctionne pas (il cherche un facteur \texttt{abc*} avec \texttt{*} comme un caractère normal, et pas comme un joker).
+\end{enumerate}
+Quelques pistes d'optimisation : insérer les fichiers en début de liste chaînée (on l'a fait par choix pour respecter les specs, mais ça casse la constance de la complexité de la commande \texttt{mkdir/touch}).
+
+\newpage
+\section{Annexes}
+\subsection{getParentFromPathIfExists}
+\begin{enumerate}
+    \item On vérifie que les arguments sont valides (non nuls),
+    \item On initialise un pointeur vers le noeud courant à partir du noeud de départ (qui peut être la racine ou le noeud courant selon que le chemin est absolu),
+    \item Si le chemin est vide, on retourne le noeud courant,
+    \item Sinon, on parcourt les tokens du chemin (sauf le dernier) :
+    \begin{enumerate}
+        \item Si le token est \texttt{..}, on remonte au parent du noeud courant,
+        \item Si le token est \texttt{.}, on reste sur le noeud courant,
+        \item Sinon, on cherche parmi les fils du noeud courant un noeud dont le nom correspond au token. Si on le trouve, on descend dans ce noeud, sinon on retourne \texttt{NULL}.
+    \end{enumerate}
+    \item Si on a parcouru tous les tokens sans problème, on retourne le noeud courant. 
+    \item Complexité : $O(n \cdot m)$ où $n$ est le nombre de tokens du chemin et $m$ est le nombre de fils d'un noeud (dans le pire cas, on doit parcourir tous les fils pour trouver le token correspondant).
+\end{enumerate}
+
+\begin{lstlisting}[language=C]
+
+noeud *getParentFromPathIfExists(noeud *start, Path *path)
+{
+    if (!start || !path)
+        return NULL;
+
+    noeud *current = start;
+    if (path->original[0] == '/')
+        current = current->racine;
+
+    if (path->nbTokens == 0)
+        return current;
+
+    for (int i = 0; i < path->nbTokens - 1; ++i)
+    {
+        if (strcmp(path->tokens[i], "..") == 0)
+        {
+            current = current->pere;
+        }
+        else if (strcmp(path->tokens[i], ".") == 0)
+        {
+            continue;
+        }
+        else
+        {
+            liste_noeud *next = current->fils;
+            int found = 0;
+            while (next)
+            {
+                if (strcmp(next->no->nom, path->tokens[i]) == 0)
+                {
+                    current = next->no;
+                    found = 1;
+                    break;
+                }
+                next = next->succ;
+            }
+            if (!found)
+                return NULL;
+        }
+    }
+    return current;
+}
+
+\end{lstlisting}
+\subsection{CommandSlice et TokenSlice}
+
+\begin{verbatim}
+// Slice de tokens
+typedef struct {
+    char **content;
+    int length;
+    int capacity;
+} TokenSlice;
+
+// Slice des lignes
+typedef struct {
+    TokenSlice *lines;
+    int length;
+    int capacity;
+} CommandSlice;
+\end{verbatim}
+
+\end{document}
