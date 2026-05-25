@@ -1,0 +1,405 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{Préparation CAPES}
+\fancyhead[C]{Statistiques}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Séries statistique à une variable}
+
+\noindent Ce chapitre est consacré à l'étude des séries statistiques quantitatives à une variable. Nous allons introduire les principales caractéristiques de position et de dispersion qui permettent de résumer et d'analyser les données d'une série statistique.\\
+
+\section{Définitions et notations}
+
+\definition{
+    Soit $\Omega$ une population finie de cardinal $N \in \mathbb{N}^*$. 
+    On appelle \textbf{série statistique quantitative à une variable} la donnée d'un $N$-uplet $(t_1, t_2, \dots, t_N) \in \mathbb{R}^N$ représentant les valeurs d'un caractère mesuré sur les $N$ individus de la population.
+}
+
+\vocabulary{On appelle \textbf{population} l'ensemble des \textbf{individus} sur lesquels on réalise une étude statistique. Un \textbf{caractère} est une propriété ou une mesure que l'on observe sur les individus de la population.}
+
+\remark{
+    En pratique, plusieurs individus peuvent présenter le même caractère. On préfère donc condenser l'information en regroupant les valeurs distinctes.
+}
+
+\definition{
+    Soit $\Omega$ une population finie de cardinal $N \in \mathbb{N}^*$.
+    On appelle \textbf{série statistique qualitative à une variable} la donnée d'un $N$-uplet $(t_1, t_2, \dots, t_N) \in E^N$ où $E$ est un ensemble fini de modalités qualitatives.
+}
+
+\ndlr{Ce type de série ne semble pas figurer au programme du CAPES, mais il est important de le mentionner pour la complétude du cours et la cohérence avec les programmes du lycée.}
+
+\definition{
+    Soit $\{x_1, x_2, \dots, x_k\}$ l'ensemble des valeurs distinctes de la série, ordonnées de telle sorte que $x_1 < x_2 < \dots < x_k$ (où $k \le N$).
+    \begin{itemize}
+        \item L'\textbf{effectif} $n_i$ associé à la valeur $x_i$ est le nombre de fois où cette valeur apparaît dans le $N$-uplet initial. Il vérifie la relation :
+        \[ \sum_{i=1}^{k} n_i = N \]
+        \item La \textbf{fréquence} $f_i$ associée à la valeur $x_i$ est le rapport :
+        \[ f_i = \frac{n_i}{N} \]
+        Elle vérifie les propriétés $f_i \in [0;1]$ et $\sum_{i=1}^{k} f_i = 1$.
+    \end{itemize}
+    La série statistique est alors entièrement définie par l'ensemble des couples $(x_i, n_i)$ ou $(x_i, f_i)$ pour $i \in \{1, \dots, k\}$.
+}
+
+
+\example{
+    Considérons les notes obtenues \textit{(le caractère)} par un échantillon de $N = 5$ élèves à un examen : $10, 12, 20, 12, 12$. Ici, la population $\Omega$ est l'ensemble des 5 élèves. Le nombre de valeurs distinctes est $k = 3$.\\
+    On ordonne et on organise ces données sous forme de tableau :
+    \begin{center}
+        \begin{tabular}{|l|c|c|c|}
+            \hline
+            Valeur distincte ($x_i$) & 10 & 12 & 20 \\
+            \hline
+            Effectif ($n_i$) & 1 & 3 & 1 \\
+            \hline
+            Fréquence ($f_i$) & 0,2 & 0,6 & 0,2 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    On vérifie bien que :
+    \begin{itemize}
+        \item L'effectif total est $N = 1 + 3 + 1 = 5$.
+        \item La somme des fréquences est $\sum f_i = 0,2 + 0,6 + 0,2 = 1$.
+    \end{itemize}
+}
+
+\example{
+    Considérons les couleurs préférées \textit{(le caractère)} d'un échantillon de $N = 10$ personnes : rouge, bleu, rouge, vert, bleu, rouge, vert, rouge, bleu, vert. Ici, la population $\Omega$ est l'ensemble des 10 personnes. Le nombre de valeurs distinctes est $k = 3$.\\
+    On ordonne et on organise ces données sous forme de tableau :
+    \begin{center}
+        \begin{tabular}{|l|c|c|c|}
+            \hline
+            Valeur distincte ($x_i$) & Rouge & Bleu & Vert \\
+            \hline
+            Effectif ($n_i$) & 4 & 3 & 3 \\
+            \hline
+            Fréquence ($f_i$) & 0,4 & 0,3 & 0,3 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    On vérifie bien que :
+    \begin{itemize}
+        \item L'effectif total est $N = 4 + 3 + 3 = 10$.
+        \item La somme des fréquences est $\sum f_i = 0,4 + 0,3 + 0,3 = 1$.
+    \end{itemize}
+}
+
+\section{Caractéristiques de position}
+
+\subsection{Mode d'une série statistique}
+
+\definition{
+    On appelle \textbf{mode} de la série statistique \textbf{quantitative ou qualitative} la valeur $x_i$ qui correspond à l'effectif $n_i$ (ou à la fréquence $f_i$) le plus grand. 
+}
+
+\vocabulary{On dit d'une série qu'elle est \textbf{unimodale} si elle admet un mode unique, \textbf{bimodale} si elle admet exactement deux modes, et \textbf{multimodale} si elle admet trois modes ou plus.}
+
+\example{
+    Considérons la série statistique suivante : $1, 2, 2, 3, 4$. Le mode de cette série est $2$ car c'est la valeur qui apparaît le plus fréquemment (deux fois). Cette série est unimodale.
+}
+
+\subsection{Moyenne d'une série statistique}
+
+\definition{
+    Soit une série statistique \textbf{quantitative} définie par les couples $(x_i, n_i)$ ou $(x_i, f_i)$ pour $i \in \{1, \dots, k\}$. 
+    On appelle \textbf{moyenne} de la série statistique, notée $\bar{x}$, le réel défini par :
+    \[ \bar{x} = \frac{1}{N} \sum_{i=1}^{k} n_i x_i = \sum_{i=1}^{k} f_i x_i \]
+}
+
+\theorem{Propriété}{}{false}{
+    \begin{enumerate}
+        \item \textbf{Linéarité (ou barycentre) :} La moyenne de la somme de deux séries est la somme des moyennes.
+        \item \textbf{Moyenne globale :} Soient deux sous-populations disjointes de tailles $N_1$ et $N_2$, de moyennes respectives $\bar{x}_1$ et $\bar{x}_2$. La moyenne $\bar{x}$ de la population totale ($N = N_1 + N_2$) est donnée par :
+        \[ \bar{x} = \frac{N_1 \bar{x}_1 + N_2 \bar{x}_2}{N_1 + N_2} \]
+    \end{enumerate}
+}
+
+\theorem{Théorème}{Moindre carré}{false}{
+    La moyenne $\bar{x}$ est l'unique réel $\theta$ qui minimise la fonction $g : \theta \mapsto \sum_{i=1}^{k} n_i (x_i - \theta)^2$.
+}
+
+\noindent{\textbf{Preuve :}\\
+    La fonction $g$ est une fonction polynomiale du second degré en $\theta$. Développons l'expression :
+    \[ g(\theta) = \sum_{i=1}^{k} n_i (x_i^2 - 2\theta x_i + \theta^2) = \sum_{i=1}^{k} n_i x_i^2 - 2\theta \sum_{i=1}^{k} n_i x_i + \theta^2 \sum_{i=1}^{k} n_i \]
+    En utilisant le fait que $\sum_{i=1}^{k} n_i = N$ et $\sum_{i=1}^{k} n_i x_i = N\bar{x}$, on obtient :
+    \[ g(\theta) = \sum_{i=1}^{k} n_i x_i^2 - 2\theta (N\bar{x}) + N\theta^2 \]
+    $g$ est de la forme $A\theta^2 + B\theta + C$ avec $A = N > 0$. Elle admet donc un minimum unique en :
+    \[ \theta = -\frac{B}{2A} = -\frac{-2N\bar{x}}{2N} = \bar{x} \]
+    La fonction $g$ atteint bien son minimum global et unique lorsque $\theta = \bar{x}$.
+}
+\subsection{Médiane d'une série statistique}
+
+\definition{
+    On appelle \textbf{médiane} de la série statistique \textbf{quantitative} tout réel $M_e$ vérifiant les deux conditions suivantes :
+    \begin{itemize}
+        \item Au moins $50\,\%$ des individus ont une valeur inférieure ou égale à $M_e$.
+        \item Au moins $50\,\%$ des individus ont une valeur supérieure ou égale à $M_e$.
+    \end{itemize}
+}
+
+\example{
+    Considérons la série statistique suivante : $1, 2, 3, 4, 5$. La médiane de cette série est $M_e = 3$ car :
+    \begin{itemize}
+        \item Les valeurs $1$ et $2$ sont inférieures ou égales à $3$, soit $40\,\%$ des données.
+        \item Les valeurs $4$ et $5$ sont supérieures ou égales à $3$, soit également $40\,\%$ des données.
+    \end{itemize}
+    Ainsi, la médiane est le point d'équilibre qui sépare la série en deux parties égales en termes de nombre d'individus.
+}
+
+\theorem{Propriété pratique de calcul}{}{false}{
+    On considère les valeurs de la série sous leur forme initiale de $N$-uplet ordonné par ordre croissant : $t_{(1)} \le t_{(2)} \le \dots \le t_{(N)}$.
+    \begin{itemize}
+        \item Si $N$ est impair, il existe $p \in \mathbb{N}$ tel que $N = 2p + 1$. La médiane est unique et vaut :
+        \[ M_e = t_{(p+1)} \]
+        \item Si $N$ est pair, il existe $p \in \mathbb{N}^*$ tel que $N = 2p$. Tout réel de l'intervalle $[t_{(p)} ; t_{(p+1)}]$ est une médiane. Par convention, on choisit le milieu de cet intervalle :
+        \[ M_e = \frac{t_{(p)} + t_{(p+1)}}{2} \]
+    \end{itemize}
+}
+
+\theorem{Théorème}{Optimisation en valeur absolue}{false}{
+    La médiane $M_e$ (ou tout réel médian au sens de la définition si $N$ est pair) est un réel $\theta$ qui minimise la fonction $h : \theta \mapsto \sum_{i=1}^{k} n_i |x_i - \theta|$.
+}
+
+\noindent{\textbf{Preuve (dans le cas où toutes les données sont distinctes, $k=N$) :}\\
+    La fonction $h$ est continue, affine par morceaux et convexe. Étudions son taux d'accroissement (sa dérivée à droite) sur chaque intervalle $[x_j ; x_{j+1}]$.\\
+    Pour $\theta \notin \{x_1, \dots, x_N\}$, la fonction $h$ est dérivable et sa dérivée vaut :
+    \[ h'(\theta) = \sum_{i=1}^N \text{sgn}(\theta - x_i) = \text{card}(\{i \ / \ x_i < \theta\}) - \text{card}(\{i \ / \ x_i > \theta\}) \]
+    \begin{itemize}
+        \item Si $\theta < M_e$, le nombre de valeurs supérieures à $\theta$ est strictement plus grand que le nombre de valeurs inférieures : $h'(\theta) < 0$, la fonction décroît.
+        \item Si $\theta > M_e$, le nombre de valeurs inférieures à $\theta$ est strictement plus grand que le nombre de valeurs supérieures : $h'(\theta) > 0$, la fonction croît.
+    \end{itemize}
+    Par conséquent, le minimum global de $h$ est atteint au point de bascule, qui correspond précisément aux critères de la médiane $M_e$.
+}
+
+
+\section{Caractéristiques de dispersion}
+Les caractéristiques suivantes sont définies uniquement pour les séries statistiques quantitatives, car elles mesurent la dispersion des données autour d'une valeur centrale (comme la moyenne ou la médiane).
+
+\subsection{Étendue}
+
+\definition{
+    On appelle \textbf{étendue} d'une série statistique \textbf{quantitative}, notée $E$, la différence entre la plus grande valeur et la plus petite valeur prises par le caractère :
+    \[ E = x_k - x_1 \]
+}
+
+\subsection{Quartiles et écart interquartile}
+
+\definition{
+    On appelle \textbf{premier quartile}, noté $Q_1$, le plus petit élément de la série tel qu'au moins $25\,\%$ des données soient inférieures ou égales à $Q_1$.\\
+    On appelle \textbf{troisième quartile}, noté $Q_3$, le plus petit élément de la série tel qu'au moins $75\,\%$ des données soient inférieures ou égales à $Q_3$.
+}
+
+\theorem{Propriété pratique de calcul}{}{false}{
+    On considère les valeurs de la série ordonnées par ordre croissant : $t_{(1)} \le t_{(2)} \le \dots \le t_{(N)}$.
+    \begin{itemize}
+        \item $Q_1$ correspond à la valeur d'indice $\lceil 0,25N \rceil$ (où $\lceil \cdot \rceil$ désigne la partie entière supérieure).
+        \item $Q_3$ correspond à la valeur d'indice $\lceil 0,75N \rceil$.
+    \end{itemize}
+}
+
+\definition{
+    On appelle \textbf{écart interquartile} le réel positif défini par $Q_3 - Q_1$. Il mesure la dispersion des $50\,\%$ centraux de la population.
+}
+
+\example{
+    On considère la durée du règne des 7 derniers papes de l'Église catholique :
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            François & Benoît XVI & Jean-Paul II & Jean-Paul I & Paul VI & Jean XXIII & Pie XII \\
+            \hline
+            12,1 ans & 7,8 ans & 26,5 ans & 33 jours ($\approx$ 0,1 an) & 15,1 ans & 4,6 ans & 19,6 ans \\
+            \hline
+        \end{tabular}
+    \end{center}
+    En ordonnant ces $N = 7$ durées de règne par ordre croissant, on obtient la série brute suivante (exprimée en années) : 
+    \[ 0,1 \quad ; \quad 4,6 \quad ; \quad 7,8 \quad ; \quad 12,1 \quad ; \quad 15,1 \quad ; \quad 19,6 \quad ; \quad 26,5 \]
+    
+    \noindent Déterminons les caractéristiques de dispersion de cette série :
+    \begin{itemize}
+        \item \textbf{Premier quartile $Q_1$ :} Il correspond à la valeur d'indice $\lceil 0,25 \times 7 \rceil = \lceil 1,75 \rceil = 2$. \\
+        La deuxième valeur de la série ordonnée est $Q_1 = 4,6$ ans (durée du règne de Jean XXIII).
+        \item \textbf{Troisième quartile $Q_3$ :} Il correspond à la valeur d'indice $\lceil 0,75 \times 7 \rceil = \lceil 5,25 \rceil = 6$. \\
+        La sixième valeur de la série ordonnée est $Q_3 = 19,6$ ans (durée du règne de Pie XII).
+        \item \textbf{Écart interquartile :} Il est égal à $Q_3 - Q_1 = 19,6 - 4,6 = 15$ ans. 
+    \end{itemize}
+    L'écart interquartile indique que la moitié centrale des durées de ces pontificats s'étend sur une période de 15 ans.
+}
+
+\remark{L'étude de cette série met parfaitement en évidence la robustesse de l'écart interquartile face aux valeurs extrêmes, contrairement à l'étendue.}
+
+\subsection{Variance et écart-type}
+
+\definition{
+    Soit une série statistique définie par les couples $(x_i, n_i)$ pour $i \in \{1, \dots, k\}$ et de moyenne $\bar{x}$.
+    \begin{itemize}
+        \item On appelle \textbf{variance} de la série statistique, notée $V$, le réel positif défini par la moyenne des carrés des écarts à la moyenne :
+        \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 = \sum_{i=1}^{k} f_i (x_i - \bar{x})^2 \]
+        \item On appelle \textbf{écart-type} de la série statistique, noté $\sigma$, la racine carrée de sa variance :
+        \[ \sigma = \sqrt{V} \]
+    \end{itemize}
+}
+
+\remark{L'équart-type est une mesure de dispersion qui a la même unité que les données, contrairement à la variance qui est exprimée en unités au carré.}
+
+\theorem{Théorème}{Formule de König-Huygens}{false}{
+    La variance $V$ d'une série statistique est égale à la moyenne des carrés des valeurs moins le carré de leur moyenne :
+    \[ V = \left( \frac{1}{N} \sum_{i=1}^{k} n_i x_i^2 \right) - \bar{x}^2 = \left( \sum_{i=1}^{k} f_i x_i^2 \right) - \bar{x}^2 \]
+}
+
+\noindent{\textbf{Preuve :}\\
+    Développons le terme général sous la somme de la définition de la variance :
+    \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i^2 - 2\bar{x}x_i + \bar{x}^2) \]
+    Par linéarité de la somme, on peut séparer l'expression en trois sommations distinctes :
+    \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i x_i^2 - \frac{1}{N} \sum_{i=1}^{k} 2\bar{x}n_ix_i + \frac{1}{N} \sum_{i=1}^{k} n_i\bar{x}^2 \]
+    Dans la deuxième et la troisième somme, le terme $\bar{x}$ ne dépend pas de l'indice de sommation $i$, on peut donc le mettre en facteur :
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}\left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i\right) + \bar{x}^2\left(\frac{1}{N} \sum_{i=1}^{k} n_i\right) \]
+    Or, par définition de la moyenne et de l'effectif total, on sait que :
+    \[ \frac{1}{N} \sum_{i=1}^{k} n_i x_i = \bar{x} \quad \text{et} \quad \frac{1}{N} \sum_{i=1}^{k} n_i = \frac{N}{N} = 1 \]
+    En substituant ces relations dans l'égalité, on obtient :
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}(\bar{x}) + \bar{x}^2(1) \]
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}^2 + \bar{x}^2 \]
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - \bar{x}^2 \]
+    Ce qui démontre la formule de König-Huygens. \hfill $\square$
+}
+
+\example{
+    Considérons la série statistique suivante : $1, 2, 3, 4, 5$. Calculons sa variance et son écart-type.
+    \begin{itemize}
+        \item La moyenne de la série est $\bar{x} = \frac{1 + 2 + 3 + 4 + 5}{5} = 3$.
+        \item La moyenne des carrés des valeurs est $\frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2}{5} = \frac{55}{5} = 11$.
+        \item En appliquant la formule de König-Huygens, on trouve :
+        \[ V = 11 - 3^2 = 11 - 9 = 2 \]
+        \[ \sigma = \sqrt{V} = \sqrt{2} \approx 1,41 \]
+    \end{itemize}
+    Ainsi, la variance de cette série est $2$ et son écart-type est d'environ $1,41$.
+}
+
+\subsection{Diagramme en boîte à moustaches}
+
+\definition{
+    Le \textbf{diagramme en boîte à moustaches} (ou boîte à pattes, ou \textit{boxplot}) est une représentation graphique résumant visuellement la distribution d'une série statistique quantitative à l'aide de cinq caractéristiques numériques appelées \textbf{les cinq nombres de synthèse} :
+    \begin{itemize}
+        \item La valeur minimale ($x_1$) ;
+        \item Le premier quartile ($Q_1$) ;
+        \item La médiane ($M_e$) ;
+        \item Le troisième quartile ($Q_3$) ;
+        \item La valeur maximale ($x_k$).
+    \end{itemize}
+}
+
+\example{
+    Reprenons la série statistique du rectangle central des durées de règne des 7 derniers papes (triée par ordre croissant) :
+    \[ 0,1 \quad ; \quad 4,6 \quad ; \quad 7,8 \quad ; \quad 12,1 \quad ; \quad 15,1 \quad ; \quad 19,6 \quad ; \quad 26,5 \]
+    Les cinq nombres de synthèse calculés précédemment sont :
+    \begin{itemize}
+        \item $\text{Min} = 0,1$ an
+        \item $Q_1 = 4,6$ ans
+        \item $M_e = 12,1$ ans (valeur d'indice $4$)
+        \item $Q_3 = 19,6$ ans
+        \item $\text{Max} = 26,5$ ans
+    \end{itemize}
+    
+    Le diagramme se construit de la manière suivante : un rectangle (la boîte) s'étend de $Q_1$ à $Q_3$ (sa largeur vaut l'écart interquartile). Une ligne verticale marque la position de la médiane $M_e$. Les "moustaches" s'étendent de part et d'autre de la boîte jusqu'aux valeurs minimale et maximale.
+
+    \begin{center}
+        \setlength{\unitlength}{1mm}
+        \begin{picture}(100,25)
+            % Axe gradué de 0 à 30
+            \put(10,5){\line(1,0){80}}
+            \put(10,4){\line(0,1){2}}\put(8,1){0}
+            \put(23.3,4){\line(0,1){2}}\put(22,1){5}
+            \put(36.6,4){\line(0,1){2}}\put(35,1){10}
+            \put(50,4){\line(0,1){2}}\put(48,1){15}
+            \put(63.3,4){\line(0,1){2}}\put(61,1){20}
+            \put(76.6,4){\line(0,1){2}}\put(74,1){25}
+            \put(90,4){\line(0,1){2}}\put(88,1){30}
+            \put(95,1){(années)}
+            
+            % La boîte de Q1(4.6) à Q3(19.6) -> Échelle : 1 an = 2.66 mm
+            % Début boîte : 10 + 4.6 * 2.66 = 22.2
+            % Fin boîte : 10 + 19.6 * 2.66 = 62.1
+            \put(22.2,10){\framebox(39.9,10){}}
+            
+            % Médiane Me(12.1) -> 10 + 12.1 * 2.66 = 42.2
+            \put(42.2,10){\line(0,1){10}}
+            
+            % Moustaches de Min(0.1) à Q1 et de Q3 à Max(26.5)
+            % Min : 10 + 0.1 * 2.66 = 10.3
+            % Max : 10 + 26.5 * 2.66 = 80.5
+            \put(10.3,15){\line(1,0){11.9}}
+            \put(62.1,15){\line(1,0){18.4}}
+            
+            % Bornes des moustaches
+            \put(10.3,13){\line(0,1){4}}
+            \put(80.5,13){\line(0,1){4}}
+        \end{picture}
+    \end{center}
+    On observe graphiquement l'asymétrie de la distribution : la moitié inférieure des données (entre $\text{Min}$ et $M_e$) est plus regroupée que la moitié supérieure (entre $M_e$ et $\text{Max}$).
+}
+
+\section{Transformation affine}
+
+\definition{
+    Soit une série statistique quantitative définie par les couples $(x_i, n_i)$ ou $(x_i, f_i)$ pour $i \in \{1, \dots, k\}$. 
+    Soient $a \in \mathbb{R}^*$ et $b \in \mathbb{R}$. La série statistique transformée par l'application affine $T : x \mapsto ax + b$ est définie par les couples $(y_i, n_i)$ ou $(y_i, f_i)$ où $y_i = ax_i + b$ pour chaque $i$.
+}
+
+\theorem{Propriété}{Transformation affine de la moyenne}{false}{
+    Soit une série statistique quantitative et sa transformation affine par $T : x \mapsto ax + b$. La moyenne de la série transformée, notée $\bar{y}$, est donnée par :
+    \[ \bar{y} = a\bar{x} + b \]
+}
+\theorem{Propriété}{Effet d'une transformation affine sur les indicateurs}{false}{
+    Soit une série statistique quantitative initiale et sa transformation affine par $T : x \mapsto ax + b$ avec $a \in \mathbb{R}^*$ et $b \in \mathbb{R}$.
+    \begin{enumerate}
+        \item \textbf{Indicateurs de position :} La médiane et les quartiles subissent la même transformation affine si $a > 0$. De manière générale :
+        \begin{itemize}
+            \item Si $a > 0$, alors $M_e(Y) = a M_e(X) + b$, $Q_1(Y) = a Q_1(X) + b$ et $Q_3(Y) = a Q_3(X) + b$.
+            \item Si $a < 0$, l'ordre des données étant inversé, les rôles des quartiles s'échangent : $Q_1(Y) = a Q_3(X) + b$ et $Q_3(Y) = a Q_1(X) + b$.
+        \end{itemize}
+        \item \textbf{Indicateurs de dispersion :} Les indicateurs de dispersion sont insensibles à la translation ($b$) et sont multipliés par la valeur absolue ou le carré du coefficient multiplicateur ($a$) :
+        \begin{itemize}
+            \item Étendue : $E(Y) = |a| E(X)$
+            \item Écart interquartile : $I_Q(Y) = |a| I_Q(X)$
+            \item Variance : $V(Y) = a^2 V(X)$
+            \item Écart-type : $\sigma(Y) = |a| \sigma(X)$
+        \end{itemize}
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve pour la variance et l'écart-type :}\\
+    Par définition, la variance de la série transformée $Y$ est :
+    \[ V(Y) = \frac{1}{N} \sum_{i=1}^{k} n_i (y_i - \bar{y})^2 \]
+    En substituant $y_i = ax_i + b$ et $\bar{y} = a\bar{x} + b$, on obtient :
+    \[ V(Y) = \frac{1}{N} \sum_{i=1}^{k} n_i \left[ (ax_i + b) - (a\bar{x} + b) \right]^2 \]
+    Les constantes $b$ s'annulent à l'intérieur de la parenthèse :
+    \[ V(Y) = \frac{1}{N} \sum_{i=1}^{k} n_i \left[ a(x_i - \bar{x}) \right]^2 = \frac{1}{N} \sum_{i=1}^{k} n_i a^2 (x_i - \bar{x})^2 \]
+    Par linéarité de la sommation, on peut sortir la constante $a^2$ de la somme :
+    \[ V(Y) = a^2 \left( \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 \right) = a^2 V(X) \]
+    En passant à la racine carrée pour l'écart-type, puisque $\sqrt{a^2} = |a|$ pour tout réel $a$, on en déduit :
+    \[ \sigma(Y) = \sqrt{V(Y)} = \sqrt{a^2 V(X)} = |a| \sqrt{V(X)} = |a| \sigma(X) \hfill \square \]
+}
+
+\remark{
+    Le fait que $\sigma(Y) = |a|\sigma(X)$ montre bien qu'une dispersion est une grandeur géométrique toujours positive. Une translation des données ($b$) ne modifie pas l'écartement mutuel des points, ce qui explique pourquoi $b$ n'intervient pas dans les formules de dispersion.
+}
+
+\newpage
+\tableofcontents
+\end{document}
