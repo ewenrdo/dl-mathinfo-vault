@@ -38,11 +38,10 @@ Avant d'entrer dans les calculs, il est crucial de comprendre la nature algébri
 
 \vocabulary{Un \textbf{problème de Cauchy} est un problème de résolution d'une équation différentielle avec des conditions initiales spécifiées.}
 
-
 \theorem{Théorème}{Structure de l'ensemble des solutions}{false}{
     Soit $(E) : ax' + bx = c$ une équation différentielle linéaire.
     \begin{enumerate}
-        \item L'ensemble $S_0$ des solutions de l'équation homogène associés $(E_0)$ est un \textbf{espace vectoriel} (sous-espace de $\mathcal{C}^1(I, \mathbb{R})$).
+        \item L'ensemble $S_0$ des solutions de l'équation homogène associée $(E_0)$ est un \textbf{espace vectoriel} (sous-espace de $\mathcal{C}^1(I, \mathbb{R})$).
         \item L'ensemble $S$ des solutions de l'équation complète $(E)$ est un \textbf{espace affine} de direction $S_0$. Autrement dit, si $x_p$ est une solution particulière de $(E)$, alors :
         \[
             S = \{ x_0 + x_p \quad \text{où} \quad x_0 \in S_0 \}
@@ -54,7 +53,6 @@ Avant d'entrer dans les calculs, il est crucial de comprendre la nature algébri
 1. Considérons l'application linéaire $L : \mathcal{C}^1(I, \mathbb{R}) \to \mathcal{C}^0(I, \mathbb{R})$ définie par $L(x) = ax' + bx$. Par linéarité de la dérivation et de la multiplication par une fonction, $L$ est un morphisme d'espaces vectoriels. L'ensemble $S_0$ des solutions de $(E_0)$ n'est autre que $\ker(L)$. C'est donc un sous-espace vectoriel de $\mathcal{C}^1(I, \mathbb{R})$.\\
 2. Si $x$ et $x_p$ sont deux solutions de $(E)$, alors par linéarité $L(x - x_p) = L(x) - L(x_p) = c - c = 0$. Donc $(x - x_p) \in \ker(L) = S_0$. Ainsi, toute solution s'écrit comme la somme d'une solution homogène et d'une solution particulière. $\Box$}
 
-
 \theorem{Théorème}{Théorème de Cauchy-Lipschitz linéaire}{false}{
     Soient $a, b, c$ des fonctions continues sur $I$, avec \textbf{$a(t) \neq 0$ pour tout $t \in I$}.\\
     Pour tout $t_0 \in I$ et tout $x_0 \in \mathbb{R}$, il existe \textbf{une unique} solution $x$ de l'équation $a(t)x'(t) + b(t)x(t) = c(t)$ définie sur $I$ telle que :
@@ -63,31 +61,30 @@ Avant d'entrer dans les calculs, il est crucial de comprendre la nature algébri
     \]
 }
 
-
 \theorem{Proposition}{Principe de superposition}{false}{
-    Soit $(E)$ une équation différentielle linéaire. Si $x_1$ et $x_2$ sont deux solutions de $(E)$, alors pour tous $\lambda, \mu \in \mathbb{R}$, la fonction $\lambda x_1 + \mu x_2$ est également une solution de $(E)$.
+    Soit $(E)$ une équation différentielle linéaire associée à un opérateur linéaire $L(x)$. Si $x_1$ est une solution de $L(x) = \beta_1(t)$ et $x_2$ est une solution de $L(x) = \beta_2(t)$, alors pour tous $\lambda, \mu \in \mathbb{R}$, la fonction $\lambda x_1 + \mu x_2$ est également une solution de l'équation $L(x) = \lambda \beta_1(t) + \mu \beta_2(t)$.
 }
 
 \noindent{\textbf{Preuve :}\\
-Cela découle directement de la linéarité de l'opérateur de dérivation. En effet :
+Cela découle directement de la linéarité de l'opérateur différentiel. En effet :
 \[
-    L(\lambda x_1 + \mu x_2) = (\lambda x_1 + \mu x_2)' - \alpha(\lambda x_1 + \mu x_2)
-\]
-\[
-    = \lambda(x_1' - \alpha x_1) + \mu(x_2' - \alpha x_2) = \lambda L(x_1) + \mu L(x_2) = \lambda \beta_1(t) + \mu \beta_2(t) \quad \Box
+    L(\lambda x_1 + \mu x_2) = \lambda L(x_1) + \mu L(x_2) = \lambda \beta_1(t) + \mu \beta_2(t) \quad \Box
 \]}
 
+\newpage
+\training{Démontrer la proposition précédente en exercice dans le cas général d'un opérateur linéaire du premier ordre $L(x) = ax' + bx$.}
+\noindent\carreaux{10}
 
-\section{Équations du premier ordre}
+\section{Équations du premier ordre à coefficients constants}
 
-\subsection{Équations d'ordre 1 à coefficients constants}
+Il s'agit du cas où $a$ et $b$ sont des constantes réelles (avec $a \neq 0$). Quitte à diviser par $a$, on se ramène systématiquement à la forme canonique $x'(t) - \alpha x(t) = \beta(t)$.
 
-Il s'agit du cas le plus simple où $a$ et $b$ sont des constantes réelles (avec $a \neq 0$). Quitte à diviser par $a$, on se ramène à la forme $x'(t) - \alpha x(t) = \beta(t)$.
+\subsection{Résolution du cas homogène}
 
-\theorem{Théorème}{Résolution du cas homogène à coefficients constants}{false}{
+\theorem{Théorème}{Solutions de l'équation homogène}{false}{
     Soit $\alpha \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'équation homogène $x'(t) - \alpha x(t) = 0$ sont les fonctions de la forme :
     \[
-        x(t) = C \cdot e^{\alpha t} \quad \text{où} \quad C \in \mathbb{R}
+        x(t) = C \cdot e^{alpha t} \quad \text{où} \quad C \in \mathbb{R}
     \]
     L'espace des solutions $S_0$ est un espace vectoriel de \textbf{dimension 1} dont la famille $(t \mapsto e^{\alpha t})$ est une base.
 }
@@ -97,9 +94,9 @@ Soit $x$ une solution de l'équation. Posons la fonction auxiliaire $g(t) = x(t)
 \[ g'(t) = x'(t)e^{-\alpha t} - \alpha x(t)e^{-\alpha t} = (x'(t) - \alpha x(t))e^{-\alpha t} = 0 \]
 Puisque $g'=0$ sur l'intervalle $\mathbb{R}$, $g$ est une fonction constante. Il existe donc $C \in \mathbb{R}$ tel que $g(t) = C$, ce qui donne immédiatement $x(t) = C e^{\alpha t}$. Réciproquement, on vérifie aisément que ces fonctions sont solutions. $\Box$}
 
-\subsubsection{Recherche d'une solution particulière}
+\subsection{Recherche d'une solution particulière}
 
-Pour résoudre l'équation complète $x'(t) - \alpha x(t) = \beta(t)$, il est nécessaire de trouver une solution particulière $x_p$. Deux méthodes principales sont à connaître au CAPES selon la forme du second membre.
+Pour résoudre l'équation complète, il est nécessaire de déterminer une solution particulière $x_p$. Deux approches complémentaires doivent être maîtrisées au CAPES.
 
 \theorem{Théorème}{Second membre de la forme $P(t)e^{\omega t}$}{false}{
     Soient $\alpha, \omega \in \mathbb{R}$ et $P \in \mathbb{R}[X]$. Considérons l'équation :
@@ -114,10 +111,10 @@ Pour résoudre l'équation complète $x'(t) - \alpha x(t) = \beta(t)$, il est n�
 }
 
 \remark{
-    Ce théorème est très général :
+    Ce théorème unifie plusieurs situations courantes :
     \begin{itemize}
-        \item Si $\omega = 0$, on retrouve le cas d'un second membre purement polynomial $\beta(t) = P(t)$.
-        \item Si $P(t) = 1$ (polynôme constant), on retrouve le cas d'un second membre exponentiel pur $\beta(t) = e^{\omega t}$.
+        \item Si $\omega = 0$, le second membre est un polynôme pur $\beta(t) = P(t)$.
+        \item Si $P(t) = 1$, le second membre est une exponentielle pure $\beta(t) = e^{\omega t}$.
     \end{itemize}
 }
 
@@ -140,7 +137,7 @@ Pour résoudre l'équation complète $x'(t) - \alpha x(t) = \beta(t)$, il est n�
     Une solution particulière est donc $x_p(t) = t e^{2t}$.
 }
 
-\theorem{Théorème}{Méthode de variation de la constante}{false}{
+\method{Variation de la constante}{
     Soit $\alpha \in \mathbb{R}$ et $\beta: I \to \mathbb{R}$ une fonction continue quelconque. Pour trouver une solution particulière de l'équation $x'(t) - \alpha x(t) = \beta(t)$, on cherche une fonction sous la forme :
     \[
         x_p(t) = C(t) e^{\alpha t}
@@ -155,7 +152,7 @@ Pour résoudre l'équation complète $x'(t) - \alpha x(t) = \beta(t)$, il est n�
 Soit $x_p(t) = C(t)e^{\alpha t}$. En dérivant cette fonction comme un produit, on obtient :
 \[
     x_p'(t) = C'(t)e^{\alpha t} + \alpha C(t)e^{\alpha t}
- Reds\]
+\]
 En injectant cette expression dans l'équation différentielle complète $x_p'(t) - \alpha x_p(t) = \beta(t)$, les termes contenant $C(t)$ se simplifient :
 \[
     \left(C'(t)e^{\alpha t} + \alpha C(t)e^{\alpha t}\right) - \alpha C(t)e^{\alpha t} = \beta(t) \iff C'(t)e^{\alpha t} = \beta(t)
@@ -172,55 +169,99 @@ En multipliant chaque membre par $e^{-\alpha t}$, on trouve bien $C'(t) = \beta(
     \[
         x_p(t) = (e^{t} + K)e^{2t} = e^{3t} + K e^{2t}
     \]
-    En choisissant $K=0$, on peut retenir la solution particulière $x_p(t) = e^{3t}$.
+    En choisissant $K=0$, on retient la solution particulière épurée $x_p(t) = e^{3t}$.
 }
-
 
 \remark{
-    Ce principe est extrêmement utile lorsque le second membre est une somme de fonctions de natures différentes (par exemple $\beta(t) = t + e^{3t}$). On traite chaque morceau séparément avant de sommer les solutions particulières obtenues. \textbf{Note :} Ce principe reste entièrement valable pour les équations linéaires d'ordre 2.
+    Le principe de superposition s'avère particulièrement efficace lorsque le second membre combine des fonctions de natures hybrides (par exemple $\beta(t) = t + e^{2t}$). On traite chaque composante de manière indépendante avant d'effectuer la somme des solutions particulières associées.
 }
 
-\training{Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = t + e^{2t}$ en combinant la méthode du second membre polynomial, la méthode de variation de la constante et le principe de superposition.}
+\training{Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = t + e^{2t}$ en combinant habilement les structures de solutions de la forme $P(t)e^{\omega t}$ et le principe de superposition.}
 \noindent\carreaux{10}
+
+
+\section{Équations du premier ordre à variables séparables}
+
+Ces équations ne s'inscrivent pas nécessairement dans un cadre linéaire, mais leur traitement analytique constitue un attendu technique fondamental.
+
+\definition{
+    Une équation différentielle du premier ordre est dite \textbf{à variables séparables} si elle est modélisable sous la forme :
+    \[
+        x'(t) = g(t) \cdot h(x(t))
+    \]
+    où $g$ est continue sur un intervalle $I$ et $h$ est continue sur un intervalle $J$.
+}
+
+\remark{Interprétation et formalisme (Notation de Leibniz)}{
+    Sous la notation différentielle historique $\frac{dx}{dt} = g(t)h(x)$, la séparation des variables s'organise formellement par le regroupement des expressions dépendant de mêmes variables de part et d'autre de l'égalité :
+    \[
+        \frac{1}{h(x)}\,dx = g(t)\,dt
+    \]
+    L'intégration s'effectue alors directement sur chaque membre vis-à-vis de sa propre variable : $\int \frac{1}{h(x)}\,dx = \int g(t)\,dt$.
+}
+
+\method{Résolution rigoureuse}{
+    Pour résoudre de manière rigoureuse l'équation $x'(t) = g(t) \cdot h(x(t))$ sur un intervalle :
+    \begin{enumerate}
+        \item \textbf{Solutions stationnaires :} On identifie d'abord les racines de $h$. Si un réel $x_0 \in J$ vérifie $h(x_0) = 0$, la fonction constante $x(t) = x_0$ constitue une solution de l'équation.
+        \item \textbf{Solutions non constantes :} Sur un intervalle d'étude où $h(x(t)) \neq 0$, on divise par $h(x(t))$ :
+        \[
+            \frac{x'(t)}{h(x(t))} = g(t)
+        \]
+        \item On procède à l'intégration temporelle des deux membres : $\int \frac{x'(t)}{h(x(t))} \, dt = \int g(t) \, dt$.
+        \item Par application du changement de variable de classe $\mathcal{C}^1$ donné par $u = x(t)$ (impliquant $du = x'(t)dt$), on se ramène au calcul d'une primitive de fonctions à variables découplées :
+        \[
+            \int \frac{1}{h(u)} \, du = \int g(t) \, dt
+        \]
+    \end{enumerate}
+}
+
+\example{
+    L'équation homogène linéaire à coefficients non constants $x'(t) = a(t)x(t)$ correspond au cas standard $g(t) = a(t)$ et $h(x) = x$. La fonction nulle $x(t) = 0$ est la solution stationnaire évidente. Sur tout intervalle ne contenant pas d'annulation, l'intégration donne $\ln|x| = A(t) + K$, menant aux solutions $x(t) = C e^{A(t)}$ avec $C \in \mathbb{R}$.
+}
+
+\training{Résoudre l'équation différentielle non linéaire à variables séparables suivante : $x'(t) = t \cdot x(t)^2$ sur un intervalle à définir avec précision, soumise à la condition initiale $x(0) = 1$.}
+\noindent\carreaux{10}
+
 
 \section{Équations linéaires du second ordre à coefficients constants}
 
-On s'intéresse ici aux équations de la forme $(E) : a x''(t) + b x'(t) + c x(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$. L'analyse algébrique repose entièrement sur les racines d'un polynôme.
+On étudie les équations de la forme $(E) : a x''(t) + b x'(t) + c x(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$.
 
 \definition{
     L'équation algébrique $a r^2 + b r + c = 0$ est appelée \textbf{l'équation caractéristique} associée à l'équation différentielle homogène $a x'' + b x' + c x = 0$. On note $\Delta = b^2 - 4ac$ son discriminant.
 }
 
 \theorem{Théorème}{Résolution du second ordre homogène}{false}{
-    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a x'' + b x' + c x = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa description dépend du signe du discriminant $\Delta$ :
+    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a x'' + b x' + c x = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa structure dépend de la nature des racines de l'équation caractéristique :
     \begin{itemize}
-        \item \textbf{Si $\Delta > 0$ :} L'équation caractéristique possède deux racines réelles distinctes $r_1$ et $r_2$.
+        \item \textbf{Si $\Delta > 0$ :} Deux racines réelles distinctes $r_1$ et $r_2$.
         \[ x(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t} \quad (C_1, C_2 \in \mathbb{R}) \]
-        \item \textbf{Si $\Delta = 0$ :} L'équation caractéristique possède une racine double réelle $r_0$.
+        \item \textbf{Si $\Delta = 0$ :} Une racine double réelle $r_0$.
         \[ x(t) = (C_1 t + C_2) e^{r_0 t} \quad (C_1, C_2 \in \mathbb{R}) \]
-        \item \textbf{Si $\Delta < 0$ :} L'équation caractéristique possède deux racines complexes conjuguées $r = \alpha \pm i\beta$.
+        \item \textbf{Si $\Delta < 0$ :} Deux racines complexes conjuguées $r = \alpha \pm i\beta$.
         \[ x(t) = e^{\alpha t} \left( C_1 \cos(\beta t) + C_2 \sin(\beta t) \right) \quad (C_1, C_2 \in \mathbb{R}) \]
     \end{itemize}
 }
 
 \noindent{\textbf{Preuve (pour le cas $\Delta = 0$) :}\\
 Si $\Delta = 0$, la racine double vaut $r_0 = -\frac{b}{2a}$, ce qui implique $2ar_0 + b = 0$ et $ar_0^2 + br_0 + c = 0$. \\
-Soit $x$ une solution. Posons $g(t) = x(t)e^{-r_0 t}$, soit $x(t) = g(t)e^{r_0 t}$. Dérivons deux fois :
+Soit $x$ une solution. Posons $g(t) = x(t)e^{-r_0 t}$, d'où $x(t) = g(t)e^{r_0 t}$. En dérivant successivement :
 \[ x'(t) = (g'(t) + r_0 g(t))e^{r_0 t} \]
 \[ x''(t) = (g''(t) + 2r_0 g'(t) + r_0^2 g(t))e^{r_0 t} \]
-En injectant dans l'équation $a x'' + b x' + c x = 0$ et en simplifiant par $e^{r_0 t} > 0$, on obtient :
+En injectant ces expressions au sein de l'équation $a x'' + b x' + c x = 0$ puis en simplifiant par le facteur strictement positif $e^{r_0 t}$, on obtient :
 \[ a g''(t) + (2a r_0 + b) g'(t) + (a r_0^2 + b r_0 + c) g(t) = 0 \]
-En utilisant les propriétés de $r_0$, l'équation se réduit trivialement à : $a g''(t) = 0 \implies g''(t) = 0$. \\
-Une fonction dont la dérivée seconde est nulle est une fonction affine. Il existe donc $K_1, K_2 \in \mathbb{R}$ tels que $g(t) = K_1 t + K_2$. On en déduit bien $x(t) = (K_1 t + K_2)e^{r_0 t}$. $\Box$}
+Par les relations polynomiales de $r_0$, l'équation se réduit à : $a g''(t) = 0 \implies g''(t) = 0$. \\
+Une fonction de dérivée seconde nulle étant nécessairement affine, il existe $C_1, C_2 \in \mathbb{R}$ tels que $g(t) = C_1 t + C_2$. On en déduit la forme requise $x(t) = (C_1 t + C_2)e^{r_0 t}$. $\Box$}
 
 \example{
-    Résoudre sur $\mathbb{R}$ l'équation différentielle $x''(t) + x(t) = 0$. L'équation caractéristique est $r^2 + 1 = 0$, dont les racines sont $r = \pm i$. La solution générale de l'équation homogène est donc :
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $x''(t) + x(t) = 0$. L'équation caractéristique est $r^2 + 1 = 0$, de racines complexes $r = \pm i$. La solution générale homogène s'écrit :
     \[
         x(t) = C_1 \cos(t) + C_2 \sin(t) \quad (C_1, C_2 \in \mathbb{R})
     \]
 }
 
-\training{Résoudre sur $\mathbb{R}$ le problème de Cauchy suivant :
+\training{Résoudre sur $\mathbb{R}$ le problème de Cauchy d'ordre 2 formulé par :
 \[
     \begin{cases}
         x''(t) + x(t) = 0 \\
