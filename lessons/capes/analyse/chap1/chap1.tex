@@ -45,6 +45,24 @@
 \training{Montrer que l'ensemble $C = \{x \in \mathbb{R} : x^2 \leq 1\}$ est convexe.}
 \noindent\carreaux{7}
 
+\theorem{Proposition}{Produit cartésien de convexes}{false}{
+    Si $A$ et $B$ sont des ensembles convexes de $\mathbb{R}$, alors leur produit cartésien $A \times B = \{(x, y) : x \in A, y \in B\}$ est un ensemble convexe de $\mathbb{R}^2$.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soient $(x_1, y_1), (x_2, y_2) \in A \times B$ et $t \in [0, 1]$.
+$t \cdot (x_1, y_1) + (1-t) \cdot (x_2, y_2) = (\underbrace{tx_1 + (1-t)x_2}_{\in A \text{ car convexe}}, \underbrace{ty_1 + (1-t)y_2}_{\in B \text{ car convexe}}) \in A \times B$.\\
+Donc $A \times B$ est convexe. $\Box$}
+
+\theorem{Proposition}{Intersection de convexes}{false}{
+    Si $A$ et $B$ sont des ensembles convexes de $\mathbb{R}$, alors leur intersection $A \cap B$ est un ensemble convexe de $\mathbb{R}$.
+}
+\noindent{\textbf{Preuve :}\\
+Soient $x_1, x_2 \in A \cap B$ et $t \in [0, 1]$.
+Comme $x_1, x_2 \in A \cap B$, on a $x_1, x_2 \in A$. Par convexité de $A$, on a $tx_1 + (1-t)x_2 \in A$. De même, $x_1, x_2 \in B$ et par convexité de $B$, on a $tx_1 + (1-t)x_2 \in B$.\\
+Ainsi, $tx_1 + (1-t)x_2 \in A \cap B$. $\Box$}
+
+
 \subsection{Cordes et convexité}
 
 Approchons de manière intuitive la notion de convexité à l'aide de la géométrie. Considérons une fonction $f: I \to \mathbb{R}$ définie sur un intervalle $I$. Pour deux points $x, y \in I$, on peut tracer la corde (le segment) reliant les points $(x, f(x))$ et $(y, f(y))$ sur le graphique de $f$. La convexité de la fonction est liée à la position de sa courbe par rapport à cette corde.
