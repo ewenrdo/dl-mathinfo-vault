@@ -143,6 +143,8 @@
     \[ \theta = -\frac{B}{2A} = -\frac{-2N\bar{x}}{2N} = \bar{x} \]
     La fonction $g$ atteint bien son minimum global et unique lorsque $\theta = \bar{x}$.
 }
+
+\remark{Le $(x_i - \theta)^2$ donne l'intuition : on essaie de trouver le point (\textit{i.e.} la moyenne) le plus proche de toutes les valeurs de la série, en minimisant la somme des carrés des écarts.}
 \subsection{Médiane d'une série statistique}
 
 \definition{
@@ -244,53 +246,6 @@ Les caractéristiques suivantes sont définies uniquement pour les séries stati
 
 \remark{L'étude de cette série met parfaitement en évidence la robustesse de l'écart interquartile face aux valeurs extrêmes, contrairement à l'étendue.}
 
-\subsection{Variance et écart-type}
-
-\definition{
-    Soit une série statistique définie par les couples $(x_i, n_i)$ pour $i \in \{1, \dots, k\}$ et de moyenne $\bar{x}$.
-    \begin{itemize}
-        \item On appelle \textbf{variance} de la série statistique, notée $V$, le réel positif défini par la moyenne des carrés des écarts à la moyenne :
-        \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 = \sum_{i=1}^{k} f_i (x_i - \bar{x})^2 \]
-        \item On appelle \textbf{écart-type} de la série statistique, noté $\sigma$, la racine carrée de sa variance :
-        \[ \sigma = \sqrt{V} \]
-    \end{itemize}
-}
-
-\remark{L'équart-type est une mesure de dispersion qui a la même unité que les données, contrairement à la variance qui est exprimée en unités au carré.}
-
-\theorem{Théorème}{Formule de König-Huygens}{false}{
-    La variance $V$ d'une série statistique est égale à la moyenne des carrés des valeurs moins le carré de leur moyenne :
-    \[ V = \left( \frac{1}{N} \sum_{i=1}^{k} n_i x_i^2 \right) - \bar{x}^2 = \left( \sum_{i=1}^{k} f_i x_i^2 \right) - \bar{x}^2 \]
-}
-
-\noindent{\textbf{Preuve :}\\
-    Développons le terme général sous la somme de la définition de la variance :
-    \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i^2 - 2\bar{x}x_i + \bar{x}^2) \]
-    Par linéarité de la somme, on peut séparer l'expression en trois sommations distinctes :
-    \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i x_i^2 - \frac{1}{N} \sum_{i=1}^{k} 2\bar{x}n_ix_i + \frac{1}{N} \sum_{i=1}^{k} n_i\bar{x}^2 \]
-    Dans la deuxième et la troisième somme, le terme $\bar{x}$ ne dépend pas de l'indice de sommation $i$, on peut donc le mettre en facteur :
-    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}\left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i\right) + \bar{x}^2\left(\frac{1}{N} \sum_{i=1}^{k} n_i\right) \]
-    Or, par définition de la moyenne et de l'effectif total, on sait que :
-    \[ \frac{1}{N} \sum_{i=1}^{k} n_i x_i = \bar{x} \quad \text{et} \quad \frac{1}{N} \sum_{i=1}^{k} n_i = \frac{N}{N} = 1 \]
-    En substituant ces relations dans l'égalité, on obtient :
-    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}(\bar{x}) + \bar{x}^2(1) \]
-    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}^2 + \bar{x}^2 \]
-    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - \bar{x}^2 \]
-    Ce qui démontre la formule de König-Huygens. \hfill $\square$
-}
-
-\example{
-    Considérons la série statistique suivante : $1, 2, 3, 4, 5$. Calculons sa variance et son écart-type.
-    \begin{itemize}
-        \item La moyenne de la série est $\bar{x} = \frac{1 + 2 + 3 + 4 + 5}{5} = 3$.
-        \item La moyenne des carrés des valeurs est $\frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2}{5} = \frac{55}{5} = 11$.
-        \item En appliquant la formule de König-Huygens, on trouve :
-        \[ V = 11 - 3^2 = 11 - 9 = 2 \]
-        \[ \sigma = \sqrt{V} = \sqrt{2} \approx 1,41 \]
-    \end{itemize}
-    Ainsi, la variance de cette série est $2$ et son écart-type est d'environ $1,41$.
-}
-
 \subsection{Diagramme en boîte à moustaches}
 
 \definition{
@@ -352,6 +307,53 @@ Les caractéristiques suivantes sont définies uniquement pour les séries stati
         \end{picture}
     \end{center}
     On observe graphiquement l'asymétrie de la distribution : la moitié inférieure des données (entre $\text{Min}$ et $M_e$) est plus regroupée que la moitié supérieure (entre $M_e$ et $\text{Max}$).
+}
+
+\subsection{Variance et écart-type}
+
+\definition{
+    Soit une série statistique définie par les couples $(x_i, n_i)$ pour $i \in \{1, \dots, k\}$ et de moyenne $\bar{x}$.
+    \begin{itemize}
+        \item On appelle \textbf{variance} de la série statistique, notée $V$, le réel positif défini par la moyenne des carrés des écarts à la moyenne :
+        \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 = \sum_{i=1}^{k} f_i (x_i - \bar{x})^2 \]
+        \item On appelle \textbf{écart-type} de la série statistique, noté $\sigma$, la racine carrée de sa variance :
+        \[ \sigma = \sqrt{V} \]
+    \end{itemize}
+}
+
+\remark{L'équart-type est une mesure de dispersion qui a la même unité que les données, contrairement à la variance qui est exprimée en unités au carré.}
+
+\theorem{Théorème}{Formule de König-Huygens}{false}{
+    La variance $V$ d'une série statistique est égale à la moyenne des carrés des valeurs moins le carré de leur moyenne :
+    \[ V = \left( \frac{1}{N} \sum_{i=1}^{k} n_i x_i^2 \right) - \bar{x}^2 = \left( \sum_{i=1}^{k} f_i x_i^2 \right) - \bar{x}^2 \]
+}
+
+\noindent{\textbf{Preuve :}\\
+    Développons le terme général sous la somme de la définition de la variance :
+    \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i - \bar{x})^2 = \frac{1}{N} \sum_{i=1}^{k} n_i (x_i^2 - 2\bar{x}x_i + \bar{x}^2) \]
+    Par linéarité de la somme, on peut séparer l'expression en trois sommations distinctes :
+    \[ V = \frac{1}{N} \sum_{i=1}^{k} n_i x_i^2 - \frac{1}{N} \sum_{i=1}^{k} 2\bar{x}n_ix_i + \frac{1}{N} \sum_{i=1}^{k} n_i\bar{x}^2 \]
+    Dans la deuxième et la troisième somme, le terme $\bar{x}$ ne dépend pas de l'indice de sommation $i$, on peut donc le mettre en facteur :
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}\left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i\right) + \bar{x}^2\left(\frac{1}{N} \sum_{i=1}^{k} n_i\right) \]
+    Or, par définition de la moyenne et de l'effectif total, on sait que :
+    \[ \frac{1}{N} \sum_{i=1}^{k} n_i x_i = \bar{x} \quad \text{et} \quad \frac{1}{N} \sum_{i=1}^{k} n_i = \frac{N}{N} = 1 \]
+    En substituant ces relations dans l'égalité, on obtient :
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}(\bar{x}) + \bar{x}^2(1) \]
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - 2\bar{x}^2 + \bar{x}^2 \]
+    \[ V = \left(\frac{1}{N} \sum_{i=1}^{k} n_i x_i^2\right) - \bar{x}^2 \]
+    Ce qui démontre la formule de König-Huygens. \hfill $\square$
+}
+
+\example{
+    Considérons la série statistique suivante : $1, 2, 3, 4, 5$. Calculons sa variance et son écart-type.
+    \begin{itemize}
+        \item La moyenne de la série est $\bar{x} = \frac{1 + 2 + 3 + 4 + 5}{5} = 3$.
+        \item La moyenne des carrés des valeurs est $\frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2}{5} = \frac{55}{5} = 11$.
+        \item En appliquant la formule de König-Huygens, on trouve :
+        \[ V = 11 - 3^2 = 11 - 9 = 2 \]
+        \[ \sigma = \sqrt{V} = \sqrt{2} \approx 1,41 \]
+    \end{itemize}
+    Ainsi, la variance de cette série est $2$ et son écart-type est d'environ $1,41$.
 }
 
 \section{Transformation affine}
