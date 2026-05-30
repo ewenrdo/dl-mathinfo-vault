@@ -1,0 +1,145 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{CAPES}
+\fancyhead[C]{Arithmétique}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+\docTitle{Chapitre 1 : Construction de $\mathbb{N}$ et $\mathbb{Z}$}
+
+\section{Construction de $\mathbb{N}$}
+
+\subsection{Axiomes de Peano et opération successeur}
+\definition{
+    Les axiomes de Peano sont un ensemble d'axiomes qui définissent les propriétés fondamentales des nombres naturels.\\
+    Ils sont les suivants :
+    \begin{itemize}
+        \item Il existe un nombre naturel $0$, qui n'est le successeur d'aucun nombre naturel.
+        \item Chaque nombre naturel $n$ a un successeur, noté $S(n)$.
+        \item Si $S(n) = S(m)$, alors $n = m$ (injectivité du successeur).
+        \item Si une propriété est vraie pour $0$ et si elle est vraie pour le successeur de tout nombre naturel pour lequel elle est vraie, alors elle est vraie pour tous les nombres naturels (principe de récurrence).
+    \end{itemize}
+}
+
+\theorem{Théorème}{}{true}{
+    Les axiomes de Peano définissent une structure unique à isomorphisme près, appelée les nombres naturels $\mathbb{N}$.
+}
+
+\definition{
+    L'opération successeur $S$ est définie de manière à ce que $S(n) = n + 1$ pour tout $n \in \mathbb{N}$.
+}
+
+\attention{Ici, $+$ et $1$ ne sont pas encore définis : ce sont des conventions d'écriture pour faciliter la compréhension, mais ils seront formellement définis plus tard à partir de l'opération successeur.}
+
+\example{
+    $S(0) = 1$, $S(1) = S(S(0)) = 2$, $S(2) = S(S(S(0))) = 3$, etc.
+}
+
+\remark{Ici, on remarque quelque chose d'important : les axiomes de Peano ne définissent pas explicitement l'opération d'addition ou de multiplication ni les relations d'ordre, mais ils permettent de les construire à partir de l'opération successeur.}
+
+\subsection{Opération d'addition et de multiplication}
+\subsubsection{Addition}
+\definition{
+    L'addition est définie de manière récursive à partir de l'opération successeur :
+    \begin{itemize}
+        \item $n + 0 = n$ pour tout $n \in \mathbb{N}$.
+        \item $n + S(m) = S(n + m)$ pour tout $n, m \in \mathbb{N}$.
+    \end{itemize}
+}
+
+\example{
+    $2 + 3 = S(S(0)) + S(S(S(0))) = S(S(S(0) + S(S(0)))) = S(S(S(S(0) + S(0)))) = S(S(S(S(S(0) + 0)))) = S(S(S(S(S(0))))) = 5$.
+}
+
+\remark{Une telle définition de l'addition peut sembler compliquée, mais elle est essentielle pour construire rigoureusement les propriétés de l'addition à partir des axiomes de Peano. Néanmoins, on peut garder notre manière habituelle d'écrire $2 + 3$ pour faciliter la compréhension, tout en sachant que cela repose sur une construction formelle à partir de l'opération successeur.}
+
+\theorem{Proposition}{}{true}{
+    L'addition ainsi définie est associative, commutative et possède un élément neutre $0$.
+}
+
+\noindent{\textbf{Preuve :}}
+\begin{itemize}
+    \item Associativité : On montre que $(n + m) + k = n + (m + k)$ pour tous $n, m, k \in \mathbb{N}$.\\
+    Par récurrence sur $k$ :
+    \begin{itemize}
+        \item $k = 0$ : $(n + m) + 0 = n + m = n + (m + 0)$.
+        \item $k = S(l)$ : $(n + m) + S(l) = S((n + m) + l) = S(n + (m + l)) = n + S(m + l) = n + (m + S(l))$.
+    \end{itemize}
+    \item Commutativité : On montre que $n + m = m + n$ pour tous $n, m \in \mathbb{N}$.\\
+    Par récurrence sur $m$ :
+    \begin{itemize}
+        \item $m = 0$ : $n + 0 = n = 0 + n$.
+        \item $m = S(l)$ : $n + S(l) = S(n + l) = S(l + n) = S(l) + n$.
+    \end{itemize}
+    \item Élément neutre : $n + 0 = n$ pour tout $n \in \mathbb{N}$.
+\end{itemize}
+
+\subsubsection{Multiplication}
+\definition{
+    La multiplication est définie de manière récursive à partir de l'addition :
+    \begin{itemize}
+        \item $n \cdot 0 = 0$ pour tout $n \in \mathbb{N}$.
+        \item $n \cdot S(m) = n \cdot m + n$ pour tout $n, m \in \mathbb{N}$.
+    \end{itemize}
+}
+
+\example{
+    $2 \cdot 3 = S(S(0)) \cdot S(S(S(0))) = S(S(0)) \cdot S(S(0)) + S(S(0)) = S(S(0)) \cdot S(0) + S(S(0)) + S(S(0)) = S(S(0)) \cdot 0 + S(S(0)) + S(S(0)) + S(S(0)) = 6$.
+}
+
+\theorem{Proposition}{}{true}{
+    La multiplication ainsi définie est associative, commutative et possède un élément neutre $1$.
+}
+
+\noindent{\textbf{Preuve :}}
+\begin{itemize}
+    \item Associativité : On montre que $(n \cdot m) \cdot k = n \cdot (m \cdot k)$ pour tous $n, m, k \in \mathbb{N}$.\\
+    Par récurrence sur $k$ :
+    \begin{itemize}
+        \item $k = 0$ : $(n \cdot m) \cdot 0 = 0 = n \cdot (m \cdot 0)$.   
+        \item $k = S(l)$ : $(n \cdot m) \cdot S(l) = (n \cdot m) \cdot l + n \cdot m = n \cdot (m \cdot l) + n \cdot m = n \cdot (m \cdot S(l))$.
+    \end{itemize}
+    \item Commutativité : On montre que $n \cdot m = m \cdot n$ pour tous $n, m \in \mathbb{N}$.\\
+    Par récurrence sur $m$ :
+    \begin{itemize}
+        \item $m = 0$ : $n \cdot 0 = 0 = 0 \cdot n$.
+        \item $m = S(l)$ : $n \cdot S(l) = n \cdot l + n = l \cdot n + n = S(l) \cdot n$.
+    \end{itemize}
+    \item Élément neutre : $n \cdot 1 = n$ pour tout $n \in \mathbb{N}$.
+\end{itemize}
+
+\subsection{Relation d'ordre}
+
+\definition{
+    On définit la relation d'ordre $\leq$ sur $\mathbb{N}$ de la manière suivante : $n \leq m$ si et seulement s'il existe un $k \in \mathbb{N}$ tel que $n + k = m$.
+}
+
+\example{
+    $2 \leq 5$ car $2 + 3 = 5$, mais $5 \nleq 2$ car il n'existe pas de $k \in \mathbb{N}$ tel que $5 + k = 2$.
+}
+
+\theorem{Proposition}{}{true}{
+    La relation $\leq$ ainsi définie est un ordre total sur $\mathbb{N}$.
+}
+\noindent{\textbf{Preuve :}}\\
+Pour qu'une relation soit un ordre total, elle doit être réflexive, antisymétrique, transitive et totale. On a :
+\begin{itemize}
+    \item Réflexivité : $n \leq n$ car $n + 0 = n$.
+    \item Antisymétrie : Si $n \leq m$ et $m \leq n$, alors il existe $k, l \in \mathbb{N}$ tels que $n + k = m$ et $m + l = n$. En substituant $m$ dans la deuxième équation, on obtient $n + k + l = n$, ce qui implique que $k + l = 0$. Comme $k, l \in \mathbb{N}$, cela signifie que $k = 0$ et $l = 0$, donc $n = m$.
+    \item Transitivité : Si $n \leq m$ et $m \leq p$, alors il existe $k, l \in \mathbb{N}$ tels que $n + k = m$ et $m + l = p$. En substituant $m$ dans la deuxième équation, on obtient $n + k + l = p$, ce qui implique que $n \leq p$.
+    \item Totalité : Pour tous $n, m \in \mathbb{N}$, soit $n \leq m$ soit $m \leq n$. En effet, si $n \leq m$, alors il existe $k \in \mathbb{N}$ tel que $n + k = m$. Si $m \leq n$, alors il existe $l \in \mathbb{N}$ tel que $m + l = n$.
+\end{itemize}
+
+\end{document}

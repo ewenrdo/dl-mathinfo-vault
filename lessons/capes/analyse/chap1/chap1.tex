@@ -69,6 +69,58 @@ Ainsi, $tx_1 + (1-t)x_2 \in A \cap B$. $\Box$}
 
 \subsection{Cordes et convexité}
 
+\subsection{Intuition géométrique d'un ensemble convexe}
+Géométriquement, un ensemble convexe est un ensemble tel que pour tous points $x, y$ de cet ensemble, le segment de droite reliant $x$ et $y$ est entièrement contenu dans l'ensemble.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+
+    \begin{scope}[shift={(0,0)}]
+        % Dessin de l'ensemble (Disque)
+        \fill[blue!10, draw=blue!60, thick] (0,0) circle (1.5);
+        \node[blue!80!black] at (0,-1.8) {\textbf{Ensemble convexe}};
+        
+        % Points x et y
+        \coordinate (X1) at (-0.8, 0.4);
+        \coordinate (Y1) at (0.9, -0.3);
+        
+        % Tracé du segment (entièrement dedans)
+        \draw[thick, red, -] (X1) -- (Y1);
+        
+        % Placer les points par-dessus le segment
+        \fill[red] (X1) circle (2pt) node[above left, black] {$x$};
+        \fill[red] (Y1) circle (2pt) node[below right, black] {$y$};
+    \end{scope}
+
+    \begin{scope}[shift={(4.5,0)}]
+        % Dessin d'une forme en haricot avec un gros creux au milieu
+        \fill[gray!10, draw=gray!60, thick] 
+            (0,1.5) to[out=200,in=100] (-1,-1) 
+                    to[out=280,in=200] (1,-1) 
+                    to[out=20,in=300] (0.8,1)
+                    to[out=120,in=340] (0,0.2) % Le creux se trouve ici !
+                    to[out=160,in=20] cycle;
+        \node[gray!80!black] at (0,-1.8) {\textbf{Ensemble non convexe}};
+        
+        % Points x et y situés de part et d'autre du creux
+        \coordinate (X2) at (-0.6, 0.4);
+        \coordinate (Y2) at (0.6, 0.4);
+        
+        % Tracé du segment qui passe par le "vide" extérieur
+        \draw[thick, red, dashed] (X2) -- (Y2);
+        
+        % Placer les points
+        \fill[red] (X2) circle (2pt) node[left, black] {$x$};
+        \fill[red] (Y2) circle (2pt) node[right, black] {$y$};
+    \end{scope}
+
+\end{tikzpicture}
+\caption{Comparaison géométrique à l'aide du segment $[x,y]$.}
+\label{fig:convexite}
+\end{figure}
+
+\subsection{Intuition géométrique d'une fonction convexe}
 Approchons de manière intuitive la notion de convexité à l'aide de la géométrie. Considérons une fonction $f: I \to \mathbb{R}$ définie sur un intervalle $I$. Pour deux points $x, y \in I$, on peut tracer la corde (le segment) reliant les points $(x, f(x))$ et $(y, f(y))$ sur le graphique de $f$. La convexité de la fonction est liée à la position de sa courbe par rapport à cette corde.
 
 \begin{center}
@@ -108,10 +160,16 @@ Approchons de manière intuitive la notion de convexité à l'aide de la géomé
 \end{tikzpicture}
 \end{center}
 
-\noindent La convexité est donc une notion globale qui concerne la forme de la courbe d'une fonction.
+\noindent La convexité est donc une notion globale qui concerne la forme de la courbe d'une fonction. Une fonction est convexe si \textbf{sa courbe représentative est située en dessous de toutes les cordes (et en particulier de ses tangeantes)} reliant deux points quelconques de la courbe.
+
+\vocabulary{On appelle \textbf{épigraphe} d'une fonction $f$ l'ensemble des points situés au-dessus de sa courbe représentative, c'est-à-dire $\{(x, y) \in I \times \mathbb{R} : y \geq f(x)\}$.}
+\theorem{Proposition}{Caractérisation géométrique de la convexité}{false}{
+    Une fonction $f: I \to \mathbb{R}$ est convexe si et seulement si son épigraphe est un ensemble convexe de $\mathbb{R}^2$.
+}
+
 
 \subsection{Convexité d'une fonction}
-Pour définir une fonction convexe, il est nécessaire que \textbf{son domaine de définition soit un ensemble convexe} de $\mathbb{R}$, c'est-à-dire un intervalle.
+Pour définir rigoureusement ce qu'est une fonction convexe, il est nécessaire que \textbf{son domaine de définition soit un ensemble convexe} de $\mathbb{R}$, c'est-à-dire un intervalle.
 
 \definition{
     Soit $I$ un intervalle de $\mathbb{R}$. Une fonction $f: I \to \mathbb{R}$ est dite \textbf{convexe} si pour tous $x, y \in I$ et pour tout $t \in [0, 1]$, on a :
@@ -125,7 +183,6 @@ Pour définir une fonction convexe, il est nécessaire que \textbf{son domaine d
     \begin{itemize}
         \item Le terme $tx + (1-t)y$ décrit les points de l'axe des abscisses situés entre $x$ et $y$.
         \item Le terme $tf(x) + (1-t)f(y)$ représente l'ordonnée du point situé sur la corde (le segment) reliant les points $(x, f(x))$ et $(y, f(y))$.
-        \item Géométriquement, une fonction est convexe si sa courbe représentative est située \textbf{en dessous} de ses cordes. En particulier, une fonction $f$ est convexe la courbe représentative de $f$ est située au-dessus de toutes ses tangentes.
     \end{itemize}
 }
 
