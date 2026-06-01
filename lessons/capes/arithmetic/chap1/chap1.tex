@@ -141,5 +141,93 @@ Pour qu'une relation soit un ordre total, elle doit être réflexive, antisymét
     \item Transitivité : Si $n \leq m$ et $m \leq p$, alors il existe $k, l \in \mathbb{N}$ tels que $n + k = m$ et $m + l = p$. En substituant $m$ dans la deuxième équation, on obtient $n + k + l = p$, ce qui implique que $n \leq p$.
     \item Totalité : Pour tous $n, m \in \mathbb{N}$, soit $n \leq m$ soit $m \leq n$. En effet, si $n \leq m$, alors il existe $k \in \mathbb{N}$ tel que $n + k = m$. Si $m \leq n$, alors il existe $l \in \mathbb{N}$ tel que $m + l = n$.
 \end{itemize}
+\section{Construction de $\mathbb{Z}$}
 
+\subsection{Relation d'équivalence sur $\mathbb{N}^2$}
+
+L'objectif de cette section est de construire un ensemble où toute soustraction devient possible. Pour ce faire, on formalise l'idée qu'un entier relatif peut être représenté par la différence de deux entiers naturels.
+
+\definition{
+    On définit sur l'ensemble des couples d'entiers naturels $\mathbb{N} \times \mathbb{N}$ la relation $\sim$ par :
+    $$ (a, b) \sim (c, d) \iff a + d = b + c $$
+    pour tous $a, b, c, d \in \mathbb{N}$.
+}
+
+\theorem{Proposition}{}{false}{
+    La relation $\sim$ est une relation d'équivalence sur $\mathbb{N} \times \mathbb{N}$.
+}
+
+\noindent{\textbf{Preuve :}}
+\begin{itemize}
+    \item \textbf{Réflexivité :} Pour tout $(a, b) \in \mathbb{N}^2$, on a $a + b = b + a$ par commutativité de l'addition dans $\mathbb{N}$, donc $(a, b) \sim (a, b)$.
+    \item \textbf{Symétrie :} Si $(a, b) \sim (c, d)$, alors $a + d = b + c$, ce qui implique $c + b = d + a$, d'où $(c, d) \sim (a, b)$.
+    \item \textbf{Transitivité :} Si $(a, b) \sim (c, d)$ et $(c, d) \sim (e, f)$, alors $a + d = b + c$ et $c + f = d + e$.\\
+    En sommant membre à membre, on obtient : $(a + d) + (c + f) = (b + c) + (d + e)$.\\
+    En utilisant la commutativité et l'associativité dans $\mathbb{N}$, on peut simplifier par $c + d$ des deux côtés (propriété de régularité de l'addition dans $\mathbb{N}$), ce qui donne $a + f = b + e$. Par conséquent, $(a, b) \sim (e, f)$.
+\end{itemize}
+
+\definition{
+    L'ensemble quotient $(\mathbb{N} \times \mathbb{N}) / \sim$ est noté $\mathbb{Z}$. C'est l'ensemble des entiers relatifs.\\
+    La classe d'équivalence du couple $(a, b)$ est notée $\overline{(a, b)}$.
+}
+
+\remark{Intuitivement, la classe $\overline{(a, b)}$ représente l'entier relatif correspondant à la différence $a - b$.}
+
+\example{
+    \begin{itemize}
+        \item La classe $\overline{(3, 1)} = \{(3, 1), (4, 2), (5, 3), \dots\}$ correspond à l'entier $2$.
+        \item La classe $\overline{(0, 2)} = \{(0, 2), (1, 3), (2, 4), \dots\}$ correspond à l'entier $-2$.
+        \item La classe $\overline{(1, 1)} = \{(0, 0), (1, 1), (2, 2), \dots\}$ correspond à l'entier $0$.
+    \end{itemize}
+}
+
+\subsection{Opérations et structure d'anneau}
+
+On munit désormais $\mathbb{Z}$ d'une loi d'addition et d'une loi de multiplication en prolongeant celles de $\mathbb{N}$.
+
+\definition{
+    Pour toutes classes $\overline{(a, b)}$ et $\overline{(c, d)}$ dans $\mathbb{Z}$, on définit :
+    \begin{itemize}
+        \item \textbf{L'addition :} $\overline{(a, b)} +_\mathbb{Z} \, \overline{(c, d)} = \overline{(a + c, b + d)}$
+        \item \textbf{La multiplication :} $\overline{(a, b)} \cdot_{\mathbb{Z}} \, \overline{(c, d)} = \overline{(ac + bd, ad + bc)}$
+    \end{itemize}
+}
+
+\attention{Il est fondamental de vérifier que ces opérations sont bien définies, c'est-à-dire que le résultat ne dépend pas des représentants choisis dans chaque classe d'équivalence.}
+
+\theorem{Théorème}{}{true}{
+    Muni de ces deux opérations, $(\mathbb{Z}, +, \cdot)$ est un anneau commutatif unitaire.
+    \begin{itemize}
+        \item L'élément neutre pour l'addition est $\overline{(0, 0)}$.
+        \item L'opposé de la classe $\overline{(a, b)}$ est $-\overline{(a, b)} = \overline{(b, a)}$.
+        \item L'élément neutre pour la multiplication est $\overline{(1, 0)}$.
+    \end{itemize}
+}
+
+\subsection{Plongement de $\mathbb{N}$ dans $\mathbb{Z}$ et notation usuelle}
+
+\theorem{Proposition}{}{true}{
+    L'application $\phi : \mathbb{N} \to \mathbb{Z}$ définie par $\phi(n) = \overline{(n, 0)}$ est un morphisme injectif d'anneaux non unitaires (il préserve l'addition, la multiplication, et l'ordre).
+}
+
+\remark{Grâce à cette injection, on identifie chaque entier naturel $n$ à sa classe $\overline{(n, 0)}$. On peut ainsi écrire $\mathbb{N} \subset \mathbb{Z}$.}
+
+\vocabulary{
+    Par convention et pour simplifier l'écriture :
+    \begin{itemize}
+        \item Si $a \geq b$, il existe $k \in \mathbb{N}$ tel que $a = b + k$. Alors $\overline{(a, b)} = \overline{(b+k, b)} = \overline{(k, 0)}$, que l'on note simplement $k$.
+        \item Si $a < b$, il existe $k \in \mathbb{N}^*$ tel que $b = a + k$. Alors $\overline{(a, b)} = \overline{(a, a+k)} = \overline{(0, k)}$, que l'on note simplement $-k$.
+    \end{itemize}
+}
+
+\subsection{Relation d'ordre sur $\mathbb{Z}$}
+
+\definition{
+    On définit la relation d'ordre $\leq$ sur $\mathbb{Z}$ par :
+    $$ \overline{(a, b)} \leq \overline{(c, d)} \iff a + d \leq b + c \quad (\text{dans } \mathbb{N}) $$
+}
+
+\theorem{Proposition}{}{true}{
+    La relation $\leq$ est un ordre total sur $\mathbb{Z}$, compatible avec l'addition et la multiplication par des éléments positifs.
+}
 \end{document}

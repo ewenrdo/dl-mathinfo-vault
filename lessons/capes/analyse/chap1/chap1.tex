@@ -225,8 +225,56 @@ De la même manière, en soustrayant $f(c)$ au lieu de $f(a)$, on obtient la sec
 $\bullet$ Réciproquement, si l'inégalité des pentes est vraie, on peut remonter les calculs exacts en sens inverse pour retrouver $f(b) \leq t f(a) + (1-t) f(c)$ pour tout $b \in ]a, c[$, ce qui valide la définition de la convexité. $\Box$}
 
 \remark{
-    Géométriquement, ce théorème signifie que si on fixe un point sur la courbe d'une fonction convexe et qu'on fait glisser un second point vers la droite, la pente de la corde reliant ces deux points ne fait qu'augmenter.
+    Géométriquement, l'inégalité des pentes signifie que la pente de la corde reliant $A$ à $B$ est inférieure ou égale à la pente de la corde reliant $A$ à $C$, qui elle-même est inférieure ou égale à la pente de la corde reliant $B$ à $C$. Soit : $p_1 \leq p_2 \leq p_3$ :
 }
+
+\begin{center}
+\begin{tikzpicture}[>=stealth, scale=2]
+
+    % Styles pour les éléments du graphique
+    \tikzstyle{point}=[circle, fill=black, inner sep=1.5pt]
+    \tikzstyle{corde}=[thick]
+
+    % Axes de coordonnées agrandis
+    \draw[->] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+    \draw[->] (0, -0.5) -- (0, 2.5) node[above] {$y$};
+
+    % Dessin de la parabole centrée (la "cuve")
+    \draw[domain=-2.1:2.1, samples=100, smooth, very thick, gray] 
+        plot (\x, {0.5*\x*\x}) node[right] {$\mathcal{C}_f$};
+
+    % Définition de trois points de la courbe tels que a < b < c
+    \def\a{-1.6}
+    \def\b{-0.2}
+    \def\c{1.8}
+
+    % Coordonnées des points A, B, C sur la parabole
+    \path (\a, {0.5*\a*\a}) coordinate (A);
+    \path (\b, {0.5*\b*\b}) coordinate (B);
+    \path (\c, {0.5*\c*\c}) coordinate (C);
+
+    % Projections et graduations des abscisses sur l'axe
+    \draw[dashed, gray] (\a, 0) node[below, black] {$a$} -- (A);
+    \draw[dashed, gray] (\b, 0) node[below, black] {$b$} -- (B);
+    \draw[dashed, gray] (\c, 0) node[below, black] {$c$} -- (C);
+
+    % Dessin des trois cordes mettant en évidence les trois pentes
+    \draw[corde, red] (A) -- (B) node[midway, below left] {$p_1$};
+    \draw[corde, purple] (A) -- (C) node[midway, above] {$p_2$};
+    \draw[corde, orange] (B) -- (C) node[midway, below right] {$p_3$};
+
+    % Marquage des points A, B, C
+    \node[point] at (A) {};
+    \node[point] at (B) {};
+    \node[point] at (C) {};
+    
+    \node[above left] at (A) {$A$};
+    \node[below left] at (B) {$B$};
+    \node[above right] at (C) {$C$};
+
+\end{tikzpicture}
+\end{center}
+
 
 \training{Soit $f: \mathbb{R} \to \mathbb{R}$ une fonction convexe. On suppose qu'il existe deux réels $a < b$ tels que $f(a) = f(b) = 0$. 
 \begin{enumerate}
