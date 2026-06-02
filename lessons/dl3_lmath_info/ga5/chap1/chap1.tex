@@ -1,0 +1,435 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info GA5}
+\fancyhead[C]{Théorie des groupes}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Généralité sur les groupes}
+
+\section{Loi de composition interne}
+
+\definition{Soit \(E\) un ensemble. Une \textbf{loi de composition interne} sur \(E\) est une application \( * : E \times E \to E \) qui à tout couple \((x, y) \in E \times E\) associe un élément \(x * y \in E\).}
+
+\vocabulary{Quelques notations typiques pour les lois de composition interne : \(+\), \(\times\), \(\cdot\), \(\circ\), etc.}
+
+\definition{
+    Soit $(E, *)$ un ensemble muni d'une loi de composition interne. Alors, on définit :
+    \begin{itemize}
+        \item \textbf{Associativité} : $*$ est associative si $ \forall x, y, z \in E, (x * y) * z = x * (y * z)$.
+        \item \textbf{Élément neutre} : $e \in E$ est un élément neutre si $ \forall x \in E, e * x = x * e = x$.
+        \item \textbf{Symétrique} : Si $*$ admet un élément neutre $e$, alors $b$ est le \textbf{symétrique} de $a$ si $a * b = b * a = e$, où $e$ est l'élément neutre.
+        \item \textbf{Commutativité} : $*$ est commutative si $ \forall x, y \in E, x * y = y * x$.
+    \end{itemize}
+}
+
+\theorem{Propriété}{Élément neutre}{false}{
+    Soit $(E, *)$ un ensemble muni d'une loi de composition interne.\\
+    S'il existe un élément neutre, alors il est unique.
+}
+\noindent{\textbf{Preuve:}\\
+Supposons qu'il existe deux éléments neutres \(e\) et \(e'\) dans \(E\). Par définition de l'élément neutre, on a \(e * e' = e'\) (car \(e\) est un élément neutre) et \(e * e' = e\) (car \(e'\) est un élément neutre).\\
+En combinant ces deux égalités, on obtient \(e = e'\). $\Box$
+}
+
+\theorem{Propriété}{Symétrique du produit}{false}{
+    Soit $(E, *)$ un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$. Alors :
+    \[
+        \forall x, y \in E, (x * y)^{-1} = y^{-1} * x^{-1}
+    \]
+    où \(x^{-1}\) et \(y^{-1}\) sont les symétriques de \(x\) et \(y\) respectivement.
+}
+\noindent{\textbf{Preuve:}\\
+Calculons \( (x * y) * (y^{-1} * x^{-1}) \) :
+\begin{align*}
+    (x * y) * (y^{-1} * x^{-1}) &= x * (y * (y^{-1} * x^{-1})) \quad (\text{par associativité}) \\
+    &= x * ((y * y^{-1}) * x^{-1}) \quad (\text{par associativité}) \\
+    &= x * (e * x^{-1}) \quad (\text{car } y * y^{-1} = e) \\
+    &= x * x^{-1} \quad (\text{car } e \text{ est un élément neutre}) \\
+    &= e \quad (\text{car } x * x^{-1} = e)
+\end{align*}
+De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela est égal à \(e\). Ainsi, \(y^{-1} * x^{-1}\) est le symétrique de \(x * y\), c'est-à-dire \((x * y)^{-1} = y^{-1} * x^{-1}\). $\Box$
+}
+
+
+\training{Soit \((E, *)\) un ensemble muni d'une loi de composition interne associative. Supposons qu'il existe un élément neutre \(e\). Soit $x \in E$. Montrer que les assertions suivantes sont équivalentes :
+\begin{enumerate}
+    \item $x$ possède un symétrique pour la loi $*$.
+    \item L'application $y \mapsto y * x$ est bijective de $E$ dans $E$.
+    \item L'application $y \mapsto x * y$ est bijective de $E$ dans $E$.
+\end{enumerate}
+}
+\noindent\carreaux{10}
+
+\section{Notions de groupe}
+\subsection{Généralités}
+
+\definition{Soit G un ensemble muni d'une loi de composition interne \( * \). On dit que \((G, *)\) est un \textbf{groupe} si les trois propriétés suivantes sont vérifiées : 
+\begin{itemize}
+    \item \( * \) est associative.
+    \item Il existe un élément neutre \(e \in G\).
+    \item Tout élément de \(G\) possède un symétrique dans \(G\).
+\end{itemize}}
+
+\vocabulary{Si de plus \( * \) est commutative, on dit que \((G, *)\) est un \textbf{groupe abélien}.}
+
+\remark{On rencontrera la notation \((G, *, e)\) pour préciser la loi de composition interne et l'élément neutre, mais souvent on se contentera de \((G, *)\) ou même simplement \(G\) lorsque le contexte est clair.}
+%% Exemples et contres exemples de groupes
+
+\example{
+    \begin{itemize}
+        \item \((\mathbb{Z}, +)\) : l'ensemble des entiers avec l'addition.
+        \item \((\mathbb{R}^*, \times)\), \((\mathbb{Q}^*, \times)\), \((\mathbb{C}^*, \times)\) : l'ensemble des réels, rationnels et complexes non nuls avec la multiplication.
+        \item $S(X) = \left( \{ \text{bijections } X \to X \mid X \text{ est un ensemble} \}, \circ \right)$ : l'ensemble des bijections d'un ensemble \(X\) dans lui-même avec la composition.
+    \end{itemize}
+}
+\cexample{
+    \begin{itemize}
+        \item \((\mathbb{N}, +)\) : l'ensemble des entiers naturels avec l'addition (pas d'élément neutre dans \(\mathbb{N}\)).
+    \end{itemize}
+}
+
+\definition{
+    Soit $(G, *)$ un groupe où $G$ est de cardinal fini.\\
+    On appelle \textbf{ordre} de $G$ le cardinal de $G$ et on le note $|G|$.
+}
+
+\remark{
+    Il nous arrive de vouloir aller plus vite, et dans certains cas de se conformer aux notations usuelles. On introduit donc deux systèmes de notation pour les groupes :
+    \begin{itemize}
+        \item Système additif : on note le groupe \((G, +)\), l'élément neutre est noté \(0\) et le symétrique \textit{(appelé l'opposé)} de \(x\) est noté \(-x\).
+        \item Système multiplicatif : on note le groupe \((G, \times)\) ou \((G, \cdot)\), l'élément neutre est noté \(1\) et le symétrique \textit{(appelé l'inverse)} de \(x\) est noté \(x^{-1}\).
+    \end{itemize}
+}
+\theorem{Proposition}{Groupe produit}{true}{
+Soient \((G_1, *_1)\) et \((G_2, *_2)\) deux groupes. On définit une loi de composition interne \(*\) sur le produit cartésien \(G_1 \times G_2\) par : 
+\[
+(g_1, g_2) * (h_1, h_2) = (g_1 *_1 h_1, g_2 *_2 h_2)
+\]
+pour tout \((g_1, g_2), (h_1, h_2) \in G_1 \times G_2\). 
+
+Alors \((G_1 \times G_2, *)\) est un groupe, appelé le \textbf{groupe produit} de \((G_1, *_1)\) et \((G_2, *_2)\).
+}
+
+\noindent\textbf{Preuve :}
+\begin{itemize}
+    \item \textit{Associativité :} Soient \((g_1, g_2), (h_1, h_2), (k_1, k_2) \in G_1 \times G_2\).
+    \begin{align*}
+        ((g_1, g_2) * (h_1, h_2)) * (k_1, k_2) &= (g_1 *_1 h_1, g_2 *_2 h_2) * (k_1, k_2) \\
+        &= ((g_1 *_1 h_1) *_1 k_1, (g_2 *_2 h_2) *_2 k_2) \\
+        &= (g_1 *_1 (h_1 *_1 k_1), g_2 *_2 (h_2 *_2 k_2)) \quad (\text{par associativité dans } G_1 \text{ et } G_2) \\
+        &= (g_1, g_2) * (h_1 *_1 k_1, h_2 *_2 k_2) \\
+        &= (g_1, g_2) * ((h_1, h_2) * (k_1, k_2))
+    \end{align*}
+
+    \item \textit{Élément neutre :} Soient \(e_1\) et \(e_2\) les éléments neutres de \(G_1\) et \(G_2\) respectivement. Alors \((e_1, e_2) \in G_1 \times G_2\) et pour tout \((g_1, g_2) \in G_1 \times G_2\) :
+    \[
+    (e_1, e_2) * (g_1, g_2) = (e_1 *_1 g_1, e_2 *_2 g_2) = (g_1, g_2)
+    \]
+    et
+    \[
+    (g_1, g_2) * (e_1, e_2) = (g_1 *_1 e_1, g_2 *_2 e_2) = (g_1, g_2)
+    \]
+    Ainsi, \((e_1, e_2)\) est l'élément neutre de \(G_1 \times G_2\).
+
+    \item \textit{Symétrique :} Soit \((g_1, g_2) \in G_1 \times G_2\). Comme \(G_1\) et \(G_2\) sont des groupes, il existe un symétrique \(g_1^{-1} \in G_1\) et un symétrique \(g_2^{-1} \in G_2\). Alors le couple \((g_1^{-1}, g_2^{-1})\) appartient à \(G_1 \times G_2\) et vérifie :
+    \[
+    (g_1, g_2) * (g_1^{-1}, g_2^{-1}) = (g_1 *_1 g_1^{-1}, g_2 *_2 g_2^{-1}) = (e_1, e_2)
+    \]
+    et
+    \[
+    (g_1^{-1}, g_2^{-1}) * (g_1, g_2) = (g_1^{-1} *_1 g_1, g_2^{-1} *_2 g_2) = (e_1, e_2)
+    \]
+    Le symétrique de \((g_1, g_2)\) dans \(G_1 \times G_2\) est donc bien \((g_1^{-1}, g_2^{-1})\).
+\end{itemize}
+\hfill\(\Box\)
+
+\theorem{Propriété}{Produit cartésien et commutativité}{true}{
+    Si \((G_1, *_1)\) et \((G_2, *_2)\) sont des groupes abéliens, alors leur produit cartésien \((G_1 \times G_2, *)\) est aussi un groupe abélien.
+}
+
+\training{Démontrer la propriété précédente.}
+\noindent\carreaux{10}
+
+\remark{On pourrait prendre plus de deux groupes et faire le produit cartésien de plusieurs groupes.}
+\subsection{Sous-groupes}
+\subsubsection{Définitions et propriétés}
+Dans cette section, on utilisera le système de notation multiplicatif, mais il ne faut pas oublier qu'il ne s'agit que de notations !
+\definition{Soit \((G, \cdot)\) un groupe. Un \textbf{sous-groupe} de \(G\) est un sous-ensemble \(H \subseteq G\) tel que \((H, \cdot)\) est lui-même un groupe.}
+\vocabulary{On note, \textit{de manière non-standard}, \(H \leq G\) pour dire que \(H\) est un sous-groupe de \(G\).}
+\theorem{Propriété}{Lien entre sous-groupe et groupe}{true}{
+    Un sous-groupe est lui-même un groupe pour la même loi de composition interne que le groupe dont il est issu.
+}
+
+\example{\((Z, +)\) est un sous-groupe de \((\mathbb{R}, +)\).}
+\theorem{Proposition}{Caractérisation des sous-groupes}{false}{
+    Soit \((H, \cdot)\) un sous-groupe de \((G, \cdot)\ \Leftrightarrow\) %% système
+    \begin{enumerate}
+        \item \(H \neq \emptyset\)
+        \item \( \forall h, h' \in H, h \cdot h' \in H\) (stabilité par la loi)
+        \item \( \forall h \in H, \exists h^{-1} \in H\) (stabilité par l'inverse)
+    \end{enumerate}
+}
+
+\noindent\textbf{Preuve:}
+\begin{itemize}
+    \item \(\Rightarrow\)/ : Si \(H\) est un sous-groupe de \(G\), alors par définition de groupe, \(H\) satisfait 1, 2 et 3.
+    \item \(\Leftarrow\)/ : Supposons que \(H\) vérifie les trois conditions. Nous devons montrer que \((H, \cdot)\) est un groupe.
+    \begin{itemize}
+        \item \textit{Associativité :} La loi de composition interne sur \(H\) est la même que celle sur \(G\), donc elle est associative.
+        \item \textit{Élément neutre :} Soit \(e\) l'élément neutre de \(G\). Comme \(H\) est non vide, \(\exists h_0\in H\) et par la condition 3, \(h_0^{-1} \in H\). Par la définition de l'élément neutre dans \(G\), on a \(h_0 \cdot h_0^{-1} = e\). Donc \(e \in H\).
+        \item \textit{Symétrique :} Par la condition 3, pour tout \(h \in H\), son inverse \(h^{-1}\) appartient à \(H\).
+    \end{itemize}
+    Ainsi, toutes les propriétés d'un groupe sont satisfaites pour \(H\), donc \(H\) est un sous-groupe de \(G\).   
+\end{itemize}
+
+\example{
+    \begin{itemize}
+        \item \((G, \cdot)\) est un sous-groupe de lui-même.
+        \item \(\{1\}\) est un sous-groupe de \(G\).
+        \item \((Z, +)\) est un sous-groupe de \((\mathbb{R}, +)\).
+    \end{itemize}
+}
+
+
+\theorem{Théorème}{Ordre d'un sous-groupe}{true}{
+    Soit $(G, \cdot)$ un groupe fini et $(H, \cdot)$ un sous-groupe de $G$. Alors l'ordre de $H$ divise l'ordre de $G$.
+}
+
+\subsubsection{Sous-groupe engendré}
+
+\theorem{Proposition}{Intersection de sous-groupes}{false}{
+    Soit \((H_i)_{i \in I}\) une famille de sous-groupes de \((G, \cdot)\). Alors l'intersection \(H = \bigcap_{i \in I} H_i\) est un sous-groupe de \(G\).
+}
+
+\noindent{\textbf{Preuve:}
+Vérifions à l'aide de la proposition sur les sous-groupes
+
+\begin{itemize}
+    \item Le neutre \(1 \in H,\forall i\in I\). Donc \(1\in \bigcap_{i\in I} H_i\) . Donc \(H \ne \emptyset\) .
+    \item Soient \(h, h', \in H\). On a \(h, h'\in H, \forall i\in H\). Il appartient à (\(H_0, H_1, ...\))\\
+    Donc, \(h, h'\in H_i\) (si on regarde quand ils appartiennent au même \(H_i\))\\
+    Donc, \(h\cdot h'\in \bigcap_{i\in I}H_i = H\)
+    \item On a \(h\in H_i, \forall i\in I\), donc \(h^{-1}\in H_i, \forall i\in I\) (même principe)\\
+    Donc, \(h^{-1}\in \bigcap_{i\in I}H_i=H\).
+\end{itemize}}
+
+\attention{L'union de deux sous-groupes n'est pas forcément un sous-groupe.}
+
+\cexample{
+    Soit \(G = S_3\) le groupe des permutations de l'ensemble \(\{1, 2, 3\}\). Considérons les sous-groupes suivants de \(G\) :
+    \[
+    H_1 = \{ e, (1\ 2) \} \quad \text{et} \quad H_2 = \{ e, (1\ 3) \}
+    \]
+    L'union \(H_1 \cup H_2 = \{ e, (1\ 2), (1\ 3) \}\) n'est pas un sous-groupe de \(G\) car elle n'est pas stable par la loi de composition interne. Par exemple, le produit de \((1\ 2)\) et \((1\ 3)\) est égal à \((1\ 2\ 3)\), qui n'appartient pas à \(H_1 \cup H_2\).
+}
+
+\definition{
+    Le \textbf{sous-groupe engendré} par \(X\) est le plus petit sous-groupe de \(G\) contenant \(X\), c'est-à-dire le sous-groupe qui contient \(X\) et qui est inclus dans tout autre sous-groupe de \(G\) contenant \(X\).
+}
+
+\remark{Cette définition ne signifie pas qu'un tel sous-groupe existe forcément, mais on va voir que c'est le cas.}
+
+\theorem{Corollaire}{Sous-groupe engendré}{false}{
+    Soit \(X \subseteq G\). On a :
+    \[
+        \langle X \rangle = \bigcap_{\substack{H \leq G \\ X \subseteq H}} H
+    \]
+}
+
+\noindent{\textbf{Preuve:}
+\begin{itemize}
+    \item \textit{Existence :} L'intersection de tous les sous-groupes de \(G\) contenant \(X\) est un sous-groupe de \(G\) (par la proposition sur l'intersection de sous-groupes) qui contient \(X\). Donc \(\langle X \rangle\) existe.
+    \item \textit{Caractérisation :} Par construction, \(\langle X \rangle\) est inclus dans tout autre sous-groupe de \(G\) contenant \(X\). $\Box$
+    \item \textit{Unicité :} Supposons qu'il existe un autre sous-groupe \(H'\) de \(G\) contenant \(X\) et inclus dans tout autre sous-groupe de \(G\) contenant \(X\). Alors, par définition de \(\langle X \rangle\), on a \(\langle X \rangle \subseteq H'\) et \(H' \subseteq \langle X \rangle\). Donc \(\langle X \rangle = H'\).
+    \item \textit{Conclusion :} Ainsi, \(\langle X \rangle\) est le plus petit sous-groupe de \(G\) contenant \(X\) et il est unique. $\Box$
+\end{itemize}}
+
+\definition{Soit \(g \in G\).\\
+On a posé pour \(n\in \mathbb{Z}, g^n = \underbrace{g \cdot g \cdot ... \cdot g}_{n \text{ fois}}\) si \(n > 0\), \(g^0 = e\) (élément neutre) et \(g^n = \underbrace{g^{-1} \cdot g^{-1} \cdot ... \cdot g^{-1}}_{-n \text{ fois}}\) si \(n < 0\).\newline
+On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'ensemble des itérés} de \(g\), noté aussi \(\langle g \rangle\).
+}
+
+\theorem{Proposition}{Sous-groupe engendré}{false}{
+    Soit $(G, \cdot)$ un groupe et $g \in G$.\\
+    Alors \[\langle g \rangle = g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\] est le sous-groupe de G engendré par \(g\).
+}
+
+\noindent{\textbf{Preuve:}
+\begin{itemize}
+    \item \textit{Inclusion :} Par définition de \(g^{\mathbb{Z}}\), on a \(g^n \in g^{\mathbb{Z}}\) pour tout \(n \in \mathbb{Z}\). Donc \(g \in g^{\mathbb{Z}}\) et ainsi \(g^{\mathbb{Z}}\) contient \(g\). De plus, \(g^{\mathbb{Z}}\) est un sous-groupe de \(G\) (car il est stable par la loi de composition interne et par l'inverse). Donc \(g^{\mathbb{Z}}\) est un sous-groupe de \(G\) contenant \(g\).
+    \item \textit{Minimalité :} Supposons qu'il existe un autre sous-groupe \(H\) de \(G\) contenant \(g\). Alors, par la stabilité de \(H\) par la loi de composition interne, on a que pour tout \(n > 0\), \(g^n = g \cdot g \cdot ... \cdot g \in H\). De même, pour tout \(n < 0\), \(g^n = g^{-1} \cdot g^{-1} \cdot ... \cdot g^{-1} \in H\). Et bien sûr, \(g^0 = e \in H\). Ainsi, tous les éléments de \(g^{\mathbb{Z}}\) appartiennent à \(H\), ce qui montre que \(g^{\mathbb{Z}} \subseteq H\).
+    \item \textit{Conclusion :} Par conséquent, \(g^{\mathbb{Z}}\) est le plus petit sous-groupe de \(G\) contenant \(g\), c'est-à-dire le sous-groupe engendré par \(g\). $\Box$
+\end{itemize}
+}
+
+\remark{En notation additive, l'ensemble des itérés de \(g\) est noté \(\mathbb{Z}g = \{ ng \mid n \in \mathbb{Z} \}\).}
+
+\vocabulary{
+    \begin{itemize}
+        \item On dit que $(G, \cdot)$ est \textbf{monogène} s'il existe un élément \(g \in G\) tel que \(G = \langle g \rangle\).
+        \item Un groupe est dit \textbf{cyclique} s'il est fini et monogène.
+    \end{itemize}
+    
+}
+\example{
+    \(\mathbb{Z}\) est monogène et engendré par \(1\).
+}
+
+\vocabulary{Si le sous-groupe engendré par \(X\) est \(G\), on dit que \(X\) est un système de générateurs de \(G\).}
+
+%% 10 septembre 2025
+\subsubsection{Sous-groupes de \((\mathbb{Z}, +)\)}
+
+\reminder{On rappelle la notation suivante : \(k\mathbb{Z}\) = \(\langle k\rangle\) pour la loi +.}
+
+\theorem{Théorème}{Sous-groupes de \((\mathbb{Z}, +)\)}{false}{
+    Soit \((H, +)\) un sous-groupe de \((\mathbb{Z}, +)\).\\
+    Alors \(\exists !n \in \mathbb{N}\) tel que \(H = n\mathbb{Z}\).
+}
+
+\remark{Cela veut dire que tout sous-groupe de \((\mathbb{Z}, +)\) est de la forme \(n\mathbb{Z}\) pour un certain \(n \in \mathbb{N}\).}
+
+\training{Démontrer le théorème précédent.}
+\noindent\carreaux{19}
+
+\section{Morphismes de groupes}
+\ndlr{On a omis les démonstrations dans cette section, cf. OneNote.}
+
+\definition{
+    Soient $(G, *)$ et $(G', *')$ deux groupes.\\
+    Une application \functionSets{\varphi}{G \rightarrow G'} est un \textbf{morphisme de groupes} (ou homomorphisme) si :\\
+    \[\forall g_1,g_2 \in G,\quad \varphi(g_1 * g_2) = \varphi(g_1) *' \varphi(g_2)\]
+}
+
+\vocabulary{Si $\varphi$ est un morphisme de groupes et est bijective, alors $\varphi$ est un \textbf{isomorphisme}.}
+
+\theorem{Proposition}{Propriétés d'un morphisme de groupes}{false}{
+    Soit \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes.\\
+    Alors :
+    \begin{itemize}
+        \item $\varphi(e) = e'$, où $e$ et $e'$ sont les éléments neutres de $G$ et $G'$ respectivement.
+        \item $\forall g \in G, \varphi(g^{-1}) = (\varphi(g))^{-1}$.
+    \end{itemize}
+}
+
+\training{Démontrer les propriétés d'un morphisme de groupes.}
+\noindent\carreaux{10}
+
+\theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
+    $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
+}
+
+\noindent{\textbf{Preuve:} Soit \(g', h' \in G'\). Comme \(\varphi\) est bijective, il existe \(g, h \in G\) tels que \(\varphi(g) = g'\) et \(\varphi(h) = h'\). Alors :
+\[
+\varphi^{-1}(g' *' h') = \varphi^{-1}(\varphi(g) *' \varphi(h)) = \varphi^{-1}(\varphi(g * h)) = g * h = \varphi^{-1}(g') * \varphi^{-1}(h')
+\]
+Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
+
+
+\example{
+    \begin{itemize}
+        \item \function{\varphi}{G \rightarrow G'}{g \mapsto e'} est le morphisme trivial.
+        \item Si $H \subset G$ est un sous-groupe, \function{\varphi}{H \rightarrow G}{h \mapsto h} est un morphisme.
+        \item \function{exp}{(\mathbb{C}, +) \rightarrow (\mathbb{C}^*, \times)}{z \mapsto e^z} est un morphisme.
+        \item \function{ln}{(\mathbb{R}^*_+, \times) \rightarrow (\mathbb{R}, +)}{x \mapsto \ln(x)} est un morphisme.
+        \item $n\in\mathbb{Z}$, \function{\varphi}{\mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}}{k \mapsto \overline{k}} est un morphisme.
+        \item $(G, \cdot)$ groupe, $g_0\in G$, \function{\varphi}{\mathbb{Z} \rightarrow G}{n \mapsto g_0^n = exp_{g_0}(n)} est un morphisme.
+    \end{itemize}
+}
+
+\theorem{Proposition}{Composition de morphismes}{false}{
+    Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
+    Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
+}
+
+
+\theorem{Proposition}{Noyau et image d'un morphisme de groupes}{false}{
+    Soient $(G, \cdot)$ et $(G', \cdot')$ des groupes et \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes. Alors :
+    \begin{itemize}
+        \item $Ker(\varphi) = \{ g \in G \mid \varphi(g) = e' \}$ est un sous-groupe de $G$.
+        \item $Im(\varphi) = \{ g' \in G' \mid \exists g \in G, \varphi(g) = g' \}$ est un sous-groupe de $G'$.
+    \end{itemize}
+}
+
+\remark{Le noyau d'un morphisme de groupes mesure à quel point le morphisme n'est pas injectif, tandis que l'image mesure à quel point le morphisme n'est pas surjectif.}
+
+\theorem{Proposition}{Injectivité}{false}{
+    $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
+}
+
+\theorem{Proposition}{Surjectivité}{false}{
+    $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
+}
+
+\example{
+    \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
+}
+\theorem{Corollaire}{Image d'un sous-groupe}{true}{
+    Soit $H \subset G$ un sous-groupe.\\
+    Alors $\varphi(H)$ est un sous-groupe de $G'$.
+}
+
+
+
+\section{Ordre d'un élément}
+
+\reminder{On appelle \textbf{ordre} d'un ensemble G son cardinal.}
+
+\definition{
+    Soit $x \in G$. On appelle \textbf{ordre} de $x$ le cardinal de l'ensemble $\langle x \rangle = \{ x^n \mid n \in \mathbb{Z} \}$.\\
+    C'est le plus petit entier $k > 0$ tel que $x^k = e$ si il existe, sinon l'ordre de $x$ est infini.
+}
+
+\theorem{Proposition}{Ordre d'un élément}{false}{
+    Soit $g \in G$, G fini.\\
+     $k=min\{l\in\mathbb{N}^* \mid g^l=e\}$ est \textbf{l'ordre de g}.
+}
+
+\noindent\textbf{Preuve:}\\
+\carreaux{7}
+
+\remark{Si $l$ existe, alors l'ordre de $g$ est fini.}
+
+\theorem{Proposition}{Ordre d'un élément dans un groupe fini}{false}{
+    Si $G$ est un groupe fini, tout élément est d'ordre fini.
+}
+
+\ndlr{cf. Laurent pour la preuve (AL3).}
+
+
+\theorem{Proposition}{Divisibilité de l'ordre}{
+    Soit $(G, *)$ un groupe. Soit $y \in G : \exists m > 0 : y^m = e$. Alors l'ordre de $y$ divise $m$.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{Ordre d'un élément et ordre du groupe}{true}{
+    Soient $(G, *)$ et $(H, *)$ deux groupes. Soit $f : G \rightarrow H$ un morphisme de groupes.\\
+    Soit $x \in G$ d'ordre $n$. Alors $f(x) \mid n$.
+}
+
+\noindent{\textbf{Preuve:}\\
+Puisque $e_H = f(e_G) = f(x^n) = f(x)^n$, on a $f(x)^n = e_H$. Par la proposition précédente, l'ordre de $f(x)$ divise $n$. $\Box$
+}
+
+\newpage
+\tableofcontents 
+\end{document}
+
