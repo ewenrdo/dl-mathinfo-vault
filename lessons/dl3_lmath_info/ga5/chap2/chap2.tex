@@ -231,69 +231,6 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 \section{Groupe quotient}
 \ndlr{non rédigé, fin page 19 du poly de DL3}
 
-\section{Congruences}
-
-\subsection{Rappels et généralités}
-
-\definition{Soit $k \in \mathbb{Z}$. 
-On pose la relation $\equiv_k$ sur $\mathbb{Z}$ définie par : $x \equiv_k y \Leftrightarrow y - x \in k\mathbb{Z}$ (i.e. $k$ divise $y - x$).\\
-On écrit aussi $x \equiv y [k]$. \textit{i.e. $\exists n \in \mathbb{Z}, y - x = kn$}.
-}
-
-\vocabulary{
-    $\equiv_k$ est appelée \textbf{congruence modulo $k$}.
-}
-
-\theorem{Proposition}{Equivalence}{false}{
-    $\equiv_k$ est une relation d'équivalence sur $\mathbb{Z}$.
-}
-
-\noindent\textbf{Preuve:}\\
-\carreaux{10}
-
-
-\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-    On a que $\mathbb{Z}/\equiv_k = \{ \overline{0}, \overline{1}, \overline{2}, ..., \overline{k-1} \}$ noté $\mathbb{Z}/k\mathbb{Z}$.\\
-
-    En particulier, \{0, 1, 2, ..., k-1\} est un système de représentants pour $\equiv_k$.
-}
-\noindent{
-    \textbf{Preuve:}\\
-    Soit $x \in \mathbb{Z}$.\\
-    Par la division euclidienne, $\exists ! (q, r) \in \mathbb{Z} \times \{0, 1, 2, ..., k-1\}$ tel que $x = kq + r$. Donc $x - r = kq \in k\mathbb{Z}$ et ainsi $x \equiv_k r$.\\
-    Il reste à voir que $\overline{i} \neq \overline{j}$ si $i\neq j$ avec $i, j \in \{0, 1, 2, ..., k-1\}$.\\
-    En effet, $i-j \in \{ 1-k, 2-k, ..., -1, 1, 2, ..., k-1 \}$ et $i-j \neq 0$. \\
-    Donc $i-j \notin k\mathbb{Z}$ et ainsi $i \not\equiv_k j$ donc $\overline{i} \neq \overline{j}$. $\Box$
-}
-
-\theorem{Lemme}{}{false}{
-    Soient $x,y\in \mathbb{Z}$.\\
-    Considérons $\overline{x+y} \in \mathbb{Z}/k\mathbb{Z}$. Alors $\overline{x+y}$ ne dépend que de $\overline{x}$ et $\overline{y}$.\\
-    Autrement dit : $\mathbb{Z} \to \mathbb{Z}/k\mathbb{Z}, x \mapsto \overline{x+y} \text{ et } y \mapsto \overline{x+y}$ passent au quotient.
-}
-\noindent\textbf{Preuve:}\\
-\carreaux{10}
-
-
-\theorem{Théorème}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-On a que $(\mathbb{Z}/k\mathbb{Z}, +)$ est un groupe abélien. 
-}
-\newpage
-\noindent\textbf{Preuve:}\\
-\carreaux{7}
-
-\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-Le groupe $(\mathbb{Z}/k\mathbb{Z}, +)$ est le groupe des entiers modulo $k$.
-}
-\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-Le groupe $(\mathbb{Z}/k\mathbb{Z}, +)$ est cyclique et engendré par $\overline{1}$.
-}
-
-\noindent{\textbf{Preuve:}\\
-Le sous-groupe engendré par $\overline{1}$ est $\{ \overline{n} \mid n \in \mathbb{Z} \} = \{\overline{n\cdot 1} \mid n \in \mathbb{Z} \} = \mathbb{Z}/k\mathbb{Z}$. $\Box$
-}
-
-
 
 \newpage
 \tableofcontents 
