@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{Préparation CAPES}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Généralités sur les suites arithmético-géométriques et comportement asymptotique}
+
+\section{Introduction et définition}
+
+\definition{Soient \(a\) et \(b\) deux nombres réels. Une suite \((u_n)_{n \in \mathbb{N}}\) est dite \textbf{arithmético-géométrique} s'il existe une relation de récurrence de la forme :
+\[ \forall n \in \mathbb{N}, \quad u_{n+1} = a u_n + b \]
+}
+
+\remark{Si \(a = 1\), la suite est une suite arithmétique de raison \(b\). Si \(b = 0\), la suite est une suite géométrique de raison \(a\). On suppose généralement dans la suite du cours que \(a \neq 1\) et \(b \neq 0\) pour éviter ces cas triviaux.}
+
+\example{Soit la suite \((u_n)_{n \in \mathbb{N}}\) définie par \(u_0 = 2\) et pour tout \(n \in \mathbb{N}\), \(u_{n+1} = 3u_n - 4\). C'est une suite arithmético-géométrique avec \(a = 3\) et \(b = -4\).}
+
+\section{Étude et expression du terme général}
+
+L'objectif principal est d'exprimer \(u_n\) explicitement en fonction de \(n\). Pour cela, on utilise une suite auxiliaire géométrique en cherchant le point fixe de la relation de récurrence.
+
+\method{Méthode de résolution pas à pas}{
+    Pour déterminer le terme général d'une suite arithmético-géométrique \(u_{n+1} = a u_n + b\) (avec \(a \neq 1\)) :
+    \begin{enumerate}
+        \item \textbf{Recherche du point fixe :} On résout l'équation \(c = ac + b\). La solution est \(c = \frac{b}{1-a}\).
+        \item \textbf{Introduction de la suite auxiliaire :} On pose pour tout \(n \in \mathbb{N}\), \(v_n = u_n - c\).
+        \item \textbf{Nature de \((v_n)\) :} On montre que \((v_n)\) est une suite géométrique de raison \(a\).
+        \item \textbf{Expression de \(v_n\) puis \(u_n\) :} On exprime \(v_n\) en fonction de \(n\) (\(v_n = v_0 \times a^n\)), puis on en déduit \(u_n = v_n + c\).
+    \end{enumerate}
+}
+
+\theorem{Théorème}{Terme général}{true}{
+    Soit \((u_n)_{n \in \mathbb{N}}\) une suite arithmético-géométrique définie par \(u_{n+1} = a u_n + b\) avec \(a \neq 1\). 
+    En notant \(c = \frac{b}{1-a}\), on a pour tout \(n \in \mathbb{N}\) :
+    \[ u_n = a^n(u_0 - c) + c \]
+}
+
+\noindent{\textbf{Preuve :} \\
+Considérons la suite $(v_n)$ définie par $v_n = u_n - c$, avec $c = \frac{b}{1-a}$. Alors on a :\\
+\begin{align*}
+v_{n+1} &= u_{n+1} - c \\
+&= a \cdot u_n + b - \frac{b}{1-a} = a \cdot u_n - \frac{ab}{1-a} \\
+&= a \cdot (u_n - \underbrace{\frac{b}{1-a}}_{ = c}) \\
+&= a \cdot v_n
+\end{align*}
+Donc $(v_n)$ est une suite géométrique et donc : $v_n = a^n \cdot v_0 = a^n(u_0 - c)$.\\
+Comme $v_n = u_n - c$ alors $u_n = v_n + c = a^n \cdot (u_0 - c) + c$. $\Box$
+}
+
+\section{Comportement asymptotique}
+
+L'étude de la convergence de \((u_n)\) dépend entièrement de la raison \(a\) de la suite auxiliaire.
+
+\theorem{Théorème}{Convergence}{false}{
+    Soit \((u_n)_{n \in \mathbb{N}}\) une suite arithmético-géométrique avec \(a \neq 1\) et \(c = \frac{b}{1-a}\).
+    \begin{itemize}
+        \item Si \(|a| < 1\) (c'est-à-dire \(-1 < a < 1\)), alors \(\lim_{n \to +\infty} a^n = 0\), donc \(\lim_{n \to +\infty} u_n = c\).
+        \item Si \(a > 1\) ou \(a \le -1\), la suite \((u_n)\) n'admet pas de limite finie (sauf si \(u_0 = c\), auquel cas la suite est constante égale à \(c\)).
+    \end{itemize}
+}
+
+\attention{Ne confondez pas le point fixe \(c\) avec la limite automatique de la suite. La suite ne converge vers \(c\) \textbf{que si} la condition \(-1 < a < 1\) est vérifiée !}
+
+
+\training{Soit la suite \((u_n)\) définie par \(u_0 = 5\) et \(u_{n+1} = \frac{1}{2}u_n + 3\). \\
+1. Déterminer la valeur réelle \(c\) telle que \(c = \frac{1}{2}c + 3\). \\
+2. Démontrer que la suite \((v_n)\) définie par \(v_n = u_n - c\) est géométrique. \\
+3. Exprimer \(v_n\), puis \(u_n\) en fonction de \(n\). \\
+4. Déterminer la limite de la suite \((u_n)\).}
+
+\vspace{1em}
+\noindent\textbf{Solution guidée :} \\[0.5em]
+1. \(c = \frac{1}{2}c + 3 \iff \frac{1}{2}c = 3 \iff c = 6\). \\
+2. \(v_{n+1} = u_{n+1} - 6 = \frac{1}{2}u_n + 3 - 6 = \frac{1}{2}u_n - 3 = \frac{1}{2}(u_n - 6) = \frac{1}{2}v_n\). Donc \((v_n)\) est géométrique de raison \(q = \frac{1}{2}\) et de premier terme \(v_0 = u_0 - 6 = 5 - 6 = -1\). \\
+3. On a \(v_n = -1 \times \left(\frac{1}{2}\right)^n\). On en déduit \(u_n = v_n + 6 = 6 - \left(\frac{1}{2}\right)^n\). \\
+4. Comme \(-1 < \frac{1}{2} < 1\), \(\lim_{n \to +\infty} \left(\frac{1}{2}\right)^n = 0\), d'où \(\lim_{n \to +\infty} u_n = 6\).
+
+\newpage
+\tableofcontents
+\end{document}

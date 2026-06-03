@@ -23,135 +23,274 @@
 
 \docTitle{Chapitre 2 : Groupes quotients}
 
-\section{Relations d'équivalence et classes d'équivalence}
+\section{Ensembles quotients par une relation d'équivalence}
+\subsection{Relations d'équivalence et classes d'équivalence}
 
-\definition{Soit \(E\) un ensemble. Soit \(R\) (un sous-ensemble de \(E \times E\)) une relation.\\
-On pose \(xRy \Leftrightarrow (x, y) \in R\) et on dit que \(x\) est en relation avec \(y\) par \(R\).}
-\theorem{Propriété}{Relation d'équivalence}{true}{
-    Soit \(R\) une relation sur \(E\). On dit que \(R\) est une \textbf{relation d'équivalence} si :
-    \begin{itemize}
-        \item \(R\) est réflexive : \( \forall x \in E, xRx\).
-        \item \(R\) est symétrique : \( \forall x, y \in E, xRy \Rightarrow yRx\).
-        \item \(R\) est transitive : \( \forall x, y, z \in E, (xRy \wedge  yRz) \Rightarrow xRz\).
-    \end{itemize}
-}
+\definition{Soit $E$ un ensemble et $R$ une relation sur $E$, où l'on note $xRy$ si $(x, y) \in R$. On dit que $R$ est une \textbf{relation d'équivalence} si elle est réflexive, symétrique et transitive.}
 
+\example{$=$ est une relation d'équivalence sur $\mathbb{R}$}
 
-\definition{Soit \(R\) une relation d'équivalence sur \(E\). Pour \(x \in E\), on appelle \textbf{classe d'équivalence} de \(x\) et on note \(\overline{x}\) (ou \([x]_R\) ou \(x+k\mathbb{Z}\)) l'ensemble \(\{ y \in E \mid xRy \}\).}
+\definition{Soit $R$ une relation d'équivalence sur $E$. Pour $x \in E$, on appelle \textbf{classe d'équivalence} de $x$ et on note $\overline{x}$ (ou $[x]_R$, $cl_R(x)$ ou $x+k\mathbb{Z}$) l'ensemble $\{ y \in E \mid xRy \}$.}
+\remark{C'est tout simplement l'ensemble des éléments de $E$ qui sont en relation avec $x$ par $R$.}
+\example{Soit $x \in \mathbb{R}$. La classe d'équivalence de $x$ pour la relation d'équivalence $=$ est $\overline{x} = \{ y \in \mathbb{R} \mid x = y \} = \{ x \}$.}
 
-
-\theorem{Proposition}{}{true}{Si deux classes d'équivalence ont un élément en commun, alors elles sont égales.}
-
-\definition{Soit \((F_i)_{i \in I}\) une famille de parties de \(E\). On dit que cette famille est une \textbf{partition} de \(E\) si :
+\definition{Soit $(F_i)_{i \in I}$ une famille de parties de $E$. On dit que cette famille est une \textbf{partition} de $E$ si :
 \begin{itemize}
-    \item \(E = \bigcup_{i \in I} F_i\) (la réunion des \(F_i\) est \(E\)).
-    \item \( \forall i, j \in I, i \neq j \Rightarrow F_i \cap F_j = \emptyset\) (les \(F_i\) sont deux à deux disjointes).
+    \item $E = \bigcup_{i \in I} F_i$ (la réunion des $F_i$ est $E$).
+    \item $ \forall i, j \in I, i \neq j \Rightarrow F_i \cap F_j = \emptyset$ (les $F_i$ sont deux à deux disjointes).
 \end{itemize}}
 
 \illustration{On peut reprendre l'idée intuitive d'un univers en probabilités :
 
     \begin{center}
         \includegraphics[width=0.25\textwidth]{./images/partition.png}
-        \captionof{figure}{Partition de \(\Omega\) en \(A_1, A_2, A_3, A_4\)}
+        \captionof{figure}{Partition de $\Omega$ en $A_1, A_2, A_3, A_4$}
     \end{center}
 }
-\theorem{Proposition}{}{false}{Les classes d'équivalence d'une relation d'équivalence \(R\) forment une partition de \(E\).}
+\theorem{Proposition}{}{false}{Les classes d'équivalence d'une relation d'équivalence $R$ forment une partition de $E$.}
 \noindent{
     \textbf{Preuve:}
     \begin{itemize}
         \item Les classes sont non vides.
         \item Deux classes différentes sont disjointes (elles n'ont pas d'élément en commun).
-        \item L'union des classes est \(E\). $\Box$ 
+        \item L'union des classes est $E$. $\Box$ 
     \end{itemize}
+}
+\remark{Cela implique que si deux classes d'équivalence ont un élément en commun, alors elles sont égales.}
+
+\theorem{Proposition}{}{false}{
+    Soit $(F_i)_{i \in I}$ une partition de $E$. On peut définir une relation d'équivalence $R$ sur $E$ par : $xRy \Leftrightarrow \exists i \in I : x,y\in F_i$.\\
+    Alors $R$ est d'équivalence.
+}
+
+\noindent\textbf{Preuve:}
+\begin{itemize}
+    \item \textit{Réflexivité :} Soit $x \in E$. Par définition de partition, $\exists i \in I$ tel que $x \in F_i$. Donc $xRx$.
+    \item \textit{Symétrie :} Soient $x, y \in E$ tels que $xRy$. Par définition de $R$, $\exists i \in I$ tel que $x, y \in F_i$. Donc $y, x \in F_i$ et ainsi $yRx$.
+    \item \textit{Transitivité :} Soient $x, y, z \in E$ tels que $xRy$ et $yRz$. Par définition de $R$, $\exists i, j \in I$ tels que $x, y \in F_i$ et $y, z \in F_j$. Comme $y \in F_i$ et $y \in F_j$, on a $F_i \cap F_j \neq \emptyset$. Par définition de partition, on en déduit que $i = j$. Donc $x, z \in F_i$ et ainsi $xRz$. $\Box$
+\end{itemize}
+
+\subsection{Ensemble quotient d'une relation d'équivalence}
+
+\definition{
+    Soit $R$ une relation d'équivalence sur $E$.\\
+    On appelle \textbf{ensemble quotient} de $E$ par $R$ et on note $E/R$ l'ensemble des classes d'équivalence de $R$.\\
+    \textit{i.e.  $E/R = \{ \overline{x} \mid x \in E \}$.}
+}
+
+\theorem{Proposition}{Bijection de l'application quotient}{false}{
+    Soit $R$ une relation d'équivalence sur $E$.\\
+    L'application \function{\pi}{E \rightarrow E/R}{x \mapsto \overline{x}} est une surjection.
+}
+
+\vocabulary{On appelle $\pi$ l'\textbf{application quotient} de $E$ par $R$.}
+
+\definition{
+    Soit $S \subseteq E$. On dit que $S$ est un \textbf{système de représentants} pour $R$ si pour toute classe $C$ de $R$, il existe un unique élément dans $S \cap C$.\\\\
+    De manière équivalente, $S$ est un système de représentants si $\pi_{|S} : S \to E/R$ est une bijection.
+}
+
+\subsection{Passage au quotient et décomposition canonique}
+
+Dans cette section, on note $\pi_E$ l'application quotient de $E$ par $R$.
+
+\definition{
+    Soit $f : E \to F$ une application sur deux ensembles $E$ et $F$ quelconques.\\
+    On dit que $f$ \textbf{passe au quotient} ou que $f$ est \textbf{constante sur les classes d'équivalence de $R$} si $\forall x, y \in E \text{ avec } xRy \Rightarrow f(x) = f(y)$.
+}
+
+\example{Si $R$ est la relation d'équivalence $=$ sur $\mathbb{R}$, alors une application $f : \mathbb{R} \to F$ passe au quotient si et seulement si $f$ est constante.}
+
+\definition{
+    Soit $f$ une application de $E$ vers $F$ constante sur les classes d'équivalence de $R$.\\
+    On appelle l'\textbf{application déduite de $f$ par passage au quotient} l'application \function{\overline{f}}{E/R \to F}{\overline{x} \mapsto f(x)}.
 }
 
 \theorem{Proposition}{}{false}{
-    Soit \((F_i)_{i \in I}\) une partition de \(E\). On peut définir une relation d'équivalence \(R\) sur \(E\) par : \(xRy \Leftrightarrow \exists i \in I : x,y\in F_i\).\\
-    Alors \(R\) est d'équivalence.
+    Soit $f : E \to F$ une application, et soit $R$ une relation d'équivalence sur $E$. On note $R_f$ la relation d'équivalence définie par $xR_fy \Leftrightarrow f(x) = f(y)$.
+    \begin{enumerate}
+        \item $f$ est constante sur les classes d'équivalence de $R$ si et seulement si $\forall x, y \in E, xRy \Rightarrow xR_fy$.
+        \item L'application $\overline{f} : E/R_f \to F$ est bien définie et est injective.
+        \item Réciproquement, si $f$ est constante sur les classes d'équivalence de $R$, alors il $\overline{f} : E/R \to F$ est injective si et seulement si $\forall x, y \in E, xRy \Leftrightarrow xR_fy$.
+    \end{enumerate}
 }
 
-\noindent\textbf{Preuve:}\\
+\definition{
+    Soit $f : E \to F$ une application.\\
+    Alors $f = \overline{f} \circ \pi_E$ avec $\overline{f} : E/R_f \to F$ injective et $\pi_E : E \to E/R_f$ l'application quotient de $E$ par $R_f$ surjective.\\
+    On dit que cette décomposition est la \textbf{décomposition canonique} de $f$ \textit{(car elle ne dépend que de $f$)}.
+}
+
+\theorem{Proposition}{Décomposition canonique}{true}{
+    Soit \(f : E \rightarrow F\) une application. \(f\) se décompose de façon \textbf{canonique} en \(f = j \circ \bar{f} \circ \pi\) avec \(\pi : E \rightarrow E/\mathcal{R}_f\) la projection canonique (surjective), \(\bar{f} : E/\mathcal{R}_f \rightarrow f(E)\) définie par \(\bar{f}(\text{cl}_{\mathcal{R}_f}(x)) = f(x)\) bijective et \(j : f(E) \rightarrow F\) l'inclusion canonique d'ensembles.
+}
+\example{
+    Soit l'application \(f : \mathbb{Z} \rightarrow \mathbb{Z}\) définie par \(f(x) = x \pmod 3\) (qui à chaque entier associe son reste dans la division euclidienne par 3).
+    \begin{itemize}
+        \item L'ensemble de départ est \(E = \mathbb{Z}\) et l'ensemble d'arrivée est \(F = \mathbb{Z}\).
+        \item L'ensemble image est \(f(E) = \{0, 1, 2\}\).
+        \item La relation d'équivalence associée est \(x \mathcal{R}_f y \iff x \equiv y \pmod 3\). L'ensemble quotient \(E/\mathcal{R}_f\) est donc \(\mathbb{Z}/3\mathbb{Z} = \{\text{cl}(0), \text{cl}(1), \text{cl}(2)\}\).
+    \end{itemize}
+    La décomposition \(f = j \circ \bar{f} \circ \pi\) se traduit ainsi :
+    \begin{enumerate}
+        \item \(\pi : \mathbb{Z} \rightarrow \mathbb{Z}/3\mathbb{Z}\) associe à chaque entier sa classe de congruence (projection surjective).
+        \item \(\bar{f} : \mathbb{Z}/3\mathbb{Z} \rightarrow \{0, 1, 2\}\) associe à chaque classe le reste correspondant : \(\bar{f}(\text{cl}(x)) = x \pmod 3\) (bijection).
+        \item \(j : \{0, 1, 2\} \rightarrow \mathbb{Z}\) prend ce reste et le voit comme un entier dans l'ensemble d'arrivée général (injection/inclusion).
+    \end{enumerate}
+}
+
+\section{Relations d'équivalence associées à un sous-groupe}
+
+\vocabulary{
+    Soient \(A\) et \(B\) deux sous-ensembles (parties) d'un groupe \((G, *)\). On note \(AB\) (ou \(A * B\) si on veut éviter une confusion) le sous-ensemble de \(G\) défini par
+    \[ AB := \{a * b, a \in A, b \in B\} \]
+    On s'autorise si $A = \{ a \}$ à écrire \(aB\) (et de même pour $B$).
+}
+
+\vspace{1em}
+
+
+\theorem{Proposition}{Classes de sous-groupes}{true}{
+Soit \(G\) un groupe et soit \(H \subset G\) un sous-groupe. Sur \(G\) on définit deux relations, notées \(\equiv_g\) et \(\equiv_d\) par
+\[ x \equiv_g y \iff x^{-1} * y \in H \iff xH = yH \]
+\[ x \equiv_d y \iff y * x^{-1} \in H \iff Hx = Hy \]
+
+Les relations \(\equiv_g\) et \(\equiv_d\) sont des relations d'équivalence. La classe de \(x\) pour \(\equiv_g\) est \(xH\). La classe de \(x\) pour \(\equiv_d\) est \(Hx\).
+}
+
+\noindent\textbf{Démonstration :} \\[0.5em]
+On fait la démonstration pour \(\equiv_g\) (pour \(\equiv_d\) c'est exactement la même). On montre en premier lieu que \(x^{-1} * y \in H \iff xH = yH\). Si \(xH = yH\) alors comme l'élément \(y * e_G\) appartient à \(yH\), il doit aussi appartenir à \(xH\). Donc il existe \(h \in H\) tel que \(x * h = y\). Donc \(x^{-1} * y = h \in H\). Supposons \(x^{-1} * y \in H\) et montrons \(xH = yH\). Prenons \(y * h, h \in H\) un élément de \(yH\). Alors \((x^{-1} * y) * h\) est dans \(H\) car \(x^{-1} * y \in H\) et \(h \in H\) et \(H\) est un sous-groupe de \(G\). Donc \(y * h = x * (x^{-1} * y * h) \in xH\). On vient de montrer \(yH \subset xH\). On montre de même \(xH \subset yH\) en remarquant que si \(x^{-1} * y \in H\) alors son symétrique \((x^{-1} * y)^{-1} = y^{-1} * x \in H\), puisque \(H\) est un sous-groupe de \(G\). \\
+Pour tous \(x, y, z \in G\) on a :
 \begin{itemize}
-    \item \textit{Réflexivité :} Soit \(x \in E\). Par définition de partition, \(\exists i \in I\) tel que \(x \in F_i\). Donc \(xRx\).
-    \item \textit{Symétrie :} Soient \(x, y \in E\) tels que \(xRy\). Par définition de \(R\), \(\exists i \in I\) tel que \(x, y \in F_i\). Donc \(y, x \in F_i\) et ainsi \(yRx\).
-    \item \textit{Transitivité :} Soient \(x, y, z \in E\) tels que \(xRy\) et \(yRz\). Par définition de \(R\), \(\exists i, j \in I\) tels que \(x, y \in F_i\) et \(y, z \in F_j\). Comme \(y \in F_i\) et \(y \in F_j\), on a \(F_i \cap F_j \neq \emptyset\). Par définition de partition, on en déduit que \(i = j\). Donc \(x, z \in F_i\) et ainsi \(xRz\). $\Box$
+    \item \(xH = xH\), donc la relation est réflexive ;
+    \item \(xH = yH \implies yH = xH\), donc la relation est symétrique ;
+    \item \( (xH = yH \text{ et } yH = zH) \implies xH = zH\), donc la relation est transitive. 
 \end{itemize}
 
-\definition{
-    Soit \(R\) une relation d'équivalence sur \(E\).\\
-    On appelle \textbf{ensemble quotient} de \(E\) par \(R\) et on note \(E/R\) l'ensemble des classes d'équivalence de \(R\).\\
-    \textit{i.e.  \(E/R = \{ \overline{x} \mid x \in E \}\).}
-}
+Enfin montrons que \(\text{cl}_{\equiv_g}(x) = xH\). On a : \(y \equiv_g x\) si et seulement si il existe \(h \in H\) tel que \(x^{-1} * y = h\), si et seulement si il existe \(h \in H\) tel que \(y = x * h\), si et seulement si \(y \in xH\). \hfill \(\Box\)
 
 \definition{
-    Soit \(f : E \to F\) une application. \\
-    On dit que f \textbf{passe au quotient} si \( \forall x, y \in E \text{ avec } xRy \Rightarrow f(x) = f(y)\).
+    On note \(G/H\) l'ensemble quotient par la relation \(\equiv_g\) et \(H\backslash G\) l'ensemble quotient par la relation \(\equiv_d\). \(G/H\) est l'ensemble des \textbf{classes à gauche modulo \(H\)} et \(H\backslash G\) l'ensemble des \textbf{classes à droite modulo \(H\)}. On notera \(\pi : G \rightarrow G/H\) la projection canonique.
 }
 
-\definition{
-    Soit \(S \subseteq E\). On dit que \(S\) est un \textbf{système de représentants} pour \(R\) si pour toute classe \(C\) de \(R\), il existe un unique élément dans \(S \cap C\).
+\theorem{Lemme}{Bijections des classes}{true}{
+    Fixons \(x \in G\). Les applications \(l_x : H \rightarrow xH\) et \(r_x : H \rightarrow Hx\) définies par \(l_x(h) = x * h\) et \(r_x(h) = h * x\) sont des bijections.
 }
+
+
+
+\noindent\textbf{Démonstration :} \\[0.5em]
+On fait la démonstration pour \(l_x\). L'application est surjective. Montrons qu'elle est injective. Supposons \(l_x(h) = l_x(k)\) alors \(x * h = x * k\) et en multipliant à gauche par \(x^{-1}\) on obtient \(h = k\). \hfill \(\Box\)
+
+\vspace{1.5em}
+\example{
+    Pour \(H = \{e_G\}\), on a \(xH = Hx = \{x\}\), donc \(G/H = H\backslash G\) et la projection canonique \(G \rightarrow G/H\) est bijective. \\
+    Pour \(H = G\), on a \(xH = Hx = G\), donc \(G/H = H\backslash G = \{G\}\).
+}
+
+
+\remark{
+    Si \((G, \star)\) est un groupe abélien et \(H\) un sous-groupe de \(G\),
+    \[ \forall x, y \in G, \quad x \equiv_g y \iff x \equiv_d y \iff xH = yH \iff Hx = Hy \]
+    Si l'on utilise la notation additive \((G, +)\) on a
+    \[ \forall x, y \in G, \quad x \equiv_g y \iff x - y \in H \iff x + H = y + H \]
+}
+
+\theorem{Théorème}{Théorème de Lagrange}{true}{
+    Soit \((G, \star)\) un groupe fini et soit \(H\) un sous-groupe de \(G\). On a : 
+    \[|G| = |H| \times |G/H| = |H| \times |H\backslash G|\] 
+    En particulier, le nombre d'éléments de \(H\) divise le nombre d'éléments de \(G\).
+}
+
+\vspace{1.5em}
+\noindent\textbf{Démonstration :} \\[0.5em]
+Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \sum_{A \in G/H} |A|\). Pour \(x \in G\), la classe de \(x\) est \(xH\) en bijection avec \(H\) (par le lemme). Donc toutes les classes d'équivalence ont \(|H|\) éléments, ce qui permet de conclure. \hfill \(\Box\)
+
+\vocabulary{
+    Lorsque \(G/H\) est fini, son nombre d'éléments s'appelle \textbf{l'indice} de \(H\) dans \(G\) et se note \([G : H]\). Si \(G/H\) est infini, on dit que l'indice de \(H\) dans \(G\) est infini.
+}
+
+\section{Application du théorème de Lagrange}
+
+\theorem{Corollaire}{}{true}{
+    Soit $(G, *)$ un groupe fini. Si l'ordre de $G$ est premier, alors $G$ est cyclique et engendré par n'importe quel élément de $G$ différent de l'élément neutre.
+}
+\example{
+    Soit $p$ un nombre premier. Alors $(\mathbb{Z}/p\mathbb{Z}, +)$ est un groupe cyclique d'ordre $p$ engendré par $\overline{1}$.
+}
+
+\theorem{Proposition}{}{true}{
+    Soit $(G, *)$ un groupe et soient $x,y \in G$.\\
+    Supposons $x,y$ d'ordres finis $\omega(x)$ et $\omega(y)$ et que $\omega(x)$ et $\omega(y)$ sont premiers entre eux. Alors :
+    \begin{enumerate}
+        \item $\langle x \rangle \cap \langle y \rangle = \{ e_G \}$,
+        \item Si de plus $x*y = y*x$, alors $\omega(x*y) = \omega(x)\omega(y)$ et $\langle x*y \rangle = \langle \{x,y\} \rangle = \langle x \rangle \times \langle y \rangle$.
+    \end{enumerate}
+}
+
+\section{Groupe quotient}
+\ndlr{non rédigé, fin page 19 du poly de DL3}
 
 \section{Congruences}
 
 \subsection{Rappels et généralités}
 
-\definition{Soit \(k \in \mathbb{Z}\). 
-On pose la relation \(\equiv_k\) sur \(\mathbb{Z}\) définie par : \(x \equiv_k y \Leftrightarrow y - x \in k\mathbb{Z}\) (i.e. \(k\) divise \(y - x\)).\\
-On écrit aussi \(x \equiv y [k]\). \textit{i.e. \(\exists n \in \mathbb{Z}, y - x = kn\)}.
+\definition{Soit $k \in \mathbb{Z}$. 
+On pose la relation $\equiv_k$ sur $\mathbb{Z}$ définie par : $x \equiv_k y \Leftrightarrow y - x \in k\mathbb{Z}$ (i.e. $k$ divise $y - x$).\\
+On écrit aussi $x \equiv y [k]$. \textit{i.e. $\exists n \in \mathbb{Z}, y - x = kn$}.
 }
 
 \vocabulary{
-    \(\equiv_k\) est appelée \textbf{congruence modulo \(k\)}.
+    $\equiv_k$ est appelée \textbf{congruence modulo $k$}.
 }
 
 \theorem{Proposition}{Equivalence}{false}{
-    \(\equiv_k\) est une relation d'équivalence sur \(\mathbb{Z}\).
+    $\equiv_k$ est une relation d'équivalence sur $\mathbb{Z}$.
 }
 
 \noindent\textbf{Preuve:}\\
 \carreaux{10}
 
 
-\theorem{Proposition}{\(\mathbb{Z}/k\mathbb{Z}\)}{false}{
-    On a que \(\mathbb{Z}/\equiv_k = \{ \overline{0}, \overline{1}, \overline{2}, ..., \overline{k-1} \}\) noté \(\mathbb{Z}/k\mathbb{Z}\).\\
+\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
+    On a que $\mathbb{Z}/\equiv_k = \{ \overline{0}, \overline{1}, \overline{2}, ..., \overline{k-1} \}$ noté $\mathbb{Z}/k\mathbb{Z}$.\\
 
-    En particulier, \{0, 1, 2, ..., k-1\} est un système de représentants pour \(\equiv_k\).
+    En particulier, \{0, 1, 2, ..., k-1\} est un système de représentants pour $\equiv_k$.
 }
 \noindent{
     \textbf{Preuve:}\\
-    Soit \(x \in \mathbb{Z}\).\\
-    Par la division euclidienne, \(\exists ! (q, r) \in \mathbb{Z} \times \{0, 1, 2, ..., k-1\}\) tel que \(x = kq + r\). Donc \(x - r = kq \in k\mathbb{Z}\) et ainsi \(x \equiv_k r\).\\
-    Il reste à voir que \(\overline{i} \neq \overline{j}\) si \(i\neq j\) avec \(i, j \in \{0, 1, 2, ..., k-1\}\).\\
-    En effet, \(i-j \in \{ 1-k, 2-k, ..., -1, 1, 2, ..., k-1 \}\) et \(i-j \neq 0\). \\
-    Donc \(i-j \notin k\mathbb{Z}\) et ainsi \(i \not\equiv_k j\) donc \(\overline{i} \neq \overline{j}\). $\Box$
+    Soit $x \in \mathbb{Z}$.\\
+    Par la division euclidienne, $\exists ! (q, r) \in \mathbb{Z} \times \{0, 1, 2, ..., k-1\}$ tel que $x = kq + r$. Donc $x - r = kq \in k\mathbb{Z}$ et ainsi $x \equiv_k r$.\\
+    Il reste à voir que $\overline{i} \neq \overline{j}$ si $i\neq j$ avec $i, j \in \{0, 1, 2, ..., k-1\}$.\\
+    En effet, $i-j \in \{ 1-k, 2-k, ..., -1, 1, 2, ..., k-1 \}$ et $i-j \neq 0$. \\
+    Donc $i-j \notin k\mathbb{Z}$ et ainsi $i \not\equiv_k j$ donc $\overline{i} \neq \overline{j}$. $\Box$
 }
 
 \theorem{Lemme}{}{false}{
-    Soient \(x,y\in \mathbb{Z}\).\\
-    Considérons \(\overline{x+y} \in \mathbb{Z}/k\mathbb{Z}\). Alors \(\overline{x+y}\) ne dépend que de \(\overline{x}\) et \(\overline{y}\).\\
-    Autrement dit : \(\mathbb{Z} \to \mathbb{Z}/k\mathbb{Z}, x \mapsto \overline{x+y} \text{ et } y \mapsto \overline{x+y}\) passent au quotient.
+    Soient $x,y\in \mathbb{Z}$.\\
+    Considérons $\overline{x+y} \in \mathbb{Z}/k\mathbb{Z}$. Alors $\overline{x+y}$ ne dépend que de $\overline{x}$ et $\overline{y}$.\\
+    Autrement dit : $\mathbb{Z} \to \mathbb{Z}/k\mathbb{Z}, x \mapsto \overline{x+y} \text{ et } y \mapsto \overline{x+y}$ passent au quotient.
 }
 \noindent\textbf{Preuve:}\\
 \carreaux{10}
 
 
-\theorem{Théorème}{\(\mathbb{Z}/k\mathbb{Z}\)}{false}{
-On a que \((\mathbb{Z}/k\mathbb{Z}, +)\) est un groupe abélien. 
+\theorem{Théorème}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
+On a que $(\mathbb{Z}/k\mathbb{Z}, +)$ est un groupe abélien. 
 }
 \newpage
 \noindent\textbf{Preuve:}\\
 \carreaux{7}
 
-\theorem{Proposition}{\(\mathbb{Z}/k\mathbb{Z}\)}{false}{
-Le groupe \((\mathbb{Z}/k\mathbb{Z}, +)\) est le groupe des entiers modulo \(k\).
+\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
+Le groupe $(\mathbb{Z}/k\mathbb{Z}, +)$ est le groupe des entiers modulo $k$.
 }
-\theorem{Proposition}{\(\mathbb{Z}/k\mathbb{Z}\)}{false}{
-Le groupe \((\mathbb{Z}/k\mathbb{Z}, +)\) est cyclique et engendré par \(\overline{1}\).
+\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
+Le groupe $(\mathbb{Z}/k\mathbb{Z}, +)$ est cyclique et engendré par $\overline{1}$.
 }
 
 \noindent{\textbf{Preuve:}\\
-Le sous-groupe engendré par \(\overline{1}\) est \(\{ \overline{n} \mid n \in \mathbb{Z} \} = \{\overline{n\cdot 1} \mid n \in \mathbb{Z} \} = \mathbb{Z}/k\mathbb{Z}\). $\Box$
+Le sous-groupe engendré par $\overline{1}$ est $\{ \overline{n} \mid n \in \mathbb{Z} \} = \{\overline{n\cdot 1} \mid n \in \mathbb{Z} \} = \mathbb{Z}/k\mathbb{Z}$. $\Box$
 }
 
 
