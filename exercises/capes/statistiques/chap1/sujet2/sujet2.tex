@@ -1,0 +1,206 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=3cm}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\title{\textbf{Sujet d'Entraînement n°2 : Statistiques à une variable}\\\large Préparation au CAPES de Mathématiques}
+\author{Approfondissements théoriques, théorèmes de décomposition et indicateurs de forme}
+\date{Session 2026-2027}
+
+\begin{document}
+
+\maketitle
+
+\vspace{1cm}
+
+\begin{center}
+\textit{Ce sujet constitue le second volet d'entraînement dans l'esprit du concours du CAPES. Il met l'accent sur les structures algébriques des indicateurs, les démonstrations de décomposition et la manipulation fine des fonctions de répartition discrètes et continues.\\ \vspace{0.5cm} L'usage de la calculatrice en mode examen est autorisé.}
+\end{center}
+
+\vspace{1.5cm}
+
+\section*{Questions de cours}
+
+Le candidat est invité à démontrer deux théorèmes fondamentaux de la statistique descriptive théorique structurant l'analyse de la dispersion et des fonctions de répartition.
+
+\begin{enumerate}
+    \item \textbf{Théorème de décomposition de la variance (Huygens-Otterbein)}
+    \begin{enumerate}
+        \item Soit une population finie $\Omega$ de cardinal $N \in \mathbb{N}^*$, partitionnée en $G$ sous-groupes disjoints $\Omega_1, \Omega_2, \dots, \Omega_G$ d'effectifs respectifs $N_1, N_2, \dots, N_G$. On note $\overline{x}$ la moyenne globale, $V$ la variance globale, $\overline{x}_g$ la moyenne du groupe $g$ et $V_g$ sa variance.
+        À partir de la définition formelle de la variance globale $V = \frac{1}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} (x_i - \overline{x})^2$, injecter le terme $\overline{x}_g$ et démontrer rigoureusement la relation :
+        \[ V = V_{\text{intra}} + V_{\text{inter}} \]
+        où l'on définira proprement les expressions des variances intra-groupe ($V_{\text{intra}}$) et inter-groupe ($V_{\text{inter}}$).
+        \item Justifier la nullité du double produit intermédiaire lors de la démonstration.
+    \end{enumerate}
+
+    \item \textbf{Propriétés analytiques de la fonction de répartition discrète}
+    
+    Soit $X$ une variable statistique quantitative discrète prenant un nombre fini de valeurs ordonnées $x_1 < x_2 < \dots < x_k$. On note $F$ la fonction de répartition définie sur $\mathbb{R}$ par $F(t) = \frac{1}{N}\sum_{x_i \le t} n_i$.
+    \begin{enumerate}
+        \item Démontrer que $F$ est une fonction croissante sur $\mathbb{R}$, constante par morceaux, et préciser ses limites en $-\infty$ et $+\infty$.
+        \item Déterminer la nature de la continuité de $F$ en un point de saut $x_i$ (continuité à gauche ou à droite) et exprimer l'amplitude du saut $F(x_i) - \lim_{t \to x_i^-} F(t)$ en fonction de la fréquence $f_i$.
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section*{Exercice 2 : Transformation non affine et indicateurs de forme (Asymétrie)}
+
+On s'intéresse à la forme d'une distribution de salaires au sein d'une grande administration. La variable initiale $X$ possède les caractéristiques suivantes : moyenne $\overline{x} = 2200$£, médiane $M_e(X) = 1950$£{}, écart-type $\sigma(X) = 400$£{} et un moment centré d'ordre 3 défini par $\mu_3(X) = \frac{1}{N}\sum_{i=1}^k n_i(x_i - \overline{x})^3 = 3,84 \times 10^7$.
+
+\begin{enumerate}
+    \item \textbf{Analyse de l'asymétrie initiale}
+    \begin{enumerate}
+        \item Rappeler la définition du coefficient d'asymétrie de Fisher (Skewness), noté $\gamma_1(X)$, en fonction de $\mu_3(X)$ et de $\sigma(X)$. Calculer sa valeur pour la variable $X$.
+        \item Interpréter le signe de $\gamma_1(X)$ en le mettant en relation avec la position relative de la moyenne et de la médiane. Quel est le profil de la distribution (étalée à droite ou à gauche) ?
+    \end{enumerate}
+
+    \item \textbf{Effet d'une transformation non affine : l'indice multiplicatif}
+    
+    Pour compenser l'inflation, l'État propose une revalorisation qui dépend du carré de l'écart à la moyenne de subsistance fixe $m = 1200$£. La formule de transformation est donnée par $Y = \alpha (X - m)^2$ avec $\alpha = 2 \times 10^{-4}$.
+    \begin{enumerate}
+        \item Montrer que la moyenne de la nouvelle variable $\overline{y}$ peut s'exprimer directement à l'aide de paramètres de position et de dispersion de la variable $X$ sous la forme $\overline{y} = \alpha \left[ V(X) + (\overline{x} - m)^2 \right]$.
+        \item En déduire la valeur numérique de $\overline{y}$.
+        \item Peut-on appliquer les formules classiques de linéarité pour déterminer la médiane $M_e(Y)$ à partir de $M_e(X)$ ? Justifier en énonçant la condition géométrique ou analytique requise sur une transformation pour préserver l'ordre des quantiles.
+    \end{enumerate}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\section*{Exercice 3 : Robustesse et détection des valeurs aberrantes}
+
+Une station météorologique étudie la pluviométrie mensuelle (en mm) sur une série historique de $N = 11$ années pour un mois donné. Les valeurs ordonnées obtenues sont :
+\[ 32, \quad 41, \quad 45, \quad 48, \quad 50, \quad 52, \quad 55, \quad 58, \quad 62, \quad 71, \quad 145 \]
+
+\begin{enumerate}
+    \item \textbf{Calcul des indicateurs standards et robustes}
+    \begin{enumerate}
+        \item Déterminer la médiane $M_e$ et la moyenne $\overline{x}$ de cette série.
+        \item Calculer le premier quartile $Q_1$ et le troisième quartile $Q_3$ en utilisant la définition académique des fréquences cumulées (la méthode des rangs intégrale $\lceil N/4 \rceil$). En déduire l'écart interquartile $I_Q$.
+    \end{enumerate}
+
+    \item \textbf{Critère de Tukey et étude d'impact d'une anomalie}
+    \begin{enumerate}
+        \item Selon la méthode des barrières de Tukey, une valeur est considérée comme aberrante externe (outlier) si elle se situe en dehors de l'intervalle $[Q_1 - 1,5 I_Q \ ; \ Q_3 + 1,5 I_Q]$. Calculer les bornes de cet intervalle et identifier l'éventuelle valeur aberrante de la série.
+        \item Supposons que la valeur $145$ soit une erreur d'écriture et qu'elle doive être remplacée par $65$. Recalculer la nouvelle moyenne $\overline{x}'$ ainsi que la nouvelle médiane $M_e'$.
+        \item Comparer l'impact de cette modification sur la moyenne et sur la médiane. En déduire une argumentation rigoureuse sur la notion de sensibilité et de robustesse d'un indicateur statistique face aux valeurs extrêmes.
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\noindent La page suivante comporte le corrigé de l'épreuve. Il est recommandé de tenter de résoudre les exercices avant de consulter les solutions proposées.
+
+\newpage
+
+\begin{center}
+\textit{Corrigé de l'Entraînement n°2 : Statistiques à une variable\\\large Préparation au CAPES de Mathématiques}
+\end{center}
+
+\section*{Exercice 1 : Questions de cours (Démonstrations fondatrices)}
+
+\begin{enumerate}
+    \item \textbf{Théorème de décomposition de la variance (Huygens-Otterbein)}
+    \begin{enumerate}
+        \item Soit $V = \frac{1}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} (x_i - \overline{x})^2$. Introduisons la moyenne locale $\overline{x}_g$ au sein de la parenthèse par identité additive :
+        \[ V = \frac{1}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} \left[ (x_i - \overline{x}_g) + (\overline{x}_g - \overline{x}) \right]^2 \]
+        Développons le carré remarquable à l'intérieur de la double somme :
+        \[ V = \frac{1}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} (x_i - \overline{x}_g)^2 + \frac{2}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} (x_i - \overline{x}_g)(\overline{x}_g - \overline{x}) + \frac{1}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} (\overline{x}_g - \overline{x})^2 \]
+        Analysons séparément le premier et le troisième terme :
+        \begin{itemize}
+            \item \textbf{Premier terme :} Par définition, la variance interne au groupe $g$ est $V_g = \frac{1}{N_g}\sum_{i \in \Omega_g} (x_i - \overline{x}_g)^2$. Donc $\sum_{i \in \Omega_g} (x_i - \overline{x}_g)^2 = N_g V_g$. En sommant sur tous les groupes, le premier bloc devient $\frac{1}{N}\sum_{g=1}^G N_g V_g = V_{\text{intra}}$.
+            \item \textbf{Troisième terme :} La quantité $(\overline{x}_g - \overline{x})^2$ est constante par rapport à l'indice d'individu $i$. Ainsi, $\sum_{i \in \Omega_g} (\overline{x}_g - \overline{x})^2 = N_g (\overline{x}_g - \overline{x})^2$. Le troisième bloc s'écrit $\frac{1}{N}\sum_{g=1}^G N_g (\overline{x}_g - \overline{x})^2 = V_{\text{inter}}$.
+        \end{itemize}
+        On obtient ainsi l'identité fondamentale $V = V_{\text{intra}} + V_{\text{inter}}$.
+        
+        \item \textbf{Nullité du double produit :} Étudions le terme central :
+        \[ \frac{2}{N}\sum_{g=1}^G \sum_{i \in \Omega_g} (x_i - \overline{x}_g)(\overline{x}_g - \overline{x}) \]
+        Pour un groupe $g$ fixé, le facteur $(\overline{x}_g - \overline{x})$ ne dépend pas de $i$, on peut donc l'extraire de la somme interne :
+        \[ \frac{2}{N}\sum_{g=1}^G (\overline{x}_g - \overline{x}) \left[ \sum_{i \in \Omega_g} (x_i - \overline{x}_g) \right] \]
+        Or, par définition de la moyenne locale $\overline{x}_g = \frac{1}{N_g}\sum_{i \in \Omega_g} x_i$, on a $\sum_{i \in \Omega_g} x_i = N_g \overline{x}_g$. Par conséquent, la somme des écarts à la moyenne est nulle : $\sum_{i \in \Omega_g} (x_i - \overline{x}_g) = N_g \overline{x}_g - N_g \overline{x}_g = 0$. Le double produit est donc rigoureusement nul.
+    \end{enumerate}
+
+    \item \textbf{Propriétés analytiques de la fonction de répartition discrète}
+    \begin{enumerate}
+        \item Soient $t_1, t_2 \in \mathbb{R}$ tels que $t_1 \le t_2$. On a $\{x_i \in \mathbb{X} \ / \ x_i \le t_1\} \subseteq \{x_i \in \mathbb{X} \ / \ x_i \le t_2\}$. Les effectifs $n_i$ étant strictement positifs, on en déduit par positivité de la somme sur un sous-ensemble élargi que $F(t_1) \le F(t_2)$. $F$ est donc croissante.
+        Sur tout intervalle $[x_i \ ; \ x_{i+1}[$, l'ensemble des valeurs inférieures ou égales à $t$ est constant et égal à $\{x_1, \dots, x_i\}$, donc $F$ y est constante par morceaux.
+        De plus, si $t < x_1$, la somme est vide d'où $\lim_{t \to -\infty} F(t) = 0$. Si $t \ge x_k$, la somme contient toutes les valeurs de la population d'où $\lim_{t \to +\infty} F(t) = \frac{1}{N}\sum_{i=1}^k n_i = \frac{N}{N} = 1$.
+        
+        \item Soit $x_i$ une valeur de la série. Si on approche $x_i$ par valeurs supérieures ($t \to x_i^+$), la condition $x_j \le t$ inclut $x_i$, d'où $F(x_i^+) = F(x_i)$ : la fonction est \textbf{continue à droite}.
+        Si on l'approche par valeurs inférieures ($t \to x_i^-$), la valeur $x_i$ est exclue de la sommation. On a alors $\lim_{t \to x_i^-} F(t) = \frac{1}{N}\sum_{j=1}^{i-1} n_j$.
+        L'amplitude du saut vaut :
+        \[ F(x_i) - \lim_{t \to x_i^-} F(t) = \frac{1}{N}\sum_{j=1}^{i} n_j - \frac{1}{N}\sum_{j=1}^{i-1} n_j = \frac{n_i}{N} = f_i \]
+        Le saut en chaque point correspond exactement à la fréquence relative associée à la modalité.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Exercice 2 : Transformation non affine et indicateurs de forme (Asymétrie)}
+
+\begin{enumerate}
+    \item \textbf{Analyse de l'asymétrie initiale}
+    \begin{enumerate}
+        \item Le coefficient de Fisher $\gamma_1(X)$ est défini par la formule : $\gamma_1(X) = \frac{\mu_3(X)}{\sigma(X)^3}$.
+        Ici, $\sigma(X) = 400$, donc $\sigma(X)^3 = 400^3 = 6,4 \times 10^7$. Calculons le coefficient :
+        \[ \gamma_1(X) = \frac{3,84 \times 10^7}{6,4 \times 10^7} = \frac{3,84}{6,4} = 0,6 \]
+        
+        \item Puisque $\gamma_1(X) = 0,6 > 0$, la distribution présente une \textbf{asymétrie positive}. Cela concorde parfaitement avec le fait que la moyenne ($\overline{x} = 2200$) soit strictement supérieure à la médiane ($M_e = 1950$). La distribution est dite \textbf{étalée vers la droite} (présence de hauts salaires extrêmes qui tirent la moyenne vers le haut sans affecter la médiane).
+    \end{enumerate}
+
+    \item \textbf{Effet d'une transformation non affine ($Y = \alpha (X - m)^2$)}
+    \begin{enumerate}
+        \item Par définition de la moyenne de la variable transformée :
+        \[ \overline{y} = \frac{1}{N}\sum_{i=1}^k n_i y_i = \frac{1}{N}\sum_{i=1}^k n_i \alpha (x_i - m)^2 = \alpha \left[ \frac{1}{N}\sum_{i=1}^k n_i (x_i - m)^2 \right] \]
+        Développons le terme quadratique centré en $m$ en faisant apparaître la moyenne $\overline{x}$ :
+        $(x_i - m) = (x_i - \overline{x}) + (\overline{x} - m)$. En élevant au carré :
+        \[ (x_i - m)^2 = (x_i - \overline{x})^2 + 2(x_i - \overline{x})(\overline{x} - m) + (\overline{x} - m)^2 \]
+        En appliquant l'opérateur moyenne (linéarité), le double produit s'annule (somme des écarts à la moyenne nulle) :
+        \[ \frac{1}{N}\sum_{i=1}^k n_i (x_i - m)^2 = \frac{1}{N}\sum_{i=1}^k n_i (x_i - \overline{x})^2 + (\overline{x} - m)^2 = V(X) + (\overline{x} - m)^2 \]
+        On retrouve bien la formule demandée : $\overline{y} = \alpha \left[ V(X) + (\overline{x} - m)^2 \right]$.
+        
+        \item Calculons la variance initiale : $V(X) = \sigma(X)^2 = 400^2 = 160000$.
+        Le terme d'écart des moyennes vaut : $(\overline{x} - m)^2 = (2200 - 1200)^2 = 1000^2 = 1000000$.
+        \[ \overline{y} = 2 \times 10^{-4} \times (160000 + 1000000) = 2 \times 10^{-4} \times 1160000 = 232 \text{ £} \]
+        
+        \item \textbf{Non-applicabilité de la linéarité :} On ne peut absolument pas écrire $M_e(Y) = \alpha(M_e(X)-m)^2$ sans étude préalable. Pour qu'une transformation conserve directement les quantiles par composition simple, il faut impérativement que la fonction de transformation $f$ soit **strictement monotone** sur le support de la variable. 
+        Ici, $f(t) = \alpha(t-1200)^2$. Sa dérivée est $f'(t) = 2\alpha(t-1200)$. Comme tous les salaires de l'administration $x_i$ sont supérieurs à $1200$ (puisque la moyenne est à $2200$ et $\sigma=400$), la fonction $f$ est strictement croissante sur le domaine d'étude. La relation est donc ici exceptionnellement valable, mais en raison de la monotonie et non d'une quelconque linéarité.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Exercice 3 : Robustesse et détection des valeurs aberrantes}
+
+\begin{enumerate}
+    \item \textbf{Calcul des indicateurs standards et robustes}
+    \begin{enumerate}
+        \item L'effectif total est $N = 11$ (impair). 
+        La médiane est la valeur de rang $\frac{N+1}{2} = \frac{12}{2} = 6$\textsuperscript{e} valeur ordonnée : $M_e = 52$ mm.
+        Calcul de la moyenne :
+        \[ \overline{x} = \frac{32+41+45+48+50+52+55+58+62+71+145}{11} = \frac{659}{11} \approx 59,91 \text{ mm} \]
+        
+        \item Calcul du premier quartile $Q_1$ : le rang théorique est $11/4 = 2,75$. On arrondit à l'entier supérieur, soit la 3\textsuperscript{e} valeur : $Q_1 = 45$ mm.
+        Calcul du troisième quartile $Q_3$ : le rang théorique est $3 \times 11 / 4 = 8,25$. On arrondit à l'entier supérieur, soit la 9\textsuperscript{e} valeur : $Q_3 = 62$ mm.
+        L'écart interquartile vaut : $I_Q = Q_3 - Q_1 = 62 - 45 = 17$ mm.
+    \end{enumerate}
+
+    \item \textbf{Critère de Tukey et étude d'impact d'une anomalie}
+    \begin{enumerate}
+        \item Calculons le seuil de Tukey pour la barrière supérieure :
+        \[ \text{Borne Sup} = Q_3 + 1,5 I_Q = 62 + 1,5 \times 17 = 62 + 25,5 = 87,5 \text{ mm} \]
+        \[ \text{Borne Inf} = Q_1 - 1,5 I_Q = 45 - 25,5 = 19,5 \text{ mm} \]
+        L'intervalle de référence est $[19,5 \ ; \ 87,5]$. La valeur $145$ mm se situant largement au-dessus de $87,5$, elle est mathématiquement identifiée comme une \textbf{valeur aberrante externe}.
+        
+        \item Remplaçons $145$ par $65$. La série ordonnée devient : $32, 41, 45, 48, 50, 52, 55, 58, 62, 65, 71$.
+        L'effectif reste $N=11$. La médiane est toujours la 6\textsuperscript{e} valeur : $M_e' = 52$ mm.
+        Nouvelle moyenne :
+        \[ \overline{x}' = \frac{659 - 145 + 65}{11} = \frac{579}{11} \approx 52,64 \text{ mm} \]
+        
+        \item \textbf{Analyse de robustesse :} On observe que la modification d'une seule valeur extrême a provoqué une chute importante de la moyenne (qui passe de $59,91$ à $52,64$ mm, soit une variation de près de 12\,\%), tandis que la médiane est restée rigoureusement invariante ($M_e = M_e' = 52$). 
+        Cela démontre la pertinence mathématique des indicateurs : la moyenne est un indicateur \textbf{sensible}, influencé par la valeur numérique de chaque observation (sensibilité aux valeurs aberrantes), alors que la médiane est un indicateur \textbf{robuste}, déterminé uniquement par l'ordre structurel et le dénombrement de la population.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
