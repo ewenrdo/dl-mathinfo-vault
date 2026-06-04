@@ -1,0 +1,104 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=3cm}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\title{\textbf{Sujet d'Entraînement n°1 : Statistiques à une variable}\\\large Préparation au CAPES de Mathématiques}
+\author{Séries statistiques quantitatives, caractéristiques de position et de dispersion}
+\date{Session 2026-2027}
+
+\begin{document}
+
+\maketitle
+
+\vspace{1cm}
+
+\begin{center}
+\textit{Ce sujet est conçu dans l'esprit des épreuves écrites du CAPES. Il demande de la rigueur dans les justifications mathématiques, une bonne maîtrise des définitions fondamentales et des capacités d'interprétation et de démonstration.\\ \vspace{0.5cm} L'usage de la calculatrice en mode examen est autorisé.}
+\end{center}
+
+\vspace{1.5cm}
+
+\section*{Questions de cours}
+
+Le candidat est invité à démontrer deux théorèmes d'optimisation essentiels présentés dans le cours. Soit une population finie de cardinal $N \in \mathbb{N}^*$, et $(x_1, x_2, \dots, x_k)$ l'ensemble des valeurs distinctes ordonnées d'une série statistique quantitative, associées aux effectifs $(n_1, n_2, \dots, n_k)$.
+
+\begin{enumerate}
+    \item \textbf{Propriété de moindre carré de la moyenne}
+    \begin{enumerate}
+        \item Soit la fonction $g : \theta \mapsto \sum_{i=1}^{k} n_{i}(x_{i}-\theta)^{2}$ définie pour $\theta \in \mathbb{R}$. Développer l'expression de $g(\theta)$ et montrer qu'elle peut s'écrire sous la forme d'un polynôme du second degré : $g(\theta) = A\theta^2 + B\theta + C$ où l'on déterminera les expressions de $A$, $B$ et $C$ en fonction de $N$, de la moyenne de la série $\overline{x}$ et de la somme des carrés des valeurs.
+        \item En déduire que la fonction $g$ admet un minimum global unique atteint en $\theta = \overline{x}$.
+        \item Donner l'interprétation géométrique ou intuitive de ce résultat.
+    \end{enumerate}
+
+    \item \textbf{Optimisation en valeur absolue et médiane}
+    
+    Pour simplifier, on suppose ici que toutes les données de la série brute sont distinctes, de sorte que $k = N$ et $n_i = 1$ pour tout $i \in \{1, \dots, N\}$. Les valeurs sont triées : $x_1 < x_2 < \dots < x_N$.
+    On considère la fonction $h : \theta \mapsto \sum_{i=1}^{N} |x_{i}-\theta|$.
+    \begin{enumerate}
+        \item Justifier brièvement que la fonction $h$ est continue et affine par morceaux sur $\mathbb{R}$.
+        \item Pour $\theta \notin \{x_1, \dots, x_N\}$, exprimer la dérivée $h'(\theta)$ à l'aide de la fonction signe ou en dénombrant les valeurs de la série.
+        \item En supposant que $N$ est impair ($N = 2p+1$ avec $p \in \mathbb{N}$), étudier le signe de $h'(\theta)$ sur chacun des intervalles $]x_j ; x_{j+1}[$. Démontrer alors que le minimum global de $h$ est atteint uniquement en la médiane $M_e = x_{p+1}$.
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section*{Exercice 2 : Effets de transformations affines et indicateurs robustes}
+
+Lors d'un examen blanc de préparation, un échantillon de $N$ correcteurs a attribué des notes à un lot de copies. On note $X$ la variable statistique correspondant aux notes initiales. La série possède une moyenne $\overline{x} = 9,5$, un écart-type $\sigma(X) = 2,4$, une médiane $M_e(X) = 9$, un premier quartile $Q_1(X) = 7,5$ et un troisième quartile $Q_3(X) = 11,5$.
+
+\begin{enumerate}
+    \item \textbf{Harmonisation par translation et dilatation}
+    
+    Pour rehausser les résultats, le responsable de la formation applique la transformation affine suivante à l'ensemble des notes : $Y = 1,2X + 1$.
+    \begin{enumerate}
+        \item Calculer la nouvelle moyenne $\overline{y}$ ainsi que le nouvel écart-type $\sigma(Y)$ de la série. Donner une interprétation de l'effet de cette transformation sur la dispersion des notes.
+        \item Déterminer la nouvelle médiane $M_e(Y)$, ainsi que le nouvel écart interquartile $I_Q(Y)$. Justifier rigoureusement le calcul pour la médiane en utilisant sa définition.
+    \end{enumerate}
+
+    \item \textbf{Cas d'un coefficient multiplicateur négatif}
+    
+    On imagine maintenant qu'une erreur de barème a conduit à transformer les notes selon l'application affine $Z = -0,5X + 20$.
+    \begin{enumerate}
+        \item Démontrer de manière générale à partir des définitions que si $Y = aX + b$ avec $a < 0$, alors la variance vérifie $V(Y) = a^2 V(X)$ et l'écart-type vérifie $\sigma(Y) = |a|\sigma(X)$.
+        \item En déduire l'écart-type $\sigma(Z)$ de cette nouvelle série.
+        \item Déterminer les valeurs du premier quartile $Q_1(Z)$ et du troisième quartile $Q_3(Z)$. Expliquer pourquoi les rôles des quartiles se trouvent inversés.
+    \end{enumerate}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\section*{Exercice 3 : Fusion de populations et formule de König-Huygens}
+
+Une étude statistique porte sur le temps de parcours (exprimé en minutes) des candidats pour se rendre à leur centre d'examen du CAPES. Les données ont été collectées auprès de deux groupes distincts issus de deux départements différents.
+
+\begin{itemize}
+    \item \textbf{Groupe A} : Effectif $N_1 = 60$ candidats ; moyenne des temps $\overline{x}_1 = 25$ min ; écart-type $\sigma_1 = 4$ min.
+    \item \textbf{Groupe B} : Effectif $N_2 = 40$ candidats ; moyenne des temps $\overline{x}_2 = 35$ min ; écart-type $\sigma_2 = 6$ min.
+\end{itemize}
+
+\begin{enumerate}
+    \item \textbf{Analyse globale de position}
+    \begin{enumerate}
+        \item Calculer le temps moyen global $\overline{x}$ de l'ensemble des 100 candidats.
+        \item Le temps moyen global est-il égal à la moyenne arithmétique simple de $\overline{x}_1$ et $\overline{x}_2$ ? Justifier la réponse en explicitant la notion de moyenne globale comme barycentre.
+    \end{enumerate}
+
+    \item \textbf{Analyse globale de dispersion}
+    \begin{enumerate}
+        \item À l'aide de la formule de König-Huygens, déterminer pour le Groupe A la moyenne des carrés des temps de parcours, c'est-à-dire la quantité $M_A = \frac{1}{N_1}\sum_{i \in A} x_i^2$. 
+        \item Calculer de même la moyenne des carrés des temps de parcours pour le Groupe B, soit $M_B = \frac{1}{N_2}\sum_{i \in B} x_i^2$.
+        \item En déduire la moyenne des carrés des temps de parcours pour la population totale des 100 candidats.
+        \item En appliquant de nouveau la formule de König-Huygens sur l'ensemble de la population, calculer la variance globale $V$ puis l'écart-type global $\sigma$ de cette série fusionnée. Commenter le résultat obtenu par rapport aux écarts-types initiaux $\sigma_1$ et $\sigma_2$.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
