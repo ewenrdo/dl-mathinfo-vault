@@ -17,7 +17,7 @@
 \fancyfoot[R]{\thepage}
 
 \begin{document}
-\docTitle{Chapitre 1 : Construction de $\mathbb{N}$ et $\mathbb{Z}$}
+\docTitle{Chapitre 1 : Construction de $\mathbb{N}$, $\mathbb{Z}$ et $\mathbb{Q}$}
 
 \section{Construction de $\mathbb{N}$}
 
@@ -230,4 +230,97 @@ On munit désormais $\mathbb{Z}$ d'une loi d'addition et d'une loi de multiplica
 \theorem{Proposition}{}{true}{
     La relation $\leq$ est un ordre total sur $\mathbb{Z}$, compatible avec l'addition et la multiplication par des éléments positifs.
 }
+
+\section{Construction de $\mathbb{Q}$}
+
+\subsection{Relation d'équivalence sur $\mathbb{Z} \times \mathbb{Z}^*$}
+
+L'objectif de cette section est de construire un corps où toute équation de la forme $mx = n$ (avec $m \neq 0$) possède une solution unique. On formalise ici l'idée qu'un nombre rationnel peut être représenté par le quotient d'un entier relatif par un entier relatif non nul.
+
+\definition{
+    On note $\mathbb{Z}^* = \mathbb{Z} \setminus \{\overline{(0,0)}\}$ l'ensemble des entiers relatifs non nuls. On définit sur l'ensemble des couples $\mathbb{Z} \times \mathbb{Z}^*$ la relation $\mathcal{R}$ par :
+    $$ (a, b) \mathcal{R} (c, d) \iff a \cdot_{\mathbb{Z}} d = b \cdot_{\mathbb{Z}} c $$
+    pour tous $a, c \in \mathbb{Z}$ et $b, d \in \mathbb{Z}^*$.
+}
+
+\theorem{Proposition}{}{false}{
+    La relation $\mathcal{R}$ est une relation d'équivalence sur $\mathbb{Z} \times \mathbb{Z}^*$.
+}
+
+\noindent{\textbf{Preuve :}}
+\begin{itemize}
+    \item \textbf{Réflexivité :} Pour tout $(a, b) \in \mathbb{Z} \times \mathbb{Z}^*$, on a $a \cdot_{\mathbb{Z}} b = b \cdot_{\mathbb{Z}} a$ par commutativité de la multiplication dans $\mathbb{Z}$, donc $(a, b) \mathcal{R} (a, b)$.
+    \item \textbf{Symétrie :} Si $(a, b) \mathcal{R} (c, d)$, alors $a \cdot_{\mathbb{Z}} d = b \cdot_{\mathbb{Z}} c$, ce qui implique $c \cdot_{\mathbb{Z}} b = d \cdot_{\mathbb{Z}} a$ par commutativité, d'où $(c, d) \mathcal{R} (a, b)$.
+    \item \textbf{Transitivité :} Si $(a, b) \mathcal{R} (c, d)$ et $(c, d) \mathcal{R} (e, f)$, alors $a \cdot_{\mathbb{Z}} d = b \cdot_{\mathbb{Z}} c$ et $c \cdot_{\mathbb{Z}} f = d \cdot_{\mathbb{Z}} e$.\\
+    Multiplions la première égalité par $f$ et la seconde par $b$ :
+    $$ (a \cdot_{\mathbb{Z}} d) \cdot_{\mathbb{Z}} f = (b \cdot_{\mathbb{Z}} c) \cdot_{\mathbb{Z}} f \quad \text{et} \quad (c \cdot_{\mathbb{Z}} f) \cdot_{\mathbb{Z}} b = (d \cdot_{\mathbb{Z}} e) \cdot_{\mathbb{Z}} b $$
+    En combinant ces deux égalités par transitivité dans $\mathbb{Z}$, on obtient :
+    $$ (a \cdot_{\mathbb{Z}} f) \cdot_{\mathbb{Z}} d = (e \cdot_{\mathbb{Z}} b) \cdot_{\mathbb{Z}} d $$
+    Puisque $\mathbb{Z}$ est un anneau intègre et que $d \in \mathbb{Z}^*$ ($d$ est non nul), on peut simplifier par $d$ (propriété de régularité), ce qui donne $a \cdot_{\mathbb{Z}} f = b \cdot_{\mathbb{Z}} e$. Par conséquent, $(a, b) \mathcal{R} (e, f)$.
+\end{itemize}
+
+\definition{
+    L'ensemble quotient $(\mathbb{Z} \times \mathbb{Z}^*) / \mathcal{R}$ est noté $\mathbb{Q}$. C'est l'ensemble des nombres rationnels.\\
+    La classe d'équivalence du couple $(a, b)$ est notée $\frac{a}{b}$ ou $a/b$.
+}
+
+\remark{Intuitivement, la classe $\frac{a}{b}$ formalise le quotient algébrique de l'entier $a$ par l'entier non nul $b$.}
+
+\example{
+    \begin{itemize}
+        \item La classe $\frac{1}{2} = \{(1, 2), (2, 4), (-3, -6), \dots\}$ correspond au rationnel un demi.
+        \item La classe $\frac{-2}{3} = \{(-2, 3), (2, -3), (-4, 6), \dots\}$ correspond au rationnel moins deux tiers.
+        \item La classe $\frac{0}{1} = \{(0, 1), (0, 2), (0, -5), \dots\}$ correspond au rationnel nul.
+    \end{itemize}
+}
+
+\subsection{Opérations et structure de corps}
+
+On définit sur $\mathbb{Q}$ une loi d'addition et une loi de multiplication naturelles induites par les opérations de l'anneau $\mathbb{Z}$.
+
+\definition{
+    Pour toutes classes $\frac{a}{b}$ et $\frac{c}{d}$ dans $\mathbb{Q}$, on définit :
+    \begin{itemize}
+        \item \textbf{L'addition :} $\frac{a}{b} +_\mathbb{Q} \frac{c}{d} = \frac{a \cdot_{\mathbb{Z}} d +_{\mathbb{Z}} b \cdot_{\mathbb{Z}} c}{b \cdot_{\mathbb{Z}} d}$
+        \item \textbf{La multiplication :} $\frac{a}{b} \cdot_{\mathbb{Q}} \frac{c}{d} = \frac{a \cdot_{\mathbb{Z}} c}{b \cdot_{\mathbb{Z}} d}$
+    \end{itemize}
+}
+
+\attention{Comme $b \neq 0$ et $d \neq 0$, par intégrité de l'anneau $\mathbb{Z}$, le produit $b \cdot_{\mathbb{Z}} d \neq 0$, le représentant appartient donc bien à $\mathbb{Z} \times \mathbb{Z}^*$. De plus, il convient de vérifier que ces lois sont indépendantes du choix des représentants choisis dans chaque classe.}
+
+\theorem{Théorème}{}{true}{
+    Muni de ces deux opérations, $(\mathbb{Q}, +, \cdot)$ est un corps commutatif.
+    \begin{itemize}
+        \item L'élément neutre pour l'addition est la classe $\frac{0}{1}$.
+        \item L'opposé de la classe $\frac{a}{b}$ est $-\frac{a}{b} = \frac{-a}{b} = \frac{a}{-b}$.
+        \item L'élément neutre pour la multiplication est la classe $\frac{1}{1}$.
+        \item Tout élément non nul $\frac{a}{b} \in \mathbb{Q}^*$ (ce qui implique $a \neq 0$) admet un inverse unique donné par $\left(\frac{a}{b}\right)^{-1} = \frac{b}{a}$.
+    \end{itemize}
+}
+
+\subsection{Plongement de $\mathbb{Z}$ dans $\mathbb{Q}$ et notations usuelles}
+
+\theorem{Proposition}{}{true}{
+    L'application $\psi : \mathbb{Z} \to \mathbb{Q}$ définie par $\psi(a) = \frac{a}{1}$ est un morphisme injectif de corps (il préserve l'identité de l'addition, de la multiplication et de la relation d'ordre).
+}
+
+\remark{Grâce à cette injection canonique, on identifie chaque entier relatif $a$ à la classe $\frac{a}{1}$. On pose ainsi légitimement l'inclusion d'anneaux $\mathbb{Z} \subset \mathbb{Q}$.}
+
+\vocabulary{
+    Tout nombre rationnel peut s'écrire sous la forme unique d'une fraction irréductible $\frac{p}{q}$ où $p \in \mathbb{Z}$, $q \in \mathbb{N}^*$ et $\text{pgcd}(p, q) = 1$.
+}
+
+\subsection{Relation d'ordre sur $\mathbb{Q}$}
+
+Pour préserver la compatibilité de l'ordre avec la multiplication par un élément positif, on s'assure d'abord de travailler avec des dénominateurs strictement positifs.
+
+\definition{
+    Soient deux rationnels exprimés avec un dénominateur positif (quitte à multiplier numérateur et dénominateur par $-1$), c'est-à-dire $\frac{a}{b}$ et $\frac{c}{d}$ avec $b > 0$ et $d > 0$ dans $\mathbb{Z}$. On définit la relation d'ordre $\leq$ sur $\mathbb{Q}$ par :
+    $$ \frac{a}{b} \leq \frac{c}{d} \iff a \cdot_{\mathbb{Z}} d \leq b \cdot_{\mathbb{Z}} c \quad (\text{dans } \mathbb{Z}) $$
+}
+
+\theorem{Proposition}{}{true}{
+    La relation $\leq$ est un ordre total sur $\mathbb{Q}$, faisant de $(\mathbb{Q}, +, \cdot, \leq)$ un corps ordonné archimédien.
+}
+
 \end{document}
