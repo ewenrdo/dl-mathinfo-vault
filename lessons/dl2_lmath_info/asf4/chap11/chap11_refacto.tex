@@ -29,6 +29,8 @@
 
 \section{Continuité}
 
+\subsection{Définition et propriétés}
+
 \definition{
     Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^q$. Une fonction de plusieurs variables est définie par :
     \[ f : \mathcal{U} \to \mathbb{R}^p, \quad x \mapsto f(x) = f(x_1, \dots, x_q) \]
@@ -80,6 +82,74 @@
     \[ f(x,x) = \frac{x^2}{x^2+x^2} = \frac{1}{2} \xrightarrow[x \to 0]{} \frac{1}{2} \neq f(0,0) \]
     $f$ n'est pas continue en $(0,0)$.
 }
+
+\subsection{Continuité uniforme}
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :
+    \[
+    \forall \epsilon > 0, \exists \alpha > 0, \forall x,y \in \mathcal{U}, \quad \|x - y\| \le \alpha \Rightarrow \|f(x) - f(y)\| < \epsilon
+    \]
+}
+
+\remark{
+    Dans la définition de la continuité en un point $x_0$, le réel $\alpha$ dépend de $\epsilon$ et de $x_0$. Dans le cas de la continuité uniforme, le réel $\alpha$ ne dépend plus que de $\epsilon$ : il est globalement valable pour tout couple de points $(x,y)$ de l'ouvert $\mathcal{U}$.
+}
+
+\theorem{Proposition}{Uniforme continuité et continuité sur les compacts}{false}{
+    Toute fonction continue sur un compact de $\mathbb{R}^q$ est uniformément continue.
+}
+
+\example{
+    L'application identité ou toute application linéaire $f : \mathbb{R}^q \to \mathbb{R}^p$ est uniformément continue sur $\mathbb{R}^q$. 
+    En effet, par linéarité en dimension finie, il existe une constante $C > 0$ telle que pour tous $x,y \in \mathbb{R}^q$, $\|f(x) - f(y)\| \le C \|x - y\|$. Pour un $\epsilon > 0$ donné, il suffit alors de choisir $\alpha = \frac{\epsilon}{C}$ (qui est indépendant de $x$ et $y$) pour vérifier la définition.
+}
+
+\cexample{
+    La fonction $f : ]0,1] \to \mathbb{R}, \, x \mapsto \frac{1}{x}$ est continue sur $]0,1]$ mais \textbf{n'est pas} uniformément continue sur cet intervalle. En effet, si l'on choisit les deux suites de $]0,1]$ définies pour $n \in \mathbb{N}^*$ par $x_n = \frac{1}{n}$ and $y_n = \frac{1}{n+1}$, on a :
+    \[
+    |x_n - y_n| = \frac{1}{n(n+1)} \xrightarrow[n \to +\infty]{} 0
+    \]
+    Pourtant, l'écart entre leurs images reste constant et ne tend pas vers 0 :
+    \[
+    |f(x_n) - f(y_n)| = |n - (n+1)| = 1
+    \]
+    Il est donc impossible de trouver un $\alpha$ global qui rende les images proches dès que les antécédents le sont.
+}
+
+\theorem{Théorème}{Prolongement par continuité}{false}{
+    Soit $\mathcal{U}$ un ouvert borné de $\mathbb{R}^q$ et $f : \mathcal{U} \to \mathbb{R}^p$ une fonction uniformément continue. 
+    Alors $f$ peut être prolongée de façon unique en une application continue sur l'adhérence $\overline{\mathcal{U}}$.
+}
+
+\subsection{Fonctions lipschitziennes}
+
+\definition{
+    Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^q$ et $f : \mathcal{U} \to \mathbb{R}^p$. Soit $k \ge 0$ un réel. 
+    On dit que $f$ est \textbf{$k$-lipschitzienne} sur $\mathcal{U}$ si :
+    \[
+    \forall (x,y) \in \mathcal{U}^2, \quad \|f(x) - f(y)\| \le k \|x - y\|
+    \]
+    On dit que $f$ est \textbf{lipschitzienne} s'il existe un tel réel $k$. 
+    Si $0 \le k < 1$, l'application $f$ est dite \textbf{contractante}.
+}
+
+\theorem{Proposition}{Rapport avec la continuité uniforme}{false}{
+    Toute fonction lipschitzienne sur $\mathcal{U}$ est uniformément continue sur $\mathcal{U}$ (et est donc, a fortiori, continue sur $\mathcal{U}$).
+}
+
+\remark{
+    Pour une fonction $k$-lipschitzienne, face à un $\epsilon > 0$ donné, le choix du pas $\alpha = \frac{\epsilon}{k}$ (si $k > 0$) convient globalement en tout point, ce qui montre de manière immédiate l'uniforme continuité. 
+}
+
+\example{
+    Soit $f : \mathbb{R}^q \to \mathbb{R}^p$ une application linéaire. En dimension finie, toutes les applications linéaires sont continues et il existe une constante $M \ge 0$ telle que pour tout $h \in \mathbb{R}^q$, $\|f(h)\| \le M \|h\|$. 
+    Par conséquent :
+    \[
+    \forall (x,y) \in (\mathbb{R}^q)^2, \quad \|f(x) - f(y)\| = \|f(x-y)\| \le M \|x - y\|
+    \]
+    Ainsi, toute application linéaire en dimension finie est $M$-lipschitzienne.
+}
+
 
 \section{Dérivabilité et Différentiabilité}
 \subsection{Dérivées partielles}
