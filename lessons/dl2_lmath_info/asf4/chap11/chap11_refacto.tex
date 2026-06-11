@@ -422,11 +422,11 @@ Dans toute cette section, $\mathcal{U}$ désigne un ouvert de $\mathbb{R}^p$.
     Si une telle application linéaire existe, elle est unique. On l'appelle la \textbf{différentielle} de $f$ en $a$ et on la note $Df(a)$.
 }
 
-\example{
-    Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction d'une variable réelle dérivable en $a$. La formule de Taylor-Young donne $f(a+h) = f(a) + f'(a)h + o(h)$. La différentielle $Df(a)$ est l'application linéaire de $\mathcal{L}(\mathbb{R}, \mathbb{R})$ définie par :
-    \[ Df(a) : h \mapsto f'(a) \cdot h \]
-    Il s'agit géométriquement de l'application linéaire associée à la multiplication par le scalaire $f'(a)$.
-}
+%\example{
+%    Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction d'une variable réelle dérivable en $a$. La formule de Taylor-Young donne $f(a+h) = f(a) + f'(a)h + o(h)$. La différentielle $Df(a)$ est l'application linéaire de $\mathcal{L}(\mathbb{R}, \mathbb{R})$ définie par :
+%    \[ Df(a) : h \mapsto f'(a) \cdot h \]
+%    Il s'agit géométriquement de l'application linéaire associée à la multiplication par le scalaire $f'(a)$.
+%}
 
 \example{
     Soit $f \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$ une application linéaire. Pour tout $a \in \mathbb{R}^p$ et tout $h \in \mathbb{R}^p$, on a par linéarité :
@@ -434,6 +434,47 @@ Dans toute cette section, $\mathcal{U}$ désigne un ouvert de $\mathbb{R}^p$.
     Le reste étant identiquement nul, il est un $o(\|h\|)$. Ainsi, $f$ est différentiable en tout point $a \in \mathbb{R}^p$ et sa différentielle est l'application $f$ elle-même, indépendamment du point $a$ :
     \[ \forall a \in \mathbb{R}^p, \quad Df(a) = f \]
 }
+
+\method{Vérifier la différentiabilité d'une fonction $f : \mathbb{R}^p \to \mathbb{R}^q$ en un point $a$}{
+\begin{enumerate}
+    \item \textbf{Calculer les dérivées partielles de $f$ en $a$} pour déterminer le candidat $L$ à la différentielle.\\
+    Si les dérivées partielles existent en $a$, alors $L$ est l'application linéaire définie par :
+\[ L(h_1, \dots, h_p) = \sum_{k=1}^p \frac{\partial f}{\partial x_k}(a) h_k \]
+    \item \textbf{Calculer le reste} $R(h) = f(a+h) - f(a) - L(h)$.
+    \item \textbf{Vérifier que $R(h) = o(\|h\|)$} en calculant la limite $\lim_{h \to 0} \frac{\|R(h)\|}{\|h\|}$ et en vérifiant qu'elle est nulle.
+\end{enumerate}
+}
+
+\example{Soit $f : \mathbb{R}^2 \to \mathbb{R}$ définie par $f(x, y) = x^2 + y^2$. Nous étudions sa différentiabilité au point $a = (0, 0)$ en utilisant la définition.
+\begin{enumerate}
+
+\item \textbf{Recherche du candidat pour la différentielle}
+Pour former l'application linéaire candidate $L$, nous calculons les dérivées partielles en $(0,0)$ :
+\begin{itemize}
+    \item \textbf{Selon $x$ :} $\frac{\partial f}{\partial x}(0,0) = \lim_{t \to 0} \frac{f(t, 0) - f(0,0)}{t} = \lim_{t \to 0} \frac{t^2 - 0}{t} = 0$.
+    \item \textbf{Selon $y$ :} $\frac{\partial f}{\partial y}(0,0) = \lim_{t \to 0} \frac{f(0, t) - f(0,0)}{t} = \lim_{t \to 0} \frac{t^2 - 0}{t} = 0$.
+\end{itemize}
+L'unique application linéaire candidate est donc l'application nulle : $L(h_1, h_2) = 0$.
+
+\item \textbf{Étude du reste}
+D'après la définition, $f$ est différentiable en $a$ s'il existe $L$ telle que $f(a+h) = f(a) + L(h) + R(h)$ avec $R(h) = o(\|h\|)$. Ici :
+\[ f(0+h_1, 0+h_2) = h_1^2 + h_2^2 \]
+\[ f(0,0) = 0 \quad \text{et} \quad L(h) = 0 \]
+Le reste est donc :
+\[ R(h) = f(h_1, h_2) - f(0,0) - L(h) = h_1^2 + h_2^2 \]
+
+\item \textbf{Vérification de la limite}
+Nous utilisons la norme euclidienne $\|h\| = \sqrt{h_1^2 + h_2^2}$. Calculons le rapport $\frac{R(h)}{\|h\|}$ :
+\[ \frac{R(h)}{\|h\|} = \frac{h_1^2 + h_2^2}{\sqrt{h_1^2 + h_2^2}} = \sqrt{h_1^2 + h_2^2} = \|h\| \]
+Or, par définition de la limite d'une norme :
+\[ \lim_{h \to (0,0)} \frac{R(h)}{\|h\|} = \lim_{h \to (0,0)} \|h\| = 0 \]
+
+\item \textbf{Conclusion}
+Le reste est bien un $o(\|h\|)$ au voisinage de l'origine. La fonction $f$ est donc
+\end{enumerate}
+}
+
+
 
 \subsubsection{Propriétés fondamentales}
 

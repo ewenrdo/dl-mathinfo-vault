@@ -1,0 +1,108 @@
+
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{Préparation CAPES}
+\fancyhead[C]{Analyse}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Interpolation de Lagrange}
+
+
+
+\definition{
+On considère \(n+1\) points distincts \((x_0,y_0), \dots, (x_n,y_n)\).
+L’interpolation de Lagrange consiste à construire un polynôme \(P\) tel que :
+\[
+P(x_i)=y_i \quad \forall i \in \{0,\dots,n\}.
+\]
+}
+
+\method{Construction du polynôme de Lagrange}{
+On construit :
+\[
+P(x)=\sum_{i=0}^{n} y_i L_i(x)
+\]
+où les polynômes de base sont définis par :
+\[
+L_i(x)=\prod_{\substack{j=0 \\ j\neq i}}^{n} \frac{x-x_j}{x_i-x_j}.
+\]
+}
+
+\remark{
+Chaque \(L_i(x)\) vérifie :
+\[
+L_i(x_i)=1 \quad \text{et} \quad L_i(x_j)=0 \ (j\neq i).
+\]
+Ainsi, chaque point \((x_i,y_i)\) “active” uniquement son propre terme.
+}
+
+\example{
+Soient les points \((1,2)\) et \((3,4)\).
+
+On a :
+\[
+L_0(x)=\frac{x-3}{1-3}, \quad L_1(x)=\frac{x-1}{3-1}.
+\]
+
+Donc :
+\[
+P(x)=2L_0(x)+4L_1(x).
+\]
+Après simplification :
+\[
+P(x)=x+1.
+\]
+}
+
+\attention{
+Plus le nombre de points augmente, plus le polynôme devient de degré élevé et peut osciller fortement (phénomène de Runge).
+}
+
+\method{Procédure de calcul}{
+\begin{enumerate}
+    \item Lister les points \((x_i,y_i)\).
+    \item Construire chaque \(L_i(x)\).
+    \item Multiplier chaque \(L_i(x)\) par \(y_i\).
+    \item Additionner tous les termes.
+    \item Simplifier.
+\end{enumerate}
+}
+\newpage
+\training{
+Calculer le polynôme de Lagrange passant par les points :
+\[
+(0,1), \ (1,2), \ (2,5).
+\]
+}
+\noindent \carreaux{10}
+
+\training{
+Soient les points \((-1,1), (0,0), (1,1)\).
+\begin{enumerate}
+    \item Construire les polynômes \(L_i(x)\). \\
+    \item En déduire \(P(x)\). \\
+    \item Vérifier que \(P(x)\) est un polynôme du second degré.
+\end{enumerate}
+}
+\noindent \carreaux{10}
+
+\problem{
+On considère les points \((1,1), (2,4), (3,9), (4,16)\).
+Sans calcul complet, que peut-on conjecturer sur le degré du polynôme interpolateur ?
+}
+
+\end{document}
