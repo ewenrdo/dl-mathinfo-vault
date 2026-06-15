@@ -422,6 +422,14 @@ Dans toute cette section, $\mathcal{U}$ désigne un ouvert de $\mathbb{R}^p$.
     Si une telle application linéaire existe, elle est unique. On l'appelle la \textbf{différentielle} de $f$ en $a$ et on la note $Df(a)$.
 }
 
+
+\attention{On a les notations suivantes, qui sont proches mais qu'il ne faut pas confondre :
+\begin{itemize}
+    \item $Df(a) \cdot h = (Df(a))(h)$ : application de la différentielle $Df(a)$ au vecteur $h$ \textit{(égal à $L(h) = \langle \nabla f(a), h \rangle = J_f(a) \cdot h$ si $f$ est différentiable et admet un gradient en $a$)}.
+    \item $D_h f(a)$ : dérivée directionnelle de $f$ en $a$ selon la direction $h$.
+\end{itemize}
+}
+
 %\example{
 %    Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction d'une variable réelle dérivable en $a$. La formule de Taylor-Young donne $f(a+h) = f(a) + f'(a)h + o(h)$. La différentielle $Df(a)$ est l'application linéaire de $\mathcal{L}(\mathbb{R}, \mathbb{R})$ définie par :
 %    \[ Df(a) : h \mapsto f'(a) \cdot h \]
@@ -495,7 +503,9 @@ Lorsque $h \to 0$, le membre de droite tend vers $0$. On a donc $\lim_{h \to 0} 
 \theorem{Proposition}{Lien avec les dérivées directionnelles}{false}{
     Si $f : \mathcal{U} \to \mathbb{R}^q$ est différentiable en $a \in \mathcal{U}$, alors $f$ admet des dérivées directionnelles en $a$ selon toutes les directions $h \in \mathbb{R}^p$, et on a :
     \[ Df(a) \cdot h = \lim_{t \to 0} \frac{f(a+th) - f(a)}{t} \]
+    Autrement dit, $Df(a) \cdot h$ est la dérivée directionnelle de $f$ en $a$ selon la direction $h$.
 }
+
 
 \noindent{\textbf{Preuve :}\\
 Soit $h \in \mathbb{R}^p$. En évaluant le développement limité de $f$ en $a$ le long de la droite passant par $a$ et de vecteur directeur $h$ (pour $t \in \mathbb{R}$ proche de $0$), on obtient par linéarité de $Df(a)$ :
@@ -586,7 +596,34 @@ Lorsque $f : \mathcal{U} \to \mathbb{R}^q$, la différentielle $Df(a)$ est repr�
     Si $\mathbb{R}^p = \mathbb{R}^q$ (i.e. $p=q$), la matrice jacobienne $J_f(a)$ est carrée d'ordre $p$.\\
     On appelle alors \textbf{déterminant jacobien} (ou simplement jacobien) de $f$ en $a$ le déterminant de cette matrice, noté :
     \[ \det(J_f(a)) \]
-}\section{Fonctions de classe $\mathcal{C}^k$ et second ordre}
+}
+
+\theorem{Proposition}{Différentielle et changement de base}{false}{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ une fonction différentiable en $a \in \mathcal{U}$. Soit $\mathcal{B}$ la base canonique de $\mathbb{R}^p$ et $\mathcal{B}' = (v_1, \dots, v_p)$ une autre base de $\mathbb{R}^p$. Alors :
+    \[ Mat_{\mathcal{B}'}(Df(a)) = J_f(a) \times P_{\mathcal{B} \to \mathcal{B}'} \]
+}
+
+\noindent{\textbf{Preuve :}\\
+Soit $h \in \mathbb{R}^p$ un vecteur de déplacement. Notons $h_{\mathcal{B}}$ son vecteur colonne de coordonnées dans la base canonique et $h_{\mathcal{B}'}$ dans la base $\mathcal{B}'$. Par définition de la matrice de passage, on a $h_{\mathcal{B}} = P h_{\mathcal{B}'}$. 
+En utilisant la représentation matricielle de la différentielle dans la base canonique, on a :
+\[ Df(a) \cdot h = J_f(a) \times h_{\mathcal{B}} = J_f(a) \times (P h_{\mathcal{B}'}) = (J_f(a) P) \times h_{\mathcal{B}'} \]
+Par identification, la matrice de $Df(a)$ dans la base $\mathcal{B}'$ est donc $M_{\mathcal{B}'}(Df(a)) = J_f(a) P$. 
+Enfin, puisque $Df(a) \cdot v_i = D_{v_i}f(a)$, la $i$-ème composante de cette matrice ligne est bien la dérivée directionnelle de $f$ selon le $i$-ème vecteur de la base $\mathcal{B}'$. \hfill $\square$
+}
+
+\example{
+    Soit $f : \mathbb{R}^2 \to \mathbb{R}$ de classe $\mathcal{C}^1$. On se donne $p \in \mathbb{R}^2$ et deux vecteurs $v,w$ tels que $v = (2,3)$ et $w = (1,1)$. On suppose que $D_v f(p) = 1$ et $D_w f(p) = 2$. On cherche le gradient de $f$ en $p$.
+    \begin{itemize}
+        \item On choisit la base $\mathcal{B}' = (v,w)$ de $\mathbb{R}^2$. La matrice de passage de la base canonique à la base $\mathcal{B}'$ est donnée par :
+        \[ P_{\mathcal{B} \to \mathcal{B}'} = \begin{pmatrix} 2 & 1 \\ 3 & 1 \end{pmatrix} \Leftrightarrow P_{\mathcal{B}' \to \mathcal{B}} = P_{\mathcal{B} \to \mathcal{B}'}^{-1} = \begin{pmatrix} -1 & 1 \\ 3 & -2 \end{pmatrix} \]
+        \item La matrice de la différentielle $Df(p)$ dans la base $\mathcal{B}'$ est la matrice ligne $M_{\mathcal{B}'}(Df(p)) = (D_v f(p), D_w f(p)) = (1, 2)$.
+        \item En utilisant la proposition précédente, on a :
+        \[ M_{\mathcal{B}'}(Df(p)) = J_f(p) P_{\mathcal{B} \to \mathcal{B}'} \Leftrightarrow J_f(p) = M_{\mathcal{B}'}(Df(p)) P_{\mathcal{B}' \to \mathcal{B}} = (1, 2) \begin{pmatrix} -1 & 1 \\ 3 & -2 \end{pmatrix} = (5, -3) \]
+        \item Enfin, le gradient de $f$ en $p$ est donné par $\nabla f(p) = {}^t J_f(p) = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$.
+    \end{itemize}
+}
+
+\section{Fonctions de classe $\mathcal{C}^k$ et second ordre}
 
 Dans toute cette section, $\mathcal{U}$ désigne un ouvert de $\mathbb{R}^p$.
 
