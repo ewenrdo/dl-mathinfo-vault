@@ -274,6 +274,20 @@ Dans le cas où la fonction intégrande $f$ est continue (et non plus seulement 
     Le réel $\mu = \frac{1}{b-a} \int_{a}^{b} f(t) \, dt$ est appelé la \textbf{valeur moyenne} de $f$ sur $[a, b]$.
 }
 
+\noindent{\textbf{Preuve :}\\
+Soit $f : [a, b] \to \mathbb{R}$ une fonction \textbf{continue} avec $a < b$.\\
+Alors $\exists m, M \in [a,b]$ (les minimums et maximums de $f$ sur $[a,b]$) tels que :
+$$ m \le f(t) \le M, \quad \forall t \in [a, b]$$
+En intégrant, on obtient :
+$$ m(b-a) \le \int_{a}^{b} f(t) \, dt \le M(b-a)$$
+Or $a < b$, donc $b-a > 0$, et on peut diviser par $b-a$ :
+$$ m \le \frac{1}{b-a} \int_{a}^{b} f(t) \, dt \le M$$
+On retrouve la définition de la valeur moyenne $\mu$, \textit{i.e.} : $m \le \mu \le M$.\\
+Comme $f$ est continue, par le théorème des valeurs intermédiaires $\exists c \in [a,b] : f(c) = \mu$. Ainsi :
+$$\int_{a}^{b} f(t) \, dt = (b-a) \mu = (b-a) f(c)$$
+$\hfill \Box$
+}
+
 \begin{center}
 \begin{tikzpicture}
 \begin{axis} [
@@ -322,7 +336,6 @@ Il s'agit du théorème clé établissant le pont définitif entre le calcul dif
     $$\forall x \in I, \quad F'(x) = f(x)$$
     Autrement dit, $F$ est l'unique primitive de $f$ sur $I$ s'annulant au point $a$.
 }
-\vspace{.5cm}
 \noindent\textbf{Preuve du TFA (cas $f$ croissante) :}\par\vspace{0.5em}
 Soit $x \in I$ et $h > 0$ tel que $x+h \in I$. On forme le taux d'accroissement de $F$ entre $x$ et $x+h$ :
 $$\frac{F(x+h) - F(x)}{h} = \frac{1}{h} \left( \int_{a}^{x+h} f(t)\,dt - \int_{a}^{x} f(t)\,dt \right) = \frac{1}{h} \int_{x}^{x+h} f(t)\,dt$$ (par la relation de Chasles).
@@ -392,8 +405,6 @@ $$I = \frac{e^2}{2} - \frac{1}{2} \left[ \frac{x^2}{2} \right]_1^e = \frac{e^2}{
         \item Substituer la variable dans l'intégrande : $f(t) \to f(\varphi(s))$.
     \end{enumerate}
 }
-
-\vspace{2cm}
 
 \training{Calculer l'intégrale $J = \int_{0}^{1} \sqrt{1 - x^2} \, dx$ à l'aide du changement de variable $x = \sin(\theta)$ pour $\theta \in [0, \frac{\pi}{2}]$.} \par\vspace{0.5em}
 \noindent\carreaux{10}
