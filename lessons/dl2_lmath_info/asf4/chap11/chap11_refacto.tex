@@ -708,18 +708,50 @@ Le théorème de Schwarz s'applique naturellement aux fonctions vectorielles en 
 Les représentations compactes (produit scalaire et matrice) des formules de Taylor suivantes sont écrites pour une fonction scalaire $f : \mathcal{U} \subset \mathbb{R}^p \to \mathbb{R}$.
 
 \theorem{Théorème de Taylor-Young (ordre 1)}{}{false}{
-    Si $f : \mathcal{U} \subset \mathbb{R}^2 \to \mathbb{R}$ est de classe $\mathcal{C}^1$ au voisinage de $a$, alors pour tout déplacement $h = (h_1, h_2) \to (0,0)$ :
+    Si $f : \mathcal{U} \subset \mathbb{R}^p \to \mathbb{R}$ est de classe $\mathcal{C}^1$ au voisinage de $a \in \mathcal{U}$, alors pour tout déplacement vu comme un vecteur colonne $h \in \mathbb{R}^p$ au voisinage de $0$ :
     \[
-    f(a+h) = f(a) + \frac{\partial f}{\partial x}(a)h_1 + \frac{\partial f}{\partial y}(a)h_2 + o(\|h\|)
+    f(a+h) = f(a) + {}^t \nabla f(a) h + o(\|h\|)
     \]
 }
+
+\noindent{\textbf{Preuve :} La démonstration découle directement de la définition de la différentiabilité, en identifiant $\nabla f(a)$ à la matrice représentative de la différentielle $Df(a)$.}
 
 \theorem{Théorème de Taylor-Young (ordre 2)}{}{false}{
     Si $f : \mathcal{U} \subset \mathbb{R}^p \to \mathbb{R}$ est de classe $\mathcal{C}^2$ au voisinage de $a \in \mathcal{U}$, alors pour tout déplacement vu comme un vecteur colonne $h \in \mathbb{R}^p$ au voisinage de $0$ :
     \[
-    f(a+h) = f(a) + \langle \nabla f(a), h \rangle + \frac{1}{2} \, { }^t h \mathcal{H}_f(a) h + o(\|h\|^2)
+    f(a+h) = f(a) + {}^t \nabla f(a) h + \frac{1}{2} \, { }^t h \mathcal{H}_f(a) h + o(\|h\|^2)
     \]
 }
+\noindent{\textbf{Preuve :} Soit $h \in \mathbb{R}^p$ un vecteur colonne fixé au voisinage de $0$. On considère la fonction auxiliaire d'une variable réelle $\phi : [0, 1] \to \mathbb{R}$ définie par $\phi(t) = f(a + th)$. Comme $f$ est de classe $\mathcal{C}^2$ au voisinage de $a$, $\phi$ est de classe $\mathcal{C}^2$ sur $[0, 1]$.}
+
+\noindent{En appliquant la règle de dérivation des fonctions composées, on exprime les dérivées successives de $\phi$ en fonction de la différentielle et de la matrice hessienne de $f$ :}
+\[
+\phi'(t) = Df(a+th) \cdot h = {}^t \nabla f(a+th) h
+\]
+\[
+\phi''(t) = D^2f(a+th)(h,h) = {}^t h \mathcal{H}_f(a+th) h
+\]
+
+\noindent{Le théorème de Taylor-Young à l'ordre 2 pour une fonction d'une seule variable réelle appliqué à $\phi$ entre $0$ et $1$ donne :}
+\[
+\phi(1) = \phi(0) + \phi'(0) \cdot 1 + \frac{1}{2}\phi''(0) \cdot 1^2 + o(1)
+\]
+
+\noindent{En évaluant $\phi(0)$, $\phi'(0)$ et $\phi''(0)$, on obtient :}
+\[
+\phi(0) = f(a)
+\]
+\[
+\phi'(0) = {}^t \nabla f(a) h
+\]
+\[
+\phi''(0) = {}^t h \mathcal{H}_f(a) h
+\]
+
+\noindent{Puisque $\phi(1) = f(a+h)$, on injecte ces expressions dans le développement. Le terme de reste $o(1)$ pour $\phi$ se traduit par un reste d'ordre $o(\|h\|^2)$ pour $f$ par contrôle uniforme de la continuité des dérivées secondes. On obtient ainsi la formule finale :}
+\[
+f(a+h) = f(a) + {}^t \nabla f(a) h + \frac{1}{2} \, { }^t h \mathcal{H}_f(a) h + o(\|h\|^2)
+\]
 
 \remark{
     Pour une fonction de deux variables $f(x,y)$ ($p=2$) avec un accroissement $h = (h_1, h_2)$, en appliquant le théorème de Schwarz, la formule de Taylor-Young à l'ordre 2 se déploie sous sa forme algébrique usuelle :
