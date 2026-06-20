@@ -559,6 +559,63 @@ Cette expression correspond exactement au produit scalaire usuel $\langle \nabla
     \[ Df(1,\pi,1) \cdot h = \langle \nabla f(1,\pi,1), h \rangle = \left\langle \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix} , \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix} \right\rangle = 0\cdot 1 + 0\cdot 1 + (-1)\cdot 1 = -1 \]
 }
 
+\subsubsection{Lignes de niveau et interprétation géométrique du gradient}
+
+Après avoir défini le gradient d'une fonction scalaire comme le vecteur de ses dérivées partielles, il est fondamental d'en comprendre l'interprétation géométrique. Celle-ci s'appuie sur la notion d'ensemble de niveau.
+
+\definition{
+    Soit $f : \mathcal{U} \subset \mathbb{R}^p \to \mathbb{R}$ une fonction scalaire et $c \in \mathbb{R}$ une constante.
+    On appelle \textbf{ensemble de niveau $c$} de la fonction $f$ l'ensemble noté $\mathcal{L}_c(f)$ défini par :
+    \[
+    \mathcal{L}_c(f) = \{ x \in \mathcal{U} \mid f(x) = c \}
+    \]
+}
+
+\remark{
+    \begin{itemize}
+        \item Si $p = 2$, l'ensemble est généralement une courbe plane, appelée \textbf{ligne de niveau} (ou courbe de niveau).
+        \item Si $p = 3$, l'ensemble est généralement une surface dans l'espace, appelée \textbf{surface de niveau}.
+    \end{itemize}
+}
+
+\example{
+    Considérons la fonction $f : \mathbb{R}^2 \to \mathbb{R}$ définie par $f(x,y) = x^2 + y^2$. Pour tout $c \geq 0$, l'ensemble de niveau $\mathcal{L}_c(f)$ est l'ensemble des points $(x,y)$ tels que $x^2 + y^2 = c$. Il s'agit d'un cercle de rayon $\sqrt{c}$ centré à l'origine. Pour $c < 0$, l'ensemble de niveau est vide.
+}
+
+\theorem{Orthogonalité du gradient aux lignes de niveau}{}{false}{
+    Soit $f : \mathcal{U} \subset \mathbb{R}^p \to \mathbb{R}$ une fonction de classe $\mathcal{C}^1$ sur l'ouvert $\mathcal{U}$. 
+    Soit $c \in \mathbb{R}$ et $\gamma : ]-\epsilon, \epsilon[ \to \mathbb{R}^p$ une courbe différentiable tracée sur l'ensemble de niveau $\mathcal{L}_c(f)$ (c'est-à-dire que pour tout $t$, $\gamma(t) \in \mathcal{L}_c(f)$), telle que $\gamma(0) = a$.
+    
+    Alors, le vecteur gradient de $f$ en $a$ est orthogonal au vecteur tangent à la courbe en ce point :
+    \[
+    \langle \nabla f(a), \gamma'(0) \rangle = 0 \iff {}^t \nabla f(a) \gamma'(0) = 0
+    \]
+}
+
+\noindent{\textbf{Preuve :}} Par hypothèse, la courbe $\gamma$ est entièrement contenue dans l'ensemble de niveau $\mathcal{L}_c(f)$. Par conséquent, la fonction composée $g : ]-\epsilon, \epsilon[ \to \mathbb{R}$ définie par $g(t) = f(\gamma(t))$ est constante et vaut toujours $c$. 
+
+Sa dérivée par rapport à $t$ est donc identiquement nulle. En appliquant la règle de dérivation des fonctions composées (Chain Rule), on a pour tout $t \in ]-\epsilon, \epsilon[$ :
+\[
+g'(t) = Df(\gamma(t)) \cdot \gamma'(t) = {}^t \nabla f(\gamma(t)) \gamma'(t) = 0
+\]
+En évaluant en $t = 0$, on obtient :
+\[
+{}^t \nabla f(a) \gamma'(0) = \langle \nabla f(a), \gamma'(0) \rangle = 0
+\]
+Le vecteur gradient $\nabla f(a)$ est donc orthogonal à tout vecteur tangent $\gamma'(0)$ à l'ensemble de niveau passant par $a$.
+
+\theorem{Propriétés géométriques fondamentales du gradient}{}{false}{
+    Du théorème précédent découlent deux interprétations physiques et géométriques majeures du gradient en un point $a \in \mathcal{U}$ où $\nabla f(a) \neq 0$ :
+    \begin{enumerate}
+        \item \textbf{Direction de plus forte pente :} Le vecteur $\nabla f(a)$ pointe dans la direction où la fonction $f$ augmente le plus rapidement à partir du point $a$. Inversement, $-\nabla f(a)$ pointe vers la direction de plus forte diminution.
+        \item \textbf{Orthogonalité locale :} Le gradient est localement perpendiculaire à la ligne de niveau (ou surface de niveau) de la fonction passant par ce point.
+    \end{enumerate}
+}
+
+\remark{
+    Cette propriété d'orthogonalité fait le lien direct avec l'\textbf{équation du plan tangent}. En effet, si l'on cherche le plan tangent à une surface d'équation $z = f(x,y)$, on peut définir la fonction de trois variables $F(x,y,z) = f(x,y) - z$. La surface de graphe devient la surface de niveau $F(x,y,z) = 0$. Le gradient de $F$ fournit alors immédiatement le vecteur normal recherché pour le plan tangent.
+}
+
 \subsubsection{Cas des fonctions vectorielles : La Matrice Jacobienne}
 
 Lorsque $f : \mathcal{U} \to \mathbb{R}^q$, la différentielle $Df(a)$ est représentée matriciellement dans les bases canoniques de $\mathbb{R}^p$ et $\mathbb{R}^q$.
@@ -704,7 +761,7 @@ Le théorème de Schwarz s'applique naturellement aux fonctions vectorielles en 
 }
 
 \subsection{Développements de Taylor}
-
+\subsubsection{Formules de Taylor-Young}
 Les représentations compactes (produit scalaire et matrice) des formules de Taylor suivantes sont écrites pour une fonction scalaire $f : \mathcal{U} \subset \mathbb{R}^p \to \mathbb{R}$.
 
 \theorem{Théorème de Taylor-Young (ordre 1)}{}{false}{
@@ -758,7 +815,49 @@ f(a+h) = f(a) + {}^t \nabla f(a) h + \frac{1}{2} \, { }^t h \mathcal{H}_f(a) h +
     \[
     f(a+h) = f(a) + \left[ \frac{\partial f}{\partial x}(a) h_1 + \frac{\partial f}{\partial y}(a) h_2 \right] + \frac{1}{2} \left[ h_1^2 \frac{\partial^2 f}{\partial x^2}(a) + 2h_1h_2 \frac{\partial^2 f}{\partial x \partial y}(a) + h_2^2 \frac{\partial^2 f}{\partial y^2}(a) \right] + o(\|h\|^2)
     \]
-}\section{Recherche d'extrema}
+}
+
+\subsubsection{Équation du plan tangent}
+
+L'approximation affine globale issue du théorème de Taylor-Young à l'ordre 1 possède une interprétation géométrique fondamentale : elle permet de définir l'extension de la notion de droite tangente aux fonctions de plusieurs variables.
+
+Soit $f : \mathcal{U} \subset \mathbb{R}^2 \to \mathbb{R}$ une fonction de classe $\mathcal{C}^1$ définie sur un ouvert $\mathcal{U}$ de $\mathbb{R}^2$. On considère la surface $\mathcal{S}$ de $\mathbb{R}^3$ d'équation cartésienne $z = f(x,y)$, représentation graphique de la fonction $f$.
+
+\definition{
+    Soit $A(a_1, a_2, f(a_1,a_2))$ un point de la surface $\mathcal{S}$. On appelle \textbf{plan tangent} à la surface $\mathcal{S}$ au point $A$ le plan passant par $A$ qui constitue la meilleure approximation affine de la surface au voisinage de ce point.
+}
+
+\theorem{Équation cartésienne du plan tangent}{}{false}{
+    Si $f$ est différentiable en $a = (a_1, a_2) \in \mathcal{U}$, l'équation cartésienne du plan tangent à la surface $\mathcal{S}$ au point $A(a_1, a_2, f(a))$ est donnée par :
+    \[
+    z = f(a) + \frac{\partial f}{\partial x}(a)(x - a_1) + \frac{\partial f}{\partial y}(a)(y - a_2)
+    \]
+    En posant $X = \begin{pmatrix} x \\ y \end{pmatrix}$ et $a = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$, cette équation se réécrit sous forme matricielle compacte :
+    \[
+    z = f(a) + {}^t \nabla f(a) (X - a)
+    \]
+}
+
+\noindent{\textbf{Interprétation par le vecteur normal :}} Une autre manière de caractériser ce plan tangent est de l'envisager à travers son vecteur normal. En introduisant la fonction de trois variables $F(x,y,z) = f(x,y) - z$, la surface $\mathcal{S}$ correspond à l'ensemble de niveau $F(x,y,z) = 0$. 
+
+Le vecteur gradient de $F$ au point $A$, noté $\nabla F(A)$, est orthogonal à la surface et au plan tangent. Ce vecteur normal a pour coordonnées :
+\[
+\vec{n} = \nabla F(A) = \begin{pmatrix} \frac{\partial f}{\partial x}(a) \\ \frac{\partial f}{\partial y}(a) \\ -1 \end{pmatrix}
+\]
+L'équation du plan tangent s'obtient alors par le produit scalaire nul entre ce vecteur normal et un vecteur directeur $\vec{AM}$ où $M(x,y,z)$ appartient au plan :
+\[
+\langle \vec{n}, \vec{AM} \rangle = 0 \iff \frac{\partial f}{\partial x}(a)(x - a_1) + \frac{\partial f}{\partial y}(a)(y - a_2) - (z - f(a)) = 0
+\]
+Ce qui redonne exactement l'équation précédente.
+
+\remark{
+    \begin{itemize}
+        \item Si $\nabla f(a) = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$, le point $a$ est un point critique de $f$. Le plan tangent en ce point est horizontal et a pour équation $z = f(a)$.
+        \item Cette notion se généralise en dimension supérieure ($p > 2$). Pour une fonction $f : \mathbb{R}^p \to \mathbb{R}$, on ne parle plus de plan tangent mais d'\textbf{hyperplan tangent} à l'hyper-surface d'équation $z = f(x_1, \dots, x_p)$ au point $a \in \mathbb{R}^p$, et son équation matricielle reste inchangée : $z = f(a) + {}^t \nabla f(a)(X-a)$.
+    \end{itemize}
+}
+
+\section{Recherche d'extrema}
 
 Dans cette section, $\mathcal{U}$ désigne un ouvert de $\mathbb{R}^p$ et $f : \mathcal{U} \to \mathbb{R}$ est une fonction à valeurs scalaires.
 
