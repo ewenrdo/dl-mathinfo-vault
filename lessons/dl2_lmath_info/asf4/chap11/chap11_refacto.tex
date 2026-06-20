@@ -83,6 +83,8 @@
     $f$ n'est pas continue en $(0,0)$.
 }
 
+\remark{Quand on trouve des expressions de la forme $x^2 + y^2$ au dénominateur, il est souvent utile de passer en coordonnées polaires pour étudier la continuité.}
+
 \subsection{Continuité uniforme}
 \definition{
     Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :
@@ -710,6 +712,34 @@ On se place ici dans le cas général d'une fonction à valeurs vectorielles.
 
 \example{
     Reprenons le changement de coordonnées polaires : $f(r,\theta) = (r\cos\theta, r\sin\theta)$. Les coefficients de sa matrice jacobienne sont $\cos\theta, -r\sin\theta, \sin\theta$ et $r\cos\theta$. Ces quatre fonctions de $(r,\theta)$ sont continues sur $\mathbb{R}^2$. L'application $f$ est donc de classe $\mathcal{C}^1$ sur $\mathbb{R}^2$.
+}
+
+\theorem{Théorème}{Règle de dérivation des fonctions composées (Chain rule)}{true}{
+Soit $I$ un intervalle ouvert de $\mathbb{R}$ et $U$ un ouvert de $\mathbb{R}^n$.
+Soient $\gamma : I \longrightarrow \mathbb{R}^n$ une application dérivable sur $I$ telle que $\gamma(I) \subset U$, et $f : U \longrightarrow \mathbb{R}$ une application de classe $\mathcal{C}^1$ sur $U$.
+
+Alors la fonction composée $\varphi = f \circ \gamma : I \longrightarrow \mathbb{R}$, définie pour tout $t \in I$ par 
+\[ \varphi(t) = f\big(\gamma_1(t), \gamma_2(t), \dots, \gamma_n(t)\big) \]
+est dérivable sur $I$. De plus, pour tout $t \in I$, sa dérivée est donnée par :
+\[ \varphi'(t) = \sum_{i=1}^n \gamma_i'(t) \frac{\partial f}{\partial x_i}(\gamma(t)) \]
+}
+
+\remark{
+\begin{itemize}
+    \item En termes géométriques, l'application $\gamma$ peut être interprétée comme le paramétrage d'un \textit{chemin} ou d'une courbe courbe dans $\mathbb{R}^n$. La fonction $\varphi(t)$ représente alors l'évolution de la quantité $f$ le long de ce chemin au cours du temps $t$.
+    \item À l'aide du produit scalaire canonique de $\mathbb{R}^n$ et du vecteur gradient, la formule générale se réécrit de manière très compacte :
+    \[ \varphi'(t) = \langle \nabla f(\gamma(t)), \gamma'(t) \rangle \]
+\end{itemize}}
+
+\example{
+    Soit $f : \mathbb{R}^3 \to \mathbb{R}$ une fonction de classe $\mathcal{C}^1$. Soit $\phi : \mathbb{R} \to \mathbb{R}$ la fonction définie par
+    \[ \phi(t) = f(t^2, t^4, e^t). \]
+    Par le théorème de la règle de dérivation des fonctions composées, on obtient :
+    \begin{itemize}
+        \item $\varphi$ est dérivable sur $\mathbb{R}$.
+        \item Sa dérivée est donnée par :
+        \[ \varphi'(t) = 2t \frac{\partial f}{\partial x_1}(t^2, t^4, e^t) + 4t^3 \frac{\partial f}{\partial x_2}(t^2, t^4, e^t) + e^t \frac{\partial f}{\partial x_3}(t^2, t^4, e^t). \]
+    \end{itemize}
 }
 
 \subsection{Fonctions de classe $\mathcal{C}^2$ et second ordre}
