@@ -82,6 +82,162 @@
 
 \definition{Le \textbf{cercle} de centre $O$ et de rayon $R$ est l'ensemble de tous les points du plan situés à une distance $R$ de $O$. Une \textbf{corde} est un segment reliant deux points du cercle. Un \textbf{diamètre} est une corde passant par $O$.}
 
+\subsection{Propriétés des angles et configurations de droites}
+
+Lorsque deux droites sont coupées par une troisième droite appelée sécante, plusieurs configurations d'angles apparaissent selon leur position relative.
+
+\subsubsection{Angles opposés par le sommet}
+
+\definition{Deux angles sont dits \textbf{opposés par le sommet} s'ils ont le même sommet et que leurs côtés sont dans le prolongement l'un de l'autre.}
+
+\theorem{Théorème}{Propriété des angles opposés par le sommet}{false}{
+Deux angles opposés par le sommet ont toujours la même mesure.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soient deux droites $(d_1)$ et $(d_2)$ sécantes en un point $O$. Les points $A$ et $A'$ appartiennent à $(d_1)$ de part et d'autre de $O$. Les points $B$ et $B'$ appartiennent à $(d_2)$ de part et d'autre de $O$. 
+Les angles $\widehat{AOB}$ et $\widehat{BOA'}$ sont adjacents et forment un angle plat, donc : $\widehat{AOB} + \widehat{BOA'} = 180^\circ$.
+De même, les angles $\widehat{BOA'}$ et $\widehat{A'OB'}$ forment un angle plat, d'où : $\widehat{BOA'} + \widehat{A'OB'} = 180^\circ$.
+En égalisant les deux expressions, on obtient $\widehat{AOB} + \widehat{BOA'} = \widehat{BOA'} + \widehat{A'OB'}$. En soustrayant $\widehat{BOA'}$ de chaque côté, il vient $\widehat{AOB} = \widehat{A'OB'}$.
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Les deux droites sécantes définies par des angles précis
+    \draw[thick] (200:2) -- (20:2) node[right] {$(d_1)$};
+    \draw[thick] (140:2) -- (-40:2) node[right] {$(d_2)$};
+    
+    \coordinate (O) at (0,0);
+    \fill (O) circle (1.5pt) node[below=3pt] {$O$};
+    
+    % Secteurs angulaires parfaits (gauche et droite)
+    \draw[draw=purple!80!black, fill=purple!20, thick] (O) -- (-40:0.4) arc (-40:20:0.4) -- cycle;
+    \draw[draw=purple!80!black, fill=purple!20, thick] (O) -- (140:0.4) arc (140:200:0.4) -- cycle;
+    
+    \node at (10:0.6) {$\alpha$};
+    \node at (170:0.6) {$\alpha$};
+\end{tikzpicture}
+\captionof{figure}{Angles opposés par le sommet (mesures égales).}
+\end{center}
+
+\subsubsection{Angles alternes-internes}
+
+\definition{Deux angles sont dits \textbf{alternes-internes} s'ils sont situés de part et d'autre de la sécante, à l'intérieur de la zone délimitée par les deux droites coupées.}
+
+\theorem{Théorème}{Parallélisme et angles alternes-internes}{false}{
+Si deux droites parallèles sont coupées par une sécante, alors les angles alternes-internes qu'elles forment ont la même mesure.\\
+\textbf{Réciproque :} Si deux droites coupées par une sécante forment deux angles alternes-internes de même mesure, alors ces droites sont parallèles.
+}
+
+\noindent{\textbf{Preuve (Propriété directe) :}\\
+Soient $(d_1) \parallel (d_2)$ deux droites coupées par une sécante $(\Delta)$ en $A$ et $B$. Soit $I$ le milieu de $[AB]$. La symétrie centrale de centre $I$ transforme $(\Delta)$ en elle-même et échange $A$ et $B$. L'image de $(d_1)$ est une droite parallèle à $(d_1)$ passant par $B$. Par unicité de la parallèle (axiome d'Euclide), cette image est $(d_2)$. La symétrie conservant les angles, l'angle alterne-interne en $A$ est envoyé sur l'angle alterne-interne en $B$. Ils sont donc égaux.
+}
+
+\begin{center}
+\usetikzlibrary{angles, quotes}
+\begin{tikzpicture}[scale=1.2]
+    % Définition des points de repère pour tracer les droites
+    \coordinate (D1g) at (-1.5, 1.5);
+    \coordinate (D1d) at (4, 1.5);
+    \coordinate (D2g) at (-1.5, 0);
+    \coordinate (D2d) at (4, 0);
+    
+    % Tracé des droites parallèles
+    \draw[thick] (D1g) -- (D1d) node[right] {$(d_1)$};
+    \draw[thick] (D2g) -- (D2d) node[right] {$(d_2)$};
+    
+    % Intersection et tracé de la sécante
+    \coordinate (A) at (2, 1.5);
+    \coordinate (B) at (0, 0);
+    \draw[thick, blue] (-0.5,-0.375) -- (3,2.25) node[above] {$(\Delta)$};
+    
+    % Points supplémentaires sur la sécante pour orienter les angles
+    \coordinate (Top) at (3,2.25);
+    \coordinate (Bot) at (-0.5,-0.375);
+    
+    % Marquage des points d'intersection principaux
+    \fill (A) circle (1.5pt) node[above left] {$A$};
+    \fill (B) circle (1.5pt) node[below right] {$B$};
+    
+    % Tracé automatique et parfait des secteurs angulaires alternes-internes
+    \pic [draw=orange!80!black, fill=orange!30, thick, angle radius=5mm, "$\alpha$", angle eccentricity=1.4] {angle = D1g--A--B};
+    \pic [draw=orange!80!black, fill=orange!30, thick, angle radius=5mm, "$\alpha$", angle eccentricity=1.4] {angle = D2d--B--A};
+
+\end{tikzpicture}
+\captionof{figure}{Configuration d'angles alternes-internes égaux.}
+\end{center}
+
+\subsubsection{Angles alternes-externes}
+
+\definition{Deux angles sont dits \textbf{alternes-externes} s'ils sont situés de part et d'autre de la sécante, à l'extérieur de la zone délimitée par les deux droites coupées.}
+
+\theorem{Théorème}{Parallélisme et angles alternes-externes}{false}{
+Si deux droites parallèles sont coupées par une sécante, alors les angles alternes-externes qu'elles forment ont la même mesure.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soient $\widehat{1}$ et $\widehat{2}$ deux angles alternes-externes formés par $(d_1) \parallel (d_2)$ et la sécante $(\Delta)$. Soit $\widehat{3}$ l'angle opposé par le sommet à $\widehat{1}$. On a $\widehat{1} = \widehat{3}$. Or, $\widehat{3}$ et $\widehat{2}$ sont en position d'angles alternes-internes, donc $\widehat{3} = \widehat{2}$ puisque $(d_1) \parallel (d_2)$. Par transitivité, on en conclut que $\widehat{1} = \widehat{2}$.
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[thick] (-1.5,1.5) -- (4,1.5) node[right] {$(d_1)$};
+    \draw[thick] (-1.5,0) -- (4,0) node[right] {$(d_2)$};
+    \draw[thick, blue] (-0.5,-0.375) -- (3,2.25) node[above] {$(\Delta)$};
+    
+    \coordinate (A) at (2,1.5);
+    \coordinate (B) at (0,0);
+    \fill (A) circle (1.5pt) node[below right] {$A$};
+    \fill (B) circle (1.5pt) node[above left] {$B$};
+    
+    % Secteur en A (externe droit) : centré en A
+    \draw[draw=teal!80!black, fill=teal!20, thick, shift={(A)}] (0,0) -- (0:0.5) arc (0:36.87:0.5) -- cycle;
+    % Secteur en B (externe gauche) : centré en B (0,0)
+    \draw[draw=teal!80!black, fill=teal!20, thick, shift={(B)}] (0,0) -- (180:0.5) arc (180:216.87:0.5) -- cycle;
+    
+    \node at (2.7,1.7) {$\widehat{1}$};
+    \node at (-0.7,-0.2) {$\widehat{2}$};
+\end{tikzpicture}
+\captionof{figure}{Configuration d'angles alternes-externes égaux.}
+\end{center}
+
+\subsubsection{Angles correspondants}
+
+\definition{Deux angles sont dits \textbf{correspondants} s'ils sont situés du même côté de la sécante, l'un à l'intérieur et l'autre à l'extérieur de la zone délimitée par les deux droites.}
+
+\theorem{Théorème}{Parallélisme et angles correspondants}{false}{
+Si deux droites parallèles sont coupées par une sécante, alors les angles correspondants qu'elles forment ont la même mesure.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soient $\widehat{1}$ et $\widehat{2}$ deux angles correspondants. L'angle $\widehat{1}$ possède un angle opposé par le sommet qui se trouve être un angle alterne-interne vis-à-vis de l'angle $\widehat{2}$. Par composition des égalités (les opposés par le sommet étant égaux et les alternes-internes étant égaux sous l'hypothèse de parallélisme), les angles correspondants $\widehat{1}$ et $\widehat{2}$ ont la même mesure.
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Droites parallèles et sécante
+    \draw[thick] (-1.5,1.5) -- (4,1.5) node[right] {$(d_1)$};
+    \draw[thick] (-1.5,0) -- (4,0) node[right] {$(d_2)$};
+    \draw[thick, blue] (-0.5,-0.375) -- (3,2.25) node[above] {$(\Delta)$};
+    
+    % Coordonnées géométriques exactes des intersections
+    \coordinate (A) at (2,1.5);
+    \coordinate (B) at (0,0);
+    \fill (A) circle (1.5pt) node[below right] {$A$};
+    \fill (B) circle (1.5pt) node[below right] {$B$};
+    
+    % Secteur en A (haut droit) : centré en A
+    \draw[draw=red!80!black, fill=red!20, thick, shift={(A)}] (0,0) -- (0:0.5) arc (0:36.87:0.5) -- cycle;
+    
+    % Secteur en B (haut droit) : centré en B (0,0)
+    \draw[draw=red!80!black, fill=red!20, thick, shift={(B)}] (0,0) -- (0:0.5) arc (0:36.87:0.5) -- cycle;
+    
+    % Ajustement fin des étiquettes d'angles
+    \node at (2.7,1.7) {$\widehat{1}$};
+    \node at (0.7,0.2) {$\widehat{2}$};
+\end{tikzpicture}
+\captionof{figure}{Configuration d'angles correspondants égaux.}
+\end{center}
 
 
 \section{Propriétés des triangles et droites Remarquables}
@@ -116,6 +272,9 @@ Pour vérifier si un triangle est constructible, on compare la plus grande longu
 
 \definition{La \textbf{hauteur} d'un triangle est une droite passant par un sommet et perpendiculaire au côté opposé.}
 
+\definition{La \textbf{bissectrice} d'un angle est la demi-droite qui partage cet angle en deux angles adjacents de même mesure. C'est également l'ensemble des points équidistants des deux côtés de l'angle.}
+
+\remark{Les trois bissectrices d'un triangle sont concourantes en un point qui est le centre du \textbf{cercle inscrit} au triangle.}
 
 
 \section{Théorèmes fondamentaux de géométrie plane}
