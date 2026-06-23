@@ -229,10 +229,105 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 }
 
 \section{Groupe quotient}
-\ndlr{non rédigé, fin page 19 du poly de DL3}
 
+\definition{
+    Un groupe quotient $G$ est un quotient $G/\mathcal{R}$, qui est un groupe tel que l'application quotient $\pi : G \to G/\mathcal{R}$ est un morphisme de groupes.
+}
 
+\subsection{Sous-groupes distingués}
+
+\definition{Un \textbf{sous-groupe distingué} (ou normal) $H$ d'un groupe $G$ est un sous-groupe tel que $\forall x \in G, \forall h \in H, x * h * x^{-1} \in H$. On note $H \triangleleft G$.}
+
+\theorem{Proposition}{Caractérisation des sous-groupes distingués}{true}{
+    Soit $H$ un sous-groupe de $(G, *)$. Il est distingué dans $G$ si et seulement si 
+    $$ \forall x \in G, xH = Hx \Leftrightarrow \forall x \in G, x * H * x^{-1} = H $$
+}
+
+\remark{Si $G$ est abélien, tout sous-groupe de $G$ est distingué.}
+
+\theorem{Proposition}{}{false}{
+    Soit $f : G \to H$ un morphisme de groupes.
+    \begin{itemize}
+        \item L'image réciproque d'un sous-groupe distingué de $H$ est un sous-groupe distingué de $G$.\\
+        \textit{En particulier, $ker(f)$ est un sous-groupe distingué de $G$.}
+        \item L'image d'un sous-groupe distingué de $G$ est un sous-groupe distingué de $f(G)$.\\
+    \end{itemize}
+}
+
+\attention{L'image d'un sous-groupe distingué de $G$ n'est pas forcément un sous-groupe distingué de $H$.}
+
+\theorem{Proposition}{}{false}{
+    Soit $G$ un groupe.
+    \begin{itemize}
+        \item Une intersection de sous-groupes distingués de $G$ est un sous-groupe distingué de $G$. En particulier, si $X \subseteq G$, il existe un plus petit sous-groupe distingué de $G$ contenant $X$.
+        \item Soient $H, K$ deux sous-groupes de $G$. Si $H \triangleleft G$, alors $HK$ est un sous-groupe de $G$ et on a $HK = KH$. De plus, si $K \triangleleft G$, alors $HK \triangleleft G$.
+    \end{itemize}
+}
+
+\subsection{Quotient par un sous-groupe distingué}
+
+\theorem{Théorème}{}{false}{
+    Soit $(G, *)$ un groupe et soit $H$ un sous-groupe de $G$. Alors les deux assertions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $H$ est distingué dans $G$,
+        \item L'ensemble quotient $G/H$ admet une unique structure de groupe telle que l'application quotient $\pi : G \to G/H$ soit un morphisme de groupes.
+    \end{enumerate}
+}
+
+\example{
+    \begin{itemize}
+        \item Les sous-groupes ${e_G}$ et $G$ sont distingués dans $G$.
+        \item $\mathbb{Z}$ est distingué dans $(\mathbb{R}, +)$ et le quotient $\mathbb{R}/\mathbb{Z}$ est un groupe.
+    \end{itemize}
+}
+
+\theorem{Théorème}{Propriété universelle du qutient}{false}{
+    Soit $f : G \to G'$ un morphisme de groupe. Soit $H$ un sous-groupe de $G$ et $\pi : G \to G/H$ la projection canonique.\\
+    Il existe une application $\overline{f} : G/H \to G'$ telle que $f = \overline{f} \circ \pi$ si et seulement si $H \subseteq ker(f)$.\\
+    Dans ce cas, si de plus $H \triangleleft G$, alors $\overline{f}$ est un morphisme de groupes et $\overline{f}(G/H) = f(G)$ et $ker(\overline{f}) = ker(f)/H$.
+}
+
+\theorem{Corollaire}{Théorème de l'isomorphisme}{true}{
+    Soit $f : G \to G'$ un morphisme de groupes. Alors $f$ induit un isomorphisme de groupes $\overline{f} : G/ker(f) \to Im(G)$ défini par $\overline{f}(x + ker(f)) = f(x)$.\\
+    Si $f$ est surjective, alors $f$ induit un isomorphisme de groupes $G/ker(f) \to G'$.
+}
+
+\theorem{Corollaire}{}{false}{
+    \begin{enumerate}
+        \item Tout groupe cyclique à $n$ éléments est isomorphe à $(\mathbb{Z}/n\mathbb{Z}, +)$.
+        \item Tout groupe monogène infini est isomorphe à $(\mathbb{Z}, +)$.
+    \end{enumerate}
+}
+
+\subsection{Sous-groupes de $G/H$ avec $H \triangleleft G$}
+
+\theorem{Proposition}{}{false}{
+    Soit $G$ un groupe et $H$ un sous-groupe distingué de $G$. Notons $\pi : G \to G/H$ l'application quotient.\\
+    Les sous-groupes de $G/H$ sont de la forme $K/H$ avec $K$ un sous-groupe de $G$ contenant $H$.\\
+    L'application $K \mapsto K/H$ est une bijection entre l'ensemble des sous-groupes de $G$ contenant $H$ et l'ensemble des sous-groupes de $G/H$.\\
+    Si $K$ est un sous-groupe de $G$, alors $\pi(K) = KH/H$.
+}
+
+\example{Les sous-groupes $\mathbb{Z}/n\mathbb{Z}$ sont de la forme $k\mathbb{Z}/n\mathbb{Z}$ avec $k$ un diviseur de $n$.}
+
+\subsection{Groupes simples et groupe alterné}
+
+\definition{Un groupe $G$ est dit \textbf{simple} si $G \neq \{ e_G \}$ et si les seuls sous-groupes distingués de $G$ sont $\{ e_G \}$ et $G$.}
+
+\theorem{Proposition}{Communtativité}{false}{
+    Un groupe commutatif est simple si et seulement si il est cycle d'ordre premier.
+}
+
+On retient pour l'instant que la signature est un morphisme de groupe $\varepsilon : \mathcal{S}_n \to \{ -1, 1 \}$ qui envoie toute transposition sur $-1$.
+
+\definition{Le groupe alterné $\mathcal{A}_n$ est le noyau de la signature. On l'appelle le $n$-ième groupe alterné.}
+
+\example{
+    Le groupe $\mathcal{A}_3$ est cyclique d'ordre 3, il est simple.\\
+    Le groupe $\mathcal{A}_4$ est d'ordre 12, il n'est pas simple.\\
+}
 \newpage
 \tableofcontents 
 \end{document}
+
 
