@@ -1,0 +1,154 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% Configuration des en-tetes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Efficacité et gestion des ressources}
+
+\section{Utilisation des ressources}
+
+En programmation, l'efficacité d'un algorithme se mesure principalement à travers deux ressources limitées :
+\begin{enumerate}
+    \item \textbf{La mémoire :} nécessaire pour stocker (temporairement ou durablement) les valeurs créées par les programmes.
+    \item \textbf{Le temps d'exécution :} le nombre d'opérations élémentaires effectuées.
+\end{enumerate}
+
+En programmation fonctionnelle, la création fréquente de valeurs intermédiaires peut consommer de la mémoire. OCaml gère cette allocation dynamique de manière automatique grâce à un \textbf{Garbage Collector} (comme en Java), qui libère de l'espace en recyclant les structures de données devenues inaccessibles pour le programme.
+
+\section{Appels de fonctions et pile d'exécution}
+
+Chaque appel de fonction non terminé consomme un espace en mémoire appelé \textbf{cadre d'activation} (ou \textit{stack frame}) inséré dans la \textbf{pile d'exécution}. Ce cadre stocke les arguments de la fonction et ses variables locales.\\
+
+\noindent Si une fonction effectue un trop grand nombre d'appels récursifs imbriqués, la pile peut saturer, ce qui déclenche une erreur fatale d'exécution.
+
+\attention{Une fonction récursive non optimisée appliquée \`a une grande structure de données provoquera une levée d'exception : \lstinline|Stack_overflow| (dépassement de la pile d'exécution).}
+
+\section{Récurrence terminale}
+
+Pour éviter la saturation de la pile, il convient de concevoir des fonctions utilisant la récursion terminale (\textit{tail recursion}).
+
+\definition{Une fonction est dite \textbf{récursive terminale} si l'appel récursif est la \textbf{toute derni\`ere opération} effectuée par la fonction. Le résultat renvoyé est directement celui de l'appel récursif, sans aucun calcul supplémentaire en attente.}
+
+\noindent Grâce à cette propriété, le compilateur OCaml réalise une optimisation : il réutilise le même cadre d'activation dans la pile au lieu d'en empiler un nouveau. L'espace mémoire requis dans la pile devient constant $\Theta(1)$, transformant l'exécution en une boucle impérative.
+
+\example{Comparons l'implémentation naïve et l'implémentation optimisée à l'aide d'un accumulateur de la fonction factorielle.}
+
+\noindent\textbf{Version naïve (Non récursive terminale) :}
+\begin{lstlisting}[language=Caml]
+let rec fact n =
+  if n = 0 then 1 
+  else n * fact (n - 1); (* Une multiplication reste en attente *)
+\end{lstlisting}
+\vspace{0.5em}
+\noindent\textbf{Version optimisée (Récursive terminale) :}
+\begin{lstlisting}[language=Caml]
+let fact_tail n =
+  let rec fact_aux acc n =
+    if n = 0 then acc
+    else fact_aux (acc * n) (n - 1) (* Appel recursif terminal *)
+  in fact_aux 1 n;
+\end{lstlisting}
+
+\section{Structures de données : listes et files d'attente}
+
+Le choix de l'implémentation et de l'accès aux structures de données impacte fortement la complexité algorithmique.
+
+\subsection{Efficacité sur les listes}
+
+Comme étudié précédemment, une liste OCaml est une liste simplement chaînée immuable. 
+\begin{itemize}
+    \item L'ajout en tête via l'opérateur \lstinline|::| (\textit{Cons}) est en $\Theta(1)$.
+    \item Le parcours, le calcul de la taille (\lstinline|List.length|) ou l'ajout en fin (\lstinline|@|) requièrent un temps linéaire $\Theta(N)$ où $N$ est la longueur de la liste.
+\end{itemize}
+
+\subsection{Modélisation d'une file d'attente (FIFO)}
+
+Une file d'attente suit la règle du \textit{First In, First Out} (Premier entré, premier sorti). Nous voulons implémenter deux opérations principales : \texttt{put} (enfiler un élément) et \texttt{get} (défiler un élément).
+
+\subsubsection{Approche na\"\i ve avec une liste simple}
+Si l'on utilise une unique liste pour représenter la file :
+\begin{itemize}
+    \item Soit \texttt{put} se fait en tête ($\Theta(1)$), mais \texttt{get} doit récupérer le dernier élément au bout de la liste ($\Theta(N)$).
+    \item Soit \texttt{put} se fait en fin de liste ($\Theta(N)$), et \texttt{get} se fait en tête ($\Theta(1)$).
+\end{itemize}
+Dans les deux cas, l'une des opérations fondamentales possède une complexité linéaire coûteuse.
+
+\subsubsection{Approche optimisée : la r\`egle des deux listes}
+
+Pour obtenir des opérations efficaces, on modélise la file à l'aide d'un enregistrement (\textit{record}) contenant deux listes distinctes :
+\begin{enumerate}
+    \item \lstinline|instack| : la liste d'entrée, où sont stockés les nouveaux éléments insérés.
+    \item \lstinline|outstack| : la liste de sortie, d'où sont extraits les éléments à défiler.
+\end{enumerate}
+
+\begin{lstlisting}[language=Caml]
+type 'a fifo = {
+  mutable instack  : 'a list;
+  mutable outstack : 'a list;
+};
+\end{lstlisting}
+
+\method{Algorithme de gestion de la file}{
+\begin{itemize}
+    \item \textbf{Insertion (\texttt{put}) :} On ajoute l'élément en tête de \lstinline|instack|. Cette opération est toujours en $\Theta(1)$.
+    \item \textbf{Extraction (\texttt{get}) :}
+    \begin{itemize}
+        \item Si \lstinline|outstack| n'est pas vide, on extrait son premier élément ($\Theta(1)$).
+        \item Si \lstinline|outstack| est vide, on \textbf{renverse} entièrement la liste \lstinline|instack| dans \lstinline|outstack|, puis on vide \lstinline|instack|. L'extraction s'effectue ensuite sur la tête de \lstinline|outstack|.
+    \end{itemize}
+\end{itemize}
+}
+
+\example{Implémentation compl\`ete des opérations de la FIFO :}
+\begin{lstlisting}[language=Caml]
+exception Queue_empty;
+
+let empty () = { instack = []; outstack = [] };
+
+let put x queue = 
+  queue.instack <- x :: queue.instack;
+
+let get queue =
+  match queue.outstack with
+  | h :: r -> queue.outstack <- r; h
+  | [] ->
+      match queue.instack with
+      | [] -> raise Queue_empty
+      | _ ->
+          let rev_in = List.rev queue.instack in
+          match rev_in with
+          | h :: r -> queue.instack <- []; queue.outstack <- r; h
+          | [] -> raise Queue_empty;
+\end{lstlisting}
+
+\remark{Bien que le retournement de la liste \lstinline|instack| prenne un temps linéaire $\Theta(N)$, cette opération ne se produit que lorsque \lstinline|outstack| devient totalement vide. Réparti sur l'ensemble des utilisations de la file, le coût de chaque opération \texttt{get} est en réalité de $\Theta(1)$ en moyenne.}
+
+\training{Soit la fonction récursive na\"\i ve calculant le $n$-i\`eme terme de la suite de Fibonacci : 
+\lstinline|let rec fib n = if n < 2 then n else fib (n-1) + fib (n-2)|. \\
+Proposer une version récursive terminale compila-optimisée \`a l'aide d'une fonction auxiliaire et de deux accumulateurs.}
+
+\noindent\carreaux{6}
+
+\newpage
+\tableofcontents
+\end{document}
