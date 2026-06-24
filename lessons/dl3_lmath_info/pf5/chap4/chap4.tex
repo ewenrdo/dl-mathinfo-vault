@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% Configuration des en-tetes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Exceptions et gestion d'erreurs}
+
+\section{Introduction}
+
+Une exception permet d'interrompre le flux d'exécution normal d'un programme. Elle survient généralement lors d'une mauvaise interaction avec l'environnement extérieur ou lorsqu'une fonction est appliquée à des valeurs non attendues (par exemple, une division par zéro).
+
+\attention{Il ne faut absolument pas confondre les exceptions avec les erreurs de typage. 
+\begin{itemize}
+    \item Les \textbf{erreurs de typage} sont détectées à la \textbf{compilation} (statiquement).
+    \item Les \textbf{exceptions} se produisent à l'\textbf{exécution} du programme (dynamiquement).
+\end{itemize}
+}
+
+\noindent Le recours aux exceptions est toujours préférable au renvoi de valeurs légales mais artificielles (comme renvoyer $-1$ pour le minimum d'une liste vide d'entiers, ce qui fausserait les calculs si la liste contenait réellement $-1$). Si une exception n'est pas rattrapée, elle provoque l'arrêt immédiat du programme.
+
+\section{Exceptions prédéfinies de OCaml}
+
+La bibliothèque standard de OCaml fournit plusieurs exceptions courantes prêtes à l'emploi :
+
+\begin{itemize}
+    \item \texttt{Division\_by\_zero} : Déclenchée lors d'une division entière par $0$.
+    \item \texttt{Failure} : Déclenchée par la fonction \texttt{failwith "message"}.
+    \item \texttt{Invalid\_argument} : Indique qu'un argument ne respecte pas les préconditions (ex: index hors des bornes).
+    \item \texttt{Not\_found} : Déclenchée lorsqu'un élément cherché n'existe pas.
+\end{itemize}
+
+\example{Exemples d'expressions provoquant des exceptions natives :}
+\begin{lstlisting}[language=Caml]
+1 / 0;;                (* Exception: Division_by_zero *)
+List.hd [];;           (* Exception: Failure "hd" *)
+String.get "hello" 17; (* Exception: Invalid_argument "index out of bounds" *)
+List.assoc "z" [("a", 5)];; (* Exception: Not_found *)
+\end{lstlisting}
+
+\subsection{La fonction \texttt{failwith}}
+
+La fonction prédéfinie \texttt{failwith : string -> 'a} est extrêmement utile car son type de retour est polymorphe (\texttt{'a}), ce qui lui permet de s'insérer dans n'importe quelle branche d'un filtrage ou d'une condition sans provoquer de conflit de type.
+
+\example{Utilisation de \texttt{failwith} pour traiter le cas d'une liste vide :}
+\begin{lstlisting}[language=Caml]
+let rec minlist l = 
+  match l with
+  | [] -> failwith "Une liste vide n'a pas de minimum"
+  | [x] -> x
+  | h :: r -> min h (minlist r);
+\end{lstlisting}
+
+\section{Déclaration et levée d'exceptions personnalisées}
+
+Il est possible de définir ses propres exceptions à l'aide du mot-clé \texttt{exception}. Elles peuvent être de simples constantes ou emporter des valeurs (arguments). Pour déclencher manuellement une exception, on utilise le mot-clé \texttt{raise}.
+
+\definition{Une exception se déclare de la manière suivante : \\
+\texttt{exception Mon\_Exception} ou \texttt{exception Mon\_Exception of type}}
+
+\example{Déclaration et levée d'exceptions avec ou sans paramètres :}
+\begin{lstlisting}[language=Caml]
+exception Empty;
+exception Bug of string * int;
+
+let verif x = 
+  if x < 0 then raise (Bug ("valeur negative", x)) else x;
+\end{lstlisting}
+
+\section{Rattrapage d'exceptions}
+
+Rattraper (ou intercepter) une exception permet d'éviter l'arrêt du programme en proposant une solution de secours ou un comportement alternatif.
+
+\subsection{La structure \texttt{try ... with}}
+
+La syntaxe pour intercepter une exception repose sur un filtrage par motif dédié à l'aide de la structure \texttt{try ... with}.
+
+\method{Structure du \texttt{try ... with}}{
+On place l'expression principale immédiatement après le mot-clé \texttt{try}, puis on énumère les différents motifs d'exceptions à intercepter après le mot-clé \texttt{with}.
+}
+
+\begin{lstlisting}[language=Caml]
+try expression_principale with
+| Exception_1 -> expression_secours_1
+| Exception_2 -> expression_secours_2
+\end{lstlisting}
+
+\vspace{0.5em}
+\noindent Si l'\texttt{expression\_principale} s'évalue sans encombre, son résultat est renvoyé. Si elle lève une exception, celle-ci est comparée aux motifs après le \texttt{with}.
+
+\example{Exemple de fonction de division sécurisée renvoyant une valeur par défaut :}
+\begin{lstlisting}[language=Caml]
+let div_safe x y =
+  try x / y with
+  | Division_by_zero -> 0;;
+\end{lstlisting}
+
+\subsection{Filtrage combiné avec \texttt{match ... with exception}}
+
+Il est également possible d'intercepter les exceptions directement au sein d'un bloc \texttt{match ... with} standard en faisant précéder le motif du mot-clé \texttt{exception}.
+
+\example{Exemple de filtrage combinant valeurs de retour et exceptions :}
+\begin{lstlisting}[language=Caml]
+let g x = 
+  match f x with
+  | 'd' -> "Lettre d"
+  | 'e' -> "Lettre e"
+  | exception (Bug (msg, _)) -> "Une erreur est survenue : " ^ msg
+  | _ -> "Autre lettre";;
+\end{lstlisting}
+
+\section{Assertions}
+
+Une assertion permet de vérifier la validité d'un invariant ou d'une précondition au cours de l'exécution d'un programme.
+
+\definition{Le mot-clé \texttt{assert} est suivi d'une expression booléenne. Si l'expression s'évalue à \texttt{false}, OCaml lève automatiquement l'exception \texttt{Assert\_failure}, qui indique le nom du fichier, le numéro de la ligne et la colonne de l'erreur.}
+
+\remark{Les assertions sont particulièrement utiles lors des phases de test ou de débogage. Si nécessaire, on peut désactiver la vérification des assertions lors de la compilation du programme afin d'optimiser les performances en utilisant l'option \texttt{-noassert} (ex : \texttt{ocamlc -noassert programme.ml}).}
+
+\example{Utilisation d'un \texttt{assert} pour garantir qu'un indice de tableau est positif :}
+\begin{lstlisting}[language=Caml]
+let acces_table t i =
+  assert (i >= 0);
+  t.(i);;
+\end{lstlisting}
+
+\training{\'Ecrire une fonction \texttt{assoc\_safe : 'a -> ('a * 'b) list -> 'b -> 'b} qui cherche une cl\'e dans une liste d'association \`a l'aide de \texttt{List.assoc}. Si la cl\'e n'est pas trouv\'ee, la fonction devra intercepter l'exception \texttt{Not\_found} pour renvoyer une valeur par d\'efaut pass\'ee en argument.}
+
+\noindent\carreaux{6}
+
+\newpage
+\tableofcontents
+\end{document}

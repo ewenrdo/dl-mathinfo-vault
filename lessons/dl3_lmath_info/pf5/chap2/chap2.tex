@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Listes en OCaml}
+
+\section{Théorie et Définition inductive}
+
+En programmation fonctionnelle, la liste est une structure de données fondamentale, homogène (tous les éléments ont le même type) et de taille dynamique. Contrairement aux tableaux, les listes ne sont pas indexées en mémoire de manière contiguë.
+
+\definition{Une liste en OCaml est définie de manière \textbf{inductive} (ou récursive) :
+\begin{itemize}
+    \item Soit la liste est vide, notée \texttt{[]}.
+    \item Soit elle est composée d'un élément de tête $x$ (de type \texttt{'a}) et d'une suite d'éléments appelée reste ou queue $xs$ (de type \texttt{'a list}). On la note alors \texttt{x :: xs}.
+\end{itemize}
+}
+
+\noindent L'opérateur \texttt{::} (prononcé \textit{Cons}) permet de construire une liste en ajoutant un élément en tête. Il est associatif à droite.
+
+\example{La liste contenant les entiers 1, 2 et 3 peut s'écrire explicitement \texttt{[1; 2; 3]} ou de manière équivalente \texttt{1 :: 2 :: 3 :: []}.}
+
+\attention{Ne confondez pas le séparateur d'éléments dans une liste qui est le point-virgule (\texttt{;}) avec la virgule (\texttt{,}), qui sert à définir des n-uplets (tuples, nous reverrons cela dans le prochain chapitre).}
+
+\section{Analyse de complexité et représentation mémoire}
+
+En mémoire, une liste est une chaîne de pointeurs (une liste simplement chaînée). Chaque maillon contient une valeur et un pointeur vers le maillon suivant. Cette implémentation dicte directement la complexité des opérations de base sur les listes :
+
+\begin{itemize}
+    \item \textbf{Ajout en tête (\texttt{::}) :} Cette opération se contente de créer un nouveau maillon pointant vers l'ancienne liste. C'est une opération en temps constant, soit en $\Theta(1)$.
+    \item \textbf{Accès à la tête :} Immédiat, en $\Theta(1)$.
+    \item \textbf{Accès au $n$-ième élément ou calcul de la taille :} Nécessite de parcourir la liste maillon par maillon. Pour une liste de taille $N$, cela s'effectue en $\Theta(N)$.
+\end{itemize}
+
+\remark{Puisque les structures de données en programmation fonctionnelle pure sont immuables, l'ajout en tête ne copie pas la liste existante ; elle est partagée en mémoire (\textit{structural sharing}), ce qui rend le \texttt{::} extrêmement efficace.}
+
+\section{Le module \texttt{List}}
+
+\vocabulary{En OCaml, un \textbf{module} regroupe un ensemble de types et de fonctions liés à une même thématique. Le module \texttt{List} de la bibliothèque standard fournit les fonctions indispensables pour manipuler les listes sans avoir à les réécrire.}
+
+\noindent Pour appeler une fonction d'un module, on utilise la notation pointée : \texttt{Nom\_du\_module.nom\_fonction}.
+
+\subsection{Fonctions de base du module \texttt{List}}
+
+Voici les fonctions incontournables, leurs signatures, leurs rôles et leurs complexités.
+
+\subsubsection{\texttt{List.hd} et \texttt{List.tl}}
+\begin{itemize}
+    \item \textbf{Signatures :} \texttt{List.hd : 'a list -> 'a} et \texttt{List.tl : 'a list -> 'a list}
+    \item \textbf{Rôle :} \texttt{hd} (\textit{head}) renvoie le premier élément ; \texttt{tl} (\textit{tail}) renvoie la liste privée de son premier élément.
+    \item \textbf{Complexité :} $\Theta(1)$ pour les deux opérations.
+\end{itemize}
+
+\attention{Ces deux fonctions lèvent une exception \texttt{Failure} si la liste passée en argument est vide. Il est souvent préférable d'utiliser le pattern matching.}
+
+\subsubsection{\texttt{List.length}}
+\begin{itemize}
+    \item \textbf{Signature :} \texttt{List.length : 'a list -> int}
+    \item \textbf{Rôle :} Renvoie le nombre d'éléments de la liste.
+    \item \textbf{Complexité :} $\Theta(N)$ où $N$ est la longueur de la liste.
+\end{itemize}
+
+\subsubsection{\texttt{List.append} ou opérateur \texttt{@}}
+\begin{itemize}
+    \item \textbf{Signature :} \texttt{List.append : 'a list -> 'a list -> 'a list}
+    \item \textbf{Rôle :} Concatène deux listes pour n'en former qu'une seule.
+    \item \textbf{Complexité :} $\Theta(N)$ où $N$ est la taille de la \textbf{première} liste uniquement (car elle doit être parcourue et recréée pour pointer sur la deuxième).
+\end{itemize}
+
+\section{Exemples de code et Pattern Matching (motifs)}
+
+La manière idiomatique de manipuler les listes est d'associer la récursivité au filtrage par motif (\textit{pattern matching}).
+
+\subsection{Exemple 1 : Calculer la somme d'une liste d'entiers}
+On applique un pattern matching sur la structure inductive de la liste.
+
+\begin{lstlisting}[language=Caml]
+let rec somme liste =
+  match liste with
+  | [] -> 0                  (* Cas de base : la liste est vide *)
+  | tete :: reste -> tete + (somme reste) (* Cas recursif *)
+\end{lstlisting}
+
+\noindent \textbf{Analyse de complexité :} La fonction visite chaque maillon une seule fois. La complexité temporelle est en $\Theta(N)$.
+
+\subsection{Exemple 2 : Implémentation alternative de la concaténation}
+Voici comment reconstruire l'opérateur \texttt{@} à la main :
+
+\begin{lstlisting}[language=Caml]
+let rec concatener l1 l2 =
+  match l1 with
+  | [] -> l2
+  | tete :: reste -> tete :: (concatener reste l2)
+\end{lstlisting}
+
+\noindent \textbf{Analyse de complexité :} On observe bien graphiquement que seul le premier argument \texttt{l1} est déstructuré élément par élément, justifiant sa complexité en $\Theta(\text{length}(l1))$.
+
+\section{Fonctions d'ordre supérieur}
+
+Le module \texttt{List} brille par ses fonctions prenant d'autres fonctions en paramètres (fonctions d'ordre supérieur).
+
+\subsubsection{\texttt{List.map}}
+Applique une fonction $f$ à chaque élément $[x_1; x_2; \dots; x_n]$ pour retourner $[f(x_1); f(x_2); \dots; f(x_n)]$.
+\begin{itemize}
+    \item \textbf{Signature :} \texttt{List.map : ('a -> 'b) -> 'a list -> 'b list}
+    \item \textbf{Complexité :} $\Theta(N)$.
+\end{itemize}
+
+\begin{lstlisting}[language=Caml]
+(* Exemple d'utilisation : doubler les elements d'une liste *)
+let doubler_liste l = List.map (fun x -> x * 2) l
+\end{lstlisting}
+
+\subsubsection{\texttt{List.filter}}
+Retourne une nouvelle liste ne contenant que les éléments qui valident un prédicat (une fonction retournant un booléen).
+\begin{itemize}
+    \item \textbf{Signature :} \texttt{List.filter : ('a -> bool) -> 'a list -> 'a list}
+    \item \textbf{Complexité :} $\Theta(N)$.
+\end{itemize}
+
+\begin{lstlisting}[language=Caml]
+(* Exemple d'utilisation : ne garder que les entiers pairs *)
+let garder_pairs l = List.filter (fun x -> x mod 2 = 0) l
+\end{lstlisting}
+
+\training{Écrire une fonction récursive \texttt{appartient : 'a -> 'a list -> bool} qui vérifie la présence d'un élément dans une liste sans utiliser le module \texttt{List}. Donner sa complexité dans le pire des cas.}
+
+\noindent\carreaux{6}
+
+\newpage
+\tableofcontents
+\end{document}

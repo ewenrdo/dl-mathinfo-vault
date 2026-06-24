@@ -25,6 +25,9 @@
 \definecolor{purple}{RGB}{159, 47, 245}
 \definecolor{gray}{RGB}{128, 128, 128}
 
+% Taille du texte
+
+
 % Styles tcolorbox
 \tcbset{
   defStyle/.style={
@@ -298,24 +301,23 @@
 
 
 % Définir le style du code
-
 \lstset{
-  backgroundcolor=\color{blue!5},   % couleur de fond
-  basicstyle=\ttfamily\footnotesize, % police typewriter
-  keywordstyle=\color{blue},         % mots-clés
-  stringstyle=\color{red},           % chaînes
+  backgroundcolor=\color{blue!5},     % couleur de fond
+  basicstyle=\ttfamily\normalsize,    % taille normale du document
+  keywordstyle=\color{blue},           % mots-clés
+  stringstyle=\color{red},             % chaînes
   commentstyle=\color{green!60!black}, % commentaires
-  numbers=left,                      % numérotation des lignes
+  numbers=left,                        % numérotation des lignes
   numberstyle=\tiny\color{gray},
-  breaklines=true,                   % retour à la ligne auto
-  frame=single,                      % cadre autour
+  breaklines=true,                     % retour à la ligne auto
+  frame=single,                        % cadre autour
   rulecolor=\color{blue!50},
-  showstringspaces=false             % ne pas afficher les espaces dans les chaînes
-  morecomment=[l]{#},                  % définit '#' comme commentaire
-  literate=
-   {é}{{\'e}}1
-   {è}{{\`e}}1
-   {à}{{\`a}}1
-   {ù}{{\`u}}1
-   {ç}{{\c{c}}}1
+  showstringspaces=false,              % virgule ajoutée
+  morecomment=[l]{\#},                 % protection du # avec un backslash
+  literate=%
+   {é}{{\text{\'{e}}}}1
+   {è}{{\text{\`{e}}}}1
+   {à}{{\text{\`{a}}}}1
+   {ù}{{\text{\`{u}}}}1
+   {ç}{{\text{\c{c}}}}1
 }

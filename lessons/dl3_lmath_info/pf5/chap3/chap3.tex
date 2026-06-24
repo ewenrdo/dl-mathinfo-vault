@@ -1,0 +1,234 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Quelques types structurés}
+
+\section{Généralités sur les types structurés}
+
+En OCaml, au-delà des types de base (primitifs) vus précédemment, il est indispensable de manipuler des données plus complexes. Les types structurés permettent d'assembler, de modéliser et de donner du sens à des collections de données logiquement reliées. \\
+
+Nous étudierons principalement les produits (tuples, enregistrements) et les sommes (types algébriques, énumérations).
+
+\section{Produit cartésien ($n$-uplets)}
+\subsection{Définition et syntaxe}
+Le type produit cartésien permet d'associer un nombre fixe d'éléments de types potentiellement différents au sein d'une structure unique appelée $n$-uplet (ou *tuple*).
+
+\definition{Un $n$-uplet $(e_1, e_2, \dots, e_n)$ possède le type produit $t_1 * t_2 * \dots * t_n$ si chaque élément $e_i$ possède le type $t_i$.}
+
+\attention{Il ne faut absolument pas confondre les $n$-uplets et les listes !
+
+\begin{itemize}
+    \item Un $n$-uplet a une \textbf{longueur fixe} $n$ et peut contenir des éléments de \textbf{types différents}.
+    \item Une liste a une \textbf{longueur variable} et ne peut contenir que des éléments du \textbf{même type}.
+\end{itemize}
+}
+
+\example{
+Déclaration et inférence de types simples de tuples :
+\begin{itemize}
+    \item \texttt{(2, 3, 4)} est de type \texttt{int * int * int}
+    \item \texttt{(1, 3.0, "hello")} est de type \texttt{int * float * string}
+\end{itemize}
+}
+
+\noindent Le produit cartésien est particulièrement utile pour :
+\begin{enumerate}
+    \item Écrire des fonctions prenant un $n$-uplet en argument (à ne pas confondre avec des fonctions curryfiées à plusieurs arguments).
+    \item Écrire des fonctions qui renvoient plusieurs résultats groupés.
+\end{enumerate}
+
+\subsection{Accès aux éléments d'un $n$-uplet}
+
+\method{Accès aux éléments d'un $n$-uplet}{
+Pour accéder aux éléments d'un $n$-uplet, on utilise la syntaxe \texttt{fst} pour le premier élément et \texttt{snd} pour le second élément (pour les 2-uplets). Pour les $n$-uplets avec $n > 2$, on utilisera du pattern matching.
+}
+
+\example{Pour un couple (2-uplet) \texttt{(42, "hello")}, on peut accéder aux éléments de la manière suivante :}
+\begin{lstlisting}[language=Caml]
+let couple = (42, "hello")
+let premier = fst couple  (* renvoie 42 *)
+let second = snd couple   (* renvoie "hello" *)
+\end{lstlisting}
+
+\example{Pour un 3-uplet \texttt{(1, 2.0, "test")}, on peut utiliser le pattern matching :}
+\begin{lstlisting}[language=Caml]
+let triplet = (1, 2.0, "test")
+let (a, b, c) = triplet  (* a = 1, b = 2.0, c = "test" *)
+\end{lstlisting}
+
+
+\section{Listes d'association}
+
+\definition{Une \textbf{liste d'association} est une liste dont les éléments sont des couples (des paires de type \texttt{'a * 'b}). Elle sert généralement à modéliser un dictionnaire où le premier élément de la paire représente une clé, et le second représente la valeur associée.}
+
+\example{
+Voici une liste d'association liant des noms d'étudiants à leurs notes :
+}
+\begin{lstlisting}[language=Caml]
+let notes = [("Alice", 18); ("Bob", 14); ("Charlie", 16)]
+\end{lstlisting}
+\noindent Le type de cette expression est \texttt{(string * int) list}.
+
+\remark{La recherche d'un élément dans une liste d'association se fait séquentiellement de la tête vers la queue. Dans le pire des cas (si la clé n'est pas présente ou est en fin de liste), l'opération est en $\Theta(N)$ où $N$ est la taille de la liste.}
+
+\section{Enregistrements}
+
+Les enregistrements (\textit{records}, on se rapproche des structures en C) sont très proches des tuples, à la différence près que chaque composant est nommé. Ces composants sont appelés des \textbf{champs}.
+
+\method{Définition et utilisation d'un enregistrement}{
+On déclare d'abord le type avec le mot-clé \texttt{type}, puis on instancie les valeurs.
+}
+
+\example{On peut par exemple définir un type d'enregistrement pour représenter un étudiant avec son prénom, son nom, son âge et sa note :}
+\begin{lstlisting}[language=Caml]
+(* Definition du type *)
+type etudiant = {
+  prenom: string;
+  nom : string;
+  age : int;
+  note : float
+}
+
+(* Instanciation *)
+let e1 = { prenom = "Laurent"; nom = "Cai"; age = 20; note = 15.5 }
+\end{lstlisting}
+
+\vspace{0.5em}
+
+\noindent Pour accéder à un champ spécifique d'un enregistrement, on utilise la notation pointée : \texttt{valeur.champ}.
+\texttt{e1.nom} renvoie la chaîne \texttt{"Cai"}, \texttt{e1.prenom} renvoie la chaîne \texttt{"Laurent"}.
+
+\section{Types algébriques}
+
+Les types algébriques (ou types variants) permettent de définir des types qui peuvent prendre plusieurs formes distinctes. On utilise le symbole vertical \texttt{|} pour lister les différents constructeurs.
+
+\subsection{Énumérations}
+
+Le cas le plus simple d'un type somme est l'énumération, où l'on définit un ensemble de constantes nommées (les constructeurs). Les noms des constructeurs doivent impérativement commencer par une lettre majuscule.
+
+\begin{lstlisting}[language=Caml]
+type jour = Lundi | Mardi | Mercredi | Jeudi | Vendredi | Samedi | Dimanche
+\end{lstlisting}
+
+\illustration{Le type standard \texttt{bool} de OCaml est en réalité une énumération prédéfinie que l'on pourrait modéliser par : \texttt{type bool = True | False}.}
+
+\example{
+    On peut utiliser les énumérations pour représenter des états ou des catégories. Par exemple, un type pour les directions cardinales :
+}
+\begin{lstlisting}[language=Caml]
+type direction = Nord | Sud | Est | Ouest
+
+let ma_direction = Nord
+\end{lstlisting}
+
+\subsection{Sommes}
+
+Les constructeurs d'un type variant peuvent également transporter des valeurs (des arguments) grâce au mot-clé \texttt{of}.
+
+\example{On peut utiliser les sommes pour représenter des formes géométriques avec des propriétés spécifiques :}
+\begin{lstlisting}[language=Caml]
+type forme =
+  | Cercle of float          (* Transporte le rayon *)
+  | Rectangle of float * float (* Transporte la largeur et la hauteur *)
+\end{lstlisting}
+
+\method{Filtrage par motif sur un type somme}{
+Le moyen le plus efficace et le plus sûr de manipuler un type somme est d'utiliser le pattern matching, car le compilateur vérifie l'exhaustivité des cas.
+}
+
+\example{On peut utiliser le \textit{pattern matching} pour calculer la surface d'une forme :}
+\begin{lstlisting}[language=Caml]
+let surface f =
+  match f with
+  | Cercle r -> 3.14159 *. r *. r
+  | Rectangle (l, h) -> l *. h
+\end{lstlisting}
+
+\subsection{Sommes polymorphes}
+
+Il est possible de rendre un type somme générique en introduisant une variable de type (notée \texttt{'a}). L'exemple le plus célèbre de la bibliothèque standard OCaml est le type \texttt{'a option}, utilisé pour représenter la possibilité d'une absence de valeur.
+
+\definition{Le type \texttt{'a option} est défini par : \texttt{type 'a option = None | Some of 'a}}
+\example{
+Une fonction de division sécurisée qui renvoie \texttt{None} en cas de division par zéro :
+}
+\begin{lstlisting}[language=Caml]
+let diviser a b =
+  if b = 0 then None else Some (a / b)
+\end{lstlisting}
+
+\section{Types récursifs}
+
+Un type algébrique est dit récursif s'il se mentionne lui-même dans sa propre définition. C'est le cas typique des structures de données dynamiques comme les listes ou les arbres.
+
+\subsection{Définition alternative des listes}
+
+Bien que les listes soient natives en OCaml (\texttt{[]}, \texttt{::}), nous pouvons tout à fait réimplémenter notre propre type de liste polymorphe et récursive :
+
+\begin{lstlisting}[language=Caml]
+type 'a ma_liste =
+  | Nil
+  | Cons of 'a * 'a ma_liste
+\end{lstlisting}
+
+\example{
+Représentation de la liste \texttt{[42; 17]} avec notre nouveau type :}
+\begin{lstlisting}[language=Caml]
+let l1 = Cons(42, Cons(17, Nil))
+\end{lstlisting}
+
+\subsection{Application : Implémentation de \texttt{map}}
+
+Nous pouvons maintenant réécrire une fonction d'ordre supérieur effectuant une transformation sur notre liste récursive grâce au filtrage :
+
+\begin{lstlisting}[language=Caml]
+let rec mon_map f l =
+  match l with
+  | Nil -> Nil
+  | Cons(h, t) -> Cons(f h, mon_map f t)
+\end{lstlisting}
+
+\noindent\textbf{Analyse de la signature :} Le compilateur infère automatiquement le type suivant : \\
+\texttt{val mon\_map : ('a -> 'b) -> 'a ma\_liste -> 'b ma\_liste = \textless fun\textgreater}
+
+\subsection{Modélisation d'expressions arithmétiques}
+
+Les types récursifs se prêtent particulièrement bien à la création d'Arbres de Syntaxe Abstraite (AST) pour modéliser des langages ou des opérations mathématiques.
+
+\begin{lstlisting}[language=Caml]
+type expr =
+  | Var of string
+  | Const of int
+  | Add of expr * expr
+  | Mult of expr * expr
+\end{lstlisting}
+
+\training{Écrire une fonction récursive \texttt{eval : (string * int) list -> expr -> int} permettant d'évaluer la valeur numérique d'une \texttt{expr} au sein d'un environnement donné (modélisé par une liste d'association contenant la valeur des variables).}
+
+\noindent\carreaux{8}
+
+\newpage
+\tableofcontents
+\end{document}

@@ -1,0 +1,242 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Introduction à la programmation fonctionnelle et types de bases}
+
+\section{Introduction}
+
+Le paradigme de programmation détermine la manière dont un développeur conçoit et structure son code. On distingue principalement trois grandes familles :
+
+\begin{itemize}
+    \item \textbf{Impératif :} Repose sur des instructions qui modifient l'état de la mémoire via des variables et des structures de contrôle (boucles, conditions). On décrit \textit{comment} faire.
+    \item \textbf{Orienté Objet :} Structure le code autour de l'interaction d'entités appelées objets, combinant données (attributs) et comportements (méthodes).
+    \item \textbf{Fonctionnel :} Modélise le calcul comme l'évaluation de fonctions mathématiques, évitant le changement d'état et la mutation des données. On décrit \textit{quoi} faire.
+\end{itemize}
+
+\remark{La programmation fonctionnelle permet de limiter drastiquement les effets de bord (side-effects), rendant le code plus sûr, plus facile à tester et naturellement adapté au parallélisme.}
+
+\example{
+Écrivons un exemple simple de fonction selon les trois paradigmes : la fonction \texttt{map}, qui applique une fonction donnée à chaque élément d'une liste et retourne une nouvelle liste avec les résultats.
+}
+
+\noindent\textbf{Impératif (Python) :} On utilise une boucle explicite pour parcourir la liste.
+\begin{lstlisting}[language=Python]
+def map_imperative(f, liste):
+    resultat = []
+    for element in liste:
+        resultat.append(f(element))
+    return resultat
+\end{lstlisting}
+
+\noindent\textbf{Orienté Objet (Java) :} L'opération est encapsulée dans une méthode.
+\begin{lstlisting}[language=Java]
+public class Generateur {
+    public static <T, R> List<R> appliquerMap(Function<T, R> f, List<T> liste) {
+        return liste.stream().map(f).collect(Collectors.toList());
+    }
+}
+\end{lstlisting}
+
+\noindent\textbf{Fonctionnel (OCaml) :} La fonction est définie par récursivité pure.
+\begin{lstlisting}[language=Caml]
+let rec map f liste =
+  match liste with
+  | [] -> []
+  | head :: rest -> (f head) :: (map f rest)
+\end{lstlisting}
+
+\section{Introduction à la programmation fonctionnelle}
+
+\subsection{Généralités sur OCaml}
+
+OCaml (Objective Caml) est un langage multi-paradigme, principalement fonctionnel, fortement et statiquement typé. Il utilise un mécanisme d'inférence de types automatique.
+
+\definition{Un langage à \textbf{typage statique} vérifie la cohérence des types lors de la compilation, empêchant l'exécution d'un programme contenant des erreurs de type.}
+
+\definition{L'\textbf{inférence de types} est la capacité du compilateur à déterminer automatiquement le type d'une expression sans que le développeur ait besoin de le spécifier explicitement.}
+
+Le langage OCaml est particulièrement apprécié pour sa robustesse, sa performance et sa capacité à gérer des abstractions complexes tout en restant expressif.
+
+\subsection{Types de base en OCaml}
+
+OCaml possède plusieurs types de données primitifs non mutables :
+
+\begin{itemize}
+    \item \texttt{int} : Les entiers (ex: \texttt{42}).
+    \item \texttt{float} : Les nombres à virgule flottante (ex: \texttt{3.14}).
+    \item \texttt{bool} : Les booléens (\texttt{true} ou \texttt{false}).
+    \item \texttt{char} : Les caractères entourés de simples quotes (ex: \texttt{'a'}).
+    \item \texttt{string} : Les chaînes de caractères entourées de guillemets (ex: \texttt{"OCaml"}).
+\end{itemize}
+
+\subsection{Opérations sur les types de base}
+
+Chaque type de base en OCaml possède son propre ensemble d'opérateurs dédiés. Le compilateur étant strict sur le typage, il est impossible de mélanger des types différents au sein d'une même opération sans conversion explicite.
+
+\subsubsection{Les Entiers (\texttt{int})}
+
+Les opérations arithmétiques usuelles sur les entiers utilisent les symboles standards. Le résultat de ces opérations est toujours un entier.
+
+\begin{itemize}
+    \item Addition : \texttt{+}
+    \item Soustraction : \texttt{-}
+    \item Multiplication : \texttt{*}
+    \item Division entière : \texttt{/} (tronque la partie décimale)
+    \item Modulo (reste de la division) : \texttt{mod}
+\end{itemize}
+
+\example{\texttt{7 / 2} renvoie \texttt{3}, tandis que \texttt{7 mod 2} renvoie \texttt{1}.}
+
+\subsubsection{Les Flottants (\texttt{float})}
+
+\attention{En OCaml, les opérateurs pour les nombres à virgule flottante sont distincts de ceux des entiers. Ils sont suivis d'un point (\texttt{.}).}
+
+Les opérateurs pour les flottants sont :
+\begin{itemize}
+    \item Addition : \texttt{+.}
+    \item Soustraction : \texttt{-.}
+    \item Multiplication : \texttt{*.}
+    \item Division : \texttt{/.}
+\end{itemize}
+
+\attention{Le typage statique d'OCaml interdit les opérations mixtes. L'expression \texttt{2 + 3.0} ou \texttt{2 +. 3.0} provoquera une erreur immédiate de compilation (\textit{Type error}).}
+
+\method{Conversion de type (Cast)}{
+    Pour effectuer un calcul entre un entier et un flottant, il faut explicitement convertir l'un des deux types à l'aide des fonctions :
+    \begin{itemize}
+        \item \texttt{float\_of\_int} : convertit un \texttt{int} en \texttt{float}.
+        \item \texttt{int\_of\_float} : convertit un \texttt{float} en \texttt{int} (en tronquant).
+    \end{itemize}
+    Exemple valide : \texttt{float\_of\_int 2 +. 3.0} renvoie \texttt{5.0}.
+}
+
+\subsubsection{Les Booléens (\texttt{bool})}
+
+Les expressions booléennes permettent de réaliser des tests logiques. Les opérateurs principaux sont :
+\begin{itemize}
+    \item Et logique : \texttt{\&\&}
+    \item Ou logique : \texttt{||}
+    \item Négation : \texttt{not}
+\end{itemize}
+
+\remark{Les opérateurs de comparaison (\texttt{=}, \texttt{<>}, \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}) s'appliquent aux types de base et renvoient une valeur booléenne. Notez qu'en OCaml, l'égalité structurelle se teste avec un seul égal (\texttt{=}) et la différence avec \texttt{<>}.}
+
+\subsubsection{Les Chaînes et Caractères (\texttt{string} et \texttt{char})}
+
+L'opération principale sur les chaînes de caractères est la concaténation (la fusion de deux chaînes), qui utilise l'opérateur \texttt{\^{}}.
+
+\example{L'expression \texttt{"Java" \^{} "Script"} renvoie la chaîne \texttt{"JavaScript"}.}
+
+\subsection{Fonctions et expressions}
+
+\subsubsection{Conditionnelles}
+
+Pour effectuer des tests conditionnels, OCaml utilise l'expression \texttt{if ... then ... else ...}. Contrairement à certains langages, cette expression est obligatoire pour les deux branches (le \texttt{else} est nécessaire).\\
+On peut comparer les valeurs avec les opérateurs de comparaison (\texttt{=}, \texttt{<>}, \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}) et combiner les conditions avec les opérateurs logiques (\texttt{\&\&} pour "et", \texttt{||} pour "ou").
+
+\attention{En OCaml, c'est bien le \texttt{=} qui est utilisé pour tester l'égalité, et non le \texttt{==} comme dans certains autres langages.}
+
+\subsubsection{Expressions}
+En programmation fonctionnelle, tout est expression et renvoie une valeur. Les fonctions sont des "citoyens de première classe" : elles peuvent être passées en argument ou renvoyées par d'autres fonctions.
+
+\subsubsection{Fonctions}
+
+\method{Déclaration d'une variable ou d'une fonction}{
+    On utilise le mot-clé \texttt{let} pour lier un nom à une valeur ou à une fonction.
+    
+    Syntaxe d'une variable : \texttt{let nom = expression}
+    
+    Syntaxe d'une fonction : \texttt{let nom\_fonction arg1 arg2 = corps\_de\_la\_fonction}
+}
+
+\vocabulary{Une fonction est dite d'\textbf{ordre supérieur} si elle prend une ou plusieurs fonctions en argument et/ou renvoie une fonction en résultat.}
+
+\example{Pour écrire une fonction qui calcule le carré d'un entier, on peut déclarer :}
+\begin{lstlisting}[language=Caml]
+(* Declaration d'une fonction simple *)
+let carre x = x * x
+
+(* Utilisation de la fonction *)
+let resultat = carre 5
+\end{lstlisting}
+
+\attention{Par défaut, les fonctions en OCaml ne sont pas récursives. Pour qu'une fonction puisse s'appeler elle-même, il faut obligatoirement utiliser le mot-clé \texttt{let rec}.}
+
+\example{Pour calculer le $n$-ième terme de la suite de Fibonacci, on peut déclarer :}
+\begin{lstlisting}[language=Caml]
+let rec fibonacci n =
+  if n <= 1 then n
+  else fibonacci (n - 1) + fibonacci (n - 2)
+\end{lstlisting}
+
+\noindent Notons qu'il n'est pas nécessaire de mettre des parenthèses autour des arguments d'une fonction, sauf si l'on souhaite regrouper plusieurs arguments en une seule expression. Les parenthèses permettent toutefois de clarifier l'ordre d'évaluation et de gérer la priorité des opérations.
+
+\training{Écrire une fonction récursive \texttt{factorielle : int -> int} qui calcule la factorielle d'un entier $n$.}
+
+\noindent\carreaux{6}
+
+\subsubsection{Signature d'une fonction et unit}
+
+\definition{
+    On appelle \textbf{unit} le type de la valeur renvoyée par une fonction qui ne retourne rien de significatif. Il est représenté par le mot-clé \texttt{unit} et sa seule valeur est \texttt{()}. Une fonction de type \texttt{unit} est souvent utilisée pour ses effets secondaires, comme l'affichage à l'écran ou la modification d'une variable globale.
+}
+
+\example{
+    Le type unit est utilisé dans la fonction \texttt{print\_newline : unit -> unit} qui affiche un saut de ligne à l'écran. Elle ne prend aucun argument et ne renvoie aucune valeur significative.
+}
+\begin{lstlisting}[language=Caml]
+(* Exemple d'utilisation de print_newline *)
+let afficher_message () =
+  print_string "Bonjour, monde !";
+  print_newline ()  (* Affiche un saut de ligne *)
+\end{lstlisting}
+
+\method{Signature d'une fonction}{
+    La signature d'une fonction décrit son type, c'est-à-dire le type de ses arguments et le type de sa valeur de retour. Elle est exprimée sous la forme :
+    \[
+    nom\_fonction : type\_arg1 -> type\_arg2 -> ... -> type\_resultat
+    \]
+    
+    Exemple : La fonction \texttt{carre} a pour signature \texttt{carre : int -> int}, indiquant qu'elle prend un entier en argument et renvoie un entier.
+}
+
+\example{
+La fonction \texttt{print\_string} a pour signature \texttt{print\_string : string -> unit}, ce qui signifie qu'elle prend une chaîne de caractères en argument et ne renvoie aucune valeur significative (le type \texttt{unit} est utilisé pour indiquer l'absence de valeur).
+}
+
+\section{Disgression : utilisation du "$;$"}
+
+Comme on l'a dit, chaque expression en OCaml renvoie une valeur. Cependant, il est parfois nécessaire d'exécuter plusieurs expressions consécutives, notamment pour leurs effets secondaires (comme l'affichage). Dans ce cas, on utilise le point-virgule "$;$" pour séparer les expressions.
+Sinon, il n'est pas nécessaire de mettre un point-virgule à la fin d'une expression, sauf si l'on souhaite enchaîner plusieurs expressions dans un bloc.
+
+\example{
+    Pour afficher deux messages consécutifs, on peut écrire :
+}
+\begin{lstlisting}[language=Caml]
+print_string "Hello, "; (* sans le point-virgule, le message ne s'affiche pas (voire le code ne compile pas) *)
+print_string "world !";
+\end{lstlisting}
+
+\newpage
+\tableofcontents
+\end{document}
