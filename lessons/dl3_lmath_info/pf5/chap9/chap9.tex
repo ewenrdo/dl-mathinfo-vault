@@ -1,0 +1,160 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 9 : Introduction au $\lambda$-calcul}
+
+\section{Syntaxe du \texorpdfstring{$\lambda$}{lambda}-calcul pur}
+
+Le $\lambda$-calcul est un modèle formel universel de la computation Turing-complet, fondé sur les notions d'abstraction et d'application de fonctions.
+
+\subsection{Grammaire formelle des \texorpdfstring{$\lambda$}{lambda}-termes}
+
+L'ensemble $\Lambda$ des $\lambda$-termes est défini de manière inductive sur un ensemble infini dénombrable de variables $\mathcal{V} = \{x, y, z, \dots\}$ par la grammaire en forme de Backus-Naur (BNF) suivante :
+\[ t, u ::= x \quad | \quad t\,u \quad | \quad \lambda x. t \]
+
+\begin{itemize}
+    \item \textbf{Variable :} $x \in \mathcal{V}$. Représente un identificateur.
+    \item \textbf{Application :} $t\,u$. Représente l'appel de la fonction $t$ sur l'argument $u$.
+    \item \textbf{Abstraction :} $\lambda x. t$. Représente la définition d'une fonction anonyme prenant le paramètre $x$ et ayant pour corps le terme $t$.
+\end{itemize}
+
+\method{Conventions de notation et associativité}{
+    Pour alléger l'écriture des expressions, on applique deux règles syntaxiques strictes :
+    \begin{enumerate}
+        \item \textbf{L'application associe à gauche :} L'expression $t_1\,t_2\,t_3 \dots t_n$ s'analyse comme $(\dots((t_1\,t_2)\,t_3)\dots t_n)$.
+        \item \textbf{Le corps d'une abstraction s'étend au maximum vers la droite :} L'expression $\lambda x. t\,u$ signifie $\lambda x. (t\,u)$ et non $(\lambda x. t)\,u$. De plus, les abstractions successives sont contractées : $\lambda x_1 x_2 \dots x_n. t$ abrège $\lambda x_1. \lambda x_2. \dots \lambda x_n. t$.
+    \end{enumerate}
+}
+
+\example{Correspondance syntaxique avec OCaml :}
+\begin{itemize}
+    \item L'identité $\lambda x. x$ s'écrit en OCaml : \texttt{fun x -> x}.
+    \item Le duplicateur $\lambda x. x\,x$ s'écrit en OCaml : \texttt{fun x -> x x}.
+    \item L'expression $\lambda x y. x$ s'écrit en OCaml : \texttt{fun x -> fun y -> x}.
+\end{itemize}
+
+\subsection{Variables libres et variables liées}
+
+Une occurrence d'une variable $x$ est dite \textbf{liée} si elle se situe dans le sous-terme $t$ d'une abstraction $\lambda x. t$. Dans le cas contraire, elle est dite \textbf{libre}.
+
+\definition{Définition inductive de l'ensemble des variables libres $\mathcal{F}V(t)$ :
+\[
+\begin{array}{lcl}
+\mathcal{F}V(x) & = & \{x\} \\
+\mathcal{F}V(t\,u) & = & \mathcal{F}V(t) \cup \mathcal{F}V(u) \\
+\mathcal{F}V(\lambda x. t) & = & \mathcal{F}V(t) \setminus \{x\}
+\end{array}
+\]
+
+}
+
+\vocabulary{Un terme $t$ est dit \textbf{clos} (ou combinateur) si et seulement si $\mathcal{F}V(t) = \emptyset$.}
+
+\section{Relation de conversion et de réduction}
+
+\subsection{La \texorpdfstring{$\alpha$}{alpha}-conversion (renommage)}
+
+La sémantique d'une fonction ne dépend pas du choix du nom de son paramètre formel. La $\alpha$-conversion formalise cette propriété en autorisant le renommage des variables liées sous réserve de ne pas capturer de variables libres existantes.
+
+\definition{On note $t \equiv_{\alpha} u$ la relation d'équivalence engendrée par la règle :
+\[ \lambda x. t \equiv_{\alpha} \lambda y. (t[x \leftarrow y]) \quad \text{si } y \notin \mathcal{F}V(t) \]}
+
+\subsection{La Substitution}
+
+L'opération fondamentale de calcul repose sur la substitution d'une variable libre par un autre terme. L'opération $t[x \leftarrow u]$ consiste à remplacer toutes les occurrences libres de $x$ dans $t$ par le terme $u$.
+
+\definition{Définition formelle de la substitution sans capture :}
+\[
+\begin{array}{lcll}
+x[x \leftarrow u] & = & u & \\
+y[x \leftarrow u] & = & y & \text{si } y \neq x \\
+(t_1\,t_2)[x \leftarrow u] & = & (t_1[x \leftarrow u])\,(t_2[x \leftarrow u]) & \\
+(\lambda x. t)[x \leftarrow u] & = & \lambda x. t & \\
+(\lambda y. t)[x \leftarrow u] & = & \lambda y. (t[x \leftarrow u]) & \text{si } y \neq x \text{ et } y \notin \mathcal{F}V(u)
+\end{array}
+\]
+
+\attention{Si la condition $y \notin \mathcal{F}V(u)$ n'est pas respectée, il y a un risque de \textbf{capture de variable}. On doit alors impérativement appliquer une $\alpha$-conversion préalable sur le terme $\lambda y. t$ pour remplacer $y$ par une variable fraîche $z \notin \mathcal{F}V(u) \cup \mathcal{F}V(t)$ avant d'effectuer la substitution.}
+
+\subsection{La \texorpdfstring{$\beta$}{beta}-réduction}
+
+La $\beta$-réduction modélise l'étape élémentaire de calcul par évaluation d'un appel fonctionnel. Un terme de la forme $(\lambda x. t)\,u$ est appelé un \textbf{$\beta$-redex} (réductible expression).
+
+\definition{Règle de $\beta$-réduction locale :}
+\[ (\lambda x. t)\,u \longrightarrow_{\beta} t[x \leftarrow u] \]
+
+On note $\longrightarrow_{\beta}^*$ la fermeture réflexive et transitive de la relation de réduction, représentant une suite d'étapes de calcul. Un terme est dit en \textbf{forme normale} s'il ne contient plus aucun $\beta$-redex.
+
+\section{Le \texorpdfstring{$\lambda$}{lambda}-calcul simplement typé (\texorpdfstring{$\lambda^{\to}$}{lambda ->})}
+
+Le $\lambda$-calcul pur permet d'exprimer des termes non terminants (comme $\Omega = (\lambda x. x\,x)(\lambda x. x\,x)$). L'introduction d'un système de types permet de restreindre l'ensemble des termes acceptés pour garantir des propriétés comportementales fortes.
+
+\subsection{Syntaxe des types}
+
+L'ensemble des types simples $\mathcal{T}$ est construit inductivement à partir d'un ensemble de types de base $\mathcal{B}$ (comme \texttt{int}, \texttt{bool}) et du constructeur de type fonctionnel $\to$ :
+\[ A, B ::= \iota \quad | \quad A \to B \]
+Le constructeur $\to$ associe à droite : $A \to B \to C$ signifie $A \to (B \to C)$.
+
+\subsection{Environnement de typage et règles d'inférence}
+
+Un \textbf{environnement de typage} $\Gamma$ est un ensemble fini de déclarations de types pour des variables distinctes, noté $\Gamma = \{x_1 : A_1, \dots, x_n : A_n\}$. On écrit $\Gamma, x : A$ pour l'extension de l'environnement $\Gamma$ avec l'hypothèse que $x$ est de type $A$, sous réserve que $x \notin \text{dom}(\Gamma)$.
+
+Le jugement de typage s'écrit $\Gamma \vdash t : A$, signifiant « sous l'environnement $\Gamma$, le terme $t$ possède le type $A$ ».
+
+\method{Règles du système de type de la Déduction Naturelle ($\lambda^{\to}$)}{
+    Les jugements de typage sont dérivés à partir des trois règles logiques suivantes :
+    \[
+    \frac{x : A \in \Gamma}{\Gamma \vdash x : A} \quad (\text{ax})
+    \]
+    \[
+    \frac{\Gamma, x : A \vdash t : B}{\Gamma \vdash \lambda x. t : A \to B} \quad (\to_i) \qquad
+    \frac{\Gamma \vdash t : A \to B \quad \Gamma \vdash u : A}{\Gamma \vdash t\,u : B} \quad (\to_e)
+    \]
+}
+
+\example{Dérivation de typage pour le terme combinatoire $(\lambda x. x)(\lambda y. y)$ de type $B \to B$ :}
+\[
+\frac{\emptyset \vdash \lambda x. x : (B \to B) \to (B \to B) \quad \emptyset \vdash \lambda y. y : B \to B}{\emptyset \vdash (\lambda x. x)(\lambda y. y) : B \to B} (\to_e)
+\]
+Où la sous-dérivation pour l'identité s'obtient par application de la règle d'abstraction :
+\[
+\frac{\{x : B\} \vdash x : B}{\emptyset \vdash \lambda x. x : B \to B} (\to_i)
+\]
+
+\subsection{Propriétés fondamentales du système \texorpdfstring{$\lambda^{\to}$}{lambda ->}}
+
+Le système de types simples valide deux théorèmes métathéoriques majeurs :
+
+\theorem{Théorème}{Subject Reduction}{false}{Si $\Gamma \vdash t : A$ et $t \longrightarrow_{\beta} u$, alors $\Gamma \vdash u : A$.}
+
+\theorem{Théorème}{Normalisation forte}{false}{
+    Si un terme $t$ est typable dans le système $\lambda^{\to}$ ($\Gamma \vdash t : A$), alors toutes les suites de $\beta$-réduction partant de $t$ sont de longueur finie et s'arrêtent sur une forme normale. En conséquence, le terme commun $\Omega$ n'est pas typable.
+}
+
+\newpage
+\tableofcontents
+\end{document}

@@ -1,0 +1,167 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 8 : Traits Impératifs en OCaml}
+
+\section{Les Références}
+
+Une \textbf{référence} en OCaml est une cellule mémoire allouée dynamiquement contenant une valeur modifiable d'un type donné. Conceptuellement identique à un pointeur initialisé en C ou à une référence d'objet mutable en Java, elle permet d'introduire des variables d'état locales ou globales.
+
+\subsection{Typage et Opérations Fondamentales}
+
+Le constructeur de type \texttt{ref} est polymorphe. Si $t$ est un type OCaml, alors $t\ \texttt{ref}$ est le type d'une référence pointant vers une valeur de type $t$.
+
+Les trois opérations fondamentales disposent des signatures suivantes :
+\begin{itemize}
+    \item \textbf{Allocation :} \texttt{ref : 'a -> 'a ref} $\rightarrow$ Alloue une cellule en mémoire et l'initialise.
+    \item \textbf{Lecture (Déréférencement) :} \texttt{! : 'a ref -> 'a} $\rightarrow$ Accède à la valeur courante stockée.
+    \item \textbf{Écriture (Affectation) :} \texttt{(:=) : 'a ref -> 'a -> unit} $\rightarrow$ Modifie le contenu de la cellule.
+\end{itemize}
+
+\example{Exemple d'utilisation basique :}
+\begin{lstlisting}[language=Caml]
+let r = ref 42        (* r : int ref, allocation initiale *)
+let v = !r            (* v = 42, lecture du contenu *)
+let () = r := 100     (* Modifie le contenu de r. Renvoie () *)
+\end{lstlisting}
+
+\subsection{Aliasing : partage de références}
+
+L'affectation d'une référence à une autre variable copie l'adresse mémoire (le pointeur) et non la valeur sous-jacente. Il y a alors création d'un \textbf{alias}.
+
+\example{Mise en évidence du partage en mémoire :}
+\begin{lstlisting}[language=Caml]
+let r1 = ref 5 in
+let r2 = r1 in       (* r2 pointe vers la meme cellule memoire que r1 *)
+r2 := 12;
+!r1                  (* Evalue a 12, car le contenu lie a r1 a ete modifie via r2 *)
+\end{lstlisting}
+
+\section{Structures de contrôle : les boucles}
+
+OCaml intègre des boucles impératives pour exécuter des blocs de code produisant des effets de bord (expressions de type \texttt{unit}). Les instructions d'une boucle sont séparées par le séquenceur \texttt{;}.
+
+\subsection{La boucle bornée (\texttt{for})}
+
+La boucle \texttt{for} utilise un compteur entier incrémenté (\texttt{to}) ou décrémenté (\texttt{downto}) de 1 à chaque itération. L'indice de la boucle est une valeur immuable locale au corps de la boucle.
+
+\begin{lstlisting}[language=Caml]
+(* Ordre croissant *)
+for i = t1 to t2 do
+  expr
+done
+
+(* Ordre decroissant *)
+for i = t1 downto t2 do
+  expr
+done
+\end{lstlisting}
+
+\subsection{La boucle non bornée (\texttt{while})}
+
+La boucle \texttt{while} évalue son expression conditionnelle (qui doit être de type \texttt{bool}) avant chaque itération. Le corps est exécuté tant que la condition vaut \texttt{true}.
+
+\begin{lstlisting}[language=Caml]
+while condition do
+  expr
+done
+\end{lstlisting}
+
+\example{Calcul itératif de la factorielle à l'aide d'une référence et d'une boucle :}
+\begin{lstlisting}[language=Caml]
+let facto n =
+  let res = ref 1 in
+  let i = ref 1 in
+  while !i <= n do
+    res := !res * !i;
+    i := !i + 1
+  done;
+  !res
+\end{lstlisting}
+
+\section{Enregistrements à champs modifiables}
+
+Par défaut, les champs d'un enregistrement (\texttt{record}) sont immuables. Il est possible de rendre certains champs mutables individuellement lors de la définition du type à l'aide du mot-clé \texttt{mutable}.
+
+\subsection{Définition et Syntaxe d'Affectation}
+
+\begin{lstlisting}[language=Caml]
+type point_mutable = {
+  mutable x : float;
+  mutable y : float;
+  label : string       (* Ce champ reste immuable *)
+}
+\end{lstlisting}
+
+L'accès à un champ se fait via la notation pointée (\texttt{p.x}). La modification d'un champ mutable utilise l'opérateur d'affectation destructif \texttt{<-}.
+
+\example{Modification en place d'un enregistrement :}
+\begin{lstlisting}[language=Caml]
+let p = { x = 0.0; y = 1.0; label = "Origine" }
+let () = p.x <- 5.5    (* Valide, le champ x est mutable *)
+(* p.label <- "A" *)   (* Erreur de typage : le champ label est immuable *)
+\end{lstlisting}
+
+\remark{En réalité, le type primitif \texttt{'a ref} d'OCaml est défini nativement sous la forme d'un enregistrement prédéfini à un seul champ mutable : \texttt{type 'a ref = \{ mutable contents : 'a \}}. L'écriture \texttt{r := v} équivaut sémantiquement à \texttt{r.contents <- v}.}
+
+\section{Les tableaux (\texttt{Arrays})}
+
+Le type \texttt{'a array} représente des structures de données contiguës en mémoire, de taille fixe, dont les éléments sont indexés de $0$ à $n-1$ et modifiables en place.
+
+\subsection{Création et manipulation}
+
+\begin{itemize}
+    \item \textbf{Syntaxe littérale :} \texttt{[| e0; e1; e2 |]}
+    \item \textbf{Allocation par fonction :} \texttt{Array.make : int -> 'a -> 'a array} $\rightarrow$ Crée un tableau d'une taille donnée dont chaque case est initialisée avec la \textit{même} valeur fournie.
+    \item \textbf{Accès en lecture :} \texttt{t.(i)} (équivalent à \texttt{Array.get t i}).
+    \item \textbf{Accès en écriture :} \texttt{t.(i) <- v} (équivalent à \texttt{Array.set t i v}).
+\end{itemize}
+
+\subsection{Piège : partage de mémoire (\textit{aliasing} de sous-structures)}
+
+Lors de l'utilisation de \texttt{Array.make} pour allouer des structures multidimensionnelles (tableaux de tableaux), OCaml duplique la référence de l'argument d'initialisation et non sa valeur.
+
+\example{Analyse d'un comportement problématique :}
+\begin{lstlisting}[language=Caml]
+(* Tentative de creation d'une matrice 3x2 initialisee a 0 *)
+let m = Array.make 3 (Array.make 2 0);;
+(* m : int array array = [|[|0; 0|]; [|0; 0|]; [|0; 0|]|] *)
+
+m.(0).(0) <- 99;;
+(* Problème : Toutes les lignes de la matrice ont ete modifiees ! *)
+(* m est en realite : [|[|99; 0|]; [|99; 0|]; [|99; 0|]|] *)
+\end{lstlisting}
+
+\paragraph{Explication sémantique :} L'expression interne \texttt{Array.make 2 0} est évaluée \textbf{une seule fois}, générant un unique sous-tableau en mémoire. La fonction externe \texttt{Array.make 3} crée ensuite un tableau principal contenant trois pointeurs dirigés vers cet unique et même sous-tableau. 
+
+\paragraph{Solution :} Pour instancier correctement des structures de données mutables imbriquées sans partage de pointeurs, il faut utiliser \texttt{Array.make\_matrix} ou la fonction d'initialisation par fonction \texttt{Array.init} :
+\begin{lstlisting}[language=Caml]
+(* Allocation correcte sans aliasing : chaque ligne est un bloc memoire distinct *)
+let m_correct = Array.init 3 (fun _ -> Array.make 2 0)
+\end{lstlisting}
+
+\newpage
+\tableofcontents
+\end{document}

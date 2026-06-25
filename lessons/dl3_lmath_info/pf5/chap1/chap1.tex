@@ -69,7 +69,7 @@ let rec map f liste =
 
 \subsection{Généralités sur OCaml}
 
-OCaml (Objective Caml) est un langage multi-paradigme, principalement fonctionnel, fortement et statiquement typé. Il utilise un mécanisme d'inférence de types automatique.
+OCaml (Objective Caml) is un langage multi-paradigme, principalement fonctionnel, fortement et statiquement typé. Il utilise un mécanisme d'inférence de types automatique.
 
 \definition{Un langage à \textbf{typage statique} vérifie la cohérence des types lors de la compilation, empêchant l'exécution d'un programme contenant des erreurs de type.}
 
@@ -122,7 +122,7 @@ Les opérateurs pour les flottants sont :
 \attention{Le typage statique d'OCaml interdit les opérations mixtes. L'expression \texttt{2 + 3.0} ou \texttt{2 +. 3.0} provoquera une erreur immédiate de compilation (\textit{Type error}).}
 
 \method{Conversion de type (Cast)}{
-    Pour effectuer un calcul entre un entier et un flottant, il faut explicitement convertir l'un des deux types à l'aide des fonctions :
+    Pour effectuer un calcul entre un entier et un flottant, il faut explicitement modifier l'un des deux types à l'aide des fonctions :
     \begin{itemize}
         \item \texttt{float\_of\_int} : convertit un \texttt{int} en \texttt{float}.
         \item \texttt{int\_of\_float} : convertit un \texttt{float} en \texttt{int} (en tronquant).
@@ -161,12 +161,12 @@ En programmation fonctionnelle, tout est expression et renvoie une valeur. Les f
 
 \subsubsection{Fonctions}
 
-\method{Déclaration d'une variable ou d'une fonction}{
-    On utilise le mot-clé \texttt{let} pour lier un nom à une valeur ou à une fonction.
+\method{Déclaration d'une variable ou d'une fonction globale}{
+    On utilise le mot-clé \texttt{let} pour lier un nom à une valeur ou à une fonction de manière permanente au niveau global du fichier.
     
-    Syntaxe d'une variable : \texttt{let nom = expression}
+    Syntaxe d'une variable globale : \texttt{let nom = expression}
     
-    Syntaxe d'une fonction : \texttt{let nom\_fonction arg1 arg2 = corps\_de\_la\_fonction}
+    Syntaxe d'une fonction globale : \texttt{let nom\_fonction arg1 arg2 = corps}
 }
 
 \vocabulary{Une fonction est dite d'\textbf{ordre supérieur} si elle prend une ou plusieurs fonctions en argument et/ou renvoie une fonction en résultat.}
@@ -194,6 +194,31 @@ let rec fibonacci n =
 \training{Écrire une fonction récursive \texttt{factorielle : int -> int} qui calcule la factorielle d'un entier $n$.}
 
 \noindent\carreaux{6}
+
+\subsubsection{Liaisons locales : la structure \texttt{let ... in ...}}
+
+\definition{Une liaison locale permet de définir une variable ou une fonction intermédiaire dont la portée (visibilité) est restreinte exclusivement à une expression spécifique. On utilise pour cela le mot-clé \texttt{let ... in ...}.}
+
+\remark{Contrairement à un \texttt{let} global, un \texttt{let ... in} est lui-même une \textbf{expression} et produit une valeur de retour (celle de la partie après le \texttt{in}). Elle permet d'éviter de polluer l'espace de nom global du programme et s'avère indispensable pour décomposer des calculs ou forcer un ordre d'évaluation lors d'effets de bord.}
+
+\method{Structure du \texttt{let ... in}}{
+    La syntaxe générale est la suivante :
+    \[
+    \texttt{let } nom = expression\_locale \texttt{ in } expression\_principale
+    \]
+    Le \texttt{nom} n'est accessible et connu que dans l'\textit{expression\_principale}. Dès que celle-ci est évaluée, la variable locale est oubliée et détruite de la mémoire.
+}
+
+\example{Exemple d'utilisation de liaisons locales pour calculer la racine d'un polynôme ou décomposer une formule géométrique :}
+\begin{lstlisting}[language=Caml]
+(* Calcul du perimetre d'un rectangle avec des variables locales *)
+let perimetre la lo =
+  let double_largeur = 2 * la in
+  let double_longueur = 2 * lo in
+  double_largeur + double_longueur
+
+(* double_largeur n'existe plus ici, l'appeler provoquerait une erreur *)
+\end{lstlisting}
 
 \subsubsection{Signature d'une fonction et unit}
 
@@ -224,17 +249,23 @@ let afficher_message () =
 La fonction \texttt{print\_string} a pour signature \texttt{print\_string : string -> unit}, ce qui signifie qu'elle prend une chaîne de caractères en argument et ne renvoie aucune valeur significative (le type \texttt{unit} est utilisé pour indiquer l'absence de valeur).
 }
 
-\section{Disgression : utilisation du "$;$"}
+\section{Digression : utilisation du \texttt{";"} et du \texttt{";;"}}
 
-Comme on l'a dit, chaque expression en OCaml renvoie une valeur. Cependant, il est parfois nécessaire d'exécuter plusieurs expressions consécutives, notamment pour leurs effets secondaires (comme l'affichage). Dans ce cas, on utilise le point-virgule "$;$" pour séparer les expressions.
-Sinon, il n'est pas nécessaire de mettre un point-virgule à la fin d'une expression, sauf si l'on souhaite enchaîner plusieurs expressions dans un bloc.
+Comme on l'a dit, chaque expression en OCaml renvoie une valeur. Il convient de ne pas confondre le rôle du point-virgule simple \texttt{;} et du double point-virgule \texttt{;;}.
+
+\begin{itemize}
+    \item \textbf{Le point-virgule simple (\texttt{;}) :} C'est un \textbf{séquenceur d'instructions}. Il s'utilise uniquement à l'intérieur d'un bloc de code pour enchaîner des expressions (généralement de type \texttt{unit}) possédant des effets de bord. L'expression de gauche est évaluée, son résultat est jeté, puis l'expression de droite est exécutée. La dernière expression d'un bloc ne prend jamais de point-virgule simple.
+    \item \textbf{Le double point-virgule (\texttt{;;}) :} C'est un \textbf{délimiteur de phrase globale}. Il sert principalement dans la console interactive (le REPL, c'est-à-dire le mode interactif du compilateur) pour signifier au compilateur que la saisie est terminée et qu'il peut exécuter le bloc. Dans un fichier source (\texttt{.ml}), il est facultatif si les déclarations globales s'enchaînent par des mots-clés clairs (\texttt{let}), mais il reste utile pour exécuter directement des instructions libres au niveau global.
+\end{itemize}
 
 \example{
-    Pour afficher deux messages consécutifs, on peut écrire :
+    Pour afficher deux messages consécutifs et clore la fonction dans le REPL, on combine les deux syntaxes :
 }
 \begin{lstlisting}[language=Caml]
-print_string "Hello, "; (* sans le point-virgule, le message ne s'affiche pas (voire le code ne compile pas) *)
-print_string "world !";
+let saluer () =
+  print_string "Hello, "; (* Le ";" separe deux expressions unit *)
+  print_string "world !"  (* Pas de ";" sur la derniere expression *);; 
+  (* Le ";;" indique a l'interpreteur que la definition est finie *)
 \end{lstlisting}
 
 \newpage

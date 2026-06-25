@@ -1,0 +1,178 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% Configuration des en-tetes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{DL3 Math-Info PF5}
+\fancyhead[C]{Programmation fonctionnelle}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 6 : Entrées, sorties et effets de bord}
+
+\section{Rappel : le type \texttt{unit}}
+
+Jusqu'ici, toutes les fonctions étudiées calculaient une valeur à partir de paramètres sans modifier l'état global du système (fonctions pures). Pour gérer les affichages ou l'écriture dans des fichiers, nous introduisons la notion d'\textbf{effet de bord}.
+
+\definition{Le type \texttt{unit} est un type primitif qui ne contient qu'une unique valeur, notée \texttt{()}. Elle représente l'absence de valeur de retour intéressante. On l'utilise principalement pour typer les fonctions réalisant des actions ou des affichages.}
+
+\example{L'évaluation de la constante \texttt{()} renvoie son propre type :}
+\begin{lstlisting}[language=Caml]
+();;
+- : unit = ()
+\end{lstlisting}
+
+\noindent Le type \texttt{unit} sert également à définir des fonctions qui ne prennent aucun argument utile en entrée, agissant alors comme des procédures.
+
+\section{Les canaux de communication}
+
+En OCaml, les interactions avec l'extérieur (clavier, écran, fichiers) passent par des structures appelées \textbf{canaux}. Un canal est unidirectionnel : il est soit ouvert en entrée, soit en sortie, mais jamais les deux simultanément.
+
+\remark{Dans la suite, il peut être intéressant de faire un parallèle avec les flux d'entrée/sortie en C ou en Java, qui sont également des canaux unidirectionnels et qui fonctionnent de manière similaire.}
+
+\subsection{Canaux standards (Syst\`eme UNIX)}
+Tout processus dispose par défaut de trois canaux de communication fondamentaux :
+\begin{itemize}
+    \item \texttt{stdin} (type \texttt{in\_channel}) : Entrée normale du processus, généralement associée au clavier.
+    \item \texttt{stdout} (type \texttt{out\_channel}) : Sortie standard pour les affichages courants, associée à l'écran.
+    \item \texttt{stderr} (type \texttt{out\_channel}) : Sortie standard dédiée aux messages d'erreur.
+\end{itemize}
+
+\begin{lstlisting}[language=Caml]
+stdin;;
+- : in_channel = <abstr>
+stdout;;
+- : out_channel = <abstr>
+\end{lstlisting}
+
+\subsection{Ouverture et fermeture de canaux de fichiers}
+
+Pour interagir avec des fichiers locaux, on utilise des fonctions d'ouverture qui créent dynamiquement de nouveaux canaux, qu'il convient de fermer après utilisation afin de libérer les ressources système.
+
+\begin{itemize}
+    \item \textbf{Pour la lecture :} \texttt{open\_in : string -> in\_channel} et \texttt{close\_in : in\_channel -> unit}
+    \item \textbf{Pour l'écriture :} \texttt{open\_out : string -> out\_channel} et \texttt{close\_out : out\_channel -> unit}
+\end{itemize}
+
+\example{Ouverture d'un fichier res.txt pour y écrire "Hello, world!" puis lecture du contenu de ce fichier :}
+\begin{lstlisting}[language=Caml]
+let ecrire_texte () =
+  let canal = open_out "res.txt" in
+  output_string canal "Hello, world!\n";
+  close_out canal (* Pas de ";" ici, c'est la fin de la fonction *)
+
+let lire_texte () =
+  let canal = open_in "res.txt" in
+  let ligne = input_line canal in
+  close_in canal;
+  ligne (* Pas de ";" ici, c'est la valeur renvoyée par la fonction *)
+
+(* Pour exécuter le scénario au niveau global dans un fichier : *)
+let () = 
+  ecrire_texte ();
+  let texte = lire_texte () in
+  print_endline texte
+\end{lstlisting}
+
+\section{Écriture dans un canal : fonctions de sortie}
+
+Le module \texttt{Stdlib} fournit des fonctions de base pour écrire sur les canaux de sortie. Par défaut, les fonctions n'incluant pas le canal dans leur nom écrivent sur la sortie standard \texttt{stdout}.
+
+\subsection{Affichage standard}
+\begin{itemize}
+    \item \texttt{print\_string : string -> unit} : Affiche une chaîne de caractères.
+    \item \texttt{print\_int : int -> unit} : Affiche un entier.
+    \item \texttt{print\_newline : unit -> unit} : Force un retour à la ligne et vide le tampon d'affichage (*flush*).
+    \item \texttt{print\_endline : string -> unit} : Équivalent à \texttt{print\_string} suivi de \texttt{print\_newline}.
+\end{itemize}
+
+\subsection{Écriture générale sur un canal}
+Pour diriger un flux vers un fichier ou vers la sortie d'erreur \texttt{stderr}, on utilise les versions généralisées acceptant le canal destinataire en paramètre :
+\begin{itemize}
+    \item \texttt{output\_string : out\_channel -> string -> unit}
+    \item \texttt{output\_char : out\_channel -> char -> unit}
+\end{itemize}
+
+\example{Écriture de données dans un fichier texte local :}
+\begin{lstlisting}[language=Caml]
+let ecrire_donnees () =
+  let canal = open_out "resultats.txt" in
+  output_string canal "Ligne 1: Bonjour OCaml!\n";
+  output_string canal "Ligne 2: Fin du fichier.\n";
+  close_out canal;;
+\end{lstlisting}
+
+\section{Lecture depuis un canal : fonctions d'entrée}
+
+De manière analogue aux sorties, la lecture consomme les données disponibles sur un canal d'entrée.
+
+\begin{itemize}
+    \item \texttt{read\_line : unit -> string} : Lit une ligne de texte depuis l'entrée standard \texttt{stdin} (sans le caractère de saut de ligne \texttt{\textbackslash n}).
+    \item \texttt{input\_line : in\_channel -> string} : Lit une ligne depuis le canal spécifié.
+    \item \texttt{input\_char : in\_channel -> char} : Lit un unique caractère.
+\end{itemize}
+
+\attention{Lorsqu'une fonction de lecture atteint la fin d'un fichier (\textit{End Of File}), elle s'interrompt en levant l'exception prédéfinie \texttt{End\_of\_file}. Il est impératif d'intercepter cette exception pour cl\^oturer proprement la lecture.}
+
+\section{Ordre d'évaluation et pi\`ege de la récursion}
+
+L'introduction d'effets de bord casse l'équivalence transparente des expressions mathématiques. La lecture fait avancer la \textbf{tête de lecture} du canal ; ainsi, deux appels successifs à \texttt{input\_line} ne renverront pas le même résultat.
+
+\subsection{Le risque de la récursion décalée : exemple du compteur d'octets}
+
+L'ordre d'évaluation des arguments d'un opérateur (comme l'addition \texttt{+}) n'est pas spécifié par la spécification officielle d'OCaml (il dépend du compilateur, qui évalue souvent de droite à gauche).\\
+
+\noindent Considérons cette tentative \textbf{incorrecte} pour compter les octets d'un fichier :
+
+\begin{lstlisting}[language=Caml]
+(* ATTENTION : Code errone provoquant un Stack overflow *)
+let rec count_bytes_bad ci =
+  try
+    String.length (input_line ci) + count_bytes_bad ci
+  with
+  | End_of_file -> 0;;
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{Pourquoi cela plante-t-il ?} OCaml évalue d'abord le membre de droite de l'addition : \texttt{count\_bytes\_bad ci}. La fonction entre ainsi immédiatement dans l'appel récursif \textbf{avant} d'avoir évalué \texttt{input\_line ci}. 
+    \item \textbf{Conséquence :} La tête de lecture n'avance jamais sur le fichier avant l'appel suivant, la fonction boucle indéfiniment sur elle-même et sature la pile d'exécution, provoquant un \lstinline|Stack_overflow|.
+\end{itemize}
+
+\subsection{Version correcte : Séquencement explicite via le \texttt{let ... in}}
+
+Pour corriger ce bug, il faut forcer l'évaluation de la lecture et l'avancement de la tête de lecture \textbf{avant} de déclencher l'appel récursif. On utilise pour cela une liaison locale \texttt{let ... in} :
+
+\example{Implémentation valide et robuste du compteur d'octets :}
+\begin{lstlisting}[language=Caml]
+let rec count_bytes_correct ci =
+  try
+    let bytes_this_line = String.length (input_line ci) in
+    bytes_this_line + count_bytes_correct ci
+  with
+  | End_of_file -> 0;;
+\end{lstlisting}
+
+\noindent Ici, \texttt{input\_line ci} est impérativement exécuté en premier pour lier sa valeur à \texttt{bytes\_this\_line}, garantissant que la lecture progresse ligne par ligne jusqu'à atteindre la fin du fichier.
+
+\training{écrire une fonction \texttt{copier\_fichier : string -> string -> unit} prenant en param\`etre un fichier source et un fichier destination, qui lit le fichier source ligne par ligne pour le réécrire intégralement dans le fichier destination. On veillera \`a bien intercepter \texttt{End\_of\_file} et \`a fermer les deux canaux ouverts.}
+
+\noindent\carreaux{8}
+
+\newpage
+\tableofcontents
+\end{document}
