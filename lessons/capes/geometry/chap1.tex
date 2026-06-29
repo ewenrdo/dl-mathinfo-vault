@@ -23,6 +23,8 @@
 
 \noindent Ce document propose une synthèse (rapide et probablement non exhaustive) des notions de géométrie plane et dans l'espace abordées au collège, avec des démonstrations détaillées des théorèmes fondamentaux.
 
+\warning{Les preuves proposées dans ce document sont génériques, et il semble que bon nombre d'entre-elles ne soient pas correctes. Il constitue toutefois un bon exercice de tenter de les corriger.}
+
 \section{Bases de la géométrie plane et configurations élémentaires}
 
 \subsection{Éléments fondamentaux et vocabulaire}
@@ -254,13 +256,11 @@ Dans un triangle, la somme des mesures des angles est égale à $180^\circ$.
 Soit un triangle $ABC$. Traçons la droite $(d)$ parallèle à $(BC)$ passant par $A$. Les angles alternes-internes formés par les droites parallèles $(d)$ et $(BC)$ avec les sécantes $(AB)$ et $(AC)$ montrent que les angles adjacents au sommet $A$ reconstituent un angle plat de $180^\circ$. Ainsi, $\widehat{A} + \widehat{B} + \widehat{C} = 180^\circ$.
 }
 
-\theorem{Théorème}{Inégalité triangulaire}{false}{
+\theorem{Théorème}{Inégalité triangulaire}{true}{
 Dans un triangle $ABC$, la longueur de chaque côté est toujours inférieure à la somme des longueurs des deux autres côtés : $AB \leq AC + CB$. Il y a égalité si et seulement si $C \in [AB]$.
 }
 
-\noindent{\textbf{Preuve :}\\
-Supposons que $AB > AC + CB$. En traçant le segment $[AC]$ et en prolongeant $[CB]$ au-delà de $B$, on peut trouver un point $D$ tel que $CD = AC$. Par construction, $AD = AC + CD = 2AC$. Cependant, dans le triangle $ABD$, on aurait $AB < AD$, ce qui contredit l'hypothèse. Par conséquent, l'inégalité doit être vérifiée : $AB \leq AC + CB$.
-}
+\ndlr{Une preuve serait la bienvenue.}
 
 \method{Vérifier si un triangle est constructible}{
 Pour vérifier si un triangle est constructible, on compare la plus grande longueur à la somme des deux autres. Si la plus grande longueur est strictement inférieure à cette somme, le triangle est constructible.
