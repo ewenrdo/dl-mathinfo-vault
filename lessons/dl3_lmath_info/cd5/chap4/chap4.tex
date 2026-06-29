@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Calcul différentiel}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Complétude}
+
+\noindent Dans ce chapitre, $E$ désigne un espace vectoriel normé, et $\| \cdot \|$ la norme associée.
+\section{Suites de Cauchy}
+
+\definition{
+    Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $E$. On dit que $(x_n)$ est une \textbf{suite de Cauchy} si :
+    $$\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall m,n \geq N, \|x_n - x_m\| < \varepsilon.$$
+}
+
+\example{Dans un espace vectoriel normé, toute suite convergente est de Cauchy. En effet, soit $(x_n)$ une suite convergente vers $x \in E$. Alors, pour tout $\varepsilon > 0$, il existe $N \in \mathbb{N}$ tel que pour tout $n \geq N$, $\|x_n - x\| < \frac{\varepsilon}{2}$. Ainsi, pour tout $m,n \geq N$, on a :
+$$\|x_n - x_m\| \leq \|x_n - x\| + \|x - x_m\| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$
+}
+
+\definition{
+    On dit qu'un espace vectoriel normé $E$ est \textbf{complet} si toute suite de Cauchy dans $E$ converge vers un élément de $E$.
+}
+
+\cexample{
+    Soit $A = \mathbb{R}^n \setminus \{0\}$. Soit $a \neq 0$ et considérons la suite $(x_n)$ définie par $x_n = \frac{a}{n}$.\\
+    Alors la suite $(x_n)$ converge, en particulier : $$x_n \to 0 \notin A \text{ lorsque } n \to +\infty.$$
+    Toutefois, on a :
+    $$ \| x_n - x_m \| = \|a\| \left| \frac{1}{n} - \frac{1}{m} \right| \leq \frac{1}{min(n,m)} \|a\|.$$
+    et vérifie la définition de suite de Cauchy en prenant $N \leq \frac{\|a\|}{\varepsilon}$. Ainsi, $(x_n)$ est une suite de Cauchy dans $A$ qui ne converge pas dans $A$. Donc $A$ n'est pas complet.
+}
+
+\section{Propriétés des suites de Cauchy}
+
+\theorem{Lemme}{Borne d'une suite de Cauchy}{false}{
+    Toute suite de Cauchy est bornée.
+}
+\noindent{\textbf{Preuve :} Soit $\varepsilon > 0, \, \exists N \in \mathbb{N}$ tel que : $\forall n,m \geq N, \|x_n - x_m\| < \varepsilon.$\\
+En particulier, on a que : $(x_m)_{m \geq N} \subset B(x_N, \varepsilon) \subset B(0, \|x_N\| + \varepsilon)$.\\
+Par ailleurs, en posant $R = max\{\|x_0\|, \|x_1\|, \ldots, \|x_{N-1}\| \} < +\infty$, on a que $(x_m)_{m < N} \subset B(0, R)$.\\
+Il s'ensuit que $(x_m)_{m \in \mathbb{N}} \subset B(0, max\{R, \|x_N\| + \varepsilon\})$, et donc $(x_n)$ est bornée.
+}
+
+% définir la valeur d'adhérence d'une suite 
+
+\section{Valeur d'adhérence d'une suite}
+
+\definition{
+    Soit $(x_n)$ une suite d'éléments de $E$. On dit que $x \in E$ est une \textbf{valeur d'adhérence} de $(x_n)$ si il existe une sous-suite $(x_{n_k})$ de $(x_n)$ telle que $x_{n_k} \to x$ lorsque $k \to +\infty$.
+}
+
+\theorem{Lemme}{Caractérisation des suites de Cauchy}{false}{
+    Une suite de Cauchy qui admet une valeur d'adhérence converge vers cette valeur.
+}
+\noindent\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite de Cauchy et $x \in E$ sa valeur d'adhérence, comme par hypothèse. Alors il existe une sous-suite $(x_{\varphi(n)})_{n \in \mathbb{N}}$ telle que
+$$\forall \varepsilon > 0, \exists N_A \in \mathbb{N} : \forall n \ge N_A \ \|x_{\varphi(n)} - x\| \le \varepsilon.$$
+La suite $(x_n)$ étant de Cauchy, on a aussi que
+$$\forall \varepsilon > 0, \exists N_C \in \mathbb{N} : \forall n, m \ge N_C \ \|x_n - x_m\| \le \varepsilon.$$
+Posons $N = \max(\varphi(N_A), N_C)$. Pour tout $n \ge N$
+$$\|x_n - x\| \le \|x_n - x_{\varphi(N_A)}\| + \|x_{\varphi(N_A)} - x\| \le 2\varepsilon$$
+et, $\varepsilon$ étant arbitraire, on conclut. \hfill $\square$
+
+\theorem{Théorème}{}{false}{
+    Tout espace vectoriel normé réel de dimension finie est complet.
+}
+\noindent{\textbf{Preuve :} 
+Par le chapitre 1, on a que tout espace vectoriel normé réel de dimension finie est isomorphe à $\mathbb{R}^n$ pour un certain $n \in \mathbb{N}^*$. Il suffit donc de montrer que $\mathbb{R}^n$ est complet.\\
+
+\noindent Soit $(x_n)_{n \in \mathbb{N}}$ une suite de Cauchy dans $\mathbb{R}^n$. Alors cette suite est bornée et il existe $R > 0$ tel que $(x_n)_{n \in \mathbb{N}} \subset B(0, R)$. Le sous-ensemble $\overline{B}(0, R)$ est compact dans $\mathbb{R}^n$, il existe donc une sous-suite $(x_{\varphi(n)})_{n \in \mathbb{N}}$ qui converge vers un certain $l \in \overline{B}(0, R)$.\\
+Par le lemme précédent, on a que $(x_n)_{n \in \mathbb{N}}$ converge vers $l$, et ce pour toute suite de Cauchy $(x_n)_{n \in \mathbb{N}}$ dans $\mathbb{R}^n$. Ainsi, $\mathbb{R}^n$ est complet. \hfill $\square$
+}
+
+
+\newpage
+\tableofcontents
+\end{document}

@@ -1,0 +1,208 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Calcul différentiel}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Continuité\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
+\disclaimer{Chapitre non terminé. Certaines parties sont encore en cours de rédaction et peuvent contenir des erreurs ou des imprécisions.}
+\textbf{Cadre de travail :}
+\begin{itemize}
+    \item $p,q \in \mathbb{N}^*$
+    \item $\mathcal{U}$ est un ouvert de $\mathbb{R}^q$
+    \item $\mathbb{R}^p$ et $\mathbb{R}^q$ sont des espaces vectoriels qui peuvent être normés, donc des espaces métriques. Ainsi, toutes les propriétés et des notions des espaces métriques s'appliquent.
+    \item $\| \cdot \|$ désigne une norme quelconque sur $\mathbb{R}^q$ ou $\mathbb{R}^p$ (les normes sont équivalentes en dimension finie, donc le choix de la norme n'affecte pas les propriétés étudiées).
+\end{itemize}
+
+\section{Continuité}
+
+\subsection{Définition et propriétés}
+
+\definition{
+    Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^q$. Une fonction de plusieurs variables est définie par :
+    \[ f : \mathcal{U} \to \mathbb{R}^p, \quad x \mapsto f(x) = f(x_1, \dots, x_q) \]
+}
+
+\example{
+    Deux exemples de fonctions de plusieurs variables sont :
+    \begin{enumerate}
+        \item $f : \mathbb{R}^2 \to \mathbb{R}$, $(x,y) \mapsto x^2 + y^2$.
+        \item $f : \mathbb{R}^3 \to \mathbb{R}^2$, $(x,y,z) \mapsto (x+y, yz)$.
+    \end{enumerate}
+}
+
+\reminder{Une suite $(X_n)$ de composante $\begin{pmatrix}x^{(n)}_1 \\ x^{(n)}_2 \\ \vdots \\ x^{(n)}_p\end{pmatrix} \in \mathbb{R}^p$ tend vers $X = \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_p\end{pmatrix} \in \mathbb{R}^p$ si et seulement si chacune de ses composantes converge, c'est-à-dire :
+\[
+    \forall i \in \{1, \ldots, p\}, \quad x^{(n)}_i \xrightarrow[n \to +\infty]{} x_i
+\]}
+\definition{
+    Soit $x_0 \in \mathcal{U}$ et soit $f : \mathcal{U} \to \mathbb{R}^p$.\\
+    On dit que $f$ est continue en $x_0$ si :
+    \[ \forall \epsilon > 0, \exists \alpha > 0, \forall x \in \mathcal{U}, \quad \|x - x_0\| \le \alpha \Rightarrow \|f(x) - f(x_0)\| < \epsilon \]
+}
+
+\theorem{Proposition}{Caractérisation de la continuité}{false}{
+    Soit $f : \mathcal{U} \to \mathbb{R}^p$ et $x_0 \in \mathcal{U}$. Notons $f(x_0) = (f_1(x_0), \dots, f_p(x_0))$. Alors :
+    \[
+    f \text{ est continue en } x_0 \Leftrightarrow \forall i \in \{1, \dots, p\}, f_i \text{ est continue en } x_0
+    \]
+}
+
+\noindent{\textbf{Preuve :}
+\begin{itemize}
+    \item $(\Rightarrow)$ : Supposons que $f$ est continue en $x_0$. Soit $i \in \{1, \dots, p\}$. Pour tout $\epsilon > 0$, il existe $\alpha > 0$ tel que pour tout $x \in \mathcal{U}$, $\|x - x_0\| \le \alpha$ implique $\|f(x) - f(x_0)\| < \epsilon$. En particulier, comme $|f_i(x) - f_i(x_0)| \le \|f(x) - f(x_0)\|$, on a bien $|f_i(x) - f_i(x_0)| < \epsilon$, donc $f_i$ est continue en $x_0$.
+    \item $(\Leftarrow)$ : Supposons que pour tout $i \in \{1, \dots, p\}$, $f_i$ est continue en $x_0$. Soit $\epsilon > 0$. Pour chaque $i$, il existe $\alpha_i > 0$ tel que pour tout $x \in \mathcal{U}$, $\|x - x_0\| \le \alpha_i$ implique $|f_i(x) - f_i(x_0)| < \frac{\epsilon}{\sqrt{p}}$. Posons $\alpha = \min_{1 \le i \le p} \alpha_i$. Alors, pour tout $x \in \mathcal{U}$, $\|x - x_0\| \le \alpha$ implique que pour tout $i$, $|f_i(x) - f_i(x_0)| < \frac{\epsilon}{\sqrt{p}}$. Par conséquent :
+    \[
+    \|f(x) - f(x_0)\| = \sqrt{\sum_{i=1}^p (f_i(x) - f_i(x_0))^2} < \sqrt{p \cdot \left(\frac{\epsilon}{\sqrt{p}}\right)^2} = \epsilon
+    \]
+    Ainsi, $f$ est continue en $x_0$.
+\end{itemize}
+}
+
+\remark{Par équivalence des normes en dimension finie, la notion de continuité ne dépend pas de la norme choisie dans $\mathbb{R}^q$.}
+
+\attention{Il ne faut pas confondre les applications coordonnées et applications partielles : la continuité de toutes les applications partielles d'une fonction ne suffit pas à assurer sa continuité globale.}
+
+\cexample{
+    Soit $f(x,y) = \begin{cases} \frac{xy}{x^2+y^2} & \text{si } (x,y) \neq (0,0) \\ 0 & \text{sinon} \end{cases}$.\\
+    Les applications partielles $x \mapsto f(x,0)$ et $y \mapsto f(0,y)$ sont nulles donc continues. Cependant, en approchant par la droite $y=x$ :
+    \[ f(x,x) = \frac{x^2}{x^2+x^2} = \frac{1}{2} \xrightarrow[x \to 0]{} \frac{1}{2} \neq f(0,0) \]
+    $f$ n'est pas continue en $(0,0)$.
+}
+
+\remark{Quand on trouve des expressions de la forme $x^2 + y^2$ au dénominateur, il est souvent utile de passer en coordonnées polaires pour étudier la continuité.}
+
+\subsection{Changement en coordonnées polaires}
+
+\definition{
+    Le passage en coordonnées polaires dans $\mathbb{R}^2$ associe à tout point $(x,y) \neq (0,0)$ un couple $(r, \theta) \in ]0, +\infty[ \times [0, 2\pi[$ tel que :
+    \[ x = r\cos(\theta) \quad \text{et} \quad y = r\sin(\theta) \]
+    On a alors $r = \sqrt{x^2 + y^2}$.
+}
+
+\method{Étudier la continuité en $(0,0)$}{
+    Pour étudier la limite en $(0,0)$ d'une fonction $f(x,y)$, on exprime $f(r\cos(\theta), r\sin(\theta))$. Si l'expression tend vers une constante indépendante de $\theta$ lorsque $r \to 0^+$, la fonction est continue.
+}
+
+\example{
+    Soit $f(x,y) = \frac{x^3}{x^2+y^2}$ pour $(x,y) \neq (0,0)$ et $f(0,0)=0$. En coordonnées polaires :
+    \[ f(r\cos(\theta), r\sin(\theta)) = \frac{r^3\cos^3(\theta)}{r^2} = r\cos^3(\theta) \]
+    Comme $|r\cos^3(\theta)| \le r \xrightarrow[r \to 0^+]{} 0$, $f$ est continue en $(0,0)$.
+}
+
+\cexample{
+    Soit $f(x,y) = \frac{x^2}{x^2+y^2}$ pour $(x,y) \neq (0,0)$ et $f(0,0)=0$. En coordonnées polaires :
+    \[ f(r\cos(\theta), r\sin(\theta)) = \frac{r^2\cos^2(\theta)}{r^2} = \cos^2(\theta) \]
+    La limite dépend de l'angle $\theta$ quand $r \to 0^+$, donc $f$ n'est pas continue en $(0,0)$. En effet, on peut trouver deux droites d'approche donnant des limites différentes, par exemple $y=0$ ($\sim \theta=0$) et $y=x$ ($\sim \theta=\frac{\pi}{4}$).
+}
+
+\remark{Cette méthode est particulièrement performante lorsque l'expression comporte le terme $x^2+y^2$, car il se simplifie directement en $r^2$.}
+
+\subsection{Lien entre continuité et topologie}
+
+\theorem{Théorème de la continuité globale}{}{true}{
+    Une fonction $f : \mathcal{U} \to \mathbb{R}^p$ est continue 
+    \begin{itemize}
+        \item $\iff$ pour tout ouverte $\mathcal{O}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{O})$ est un ouvert de $\mathcal{U}$.
+        \item $\iff$ pour tout fermé $\mathcal{F}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{F})$ est un fermé de $\mathcal{U}$.
+    \end{itemize}
+}
+
+\training{Pour chacun des ensembles suivants, déterminer s'il est ouvert, fermé, ouvert-fermé ou ni l'un, ni l'autre.
+\[
+\{ (x,y) \mid x^2 - y^2 < 1 \}, \quad \{ (x,y) \mid e^{x+y^3} > 0\}, \quad \{ (x,y,z) \mid \arctan(xz) \geq \cos(yz) \}, \quad \{ (x,y,z) \mid x+y+z > xyz \}
+\]
+}
+\noindent\carreaux{10}
+\subsection{Continuité uniforme}
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :
+    \[
+    \forall \epsilon > 0, \exists \alpha > 0, \forall x,y \in \mathcal{U}, \quad \|x - y\| \le \alpha \Rightarrow \|f(x) - f(y)\| < \epsilon
+    \]
+}
+
+\remark{
+    Dans la définition de la continuité en un point $x_0$, le réel $\alpha$ dépend de $\epsilon$ et de $x_0$. Dans le cas de la continuité uniforme, le réel $\alpha$ ne dépend plus que de $\epsilon$ : il est globalement valable pour tout couple de points $(x,y)$ de l'ouvert $\mathcal{U}$.
+}
+
+\theorem{Proposition}{Uniforme continuité et continuité sur les compacts}{false}{
+    Toute fonction continue sur un compact de $\mathbb{R}^q$ est uniformément continue.
+}
+
+\example{
+    L'application identité ou toute application linéaire $f : \mathbb{R}^q \to \mathbb{R}^p$ est uniformément continue sur $\mathbb{R}^q$. 
+    En effet, par linéarité en dimension finie, il existe une constante $C > 0$ telle que pour tous $x,y \in \mathbb{R}^q$, $\|f(x) - f(y)\| \le C \|x - y\|$. Pour un $\epsilon > 0$ donné, il suffit alors de choisir $\alpha = \frac{\epsilon}{C}$ (qui est indépendant de $x$ et $y$) pour vérifier la définition.
+}
+
+\cexample{
+    La fonction $f : ]0,1] \to \mathbb{R}, \, x \mapsto \frac{1}{x}$ est continue sur $]0,1]$ mais \textbf{n'est pas} uniformément continue sur cet intervalle. En effet, si l'on choisit les deux suites de $]0,1]$ définies pour $n \in \mathbb{N}^*$ par $x_n = \frac{1}{n}$ and $y_n = \frac{1}{n+1}$, on a :
+    \[
+    |x_n - y_n| = \frac{1}{n(n+1)} \xrightarrow[n \to +\infty]{} 0
+    \]
+    Pourtant, l'écart entre leurs images reste constant et ne tend pas vers 0 :
+    \[
+    |f(x_n) - f(y_n)| = |n - (n+1)| = 1
+    \]
+    Il est donc impossible de trouver un $\alpha$ global qui rende les images proches dès que les antécédents le sont.
+}
+
+\theorem{Théorème}{Prolongement par continuité}{false}{
+    Soit $\mathcal{U}$ un ouvert borné de $\mathbb{R}^q$ et $f : \mathcal{U} \to \mathbb{R}^p$ une fonction uniformément continue. 
+    Alors $f$ peut être prolongée de façon unique en une application continue sur l'adhérence $\overline{\mathcal{U}}$.
+}
+
+\subsection{Fonctions lipschitziennes}
+
+\definition{
+    Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^q$ et $f : \mathcal{U} \to \mathbb{R}^p$. Soit $k \ge 0$ un réel. 
+    On dit que $f$ est \textbf{$k$-lipschitzienne} sur $\mathcal{U}$ si :
+    \[
+    \forall (x,y) \in \mathcal{U}^2, \quad \|f(x) - f(y)\| \le k \|x - y\|
+    \]
+    On dit que $f$ est \textbf{lipschitzienne} s'il existe un tel réel $k$. 
+    Si $0 \le k < 1$, l'application $f$ est dite \textbf{contractante}.
+}
+
+\theorem{Proposition}{Rapport avec la continuité uniforme}{false}{
+    Toute fonction lipschitzienne sur $\mathcal{U}$ est uniformément continue sur $\mathcal{U}$ (et est donc, a fortiori, continue sur $\mathcal{U}$).
+}
+
+\remark{
+    Pour une fonction $k$-lipschitzienne, face à un $\epsilon > 0$ donné, le choix du pas $\alpha = \frac{\epsilon}{k}$ (si $k > 0$) convient globalement en tout point, ce qui montre de manière immédiate l'uniforme continuité. 
+}
+
+\example{
+    Soit $f : \mathbb{R}^q \to \mathbb{R}^p$ une application linéaire. En dimension finie, toutes les applications linéaires sont continues et il existe une constante $M \ge 0$ telle que pour tout $h \in \mathbb{R}^q$, $\|f(h)\| \le M \|h\|$. 
+    Par conséquent :
+    \[
+    \forall (x,y) \in (\mathbb{R}^q)^2, \quad \|f(x) - f(y)\| = \|f(x-y)\| \le M \|x - y\|
+    \]
+    Ainsi, toute application linéaire en dimension finie est $M$-lipschitzienne.
+}
+
+\section{Convergence de suites de fonctions}
+\section{Applications linéaires continues}
+
+\newpage
+\tableofcontents
+\end{document}

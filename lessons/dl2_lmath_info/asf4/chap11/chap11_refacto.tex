@@ -111,6 +111,23 @@
 
 \remark{Cette méthode est particulièrement performante lorsque l'expression comporte le terme $x^2+y^2$, car il se simplifie directement en $r^2$.}
 
+\subsection{Lien entre continuité et topologie}
+
+\theorem{Théorème de la continuité globale}{}{true}{
+    Une fonction $f : \mathcal{U} \to \mathbb{R}^p$ est continue 
+    \begin{itemize}
+        \item $\iff$ pour tout ouverte $\mathcal{O}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{O})$ est un ouvert de $\mathcal{U}$.
+        \item $\iff$ pour tout fermé $\mathcal{F}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{F})$ est un fermé de $\mathcal{U}$.
+    \end{itemize}
+}
+
+\training{Pour chacun des ensembles suivants, déterminer s'il est ouvert, fermé, ouvert-fermé ou ni l'un, ni l'autre.
+\[
+\{ (x,y) \mid x^2 - y^2 < 1 \}, \quad \{ (x,y) \mid e^{x+y^3} > 0\}, \quad \{ (x,y,z) \mid \arctan(xz) \geq \cos(yz) \}, \quad \{ (x,y,z) \mid x+y+z > xyz \}
+\]
+}
+\noindent\carreaux{10}
+
 \subsection{Continuité uniforme}
 \definition{
     Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :

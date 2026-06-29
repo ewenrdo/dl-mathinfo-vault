@@ -1,0 +1,498 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Calcul différentiel}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Topologie des espaces vectoriels normés\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
+
+\noindent Dans tout ce chapitre, on note $E$ un espace vectoriel sur $\mathbb{K}$, où $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$.
+\section{Espaces vectoriels normés}
+
+\subsection{Cadre général}
+
+\definition{
+    Une norme $N$ sur $E$ est une application $\| \cdot \| \colon E \to \mathbb{R}$ qui vérifie les axiomes suivants :
+    \begin{enumerate}
+        \item $\forall u \in E, \forall \lambda \in \mathbb{K}, \|\lambda u\| = |\lambda| \cdot \|u\|$ (homogénéité)
+        \item $\forall (u,v) \in E^2, \|u+v\| \leq \|u\| + \|v\|$ (inégalité triangulaire)
+        \item $\forall u \in E, \|u\| = 0 \Leftrightarrow u = 0_E$ (séparation)
+    \end{enumerate}
+}
+\vocabulary{On dit que le couple $(E, \| \cdot \|)$ est un \textbf{espace vectoriel normé}. Il est commun d'écrire $e.v.n.$.}
+\remark{L'inégalité triangulaire permet de définir une distance sur $E$ en posant $d(u,v) = \|u-v\|$. Ainsi, tout espace vectoriel normé est un espace métrique.}
+
+\example{Voici quelques normes qu'il convient de connaître sur $\mathbb{R}^n$ :
+\begin{itemize}
+    \item La norme $1$ : $\|x\|_1 = \sum_{i=1}^n |x_i|$,
+    \item La norme euclidienne : $\|x\|_2 = \sqrt{\sum_{i=1}^n |x_i|^2} = \sqrt{\langle x, x \rangle}$ (et plus généralement $\|x\|_p$ avec la racine $p$-ième pour $p \in [1, +\infty[$),
+    \item La norme $\infty$ : $\|x\|_\infty = \max_{1 \leq i \leq n} |x_i|$.
+\end{itemize}
+}
+
+\subsection{Boules}
+
+\definition{
+    Soit $x \in E$ et $r > 0$. Soit $\|\cdot\|$ une norme sur $E$.\\
+    On appelle \textbf{boule ouverte} de centre $x$ et de rayon $r$ l'ensemble $B(x,r) = \{y \in E \mid \|y-x\| < r\}$.
+}
+\definition{
+    Soit $x \in E$ et $r > 0$. Soit $\|\cdot\|$ une norme sur $E$.\\
+    On appelle \textbf{boule fermée} de centre $x$ et de rayon $r$ l'ensemble $\overline{B}(x,r) = \{y \in E \mid \|y-x\| \leq r\}$.
+}
+
+\remark{Il faut bien comprendre que la notion de boule dépend de la norme choisie. Ainsi, une boule ouverte pour une norme peut ne pas être une boule ouverte pour une autre norme.}
+
+
+\theorem{Lemme}{Translation/étirement d'une boule}{false}{
+    Soit $x \in E$ et $r > 0$. Soit $\|\cdot\|$ une norme sur $E$. On a : 
+    \[
+        B(x,r) = x + r \cdot B(0,1) \quad \text{et} \quad \overline{B}(x,r) = x + r \cdot \overline{B}(0,1).
+    \]
+    Autrement dit, une boule ouverte \textit{(resp. fermée)} est l'image de la boule unité ouverte \textit{(resp. fermée)} par la translation de vecteur $x$ et l'homothétie de rapport $r$.
+}
+\noindent{\textbf{Preuve :} Montrons l'égalité pour la boule ouverte.\\
+Soit $y \in B(x,r)$. Alors en posant $z = \frac{y-x}{r}$, on a :
+$$\|z\| = \left\|\frac{y-x}{r}\right\| < \frac{1}{r} \cdot r = 1 \Leftrightarrow z \in B(0,1)$$
+
+\noindent Réciproquement, soit $z \in B(0,1)$. Alors en posant $y = x + r z$, on a :
+$$\|y-x\| = \|r z\| = r \cdot \|z\| < r \cdot 1 = r \Leftrightarrow y \in B(x,r)$$
+}
+
+\theorem{Lemme}{Norme et infimum sur une boule}{false}{
+    Soit $x \in E$ et $r > 0$. Soit $\|\cdot\|$ une norme sur $E$. Alors :
+    \[
+        \| x \| = \inf \{r > 0 \mid x \in B(0,r)\} = \inf \{r > 0 \mid x \in r \cdot B(0,1)\}.
+    \]
+}
+\ndlr{cf. Laurent pour la preuve}
+\remark{Ce lemme permet de définir la norme d'un vecteur $x$ comme le rayon de la plus petite boule ouverte centrée en $0$ qui contient $x$.}
+\example{Dans $\mathbb{R}^2$ avec la norme euclidienne, la norme du vecteur $x = (3,4)$ est $5$, car $x$ est sur le cercle de rayon $5$ centré en $0$.}
+
+\definition{
+    Soit $A \subset E$. On dit que $A$ est \textbf{borné} s'il existe $r > 0$ tel que $A \subset B(0,r)$.
+}
+
+\training{Montrer que $A$ est borné si et seulement si $\exists r > 0 : A \subset B(0,r)$.}
+\noindent \carreaux{8}
+
+\subsection{Équivalence des normes}
+\definition{
+    Soient $\|\cdot\|_1$ et $\|\cdot\|_2$ deux normes sur $E$. On dit que ces deux normes sont \textbf{équivalentes} s'il existe des constantes $C_1, C_2 > 0$ telles que :
+    \[
+        \forall x \in E, \quad C_1 \|x\|_1 \leq \|x\|_2 \leq C_2 \|x\|_1.
+    \]
+}
+
+\remark{L'équivalence des normes est une relation d'équivalence sur l'ensemble des normes sur $E$. En particulier, si deux normes sont équivalentes, elles définissent la même topologie sur $E$.}
+
+\theorem{Théorème}{Équivalence des normes sur $\mathbb{R}^n$}{true}{
+    Toutes les normes sur $\mathbb{R}^n$ sont équivalentes.
+}
+\noindent\textbf{Preuve :} \textit{voir chapitre 3 sur la compacité.}
+
+\theorem{Théorème}{Isomorphisme entre espaces vectoriels normés de dimension finie}{true}{
+    Soit $E$ un espace vectoriel normé dont toutes les normes sont équivalentes.\\
+    Alors $E$ est isomorphe à $\mathbb{R}^n$ pour un certain $n \in \mathbb{N}$.
+}
+
+\remark{Ainsi, un espace vectoriel admettant deux normes non équivalentes est nécessairement de dimension infinie.}
+
+\example{Dans $\mathbb{R}^2$, les normes $1$ et $2$ sont équivalentes. En effet, on peut montrer que pour tout $x \in \mathbb{R}^2$, on a :
+\[
+\|x\|_2 \leq \|x\|_1 \leq \sqrt{2} \|x\|_2.
+\]
+}
+
+\subsection{Normes sur les espaces convexes}
+\definition{
+    Soit $C \subset E$.\\
+    On dit que $C$ est \textbf{convexe} si pour tout $x,y \in C$ et pour tout $t \in [0,1]$, on a :
+    \[
+        tx + (1-t)y \in C.
+    \]
+}
+\vocabulary{On parlera aussi de \textbf{sous-ensemble convexe} de $E$, pour insister sur le fait que $C \subset E$.}
+
+\remark{On note $[x,y] = \{tx + (1-t)y \mid t \in [0,1]\}$ le segment reliant $x$ et $y$. Ainsi, $C$ est convexe si et seulement si pour tout $x,y \in C$, on a $[x,y] \subset C$.}
+
+Géométriquement, un ensemble convexe est un ensemble tel que pour tous points $x, y$ de cet ensemble, le segment de droite reliant $x$ et $y$ est entièrement contenu dans l'ensemble.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+
+    \begin{scope}[shift={(0,0)}]
+        % Dessin de l'ensemble (Disque)
+        \fill[blue!10, draw=blue!60, thick] (0,0) circle (1.5);
+        \node[blue!80!black] at (0,-1.8) {\textbf{Ensemble convexe}};
+        
+        % Points x et y
+        \coordinate (X1) at (-0.8, 0.4);
+        \coordinate (Y1) at (0.9, -0.3);
+        
+        % Tracé du segment (entièrement dedans)
+        \draw[thick, red, -] (X1) -- (Y1);
+        
+        % Placer les points par-dessus le segment
+        \fill[red] (X1) circle (2pt) node[above left, black] {$x$};
+        \fill[red] (Y1) circle (2pt) node[below right, black] {$y$};
+    \end{scope}
+
+    \begin{scope}[shift={(4.5,0)}]
+        % Dessin d'une forme en haricot avec un gros creux au milieu
+        \fill[gray!10, draw=gray!60, thick] 
+            (0,1.5) to[out=200,in=100] (-1,-1) 
+                    to[out=280,in=200] (1,-1) 
+                    to[out=20,in=300] (0.8,1)
+                    to[out=120,in=340] (0,0.2) % Le creux se trouve ici !
+                    to[out=160,in=20] cycle;
+        \node[gray!80!black] at (0,-1.8) {\textbf{Ensemble non convexe}};
+        
+        % Points x et y situés de part et d'autre du creux
+        \coordinate (X2) at (-0.6, 0.4);
+        \coordinate (Y2) at (0.6, 0.4);
+        
+        % Tracé du segment qui passe par le "vide" extérieur
+        \draw[thick, red, dashed] (X2) -- (Y2);
+        
+        % Placer les points
+        \fill[red] (X2) circle (2pt) node[left, black] {$x$};
+        \fill[red] (Y2) circle (2pt) node[right, black] {$y$};
+    \end{scope}
+
+\end{tikzpicture}
+\caption{Comparaison géométrique à l'aide du segment $[x,y]$.}
+\label{fig:convexite}
+\end{figure}
+
+\theorem{Proposition}{Convexité des boules ouvertes}{false}{
+    Soit $\| \cdot \|$ une norme sur $E$. Alors les boules ouvertes et fermées sont des sous-ensembles convexes de $E$.
+}
+
+\training{Montrer que les boules ouvertes et fermées sont convexes. On pourra s'appuyer sur le lemme de translation/étirement d'une boule.}
+\noindent \carreaux{6}
+
+\section{Topologie des espaces vectoriels normés}
+La notion de norme nous permet de définir une relation de "proximité" entre les vecteurs d’un espace vectoriel normé, ce qui ouvre la porte à d'autres notions topologiques telles que la continuité, la convergence et la compacité.
+
+\subsection{Ouverts et fermés}
+\definition{Soit $A \subset E$. On dit que $A$ est un \textbf{ouvert} si pour tout $x \in A$, il existe $r > 0$ tel que $B(x,r) \subset A$.}
+
+\ndlr{Mettre un graphique TikZ qui compare un ouvert et un non ouvert.}
+
+\theorem{Proposition}{Équivalence des normes}{false}{
+    Soient $\| \cdot \|_a$ et $\| \cdot \|_b$ deux normes sur $E$. Supposons que ces deux normes sont équivalentes.\\
+    Alors un sous-ensemble $A \subset E$ est ouvert pour la norme $\| \cdot \|_a$ si et seulement si il est ouvert pour la norme $\| \cdot \|_b$.
+}
+\begin{center}\begin{tikzpicture}[scale=1.2, >=stealth]
+
+  % ==========================================
+  % SECTION 1 : ENSEMBLE OUVERT (À GAUCHE)
+  % ==========================================
+  \begin{scope}[shift={(0,0)}]
+    % Remplissage de l'ensemble ouvert
+    \fill[blue!10] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Frontière en pointillés (indique que le bord est exclu)
+    \draw[blue!70!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Nom de l'ensemble
+    \node[blue!80!black] at (2.2, 0.5) {\large $A$};
+    
+    % Point intérieur x
+    \coordinate (X) at (1.2, 0.3);
+    \fill[black] (X) circle (1.5pt) node[below left] {$x$};
+    
+    % Boule ouverte centrée en x et incluse dans A
+    \draw[gray, thin] (X) circle (0.45cm);
+    \draw[dashed, ->, gray] (X) -- node[above, scale=0.8, black] {$\varepsilon$} +(30:0.45cm);
+    
+    % Légende sous la première figure
+    \node[text width=4cm, align=center, font=\small] at (1.5,-2) {
+      \textbf{Ensemble ouvert $A$}\\
+      \textcolor{gray}{$\forall x \in A, \exists \varepsilon > 0 \text{ t.q. } B(x,\varepsilon) \subset A$}\\
+      \textit{La frontière est exclue (pointillés)}
+    };
+  \end{scope}
+
+  % ==========================================
+  % SECTION 2 : ENSEMBLE NON OUVERT (À DROITE)
+  % ==========================================
+  \begin{scope}[shift={(5.5,0)}]
+    % Remplissage de l'ensemble non ouvert
+    \fill[red!10] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Frontière hybride : une partie fermée (trait plein) et une partie ouverte (pointillés)
+    % On découpe le contour pour illustrer un bord adhérent
+    \draw[red!70!black, thick] plot[smooth, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0)};
+    \draw[red!70!black, thick, dashed] plot[smooth, tension=0.7] coordinates {(3,0) (2,-1) (0.5,-0.5) (0,0)};
+    
+    % Nom de l'ensemble
+    \node[red!80!black] at (1.3, -0.1) {\large $B$};
+    
+    % Point y sur la frontière incluse
+    \coordinate (Y) at (2.15, 1.15); % Point situé sur la ligne continue supérieure
+    \fill[black] (Y) circle (1.5pt) node[above right] {$y$};
+    
+    % Boule centrée en y (qui sort forcément de l'ensemble)
+    \draw[gray, thin] (Y) circle (0.45cm);
+    \draw[dashed, ->, gray] (Y) -- node[below left, scale=0.8, black] {$\varepsilon$} +(-120:0.45cm);
+    
+    % Légende sous la deuxième figure
+    \node[text width=4.5cm, align=center, font=\small] at (1.5,-2) {
+      \textbf{Ensemble non ouvert $B$}\\
+      \textcolor{gray}{$\exists y \in B, \forall \varepsilon > 0, B(y,\varepsilon) \not\subset B$}\\
+      \textit{Une partie de la frontière est incluse (trait plein)}
+    };
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\remark{On en déduit que les ouverts dans $\mathbb{R}^n$ sont les mêmes pour toutes les normes équivalentes.}
+
+\theorem{Proposition}{Boule ouverte et ouvert}{false}{
+    Soit $\| \cdot \|$ une norme sur $E$. Alors toute boule ouverte est un ouvert de $E$.
+}
+\noindent\textbf{Preuve :} Soit $y \in B(x,R)$, en particulier $\|y - x\| < R$. On a que $B(y, R - \|y - x\|) \subset B(x,R)$. En effet, soit $z \in B(y, R - \|y - x\|)$. Alors, par l'inégalité triangulaire,
+$$\|z - x\| = \|z - y + y - x\| \le \|z - y\| + \|y - x\| < R - \|y - x\| + \|y - x\| = R \implies z \in B(x,R).$$
+$ \hfill \square$
+
+\definition{
+    On appelle \textbf{topologie} sur $E$ l'ensemble des ouverts de $E$ pour la norme $\| \cdot \|$. On note cet ensemble $\mathcal{T}_{\| \cdot \|}$.
+}
+
+\theorem{Proposition}{Union et intersection d'ouverts}{false}{
+    Soit $\| \cdot \|$ une norme sur $E$. Alors :
+    \begin{enumerate}
+        \item L'union d'une famille quelconque d'ouverts est un ouvert.
+        \item L'intersection d'une famille finie d'ouverts est un ouvert.
+    \end{enumerate}
+}
+\attention{L'intersection d'une famille infinie d'ouverts n'est pas nécessairement un ouvert : par exemple, dans $\mathbb{R}$, l'intersection des ouverts $(-\frac{1}{n}, \frac{1}{n})$ pour $n \in \mathbb{N}^*$ est $\{0\}$, qui n'est pas un ouvert.}
+
+\training{Montrer la proposition précédente.}
+\noindent \carreaux{10}
+
+\definition{
+    Soit $F \subset E$. On dit que $F$ est un \textbf{fermé} si son complémentaire $E \setminus F$ est un ouvert.
+}
+
+\theorem{Proposition}{Boule fermée et fermé}{false}{
+    Soit $\| \cdot \|$ une norme sur $E$. Alors toute boule fermée est un fermé de $E$.
+}
+
+\theorem{Proposition}{Union et intersection de fermés}{false}{
+    Soit $\| \cdot \|$ une norme sur $E$. Alors :
+    \begin{enumerate}
+        \item L'intersection d'une famille quelconque de fermés est un fermé.
+        \item L'union d'une famille finie de fermés est un fermé.
+    \end{enumerate}
+}
+
+\remark{Il est important de noter qu'il existe des ensembles qui ne sont ni ouverts ni fermés, ainsi que des ensembles qui sont à la fois ouverts et fermés (appelés \textit{ouverts-fermés}).}
+
+\definition{
+    Soit $A \subset E$. On appelle \textbf{intérieur} de $A$ et on note $\overset{\circ}{A}$ l'union de tous les ouverts contenus dans $A$. On a :
+    $$ \overset{\circ}{A} = \bigcup \{ U \subset A \mid U \text{ est un ouvert de } E \} $$
+}
+
+\definition{
+    Soit $A \subset E$. On appelle \textbf{adhérence} de $A$ et on note $\overline{A}$ l'intersection de tous les fermés contenant $A$. On a :
+    $$ \overline{A} = \bigcap \{ F \supset A \mid F \text{ est un fermé de } E \} $$
+}
+
+\definition{
+    Soit $A \subset E$. On appelle \textbf{frontière} de $A$ et on note $\partial A$ la différence entre l'adhérence et l'intérieur de $A$. On a :
+    $$ \partial A = \overline{A} \setminus \overset{\circ}{A} $$
+}
+
+\example{
+    Soit $A = (0,1) \subset \mathbb{R}$. Alors :
+    \begin{itemize}
+        \item $\overset{\circ}{A} = ]0,1[$,
+        \item $\overline{A} = [0,1]$,
+        \item $\partial A = \{0,1\}$.
+    \end{itemize}
+}
+
+\theorem{Lemme}{Propriétés de l'intérieur et de l'adhérence}{false}{
+    Soit $A \subset E$. Alors :
+    \begin{enumerate}
+        \item $\overset{\circ}{A} \subset A \subset \overline{A}$,
+        \item si $A$ est ouvert, alors $\overset{\circ}{A} = A$,
+        \item si $A$ est fermé, alors $\overline{A} = A$,
+    \end{enumerate}
+}
+
+\training{Montrer les propriétés de l'intérieur et de l'adhérence.}
+\noindent \carreaux{8}
+
+\subsection{Voisinages}
+
+\definition{
+    Soit $x \in E$. Soit $V \subset E$. On dit que $V$ est un \textbf{voisinage} de $x$ si $\exists r > 0$ tel que $B(x,r) \subset V$.
+}
+\begin{center}
+\begin{tikzpicture}[scale=1, >=stealth]
+
+  % 1. Dessin de l'ensemble V (Voisinage) - Frontière continue
+  \fill[gray!10] plot[smooth cycle, tension=0.7] coordinates {(-0.5,2) (2,2.5) (3.5,1) (3,-1.5) (0,-2) (-1.5,-0.5)};
+  \draw[black, thick] plot[smooth cycle, tension=0.7] coordinates {(-0.5,2) (2,2.5) (3.5,1) (3,-1.5) (0,-2) (-1.5,-0.5)};
+  \node[black] at (2.8, 1.3) {\large $V$};
+
+  % 2. Placement du point x (centre de la boule)
+  \coordinate (X) at (0.6, 0.1);
+  
+  % 3. Dessin de la boule ouverte B(x,r)
+  % On utilise un cercle parfait pour représenter graphiquement la boule métrique
+  \fill[blue!10] (X) circle (1.1cm);
+  \draw[blue!70!black, thick, dashed] (X) circle (1.1cm);
+  
+  % Affichage du rayon r
+  \draw[blue!70!black, ->, dashed] (X) -- node[above, pos=0.6, black] {$r$} +(45:1.1cm);
+  
+  % Nom de la boule
+  \node[blue!70!black] at (1.2, -0.7) {\small $B(x,r)$};
+
+  % Repère du point x
+  \fill[red] (X) circle (2pt) node[left, red!30!black] {\large $x$};
+
+  % 4. Légende descriptive en bas
+  \node[text width=6cm, align=center, font=\small, draw=gray!30, rounded corners, fill=white] at (1,-2.8) {
+    \textbf{Illustration du voisinage} \\
+    $\exists r > 0 \text{ tel que } B(x,r) \subset V$
+  };
+
+\end{tikzpicture}
+\end{center}
+
+\remark{On notera $\mathcal{V}(x)$ l'ensemble des voisinages de $x$.}
+
+\theorem{Proposition}{Équivalence sur les voisinages}{false}{
+    Soit $A \subset E$.
+    \begin{enumerate}
+        \item $A$ est un ouvert $\iff \forall x \in A, A \in \mathcal{V}(x)$ \textit{(c'est-à-dire que $A$ est un voisinage de chacun de ses points)},
+        \item $A$ est un voisinage de $x \iff x \in \overset{\circ}{A}$.
+    \end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\definition{
+    Soit $A \subset E$. On dit que $A$ est \textbf{dense} dans $E$ si $\overline{A} = E$.
+}
+\remark{On le verra plus tard, mais autrement dit, $A$ est dense dans $E$ si tout point de $E$ est limite d'une suite de points de $A$.}
+\example{L'ensemble des rationnels $\mathbb{Q}$ est dense dans $\mathbb{R}$. En effet, pour tout réel $x \in \mathbb{R}$, il existe une suite de rationnels $(q_n)_{n \in \mathbb{N}}$ telle que $q_n \to x$.}
+
+\section{Suites et limites}
+
+\subsection{Généralités sur les suites}
+\definition{
+    Soit $A \subset E$. Une \textbf{suite} d'éléments de $A$ est une application $k \in \mathbb{N} \mapsto x_k \in A$, souvent notée $(x_k)_{k \in \mathbb{N}}$.
+}
+
+\definition{
+    Soit $A \subset E$ et soit $(x_k)_{k \in \mathbb{N}}$ une suite d'éléments de $A$.\\
+    Une \textbf{suite extraite} de $(x_k)_{k \in \mathbb{N}}$ est une suite $(x_{\phi(k)})_{k \in \mathbb{N}}$ où $\phi : \mathbb{N} \to \mathbb{N}$ est une application strictement croissante.
+}
+
+\example{
+    Soit $(x_k)_{k \in \mathbb{N}}$ la suite définie par $x_k = (-1)^k$. Alors $(x_{2k})_{k \in \mathbb{N}}$ est une suite extraite de $(x_k)_{k \in \mathbb{N}}$, et elle est constante égale à $1$.
+}
+
+\subsection{Convergence des suites}
+
+\definition{
+    
+    Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $E$. On dit que $(x_n)_{n \in \mathbb{N}}$ \textbf{converge} vers un élément $l \in E$ si :
+    $$\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, \|x_n - l\| < \varepsilon.$$
+    Dans ce cas, on écrit $\lim_{n \to +\infty} x_n = l$ ou $x_n \to l$.
+}
+
+\remark{De manière équivalente, on peut dire que $(x_n)_{n \in \mathbb{N}}$ converge vers $l$ :
+\begin{itemize}
+    \item si $\lim_{n \to +\infty} \|x_n - l\| = 0$.
+    \item si $\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, x_n \in B(l,\varepsilon)$.
+\end{itemize}}
+
+\training{Montrer que la suite $(x_n)_{n \in \mathbb{N}}$ définie par $x_n = (\frac{1}{n}, 1 - \frac{1}{n})$ converge vers $(0,1)$ selon les normes $1$, $2$ et $\infty$ sur $\mathbb{R}^2$.}
+\noindent \carreaux{6}
+
+\training{Montrer que la suite de fonctions $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(t) = t^n$ converge pour la norme $1$ vers la limite $f(t) = 0$, mais pas pour la norme $\infty$.}
+\noindent \carreaux{4}
+
+\remark{Dans le cas d'espaces vectoriels normés de dimension finie, par équivalence des normes, la convergence d'une suite ne dépend pas de la norme choisie. }
+
+\theorem{Proposition}{Unicité de la limite}{false}{
+    Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $E$. Si $(x_n)_{n \in \mathbb{N}}$ converge vers $l_1$ et $l_2$, alors $l_1 = l_2$.
+}
+\noindent{\textbf{Preuve :} Soit $\varepsilon > 0$.\\
+Considérons $N_\epsilon$ tel que $$\| x_k - l_1 \| < \varepsilon/2 \text{ et } \| x_k - l_2 \| < \varepsilon/2 \text{ pour tout } k \ge N_\epsilon.$$
+On remarque que $N_\varepsilon$ existe car $(x_n)_{n \in \mathbb{N}}$ converge. Par l'inégalité triangulaire, on a :
+$$ \| l_1 - l_2 \| = \| l_1 - x_k + x_k - l_2 \| \le \| l_1 - x_k \| + \| x_k - l_2 \| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$
+et comme $\varepsilon$ est arbitraire, on en déduit que $l_1 = l_2$. $ \hfill \square$
+}
+
+\theorem{Proposition}{}{false}{
+    Toute suite convergente est bornée.
+}
+\noindent\textbf{Preuve :} Soit $\{x_k\}$ une suite convergente vers $l$. Posons $\varepsilon = 1$, il existe $N \in \mathbb{N}$ tel que $x_k \in B(l, 1)$ pour tout $k \ge N$. L'ensemble des vecteurs $\{x_0, x_1, \dots, x_{N-1}\}$ est fini, et on peut poser $r = \max_{k < N} \|x_k\| < +\infty$. En posant maintenant $R = \max(r + 1, \|l\| + 1)$, on a la dichotomie
+\begin{itemize}
+    \item si $k < N$, $\|x_k\| < r + 1 \le R$;
+    \item si $k \ge N$, $\|x_k\| = \|x_k - l + l\| \le \|x_k - l\| + \|l\| \le 1 + \|l\| \le R$.
+\end{itemize}
+Dans les deux cas on conclut que $x_k \in B(0, R)$. \hfill $\square$
+
+\theorem{Proposition}{Convergence des suites et des suites extraites}{false}{
+    Toute sous-suite d'une suite convergente converge vers la même limite.
+}
+\noindent\textbf{Preuve :} Soit $\{x_k\}_{k \in \mathbb{N}}$ une suite convergente vers la limite $x \in E$. Alors
+$$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_k - x\| < \varepsilon.$$
+Soit $\{x_{\varphi(k)}\}_{k \in \mathbb{N}}$ une sous-suite, puisque $\varphi$ est monotone strictement croissante, $\varphi(n) \ge n$, on en déduit que
+$$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_{\varphi(k)} - x\| < \varepsilon$$
+ce qui implique que $x_{\varphi(k)} \to x$. \hfill $\square$
+
+\theorem{Proposition}{Combinaison linéaire de suites convergentes}{false}{
+    Soient $(x_n)_{n \in \mathbb{N}}$ et $(y_n)_{n \in \mathbb{N}}$ deux suites convergentes vers $x$ et $y$ respectivement. Alors pour tout $\alpha, \beta \in \mathbb{R}$, la suite $(\alpha x_n + \beta y_n)_{n \in \mathbb{N}}$ converge vers $\alpha x + \beta y$.
+}
+
+\training{Montrer la proposition précédente.}
+\noindent \carreaux{6}
+
+\theorem{Proposition}{Convergence et adhérence}{false}{
+    Soit $A \subset E$. Alors $a \in \overline{A}$ si et seulement si il existe une suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $A$ qui converge vers $a$.
+}
+\noindent\textbf{Preuve :} \\
+$\Rightarrow/$ Pour tout $\varepsilon > 0$ $B(a,\varepsilon) \cap \{x_k\}_k \neq \varnothing$ par la remarque sur les définitions équivalentes de la convergence. Par le lemme sur les propriétés de l'intérieur et de l'adhérence, on a que $a \in \overline{A}$. \\[0.5em]
+$\Leftarrow/$ Pour tout $k \in \mathbb{N}$ posons $\varepsilon = \frac{1}{k}$, par le même lemme $B(a,1/k) \cap A \neq \varnothing$ et posons $x_k$ élément quelconque de $B(a,1/k) \cap A$. Alors la suite construite $\{x_k\}_k \subset A$ et $x_k \to a$. \hfill $\square$
+
+\theorem{Proposition}{Caractérisation des fermés par les suites}{false}{
+    Soit $F \subset E$. Alors $F$ est fermé si et seulement si pour toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $F$ qui converge vers un élément $x \in E$, on a $x \in F$.
+}
+
+\training{Montrer que $B(0,1) \setminus \{0\}$ est ouvert et que $\overline{B}(0,1) \setminus \{0\}$ n'est ni ouvert, ni fermé.}
+\noindent \carreaux{10}
+
+\newpage
+\tableofcontents
+\end{document}

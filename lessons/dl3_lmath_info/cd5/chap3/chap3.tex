@@ -1,0 +1,116 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Calcul différentiel}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Compacité\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
+
+\section{Définition et premières propriétés}
+
+\definition{
+    Soit $K \subset \mathbb{R}^n$. On dit que $K$ est \textbf{compact} si toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $K$ admet une sous-suite convergente vers un élément de $K$.
+}
+
+\example{Un singleton $\{x\}$ est compact. En effet, toute suite $(x_n)$ d'éléments de $\{x\}$ est constante et converge vers $x \in \{x\}$.}
+
+\remark{Tout comme la notation de convergence sur $\mathbb{R}^n$, la notion de compacité est indépendante de la norme choisie sur $\mathbb{R}^n$ (par indépendance des normes).}
+
+\theorem{Théorème de Bolzano-Weierstrass}{Segments et compacité}{true}{
+    Tout segment $[a,b] \subset \mathbb{R}$ est compact.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{}{false}{
+    Soit $F \subset K \subset \mathbb{R}^n$. Supposons que $K$ est compact et que $F$ est fermé. Alors $F$ est compact.
+}
+\noindent{\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $F$. Comme $F \subset K$ et que $K$ est compact, il existe une sous-suite $(x_{n_k})_{k \in \mathbb{N}}$ qui converge vers un élément $x \in K$.\\
+Or $(x_{n_k})_{k \in \mathbb{N}}$ est une suite d'éléments de $F$ et $F$ est fermé, donc $x \in F$. On en déduit que $x_{n_k} \to x \in F$, et donc que $F$ est compact. \hfill $\square$
+}
+
+\theorem{Proposition}{Produit cartésien de compacts}{false}{
+    Soient $K_1 \subset \mathbb{R}^{p}$ et $K_2 \subset \mathbb{R}^{q}$ deux compacts. \\
+    Alors $K_1 \times K_2 \subset \mathbb{R}^{p+q}$ est compact.
+}
+\noindent{\textbf{Preuve :} On choisit sur $\mathbb{R}^{p+q}$ la norme
+$$\|(x, y)\| = \max(\|x\|_{(n)}, \|y\|_{(l)}) \quad \forall(x, y) \in \mathbb{R}^{p+q}.$$
+Soit $\{(x_n, y_n)\}_{n \in \mathbb{N}}$ une suite de $K_1 \times K_2$. Puisque $K_1$ est compact, il existe une sous-suite $\{x_{\varphi(n)}\}_{n \in \mathbb{N}}$ et un élément $x \in K_1$ tel que $x_{\varphi(n)} \to x$ dans $\mathbb{R}^p$.\\
+
+De la même manière, puisque $K_2$ est compact, il existe une sous-suite $\{y_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ et un élément $y \in K_2$ tel que $y_{\psi(\varphi(n))} \to y$ dans $\mathbb{R}^q$ (on souligne le fait que la deuxième sous-suite est extraite à partir de la première sous-suite, et pas de la suite originelle).\\
+
+La suite $\{x_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ est sous-suite d'une suite convergente, elle converge donc vers la même limite $x$. La sous-suite $\{(x_{\psi(\varphi(n))}, y_{\psi(\varphi(n))})\}_{n \in \mathbb{N}} \subset K_1 \times K_2$ converge vers $(x, y) \in K_1 \times K_2$. \hfill $\square$
+}
+\theorem{Théorème de Bolzano-Weierstrass}{Caractérisation des compacts}{true}{
+    Soit $K \subset \mathbb{R}^n$. Alors $K$ est compact si et seulement si $K$ est fermé et borné.
+}
+
+\attention{Cela n'est vrai que pour les sous-ensembles de $\mathbb{R}^n$. Dans un espace vectoriel normé quelconque, il existe des ensembles fermés et bornés qui ne sont pas compacts.}
+
+\ndlr{cf. Laurent pour la preuve.}
+\cexample{Soit $X = \mathcal{C}([0,1])$ muni de la norme $\| \cdot \|_\infty$. Alors $\overline{B}(0,1)$ (un ferme et borné) n'est pas un sous-ensemble compact de $X$. En effet, la suite $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(x) = x^n$ est contenue dans $\overline{B}(0,1)$ mais ne possède pas de sous-suite convergente dans $X$.}
+
+\section{Continuité et compacité}
+
+\theorem{Théorème}{Image d'un compact par une fonction continue}{true}{
+    Soit $K \subset \mathbb{R}^n$ un compact et $f : K \to \mathbb{R}^m$ une fonction continue. Alors $f(K)$ est un compact de $\mathbb{R}^m$.
+}
+\noindent{\textbf{Preuve :} Soit $f : A \subset \mathbb{R}^n \to \mathbb{R}^k$ une application continue et $K \subset A$ un compact, considérons $\{y_k\} \subset f(K)$ une suite quelconque et $\{x_k\} \subset K$ telle que $f(x_k) = y_k$. Puisque $K$ est un compact il existe $\{x_{\varphi(k)}\}$ sous-suite et $x \in K$ telle que $x_{\varphi(k)} \to x$. En outre, $f$ étant une fonction continue, on a
+$$\lim_{k \to +\infty} y_{\varphi(k)} = \lim_{k \to +\infty} f(x_{\varphi(k)}) = f(x) \in f(K).$$
+Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite convergente, $f(K)$ est un compact. \hfill $\square$
+}
+\theorem{Théorème}{Fonctions continues et bornes}{false}{
+    Une fonction continue sur un compact est bornée et atteint ses bornes.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\example{La fonction $f : \overline{B}(0,1) \to \mathbb{R}$ définie par $f(x,y) = x - x^2 + y^2$ atteint ses bornes car elle est continue et définie sur un ensemble compact.}
+
+\theorem{Théorème}{Heine-Cantor}{false}{
+    Toute fonction continue $f : K \subset \mathbb{R}^q \to \mathbb{R}^p$ sur un compact $K$ est uniformément continue.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+
+\section{Équivalence des normes}
+
+\theorem{Théoreme}{Équivalence des normes sur $\mathbb{R}^n$}{true}{
+    Toutes les normes sur $\mathbb{R}^n$ sont équivalentes.
+}
+\noindent\textbf{Preuve :} Par transitivité de l'équivalence, il suffit de montrer que toute norme $N$ est équivalente, entre-autre, à la norme $\| \cdot \|_\infty$.\\
+\begin{itemize}
+    \item Soit $(e_1, \ldots, e_n)$ une base de $\mathbb{R}^n$. Soit $x \in \mathbb{R}^n$ et $x = \sum_{i=1}^{n} x_i e_i$. Alors, on a :\\
+    $$N(x) = N(x_1 e_1 + \ldots + x_n e_n) \leq |x_1| N(e_1) + \ldots + |x_n| N(e_n) \leq (\sum_{i=1}^{n} N(e_i)) \|x\|_\infty.$$
+    Ainsi, on peut prendre $\beta := \sum_{i=1}^{n} N(e_i)$.
+    \item Soit $K = \{ x : \|x\|_\infty = 1 \}$ un compact (car fermé et borné). La fonction $N : \mathbb{R}^n \to \mathbb{R}$ est lipschitzienne (et donc continue) par rapport à la norme $\| \cdot \|_\infty$ (on ne peut pas utiliser l'équivalence des normes ici !). En effet, pour tous $x,y \in \mathbb{R}^n$, on a :
+    $$|N(x) - N(y)| \leq N(x-y) \leq \beta \|x-y\|_\infty.$$
+    Il s'ensuit que $N$ atteint sa borne inférieure sur $K$ : il existe $\bar x \in K$ tel que :
+    $$N(\bar x) \leq N(x), \forall x \in K.$$
+    Posons $\alpha := N(\bar x) > 0$ (car $\bar x \neq 0$). Alors, pour tout $x \in \mathbb{R}^n \setminus \{0\}$, on a :
+    $$\frac{x}{\|x\|_\infty} \in K \implies N\left(\frac{x}{\|x\|_\infty}\right) \geq N(\bar x) = \alpha \implies N(x) \geq \alpha \|x\|_\infty.$$
+    Ainsi, on peut prendre $\alpha := N(\bar x)$.
+    Pour $x = 0$, on a $N(0) = 0 = \alpha \|0\|_\infty$.\\
+    Ainsi, on a montré que $\alpha \|x\|_\infty \leq N(x) \leq \beta \|x\|_\infty$ pour tout $x \in \mathbb{R}^n$, et donc que les normes $N$ et $\| \cdot \|_\infty$ sont équivalentes. \hfill $\square$
+\end{itemize}
+
+\newpage
+\tableofcontents
+\end{document}
