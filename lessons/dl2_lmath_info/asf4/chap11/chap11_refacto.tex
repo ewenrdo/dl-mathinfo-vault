@@ -85,6 +85,32 @@
 
 \remark{Quand on trouve des expressions de la forme $x^2 + y^2$ au dénominateur, il est souvent utile de passer en coordonnées polaires pour étudier la continuité.}
 
+\subsection{Changement en coordonnées polaires}
+
+\definition{
+    Le passage en coordonnées polaires dans $\mathbb{R}^2$ associe à tout point $(x,y) \neq (0,0)$ un couple $(r, \theta) \in ]0, +\infty[ \times [0, 2\pi[$ tel que :
+    \[ x = r\cos(\theta) \quad \text{et} \quad y = r\sin(\theta) \]
+    On a alors $r = \sqrt{x^2 + y^2}$.
+}
+
+\method{Étudier la continuité en $(0,0)$}{
+    Pour étudier la limite en $(0,0)$ d'une fonction $f(x,y)$, on exprime $f(r\cos(\theta), r\sin(\theta))$. Si l'expression tend vers une constante indépendante de $\theta$ lorsque $r \to 0^+$, la fonction est continue.
+}
+
+\example{
+    Soit $f(x,y) = \frac{x^3}{x^2+y^2}$ pour $(x,y) \neq (0,0)$ et $f(0,0)=0$. En coordonnées polaires :
+    \[ f(r\cos(\theta), r\sin(\theta)) = \frac{r^3\cos^3(\theta)}{r^2} = r\cos^3(\theta) \]
+    Comme $|r\cos^3(\theta)| \le r \xrightarrow[r \to 0^+]{} 0$, $f$ est continue en $(0,0)$.
+}
+
+\cexample{
+    Soit $f(x,y) = \frac{x^2}{x^2+y^2}$ pour $(x,y) \neq (0,0)$ et $f(0,0)=0$. En coordonnées polaires :
+    \[ f(r\cos(\theta), r\sin(\theta)) = \frac{r^2\cos^2(\theta)}{r^2} = \cos^2(\theta) \]
+    La limite dépend de l'angle $\theta$ quand $r \to 0^+$, donc $f$ n'est pas continue en $(0,0)$. En effet, on peut trouver deux droites d'approche donnant des limites différentes, par exemple $y=0$ ($\sim \theta=0$) et $y=x$ ($\sim \theta=\frac{\pi}{4}$).
+}
+
+\remark{Cette méthode est particulièrement performante lorsque l'expression comporte le terme $x^2+y^2$, car il se simplifie directement en $r^2$.}
+
 \subsection{Continuité uniforme}
 \definition{
     Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :
