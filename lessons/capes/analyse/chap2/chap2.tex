@@ -31,7 +31,7 @@ Avant d'entrer dans les calculs, il est crucial de comprendre la nature algébri
 \definition{
     Soit $I$ un intervalle de $\mathbb{R}$. Une équation différentielle linéaire du premier ordre est de la forme :
     \[
-        (E) : \quad a(t)x'(t) + b(t)x(t) = c(t)
+        (E) : \quad a(t)y'(t) + b(t)y(t) = c(t)
     \]
     où $a, b, c$ sont des fonctions continues sur $I$. Si $c(t) = 0$ pour tout $t \in I$, l'équation est dite \textbf{homogène} ou \textbf{sans second membre}, notée $(E_0)$.
 }
@@ -55,7 +55,7 @@ Avant d'entrer dans les calculs, il est crucial de comprendre la nature algébri
 
 \theorem{Théorème}{Théorème de Cauchy-Lipschitz linéaire}{false}{
     Soient $a, b, c$ des fonctions continues sur $I$, avec \textbf{$a(t) \neq 0$ pour tout $t \in I$}.\\
-    Pour tout $t_0 \in I$ et tout $x_0 \in \mathbb{R}$, il existe \textbf{une unique} solution $x$ de l'équation $a(t)x'(t) + b(t)x(t) = c(t)$ définie sur $I$ telle que :
+    Pour tout $t_0 \in I$ et tout $x_0 \in \mathbb{R}$, il existe \textbf{une unique} solution $x$ de l'équation $a(t)y'(t) + b(t)y(t) = c(t)$ définie sur $I$ telle que :
     \[
         x(t_0) = x_0
     \]
@@ -77,22 +77,22 @@ Cela découle directement de la linéarité de l'opérateur différentiel. En ef
 
 \section{Équations du premier ordre à coefficients constants}
 
-Il s'agit du cas où $a$ et $b$ sont des constantes réelles (avec $a \neq 0$). Quitte à diviser par $a$, on se ramène systématiquement à la forme canonique $x'(t) - \alpha x(t) = \beta(t)$.
+Il s'agit du cas où $a$ et $b$ sont des constantes réelles (avec $a \neq 0$). Quitte à diviser par $a$, on se ramène systématiquement à la forme canonique $y'(t) - \alpha y(t) = \beta(t)$.
 
 \subsection{Résolution du cas homogène}
 
 \theorem{Théorème}{Solutions de l'équation homogène}{false}{
-    Soit $\alpha \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'équation homogène $x'(t) - \alpha x(t) = 0$ sont les fonctions de la forme :
+    Soit $\alpha \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'équation homogène $y'(t) - \alpha y(t) = 0$ sont les fonctions de la forme :
     \[
-        x(t) = C \cdot e^{alpha t} \quad \text{où} \quad C \in \mathbb{R}
+        y(t) = C \cdot e^{\alpha t} \quad \text{où} \quad C \in \mathbb{R}
     \]
     L'espace des solutions $S_0$ est un espace vectoriel de \textbf{dimension 1} dont la famille $(t \mapsto e^{\alpha t})$ est une base.
 }
 
 \noindent{\textbf{Preuve :}\\
-Soit $x$ une solution de l'équation. Posons la fonction auxiliaire $g(t) = x(t)e^{-\alpha t}$. Elle est dérivable sur $\mathbb{R}$ et :
-\[ g'(t) = x'(t)e^{-\alpha t} - \alpha x(t)e^{-\alpha t} = (x'(t) - \alpha x(t))e^{-\alpha t} = 0 \]
-Puisque $g'=0$ sur l'intervalle $\mathbb{R}$, $g$ est une fonction constante. Il existe donc $C \in \mathbb{R}$ tel que $g(t) = C$, ce qui donne immédiatement $x(t) = C e^{\alpha t}$. Réciproquement, on vérifie aisément que ces fonctions sont solutions. $\Box$}
+Soit $x$ une solution de l'équation. Posons la fonction auxiliaire $g(t) = y(t)e^{\alpha t}$. Elle est dérivable sur $\mathbb{R}$ et :
+\[ g'(t) = y'(t)e^{\alpha t} + \alpha y(t)e^{\alpha t} = (y'(t) + \alpha y(t))e^{\alpha t} = 0 \]
+Puisque $g'=0$ sur l'intervalle $\mathbb{R}$, $g$ est une fonction constante. Il existe donc $C \in \mathbb{R}$ tel que $g(t) = C$, ce qui donne immédiatement $y(t) = C e^{\alpha t}$. Réciproquement, on vérifie aisément que ces fonctions sont solutions. $\Box$}
 
 \subsection{Recherche d'une solution particulière}
 
@@ -101,7 +101,7 @@ Pour résoudre l'équation complète, il est nécessaire de déterminer une solu
 \theorem{Théorème}{Second membre de la forme $P(t)e^{\omega t}$}{false}{
     Soient $\alpha, \omega \in \mathbb{R}$ et $P \in \mathbb{R}[X]$. Considérons l'équation :
     \[
-        (E) : \quad x'(t) - \alpha x(t) = P(t)e^{\omega t}
+        (E) : \quad y'(t) - \alpha y(t) = P(t)e^{\omega t}
     \]
     $(E)$ admet une solution particulière de la forme $x_p(t) = Q(t)e^{\omega t}$ où $Q$ est un polynôme tel que :
     \begin{itemize}
@@ -119,7 +119,7 @@ Pour résoudre l'équation complète, il est nécessaire de déterminer une solu
 }
 
 \example{
-    Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = (t+1)e^{3t}$.\\
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $y'(t) - 2y(t) = (t+1)e^{3t}$.\\
     Ici, $\alpha = 2$, $\omega = 3$ et $P(t) = t+1$ (de degré 1). Comme $\omega \neq \alpha$, on cherche $x_p(t) = (at+b)e^{3t}$.\\
     En dérivant : $x_p'(t) = a e^{3t} + 3(at+b)e^{3t} = (3at + a + 3b)e^{3t}$.\\
     En injectant dans $(E)$ et en simplifiant par $e^{3t} > 0$ :
@@ -130,7 +130,7 @@ Pour résoudre l'équation complète, il est nécessaire de déterminer une solu
 }
 
 \example{
-    Considérons le cas de résonance : $x'(t) - 2x(t) = e^{2t}$.\\
+    Considérons le cas de résonance : $y'(t) - 2y(t) = e^{2t}$.\\
     Ici, $\alpha = 2$, $\omega = 2$ et $P(t) = 1$ (de degré 0). Comme $\omega = \alpha$, on cherche $x_p(t) = a t e^{2t}$.\\
     En dérivant : $x_p'(t) = a e^{2t} + 2at e^{2t}$.\\
     En injectant dans l'équation : $(a e^{2t} + 2at e^{2t}) - 2(at e^{2t}) = e^{2t} \iff a e^{2t} = e^{2t} \implies a = 1$.\\
@@ -138,7 +138,7 @@ Pour résoudre l'équation complète, il est nécessaire de déterminer une solu
 }
 
 \method{Variation de la constante}{
-    Soit $\alpha \in \mathbb{R}$ et $\beta: I \to \mathbb{R}$ une fonction continue quelconque. Pour trouver une solution particulière de l'équation $x'(t) - \alpha x(t) = \beta(t)$, on cherche une fonction sous la forme :
+    Soit $\alpha \in \mathbb{R}$ et $\beta: I \to \mathbb{R}$ une fonction continue quelconque. Pour trouver une solution particulière de l'équation $y'(t) - \alpha y(t) = \beta(t)$, on cherche une fonction sous la forme :
     \[
         x_p(t) = C(t) e^{\alpha t}
     \]
@@ -160,7 +160,7 @@ En injectant cette expression dans l'équation différentielle complète $x_p'(t
 En multipliant chaque membre par $e^{-\alpha t}$, on trouve bien $C'(t) = \beta(t)e^{-\alpha t}$. $\Box$}
 
 \example{
-    Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = e^{3t}$.\\
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $y'(t) - 2y(t) = e^{3t}$.\\
     En appliquant la méthode de variation de la constante, on cherche une solution particulière de la forme $x_p(t) = C(t)e^{2t}$. En injectant dans l'équation, on trouve :
     \[
         C'(t)e^{2t} = e^{3t} \iff C'(t) = e^{t}
@@ -176,7 +176,7 @@ En multipliant chaque membre par $e^{-\alpha t}$, on trouve bien $C'(t) = \beta(
     Le principe de superposition s'avère particulièrement efficace lorsque le second membre combine des fonctions de natures hybrides (par exemple $\beta(t) = t + e^{2t}$). On traite chaque composante de manière indépendante avant d'effectuer la somme des solutions particulières associées.
 }
 
-\training{Résoudre sur $\mathbb{R}$ l'équation différentielle $x'(t) - 2x(t) = t + e^{2t}$ en combinant habilement les structures de solutions de la forme $P(t)e^{\omega t}$ et le principe de superposition.}
+\training{Résoudre sur $\mathbb{R}$ l'équation différentielle $y'(t) - 2y(t) = t + e^{2t}$ en combinant habilement les structures de solutions de la forme $P(t)e^{\omega t}$ et le principe de superposition.}
 \noindent\carreaux{10}
 
 
@@ -187,7 +187,7 @@ Ces équations ne s'inscrivent pas nécessairement dans un cadre linéaire, mais
 \definition{
     Une équation différentielle du premier ordre est dite \textbf{à variables séparables} si elle est modélisable sous la forme :
     \[
-        x'(t) = g(t) \cdot h(x(t))
+        y'(t) = g(t) \cdot h(y(t))
     \]
     où $g$ est continue sur un intervalle $I$ et $h$ est continue sur un intervalle $J$.
 }
@@ -201,15 +201,15 @@ Ces équations ne s'inscrivent pas nécessairement dans un cadre linéaire, mais
 }
 
 \method{Résolution rigoureuse}{
-    Pour résoudre de manière rigoureuse l'équation $x'(t) = g(t) \cdot h(x(t))$ sur un intervalle :
+    Pour résoudre de manière rigoureuse l'équation $y'(t) = g(t) \cdot h(y(t))$ sur un intervalle :
     \begin{enumerate}
-        \item \textbf{Solutions stationnaires :} On identifie d'abord les racines de $h$. Si un réel $x_0 \in J$ vérifie $h(x_0) = 0$, la fonction constante $x(t) = x_0$ constitue une solution de l'équation.
-        \item \textbf{Solutions non constantes :} Sur un intervalle d'étude où $h(x(t)) \neq 0$, on divise par $h(x(t))$ :
+        \item \textbf{Solutions stationnaires :} On identifie d'abord les racines de $h$. Si un réel $x_0 \in J$ vérifie $h(x_0) = 0$, la fonction constante $y(t) = x_0$ constitue une solution de l'équation.
+        \item \textbf{Solutions non constantes :} Sur un intervalle d'étude où $h(y(t)) \neq 0$, on divise par $h(y(t))$ :
         \[
-            \frac{x'(t)}{h(x(t))} = g(t)
+            \frac{y'(t)}{h(y(t))} = g(t)
         \]
-        \item On procède à l'intégration temporelle des deux membres : $\int \frac{x'(t)}{h(x(t))} \, dt = \int g(t) \, dt$.
-        \item Par application du changement de variable de classe $\mathcal{C}^1$ donné par $u = x(t)$ (impliquant $du = x'(t)dt$), on se ramène au calcul d'une primitive de fonctions à variables découplées :
+        \item On procède à l'intégration temporelle des deux membres : $\int \frac{y'(t)}{h(y(t))} \, dt = \int g(t) \, dt$.
+        \item Par application du changement de variable de classe $\mathcal{C}^1$ donné par $u = y(t)$ (impliquant $du = y'(t)dt$), on se ramène au calcul d'une primitive de fonctions à variables découplées :
         \[
             \int \frac{1}{h(u)} \, du = \int g(t) \, dt
         \]
@@ -217,16 +217,16 @@ Ces équations ne s'inscrivent pas nécessairement dans un cadre linéaire, mais
 }
 
 \example{
-    L'équation homogène linéaire à coefficients non constants $x'(t) = a(t)x(t)$ correspond au cas standard $g(t) = a(t)$ et $h(x) = x$. La fonction nulle $x(t) = 0$ est la solution stationnaire évidente. Sur tout intervalle ne contenant pas d'annulation, l'intégration donne $\ln|x| = A(t) + K$, menant aux solutions $x(t) = C e^{A(t)}$ avec $C \in \mathbb{R}$.
+    L'équation homogène linéaire à coefficients non constants $y'(t) = a(t)y(t)$ correspond au cas standard $g(t) = a(t)$ et $h(x) = x$. La fonction nulle $y(t) = 0$ est la solution stationnaire évidente. Sur tout intervalle ne contenant pas d'annulation, l'intégration donne $\ln|x| = A(t) + K$, menant aux solutions $y(t) = C e^{A(t)}$ avec $C \in \mathbb{R}$.
 }
 
-\training{Résoudre l'équation différentielle non linéaire à variables séparables suivante : $x'(t) = t \cdot x(t)^2$ sur un intervalle à définir avec précision, soumise à la condition initiale $x(0) = 1$.}
+\training{Résoudre l'équation différentielle non linéaire à variables séparables suivante : $y'(t) = t \cdot y(t)^2$ sur un intervalle à définir avec précision, soumise à la condition initiale $x(0) = 1$.}
 \noindent\carreaux{10}
 
 
 \section{Équations linéaires du second ordre à coefficients constants}
 
-On étudie les équations de la forme $(E) : a x''(t) + b x'(t) + c x(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$.
+On étudie les équations de la forme $(E) : a y''(t) + b y'(t) + c y(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$.
 
 \definition{
     L'équation algébrique $a r^2 + b r + c = 0$ est appelée \textbf{l'équation caractéristique} associée à l'équation différentielle homogène $a x'' + b x' + c x = 0$. On note $\Delta = b^2 - 4ac$ son discriminant.
@@ -236,35 +236,35 @@ On étudie les équations de la forme $(E) : a x''(t) + b x'(t) + c x(t) = d(t)$
     L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a x'' + b x' + c x = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa structure dépend de la nature des racines de l'équation caractéristique :
     \begin{itemize}
         \item \textbf{Si $\Delta > 0$ :} Deux racines réelles distinctes $r_1$ et $r_2$.
-        \[ x(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t} \quad (C_1, C_2 \in \mathbb{R}) \]
+        \[ y(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t} \quad (C_1, C_2 \in \mathbb{R}) \]
         \item \textbf{Si $\Delta = 0$ :} Une racine double réelle $r_0$.
-        \[ x(t) = (C_1 t + C_2) e^{r_0 t} \quad (C_1, C_2 \in \mathbb{R}) \]
+        \[ y(t) = (C_1 t + C_2) e^{r_0 t} \quad (C_1, C_2 \in \mathbb{R}) \]
         \item \textbf{Si $\Delta < 0$ :} Deux racines complexes conjuguées $r = \alpha \pm i\beta$.
-        \[ x(t) = e^{\alpha t} \left( C_1 \cos(\beta t) + C_2 \sin(\beta t) \right) \quad (C_1, C_2 \in \mathbb{R}) \]
+        \[ y(t) = e^{\alpha t} \left( C_1 \cos(\beta t) + C_2 \sin(\beta t) \right) \quad (C_1, C_2 \in \mathbb{R}) \]
     \end{itemize}
 }
 
 \noindent{\textbf{Preuve (pour le cas $\Delta = 0$) :}\\
 Si $\Delta = 0$, la racine double vaut $r_0 = -\frac{b}{2a}$, ce qui implique $2ar_0 + b = 0$ et $ar_0^2 + br_0 + c = 0$. \\
-Soit $x$ une solution. Posons $g(t) = x(t)e^{-r_0 t}$, d'où $x(t) = g(t)e^{r_0 t}$. En dérivant successivement :
-\[ x'(t) = (g'(t) + r_0 g(t))e^{r_0 t} \]
-\[ x''(t) = (g''(t) + 2r_0 g'(t) + r_0^2 g(t))e^{r_0 t} \]
+Soit $x$ une solution. Posons $g(t) = y(t)e^{-r_0 t}$, d'où $y(t) = g(t)e^{r_0 t}$. En dérivant successivement :
+\[ y'(t) = (g'(t) + r_0 g(t))e^{r_0 t} \]
+\[ y''(t) = (g''(t) + 2r_0 g'(t) + r_0^2 g(t))e^{r_0 t} \]
 En injectant ces expressions au sein de l'équation $a x'' + b x' + c x = 0$ puis en simplifiant par le facteur strictement positif $e^{r_0 t}$, on obtient :
 \[ a g''(t) + (2a r_0 + b) g'(t) + (a r_0^2 + b r_0 + c) g(t) = 0 \]
 Par les relations polynomiales de $r_0$, l'équation se réduit à : $a g''(t) = 0 \implies g''(t) = 0$. \\
-Une fonction de dérivée seconde nulle étant nécessairement affine, il existe $C_1, C_2 \in \mathbb{R}$ tels que $g(t) = C_1 t + C_2$. On en déduit la forme requise $x(t) = (C_1 t + C_2)e^{r_0 t}$. $\Box$}
+Une fonction de dérivée seconde nulle étant nécessairement affine, il existe $C_1, C_2 \in \mathbb{R}$ tels que $g(t) = C_1 t + C_2$. On en déduit la forme requise $y(t) = (C_1 t + C_2)e^{r_0 t}$. $\Box$}
 
 \example{
-    Résoudre sur $\mathbb{R}$ l'équation différentielle $x''(t) + x(t) = 0$. L'équation caractéristique est $r^2 + 1 = 0$, de racines complexes $r = \pm i$. La solution générale homogène s'écrit :
+    Résoudre sur $\mathbb{R}$ l'équation différentielle $y''(t) + y(t) = 0$. L'équation caractéristique est $r^2 + 1 = 0$, de racines complexes $r = \pm i$. La solution générale homogène s'écrit :
     \[
-        x(t) = C_1 \cos(t) + C_2 \sin(t) \quad (C_1, C_2 \in \mathbb{R})
+        y(t) = C_1 \cos(t) + C_2 \sin(t) \quad (C_1, C_2 \in \mathbb{R})
     \]
 }
 
 \training{Résoudre sur $\mathbb{R}$ le problème de Cauchy d'ordre 2 formulé par :
 \[
     \begin{cases}
-        x''(t) + x(t) = 0 \\
+        y''(t) + y(t) = 0 \\
         x(0) = 1 \\
         x'(0) = 0
     \end{cases}
