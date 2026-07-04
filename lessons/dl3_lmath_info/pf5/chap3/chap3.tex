@@ -33,7 +33,7 @@ Nous étudierons principalement les produits (tuples, enregistrements) et les so
 
 \section{Produit cartésien ($n$-uplets)}
 \subsection{Définition et syntaxe}
-Le type produit cartésien permet d'associer un nombre fixe d'éléments de types potentiellement différents au sein d'une structure unique appelée $n$-uplet (ou *tuple*).
+Le type produit cartésien permet d'associer un nombre fixe d'éléments de types potentiellement différents au sein d'une structure unique appelée $n$-uplet (ou \textit{tuple}).
 
 \definition{Un $n$-uplet $(e_1, e_2, \dots, e_n)$ possède le type produit $t_1 * t_2 * \dots * t_n$ si chaque élément $e_i$ possède le type $t_i$.}
 
@@ -58,6 +58,8 @@ Déclaration et inférence de types simples de tuples :
     \item Écrire des fonctions prenant un $n$-uplet en argument (à ne pas confondre avec des fonctions curryfiées à plusieurs arguments).
     \item Écrire des fonctions qui renvoient plusieurs résultats groupés.
 \end{enumerate}
+
+\vocabulary{On parle de \textbf{curryfication} lorsqu'une fonction à plusieurs arguments est transformée en une suite de fonctions à un seul argument. En réalité, en OCaml, toutes les fonctions sont curryfiées par défaut.}
 
 \subsection{Accès aux éléments d'un $n$-uplet}
 
