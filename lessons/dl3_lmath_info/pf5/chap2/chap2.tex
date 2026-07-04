@@ -86,35 +86,49 @@ Voici les fonctions incontournables, leurs signatures, leurs rôles et leurs com
     \item \textbf{Rôle :} Concatène deux listes pour n'en former qu'une seule.
     \item \textbf{Complexité :} $\Theta(N)$ où $N$ est la taille de la \textbf{première} liste uniquement (car elle doit être parcourue et recréée pour pointer sur la deuxième).
 \end{itemize}
+\subsection{Théorie du Filtrage par Motif (Pattern Matching)}
 
-\section{Exemples de code et Pattern Matching (motifs)}
+\method{Le mécanisme de filtrage}{
+    Le \texttt{match ... with} permet d'évaluer une expression en la comparant successivement à une série de motifs (structures). Dès qu'un motif correspond, la branche associée est exécutée. En OCaml, le compilateur vérifie l'exhaustivité (tous les cas possibles sont traités) et la redondance (aucun motif n'est inutile).
+}
 
-La manière idiomatique de manipuler les listes est d'associer la récursivité au filtrage par motif (\textit{pattern matching}).
+\remark{
+    Le motif \texttt{head::tail} sépare de manière sûre la tête du reste de la liste, évitant ainsi l'utilisation de fonctions partielles comme \texttt{List.hd} ou \texttt{List.tl} qui peuvent lever des exceptions sur une liste vide.
+}
 
-\subsection{Exemple 1 : Calculer la somme d'une liste d'entiers}
-On applique un pattern matching sur la structure inductive de la liste.
-
+\example{Voici un exemple de fonction utilisant le filtrage par motif pour calculer la somme des éléments d'une liste d'entiers :}
 \begin{lstlisting}[language=Caml]
-let rec somme liste =
-  match liste with
-  | [] -> 0                  (* Cas de base : la liste est vide *)
-  | tete :: reste -> tete + (somme reste) (* Cas recursif *)
+let rec sum_list lst =
+  match lst with
+  | [] -> 0
+  | head :: tail -> head + sum_list tail
 \end{lstlisting}
 
-\noindent \textbf{Analyse de complexité :} La fonction visite chaque maillon une seule fois. La complexité temporelle est en $\Theta(N)$.
+\remark{Le \textit{pattern matching} met en évidence l'importance de la récursion en programmation fonctionnelle, permettant de traiter des structures de données inductives comme les listes de manière élégante et sûre.}
 
-\subsection{Exemple 2 : Implémentation alternative de la concaténation}
-Voici comment reconstruire l'opérateur \texttt{@} à la main :
+\subsection{Le Filtrage Simultané (Double Match)}
 
+\method{Filtrage de plusieurs valeurs}{
+    Il est possible de filtrer plusieurs expressions simultanément en les regroupant dans un n-uplet (couple, triplet, etc.) séparé par des virgules : \texttt{match expr1, expr2 with}. C'est la méthode optimale pour traiter deux listes en parallèle.
+}
+
+\example{Voici comment réaliser l'intersection de deux listes triées en une seule passe ($\Theta(N+M)$) grâce au double matching :}
+    
 \begin{lstlisting}[language=Caml]
-let rec concatener l1 l2 =
-  match l1 with
-  | [] -> l2
-  | tete :: reste -> tete :: (concatener reste l2)
+let rec inter_sorted l1 l2 =
+  match l1, l2 with
+  | [], _ -> []
+  | _, [] -> []
+  | head1 :: tail1, head2 :: tail2 ->
+      if head1 < head2 then inter_sorted tail1 l2
+      else if head1 > head2 then inter_sorted l1 tail2
+      else head1 :: inter_sorted tail1 tail2
 \end{lstlisting}
 
-\noindent \textbf{Analyse de complexité :} On observe bien graphiquement que seul le premier argument \texttt{l1} est déstructuré élément par élément, justifiant sa complexité en $\Theta(\text{length}(l1))$.
 
+\attention{
+    L'ordre des motifs compte. OCaml examine les lignes du haut vers le bas. Les cas généraux ou terminaux (comme \texttt{[], \_}) doivent être placés avant le cas structurel \texttt{head :: tail} pour intercepter correctement les listes vides.
+}
 \section{Fonctions d'ordre supérieur}
 
 Le module \texttt{List} brille par ses fonctions prenant d'autres fonctions en paramètres (fonctions d'ordre supérieur).
