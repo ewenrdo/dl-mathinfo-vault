@@ -229,11 +229,11 @@ Ces équations ne s'inscrivent pas nécessairement dans un cadre linéaire, mais
 On étudie les équations de la forme $(E) : a y''(t) + b y'(t) + c y(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$.
 
 \definition{
-    L'équation algébrique $a r^2 + b r + c = 0$ est appelée \textbf{l'équation caractéristique} associée à l'équation différentielle homogène $a x'' + b x' + c x = 0$. On note $\Delta = b^2 - 4ac$ son discriminant.
+    L'équation algébrique $a r^2 + b r + c = 0$ est appelée \textbf{l'équation caractéristique} associée à l'équation différentielle homogène $a y'' + b y' + c y = 0$. On note $\Delta = b^2 - 4ac$ son discriminant.
 }
 
 \theorem{Théorème}{Résolution du second ordre homogène}{false}{
-    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a x'' + b x' + c x = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa structure dépend de la nature des racines de l'équation caractéristique :
+    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a y'' + b y' + c y = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa structure dépend de la nature des racines de l'équation caractéristique :
     \begin{itemize}
         \item \textbf{Si $\Delta > 0$ :} Deux racines réelles distinctes $r_1$ et $r_2$.
         \[ y(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t} \quad (C_1, C_2 \in \mathbb{R}) \]
@@ -246,10 +246,10 @@ On étudie les équations de la forme $(E) : a y''(t) + b y'(t) + c y(t) = d(t)$
 
 \noindent{\textbf{Preuve (pour le cas $\Delta = 0$) :}\\
 Si $\Delta = 0$, la racine double vaut $r_0 = -\frac{b}{2a}$, ce qui implique $2ar_0 + b = 0$ et $ar_0^2 + br_0 + c = 0$. \\
-Soit $x$ une solution. Posons $g(t) = y(t)e^{-r_0 t}$, d'où $y(t) = g(t)e^{r_0 t}$. En dérivant successivement :
+Soit $y$ une solution. Posons $g(t) = y(t)e^{-r_0 t}$, d'où $y(t) = g(t)e^{r_0 t}$. En dérivant successivement :
 \[ y'(t) = (g'(t) + r_0 g(t))e^{r_0 t} \]
 \[ y''(t) = (g''(t) + 2r_0 g'(t) + r_0^2 g(t))e^{r_0 t} \]
-En injectant ces expressions au sein de l'équation $a x'' + b x' + c x = 0$ puis en simplifiant par le facteur strictement positif $e^{r_0 t}$, on obtient :
+En injectant ces expressions au sein de l'équation $a y'' + b y' + c y = 0$ puis en simplifiant par le facteur strictement positif $e^{r_0 t}$, on obtient :
 \[ a g''(t) + (2a r_0 + b) g'(t) + (a r_0^2 + b r_0 + c) g(t) = 0 \]
 Par les relations polynomiales de $r_0$, l'équation se réduit à : $a g''(t) = 0 \implies g''(t) = 0$. \\
 Une fonction de dérivée seconde nulle étant nécessairement affine, il existe $C_1, C_2 \in \mathbb{R}$ tels que $g(t) = C_1 t + C_2$. On en déduit la forme requise $y(t) = (C_1 t + C_2)e^{r_0 t}$. $\Box$}
@@ -265,8 +265,8 @@ Une fonction de dérivée seconde nulle étant nécessairement affine, il existe
 \[
     \begin{cases}
         y''(t) + y(t) = 0 \\
-        x(0) = 1 \\
-        x'(0) = 0
+        y(0) = 1 \\
+        y'(0) = 0
     \end{cases}
 \]}
 \noindent\carreaux{8}
