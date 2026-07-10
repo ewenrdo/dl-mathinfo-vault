@@ -6,7 +6,7 @@
 
 \usepackage{hyperref}
 \usepackage{fancyhdr}
-
+\usepackage{ccicons}
 
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
@@ -16,7 +16,7 @@
 \fancyhead[C]{Analyse}
 \fancyhead[R]{2026-2027}
 
-\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
 \fancyfoot[R]{\thepage}
 
 \begin{document}
@@ -223,21 +223,22 @@ Ces équations ne s'inscrivent pas nécessairement dans un cadre linéaire, mais
 \training{Résoudre l'équation différentielle non linéaire à variables séparables suivante : $y'(t) = t \cdot y(t)^2$ sur un intervalle à définir avec précision, soumise à la condition initiale $x(0) = 1$.}
 \noindent\carreaux{10}
 
-
 \section{Équations linéaires du second ordre à coefficients constants}
 
-On étudie les équations de la forme $(E) : a y''(t) + b y'(t) + c y(t) = d(t)$, où $a, b, c \in \mathbb{R}$ avec $a \neq 0$.
+On étudie les équations de la forme $(E) : a y''(t) + b y'(t) + c y(t) = d$, où $a, b, c, d \in \mathbb{R}$ avec $a \neq 0$.
+
+\subsection{Cas de l'équation homogène ($d = 0$)}
 
 \definition{
     L'équation algébrique $a r^2 + b r + c = 0$ est appelée \textbf{l'équation caractéristique} associée à l'équation différentielle homogène $a y'' + b y' + c y = 0$. On note $\Delta = b^2 - 4ac$ son discriminant.
 }
 
 \theorem{Théorème}{Résolution du second ordre homogène}{false}{
-    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation $a y'' + b y' + c y = 0$ est un espace vectoriel de \textbf{dimension 2}. Sa structure dépend de la nature des racines de l'équation caractéristique :
+    L'ensemble $S_0$ des solutions sur $\mathbb{R}$ de l'équation homogène $a y'' + b y' + c y = 0$ est un espace vectoriel de \textbf{dimension 2} (le noyau de l'opérateur différentiel). Sa structure dépend de la nature des racines de l'équation caractéristique :
     \begin{itemize}
         \item \textbf{Si $\Delta > 0$ :} Deux racines réelles distinctes $r_1$ et $r_2$.
         \[ y(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t} \quad (C_1, C_2 \in \mathbb{R}) \]
-        \item \textbf{Si $\Delta = 0$ :} Une racine double réelle $r_0$.
+        \item \textbf{Si $\Delta = 0$ :} Une racine double réelle $r_0 = -\frac{b}{2a}$.
         \[ y(t) = (C_1 t + C_2) e^{r_0 t} \quad (C_1, C_2 \in \mathbb{R}) \]
         \item \textbf{Si $\Delta < 0$ :} Deux racines complexes conjuguées $r = \alpha \pm i\beta$.
         \[ y(t) = e^{\alpha t} \left( C_1 \cos(\beta t) + C_2 \sin(\beta t) \right) \quad (C_1, C_2 \in \mathbb{R}) \]
@@ -246,7 +247,7 @@ On étudie les équations de la forme $(E) : a y''(t) + b y'(t) + c y(t) = d(t)$
 
 \noindent{\textbf{Preuve (pour le cas $\Delta = 0$) :}\\
 Si $\Delta = 0$, la racine double vaut $r_0 = -\frac{b}{2a}$, ce qui implique $2ar_0 + b = 0$ et $ar_0^2 + br_0 + c = 0$. \\
-Soit $y$ une solution. Posons $g(t) = y(t)e^{-r_0 t}$, d'où $y(t) = g(t)e^{r_0 t}$. En dérivant successivement :
+Soit $y$ une solution. Posons le changement de fonction $g(t) = y(t)e^{-r_0 t}$, d'où $y(t) = g(t)e^{r_0 t}$. En dérivant successivement :
 \[ y'(t) = (g'(t) + r_0 g(t))e^{r_0 t} \]
 \[ y''(t) = (g''(t) + 2r_0 g'(t) + r_0^2 g(t))e^{r_0 t} \]
 En injectant ces expressions au sein de l'équation $a y'' + b y' + c y = 0$ puis en simplifiant par le facteur strictement positif $e^{r_0 t}$, on obtient :
@@ -271,6 +272,38 @@ Une fonction de dérivée seconde nulle étant nécessairement affine, il existe
 \]}
 \noindent\carreaux{8}
 
+\subsection{Cas du second membre constant ($d = K$)}
+
+\theorem{Proposition}{Structure affine des solutions}{false}{
+    D'après le principe de linéarité, l'ensemble $S$ des solutions de l'équation complète $(E)$ est un \textbf{espace affine} de dimension 2, modélisé par la translation de l'espace vectoriel $S_0$ le long d'une solution particulière $y_p$ :
+    \[ S = y_p + S_0 = \{ y_p(t) + y_0(t) \mid y_0 \in S_0 \} \]
+}
+
+\method{Recherche d'une solution particulière constante}{
+    Pour un second membre constant $d = K \in \mathbb{R}^*$, la recherche d'une solution particulière polynomiale $y_p$ dépend des coefficients de l'équation différentielle :
+    \begin{itemize}
+        \item \textbf{Cas général ($c \neq 0$) :} Pas de résonance. L'équation admet une solution particulière \textbf{constante} :
+        \[ y_p(t) = \frac{K}{c} \]
+        \item \textbf{Cas de résonance d'ordre 1 ($c = 0$ et $b \neq 0$) :} L'équation admet une solution particulière \textbf{linéaire} :
+        \[ y_p(t) = A t \quad \text{puis on réinjecte pour déterminer } A = \frac{K}{b} \]
+        \item \textbf{Cas de résonance d'ordre 2 ($c = 0$ et $b = 0$) :} On intègre deux fois la constante $K$ pour obtenir une solution particulière \textbf{quadratique}.
+    \end{itemize}
+}
+
+\example{
+    Trouver l'ensemble des solutions réelles de l'équation $y''(t) + 4y(t) = 12$.\\
+    \begin{enumerate}
+        \item \textbf{Solution homogène :} L'équation $y'' + 4y = 0$ donne $y_0(t) = C_1 \cos(2t) + C_2 \sin(2t)$.\\
+        \item \textbf{Solution particulière :} Comme $c = 4 \neq 0$, on cherche une constante $y_p(t) = A$. On obtient $4A = 12 \implies y_p(t) = 3$.\\
+        \item \textbf{Solution générale :} Par sommation, $y(t) = C_1 \cos(2t) + C_2 \sin(2t) + 3 \quad (C_1, C_2 \in \mathbb{R})$.
+    \end{enumerate}
+}
+
+
 \newpage
 \tableofcontents
+\section*{Crédits}
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
 \end{document}

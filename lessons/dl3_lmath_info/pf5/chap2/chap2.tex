@@ -9,6 +9,7 @@
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{ccicons}
 
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
@@ -18,7 +19,7 @@
 \fancyhead[C]{Programmation fonctionnelle}
 \fancyhead[R]{2026-2027}
 
-\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
 \fancyfoot[R]{\thepage}
 
 \begin{document}
@@ -163,4 +164,9 @@ let garder_pairs l = List.filter (fun x -> x mod 2 = 0) l
 
 \newpage
 \tableofcontents
+
+\section*{Crédits}
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
 \end{document}
