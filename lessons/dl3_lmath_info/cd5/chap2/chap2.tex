@@ -10,7 +10,6 @@
 \usepackage{fancyhdr}
 \usepackage{ccicons}
 
-
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
 \fancyhf{} % reset tout
@@ -202,8 +201,211 @@
 }
 
 \section{Convergence de suites de fonctions}
-\section{Applications linéaires continues}
 
+\subsection{Convergence simple}
+
+\definition{
+    Soit $(f_n)$ une série de fonctions de $I$ dans $E$.\\
+    On dit que $(f_n)$ est \textbf{simplement convergente} sur $I$ s'il existe une fonction $f : I \to E$ telle que, pour tout $x \in I$, la suite $(f_n(x))$ converge dans $E$.\\
+    On appelle dans ce cas la \textbf{limite simple} de la suite $(f_n)$ la fonction $f$ définie par : \function{f}{I \to E}{x \mapsto \lim_{n \to +\infty} f_n(x)}.
+}
+
+\example{
+    On pose \function{f_n}{\left[0,1\right] \to \mathbb{R}}{x \mapsto x^n.}{}\\
+    Soit $x \in \left[0,1\right]$.\\
+    $lim_{n \to +\infty} x^n = \begin{cases}
+        0 & \text{si } x < 1\\
+        1 & \text{si } x = 1
+    \end{cases}$\\
+    Donc la suite $(f_n)$ converge simplement sur $\left[0,1\right]$ et sa limite simple est la fonction $f$ définie par : \function{f}{\left[0,1\right] \to \mathbb{R}}{x \mapsto \begin{cases}
+        0 & \text{si } x < 1\\
+        1 & \text{si } x = 1
+    \end{cases}}
+}
+\attention{On atteint un premier problème : la limite de $f_n$ est continue mais la limite simple $f$ ne l'est pas.}
+
+\example{
+    On pose $f_n = \begin{cases}
+        n^2 x & \text{si } x \in \left[0, \frac{1}{n}\right]\\
+        n^2 \left( \frac{2}{n} - x \right) & \text{si } x \in \left[\frac{1}{n}, \frac{2}{n}\right]\\
+        0 & \text{si } x > \frac{2}{n}
+    \end{cases}$ définie de $\left[0,1\right]$ dans $\mathbb{R}$.\\
+    On a que $f_n$ converge simplement vers la fonction nulle sur $\left[0,1\right]$. En effet, $f_n(0) = 0 \longrightarrow 0$ et si $x \in \left]0,1\right]$, alors il existe $N \in \mathbb{N}$ tel que $n \geq N \implies x > \frac{2}{n} \implies f_n(x) = 0$ (axiome d'Archimède). Donc $f_n(x) \longrightarrow 0$, d'où le fait que la limite simple est la fonction nulle.\\
+    Cependant, $max_{[0,1]} f_n = f_n\left(\frac{1}{n}\right) = n$, qui diverge vers $+\infty$. Donc la "convergence n'est pas uniforme".\\
+    Autre chose étrange, $\int_0^1 f_n(x) dx = 1$, alors qu'on s'attendrait à ce que l'intégrale de la limite soit nulle.
+}
+\begin{center}
+    \includegraphics[width=0.25\textwidth]{./images/figure1.png}
+    \captionof{figure}{Graphique de $f_n$}
+\end{center}
+
+\subsection{Convergence uniforme}
+
+\definition{
+    On dit que $(f_n)$ converge \textbf{uniformément} sur $I$ vers $f$ s'il existe une fonction $f : I \to E$ telle que : \\
+    $\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, \forall x \in I, |f_n(x) - f(x)| < \varepsilon$.
+}
+
+\remark{
+    $(f_n)$ converge simplement vers $f$ si $\forall x \in I, \underbrace{\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, |f_n(x) - f(x)| < \varepsilon}_{(f_n(x))_{n\in\mathbb{N}} \text{ converge vers } f(x)}$. Ce n'est donc pas la même chose que la convergence uniforme, où $n_0$ ne dépend pas de $x$.
+}
+
+\example{
+    Dans l'example précédent (avec les $\frac{1}{n}$), $f_n(\frac{1}{n}) \longrightarrow +\infty$, donc la convergence n'est pas uniforme sur $\left[0,1\right]$ vers $0$. En effet, $\forall n \geq 1, |f_n(\frac{1}{n}) - 0| = n \geq 1$.\\
+}
+\remark{Pour montrer que $f_n$ converge uniformément vers $f$, il suffit de trouver une majoration $M_n$ indépendante de $x$ telle que $|f_n(x) - f(x)| \leq M_n$ et $M_n \longrightarrow 0$.}
+
+\remark{Si $(f_n)$ converge simplement vers $f$, alors $f$ est la seule fonction candidate pour la convergence uniforme.}
+
+\subsection{Propriétés de la convergence uniforme}
+
+\theorem{Théorème}{Continuité et convergence uniforme}{false}{
+    Soit $A \subset \mathbb{R}^q$ et $f_n : A \to \mathbb{R}^p$ une suite de fonctions. Soit $\{f_k\}_{k \in \mathbb{N}}$ une suite de fonctions convergeant uniformément vers $f$ en $x \in A$. Supposons que chaque $f_k$ est continue en $x$.\\
+    Alors $f$ est continue en $x$.\\\\
+    De plus, si chaque $f_k$ est uniformément continue sur $A$, alors $f$ est uniformément continue sur $A$.
+}
+
+\noindent\textbf{Preuve :} cf. chapitre 3 du cours ASF4
+
+\section{Applications linéaires continues}
+Dans cette partie, $E$ et $F$ designent des espaces vectoriels normés. On note $\mathcal{L}(E,F)$ l'ensemble des applications linéaires de $E$ vers $F$. 
+
+\reminder{$\varphi \in \mathcal{L}(E,F) \Leftarrow \forall u,v \in E, \forall \lambda \in \mathbb{R}, \varphi(u + \lambda v) = \varphi(u) + \lambda \varphi(v)$}
+
+\theorem{Théorème}{Caractérisation des applications linéaires continues}{false}{
+    Soit $\varphi \in \mathcal{L}(E,F)$. Les propriétés suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $\varphi$ est continue ;
+        \item $\varphi$ est continue en $0$ ;
+        \item $\varphi$ est bornée, c'est-à-dire
+        \[
+        \sup_{x \in E, x \neq 0} \frac{\|\varphi(x)\|}{\|x\|} < +\infty ;
+        \]
+        \item $\varphi$ est Lipschitzienne.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve}:\\
+\textbf{(1) $\implies$ (2)} ok\\
+\textbf{(2) $\implies$ (3)} Puisque $\varphi$ est continue en $0$ on a
+\[
+\forall \varepsilon > 0, \, \exists \delta > 0 : \forall x \in E, \, \|x\| < \delta \implies \|\varphi(x)\| < \varepsilon.
+\]
+Posons $\varepsilon = 1$, on obtient notamment
+\[
+\exists \delta > 0 : \forall x \in E, \, \|x\| < \delta \implies \|\varphi(x)\| < 1.
+\]
+Soit $x \in E \setminus \{0\}$ quelconque. Alors
+\[
+\hat{x} = \frac{x}{\|x\|}\frac{\delta}{2} \quad \text{est tel que} \quad \|\hat{x}\| = \frac{\delta}{2} < \delta
+\]
+d'où
+\[
+\|\varphi(\hat{x})\| < 1 \implies \|\varphi(x)\| < \frac{2\|x\|}{\delta}.
+\]
+Il s'ensuit que
+\[
+\forall x \in E, x \neq 0, \, \frac{\|\varphi(x)\|}{\|x\|} < \frac{2}{\delta}.
+\]
+\textbf{(3) $\implies$ (4)} Posons
+\[
+L = \sup_{x \in E, x \neq 0} \frac{\|\varphi(x)\|}{\|x\|} < +\infty
+\]
+et prenons $x, y \in E$. Alors
+\[
+\|\varphi(x) - \varphi(y)\| = \|\varphi(x - y)\| \leq L\|x - y\|.
+\]
+\textbf{(4) $\implies$ (1)} ok, par la proposition "rapport avec la continuité uniforme". \hfill $\square$
+}
+
+On note $\mathcal{L}_C(E,F)$ l'ensemble des applications linéaires et continues de $E$ dans $F$.
+
+\theorem{Proposition}{Norme subordonnée}{false}{
+    L'application qui associe à chaque $\varphi \in \mathcal{L}_C(E,F)$ la quantité
+    \[
+    \varphi \mapsto \sup_{x \in E, x \neq 0} \frac{\|\varphi(x)\|}{\|x\|}
+    \]
+    est une norme sur $\mathcal{L}_C(E,F)$. Elle est appelée \textbf{norme subordonnée} et dénotée avec $\|\lvert \cdot \rVert\rvert$.
+}
+
+\noindent{\textbf{Preuve}:\\
+On peut vérifier les axiomes directement :
+\begin{itemize}
+    \item si $\|\lvert \varphi \rVert\rvert = \sup \frac{\|\varphi(x)\|}{\|x\|} = 0$, $\|\varphi(x)\| = 0$ pour tout $x \implies \varphi = 0$ ;
+    \item si $\lambda \in \mathbb{R}$, alors $\|\lambda\varphi(x)\| = |\lambda|\|\varphi(x)\|$ d'où $\|\lvert \lambda\varphi \rVert\rvert = |\lambda|\|\lvert \varphi \rVert\rvert$ pour tout $\varphi \in \mathcal{L}_C(E,F)$ ;
+    \item prenons enfin $\varphi_1, \varphi_2 \in \mathcal{L}_C(E,F)$ et $x \in E$. Alors
+    \[
+    \|\varphi_1(x) + \varphi_2(x)\| \leq \|\varphi_1(x)\| + \|\varphi_2(x)\| \leq \|\lvert \varphi_1 \rVert\rvert \|x\| + \|\lvert \varphi_2 \rVert\rvert \|x\|
+    \]
+    et on conclut en divisant par $\|x\|$. \hfill $\square$
+\end{itemize}
+}
+
+\training{Montrer que la projection $x \in \mathbb{R}^n \mapsto x_1 \in \mathbb{R}$ est une application linéaire et continue et calculer sa norme (utiliser dans $\mathbb{R}^n$ la norme euclidienne).}
+\noindent \carreaux{10}
+
+
+\training{Considérons sur $\mathbb{R}^n$ les normes $\|\cdot\|_1$, $\|\cdot\|_2$ et $\|\cdot\|_\infty$. Soit $v \in \mathbb{R}^n$, montrer que la fonction $x \in \mathbb{R}^n \mapsto \langle x, v \rangle \in \mathbb{R}$ est une application linéaire et continue et calculer ses normes subordonnées.}
+\noindent \carreaux{10}
+
+\theorem{Proposition}{Continuité des applications linéaires en dimension finie}{false}{
+    En dimension finie (i.e. si $E = \mathbb{R}^n$ et $F = \mathbb{R}^k$) toutes les applications linéaires sont continues : $\mathcal{L}(E,F) \equiv \mathcal{L}_C(E,F)$.
+}
+
+\noindent{\textbf{Preuve}:\\
+Soit $\varphi \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^k)$. Toutes les normes étant équivalentes, on considère sur $\mathbb{R}^n$ la norme $\|\cdot\|_\infty$. Soit $\{e_i\}_{i=1}^n$ une base de $\mathbb{R}^n$, on pose $M = \max_i \|\varphi(e_i)\|_F$, alors pour tout $x \in \mathbb{R}^n$, $x \neq 0$,
+\[
+\|\varphi(x)\|_F = \|\varphi(x_1e_1 + \dots + x_ne_n)\| \leq |x_1|\|\varphi(e_1)\| + \dots + |x_n|\|\varphi(e_n)\| \leq nM\|x\|_\infty. \hfill \square
+\]
+}
+
+\example{
+    Soit $A \in \mathcal{M}_n(\mathbb{R})$, on considère l'application linéaire $x \in \mathbb{R}^n \mapsto Ax \in \mathbb{R}^n$. On se pose le problème de calculer sa norme lorsque $\mathbb{R}^n$ est muni de la norme $\|\cdot\|_1$. Par définition
+    \[
+    \|\lvert A \rVert\rvert = \sup_{x \in \mathbb{R}^n, x \neq 0} \frac{\|Ax\|_1}{\|x\|_1} = \sup_{x \in \mathbb{R}^n, \|x\|_1 = 1} \|Ax\|_1.
+    \]
+    Explicitant les termes on obtient
+    \[
+    \|\lvert A \rVert\rvert = \sup_{\sum |x_j| = 1} \sum_{i=1}^n \left| \sum_{j=1}^n a_{ij}x_j \right|.
+    \]
+    On montre d'abord une estimation supérieure de la norme, puis on cherche un vecteur $x$ qui réalise l'estimation supérieure pour montrer qu'il s'agit de la correcte valeur de la norme. On a
+    \[
+    \sup_{\sum_{i=1}^n |x_j| = 1} \sum_{i=1}^n \left| \sum_{j=1}^n a_{ij}x_j \right| \leq \sup_{\sum |x_j| = 1, x_i \geq 0} \sum_{j=1}^n \sum_{i=1}^n |a_{ij}| |x_j| = \sup_{\sum |x_j| = 1, x_i \geq 0} \sum_{j=1}^n \left( \sum_{i=1}^n |a_{ij}| \right) x_j \leq \max_{j=1,\dots,n} \sum_{i=1}^n |a_{ij}|.
+    \]
+    Soit maintenant $J \in \{1, \dots, n\}$ l'index correspondant au max et posons
+    \[
+    x = (\delta_{jJ})_{j=1,\dots,n} = \begin{cases} 1 & \text{si } j = J \\ 0 & \text{si } j \neq J \end{cases}.
+    \]
+    Alors
+    \[
+    \|Ax\| = \sum_{i=1}^n \left| \sum_{j=1}^n a_{ij}x_j \right| = \sum_{i=1}^n |a_{iJ}| = \max_{j=1,\dots,n} \sum_{i=1}^n |a_{ij}|,
+    \]
+    d'où
+    \[
+    \|\lvert A \rVert\rvert = \max_{j=1,\dots,n} \sum_{i=1}^n |a_{ij}|.
+    \]
+}
+
+\training{Soit $A \in \mathcal{M}_n(\mathbb{R})$, on considère l'application linéaire $x \in \mathbb{R}^n \mapsto Ax \in \mathbb{R}^n$. On munit $\mathbb{R}^n$ de la norme $\|\cdot\|_\infty$. Montrer que
+    \[
+    \|\lvert A \rVert\rvert = \sup_{x \in \mathbb{R}^n, x \neq 0} \frac{\|Ax\|_\infty}{\|x\|_\infty} = \sup_{|x_j| \leq 1} \max_{i=1,\dots,n} \left| \sum_{j=1}^n a_{ij}x_j \right| = \max_{i=1,\dots,n} \sum_{j=1}^n |a_{ij}|.
+    \]
+}
+
+\noindent \carreaux{10}
+
+
+\example{
+    Pour conclure, l'exemple d'une application linéaire et non continue (définie, nécessairement, sur un espace vectoriel normé de dimension infinie). Soit $X = C([0,1])$ muni de la norme $\|\cdot\|_1$ et $L : X \to \mathbb{R}$ donné par
+    \[
+    L(f) = f(0).
+    \]
+    Considérons la suite de fonctions
+    \[
+    f_n(t) = (1 - t)^n.
+    \]
+    Alors $\|f_n\|_1 \to 0$ mais $L(f_n) = 1$ pour tout $n \in \mathbb{N}$.
+}
 \newpage
 \tableofcontents
 \section*{Crédits}
