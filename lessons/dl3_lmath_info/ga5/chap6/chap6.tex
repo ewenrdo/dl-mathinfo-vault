@@ -1,0 +1,125 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/components}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info GA5}
+\fancyhead[C]{Théorie des groupes}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 6 : Théorème de Sylow}
+
+\section{Théorèmes de Sylow et de Cauchy}
+\theorem{Théorème de Sylow}{}{false}{
+    Soit $p$ un nombre premier et $G$ un groupe de cardinal $p^r m$ avec $m$ non divisible par $p$.
+    \begin{enumerate}
+        \item Il existe un sous-groupe $P$ de cardinal $p^r$ (un tel sous-groupe s'appelle un $p$-sous-groupe de Sylow de $G$).
+        \item Soit $H$ un $p$-sous-groupe de $G$ et $P$ un $p$-sous-groupe de Sylow de $G$, alors il existe $g \in G$ tel que $H \subset gPg^{-1}$. En particulier deux $p$-sous-groupe de Sylow de $G$ sont conjugués.
+        \item Soit $n_p$ le nombre de $p$-sous-groupe de Sylow de $G$. Alors
+        \[
+        n_p \equiv 1 \pmod p \quad \text{et} \quad n_p \mid m.
+        \]
+    \end{enumerate}
+}
+
+\example{
+    Si $|G| = 12 = 2^2 \times 3$, alors $p=2$, $r=2$ et $m=3$. Le théorème de Sylow garantit l'existence de $2$-sous-groupes de Sylow d'ordre $4$. Le nombre $n_2$ de ces sous-groupes doit vérifier $n_2 \mid 3$ et $n_2 \equiv 1 \pmod 2$, ce qui laisse comme seules valeurs possibles $n_2 = 1$ ou $n_2 = 3$.
+}
+
+
+\theorem{Lemme}{}{false}{
+    Soit $m$ non divisible par un nombre premier $p$, alors
+    \[
+    \binom{mp^r}{p^r} \equiv m \pmod p.
+    \]
+}
+
+\remark{Ce lemme est utilisé démontrer le théorème de Sylow. Il est démontré par récurrence sur $r$.}
+\noindent{\textbf{Preuve}:\\
+En effet,
+\[
+\binom{mp^r}{p^r} = \frac{(mp^r)!}{(p^r)!(mp^r - p^r)!} = m \prod_{k=1}^{p^r-1} \frac{mp^r - k}{p^r - k}.
+\]
+Pour tout $0 < k < p^r$, il existe un unique couple $(s,l)$ avec $0 \leq s < r$ et $0 < l$ non divisible par $p$ tel que $k = p^s l$. Ainsi :
+\[
+\frac{mp^r - k}{p^r - k} = \frac{mp^{r-s} - l}{p^{r-s} - l} \equiv 1 \pmod p,
+\]
+car $p^{r-s} - l$ et $mp^{r-s} - l$ sont tous deux congrus à $-l$ modulo $p$ et $-l$ admet un inverse modulo $p$, d'où le lemme. \hfill $\square$
+}
+
+
+
+\example{
+    Prenons $p=3$, $r=1$ et $m=2$ (qui n'est pas divisible par 3). On a $mp^r = 6$ et $p^r = 3$.
+    Calculons le coefficient binomial : $\binom{6}{3} = 20$.
+    On vérifie bien que $20 \equiv 2 \pmod 3$, ce qui correspond à la valeur de $m$.
+}
+
+
+\theorem{Corollaire}{Théorème de Cauchy}{false}{
+    Soit $G$ un groupe fini. Il existe un élément d'ordre $p$ dans $G$ si et seulement si $p$ divise $|G|$.
+}
+
+\example{
+    Considérons le groupe symétrique $S_3$ dont l'ordre est $|S_3| = 6$. Comme le nombre premier $p=3$ divise 6, le théorème de Cauchy affirme qu'il existe un élément d'ordre 3 dans $S_3$, par exemple le 3-cycle $(1\,2\,3)$.
+}
+
+\section{Preuves des théorèmes}
+\subsection{Preuve du théorème de Sylow}
+\noindent{\textbf{Preuve}: Il s'agit de variations sur le thème des actions de groupes et de la formule des classes.\\
+
+\textbf{(i)} Considérons l'action de $G$ sur lui-même par translation à gauche et l'action induite sur l'ensemble des parties de $G$ ayant $p^r$ éléments : $X = \mathcal{P}_{p^r}(G)$. Si $R$ désigne un ensemble de représentants des classes d'équivalence, on a par la formule des classes
+\[
+|X| = \sum_{A \in R} \frac{|G|}{|\operatorname{Stab}(A)|} = \sum_{\omega \in \Omega} |\omega|
+\]
+Admettons provisoirement (voir le lemme ci-dessous) que $p$ ne divise pas $|X|$. Alors il existe une orbite $\omega = G \cdot A_0$, de cardinal premier avec $p$. On a donc $\frac{|G|}{|\operatorname{Stab}(A_0)|}$ non divisible par $p$ donc $|\operatorname{Stab}(A_0)|$ est divisible par $p^r$.
+
+\textbf{(ii)} Soit $P$ un $p$-sous-groupe de Sylow et $H$ un $p$-sous-groupe quelconque. Faisons agir $H$ sur $G/P$ par $h \cdot gP = hgP$.\\
+Comme $|G/P| = m$ n'est pas divisible par $p$ et que $H$ est un $p$-groupe, il existe un point fixe (voir proposition 4.5.2) : il existe donc $g_0 \in G$ tel que
+\[
+hg_0P = g_0P \quad \forall h \in H.
+\]
+Ainsi $H \subset g_0Pg_0^{-1}$.\\\\
+
+\textbf{(iii)} Soit $Y = \operatorname{Syl}_p(G)$ l'ensemble des $p$-sous-groupes de Sylow de $G$ et $n_p = |Y|$. On a vu que $Y \neq \emptyset$. Notons $\alpha : G \times Y \to Y$ l'action par conjugaison. Elle est transitive, d'après le point précédent.\\
+Fixons $P_0$ un $p$-sous-groupe de Sylow. On rappelle que $P_0$ est un sous-groupe de $\operatorname{Stab}(P_0) = \{g \in G \mid gP_0g^{-1} = P_0\}$ et qu'il y a une bijection entre $G/\operatorname{Stab}(P_0)$ et l'orbite de $P_0$ (qui coïncide avec $Y$ car l'action est transitive). Ainsi :
+\[
+n_p = \frac{|G|}{|\operatorname{Stab}(P_0)|} = \frac{|G|}{|P_0|} \cdot \frac{|P_0|}{|\operatorname{Stab}(P_0)|} = m \frac{|P_0|}{|\operatorname{Stab}(P_0)|} \implies m = n_p \underbrace{\frac{|\operatorname{Stab}(P_0)|}{|P_0|}}_{\in \mathbb{N}}
+\]
+Donc $n_p$ divise $m$.\\
+On restreint l'action par conjugaison de $G$ sur $Y$ en une action (par conjugaison) de $P_0$ sur $Y$. On note $u : P_0 \times Y \to Y$ cette action. Afin de ne pas confondre les deux actions on note pour $P \in Y$ un $p$-Sylow sous-groupe de $G$
+\[
+\operatorname{Stab}_G(P) = \{g \in G \mid gPg^{-1} = P\}, \quad \operatorname{Stab}_{P_0}(P) = \{g \in P_0 \mid gPg^{-1} = P\} = \operatorname{Stab}_G(P) \cap P_0
+\]
+On rappelle que $\operatorname{Stab}_G(P)$ est un sous-groupe de $G$ et que $P \subset \operatorname{Stab}_G(P)$ est un sous-groupe distingué de $\operatorname{Stab}_G(P)$. En effet, pour $g \in \operatorname{Stab}_G(P)$ et $h \in P$, alors $ghg^{-1} \in gPg^{-1} = P$. Par ailleurs, puisque $P \subset \operatorname{Stab}_G(P) \subset G$ on a $\operatorname{Stab}_G(P) = p^r l$ avec $l$ divise $m$ et $l$ premier à $p$. Donc $P$ est un $p$-Sylow de $\operatorname{Stab}_G(P)$ et c'est le seul puisqu'il est distingué.\\
+On a $\operatorname{Stab}_{P_0}(P_0) = P_0$, donc $P_0 \in Y$ est un point fixe pour l'action $u$. Montrons que c'est le seul point fixe. Soit $P$ un $p$-sous-groupe de Sylow tel que $\operatorname{Stab}_{P_0}(P) = P_0$. Ceci implique $P_0 \subset \operatorname{Stab}_G(P)$ et c'est un $p$-Sylow sous-groupe. Donc $P_0 = P$. En utilisant la proposition 4.5.2, ($P_0$ est un $p$-groupe), on en déduit $1 \equiv |X| \pmod p$ donc $n_p \equiv 1 \pmod p$. \hfill $\square$
+}
+
+\subsection{Preuve du théorème de Cauchy}
+\noindent{\textbf{Preuve}:\\
+La nécessité provient du théorème de Lagrange. Si $p \mid |G|$, il existe $r \geq 1$ et $m$ ne divisant pas $p$ tel que $|G| = p^r m$. Puis il existe un sous-groupe $H$ de $G$ d'ordre $p^r$ (existence d'un $p$-Sylow). Soit $y \in H$ avec $y \neq \{e\}$. Le sous-groupe engendré par $y$ est cyclique d'ordre une puissance de $p$, disons $p^s$ avec $s \geq 1$. Alors $x = y^{p^{s-1}}$ est d'ordre $p$. \hfill $\square$
+}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours provient du polycopié de cours de l'Université Paris Cité enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}

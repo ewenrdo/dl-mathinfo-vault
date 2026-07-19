@@ -6,6 +6,7 @@
 
 \usepackage{hyperref}
 \usepackage{fancyhdr}
+\usepackage{ccicons}
 
 
 % Configuration des en-têtes et pieds de page
@@ -16,7 +17,7 @@
 \fancyhead[C]{Théorie des groupes}
 \fancyhead[R]{2026-2027}
 
-\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
 \fancyfoot[R]{\thepage}
 
 \begin{document}
@@ -108,8 +109,6 @@ Comme $\sigma$ est une permutation tous les $\sigma(a_j)$ sont distincts. Soit $
 
 
 \remark{On verra que les cycles engendrent le groupe $S_n$.}
-
-\bigskip
 
 \theorem{Proposition}{Générateurs du groupe symétrique $S_n$}{false}{
     Soit $n \geq 2$.
@@ -205,7 +204,6 @@ La démonstration se fait par récurrence sur $n$ sachant que le résultat est v
 Remarquons que $\tau'(n) = n$ et $\tau'(b) = c$. Le sous-groupe $G = \{\tau \in \mathcal{A}_n \mid \tau(n) = n\}$ de $\mathcal{A}_n$ est isomorphe à $\mathcal{A}_{n-1}$ donc est simple. De plus $H \cap G$ est distingué dans $G$. Or $\tau' \in (H \cap G) \setminus \{1\}$, donc $H \cap G = G$. Ainsi $H$ contient un 3-cycle (inclus dans $G \simeq \mathcal{A}_{n-1}$) donc $H = \mathcal{A}_n$. \hfill $\square$
 }
 
-\bigskip
 
 \theorem{Corollaire}{Sous-groupes distingués de $S_n$}{false}{
     Pour $n \geq 5$, $S_n$ ne possède qu'un seul sous-groupe distingué propre : $\mathcal{A}_n$.
@@ -217,4 +215,9 @@ Soit $H$ un sous-groupe distingué propre. On a $H \cap \mathcal{A}_n$ est disti
 
 \newpage
 \tableofcontents 
+\section*{Crédits}
+Ce cours provient du polycopié de cours de l'Université Paris Cité enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
 \end{document}
