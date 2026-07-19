@@ -23,69 +23,197 @@
 
 \docTitle{Chapitre 3 : Exemples de groupes importants}
 
-\section{Congruences}
+\section{Groupe $\mathbb{Z}/n\mathbb{Z}$}
 
-\subsection{Rappels et généralités}
+\reminder{On a déjà vu que tout groupe monogène est isomorphe à :
+\begin{itemize}
+    \item  $\mathbb{Z}$ s'il est infini,
+    \item $\mathbb{Z}/n\mathbb{Z}$ s'il est cyclique d'ordre $n$.
+\end{itemize}
+De plus, $\mathbb{Z}$ est engendré par $\{-1, 1\}$. Les sous-groupes de $\mathbb{Z}/n\mathbb{Z}$ sont de la forme $\frac{d\mathbb{Z}}{n\mathbb{Z}}$ où $d$ divise $n$.}
 
-\definition{Soit $k \in \mathbb{Z}$. 
-On pose la relation $\equiv_k$ sur $\mathbb{Z}$ définie par : $x \equiv_k y \Leftrightarrow y - x \in k\mathbb{Z}$ (i.e. $k$ divise $y - x$).\\
-On écrit aussi $x \equiv y [k]$. \textit{i.e. $\exists n \in \mathbb{Z}, y - x = kn$}.
+\theorem{Lemme chinois}{}{false}{
+    Soient $n,m \geq 2$ deux entiers premiers entre-eux.\\
+    L'application $\varphi : \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$ définie par $\varphi(k) = (k + n\mathbb{Z}, k + m\mathbb{Z})$ est un morphisme de groupes.\\\\
+
+    Cela induit un isomorphisme de groupes : $\mathbb{Z}/nm\mathbb{Z} \cong \mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$.
+}
+\noindent{\textbf{Preuve}:\\
+L'application $\pi_n : \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$, qui à $k$ associe $k + n\mathbb{Z}$ est un morphisme de groupes. Le morphisme $\varphi$ est donc un morphisme de groupes par propriété universelle du produit. Calculons son noyau. Pour $k \in \mathbb{Z}$ on a
+\[
+\varphi(k) = 0 \iff k \in n\mathbb{Z} \cap m\mathbb{Z} \iff (n \mid k \text{ et } m \mid k) \iff \operatorname{pgcd}(n,m) \mid k.
+\]
+Comme $n$ et $m$ sont premiers entre eux, $\operatorname{pgcd}(n,m) = 1$, donc $\operatorname{pgcd}(n,m) \mid k \iff nm \mid k$. Donc $\ker \varphi = nm\mathbb{Z}$. Ainsi $\bar{\varphi} : \mathbb{Z}/nm\mathbb{Z} \to \mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$ est un morphisme de groupes injectif. Les deux groupes en jeu sont finis d'ordre $nm$, donc $\bar{\varphi}$ est aussi surjective. \hfill $\square$
 }
 
-\vocabulary{
-    $\equiv_k$ est appelée \textbf{congruence modulo $k$}.
+\theorem{Proposition}{Ordre d'un élément dans $\mathbb{Z}/n\mathbb{Z}$}{false}{
+    Soit $n > 0$ et $a \in \mathbb{Z}$. L'ordre de $\bar{a}$ dans $\mathbb{Z}/n\mathbb{Z}$ est $\frac{n}{\operatorname{pgcd}(a,n)}$.
 }
 
-\theorem{Proposition}{Equivalence}{false}{
-    $\equiv_k$ est une relation d'équivalence sur $\mathbb{Z}$.
+\noindent{\textbf{Preuve}:\\
+Notons $d = \operatorname{pgcd}(a,n)$, $n = n'd$ et $a = a'd$. On a $a'$ et $n'$ sont premiers entre eux. Montrons que $\bar{a}$ est d'ordre $n'$. Calculons dans $\mathbb{Z}/n\mathbb{Z}$ : $n'\bar{a} = \overline{n'a} = \overline{n'a'd} = \overline{na'} = \bar{0}$. Donc l'ordre de $\bar{a}$ divise $n'$.
+
+Si $k\bar{a} = \bar{0}$ alors $n$ divise $ka$, donc il existe $l \in \mathbb{Z}$ tel que $ka = nl$. Cela implique $ka' = n'l$. Cette égalité a lieu dans $\mathbb{Z}$, et comme $n'$ est premier avec $a'$ on en déduit que $n'$ divise $k$. Ainsi $n' = \frac{n}{\operatorname{pgcd}(a,n)}$ est le plus petit entier $k$ tel que $k\bar{a} = \bar{0}$. \hfill $\square$
 }
 
-\noindent\textbf{Preuve:}\\
-\carreaux{10}
 
-
-\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-    On a que $\mathbb{Z}/\equiv_k = \{ \overline{0}, \overline{1}, \overline{2}, ..., \overline{k-1} \}$ noté $\mathbb{Z}/k\mathbb{Z}$.\\
-
-    En particulier, \{0, 1, 2, ..., k-1\} est un système de représentants pour $\equiv_k$.
+\theorem{Proposition}{Éléments générateurs de $\mathbb{Z}/n\mathbb{Z}$}{false}{
+    Soit $n > 0$ et $a \in \mathbb{Z}$. Les propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $a$ et $n$ sont premiers entre eux ;
+        \item $\mathbb{Z}/n\mathbb{Z} = \langle\bar{a}\rangle$.
+    \end{enumerate}
 }
-\noindent{
-    \textbf{Preuve:}\\
-    Soit $x \in \mathbb{Z}$.\\
-    Par la division euclidienne, $\exists ! (q, r) \in \mathbb{Z} \times \{0, 1, 2, ..., k-1\}$ tel que $x = kq + r$. Donc $x - r = kq \in k\mathbb{Z}$ et ainsi $x \equiv_k r$.\\
-    Il reste à voir que $\overline{i} \neq \overline{j}$ si $i\neq j$ avec $i, j \in \{0, 1, 2, ..., k-1\}$.\\
-    En effet, $i-j \in \{ 1-k, 2-k, ..., -1, 1, 2, ..., k-1 \}$ et $i-j \neq 0$. \\
-    Donc $i-j \notin k\mathbb{Z}$ et ainsi $i \not\equiv_k j$ donc $\overline{i} \neq \overline{j}$. $\Box$
+
+\noindent{\textbf{Preuve}:\\
+On rappelle que $\bar{a}$ est d'ordre $n$ si et seulement si $\bar{a}$ engendre $\mathbb{Z}/n\mathbb{Z}$. Par la proposition précédente $\bar{a}$ est d'ordre $n$ si et seulement si $\operatorname{pgcd}(a,n) = 1$. \hfill $\square$
 }
+
+
+\theorem{Proposition}{Sous-groupes de $\mathbb{Z}/n\mathbb{Z}$}{false}{
+    Soit $d$ un diviseur de $n$. Le sous-groupe $d\mathbb{Z}/n\mathbb{Z}$ de $\mathbb{Z}/n\mathbb{Z}$ est cyclique d'ordre $\frac{n}{d}$.
+}
+
+\noindent{\textbf{Preuve}:\\
+Considérons l'application $\psi : \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$ qui à $x$ associe $\overline{dx}$ où $\overline{dx}$ désigne la classe de $dx$ modulo $n$. L'application $\psi$ est un morphisme de groupes d'image $d\mathbb{Z}/n\mathbb{Z}$. Calculons son noyau.
+\[
+\psi(x) = \bar{0} \iff \exists u \in \mathbb{Z}, \, dx = nu \iff \exists u \in \mathbb{Z}, \, x = \frac{n}{d}u \iff x \in \frac{n}{d}\mathbb{Z}.
+\]
+Le théorème d'isomorphisme permet de conclure que $\psi$ induit un isomorphisme $\mathbb{Z}/\frac{n}{d}\mathbb{Z} \to d\mathbb{Z}/n\mathbb{Z}$. \hfill $\square$
+}
+
+\example{
+    Les sous-groupes propres (c'est-à-dire différents de $\mathbb{Z}/8\mathbb{Z}$) de $\mathbb{Z}/8\mathbb{Z}$ sont exactement les sous-groupes $d\mathbb{Z}/n\mathbb{Z}$ où $d$ est un diviseur strict de $n$. On a :
+    \begin{itemize}
+        \item Pour $d = 1$ : $1\mathbb{Z}/8\mathbb{Z} = \mathbb{Z}/8\mathbb{Z}$ d'ordre $8$ ;
+        \item Pour $d = 2$ : $2\mathbb{Z}/8\mathbb{Z} = \{\bar{0}, \bar{2}, \bar{4}, \bar{6}\}$ d'ordre $4$ ;
+        \item Pour $d = 4$ : $4\mathbb{Z}/8\mathbb{Z} = \{\bar{0}, \bar{4}\}$ d'ordre $2$ ;
+        \item Pour $d = 8$ : $8\mathbb{Z}/8\mathbb{Z} = \{\bar{0}\}$ d'ordre $1$.
+    \end{itemize}
+    Ainsi, les sous-groupes propres de $\mathbb{Z}/8\mathbb{Z}$ sont $2\mathbb{Z}/8\mathbb{Z}$ et $4\mathbb{Z}/8\mathbb{Z}$.
+}
+
+\section{Première approche du groupe symétrique}
+\subsection{Générateurs du groupe symétrique $S_n$}
+\reminder{On rappelle que le groupe symétrique $S_n$ est le groupe des permutations de l'ensemble $\{1, 2, \ldots, n\}$.}
 
 \theorem{Lemme}{}{false}{
-    Soient $x,y\in \mathbb{Z}$.\\
-    Considérons $\overline{x+y} \in \mathbb{Z}/k\mathbb{Z}$. Alors $\overline{x+y}$ ne dépend que de $\overline{x}$ et $\overline{y}$.\\
-    Autrement dit : $\mathbb{Z} \to \mathbb{Z}/k\mathbb{Z}, x \mapsto \overline{x+y} \text{ et } y \mapsto \overline{x+y}$ passent au quotient.
-}
-\noindent\textbf{Preuve:}\\
-\carreaux{10}
-
-
-\theorem{Théorème}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-On a que $(\mathbb{Z}/k\mathbb{Z}, +)$ est un groupe abélien. 
-}
-\newpage
-\noindent\textbf{Preuve:}\\
-\carreaux{7}
-
-\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-Le groupe $(\mathbb{Z}/k\mathbb{Z}, +)$ est le groupe des entiers modulo $k$.
-}
-\theorem{Proposition}{$\mathbb{Z}/k\mathbb{Z}$}{false}{
-Le groupe $(\mathbb{Z}/k\mathbb{Z}, +)$ est cyclique et engendré par $\overline{1}$.
+    Soit $(a_1 \ldots a_n)$ un $r$-cycle et $\sigma \in S_n$. On a :
+    $$\sigma (a_1 \ldots a_r) \sigma^{-1} = (\sigma(a_1) \ldots \sigma(a_r)).$$
 }
 
-\noindent{\textbf{Preuve:}\\
-Le sous-groupe engendré par $\overline{1}$ est $\{ \overline{n} \mid n \in \mathbb{Z} \} = \{\overline{n\cdot 1} \mid n \in \mathbb{Z} \} = \mathbb{Z}/k\mathbb{Z}$. $\Box$
+\noindent{\textbf{Preuve}:\\
+Comme $\sigma$ est une permutation tous les $\sigma(a_j)$ sont distincts. Soit $\sigma(j) \notin \{\sigma(a_1), \dots, \sigma(a_r)\}$ alors $j \notin \{a_1, \dots, a_r\}$ donc $\sigma(a_1 \dots a_r)\sigma^{-1}(\sigma(j)) = \sigma(j)$. Par ailleurs $\sigma(a_1 \dots a_r)\sigma^{-1}(\sigma(a_k)) = \sigma(a_{k+1})$ pour $1 \leq k \leq r - 1$ et $\sigma(a_1 \dots a_r)\sigma^{-1}(\sigma(a_r)) = \sigma(a_1)$. Donc le résultat est démontré. \hfill $\square$
 }
 
 
+\remark{On verra que les cycles engendrent le groupe $S_n$.}
+
+\bigskip
+
+\theorem{Proposition}{Générateurs du groupe symétrique $S_n$}{false}{
+    Soit $n \geq 2$.
+    \begin{enumerate}
+        \item L'ensemble des transpositions engendre $S_n$.
+        \item L'ensemble des transpositions de la forme $(i \quad i+1)$ pour $1 \leq i \leq n - 1$ engendre $S_n$.
+        \item L'ensemble $\{(12), (12\dots n)\}$ engendre $S_n$.
+    \end{enumerate}
+}
+
+\noindent{\textbf{Preuve}:\\
+Notons $T$ l'ensemble des transpositions, $\tilde{T}$ l'ensemble décrit au point (2) et $S$ l'ensemble décrit au point (3). Comme
+\[
+(a_1 \dots a_r) = (a_1a_2)(a_2a_3)\dots(a_{r-1}a_r)
+\]
+et comme les cycles engendrent $S_n$ on en déduit $\langle T \rangle = S_n$.\\
+On a clairement $\langle \tilde{T} \rangle \subset \langle T \rangle$. Montrons que $\langle \tilde{T} \rangle = \langle S \rangle$. L'égalité
+\[
+(12\dots n) = (12)(23)\dots(n-1\,n)
+\]
+implique $\langle S \rangle \subset \langle \tilde{T} \rangle$.\\
+Notons $\sigma = (12\dots n)$. On a $\sigma(12)\sigma^{-1} = (23) \in \langle S \rangle$ et par récurrence $\sigma^{i-1}(12)\sigma^{-i+1} = (i \quad i+1) \in \langle S \rangle$ pour $1 \leq i \leq n - 1$. Donc $\langle \tilde{T} \rangle \subset \langle S \rangle$.\\
+Soit $(ij) \in T$, avec $i < j$. On montre par récurrence sur $j - i$ que $(ij) \in \langle \tilde{T} \rangle$. Si $j - i = 1$ c'est clair. Sinon $(ij) = (i \quad i+1)(i+1\,j)(i \quad i+1)$ et l'hypothèse de récurrence permet de conclure. Donc
+\[
+\langle T \rangle = \langle \tilde{T} \rangle = \langle S \rangle = S_n 
+\]
+$\hfill \square$
+}
+
+\subsection{Simplicité de $\mathcal{A}_n$}
+
+\remark{Retenons pour l'instant que la signature est un morphisme de groupes $\epsilon : S_n \to \{-1, 1\}$ qui envoie toute transposition sur $-1$ \textit{(on reverra la défintion formelle plus tard)}.}
+
+\definition{
+    Le groupe alterné $\mathcal{A}_n$ est le noyau de la signature. On l'appelle le \textbf{n-ième groupe alterné}. C'est-à-dire :
+    $$\mathcal{A}_n = \ker(\epsilon) = \{\sigma \in S_n \mid \epsilon(\sigma) = 1\}.$$
+}
+
+
+\theorem{Proposition}{Groupe alterné $\mathcal{A}_n$}{false}{
+    Le groupe $\mathcal{A}_n$ est un sous-groupe distingué dans $S_n$ et $S_n/\mathcal{A}_n$ est isomorphe à $\mathbb{Z}/2\mathbb{Z}$. L'ordre du groupe $\mathcal{A}_n$ est $\frac{n!}{2}$. Pour $n \geq 3$, le groupe $\mathcal{A}_n$ est engendré par les 3-cycles.
+}
+
+\noindent{\textbf{Preuve}:\\
+Seule la dernière assertion nécessite une preuve. Un élément $\sigma \in \mathcal{A}_n$ s'écrit comme un produit pair de transpositions. Pour $i, j, k$ tous distincts on a $(ij)(jk) = (ijk)$ est un 3-cycle et pour $i, j, k, l$ tous distincts, on a $(ij)(kl) = (ij)(jk)(jk)(kl) = (ijk)(jkl)$ est un produit de 3-cycles. \hfill $\square$
+}
+
+
+\theorem{Lemme}{Sous-groupe distingué de $\mathcal{A}_n$}{false}{
+    Supposons $n \geq 5$ et $H$ un sous-groupe distingué de $\mathcal{A}_n$. Si $H$ contient un 3-cycle, alors $H = \mathcal{A}_n$.
+}
+
+\noindent{\textbf{Preuve}:\\
+Soit $\rho = (abc)$ un 3-cycle contenu dans $H$. Montrons que $H$ contient tous les 3-cycles de $\mathcal{A}_n$. Soit $\rho'$ un tel 3-cycle. Il existe $\sigma \in S_n$ tel que $\sigma \rho \sigma^{-1} = \rho'$. Si $\sigma \in \mathcal{A}_n$ c'est fini. Comme $n \geq 5$, il existe une transposition $\tau \in S_n$ telle que le support de $\tau$ est distinct de celui de $\rho$ (donc $\tau$ commute avec $\rho$). On a $\sigma \tau \in \mathcal{A}_n$ et
+\[
+\sigma \tau \rho \tau^{-1} \sigma^{-1} = \sigma \rho \sigma^{-1} = \rho'.
+\]
+Comme $H$ est distingué on en déduit que tous les 3-cycles de $\mathcal{A}_n$ sont dans $H$ et donc par la proposition précédente $H = \mathcal{A}_n$. \hfill $\square$
+}
+
+\theorem{Théorème}{Simplicité de $\mathcal{A}_5$}{false}{
+    Le groupe $\mathcal{A}_5$ est simple.
+}
+
+\noindent{\textbf{Preuve}:\\
+Soit $H \neq \{\text{id}\}$ un sous-groupe distingué de $\mathcal{A}_5$. Soit $\rho \in H$.\\
+Si $\rho$ est un 3-cycle, par le lemme précédent $H = \mathcal{A}_5$.\\
+Si $\rho = (ab)(cd)$, montrons que si $\rho'$ est une double transposition, alors $\rho' \in H$. Il existe $\sigma \in S_n$ tel que $\sigma \rho \sigma^{-1} = \rho'$. Si $\sigma \in \mathcal{A}_n$ c'est fini. Sinon $\sigma(ab) \in \mathcal{A}_5$ et
+\[
+\sigma(ab)\rho(ab)\sigma^{-1} = \sigma \rho \sigma^{-1} = \rho'.
+\]
+Donc $H$ contient toutes les doubles transpositions. On écrit, avec $a,b,c,d,e$ tous distincts
+\[
+(abc) = (ab)(bc) = (ab)(de)(de)(bc) \in H
+\]
+donc $H$ contient un 3-cycle et $H = \mathcal{A}_5$.\\
+Si $\rho = (abcde)$ alors
+\[
+(abc)\rho(abc)^{-1}\rho^{-1} = (bcade)(aedcb) = (abd) \in H
+\]
+donc $H$ contient un 3-cycle et $H = \mathcal{A}_5$. \hfill $\square$
+}
+
+\theorem{Corollaire}{Simplicité de $\mathcal{A}_n$}{false}{
+    Le groupe $\mathcal{A}_n$ est simple pour $n \geq 5$.
+}
+
+\noindent{\textbf{Preuve}:\\
+La démonstration se fait par récurrence sur $n$ sachant que le résultat est vrai pour $n = 5$. Soit $n > 5$ et supposons que $\mathcal{A}_{n-1}$ est simple. Soit $H \neq \{\text{id}\}$ un sous-groupe distingué de $\mathcal{A}_n$. Soit $\tau \in H$. Supposons dans un premier temps que $\tau(n) \neq n$. Il existe $b \in \{1, \dots, n\} \setminus \{n, \tau(n)\}$ tel que $\tau(b) \neq b$ (existe car $\tau$ de signature $1$ n'est pas la transposition $(n\tau(n))$). Comme $n > 5$, il existe $c, d$ distincts dans $\{1, \dots, n\} \setminus \{n, \tau(n), b, \tau(b)\}$. Posons
+\[
+\tau' = (bcd)\tau^{-1}(bcd)^{-1}\tau \in H
+\]
+Remarquons que $\tau'(n) = n$ et $\tau'(b) = c$. Le sous-groupe $G = \{\tau \in \mathcal{A}_n \mid \tau(n) = n\}$ de $\mathcal{A}_n$ est isomorphe à $\mathcal{A}_{n-1}$ donc est simple. De plus $H \cap G$ est distingué dans $G$. Or $\tau' \in (H \cap G) \setminus \{1\}$, donc $H \cap G = G$. Ainsi $H$ contient un 3-cycle (inclus dans $G \simeq \mathcal{A}_{n-1}$) donc $H = \mathcal{A}_n$. \hfill $\square$
+}
+
+\bigskip
+
+\theorem{Corollaire}{Sous-groupes distingués de $S_n$}{false}{
+    Pour $n \geq 5$, $S_n$ ne possède qu'un seul sous-groupe distingué propre : $\mathcal{A}_n$.
+}
+
+\noindent{\textbf{Preuve}:\\
+Soit $H$ un sous-groupe distingué propre. On a $H \cap \mathcal{A}_n$ est distingué dans $\mathcal{A}_n$ donc il vaut soit $\{1\}$ soit $\mathcal{A}_n$. Si $H \cap \mathcal{A}_n = \{1\}$, alors $\epsilon : H \to \{+1, -1\}$ est injective (son noyau est précisément $H \cap \mathcal{A}_n$). Donc $H = \{\text{id}, \tau\}$ avec $\epsilon(\tau) = -1$ et $\tau^2 = \text{id}$. Or il existe $\sigma \in S_n$ qui ne commute pas avec $\tau$, donc $\sigma \tau \sigma^{-1} = \tau' \in H$ mais $\tau' \neq \text{id}$ et $\tau' \neq \tau$, absurde. Si $H \cap \mathcal{A}_n = \mathcal{A}_n$, on a $\mathcal{A}_n \subset H \subset S_n$ et $\mathcal{A}_n$ est d'indice 2. Donc $H \neq S_n \Rightarrow H = \mathcal{A}_n$. \hfill $\square$
+}
 
 \newpage
 \tableofcontents 
