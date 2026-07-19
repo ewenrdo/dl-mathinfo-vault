@@ -27,6 +27,7 @@
 
 \noindent Dans ce chapitre, $E$ désigne un espace vectoriel normé, et $\| \cdot \|$ la norme associée.
 \section{Suites de Cauchy}
+\subsection{Généralités et définitions}
 
 \definition{
     Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $E$. On dit que $(x_n)$ est une \textbf{suite de Cauchy} si :
@@ -49,7 +50,7 @@ $$\|x_n - x_m\| \leq \|x_n - x\| + \|x - x_m\| < \frac{\varepsilon}{2} + \frac{\
     et vérifie la définition de suite de Cauchy en prenant $N \leq \frac{\|a\|}{\varepsilon}$. Ainsi, $(x_n)$ est une suite de Cauchy dans $A$ qui ne converge pas dans $A$. Donc $A$ n'est pas complet.
 }
 
-\section{Propriétés des suites de Cauchy}
+\subsection{Propriétés des suites de Cauchy}
 
 \theorem{Lemme}{Borne d'une suite de Cauchy}{false}{
     Toute suite de Cauchy est bornée.
@@ -62,7 +63,7 @@ Il s'ensuit que $(x_m)_{m \in \mathbb{N}} \subset B(0, max\{R, \|x_N\| + \vareps
 
 % définir la valeur d'adhérence d'une suite 
 
-\section{Valeur d'adhérence d'une suite}
+\subsection{Valeur d'adhérence d'une suite}
 
 \definition{
     Soit $(x_n)$ une suite d'éléments de $E$. On dit que $x \in E$ est une \textbf{valeur d'adhérence} de $(x_n)$ si il existe une sous-suite $(x_{n_k})$ de $(x_n)$ telle que $x_{n_k} \to x$ lorsque $k \to +\infty$.
@@ -89,6 +90,48 @@ Par le chapitre 1, on a que tout espace vectoriel normé réel de dimension fini
 Par le lemme précédent, on a que $(x_n)_{n \in \mathbb{N}}$ converge vers $l$, et ce pour toute suite de Cauchy $(x_n)_{n \in \mathbb{N}}$ dans $\mathbb{R}^n$. Ainsi, $\mathbb{R}^n$ est complet. \hfill $\square$
 }
 
+\section{Théorème du point fixe}
+
+\definition{
+    Soit $A \subset \mathbb{R}^n$ et $f: A \to \mathbb{R}^n$. On dit que $f$ est \textbf{contractante} si est elle Lipschitzienne de constante $k < 1$, c'est-à-dire :
+    $$\exists k \in [0, 1[, \forall x, y \in A, \|f(x) - f(y)\| \leq k \|x - y\|.$$
+}
+
+\example{
+    La fonction $f(x) = \frac{1}{2}x$ est contractante sur $\mathbb{R}$ avec $k = \frac{1}{2}$. En effet, pour tout $x, y \in \mathbb{R}$, on a :
+    $$|f(x) - f(y)| = \left|\frac{1}{2}x - \frac{1}{2}y\right| = \frac{1}{2}|x - y|.$$
+}
+
+\attention{Il faut bien noter ici que la notion de fonction contractante dépend de la norme choisie sur $\mathbb{R}^n$. Une fonction peut être contractante pour une norme et ne pas l'être pour une autre.}
+
+\definition{
+    Soit $f: A \to \mathbb{R}^n$ une fonction. On dit que $x \in A$ est un \textbf{point fixe} de $f$ si $f(x) = x$.
+}
+
+\theorem{Théorème}{Point fixe de Banach}{false}{
+    Soit $F \subset \mathbb{R}^n$ un fermé et soit $f: F \to F$ une fonction contractante.\\
+    Alors $\exists ! x \in F$ tel que $f(x) = x$ \textit{(c'est-à-dire que $x$ est l'unique point fixe de $f$)}.\\\\
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{Suite associée au théorème du point fixe}{false}{
+    Soit $F \subset \mathbb{R}^n$ un fermé et soit $f: F \to F$ une fonction contractante.\\
+    Alors, pour tout $x_0 \in F$, la suite $(x_n)_{n \in \mathbb{N}}$ définie par récurrence par :
+    $$\begin{cases}
+        x_0 \in F\\
+        x_{n+1} = f(x_n), \forall n \in \mathbb{N}
+    \end{cases}$$
+    converge vers le point fixe unique de $f$ et on a $\|x_n - x\| \leq \frac{k^n}{1-k} \|x_1 - x_0\|$, où $k$ est la constante de contraction de $f$.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\example{
+    Reprenons l'exemple de la fonction $f(x) = \frac{1}{2}x$ sur $\mathbb{R}$.\\
+    Cette fonction est contractante avec $k = \frac{1}{2}$. Le point fixe unique est $x = 0$.\\
+    Pour tout $x_0 \in \mathbb{R}$, la suite $(x_n)$ définie par $x_{n+1} = f(x_n)$ converge vers $0$. En effet, on a :
+    $$x_n = f^n(x_0) = \left(\frac{1}{2}\right)^n x_0 \to 0 \text{ lorsque } n \to +\infty.$$
+}
 
 \newpage
 \tableofcontents
