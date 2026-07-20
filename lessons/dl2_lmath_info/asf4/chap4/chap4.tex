@@ -66,7 +66,7 @@
     De plus, l'égalité a lieu si et seulement si $x$ et $y$ sont colinéaires.
 }
 
-\noindent{ \textbf{Démonstration :}\\
+\noindent{\textbf{Preuve :}\\
     \begin{itemize}
         \item   Soit $t\in\mathbb{R}$. On pose $P(t)=\langle x, y\rangle$. Supposons $y\ne0$.\\
                 $P(t)=\langle x, x\rangle+2t\langle x, y\rangle+t^2\langle y, y\rangle\ge0$ est polynômiale de degré 2 si $y\ne0$. Ainsi $\Delta\le0$.\\
@@ -89,7 +89,7 @@
     Alors $\| \cdot \|$ est une norme sur $E$, appelée la norme associée au produit scalaire $\langle \cdot, \cdot \rangle$.
 }
 
-\noindent{\textbf{Démonstration :}\\
+\noindent{\textbf{Preuve :}\\
 \textbf{Homogénéité :} Soit $\lambda \in \mathbb{R}$ et $x \in E$.\\
 $\| \lambda x \| = \sqrt{\langle \lambda x, \lambda x \rangle} = \sqrt{\lambda^2 \langle x,x \rangle} = |\lambda| \sqrt{\langle x,x \rangle} = |\lambda| \| x \|$\\
 \textbf{Inégalité triangulaire :} Soit $x,y \in E$.\\
@@ -116,8 +116,7 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
     On peut le vérifier avec $\| x \| = \sqrt{\langle x,x \rangle}$ et les identités remarquables.\\\\
     D'où si une norme ne vérifie pas l'identité du parallélogramme, elle n'est pas associée à un produit scalaire.
 }
-\noindent{ \textbf{Démonstration :}\\
-    Vérifions avec $\|x\|=\sqrt{\langle x, x\rangle}$.\\
+\noindent{\textbf{Preuve :} Vérifions avec $\|x\|=\sqrt{\langle x, x\rangle}$.\\
     $\|x+y\|^2=\|x\|^2+2\langle x, y\rangle+\|y\|^2$ et $\|x-y\|^2=\|x\|^2-2\langle x, y\rangle+\|y\|^2$.\\
     Donc, $\|x+y\|^2+\|x-y\|^2=2(\|x\|^2+\|y\|^2)$.
 }
@@ -126,8 +125,7 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
     Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
     Alors $\forall x,y \in E, \; \langle x,y \rangle = \frac{1}{2}(\| x+y \|^2 - \| x \|^2 - \| y \|^2)$.
 }
-\noindent{ \textbf{Démonstration :}\\
-    $\| x+y \|^2 = \langle x+y, x+y \rangle = \langle x,x \rangle + 2\langle x,y \rangle + \langle y,y \rangle = \| x \|^2 + 2\langle x,y \rangle + \| y \|^2$.\\
+\noindent{\textbf{Preuve :} $\| x+y \|^2 = \langle x+y, x+y \rangle = \langle x,x \rangle + 2\langle x,y \rangle + \langle y,y \rangle = \| x \|^2 + 2\langle x,y \rangle + \| y \|^2$.\\
     Donc $\langle x,y \rangle = \frac{1}{2}(\| x+y \|^2 - \| x \|^2 - \| y \|^2)$. $\Box$
 }
 
@@ -162,8 +160,7 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
     De plus, si $k=2$, alors $\| x + y \|^2 = \| x \|^2 + \| y \|^2 \Rightarrow x \perp y$.
 }
 
-\noindent{\textbf{Démonstration :}\\
-$\| \sum_{i=1}^k x_i \|^2 = \langle \sum_{i=1}^k x_i, \sum_{j=1}^k x_j \rangle = \text{ (bilinéarité) } \sum_{i=1}^k \sum_{j=1}^k \langle x_i, x_j \rangle = \sum_{i=1}^k \langle x_i, x_i \rangle = \sum_{i=1}^k \| x_i \|^2$.\\\\
+\noindent{\textbf{Preuve :} $\| \sum_{i=1}^k x_i \|^2 = \langle \sum_{i=1}^k x_i, \sum_{j=1}^k x_j \rangle = \text{ (bilinéarité) } \sum_{i=1}^k \sum_{j=1}^k \langle x_i, x_j \rangle = \sum_{i=1}^k \langle x_i, x_i \rangle = \sum_{i=1}^k \| x_i \|^2$.\\\\
 Pour $k = 2$, 
 $\| x + y \| ^ 2 = \|x\|^2 + 2\langle x,y \rangle + \| y \|^2$.\\
 Donc si $\| x + y \|^2 = \| x \|^2 + \| y \|^2$, alors $2\langle x,y \rangle = 0 \Rightarrow x \perp y$. $\Box$
@@ -182,8 +179,7 @@ Donc si $\| x + y \|^2 = \| x \|^2 + \| y \|^2$, alors $2\langle x,y \rangle = 0
 
 \remark{Si $E$ est de dimension finie, toute famille orthonormée admet au plus $\dim(E)$ vecteurs.}
 
-\noindent{ \textbf{Démonstration :}\\
-    Soit $\sum_{i\in J}\lambda_ix_i=0$ une combinaison linéaire nulle de vecteur de la famille $J$, avec $J\subset I$ un ensemble fini. \\
+\noindent{\textbf{Preuve :} Soit $\sum_{i\in J}\lambda_ix_i=0$ une combinaison linéaire nulle de vecteur de la famille $J$, avec $J\subset I$ un ensemble fini. \\
     Soit $j\in J$, $\langle x_j, \sum_{i\in J}\lambda_ix_i\rangle=0$.\\
     D'où $\sum_{i\in J}\lambda_i\langle x_j, x_i\rangle=0$ car $ \langle x_j, x_i\rangle=0$ si $i\ne j$.\\
     D'où $\lambda_j\langle x_i, x_j\rangle=0$; $\langle x_j, x_i\rangle>0$ car $x_j\ne0$.
@@ -218,8 +214,7 @@ La $i^{ème}$ coordonnée de $x$ dans la base $(e_1, \ldots, e_n)$ est $\langle 
     En particulier, si $k = \dim(E)$, alors $(u_1, \ldots, u_k=u_n)$ est une base orthonormée de $E$.
 }
 
-\noindent{\textbf{Démonstration :}\\
-On procède par récurrence sur $k$.\\
+\noindent{\textbf{Preuve :} On procède par récurrence sur $k$.\\
 \textbf{Initialisation :} $k=1$.\\
 Alors $(e_1)$ est une famille libre de $E$ si et seulement si $e_1 \neq 0$.\\
 Dans ce cas, on pose $u_1 = \frac{e_1}{\| e_1 \|}$, qui est un vecteur de norme 1.\\
@@ -258,8 +253,7 @@ On a : $(u_1, \ldots, u_{k+1})$ est une famille orthonormée de $E$ qui vérifie
     Alors $E$ est isométrique à $\mathbb{R}^n$ muni du produit scalaire canonique.
 }
 
-\noindent{\textbf{Démonstration :}\\
-Soit $(e_1, \ldots, e_n)$ une base orthonormée de $E$.\\
+\noindent{\textbf{Preuve :} Soit $(e_1, \ldots, e_n)$ une base orthonormée de $E$.\\
 Soit $(\varepsilon_1, \ldots, \varepsilon_n)$ la base canonique de $\mathbb{R}^n$.\\
 On définie l'application linéaire $f : E \to \mathbb{R}^n$ par $f(e_i) = \varepsilon_i$ pour tout $i \in S_n$.\\
 Alors $f$ est un isomorphisme d'espace vectoriel (car l'image d'une base est une base).\\\\
@@ -299,7 +293,7 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
 }
 
 \remark{Soit $p$ la projection orthogonale sur $F$. Alors pour $x \in E, \; p(x)$ est l'unique vecteur de $F$ tel que $\| x - p(x) \| = \min_{z \in F} \| x - z \|$. Autrement dit, $p(x)$ est le point de $F$ le plus proche de $x$.} 
-\noindent{ \textbf{Démonstration :} La plus petite distance entre $x$ et un plan est la droite perpendiculaire au plan passant par $x$. $\Box$}
+\noindent{\textbf{Preuve :} La plus petite distance entre $x$ et un plan est la droite perpendiculaire au plan passant par $x$. $\Box$}
 
 \remark{On peut retrouver la formule de la distance d'un point à une droite / plan dans $\mathbb{R}^3$. Prendre une base orthonormée du plan $P$ et $d(x, P) = \| x - \sum_{i=1}^2 \langle x, e_i \rangle e_i \|$ où $d(x, F) = \inf_{y \in F} \| x - y \|$.}
 
@@ -323,8 +317,7 @@ $ker p = \{ z \in E : p(z) = 0 \} = \{ z \in E : z \perp F \} = F^\perp$. $\Box$
     Alors $E = F \oplus F^\perp$ (c'est même une somme directe orthogonale) et $F = (F^\perp)^\perp$.
 }
 
-\noindent{\textbf{Démonstration :}\\
-$F^\perp = ker p$ et $F = Im p$ où $p$ est la projection orthogonale de $E$ sur $F$.\\
+\noindent{\textbf{Preuve :} $F^\perp = ker p$ et $F = Im p$ où $p$ est la projection orthogonale de $E$ sur $F$.\\
 D'où $F^\perp \oplus F = ker p \oplus Im p = E$.\\
 On a $dim(F^\perp)^\perp = dim(E) - dim(F^\perp) = dim(F)$ donc il suffit de montrer une inclusion.\\
 Soit $y \in F^\perp$.\\
@@ -335,8 +328,7 @@ D'où $F \subset (F^\perp)^\perp$, d'où $F^\perp \supset (F^\perp)^\perp$. $\Bo
 \theorem{Corollaire}{}{false}{
     Soit $H$ un hyperplan de $E$. Alors il existe $x_0 \in E$ tel que $H = (Vect(x_0))^\perp$.
 }
-\noindent{\textbf{Démonstration :}\\
-Par définition d'un hyperplan, et comme $H^\perp$ est un supplémentaire de $H$, il existe $x_0 \in H^\perp$ tel que $H^\perp = Vect(x_0)$.\\
+\noindent{\textbf{Preuve :} Par définition d'un hyperplan, et comme $H^\perp$ est un supplémentaire de $H$, il existe $x_0 \in H^\perp$ tel que $H^\perp = Vect(x_0)$.\\
 Et donc $H = (H^\perp)^\perp = (Vect(x_0))^\perp$. $\Box$
 }
 
@@ -354,9 +346,7 @@ Alors $A^\perp$ est un sev de $E$ et $A^\perp = (Vect(A))^\perp$.}
     Alors $j_E$ est un isomorphisme d'espace vectoriel de $E$ dans $E^*$.\\\\
     Autrement dit, $\forall \varphi \in E^*, \; \exists x \in E : \varphi = \langle x, \cdot \rangle$.
 }
-\noindent{\textbf{Démonstration :}\\
-$j_E$ est linéaire et $dimE = dimE^*$ et $x \in ker(j_E) \Leftrightarrow \forall y \in E, \; \langle x,y \rangle = 0 \Leftrightarrow x = 0$. $\Box$
-}
+\noindent{\textbf{Preuve :} $j_E$ est linéaire et $dimE = dimE^*$ et $x \in ker(j_E) \Leftrightarrow \forall y \in E, \; \langle x,y \rangle = 0 \Leftrightarrow x = 0$. $\Box$}
 
 \remark{Si $\varphi \in E^*, y \in E$ on a le crochet de dualité $\langle \varphi, y \rangle$. Mais aussi si $x$ est tel que $\varphi = \langle x, \cdot \rangle$, on a aussi $\langle x, y \rangle = \langle \varphi, y \rangle$. Donc on peut confondre les deux crochets de dualité. Autrement dit, $\langle j_E(x), y \rangle_{E^* \times E} = \langle x, y \rangle_{E \times E}$ et $j_E$ permet de dire que le crochet de dualité est la même chose que le produit scalaire en identifiant $E$ et $E^*$ de manière canonique.}
 
