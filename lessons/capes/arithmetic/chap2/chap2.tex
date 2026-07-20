@@ -4,12 +4,18 @@
 \usepackage{../../../../components/components}
 
 \usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{ccicons}
 
+% Opérateurs arithmétiques
+\DeclareMathOperator{\pgcd}{pgcd}
+\DeclareMathOperator{\ppcm}{ppcm}
+
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
-\fancyhf{} % reset tout
+\fancyhf{} 
 
 \fancyhead[L]{Préparation CAPES}
 \fancyhead[C]{Arithmétique}
@@ -19,129 +25,184 @@
 \fancyfoot[R]{\thepage}
 
 \begin{document}
-\docTitle{Chapitre 2 : Généralités sur les nombres entiers}
+\docTitle{Chapitre 2 : Arithmétique des entiers et Équations Diophantiennes}
 
 \section{Arithmétique des entiers}
-\subsection{Divisibilité}
-\subsubsection{Division euclidienne}
+
+\subsection{Divisibilité et Division Euclidienne}
 
 \definition{
     On dit que $a$ divise $b$ si $\exists k \in \mathbb{Z}, b = a \cdot k$.\\
     On le note $a \mid b$.
 }
 
+\example{
+    $7 \mid 21$ car $21 = 7 \times 3$. De même, $-4 \mid 12$ car $12 = (-4) \times (-3)$.
+}
+
+\cexample{
+    $5 \nmid 12$ car il n'existe aucun entier $k \in \mathbb{Z}$ tel que $12 = 5k$.
+}
+
 \theorem{Théorème}{Division euclidienne}{true}{
     Soient $a,b \in \mathbb{Z}$ et $b$ non nul.\\
-    Il existe un unique couple $(q, r) \in \mathbb{Z}^2$ tel que :
+    Il existe un unique couple $(q, r) \in \mathbb{Z} \times \mathbb{N}$ tel que :
     \[
-        a = b \cdot q + r
+        a = b \cdot q + r \quad \text{avec} \quad 0 \le r < |b|
     \]
 }
+\ndlr{Théorème à démontrer.}
 
 \remark{On dit que $a$ divise $b$ si le reste de la division euclidienne de $b$ par $a$ est nul.}
 
-\subsubsection{Congruences}
-\definition{
-    Soient $a, b \in \mathbb{Z}$ et $n \in \mathbb{N}^*$.\\
-    On dit que $a$ est congru à $b$ modulo $n$ si $n$ divise $a - b$.\\
-    On le note $a \equiv b \; (mod \; n)$ ou encore $a \equiv b \; [n]$.
+\training{
+    Démontrer que pour tout entier $n \in \mathbb{N}$, le produit de trois entiers consécutifs $n(n+1)(n+2)$ est divisible par $6$.
 }
 
-\theorem{Petit théorème de Fermat}{}{true}{
-    Soient $p$ un nombre premier et $a \in \mathbb{Z}$ tel que $p \nmid a$.\\
-    Alors on a que :
-    \[
-        a^{p-1} \equiv 1 \; [p]
-    \]\\
-    En partiuclier, on a que : $a^p \equiv a \; [p]$.
-}
+\noindent \carreaux{5}
 
-\theorem{Lemme}{}{true}{
-    Soit $x,y \in \mathbb{Z}$ et soit $p \in \mathbb{P}$.\\
-    Alors :
-    \[
-        (x + y)^p \equiv x^p + y^p \; [p]
-    \]
-}
-
-\subsubsection{Critère de divisibilité}
+\subsection{Critère de divisibilité}
 
 \theorem{Proposition}{Écriture des nombres relatifs}{true}{
     On a que $\forall n \in \mathbb{Z}, n = \sum_{i=0}^{k} a_i \cdot 10^i$ avec $a_i$ un entier entre $-9$ et $9$.
 }
+\ndlr{Proposition à démontrer.}
 
-\noindent Pour pouvoir aller plus rapidement, on établit les critères de divisibilité suivants :
-\begin{enumerate}
-    \item $2 \mid n \Leftrightarrow$ le dernier chiffre de $n$ est pair.
-    \item $3 \mid n \Leftrightarrow 3 \mid$ la somme des chiffres de $n$.
-    \item $4 \mid n \Leftrightarrow 4 \mid 10 \cdot a_1 + a_0$ (\textit{ie} si le nombre formé par les deux derniers chiffres de $n$ est divisible par 4).
-    \item $9 \mid n \Leftrightarrow 9 \mid$ la somme des chiffres de $n$. 
-\end{enumerate}
-
-\subsection{Nombres premiers}
-
-\subsubsection{Généralités}
-
-\definition{
-    On dit que $n$ est un nombre \textbf{premier} et on note $n \in \mathbb{P}$ \textit{(non standard)} si les diviseurs de $n$ sont $n$ et $1$.
-}
-
-\theorem{Crible d'Eratosthène}{}{true}{
-    Pour trouver la liste des nombres premiers, on applique l'algorithme suivant :
+\method{Critères de divisibilité}{
+    Pour pouvoir aller plus rapidement, on établit les critères de divisibilité suivants :
     \begin{enumerate}
-        \item On écrit la liste des nombres ;
-        \item On retire $1$ ;
-        \item On retire tous les multiples de 2 \textit{(sauf lui-même)} ;
-        \item De même avec le nombre suivant 2 non barré, et ainsi de suite.
+        \item $2 \mid n \Leftrightarrow$ le dernier chiffre de $n$ est pair.
+        \item $3 \mid n \Leftrightarrow 3 \mid$ la somme des chiffres de $n$.
+        \item $4 \mid n \Leftrightarrow 4 \mid 10 \cdot a_1 + a_0$ (\textit{i.e.} si le nombre formé par les deux derniers chiffres de $n$ est divisible par 4).
+        \item $5 \mid n \Leftrightarrow$ le dernier chiffre de $n$ est $0$ ou $5$.
+        \item $9 \mid n \Leftrightarrow 9 \mid$ la somme des chiffres de $n$.
     \end{enumerate}
 }
 
-\theorem{Théorème fondamental de l'arithmétique}{}{true}{
-    Tout entier naturel $n \geq 2$ s'écrit de manière unique (à l'ordre près des facteurs) comme un produit de nombres premiers.\\\\
-    Plus formellement, $\forall n \geq 2, \exists ! (p_1, p_2, \ldots, p_k) \in \mathbb{P}^k$ et $\forall i \in [1, k] \cap \mathbb{N}, \exists ! \alpha_i \in \mathbb{N}^*$ tels que :
+\training{
+    Soit $N = 3a4b$ un nombre écrit en base 10. Déterminer les chiffres $a$ et $b$ pour que $N$ soit divisible par $9$ et par $10$.
+}
+\noindent \carreaux{7}
+
+
+\subsection{Nombres premiers}
+
+\definition{
+    On dit que $n$ est un nombre \textbf{premier} et on note $n \in \mathbb{P}$ \textit{(non standard)} si les diviseurs positifs de $n$ sont exactement $n$ et $1$.
+}
+
+\theorem{Algorithme}{Crible d'Eratosthène}{true}{
+    Pour trouver la liste des nombres premiers inférieurs à un entier $N$, on applique l'algorithme suivant :
+    \begin{enumerate}
+        \item On écrit la liste des nombres de $1$ à $N$ ;
+        \item On retire $1$ ;
+        \item On retire tous les multiples de 2 \textit{(sauf lui-même)} ;
+        \item De même avec le nombre suivant non barré, et ainsi de suite.
+    \end{enumerate}
+}
+
+\theorem{Théorème}{Théorème fondamental de l'arithmétique}{true}{
+    Tout entier naturel $n \ge 2$ s'écrit de manière unique (à l'ordre près des facteurs) comme un produit de nombres premiers.\\\\
+    Plus formellement, $\forall n \ge 2, \exists ! (p_1, p_2, \ldots, p_k) \in \mathbb{P}^k$ et $\forall i \in [1, k] \cap \mathbb{N}, \exists ! \alpha_i \in \mathbb{N}^*$ tels que :
     \[
         n = \prod_{i=1}^{k} p_i^{\alpha_i}
     \]
 }
+\ndlr{Théorème à démontrer.}
 
-\theorem{Corollaire}{}{true} {
+\theorem{Corollaire}{Test de primalité}{true}{
     Soit $n \in \mathbb{N}$.\\
-    Si $n \notin \mathbb{P}$, alors $n$ a forcément un facteur premier $p$ tel que $p \leq \sqrt{n}$.
+    Si $n \notin \mathbb{P}$ et $n \ge 2$, alors $n$ a forcément un facteur premier $p$ tel que $p \le \sqrt{n}$.
 }
+\ndlr{Corollaire à démontrer.}
 
-\subsubsection{PGCD et PPCM}
+\training{
+    Démontrer que $101$ est un nombre premier en utilisant le corollaire du test de primalité.
+}
+\noindent \carreaux{5}
+
+\subsection{PGCD et PPCM}
 
 \definition{
     Le \textbf{plus grand commun diviseur} (PGCD) de deux entiers $a$ et $b$ est le plus grand entier qui divise à la fois $a$ et $b$.\\
-    On le note $pgcd(a, b)$ ou $a \wedge b$. 
+    On le note $\pgcd(a, b)$ ou $a \wedge b$. 
 }
 
 \definition{
     On dit de deux nombres qu'ils sont \textbf{premiers entre eux} si leur PGCD vaut $1$.
 }
 
-\theorem{Théorème de Bézout}{}{true}{
+\definition{
+    Le \textbf{plus petit commun multiple} (PPCM) de deux entiers $a$ et $b$ est le plus petit entier strictement positif qui est multiple à la fois de $a$ et de $b$.\\
+    On le note $\ppcm(a, b)$ ou $a \vee b$.
+}
+
+\theorem{Théorème}{Lien entre PGCD et PPCM}{true}{
+    Soient $a, b \in \mathbb{N}^*$. On a la relation :
+    \[
+        \pgcd(a, b) \times \ppcm(a, b) = a \cdot b
+    \]
+}
+
+\noindent \textbf{Preuve :}\\
+Soient $a, b \in \mathbb{N}^*$. D'après le théorème fondamental de l'arithmétique, considérons l'ensemble $\{p_1, p_2, \dots, p_k\}$ de tous les facteurs premiers intervenant dans les décompositions de $a$ et $b$. On peut écrire :
+\[
+    a = \prod_{i=1}^k p_i^{\alpha_i} \quad \text{et} \quad b = \prod_{i=1}^k p_i^{\beta_i} \quad \text{avec } \alpha_i, \beta_i \in \mathbb{N}
+\]
+Par construction du PGCD et du PPCM :
+\[
+    \pgcd(a, b) = \prod_{i=1}^k p_i^{\min(\alpha_i, \beta_i)} \quad \text{et} \quad \ppcm(a, b) = \prod_{i=1}^k p_i^{\max(\alpha_i, \beta_i)}
+\]
+En effectuant le produit, il vient :
+\[
+    \pgcd(a, b) \times \ppcm(a, b) = \prod_{i=1}^k p_i^{\min(\alpha_i, \beta_i) + \max(\alpha_i, \beta_i)}
+\]
+Comme pour tous réels $\alpha_i, \beta_i$, on a $\min(\alpha_i, \beta_i) + \max(\alpha_i, \beta_i) = \alpha_i + \beta_i$, on obtient :
+\[
+    \pgcd(a, b) \times \ppcm(a, b) = \prod_{i=1}^k p_i^{\alpha_i + \beta_i} = \left(\prod_{i=1}^k p_i^{\alpha_i}\right) \left(\prod_{i=1}^k p_i^{\beta_i}\right) = a \cdot b \quad \square
+\]
+
+\theorem{Lemme}{Conservation du PGCD par reste}{false}{
+    Soient $a,b,k \in \mathbb{Z}$.\\
+    Alors on a que $\pgcd(a - k \cdot b, b) = \pgcd(a, b)$.
+}
+\ndlr{Lemme à démontrer.}
+
+\training{
+    Résoudre dans $\mathbb{N}^2$ le système suivant :
+    \[
+        \begin{cases}
+            \pgcd(x, y) = 12 \\
+            \ppcm(x, y) = 360
+        \end{cases}
+    \]
+}
+\noindent \carreaux{7}
+
+
+\subsection{Théorèmes de Bézout et de Gauss}
+
+\theorem{Théorème}{Théorème de Bézout}{true}{
     Soient $a,b \in \mathbb{Z}$.\\
     Il existe des entiers $u,v \in \mathbb{Z}$ tels que :
     \[
-        a \cdot u + b \cdot v = pgcd(a, b)
+        a \cdot u + b \cdot v = \pgcd(a, b)
     \]
-    En particulier on a l'\textbf{identité de Bézout} :
+    En particulier on a l'\textbf{identité de Bézout} :\\
     $a,b$ sont premiers entre eux $\Leftrightarrow \exists u,v \in \mathbb{Z}, a \cdot u + b \cdot v = 1$.
 }
+\ndlr{Théorème à démontrer.}
 
-\definition{
-    Le \textbf{plus petit commun multiple} (PPCM) de deux entiers $a$ et $b$ est le plus petit entier qui est multiple à la fois de $a$ et de $b$.\\
-    On le note $ppcm(a, b)$ ou $a \vee b$.
+\attention{
+    L'existence de $u, v \in \mathbb{Z}$ tels que $au + bv = k$ ne garantit pas que $\pgcd(a, b) = k$, mais seulement que $\pgcd(a, b) \mid k$.
 }
 
-\theorem{Lemme}{}{false}{
-    Soient $a,b,k \in \mathbb{Z}$.\\
-    Alors on que $pgcd(a - k \cdot b, b) = pgcd(a, b)$.
+\cexample{
+    $2 \times 3 + 3 \times (-1) = 3$, pourtant $\pgcd(2, 3) = 1 \neq 3$.
 }
 
-\theorem{Lemme de Gauss}{}{false}{
-    Soient $a,b,c \in \mathbb{N}$.
+\theorem{Lemme}{Lemme de Gauss}{false}{
+    Soient $a,b,c \in \mathbb{N}^*$.
     \[
     \begin{cases}
         a \mid b \cdot c\\
@@ -149,18 +210,348 @@
     \end{cases} \Rightarrow a \mid c
     \]
 }
-\theorem{Lemme d'Euclide}{}{false}{
+
+\noindent \textbf{Preuve :}\\
+Puisque $a \wedge b = 1$, le théorème de Bézout assure l'existence d'un couple $(u, v) \in \mathbb{Z}^2$ tel que $au + bv = 1$. En multipliant cette égalité par $c$, on obtient :
+\[
+    c = a(cu) + (bc)v
+\]
+$a$ divise manifestement $a(cu)$. De plus, par hypothèse, $a \mid bc$, donc $a$ divise également $(bc)v$. Par conséquent, $a$ divise la somme $a(cu) + (bc)v = c$. $\square$
+
+\theorem{Lemme}{Lemme d'Euclide}{false}{
     Soient $a,b \in \mathbb{N}$ et $p \in \mathbb{P}$.
     \[
     p \mid a \cdot b \Rightarrow \left( p \mid a \; \text{ou} \; p \mid b \right)
     \]
 }
+\ndlr{Lemme à démontrer.}
+
+\training{
+    Soit $n \in \mathbb{N}$. Démontrer que la fraction $\frac{21n + 4}{14n + 3}$ est irréductible pour tout $n$.
+}
+\noindent \carreaux{7}
+
+\subsection{Congruences}
+
+\definition{
+    Soient $a, b \in \mathbb{Z}$ et $n \in \mathbb{N}^*$.\\
+    On dit que $a$ est congru à $b$ modulo $n$ si $n$ divise $a - b$.\\
+    On le note $a \equiv b \; (\text{mod} \; n)$ ou encore $a \equiv b \; [n]$.
+}
+
+\theorem{Théorème}{Petit théorème de Fermat}{true}{
+    Soient $p$ un nombre premier et $a \in \mathbb{Z}$ tel que $p \nmid a$.\\
+    Alors on a que :
+    \[
+        a^{p-1} \equiv 1 \; [p]
+    \]
+    En particulier, pour tout $a \in \mathbb{Z}$, on a : $a^p \equiv a \; [p]$.
+}
+\ndlr{Théorème à démontrer.}
+
+\theorem{Lemme}{Binôme modulo $p$}{true}{
+    Soit $x,y \in \mathbb{Z}$ et soit $p \in \mathbb{P}$.\\
+    Alors :
+    \[
+        (x + y)^p \equiv x^p + y^p \; [p]
+    \]
+}
+\ndlr{Lemme à démontrer.}
+
+\training{
+    Déterminer le reste de la division euclidienne de $3^{100}$ par $7$.
+}
+\noindent \carreaux{7}
+
+\training{
+    Démontrer que pour tout entier $n \in \mathbb{N}$, le nombre $n^5 - n$ est divisible par $30$.
+}
+\noindent \carreaux{5}
+
+\subsection{Théorème des Restes Chinois et Applications}
+
+\subsubsection{Le Théorème des Restes Chinois (TRC)}
+
+\theorem{Théorème}{Théorème des Restes Chinois}{true}{
+    Soient $n_1, n_2, \dots, n_k \in \mathbb{N}^*$ des entiers deux à deux premiers entre eux (\textit{i.e.} $\pgcd(n_i, n_j) = 1$ pour tous $i \neq j$).\\
+    Soient $a_1, a_2, \dots, a_k \in \mathbb{Z}$.\\
+    Le système de congruences :
+    \[
+        (S) : \begin{cases}
+            x \equiv a_1 \; [n_1] \\
+            x \equiv a_2 \; [n_2] \\
+            \vdots \\
+            x \equiv a_k \; [n_k]
+        \end{cases}
+    \]
+    admet une unique solution modulo $N = \prod_{i=1}^k n_i$. Autrement dit, l'ensemble des solutions de $(S)$ dans $\mathbb{Z}$ est une classe de congruence modulo $N$.
+}
+\ndlr{Théorème à démontrer.}
+
+\method{Construction pratique de la solution}{
+    Pour résoudre un système $(S)$ de $k$ congruences avec $n_i$ deux à deux premiers entre eux :
+    \begin{enumerate}
+        \item Calculer le produit global $N = n_1 \cdot n_2 \cdots n_k$.
+        \item Pour chaque $i \in \{1, \dots, k\}$, poser $N_i = \frac{N}{n_i} = \prod_{j \neq i} n_j$.
+        \item Comme $\pgcd(N_i, n_i) = 1$, déterminer un inverse $e_i$ de $N_i$ modulo $n_i$, c'est-à-dire un entier $e_i$ tel que :
+        \[
+            N_i \cdot e_i \equiv 1 \; [n_i]
+        \]
+        (ceci s'obtient via l'algorithme d'Euclide étendu).
+        \item Une solution particulière $x_0$ est alors donnée par :
+        \[
+            x_0 = \sum_{i=1}^k a_i \cdot N_i \cdot e_i
+        \]
+        \item L'ensemble général des solutions dans $\mathbb{Z}$ est :
+        \[
+            \mathcal{S} = \{ x_0 + k N, \ k \in \mathbb{Z} \}
+        \]
+    \end{enumerate}
+}
+
+\example{
+    Résolvons le système :
+    \[
+        (S) : \begin{cases} x \equiv 2 \; [3] \\ x \equiv 3 \; [5] \\ x \equiv 2 \; [7] \end{cases}
+    \]
+    \begin{enumerate}
+        \item $n_1 = 3, n_2 = 5, n_3 = 7$ sont deux à deux premiers entre eux. Le produit est $N = 3 \times 5 \times 7 = 105$.
+        \item On calcule les $N_i$ :
+        \[
+            N_1 = 5 \times 7 = 35, \quad N_2 = 3 \times 7 = 21, \quad N_3 = 3 \times 5 = 15
+        \]
+        \item On cherche les inverses $e_i$ de $N_i$ modulo $n_i$ :
+        \begin{itemize}
+            \item $35 \equiv 2 \; [3]$, et $2 \times 2 = 4 \equiv 1 \; [3]$, donc $e_1 = 2$.
+            \item $21 \equiv 1 \; [5]$, donc $e_2 = 1$.
+            \item $15 \equiv 1 \; [7]$, donc $e_3 = 1$.
+        \end{itemize}
+        \item Une solution particulière est :
+        \[
+            x_0 = 2 \cdot (35 \cdot 2) + 3 \cdot (21 \cdot 1) + 2 \cdot (15 \cdot 1) = 140 + 63 + 30 = 233
+        \]
+        Comme $233 = 2 \times 105 + 23 \equiv 23 \; [105]$, la plus petite solution positive est $23$.
+        \item Les solutions dans $\mathbb{Z}$ sont de la forme $x \equiv 23 \; [105]$.
+    \end{enumerate}
+}
+
+\training{
+    Un panier contient des œufs. Si on les compte 2 par 2, 3 par 3, 4 par 4, 5 par 5 ou 6 par 6, il en reste toujours 1. En revanche, si on les compte 7 par 7, il n'en reste aucun. Quel est le nombre minimal d'œufs dans le panier ?
+}
+
+\noindent \carreaux{10}
+
+\subsubsection{Applications du Théorème des Restes Chinois}
+
+\theorem{Proposition}{Simultanéité de divisibilité}{true}{
+    Soient $a, b \in \mathbb{N}^*$ premiers entre eux, et $x \in \mathbb{Z}$.
+    \[
+        \begin{cases} x \equiv 0 \; [a] \\ x \equiv 0 \; [b] \end{cases} \iff x \equiv 0 \; [ab]
+    \]
+    En d'autres termes, si $a \mid x$ et $b \mid x$ avec $\pgcd(a,b)=1$, alors $ab \mid x$.
+}
+\ndlr{Proposition à démontrer.}
+
+\definition{
+    Pour tout $n \in \mathbb{N}^*$, l'\textbf{indicatrice d'Euler} $\varphi(n)$ est le nombre d'entiers $k \in \{1, 2, \dots, n\}$ tels que $\pgcd(k, n) = 1$.
+}
+
+\remark{On a que $\varphi(1) = 1$ et $\varphi(p) = p - 1$ pour tout nombre premier $p$.}
+
+\example{
+    Calculons $\varphi(12)$. Les entiers $k \in \{1, 2, \dots, 12\}$ premiers avec $12$ sont : $1, 5, 7, 11$.\\
+    Ainsi $\varphi(12) = 4$.
+}
+
+\theorem{Théorème}{Multiplicativité de l'indicatrice d'Euler}{true}{
+    Si $a$ et $b$ sont deux entiers naturels premiers entre eux, alors :
+    \[
+        \varphi(a \cdot b) = \varphi(a) \cdot \varphi(b)
+    \]
+    En conséquence, si la décomposition en facteurs premiers de $n$ est $n = \prod_{i=1}^k p_i^{\alpha_i}$, alors :
+    \[
+        \varphi(n) = n \prod_{i=1}^k \left( 1 - \frac{1}{p_i} \right)
+    \]
+}
+\ndlr{Théorème à démontrer.}
+
+
+\training{
+    Calculer $\varphi(360)$ en utilisant la décomposition en facteurs premiers.
+}
+
+\noindent \carreaux{5}
+
+\subsection{Sommes de $n$ premiers entiers, carrés et cubes}
+
+\theorem{Théorème}{Formules des sommes usuelles}{true}{
+    Pour tout $n \in \mathbb{N}^*$ :
+    \[
+        \sum_{k=1}^n k = \frac{n(n+1)}{2}
+    \]
+    \[
+        \sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}
+    \]
+    \[
+        \sum_{k=1}^n k^3 = \left( \frac{n(n+1)}{2} \right)^2 = \left( \sum_{k=1}^n k \right)^2
+    \]
+}
+\ndlr{Théorème à démontrer.}
+
+\training{
+    Démontrer la formule de la somme des carrés $\sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}$ par récurrence.
+}
+\noindent \carreaux{10}
+
+
+\section{Équations diophantiennes linéaires}
+
+\subsection{Cadre général}
+
+\definition{
+    Une équation diophantienne est une équation polynomiale à coefficients entiers dont les solutions recherchées sont des entiers.\\
+    On s'intéresse ici aux équations diophantiennes linéaires à deux inconnues de la forme :
+    \[
+        (E) : ax + by = c
+    \]
+    avec $a, b, c \in \mathbb{Z}$ et l'inconnue $(x, y) \in \mathbb{Z}^2$.
+}
+
+\theorem{Théorème}{Existence de solutions entières}{true}{
+    Soient $a, b, c \in \mathbb{Z}$.\\
+    L'équation diophantienne linéaire $ax + by = c$ admet au moins une solution dans $\mathbb{Z}^2$ si et seulement si $\pgcd(a, b) \mid c$.
+}
+
+\noindent{\textbf{Preuve :}\\
+Notons $d = \pgcd(a, b)$.
+\begin{itemize}
+    \item[$\Rightarrow$] Supposons que l'équation $ax + by = c$ admette une solution entière $(x_0, y_0)$. \\
+    Par définition du PGCD, $d \mid a$ et $d \mid b$. Il existe donc deux entiers $a'$ et $b'$ tels que $a = da'$ et $b = db'$. En substituant dans l'équation, on obtient :
+    \[
+        da'x_0 + db'y_0 = c \iff d(a'x_0 + b'y_0) = c
+    \]
+    Comme $(a'x_0 + b'y_0) \in \mathbb{Z}$, on en déduit immédiatement que $d \mid c$.
+    
+    \item[$\Leftarrow$] Réciproquement, supposons que $d \mid c$. Il existe donc un entier $m$ tel que $c = md$. \\
+    D'après le théorème de Bézout, il existe un couple d'entiers $(u, v) \in \mathbb{Z}^2$ tel que :
+    \[
+        au + bv = d
+    \]
+    En multipliant cette égalité par $m$, on obtient :
+    \[
+        a(mu) + b(mv) = md = c
+    \]
+    Le couple $(x_0, y_0) = (mu, mv) \in \mathbb{Z}^2$ est donc une solution particulière de l'équation.
+\end{itemize}
+\hfill$\square$
+}
+
+\subsection{Algorithme d'Euclide étendu et solution particulière}
+
+\method{Recherche d'une solution particulière}{
+    Pour déterminer une solution particulière de l'équation $ax + by = c$ lorsque $\pgcd(a,b) \mid c$ :
+    \begin{enumerate}
+        \item Établir l'algorithme d'Euclide pour déterminer $d = \pgcd(a, b)$.
+        \item Remonter l'algorithme (méthode des substitutions successives) pour exprimer $d$ sous la forme d'une combinaison linéaire de $a$ et $b$ : $au + bv = d$.
+        \item Multiplier l'égalité obtenue par le quotient $\frac{c}{d}$ afin d'isoler $c$ et d'identifier par identification un couple solution particulière $(x_0, y_0)$.
+    \end{enumerate}
+}
+
+\example{
+    Considérons l'équation $23x + 17y = 3$.
+    \begin{enumerate}
+        \item \textbf{Algorithme d'Euclide :}
+        \[
+            23 = 1 \cdot 17 + 6 \quad (\text{L}_1)
+        \]
+        \[
+            17 = 2 \cdot 6 + 5 \quad (\text{L}_2)
+        \]
+        \[
+            6 = 1 \cdot 5 + \textbf{1} \quad (\text{L}_3)
+        \]
+        \[
+            5 = 5 \cdot 1 + 0
+        \]
+        Ainsi, $\pgcd(23, 17) = 1$. Comme $1 \mid 3$, l'équation admet des solutions entières.
+        
+        \item \textbf{Remontée de l'algorithme :} \\
+        Via $(\text{L}_3)$ : $1 = 6 - 1 \cdot 5$ \\
+        Via $(\text{L}_2)$ : $1 = 6 - 1 \cdot (17 - 2 \cdot 6) = 3 \cdot 6 - 1 \cdot 17$ \\
+        Via $(\text{L}_1)$ : $1 = 3 \cdot (23 - 1 \cdot 17) - 1 \cdot 17 = 3 \cdot 23 - 4 \cdot 17$
+        
+        On obtient l'identité de Bézout : $23 \cdot (3) + 17 \cdot (-4) = 1$.
+        
+        \item \textbf{Obtention de la solution particulière :} \\
+        En multipliant par $3$, on obtient :
+        \[
+            23 \cdot (9) + 17 \cdot (-12) = 3
+        \]
+        Le couple $(x_0, y_0) = (9, -12)$ est une solution particulière de notre équation.
+    \end{enumerate}
+}
+
+\subsection{Résolution générale par Analyse-Synthèse}
+
+\method{Détermination de l'ensemble des solutions}{
+    La recherche de la forme générale des solutions repose rigoureusement sur un raisonnement par \textbf{analyse-synthèse} :
+    \begin{enumerate}
+        \item \textbf{Analyse :} On suppose qu'un couple $(x,y)$ est solution. Par soustraction membre à membre avec la solution particulière, on se ramène à une équation homogène. L'application du \textbf{théorème de Gauss} fournit les conditions nécessaires sur la forme de $x$ et $y$.
+        \item \textbf{Synthèse :} On vérifie réciproquement que tout couple répondant à cette forme structurelle est effectivement solution (condition suffisante).
+    \end{enumerate}
+}
+
+\example{
+    Résolvons complètement dans $\mathbb{Z}^2$ l'équation $(E) : 23x + 17y = 3$, sachant que $(9, -12)$ est solution particulière.
+    
+    \noindent{\textbf{Analyse :}\\
+    Soit $(x, y) \in \mathbb{Z}^2$ un couple solution de $(E)$. On a le système :
+    \[
+        \begin{cases}
+            23x + 17y = 3 \\
+            23 \cdot 9 + 17 \cdot (-12) = 3
+        \end{cases}
+    \]
+    Par soustraction membre à membre, on obtient l'équation homogène associée :
+    \[
+        23(x - 9) + 17(y + 12) = 0 \iff 23(x - 9) = -17(y + 12) \quad (E_0)
+    \]
+    De l'équation $(E_0)$, on déduit que $17 \mid 23(x - 9)$. \\
+    Or, $\pgcd(17, 23) = 1$. D'après le \textbf{théorème de Gauss}, $17 \mid (x - 9)$. \\
+    Il existe donc un entier relatif $k \in \mathbb{Z}$ tel que :
+    \[
+        x - 9 = 17k \iff x = 17k + 9
+    \]
+    En substituant $x-9$ par $17k$ dans $(E_0)$, il vient :
+    \[
+        23 \cdot (17k) = -17(y + 12) \iff 23k = -(y + 12) \iff y = -23k - 12
+    \]
+    Ainsi, si $(x,y)$ est solution, il est nécessairement de la forme $(17k + 9, -23k - 12)$ avec $k \in \mathbb{Z}$.
+    }
+
+    \noindent{\textbf{Synthèse :}\\
+    Soit $k \in \mathbb{Z}$. Considérons le couple $(x, y) = (17k + 9, -23k - 12)$. Injectons-le dans le membre de gauche de $(E)$ :
+    \[
+        23(17k + 9) + 17(-23k - 12) = 23 \cdot 17k + 207 - 17 \cdot 23k - 204 = 207 - 204 = 3
+    \]
+    Le couple est donc validé comme solution pour tout $k \in \mathbb{Z}$.
+    }
+    
+    \noindent\textbf{Conclusion :} L'ensemble des solutions de l'équation dans $\mathbb{Z}^2$ est :
+    \[
+        \mathcal{S} = \left\{ (17k + 9 \ ; \ -23k - 12), \ k \in \mathbb{Z} \right\}
+    \]
+}
+
+\toTrain{
+    Résoudre dans $\mathbb{Z}^2$ l'équation diophantienne : $45x + 28y = 6$.
+}
 
 \newpage
 \tableofcontents
+
 \section*{Crédits}
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
-
 
 \end{document}
