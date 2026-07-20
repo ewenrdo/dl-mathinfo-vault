@@ -5,6 +5,7 @@
 \usepackage{../../../../components/components}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
+\usepackage{ccicons}
 
 
 % Configuration des en-têtes et pieds de page
@@ -15,7 +16,7 @@
 \fancyhead[C]{Algèbre}
 \fancyhead[R]{2025-2026}
 
-\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
 \fancyfoot[R]{\thepage}
 
 \begin{document}
@@ -359,65 +360,72 @@ $j_E$ est linéaire et $dimE = dimE^*$ et $x \in ker(j_E) \Leftrightarrow \foral
 
 \remark{Si $\varphi \in E^*, y \in E$ on a le crochet de dualité $\langle \varphi, y \rangle$. Mais aussi si $x$ est tel que $\varphi = \langle x, \cdot \rangle$, on a aussi $\langle x, y \rangle = \langle \varphi, y \rangle$. Donc on peut confondre les deux crochets de dualité. Autrement dit, $\langle j_E(x), y \rangle_{E^* \times E} = \langle x, y \rangle_{E \times E}$ et $j_E$ permet de dire que le crochet de dualité est la même chose que le produit scalaire en identifiant $E$ et $E^*$ de manière canonique.}
 
-\section{Cas des $\mathbb{C}$-espaces vectoriels : espaces hermitiens}
+\ndlr{En cours magistral a été abordée la notion d'espace hermitien, mais ce n'est pas au programme.}
 
-\ndlr{Cette section ne semble pas être au programme.}
-
-\definition{
-    Soit $E$ un $\mathbb{C}$-espace vectoriel.\\
-    Soit $\langle \cdot, \cdot \rangle : E \times E \to \mathbb{C}$ une application.\\
-    On dit que $\langle \cdot, \cdot \rangle$ est un \textbf{produit scalaire} sur $E$ si :
-    \begin{enumerate}
-        \item $\forall x,y \in E, \; \langle x,y \rangle = \overline{\langle y,x \rangle}$ (hermitianité)
-        \item $\forall x\in E \; y \mapsto \langle x,y \rangle$ est $\mathbb{C}$-linéaire (linéarité en la seconde variable)
-        \item $\forall x \in E, \; \langle x,x \rangle > 0$ si $x\neq 0$ et $\langle x,x\rangle = 0$ si $x=0$ (positivité)
-    \end{enumerate}
-}
-
-\remark{Sesquilinéaire : $\forall y \in E \forall x, x' \in E \lambda \in \mathbb{C} \; \langle \lambda x + x', y \rangle = \overline{\lambda} \langle x,y \rangle + \langle x',y \rangle$. $\forall x \in E \forall y,y' \in E \forall \lambda \in \mathbb{C} \; \langle x, \lambda y + y' \rangle = \lambda \langle x,y \rangle + \langle x,y' \rangle$.}
-
-\example{Dans $\mathbb{C}^n$, $x = (x_i)$ et $y = (y_i)$, $\langle x,y \rangle = \sum_{i=1}^n  \overline{x_i} y_i$ est un produit scalaire (canonique).}
-\remark{Pour $n = 1$, $x,y \in \mathbb{C}$, $\langle x,y \rangle = \overline{x} y$ est un produit scalaire, et $\langle x, x \rangle = |x|^2$ (module au carré).}
-
-\remark{}
-$
-\begin{cases}
-    y \mapsto \langle x,y \rangle \text{ est } \mathbb{C}\text{-linéaire} \\
-    \forall x,y \in E,\;
-    \langle x,y \rangle = \overline{\langle y,x \rangle}
-    \text{ (hermitianité)}
-\end{cases}
-$
-implique que $(x,y) \mapsto \langle x,y \rangle$ est sesquilinéaire.
-
-\remark{
-    Dans $\mathcal{C}^0([a,b], \mathbb{C})$, $\langle f, g \rangle = \int_a^b \overline{f}(t) g(t) dt$ est un produit scalaire.
-}
-
-\definition{
-    On appelle \textbf{espace hermitien} un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire (complexe/hermitien).
-}
-
-\remark{On garde toutes les définitions et propriétés vues pour les espaces euclidiens, en remplaçant le produit scalaire par un produit hermitien et en imposant la finitude de la dimension.}
-
-\attention{La réciproque du même théorème de Pythagore ($\langle x,y \rangle = 0 \Rightarrow \| x+y \|^2 = \| x \|^2 + \| y \|^2$) n'est pas vérifiée dans les espaces hermitiens : il ne permet pas de conclure que $\mathfrak{I}m(\langle x,y \rangle) = 0$ et donc pas que $\langle x,y \rangle = 0$.}
-\remark{Si $E$ est un espace hermitien, alors $\| x \| = \sqrt{\langle x,x \rangle}$ est bien un norme sur $E$.}
-
-\theorem{Proposition}{}{false}{
-    Si $(e_1, \ldots, e_n)$ est une base orthonormée de $E$ un espace hermitien, et on a $x = \sum_{i=1}^n x_i e_i$ et $y = \sum_{j=1}^n y_j e_j$, alors :
-    \[
-    x_i = \langle x, e_i \rangle \text{ et } y_j = \langle y, e_j \rangle
-     \text{ et } \langle x,y \rangle = \sum_{i=1}^n \overline{x_i} y_i
-    \]
-}
-
-
-\training{Proposer une démonstration de l'inégalité de Cauchy-Schwarz dans les espaces hermitiens.}
-\noindent\carreaux{10}
+%\section{Cas des $\mathbb{C}$-espaces vectoriels : espaces hermitiens}
+%
+%\ndlr{Cette section ne semble pas être au programme.}
+%
+%\definition{
+%    Soit $E$ un $\mathbb{C}$-espace vectoriel.\\
+%    Soit $\langle \cdot, \cdot \rangle : E \times E \to \mathbb{C}$ une application.\\
+%    On dit que $\langle \cdot, \cdot \rangle$ est un \textbf{produit scalaire} sur $E$ si :
+%    \begin{enumerate}
+%        \item $\forall x,y \in E, \; \langle x,y \rangle = \overline{\langle y,x \rangle}$ (hermitianité)
+%        \item $\forall x\in E \; y \mapsto \langle x,y \rangle$ est $\mathbb{C}$-linéaire (linéarité en la seconde variable)
+%        \item $\forall x \in E, \; \langle x,x \rangle > 0$ si $x\neq 0$ et $\langle x,x\rangle = 0$ si $x=0$ (positivité)
+%    \end{enumerate}
+%}
+%
+%\remark{Sesquilinéaire : $\forall y \in E \forall x, x' \in E \lambda \in \mathbb{C} \; \langle \lambda x + x', y \rangle = \overline{\lambda} \langle x,y \rangle + \langle x',y \rangle$. $\forall x \in E \forall y,y' \in E \forall \lambda \in \mathbb{C} \; \langle x, \lambda y + y' \rangle = \lambda \langle x,y \rangle + \langle x,y' \rangle$.}
+%
+%\example{Dans $\mathbb{C}^n$, $x = (x_i)$ et $y = (y_i)$, $\langle x,y \rangle = \sum_{i=1}^n  \overline{x_i} y_i$ est un produit scalaire (canonique).}
+%\remark{Pour $n = 1$, $x,y \in \mathbb{C}$, $\langle x,y \rangle = \overline{x} y$ est un produit scalaire, et $\langle x, x \rangle = |x|^2$ (module au carré).}
+%
+%\remark{}
+%$
+%\begin{cases}
+%    y \mapsto \langle x,y \rangle \text{ est } \mathbb{C}\text{-linéaire} \\
+%    \forall x,y \in E,\;
+%    \langle x,y \rangle = \overline{\langle y,x \rangle}
+%    \text{ (hermitianité)}
+%\end{cases}
+%$
+%implique que $(x,y) \mapsto \langle x,y \rangle$ est sesquilinéaire.
+%
+%\remark{
+%    Dans $\mathcal{C}^0([a,b], \mathbb{C})$, $\langle f, g \rangle = \int_a^b \overline{f}(t) g(t) dt$ est un produit scalaire.
+%}
+%
+%\definition{
+%    On appelle \textbf{espace hermitien} un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire (complexe/hermitien).
+%}
+%
+%\remark{On garde toutes les définitions et propriétés vues pour les espaces euclidiens, en remplaçant le produit scalaire par un produit hermitien et en imposant la finitude de la dimension.}
+%
+%\attention{La réciproque du même théorème de Pythagore ($\langle x,y \rangle = 0 \Rightarrow \| x+y \|^2 = \| x \|^2 + \| y \|^2$) n'est pas vérifiée dans les espaces hermitiens : il ne permet pas de conclure que $\mathfrak{I}m(\langle x,y \rangle) = 0$ et donc pas que $\langle x,y \rangle = 0$.}
+%\remark{Si $E$ est un espace hermitien, alors $\| x \| = \sqrt{\langle x,x \rangle}$ est bien un norme sur $E$.}
+%
+%\theorem{Proposition}{}{false}{
+%    Si $(e_1, \ldots, e_n)$ est une base orthonormée de $E$ un espace hermitien, et on a $x = \sum_{i=1}^n x_i e_i$ et $y = \sum_{j=1}^n y_j e_j$, alors :
+%    \[
+%    x_i = \langle x, e_i \rangle \text{ et } y_j = \langle y, e_j \rangle
+%     \text{ et } \langle x,y \rangle = \sum_{i=1}^n \overline{x_i} y_i
+%    \]
+%}
+%
+%
+%\training{Proposer une démonstration de l'inégalité de Cauchy-Schwarz dans les espaces hermitiens.}
+%\noindent\carreaux{10}
 
 
 \newpage
 \tableofcontents
+
+\section*{Crédits}
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
 
 
 \end{document}  
