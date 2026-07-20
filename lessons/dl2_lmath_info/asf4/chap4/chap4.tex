@@ -121,6 +121,17 @@ Alors $\sqrt{\langle x,x \rangle} = 0 \Rightarrow \langle x,x \rangle = 0 \Right
     Donc, $\|x+y\|^2+\|x-y\|^2=2(\|x\|^2+\|y\|^2)$.
 }
 
+\theorem{Proposition}{Identité de polarisation}{false}{
+    Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
+    Alors $\forall x,y \in E, \; \langle x,y \rangle = \frac{1}{2}(\| x+y \|^2 - \| x \|^2 - \| y \|^2)$.
+}
+\noindent{ \textbf{Démonstration :}\\
+    $\| x+y \|^2 = \langle x+y, x+y \rangle = \langle x,x \rangle + 2\langle x,y \rangle + \langle y,y \rangle = \| x \|^2 + 2\langle x,y \rangle + \| y \|^2$.\\
+    Donc $\langle x,y \rangle = \frac{1}{2}(\| x+y \|^2 - \| x \|^2 - \| y \|^2)$. $\Box$
+}
+
+\remark{Il existe une autre formule de polarisation : $\langle x,y \rangle = \frac{1}{4}(\| x+y \|^2 - \| x-y \|^2)$ qui sera très pertinente au chapitre 10 sur les formes quadratiques.}
+
 \definition{
     Soit $E$ un $\mathbb{R}$-espace vectoriel, muni d'un produit scalaire $\langle \cdot, \cdot \rangle$.\\
     L'\textbf{angle non-orienté} entre $x,y \in E\setminus \{0\}$ est défini par $\theta = \arccos\left(\frac{\langle x,y \rangle}{\| x \| \| y \|}\right) \in [0, \pi]$.
