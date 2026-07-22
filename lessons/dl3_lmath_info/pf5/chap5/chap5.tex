@@ -52,6 +52,20 @@ Pour éviter la saturation de la pile, il convient de concevoir des fonctions ut
 
 \noindent Grâce à cette propriété, le compilateur OCaml réalise une optimisation : il réutilise le même cadre d'activation dans la pile au lieu d'en empiler un nouveau. L'espace mémoire requis dans la pile devient constant $\Theta(1)$, transformant l'exécution en une boucle impérative.
 
+\theorem{Théorème}{Équivalence de la récursivité terminale}{true}{
+  Toute fonction récursive $f$ il existe une fonction récursive terminale $f_{tail}$ équivalente à $f$.
+}
+\attention{Si une fonction récursive, même terminale, nécessite de stocker de grosses quantités de données, même dans un accumulateur, la mémoire peut saturer. Il est donc important de concevoir des fonctions récursives terminales avec des accumulateurs de taille constante autant que possible \textit{(ce n'est pas toujours possible, notamment sur les listes ou les arbres !)}.}
+
+\method{Méthode pour transformer une fonction récursive en fonction récursive terminale}{
+\begin{enumerate}
+    \item Identifier les calculs intermédiaires effectués après l'appel récursif.
+    \item Introduire un ou plusieurs \textbf{accumulateurs} pour stocker ces résultats intermédiaires.
+    \item Créer une fonction auxiliaire récursive terminale qui prend ces accumulateurs comme arguments.
+    \item Appeler cette fonction auxiliaire avec les valeurs initiales des accumulateurs.
+\end{enumerate}
+}
+
 \example{Comparons l'implémentation naïve et l'implémentation optimisée à l'aide d'un accumulateur de la fonction factorielle.}
 
 \noindent\textbf{Version naïve (Non récursive terminale) :}
