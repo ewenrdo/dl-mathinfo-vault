@@ -1,0 +1,379 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../../components/components}
+
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{ccicons}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{Préparation CAPES}
+\fancyhead[C]{Géométrie affine}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+\docTitle{Chapitre 2 : Espaces affines et applications affines}
+
+\disclaimer{Ce cours n'a pas encore été relu et validé. Il peut contenir des erreurs. À noter également que ce chapitre n'est pas à proprement parler au programme du CAPES.}
+
+\section{Espaces et sous-espaces affines}
+
+\subsection{Définition d'un espace affine}
+
+\definition{
+    Soit $\vec{E}$ un espace vectoriel sur un corps $\mathbb{K}$ ($\mathbb{R}$ ou $\mathbb{C}$).\\
+    Un \textbf{espace affine} attaché à $\vec{E}$ est un ensemble non vide $\mathcal{E}$ muni d'une application :
+    \[
+        \begin{array}{ccccc}
+            \phi & : & \mathcal{E} \times \mathcal{E} & \to & \vec{E} \\
+                 &   & (A, B) & \mapsto & \overrightarrow{AB}
+        \end{array}
+    \]
+    vérifiant les deux axiomes suivants :
+    \begin{enumerate}
+        \item \textbf{Relation de Chasles :} $\forall A, B, C \in \mathcal{E}, \quad \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC}$.
+        \item \textbf{Axiome du point d'arrivée :} $\forall A \in \mathcal{E}, \forall \vec{u} \in \vec{E}, \exists ! B \in \mathcal{E} \quad \text{tel que} \quad \overrightarrow{AB} = \vec{u}$.\\
+        On note alors $B = A + \vec{u}$.
+    \end{enumerate}
+    L'espace vectoriel $\vec{E}$ est appelé la \textbf{direction} de $\mathcal{E}$. La dimension de $\mathcal{E}$ est par définition celle de $\vec{E}$.
+}
+
+\remark{
+    Pour tout $A \in \mathcal{E}$, l'application $B \mapsto \overrightarrow{AB}$ est une bijection de $\mathcal{E}$ sur $\vec{E}$.
+}
+
+\theorem{Proposition}{Propriétés immédiates}{true}{
+    Soit $\mathcal{E}$ un espace affine. Pour tous $A, B \in \mathcal{E}$ et tout $\vec{u} \in \vec{E}$ :
+    \begin{enumerate}
+        \item $\overrightarrow{AA} = \vec{0}_{\vec{E}}$.
+        \item $\overrightarrow{BA} = -\overrightarrow{AB}$.
+        \item $(A + \vec{u}) + \vec{v} = A + (\vec{u} + \vec{v})$.
+        \item $A + \vec{u} = B \iff \overrightarrow{AB} = \vec{u}$.
+    \end{enumerate}
+}
+\ndlr{Proposition à démontrer.}
+
+\example{
+    L'espace $\mathbb{R}^n$ est naturellement un espace affine attaché à l'espace vectoriel $\mathbb{R}^n$ en posant $\overrightarrow{AB} = B - A$.
+}
+
+\training{
+    Démontrer que pour tous points $A, B, C, D \in \mathcal{E}$, on a l'identité :
+    \[
+        \overrightarrow{AB} + \overrightarrow{CD} = \overrightarrow{AD} + \overrightarrow{CB}
+    \]
+}
+\noindent \carreaux{5}
+
+\subsection{Sous-espaces affines}
+
+\definition{
+    Soit $\mathcal{E}$ un espace affine de direction $\vec{E}$.\\
+    Une partie $\mathcal{F} \subset \mathcal{E}$ est un \textbf{sous-espace affine} de $\mathcal{E}$ s'il existe un point $A \in \mathcal{F}$ et un sous-espace vectoriel $\vec{F}$ de $\vec{E}$ tels que :
+    \[
+        \mathcal{F} = \{ A + \vec{u} \mid \vec{u} \in \vec{F} \} = A + \vec{F}
+    \]
+    $\vec{F}$ est alors la \textbf{direction} de $\mathcal{F}$, notée $\overrightarrow{\mathcal{F}}$.
+}
+
+\theorem{Théorème}{Caractérisation des sous-espaces affines}{true}{
+    Soit $\mathcal{F}$ une partie non vide de $\mathcal{E}$.\\
+    $\mathcal{F}$ est un sous-espace affine de $\mathcal{E}$ si et seulement si l'ensemble :
+    \[
+        \vec{F} = \{ \overrightarrow{AB} \mid A, B \in \mathcal{F} \}
+    \]
+    est un sous-espace vectoriel de $\vec{E}$.
+}
+\ndlr{Théorème à démontrer.}
+
+\definition{
+    Un sous-espace affine de dimension $1$ est appelé une \textbf{droite affine}.\\
+    Un sous-espace affine de dimension $2$ est appelé un \textbf{plan affine}.\\
+    Un sous-espace affine de dimension $\dim(\mathcal{E}) - 1$ est appelé un \textbf{hyperplan affine}.
+}
+
+\method{Équation cartésienne d'un hyperplan}{
+    Soit $\mathcal{E}$ un espace affine de dimension $n$ muni d'un repère. Un hyperplan $\mathcal{H}$ passant par $A(x_1^{(0)}, \dots, x_n^{(0)})$ de direction $\vec{H} = \ker(f)$ (où $f \in \vec{E}^*$ est une forme linéaire non nulle de coordonnées $(a_1, \dots, a_n)$) admet pour équation cartésienne :
+    \[
+        a_1 x_1 + a_2 x_2 + \dots + a_n x_n + d = 0 \quad \text{avec} \quad d = -\sum_{i=1}^n a_i x_i^{(0)}
+    \]
+}
+
+\example{
+    Dans $\mathbb{R}^3$, l'ensemble des solutions du système $2x - y + 3z = 5$ est un plan affine de direction le sous-espace vectoriel d'équation $2x - y + 3z = 0$.
+}
+
+\training{
+    Déterminer une représentation paramétrique de la droite affine de $\mathbb{R}^3$ passant par $A(1, 2, -1)$ et dirigée par $\vec{u} = (2, -1, 3)$.
+}
+\noindent \carreaux{6}
+
+\subsection{Parallélisme et intersection}
+
+\definition{
+    Deux sous-espaces affines $\mathcal{F}$ et $\mathcal{G}$ de $\mathcal{E}$ sont dits \textbf{parallèles}, et on note $\mathcal{F} \parallel \mathcal{G}$, si leurs directions sont incluses l'une dans l'autre :
+    \[
+        \mathcal{F} \parallel \mathcal{G} \iff \overrightarrow{\mathcal{F}} \subset \overrightarrow{\mathcal{G}} \quad \text{ou} \quad \overrightarrow{\mathcal{G}} \subset \overrightarrow{\mathcal{F}}
+    \]
+}
+
+\theorem{Proposition}{Intersection de sous-espaces affines}{true}{
+    Soient $\mathcal{F} = A + \vec{F}$ et $\mathcal{G} = B + \vec{G}$ deux sous-espaces affines de $\mathcal{E}$.
+    \begin{enumerate}
+        \item $\mathcal{F} \cap \mathcal{G} \neq \emptyset \iff \overrightarrow{AB} \in \vec{F} + \vec{G}$.
+        \item Si $\mathcal{F} \cap \mathcal{G} \neq \emptyset$, alors $\mathcal{F} \cap \mathcal{G}$ est un sous-espace affine de direction $\vec{F} \cap \vec{G}$.
+    \end{enumerate}
+}
+
+\noindent \textbf{Preuve :}\\
+1. Supposons $\mathcal{F} \cap \mathcal{G} \neq \emptyset$. Soit $M \in \mathcal{F} \cap \mathcal{G}$.\\
+Alors $\overrightarrow{AM} \in \vec{F}$ et $\overrightarrow{BM} \in \vec{G}$. Par la relation de Chasles, $\overrightarrow{AB} = \overrightarrow{AM} - \overrightarrow{BM} \in \vec{F} + \vec{G}$.\\
+Réciproquement, si $\overrightarrow{AB} \in \vec{F} + \vec{G}$, il existe $\vec{u} \in \vec{F}$ et $\vec{v} \in \vec{G}$ tels que $\overrightarrow{AB} = \vec{u} - \vec{v}$.\\
+Posons $M = A + \vec{u}$. Alors $M \in \mathcal{F}$. De plus, $\overrightarrow{BM} = \overrightarrow{BA} + \overrightarrow{AM} = -\overrightarrow{AB} + \vec{u} = \vec{v} \in \vec{G}$, donc $M \in \mathcal{G}$. Ainsi $M \in \mathcal{F} \cap \mathcal{G}$.
+
+2. Si $C \in \mathcal{F} \cap \mathcal{G}$, alors $\mathcal{F} = C + \vec{F}$ et $\mathcal{G} = C + \vec{G}$.
+Un point $M$ appartient à $\mathcal{F} \cap \mathcal{G}$ si et seulement si $\overrightarrow{CM} \in \vec{F}$ et $\overrightarrow{CM} \in \vec{G}$, soit $\overrightarrow{CM} \in \vec{F} \cap \vec{G}$. L'intersection est donc bien le sous-espace affine $C + (\vec{F} \cap \vec{G})$. $\hfill \square$
+
+
+\section{Barycentres et combinaisons affines}
+
+\subsection{Barycentre d'un système de points pondérés}
+
+\definition{
+    Un \textbf{point pondéré} de $\mathcal{E}$ est un couple $(A, \alpha) \in \mathcal{E} \times \mathbb{K}$.\\
+    Soit $((A_i, \alpha_i))_{1 \le i \le k}$ une famille de points pondérés. La quantité $m = \sum_{i=1}^k \alpha_i$ est appelée la \textbf{masse totale} du système.
+}
+
+\theorem{Théorème}{Existence et unicité du barycentre}{true}{
+    Soit $((A_i, \alpha_i))_{1 \le i \le k}$ un système de points pondérés de masse totale $m = \sum_{i=1}^k \alpha_i \neq 0$.\\
+    Il existe un unique point $G \in \mathcal{E}$, appelé \textbf{barycentre} du système, tel que :
+    \[
+        \sum_{i=1}^k \alpha_i \overrightarrow{GA_i} = \vec{0}_{\vec{E}}
+    \]
+    De plus, pour tout point $O \in \mathcal{E}$, on a la relation de réduction :
+    \[
+        \overrightarrow{OG} = \frac{1}{\sum_{i=1}^k \alpha_i} \sum_{i=1}^k \alpha_i \overrightarrow{OA_i}
+    \]
+}
+
+\noindent \textbf{Preuve :}\\
+Fixons un point $O \in \mathcal{E}$. D'après la relation de Chasles, pour tout point $G \in \mathcal{E}$ :
+\[
+    \sum_{i=1}^k \alpha_i \overrightarrow{GA_i} = \vec{0} \iff \sum_{i=1}^k \alpha_i \left( \overrightarrow{GO} + \overrightarrow{OA_i} \right) = \vec{0} \iff \left( \sum_{i=1}^k \alpha_i \right) \overrightarrow{OG} = \sum_{i=1}^k \alpha_i \overrightarrow{OA_i}
+\]
+Comme $m = \sum_{i=1}^k \alpha_i \neq 0$, cette équation équivaut à $\overrightarrow{OG} = \frac{1}{m} \sum_{i=1}^k \alpha_i \overrightarrow{OA_i}$.
+Par l'axiome du point d'arrivée, il existe un unique point $G$ vérifiant cette relation. $\hfill \square$
+
+\remark{
+    Si tous les poids $\alpha_i$ sont égaux et non nuls, le barycentre est appelé l'\textbf{isobarycentre} des points $A_1, \dots, A_k$.
+}
+
+\theorem{Proposition}{Propriétés du barycentre}{true}{
+    \begin{enumerate}
+        \item \textbf{Homogénéité :} Le barycentre ne change pas si l'on multiplie tous les poids par un même scalaire non nul $\lambda \in \mathbb{K}^*$.
+        \item \textbf{Associativité :} On ne modifie pas le barycentre d'un système en remplaçant une partie des points par leur barycentre partiel affecté de la somme de leurs masses (si cette somme est non nulle).
+    \end{enumerate}
+}
+\ndlr{Proposition à démontrer.}
+
+\training{
+    Soit $ABC$ un triangle. On note $G$ son isobarycentre et $A'$ le milieu de $[BC]$.\\
+    Démontrer en utilisant l'associativité du barycentre que $G$ appartient au segment $[AA']$ et déterminer le rapport $\frac{\overline{AG}}{\overline{AA'}}$.
+}
+\noindent \carreaux{7}
+
+\subsection{Repères et coordonnées barycentriques}
+
+\definition{
+    Une famille de $k+1$ points $(A_0, A_1, \dots, A_k)$ de $\mathcal{E}$ est dite \textbf{affinement indépendante} si la famille de $k$ vecteurs $(\overrightarrow{A_0A_1}, \overrightarrow{A_0A_2}, \dots, \overrightarrow{A_0A_k})$ est libre dans $\vec{E}$.
+}
+
+\definition{
+    Un \textbf{repère affine} d'un espace affine $\mathcal{E}$ de dimension $n$ est une famille de $n+1$ points $\mathcal{R} = (A_0, A_1, \dots, A_n)$ affinement indépendants.
+}
+
+\theorem{Proposition}{Coordonnées barycentriques}{true}{
+    Soit $(A_0, A_1, \dots, A_n)$ un repère affine de $\mathcal{E}$.\\
+    Pour tout point $M \in \mathcal{E}$, il existe un unique $(n+1)$-uplet $(\lambda_0, \lambda_1, \dots, \lambda_n) \in \mathbb{K}^{n+1}$ tel que :
+    \[
+        \sum_{i=0}^n \lambda_i = 1 \quad \text{et} \quad M = \text{bar}\left( (A_0, \lambda_0), (A_1, \lambda_1), \dots, (A_n, \lambda_n) \right)
+    \]
+    Les scalaires $\lambda_0, \dots, \lambda_n$ sont appelés les \textbf{coordonnées barycentriques} de $M$ dans le repère $\mathcal{R}$.
+}
+\ndlr{Proposition à démontrer.}
+
+\training{
+    Dans le plan affine muni d'un repère $(A, B, C)$, exprimer les coordonnées barycentriques du milieu $I$ de $[AB]$ et du centre de gravité $G$ du triangle $ABC$.
+}
+\noindent \carreaux{5}
+
+
+\section{Applications affines}
+
+\subsection{Définition et structure}
+
+\definition{
+    Soient $\mathcal{E}$ et $\mathcal{F}$ deux espaces affines de directions respectives $\vec{E}$ et $\vec{F}$.\\
+    Une application $f : \mathcal{E} \to \mathcal{F}$ est dite \textbf{affine} s'il existe une application linéaire $\vec{f} \in \mathcal{L}(\vec{E}, \vec{F})$ telle que :
+    \[
+        \forall A, B \in \mathcal{E}, \quad \overrightarrow{f(A)f(B)} = \vec{f}\left(\overrightarrow{AB}\right)
+    \]
+    $\vec{f}$ est appelée l'\textbf{application linéaire associée} (ou partie linéaire) de $f$.
+}
+
+\remark{
+    L'application linéaire $\vec{f}$ est unique et vérifie $\vec{f}(\vec{u}) = \overrightarrow{f(A)f(A+\vec{u})}$ pour tout $A \in \mathcal{E}$.
+}
+
+\theorem{Théorème}{Caractérisation par le barycentre}{true}{
+    Une application $f : \mathcal{E} \to \mathcal{F}$ est affine si et seulement si elle conserve les barycentres, c'est-à-dire que pour tout système de points pondérés de masse non nulle :
+    \[
+        f\left( \text{bar}((A_i, \alpha_i))_{1 \le i \le k} \right) = \text{bar}\left( (f(A_i), \alpha_i) \right)_{1 \le i \le k}
+    \]
+}
+\ndlr{Théorème à démontrer.}
+
+\example{
+    \begin{itemize}
+        \item \textbf{Translation :} Soit $\vec{u} \in \vec{E}$. L'application $t_{\vec{u}} : A \mapsto A + \vec{u}$ est affine, de partie linéaire $\vec{t_{\vec{u}}} = \text{id}_{\vec{E}}$.
+        \item \textbf{Homothétie affine :} Soient $\Omega \in \mathcal{E}$ et $k \in \mathbb{K}$. L'application $h_{\Omega, k} : A \mapsto \Omega + k \overrightarrow{\Omega A}$ est affine, de partie linéaire $\vec{h} = k \cdot \text{id}_{\vec{E}}$.
+    \end{itemize}
+}
+
+\subsection{Exemples fondamentaux et classification}
+
+\method{Détermination du point fixe d'une application affine}{
+    Soit $f : \mathcal{E} \to \mathcal{E}$ une application affine de partie linéaire $\vec{f}$.
+    Un point $\Omega \in \mathcal{E}$ est fixe par $f$ si et seulement si $f(\Omega) = \Omega$.\\
+    Pour trouver un point fixe :
+    \begin{enumerate}
+        \item Choisir un point origine $O \in \mathcal{E}$ et chercher $\vec{u} = \overrightarrow{O\Omega}$.
+        \item Résoudre l'équation vectorielle : $(\text{id}_{\vec{E}} - \vec{f})(\vec{u}) = \overrightarrow{Of(O)}$.
+        \item Si $1$ n'est pas valeur propre de $\vec{f}$ (i.e. $\text{id}_{\vec{E}} - \vec{f}$ est inversible), alors $f$ admet un \textbf{unique point fixe}.
+    \end{enumerate}
+}
+
+\theorem{Proposition}{Composition d'applications affines}{true}{
+    Soient $f : \mathcal{E} \to \mathcal{F}$ et $g : \mathcal{F} \to \mathcal{G}$ deux applications affines.
+    Alors $g \circ f : \mathcal{E} \to \mathcal{G}$ est affine, et sa partie linéaire est :
+    \[
+        \overrightarrow{g \circ f} = \vec{g} \circ \vec{f}
+    \]
+}
+\ndlr{Proposition à démontrer.}
+
+\training{
+    Soient $h_1 = h_{\Omega_1, k_1}$ et $h_2 = h_{\Omega_2, k_2}$ deux homothéties affines de $\mathcal{E}$ avec $k_1, k_2 \in \mathbb{R}^*$.\\
+    Déterminer la nature de $h_2 \circ h_1$ selon les valeurs du produit $k_1 k_2$.
+}
+\noindent \carreaux{8}
+
+
+\section{Espaces affines euclidiens}
+
+\subsection{Structure euclidienne et distance affine}
+
+\definition{
+    Un \textbf{espace affine euclidien} est un espace affine $\mathcal{E}$ dont la direction $\vec{E}$ est un espace vectoriel euclidien (muni d'un produit scalaire noté $\langle \cdot, \cdot \rangle$).\\
+    La \textbf{distance} entre deux points $A, B \in \mathcal{E}$ est définie par :
+    \[
+        d(A, B) = \|\overrightarrow{AB}\| = \sqrt{\langle \overrightarrow{AB}, \overrightarrow{AB} \rangle}
+    \]
+}
+
+\theorem{Proposition}{Propriétés de la distance}{true}{
+    L'application $d : \mathcal{E} \times \mathcal{E} \to \mathbb{R}^+$ définit une distance sur $\mathcal{E}$ :
+    \begin{enumerate}
+        \item \textbf{Séparation :} $d(A, B) = 0 \iff A = B$.
+        \item \textbf{Symétrie :} $d(A, B) = d(B, A)$.
+        \item \textbf{Inégalité triangulaire :} $d(A, C) \le d(A, B) + d(B, C)$.
+    \end{enumerate}
+}
+\ndlr{Proposition à démontrer.}
+
+\definition{
+    Deux sous-espaces affines $\mathcal{F} = A + \vec{F}$ et $\mathcal{G} = B + \vec{G}$ sont dits \textbf{orthogonaux}, et on note $\mathcal{F} \perp \mathcal{G}$, si leurs directions sont orthogonales : $\vec{F} \perp \vec{G}$ (i.e. $\forall \vec{u} \in \vec{F}, \forall \vec{v} \in \vec{G}, \langle \vec{u}, \vec{v} \rangle = 0$).
+}
+
+\subsection{Projection orthogonale et distance à un sous-espace}
+
+\theorem{Théorème}{Projection orthogonale affine}{true}{
+    Soit $\mathcal{F} = A + \vec{F}$ un sous-espace affine de $\mathcal{E}$ de dimension finie.\\
+    Pour tout point $M \in \mathcal{E}$, il existe un unique point $p_{\mathcal{F}}(M) \in \mathcal{F}$, appelé \textbf{projeté orthogonal} de $M$ sur $\mathcal{F}$, tel que :
+    \[
+        \overrightarrow{M p_{\mathcal{F}}(M)} \in \vec{F}^\perp
+    \]
+    De plus, $p_{\mathcal{F}}(M)$ est l'unique point de $\mathcal{F}$ vérifiant $d(M, p_{\mathcal{F}}(M)) = \min_{N \in \mathcal{F}} d(M, N)$.
+}
+
+\noindent \textbf{Preuve :}\\
+Soit $M \in \mathcal{E}$. Un point $N \in \mathcal{F}$ s'écrit $N = A + \vec{u}$ avec $\vec{u} \in \vec{F}$.\\
+Le vecteur $\overrightarrow{MN} = \overrightarrow{MA} + \vec{u}$ est orthogonal à $\vec{F}$ si et seulement si $\forall \vec{v} \in \vec{F}, \langle \overrightarrow{AM} - \vec{u}, \vec{v} \rangle = 0$, c'est-à-dire si $\vec{u} = p_{\vec{F}}(\overrightarrow{AM})$ (projection orthogonale vectorielle de $\overrightarrow{AM}$ sur $\vec{F}$).\\
+Ainsi $p_{\mathcal{F}}(M) = A + p_{\vec{F}}(\overrightarrow{AM})$ existe et est unique.\\
+Pour tout $N \in \mathcal{F}$, le théorème de Pythagore s'applique car $\overrightarrow{M p_{\mathcal{F}}(M)} \perp \overrightarrow{p_{\mathcal{F}}(M) N} \in \vec{F}$ :
+\[
+    d(M, N)^2 = \|\overrightarrow{M N}\|^2 = \|\overrightarrow{M p_{\mathcal{F}}(M)}\|^2 + \|\overrightarrow{p_{\mathcal{F}}(M) N}\|^2 \ge \|\overrightarrow{M p_{\mathcal{F}}(M)}\|^2 = d(M, p_{\mathcal{F}}(M))^2
+\]
+L'égalité a lieu si et seulement si $N = p_{\mathcal{F}}(M)$. $\hfill \square$
+
+\method{Distance d'un point à un hyperplan}{
+    Soit $\mathcal{H}$ un hyperplan affine d'équation $a_1 x_1 + \dots + a_n x_n + d = 0$ dans un repère orthonormé.\\
+    La distance d'un point $M_0(x_1^{(0)}, \dots, x_n^{(0)})$ à $\mathcal{H}$ est donnée par la formule :
+    \[
+        d(M_0, \mathcal{H}) = \frac{|a_1 x_1^{(0)} + \dots + a_n x_n^{(0)} + d|}{\sqrt{a_1^2 + \dots + a_n^2}}
+    \]
+}
+
+\training{
+    Dans $\mathbb{R}^3$ muni du produit scalaire usuel, calculer la distance du point $A(1, 2, 3)$ au plan affine $\mathcal{P}$ d'équation $2x - y + 2z - 1 = 0$.
+}
+\noindent \carreaux{7}
+
+\training{
+    Soient $A(1, 0, 1)$ et $B(2, -1, 1)$ deux points de $\mathbb{R}^3$.
+    Résoudre dans $\mathbb{R}^3$ l'équation $d(M, A) = d(M, B)$ et donner la nature géométrique de l'ensemble obtenu.
+}
+\noindent \carreaux{7}
+
+
+\subsection{Isométries affines}
+
+\definition{
+    Une application affine $f : \mathcal{E} \to \mathcal{E}$ est une \textbf{isométrie affine} si elle conserve les distances :
+    \[
+        \forall A, B \in \mathcal{E}, \quad d(f(A), f(B)) = d(A, B)
+    \]
+}
+
+\theorem{Théorème}{Caractérisation des isométries affines}{true}{
+    Soit $f : \mathcal{E} \to \mathcal{E}$ une application affine de partie linéaire $\vec{f}$.\\
+    $f$ est une isométrie affine si et seulement si sa partie linéaire $\vec{f}$ est une isométrie vectorielle (i.e. $\vec{f} \in O(\vec{E})$).
+}
+\ndlr{Théorème à démontrer.}
+
+\remark{
+    L'ensemble des isométries affines de $\mathcal{E}$ forme un groupe pour la loi $\circ$, noté $\text{Isom}(\mathcal{E})$.
+}
+
+\toTrain{
+    Soit $f$ l'application de $\mathbb{R}^2$ dans $\mathbb{R}^2$ définie par $f(x, y) = \left( \frac{3}{5}x - \frac{4}{5}y + 1, \frac{4}{5}x + \frac{3}{5}y - 2 \right)$.\\
+    Démontrer que $f$ est une isométrie affine et déterminer ses éléments caractéristiques (nature, point fixe, axe/centre).
+}
+
+\newpage
+\tableofcontents
+
+\section*{Crédits}
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}

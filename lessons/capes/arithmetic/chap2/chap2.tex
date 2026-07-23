@@ -166,7 +166,31 @@ Comme pour tous réels $\alpha_i, \beta_i$, on a $\min(\alpha_i, \beta_i) + \max
     Soient $a,b,k \in \mathbb{Z}$.\\
     Alors on a que $\pgcd(a - k \cdot b, b) = \pgcd(a, b)$.
 }
-\ndlr{Lemme à démontrer.}
+
+\noindent{\textbf{Preuve :} L'idée de la preuve consiste à montrer que l'ensemble des diviseurs communs de $a$ et $b$ est le même que l'ensemble des diviseurs communs de $a - k \cdot b$ et $b$.\\
+Soient $a,b,k \in \mathbb{Z}$.
+\begin{itemize}
+    \item Soit $d = pgcd(a,b)$. Comme $d \mid a$ et $d \mid b$, alors $d \mid kb$ et donc $d \mid (a - kb)$. Ainsi, $d$ est un diviseur commun de $a - kb$ et $b$.
+    \item Réciproquement, soit $d' = pgcd(a - kb, b)$. Comme $d' \mid (a - kb)$ et $d' \mid b$, alors $d' \mid (a - kb + kb) = a$. Ainsi, $d'$ est un diviseur commun de $a$ et $b$.
+\end{itemize}
+Aussi, l'ensemble des diviseurs communs de $a$ et $b$ est le même que l'ensemble des diviseurs communs de $a - kb$ et $b$. En particulier, le plus grand des diviseurs est donc le même: \textit{i.e.} $\pgcd(a - k \cdot b, b) = \pgcd(a, b)$. $\hfill \square$
+}
+
+\remark{Ce lemme permet la mise en place d'un algorithme efficace pour calculer le PGCD de deux entiers, appelé \textbf{algorithme d'Euclide}.}
+
+\example{
+    Soit $n \in \mathbb{N}$. On veut calculer $\pgcd(5n+2, 2n+1)$.\\
+    On applique le lemme de conservation du PGCD par reste avec $k = 2$ :
+    $$ \pgcd(5n+2, 2n+1) = \pgcd(5n+2 - 2(2n+1), 2n+1) = \pgcd(n, 2n+1) $$
+    On applique à nouveau le lemme avec $k = 2$ :
+    $$ \pgcd(n, 2n+1) = \pgcd(2n+1, n) = \pgcd(2n+1 - 2n, n) = \pgcd(1, n) = 1 $$
+    Ainsi, $5n+2$ et $2n+1$ sont premiers entre eux pour tout $n \in \mathbb{N}$. De manière équivalente, on peut dire que la fraction $\frac{5n+2}{2n+1}$ est irréductible pour tout $n \in \mathbb{N}$.
+}
+
+\training{
+    Soit $n \in \mathbb{N}$. Démontrer que la fraction $\frac{21n + 4}{14n + 3}$ est irréductible pour tout $n$.
+}
+\noindent \carreaux{7}
 
 \training{
     Résoudre dans $\mathbb{N}^2$ le système suivant :
@@ -191,7 +215,24 @@ Comme pour tous réels $\alpha_i, \beta_i$, on a $\min(\alpha_i, \beta_i) + \max
     En particulier on a l'\textbf{identité de Bézout} :\\
     $a,b$ sont premiers entre eux $\Leftrightarrow \exists u,v \in \mathbb{Z}, a \cdot u + b \cdot v = 1$.
 }
-\ndlr{Théorème à démontrer.}
+\noindent{\textbf{Preuve :}\\ Soient $a,b \in \mathbb{Z}$. On considère l'ensemble $E = \{ au + bv \mid u,v \in \mathbb{Z}, au + bv > 0\}$.\\
+On remarque que $|a| \in E$ (en prenant $u = 1, v = 0$) et $|b| \in E$ (en prenant $u = 0, v = 1$). Ainsi, $E$ est non vide.\\
+Or toute partie non vide de $\mathbb{N}^*$ admet un plus petit élément. Soit $d = \min(E)$.\\
+Or $d \in E$ donc $\exists (u_0, v_0) \in \mathbb{Z}^2$ tel que $d = au_0 + bv_0$.\\
+Il reste à montrer que $d$ est effectivement le PGCD de $a$ et $b$.\\
+\begin{enumerate}
+    \item Montrons que $d \mid a$ et $d \mid b$.\\
+    Appliquons la division euclidienne à $a$ par $d$ : $\exists q, r \in \mathbb{Z}$ tels que $a = dq + r$ avec $0 \le r < d$.\\
+    $\Leftrightarrow r = a - q(au_0 + bv_0) = a(1 - qu_0) + b(-qv_0)$\\
+    $\Leftarrow r \in E$ car $1 - qu_0, -qv_0 \in \mathbb{Z}$.\\
+    Or $0 \leq r < d$. Si $r > 0$, alors on a trouvé un plus petit élément que $d = min(E)$ : absurde.\\
+    Donc $r = 0$ et donc $d \mid a$. De même, on montre que $d \mid b$.\\
+    Ainsi, $d$ est un diviseur commun de $a$ et $b$.
+    \item Montrons que $d$ est le plus grand diviseur commun de $a$ et $b$.\\
+    Soit $\delta$ un diviseur commun quelconque de $a$ et $b$. Alors $\delta \mid a$ et $\delta \mid b$.\\
+    Il vient $\delta \mid (au_0 + bv_0) = d$.\\
+    Donc $\delta \le d$. Ainsi, $d$ est le plus grand diviseur commun de $a$ et $b$.
+\end{enumerate}
 
 \attention{
     L'existence de $u, v \in \mathbb{Z}$ tels que $au + bv = k$ ne garantit pas que $\pgcd(a, b) = k$, mais seulement que $\pgcd(a, b) \mid k$.
@@ -224,12 +265,17 @@ $a$ divise manifestement $a(cu)$. De plus, par hypothèse, $a \mid bc$, donc $a$
     p \mid a \cdot b \Rightarrow \left( p \mid a \; \text{ou} \; p \mid b \right)
     \]
 }
-\ndlr{Lemme à démontrer.}
+\noindent{\textbf{Preuve :} Soient $a,b \in \mathbb{N}$ et $p \in \mathbb{P}$.\\
+Il vient $\mathcal{D}(p) = \{1 , p\}$. Donc $\pgcd(a,p) \in \{1,p\}$.
 
-\training{
-    Soit $n \in \mathbb{N}$. Démontrer que la fraction $\frac{21n + 4}{14n + 3}$ est irréductible pour tout $n$.
+\begin{enumerate}
+    \item Si $\pgcd(a,p) = p$, alors $p \mid a$.
+    \item Si $\pgcd(a,p) = 1$, comme $ p \mid ab$ alors d'après le lemme de Gauss, $p \mid b$.
+\end{enumerate}
+
+Ainsi, $p \mid ab \Rightarrow p \mid a \; \text{ou} \; p \mid b$. $\hfill \square$
 }
-\noindent \carreaux{7}
+
 
 \subsection{Congruences}
 
