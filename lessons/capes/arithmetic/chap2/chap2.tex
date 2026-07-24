@@ -133,6 +133,9 @@
     Soit $n \in \mathbb{N}$.\\
     Si $n \notin \mathbb{P}$ et $n \ge 2$, alors $n$ a forcément un facteur premier $p$ tel que $p \le \sqrt{n}$.
 }
+\remark{
+    Le test deterministe jusqu'à $\sqrt{n}$ devient inutilisable pour de très grands entiers (comme ceux utilisés en cryptographie, ayant plusieurs centaines de chiffres). En pratique, on utilise des \textbf{tests de primalité probabilistes} (comme le test de Fermat ou de Miller-Rabin) fondés sur des propriétés congruentielles.
+}
 \ndlr{Corollaire à démontrer.}
 
 \training{
@@ -344,6 +347,7 @@ Le cas particulier $a^p \equiv a \; [p]$ s'obtient en multipliant les deux membr
 }
 \noindent \carreaux{5}
 
+\remark{Pour la culture, pour calculer $a^b$ modulo $n$ lorsque $b$ est très grand, on utilise le théorème d'Euler (ou de Fermat) pour réduire d'abord l'exposant $b$, puis l'algorithme d'\textbf{exponentiation rapide} (qui réduit le nombre de multiplications via la décomposition binaire de $b$).}
 \subsection{Théorème des Restes Chinois et Applications}
 
 \subsubsection{Le Théorème des Restes Chinois (TRC)}
@@ -456,7 +460,23 @@ Le cas particulier $a^p \equiv a \; [p]$ s'obtient en multipliant les deux membr
     Calculer $\varphi(360)$ en utilisant la décomposition en facteurs premiers.
 }
 
-\noindent \carreaux{5}
+\noindent \carreaux{6}
+
+\theorem{Théorème}{Théorème d'Euler}{true}{
+    Soient $n \in \mathbb{N}^*$ et $a \in \mathbb{Z}$ tels que $\pgcd(a, n) = 1$.\\
+    Alors on a :
+    \[
+        a^{\varphi(n)} \equiv 1 \; [n]
+    \]
+}
+\remark{
+    Le petit théorème de Fermat est un cas particulier du théorème d'Euler : lorsque $n = p$ est premier, $\varphi(p) = p - 1$, ce qui donne bien $a^{p-1} \equiv 1 \; [p]$.
+}
+
+\training{
+    Déterminer les deux derniers chiffres de $7^{402}$ en utilisant le théorème d'Euler modulo $100$.
+}
+\noindent \carreaux{7}
 
 \subsection{Sommes de $n$ premiers entiers, carrés et cubes}
 
