@@ -101,14 +101,33 @@
     \end{enumerate}
 }
 
-\theorem{Théorème}{Théorème fondamental de l'arithmétique}{true}{
+\theorem{Théorème}{Théorème fondamental de l'arithmétique}{false}{
     Tout entier naturel $n \ge 2$ s'écrit de manière unique (à l'ordre près des facteurs) comme un produit de nombres premiers.\\\\
     Plus formellement, $\forall n \ge 2, \exists ! (p_1, p_2, \ldots, p_k) \in \mathbb{P}^k$ et $\forall i \in [1, k] \cap \mathbb{N}, \exists ! \alpha_i \in \mathbb{N}^*$ tels que :
     \[
         n = \prod_{i=1}^{k} p_i^{\alpha_i}
     \]
 }
-\ndlr{Théorème à démontrer.}
+\noindent{\textbf{Preuve :} Il faut démontrer l'existence puis l'unicité.
+\begin{itemize}
+    \item \textbf{Existence :} On procède par récurrence forte sur $n \ge 2$.\\
+    \begin{enumerate}
+        \item \textbf{Initialisation :} Pour $n = 2$, on a $2 = 2^1$ avec $2 \in \mathbb{P}$.
+        \item \textbf{Hérédité :} Supposons que tout entier $k$ tel que $2 \le k \le n$ s'écrit comme un produit de nombres premiers.\\
+        On veut montrer que $n+1$ s'écrit comme un produit de nombres premiers.\\
+        \begin{itemize}
+            \item Si $n+1$ est premier, alors $n+1 = (n+1)^1$ est un produit de nombres premiers.
+            \item Sinon, $n+1$ n'est pas premier. Donc il existe $a, b \in \mathbb{N}^*$ tels que $2 \le a, b < n+1$ et $n+1 = a \cdot b$.\\
+            Par hypothèse de récurrence, $a$ et $b$ s'écrivent comme des produits de nombres premiers. Ainsi, $n+1 = a \cdot b$ s'écrit également comme un produit de nombres premiers.
+        \end{itemize}
+        \item \textbf{Conclusion :} Par le principe de récurrence \textit{(forte)}, tout entier $n \ge 2$ s'écrit comme un produit de nombres premiers.
+    \end{enumerate}
+    \item \textbf{Unicité :} Supposons que $n \ge 2$ s'écrive de deux manières différentes, mettons $n = p_1 \cdots p_r = q_1 \cdots q_s$ avec $p_i, q_j \in \mathbb{P}$ \textit{(cette écriture est équivalente à l'écriture avec les exposants $\alpha_i$)}.\\
+    Il vient $\exists j \in [1, s] \cap \mathbb{N}, p_1 \mid q_j$. Supposons sans perte de généralité que $j = 1$. Alors $p_1 \mid q_1$ et comme $q_1$ est premier, il vient $p_1 = q_1$.\\
+    On peut donc simplifier par $p_1 = q_1$ et on obtient $p_2 \cdots p_r = q_2 \cdots q_s$.\\
+    En répétant ce raisonnement, on obtient que $r = s$ et que les $p_i$ sont exactement les $q_j$ à l'ordre près. Ainsi, l'écriture en produit de nombres premiers est unique. $\hfill \square$
+\end{itemize}
+}
 
 \theorem{Corollaire}{Test de primalité}{true}{
     Soit $n \in \mathbb{N}$.\\
@@ -293,7 +312,22 @@ Ainsi, $p \mid ab \Rightarrow p \mid a \; \text{ou} \; p \mid b$. $\hfill \squar
     \]
     En particulier, pour tout $a \in \mathbb{Z}$, on a : $a^p \equiv a \; [p]$.
 }
-\ndlr{Théorème à démontrer.}
+\noindent{\textbf{Preuve :} Soient $p$ un nombre premier et $a \in \mathbb{Z}$ tel que $p \nmid a$.\\
+L'ensemble des restes non nuls modulos $p$ est $E = \{1, 2, \ldots, p-1\}$. Considérons également $aE = \{a, 2a, \ldots, (p-1)a\}$.\\\\
+Supposons que $\exists 1 \leq j < k \leq p-1 \cap \mathbb{N}$ tels que $ka \equiv ja \; [p] \Leftrightarrow k - j \equiv 0 \; [p]$ \textit{(car $\pgcd(a,p) = 1$, lemme de Gauss)}. Comme $k - j < p$, $p \nmid (k -j)$, absurde !
+Ainsi, les éléments de $aE$ sont tous distincts modulo $p$. A fortiori, ils sont tous non nuls modulo $p$.\\
+Les éléments de $aE$ et $E$ sont donc les mêmes modulo $p$. En particulier, on a :
+$$ a \cdot (2a) \cdots (p-1)a \equiv 1 \cdot 2 \cdots (p-1) \; [p] $$
+$$ \Leftrightarrow a^{p-1} \cdot (p-1)! \equiv (p-1)! \; [p] $$
+$$ \Leftrightarrow a^{p-1} \equiv 1 \; [p] $$
+\textit{(ce dernier point étant justifié par le lemme de Gauss car $\pgcd((p-1)!, p) = 1$).}
+Le cas particulier $a^p \equiv a \; [p]$ s'obtient en multipliant les deux membres de l'équivalence précédente par $a$. $\hfill \square$
+}
+
+\training{
+    Déterminer le reste de la division euclidienne de $3^{100}$ par $7$.
+}
+\noindent \carreaux{9}
 
 \theorem{Lemme}{Binôme modulo $p$}{true}{
     Soit $x,y \in \mathbb{Z}$ et soit $p \in \mathbb{P}$.\\
@@ -304,10 +338,6 @@ Ainsi, $p \mid ab \Rightarrow p \mid a \; \text{ou} \; p \mid b$. $\hfill \squar
 }
 \ndlr{Lemme à démontrer.}
 
-\training{
-    Déterminer le reste de la division euclidienne de $3^{100}$ par $7$.
-}
-\noindent \carreaux{7}
 
 \training{
     Démontrer que pour tout entier $n \in \mathbb{N}$, le nombre $n^5 - n$ est divisible par $30$.
