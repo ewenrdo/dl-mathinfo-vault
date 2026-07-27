@@ -333,13 +333,24 @@ Le cas particulier $a^p \equiv a \; [p]$ s'obtient en multipliant les deux membr
 \noindent \carreaux{9}
 
 \theorem{Lemme}{Binôme modulo $p$}{true}{
-    Soit $x,y \in \mathbb{Z}$ et soit $p \in \mathbb{P}$.\\
+    Soient $x,y \in \mathbb{Z}$ et soit $p \in \mathbb{P}$.\\
     Alors :
     \[
         (x + y)^p \equiv x^p + y^p \; [p]
     \]
 }
-\ndlr{Lemme à démontrer.}
+\noindent{\textbf{Preuve :}\\
+    Soient $x,y \in \mathbb{Z}$ et $p \in \mathbb{P}$.\\
+    Par le binôme de Newton, on a :
+    \[
+        (x + y)^p = \sum_{k=0}^{p} \binom{p}{k} x^k y^{p-k}
+    \]
+    Or, pour $0 < k < p$, le coefficient binomial $\binom{p}{k}$ est divisible par $p$ (car il contient $p$ au numérateur et aucun facteur du dénominateur ne le divise). Ainsi, tous les termes du développement sauf $x^p$ et $y^p$ sont congrus à $0$ modulo $p$. Donc :
+    \[
+        (x + y)^p \equiv x^p + y^p \; [p]
+    \]
+    $\hfill \square$
+}
 
 
 \training{
