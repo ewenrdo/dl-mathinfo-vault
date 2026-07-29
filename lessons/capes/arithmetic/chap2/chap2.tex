@@ -480,6 +480,30 @@ Le cas particulier $a^p \equiv a \; [p]$ s'obtient en multipliant les deux membr
         a^{\varphi(n)} \equiv 1 \; [n]
     \]
 }
+
+\noindent{\textbf{Preuve :} Soient $n \in \mathbb{N}^*$ et $a \in \mathbb{Z}$ tels que $\pgcd(a, n) = 1$.\\
+On considère l'ensemble $S = \{ k \in \{1, 2, \dots, n\} \mid \pgcd(k, n) = 1\}$. Il vient $Card(S) = \varphi(n)$ (par défintiion de l'indicatrice d'Euler).\\
+On considère également l'ensemble $aS = \{ ak \mid k \in S\}$. Comme $\pgcd(a, n) = 1$, le lemme de Gauss assure que les éléments de $aS$ sont tous distincts modulo $n$. De plus, comme $\pgcd(k, n) = 1$ pour tout $k \in S$, on a que $\pgcd(ak, n) = 1$ pour tout $k \in S$. Ainsi, les éléments de $aS$ sont tous distincts et premiers avec $n$ modulo $n$. A fortiori, ils sont tous dans $S$.\\
+Ainsi, les éléments de $aS$ et $S$ sont les mêmes modulo $n$. En particulier, on a :
+\[
+    \prod_{k \in S} ak \equiv \prod_{k \in S} k \; [n]
+\]
+\[
+    \Leftrightarrow a^{\varphi(n)} \prod_{k \in S} k \equiv \prod_{k \in S} k \; [n]
+\]
+\[
+    \Leftrightarrow a^{\varphi(n)} \equiv 1 \; [n]
+\]
+\hfill$\square$
+}
+
+\theorem{Proposition}{Propriété de la somme}{true}{
+    Soit $n \in \mathbb{N}^*$. On a :
+    $$ \sum_{d \mid n} \varphi(d) = n $$
+}
+
+\ndlr{Proposition à démontrer.}
+
 \remark{
     Le petit théorème de Fermat est un cas particulier du théorème d'Euler : lorsque $n = p$ est premier, $\varphi(p) = p - 1$, ce qui donne bien $a^{p-1} \equiv 1 \; [p]$.
 }
