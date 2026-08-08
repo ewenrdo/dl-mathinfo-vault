@@ -1,23 +1,33 @@
-# Math-Lesson-Maker – Package LaTeX pour polycopiés mathématiques
+# Math Lesson Maker
 
-> **Disclaimer étudiants Paris-Cité** :
-> Je conseille vivement de consulter [ce site web](https://ewenrdo.fr/ressources) pour accéder à ces ressources, qui y sont rangées de manière plus structurée.
-> Vous trouverez mes notes de cours de mathématiques, des exercices et livrets de révision, le suivi des TD et les ressources que j'utilise pour me préparer aux concours et examens. Ces documents sont mis à disposition gratuitement, mais leur usage est strictement personnel. Toute diffusion ou reproduction publique est interdite sans autorisation.
+Ce dépôt centralise les cours et exercices de mathématiques.
 
-Ce projet a pour vocation de faciliter et d'accélérer la création de documents pédagogiques en mathématiques, tout en garantissant une présentation claire, moderne et homogène. 
-
-_(Ce qui est très utile pour les étudiants en amphithéâtre, bien que je conseillerai l'utilisation de Copilot pour écrire encore plus vite les documents en direct...)_
-
-Pour installer et utiliser ce .sty, suivez les instructions détaillées dans [SETUP.md](SETUP.md) _(sauf si vous vous y connaissez déjà en LaTeX, alors vous savez faire !). Il faut un peu se battre sur Windows pour le faire...
+> [!NOTE]
+> Si votre objectif est simplement de consulter les cours et les documents finalisés, il est fortement recommandé de vous rendre directement sur le site [ewenrdo.fr](https://ewenrdo.fr/ressources).
 
 ---
 
-## Crédits
+## Utilisation des documents et licences
 
-La version initiale de ce projet a été inspirée par les travaux de Mme Yuen et M. Alliot, enseignants agrégés de mathématiques au lycée. Le design, la structuration et le style des commandes LaTeX s'inspirent largement de leurs pratiques pédagogiques, qui ont fait leurs preuves auprès de leurs étudiants.
+Certains documents présents dans ce dépôt sont soumis à des restrictions d'utilisation. Il convient de vérifier systématiquement les conditions applicables sur [ewenrdo.fr/ressources](https://ewenrdo.fr/ressources) avant toute réutilisation.
 
-Toutefois, le projet a évolué et s'est enrichi de nombreuses fonctionnalités supplémentaires, notamment pour la création d'exercices et de polycopiés. Ces ajouts ont été réalisés par mes soins, en m'appuyant sur mes propres expériences d'apprentissage et mes besoins comme étudiant.
+---
 
-**Le contenu des documents présents dans le dossier `lessons/` est soumis à différentes licences et droits d'auteur.** Certains fichiers sont des créations originales, tandis que d'autres sont basés sur des cours existants, notamment ceux de l'Université Paris Cité. Il est donc impératif de respecter les droits d'auteur et les licences associées à chaque document. Pour plus d'informations, les crédits sont systématiquement mentionnés sur [ewenrdo.fr/ressources](https://ewenrdo.fr/ressources). Veuillez vous y référer pour toute question relative aux droits d'utilisation.
+## Architecture et module requis (components)
 
-_Un grand remerciement à Mme Yuen et M. Alliot pour leur générosité, leur exigence et la qualité de leur enseignement, qui ont servi de fondation à ce projet et à mes connaissances en mathématiques._
+L'arborescence du projet s'appuie sur un package de style partagé (`mathtex-maker`) qui gère la mise en forme des documents LaTeX. Vous pouvez consulter le code source de ce package sur [GitHub](https://github.com/ewenrdo/mathtex-maker). Il est nécessaire d'installer ce package pour compiler correctement les documents du projet.
+
+Pour éviter les duplications et centraliser la maintenance, ce package est intégré au projet sous forme de **sous-module Git** situé à la racine dans le dossier `components/`. Cela permet de lier le dépôt principal à une version précise et indépendante du code de mise en page, tout en garantissant que les fichiers `.tex` (peu importe leur profondeur dans les sous-dossiers) pointent de manière cohérente vers ce même répertoire source.
+
+---
+
+## Contribuer
+
+Les contributions pour corriger une coquille, améliorer un exercice ou proposer une modification sont les bienvenues. Voici la marche à suivre pour proposer un changement :
+
+1. **Créer une branche :** Partez d'une nouvelle branche dédiée à votre modification à partir de `main`.
+2. **Modifier le fichier :** Apportez vos corrections directement dans le fichier `.tex` concerné.
+3. **Tester la compilation :** Assurez-vous que votre document compile correctement en local en vous plaçant dans son dossier de travail et en veillant à ce que les chemins relatifs pointent bien vers le dossier `components/` à la racine.
+4. **Proposer une Pull Request :** Soumettez votre contribution en ouvrant une Pull Request sur le dépôt pour relecture.
+
+**Attention :** S'il vous plait, n'envoyez pas les documents modifiés compilés (PDF) mais uniquement les fichiers `.tex` et les éventuels fichiers de ressources (images, etc.) nécessaires à la compilation dans votre Pull Request. Cela permet de garder le dépôt léger et de faciliter la maintenance.
