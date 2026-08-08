@@ -12,18 +12,36 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive # INDISPENSABLE pour récupérer ton dossier components !
+
       - name: Install TeX Live
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-full
+          sudo apt-get install -y texlive-full latexmk
+
       - name: Find changed LaTeX files
         id: latexfiles
         run: |
-          git fetch origin ${{ github.base_ref }}
-          git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.tex$' > changed_tex.txt || true
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git fetch origin ${{ github.base_ref }}
+            git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.tex$' > changed_tex.txt || true
+          else
+            # Pour un push simple, on compare avec le commit précédent
+            git diff --name-only HEAD~1 HEAD | grep '\.tex$' > changed_tex.txt || true
+          fi
+          echo "Fichiers modifiés :"
+          cat changed_tex.txt
+
       - name: Compile changed LaTeX files
         run: |
           while IFS= read -r file; do
-            echo "Compiling $file"
-            pdflatex -interaction=nonstopmode "$file" || exit 1
+            if [ -f "$file" ]; then
+              echo "Compiling $file"
+              dir=$(dirname "$file")
+              # On se place dans le dossier du fichier et on utilise TEXINPUTS pour pointer vers le sous-module à la racine
+              cd "$dir"
+              TEXINPUTS=.:../../../../components//: latexmk -pdf -interaction=nonstopmode $(basename "$file") || exit 1
+              cd - > /dev/null
+            fi
           done < changed_tex.txt
