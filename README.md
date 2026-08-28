@@ -1,6 +1,6 @@
-# Math Lesson Maker
+# dl-mathinfo-vault
 
-Ce dépôt centralise les cours et exercices de mathématiques.
+Ce dépôt centralise mes cours et exercices de mathématiques et d'informatique à l'UniversitéParis Cité.
 
 > [!NOTE]
 > Si votre objectif est simplement de consulter les cours et les documents finalisés, il est fortement recommandé de vous rendre directement sur le site [ewenrdo.fr](https://ewenrdo.fr/ressources).
