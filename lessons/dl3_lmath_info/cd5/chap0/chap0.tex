@@ -1,0 +1,129 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info CD5}
+\fancyhead[C]{Topologie}
+\fancyhead[R]{2025-2026}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 0 : Espaces préhilbertiens}
+
+\textbf{Ce chapitre est une introduction aux espaces préhilbertiens qui n'a pas été abordé en cours comme tel, mais qu'il est nécessaire de comprendre.} \textit{Dans le chapitre sur les espaces euclidiens de ASF4, nous avons manipulé les espaces euclidiens (sur $\mathbb{R}$ et de dimension finie). Nous généralisons ici cette notion aux corps $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$, et à des espaces de dimension quelconque (finie ou infinie).}
+
+\section{Produit scalaire et espaces préhilbertiens}
+
+\subsection{Définition générale sur $\mathbb{R}$ ou $\mathbb{C}$}
+
+\definition{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$).\\
+    Un \textbf{produit scalaire} (ou produit hermitien dans le cas complexe) sur $E$ est une application $\langle \cdot, \cdot \rangle : E \times E \to \mathbb{K}$ qui vérifie :
+    \begin{enumerate}
+        \item $\forall x,y \in E, \; \langle y,x \rangle = \overline{\langle x,y \rangle}$ (symétrie hermitienne, ou symétrie classique si $\mathbb{K}=\mathbb{R}$)
+        \item $\forall x, y, z \in E, \forall \lambda \in \mathbb{K}, \; \langle x, \lambda y + z \rangle = \lambda \langle x,y \rangle + \langle x,z \rangle$ (linéarité à droite, i.e. en la seconde variable)
+        \item $\forall x \in E \setminus \{0\}, \; \langle x,x \rangle > 0$ (définie positivité)
+    \end{enumerate}
+}
+
+\remark{Si $\mathbb{K} = \mathbb{R}$, la symétrie hermitienne devient la symétrie classique : $\langle x,y \rangle = \langle y,x \rangle$.}
+\remark{La symétrie peut être à gauche ou à droite, mais on choisit ici la convention de linéarité à droite.}
+
+\theorem{Proposition}{Semi-linéarité à gauche}{false}{
+    Soit $E$ un $\mathbb{K}$-espace vectoriel muni d'un produit scalaire. Alors l'application $\langle \cdot, \cdot \rangle$ est semi-linéaire (ou antilinéaire) à gauche, c'est-à-dire :
+    \[
+        \forall x,y,z \in E, \forall \lambda \in \mathbb{K}, \; 
+        \langle \lambda x + y, z \rangle = \overline{\lambda} \langle x,z \rangle + \langle y,z \rangle
+    \]
+}
+\noindent{\textbf{Preuve :} On utilise la symétrie hermitienne (1) et la linéarité à droite (2) :
+\[
+    \langle \lambda x + y, z \rangle = \overline{\langle z, \lambda x + y \rangle} 
+    = \overline{\lambda \langle z, x \rangle + \langle z, y \rangle} 
+    = \overline{\lambda} \overline{\langle z, x \rangle} + \overline{\langle z, y \rangle} 
+    = \overline{\lambda} \langle x, z \rangle + \langle y, z \rangle
+\]}
+
+\definition{
+    Un \textbf{espace préhilbertien} est un $\mathbb{K}$-espace vectoriel $E$ (de dimension quelconque) muni d'un produit scalaire.
+    \begin{itemize}
+        \item Si $\mathbb{K} = \mathbb{R}$ et $\dim(E) < +\infty$, $E$ est un \textbf{espace euclidien} (Chapitre 4).
+        \item Si $\mathbb{K} = \mathbb{C}$ et $\dim(E) < +\infty$, $E$ est un \textbf{espace hermitien}.
+    \end{itemize}
+}
+
+\example{
+    \begin{enumerate}
+        \item Dans $\mathbb{C}^n$, $\langle x,y \rangle = \sum_{i=1}^n \overline{x_i} y_i$ est le produit scalaire canonique.
+        \item Dans $\mathcal{C}^0([a,b], \mathbb{C})$, $\langle f,g \rangle = \int_a^b \overline{f(t)} g(t) \, dt$ est un produit scalaire. $E$ est un espace préhilbertien complexe de dimension infinie.
+    \end{enumerate}
+}
+
+\subsection{Propriétés fondamentales}
+
+\theorem{Inégalité de Cauchy-Schwarz}{}{false}{
+    Soit $E$ un espace préhilbertien ($\mathbb{R}$ ou $\mathbb{C}$). Pour tous $x,y \in E$, on a :
+    \[
+        |\langle x,y \rangle| \leq \sqrt{\langle x,x \rangle} \sqrt{\langle y,y \rangle}
+    \]
+    L'égalité a lieu si et seulement si $x$ et $y$ sont colinéaires.
+}
+
+\theorem{Norme canonique}{}{false}{
+    Soit $E$ un espace préhilbertien. L'application $\| x \| = \sqrt{\langle x,x \rangle}$ définit une norme sur $E$, appelée \textbf{norme associée au produit scalaire}.
+}
+
+\remark{Les identitiés suivantes que l'on a vues dans le cas euclidien/hermitien sont encore valables dans le cas préhilbertien, et permettent de retrouver le produit scalaire à partir de la norme associée :
+    \begin{itemize}
+        \item \textbf{Identité du parallélogramme :} $\forall x,y \in E, \; \|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2$.
+        \item \textbf{Identité de polarisation complexe :} Si $\mathbb{K} = \mathbb{C}$, 
+        \[ \langle x,y \rangle = \frac{1}{4}\left( \|x+y\|^2 - \|x-y\|^2 + i\|x-i y\|^2 - i\|x+i y\|^2 \right) \]
+    \end{itemize}
+}
+
+
+\section{Différences fondamentales avec le cas euclidien/hermitien}
+
+\reminder{
+    Au chapitre 4 (dimension finie), si $F$ est un sous-espace vectoriel de $E$, nous avions :
+    \begin{enumerate}
+        \item $E = F \oplus F^\perp$ (supplémentaires orthogonaux).
+        \item $(F^\perp)^\perp = F$.
+    \end{enumerate}
+}
+
+\attention{
+    \textbf{Rupture en dimension infinie :} Si $E$ est un espace préhilbertien de dimension infinie et $F$ un sous-espace vectoriel de $E$, ces propriétés ne sont plus toujours vérifiées :
+    \begin{itemize}
+        \item La somme $F + F^\perp$ peut être strictement incluse dans $E$ ($F$ et $F^\perp$ ne sont plus nécessairement supplémentaires).
+        \item On a seulement l'inclusion $F \subset (F^\perp)^\perp$. L'égalité $(F^\perp)^\perp = F$ peut être fausse.
+    \end{itemize}
+}
+
+\example{
+    Soit $E = \mathcal{C}^0([0,1], \mathbb{R})$ muni du produit scalaire $\langle f,g \rangle = \int_0^1 f(t)g(t) dt$.\\
+    Soit $F = \mathbb{R}[X]$ le sous-espace des polynômes.
+    La seule fonction continue orthogonale à tous les polynômes est la fonction nulle, donc $F^\perp = \{0\}$.\\
+    Par conséquent, $(F^\perp)^\perp = \{0\}^\perp = E \neq F$.
+}
+
+\newpage
+\tableofcontents
+
+\section*{Crédits}
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}

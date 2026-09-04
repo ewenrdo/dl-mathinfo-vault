@@ -9,7 +9,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{DL3 Math-Info}
-\fancyhead[C]{Fiche d'entraînement hebdomadaire N°2}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°1}
 \fancyhead[R]{2026-2027}
 \fancyfoot[L]{Ewen Rodrigues de Oliveira}
 \fancyfoot[R]{\thepage}
@@ -32,7 +32,7 @@ Intégration et probabilités & $\emptyset$\\
 \hline
 Groupes et actions & $\emptyset$\\
 \hline
-Calcul différentiel & $\emptyset$\\
+Calcul différentiel & $1,2,3,4,5,6$\\
 \hline
 Systèmes d'exploitation & $\emptyset$\\
 \hline
@@ -46,6 +46,84 @@ Anglais & $\emptyset$\\
 
 \vspace{1em}
 
+\exercise{1}{Formes hermitiennes et vérifications de base}{
+    On considère la fonction $b : \mathbb{C}^2 \times \mathbb{C}^2 \to \mathbb{C}$ définie pour $x=(x_1,x_2)$ et $y=(y_1,y_2)$ par :
+    \[
+        b(x,y) = 2\overline{x_1}y_1 + i\overline{x_1}y_2 - i\overline{x_2}y_1 + 3\overline{x_2}y_2
+    \]
+    \begin{enumerate}
+        \item Vérifier que $b$ est linéaire à droite (par rapport à $y$) et semi-linéaire à gauche (par rapport à $x$).
+        \item Montrer que $b(y,x) = \overline{b(x,y)}$ pour tous $x,y \in \mathbb{C}^2$.
+        \item Pour $x=(x_1, x_2) \in \mathbb{C}^2$, exprimer $b(x,x)$ sous la forme d'une somme de carrés de modules.
+        \item En déduire que $b$ définit un produit scalaire (hermitien) sur $\mathbb{C}^2$.
+    \end{enumerate}
+}
+
+\exercise{2}{Identités de polarisation et produit scalaire}{
+    Soit $E$ un $\mathbb{C}$-espace vectoriel muni d'un produit scalaire $\langle \cdot, \cdot \rangle$ (linéaire à droite) et de la norme associée $\|\cdot\|$.
+    \begin{enumerate}
+        \item Développer les expressions $\|x+y\|^2$, $\|x-y\|^2$, $\|x+iy\|^2$ et $\|x-iy\|^2$.
+        \item Démontrer l'identité de polarisation complexe :
+        \[
+            \langle x,y \rangle = \frac{1}{4}\left( \|x+y\|^2 - \|x-y\|^2 - i\|x+i y\|^2 + i\|x-i y\|^2 \right)
+        \]
+        \item Que devient cette identité si $E$ est un espace préhilbertien réel ?
+    \end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{3}{Gram-Schmidt dans $\mathbb{C}^3$}{
+    Soit $\mathbb{C}^3$ muni de son produit scalaire hermitien canonique $\langle x,y \rangle = \sum_{k=1}^3 \overline{x_k}y_k$.  
+    On considère les vecteurs $e_1 = (1, i, 0)$ et $e_2 = (0, 1, i)$.
+    \begin{enumerate}
+        \item Montrer que la famille $(e_1, e_2)$ est libre dans $\mathbb{C}^3$.
+        \item Former une famille orthonormée $(f_1, f_2)$ engendrant le sous-espace $F = \text{Vect}(e_1, e_2)$.
+        \item Déterminer un vecteur $f_3 \in \mathbb{C}^3$ non nul tel que $(f_1, f_2, f_3)$ forme une base orthonormée de $\mathbb{C}^3$.
+    \end{enumerate}
+}
+
+
+\exercise{4}{Distance à un sous-espace et polynômes}{
+    On se place dans $E = \mathbb{R}[X]$ muni du produit scalaire :
+    \[
+        \langle P, Q \rangle = \int_0^1 P(t)Q(t) \, dt
+    \]
+    On note $F = \mathbb{R}_1[X] = \text{Vect}(1, X)$.
+    \begin{enumerate}
+        \item Construire une base orthonormée $(Q_0, Q_1)$ du sous-espace $F$ par l'orthogonalisation de Gram-Schmidt appliquée à la base canonique $(1, X)$.
+        \item Calculer la projection orthogonale du polynôme $P(X) = X^2$ sur le sous-espace $F$.
+        \item En déduire la valeur de la distance $d(X^2, F) = \inf_{(a,b) \in \mathbb{R}^2} \left( \int_0^1 (t^2 - at - b)^2 \, dt \right)^{1/2}$.
+    \end{enumerate}
+}
+
+\exercise{5}{Projections dans un espace euclidien}{
+    Dans $\mathbb{R}^4$ muni du produit scalaire usuel, on considère le sous-espace vectoriel $F$ d'équations :
+    \[
+        \begin{cases}
+            x + y + z + t = 0 \\
+            x - y + z - t = 0
+        \end{cases}
+    \]
+    \begin{enumerate}
+        \item Déterminer une base de $F$, puis une base de $F^\perp$. En déduire une base orthonormée de $F$.
+        \item Calculer la matrice dans la base canonique de la projection orthogonale $p_F$ sur $F$.
+        \item Déterminer la distance du vecteur $v = (1, 2, 3, 4)$ au sous-espace $F$.
+    \end{enumerate}
+}
+\switchcolumn
+\newpage
+
+\exercise{6}{L'orthogonal du sous-espace des polynômes}{
+    Soit $E = \mathcal{C}^0([0,1], \mathbb{R})$ muni du produit scalaire $\langle f,g \rangle = \int_0^1 f(t)g(t) \, dt$.  
+    On note $F = \mathbb{R}[X]$ le sous-espace des fonctions polynomiales restreintes à $[0,1]$.
+    \begin{enumerate}
+        \item Soit $f \in F^\perp$. Montrer que pour tout $n \in \mathbb{N}$, $\int_0^1 f(t) t^n \, dt = 0$.
+        \item En admettant le théorème de Weierstrass (tout élément de $E$ est limite uniforme d'une suite de polynômes sur $[0,1]$), montrer que $\int_0^1 f(t)^2 \, dt = 0$.
+        \item En déduire $F^\perp$.
+        \item A-t-on $E = F \oplus F^\perp$ ? Que peut-on en conclure sur la dimension infinie ?
+    \end{enumerate}
+}
 
 \end{paracol}
 
