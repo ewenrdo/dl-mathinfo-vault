@@ -62,6 +62,7 @@
 }
 \ndlr{cf. Laurent pour la preuve}
 
+
 \theorem{Proposition}{Inégalité triangulaire inverse}{false}{
     Soit $(E, \| \cdot \|)$ un espace vectoriel normé. Alors pour tous $x,y \in E$, on a :
     $$|\|x\| - \|y\|| \leq \|x - y\|.$$
@@ -437,6 +438,74 @@ $\Leftarrow/$ Pour tout $k \in \mathbb{N}$ posons $\varepsilon = \frac{1}{k}$, p
     C'est le plus petit fermé contenant $A$.
 }
 
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=stealth]
+
+  % ==========================================
+  % SECTION 1 : POINT ADHÉRENT (À GAUCHE)
+  % ==========================================
+  \begin{scope}[shift={(0,0)}]
+    % Remplissage de l'ensemble A
+    \fill[blue!10] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Frontière de A en pointillés (A peut être ouvert ou quelconque)
+    \draw[blue!70!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Nom de l'ensemble
+    \node[blue!80!black] at (1.5, 0.2) {\large $A$};
+    
+    % Point adhérent a (situé sur le bord de A)
+    \coordinate (A_point) at (2.5, 1);
+    \fill[black] (A_point) circle (1.5pt) node[above right] {$a$};
+    
+    % Boule ouverte centrée en a qui croise A
+    \draw[gray, thin] (A_point) circle (0.5cm);
+    \draw[dashed, ->, gray] (A_point) -- node[above left, scale=0.8, black] {$\varepsilon$} +(210:0.5cm);
+    
+    % Zone d'intersection B(a, eps) \cap A
+    \begin{scope}
+      \clip plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+      \fill[teal!30, opacity=0.7] (A_point) circle (0.5cm);
+    \end{scope};
+    
+    % Légende sous la première figure
+    \node[text width=4.5cm, align=center, font=\small] at (1.5,-2) {
+      \textbf{Point adhérent $a$}\\
+      \textcolor{gray}{$\forall \varepsilon > 0, B(a,\varepsilon) \cap A \neq \varnothing$}\\
+      \textit{Toute boule coupe $A$ (zone verte)}
+    };
+  \end{scope}
+
+  % ==========================================
+  % SECTION 2 : ADHÉRENCE \overline{A} (À DROITE)
+  % ==========================================
+  \begin{scope}[shift={(6,0)}]
+    % Fermé F englobant (en gris clair)
+    \fill[gray!15] plot[smooth cycle, tension=0.6] coordinates {(-0.4,-0.4) (0.8,1.8) (2.8,1.3) (3.3,-0.3) (2,-1.3) (0.3,-0.8)};
+    \draw[gray!70, thick] plot[smooth cycle, tension=0.6] coordinates {(-0.4,-0.4) (0.8,1.8) (2.8,1.3) (3.3,-0.3) (2,-1.3) (0.3,-0.8)};
+    \node[gray!80!black] at (3.1, 1.1) {$F$};
+
+    % Remplissage de l'adhérence \overline{A}
+    \fill[purple!20] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Frontière FERMÉE de \overline{A} (trait plein violet)
+    \draw[purple!80!black, thick] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Intérieur de A (en bleu très clair)
+    \fill[blue!15] plot[smooth cycle, tension=0.7] coordinates {(0.2,0.1) (1,1.3) (2.3,0.9) (2.7,0.1) (1.9,-0.8) (0.6,-0.4)};
+    \node[blue!80!black] at (1.2, 0) {$A$};
+    \node[purple!90!black] at (2.2, 0.4) {$\overline{A}$};
+    
+    % Légende sous la deuxième figure
+    \node[text width=4.8cm, align=center, font=\small] at (1.5,-2) {
+      \textbf{Adhérence $\overline{A}$}\\
+      \textcolor{gray}{$\overline{A} = \bigcap \{ F \text{ fermé} \mid F \supset A \}$}\\
+      \textit{Plus petit fermé contenant $A$ ($A \subset \overline{A} \subset F$)}
+    };
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
 
 
 \subsection{Intérieur}
@@ -458,6 +527,71 @@ $\Leftarrow/$ Pour tout $k \in \mathbb{N}$ posons $\varepsilon = \frac{1}{k}$, p
     Soit $A \subset E$. On appelle \textbf{frontière} de $A$ et on note $\partial A$ la différence entre l'adhérence et l'intérieur de $A$. On a :
     $$ \partial A = \overline{A} \setminus \overset{\circ}{A} $$
 }
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=stealth]
+
+  % ==========================================
+  % SECTION 1 : POINT INTÉRIEUR & INTÉRIEUR (À GAUCHE)
+  % ==========================================
+  \begin{scope}[shift={(0,0)}]
+    % Ensemble A global (avec sa frontière réelle en trait plein)
+    \fill[blue!10] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    \draw[black!60, thick] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Intérieur \overset{\circ}{A} (zone bleue avec bord en pointillés)
+    \fill[blue!20] plot[smooth cycle, tension=0.7] coordinates {(0.1,0.05) (1,1.4) (2.4,0.95) (2.9,0) (1.95,-0.9) (0.55,-0.45)};
+    \draw[blue!80!black, thick, dashed] plot[smooth cycle, tension=0.7] coordinates {(0.1,0.05) (1,1.4) (2.4,0.95) (2.9,0) (1.95,-0.9) (0.55,-0.45)};
+    
+    % Noms des ensembles
+    \node[blue!90!black] at (1.9, 0.2) {\large $\overset{\circ}{A}$};
+    \node[black!70] at (2.8, -0.5) {$A$};
+
+    % Point intérieur a
+    \coordinate (A_int) at (1.1, 0.4);
+    \fill[black] (A_int) circle (1.5pt) node[below left] {$a$};
+    
+    % Boule entièrement contenue dans A
+    \draw[gray, thin] (A_int) circle (0.45cm);
+    \draw[dashed, ->, gray] (A_int) -- node[above, scale=0.8, black] {$\varepsilon$} +(45:0.45cm);
+
+    % Légende sous la première figure
+    \node[text width=4.8cm, align=center, font=\small] at (1.5,-2) {
+      \textbf{Point intérieur $a$ et Intérieur $\overset{\circ}{A}$}\\
+      \textcolor{gray}{$\exists \varepsilon > 0, B(a,\varepsilon) \subset A$}\\
+      \textit{Plus grand ouvert contenu dans $A$}
+    };
+  \end{scope};
+
+  % ==========================================
+  % SECTION 2 : FRONTIÈRE \partial A (À DROITE)
+  % ==========================================
+  \begin{scope}[shift={(6,0)}]
+    % Remplissage léger de l'ensemble A
+    \fill[blue!10] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    \node[blue!80!black] at (1.5, 0.2) {\large $A$};
+
+    % Épaisseur matérialisant la frontière \partial A = \overline{A} \setminus \overset{\circ}{A}
+    \draw[orange!90!black, line width=4pt, opacity=0.7] plot[smooth cycle, tension=0.7] coordinates {(0,0) (1,1.5) (2.5,1) (3,0) (2,-1) (0.5,-0.5)};
+    
+    % Indication du nom de la frontière
+    \node[orange!90!black] at (2.7, 1.2) {\large $\partial A$};
+    \draw[->, orange!90!black, thin] (2.5, 1.05) -- (2.2, 0.9);
+
+    % Point sur la frontière
+    \coordinate (A_front) at (0.5, -0.5);
+    \fill[black] (A_front) circle (1.5pt);
+
+    % Légende sous la deuxième figure
+    \node[text width=4.8cm, align=center, font=\small] at (1.5,-2) {
+      \textbf{Frontière $\partial A$}\\
+      \textcolor{gray}{$\partial A = \overline{A} \setminus \overset{\circ}{A}$}\\
+      \textit{Séparation entre l'intérieur et l'extérieur}
+    };
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
 
 \example{
     Soit $A = (0,1) \subset \mathbb{R}$. Alors :
@@ -575,7 +709,7 @@ $ \hfill \square$
 \attention{L'intersection d'une famille infinie d'ouverts n'est pas nécessairement un ouvert : par exemple, dans $\mathbb{R}$, l'intersection des ouverts $(-\frac{1}{n}, \frac{1}{n})$ pour $n \in \mathbb{N}^*$ est $\{0\}$, qui n'est pas un ouvert.}
 
 \training{Montrer la proposition précédente.}
-\noindent \carreaux{10}
+\noindent \carreaux{7}
 
 \theorem{Proposition}{}{false}{
     Soit $A \subset E$. Alors $A$ est ouvert si et seulement si $A = \overset{\circ}{A}$.
@@ -592,7 +726,7 @@ $ \hfill \square$
 }
 
 \training{Montrer la proposition précédente.}
-\noindent \carreaux{10}
+\noindent \carreaux{7}
 
 \theorem{Proposition}{Union et intersection de fermés}{false}{
     Soit $\| \cdot \|$ une norme sur $E$. Alors :
