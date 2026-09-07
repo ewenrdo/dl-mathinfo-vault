@@ -191,6 +191,13 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 \training{Démontrer les propriétés d'un morphisme de groupes.}
 \noindent\carreaux{5}
 
+\theorem{Proposition}{Composition de morphismes}{false}{
+    Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
+    Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
+}
+
+\ndlr{cf. Laurent ou Dan pour la preuve (merci mon Laurent d'amour).}
+
 \theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
     $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
 }
@@ -201,6 +208,13 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 \]
 Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 
+
+\theorem{Proposition}{Groupe des automorphismes}{false}{
+    Soit $G$ un groupe. Alors $(Aut(G), \circ)$ est un groupe, où $Aut(G)$ est l'ensemble des automorphismes de $G$ et $\circ$ est la composition de fonctions.
+}
+\noindent{\textbf{Preuve :} La composée de deux automorphismes est un automorphisme, l'élément neutre est l'identité $id_G$, et l'inverse d'un automorphisme est aussi un automorphisme. $\Box$}
+
+\ndlr{Fin du cours du 07/09/2026.}
 
 \example{
     \begin{itemize}
@@ -213,10 +227,6 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
     \end{itemize}
 }
 
-\theorem{Proposition}{Composition de morphismes}{false}{
-    Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
-    Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
-}
 
 
 \theorem{Proposition}{Noyau et image d'un morphisme de groupes}{false}{
