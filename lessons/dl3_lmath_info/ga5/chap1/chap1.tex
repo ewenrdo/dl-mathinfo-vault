@@ -49,6 +49,19 @@ Supposons qu'il existe deux éléments neutres \(e\) et \(e'\) dans \(E\). Par d
 En combinant ces deux égalités, on obtient \(e = e'\). $\Box$
 }
 
+\theorem{Propriété}{Unicité du symétrique}{false}{
+    Soit $E$ un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$.\\
+    Alors tout élément de \(E\) possède un unique symétrique.
+}
+\noindent{\textbf{Preuve:}\\
+Soient $x \in E$ et $x', x'' \in E$ tels que $x'$ et $x''$ soient des symétriques de $x$. On a donc :
+
+\[
+    x'' = x'' * e = x'' * (x * x') = (x'' * x) * x' = e * x' = x' 
+\]
+$\hfill \Box$
+}
+
 \theorem{Propriété}{Symétrique du produit}{false}{
     Soit $(E, *)$ un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$. Alors :
     \[
@@ -84,7 +97,7 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 \definition{Soit G un ensemble muni d'une loi de composition interne \( * \). On dit que \((G, *)\) est un \textbf{groupe} si les trois propriétés suivantes sont vérifiées : 
 \begin{itemize}
     \item \( * \) est associative.
-    \item Il existe un élément neutre \(e \in G\).
+    \item Il existe un élément neutre \(e_G \in G\).
     \item Tout élément de \(G\) possède un symétrique dans \(G\).
 \end{itemize}}
 
@@ -97,7 +110,8 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
     \begin{itemize}
         \item \((\mathbb{Z}, +)\) : l'ensemble des entiers avec l'addition.
         \item \((\mathbb{R}^*, \times)\), \((\mathbb{Q}^*, \times)\), \((\mathbb{C}^*, \times)\) : l'ensemble des réels, rationnels et complexes non nuls avec la multiplication.
-        \item $S(X) = \left( \{ \text{bijections } X \to X \mid X \text{ est un ensemble} \}, \circ \right)$ : l'ensemble des bijections d'un ensemble \(X\) dans lui-même avec la composition.
+        \item $Bij(X) = S(X) = \left( \{ \text{bijections } X \to X \mid X \text{ est un ensemble} \}, \circ \right)$ : l'ensemble des bijections d'un ensemble \(X\) dans lui-même avec la composition (si $X = \{1, 2, \ldots, n\}$, on note $S(X) = S_n$)\footnote{cf. \href{https://www.ewenrdo.fr/ressources?slug=algebre-3-chapitre-2-groupe-symetrique}{Chapitre 2 : Groupe symétrique} d'AL3, en particulier pour les cycles et les permutations qui ne sont pas rappelées ici.}.
+        \item $GL_n(\mathbb{K}) = \left( \{ A \in M_n(\mathbb{K}) \mid \det(A) \neq 0 \}, \times \right)$ : l'ensemble des matrices carrées inversibles d'ordre \(n\) avec la multiplication matricielle.
     \end{itemize}
 }
 \cexample{
@@ -106,69 +120,132 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
     \end{itemize}
 }
 
-\definition{
-    Soit $(G, *)$ un groupe où $G$ est de cardinal fini.\\
-    On appelle \textbf{ordre} de $G$ le cardinal de $G$ et on le note $|G|$.
+\theorem{Propriété}{Bijection de multiplication}{false}{
+    Soit \((G, *)\) un groupe. Alors les applications "multiplication à gauche" et "multiplication à droite" sont des bijections de \(G\) dans \(G\).
 }
+\noindent{\textbf{Preuve à gauche :} Montrons que $\ell_x : G \to G$ définie par $\ell_x(y) = x * y$ est injective et surjective.\\
+\begin{itemize}
+    \item \textbf{Injectivité :} Soient $y,z \in G$ tels que $\ell_x(y) = \ell_x(z)$, c'est-à-dire $x * y = x * z$.\\
+    $$ y = x^{-1} * (x * y) = x^{-1} * (x * z) = (x^{-1} * x) * z = e * z = z $$
+    Donc $\ell_x$ est injective.
+
+    \item \textbf{Surjectivité :} Soit $z \in G$. On veut trouver $y \in G$ tel que $\ell_x(y) = z$, c'est-à-dire $x * y = z$.\\
+    En multipliant à droite par l'inverse de $x$, on obtient $y = z * x^{-1}$. Donc $\ell_x$ est surjective.
+\end{itemize}
+
+}
+
+\ndlr{La propriété précédente est dans un exercice de la partie I, à laisser ?}
+
+\attention{La méthode pour démontrer qu'une application est injective ou surjective (et donc bijective) est considérée comme acquise.}
 
 \remark{
     Il nous arrive de vouloir aller plus vite, et dans certains cas de se conformer aux notations usuelles. On introduit donc deux systèmes de notation pour les groupes :
     \begin{itemize}
         \item Système additif : on note le groupe \((G, +)\), l'élément neutre est noté \(0\) et le symétrique \textit{(appelé l'opposé)} de \(x\) est noté \(-x\).
-        \item Système multiplicatif : on note le groupe \((G, \times)\) ou \((G, \cdot)\), l'élément neutre est noté \(1\) et le symétrique \textit{(appelé l'inverse)} de \(x\) est noté \(x^{-1}\).
+        \item Système multiplicatif : on note le groupe \((G, \times)\) ou \((G, \cdot)\), l'élément neutre est noté \(1\) et le symétrique \textit{(appelé l'inverse)} de \(x\) est noté \(x^{-1}\).\\
+        Par récurrence, on note aussi : $\begin{cases}
+            x^{n+1} = x^n \cdot x & \text{si } n \geq 0 \\
+            x^0 = 1 & \\
+            x^n = (x^{-n})^{-1} & \text{si } n < 0
+        \end{cases}$
+        \item Composée de fonctions : on note le groupe \((G, \circ)\), l'élément neutre est noté \(id_G\) et le symétrique \textit{(appelé l'inverse)} de \(f\) est noté \(f^{-1}\).\\
     \end{itemize}
 }
-\theorem{Proposition}{Groupe produit}{true}{
-Soient \((G_1, *_1)\) et \((G_2, *_2)\) deux groupes. On définit une loi de composition interne \(*\) sur le produit cartésien \(G_1 \times G_2\) par : 
+
+\training{Soient $n,m \in \mathbb{Z}$. Montrer par récurrence que $x^n \cdot x^m = x^{n+m}$ et $x^{nm} = (x^n)^m$. On pourra distinguer les cas $\mathbb{N}$ et $\mathbb{Z}$ lorsque nécessaire.}
+\noindent\carreaux{7}
+
+\ndlr{À cet endroit, il y a eu un rappel sur les permutations et la décomposition de permutations en cycles à supports disjoints, ainsi que sur $S_n$ et sa non-commutativité (et son cardinal). Le ré-ajouter ?}
+
+\definition{
+    Soit $(G, *)$ un groupe où $G$ est de cardinal \textbf{fini}.\\
+    On appelle \textbf{ordre} de $G$ le cardinal de $G$ et on le note $|G|$. On dit que $G$ est un groupe fini.
+}
+
+\example{$|S_n| = n!$ pour tout $n \in \mathbb{N}^*$.}
+
+\ndlr{Ici, elle a défini la notation $\mathbb{Z}/n\mathbb{Z}$ et rappelé la définition d'une congruence. C'est dans le chapitre 2, le mettre ici ?}
+
+
+\section{Morphismes de groupes}
+\ndlr{On a omis les démonstrations dans cette section, cf. OneNote.}
+
+\definition{
+    Soient $(G, *)$ et $(G', *')$ deux groupes.\\
+    Une application \functionSets{\varphi}{G \rightarrow G'} est un \textbf{morphisme de groupes} (ou homomorphisme) si :\\
+    \[\forall g_1,g_2 \in G,\quad \varphi(g_1 * g_2) = \varphi(g_1) *' \varphi(g_2)\]
+}
+
+\vocabulary{Si $\varphi$ est un morphisme de groupes et est bijective, alors $\varphi$ est un \textbf{isomorphisme} (si de plus $\varphi$ est un endomorphisme, alors $\varphi$ est un \textbf{automorphisme}).}
+\theorem{Proposition}{Propriétés d'un morphisme de groupes}{false}{
+    Soit \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes.\\
+    Alors :
+    \begin{itemize}
+        \item $\varphi(e) = e'$, où $e$ et $e'$ sont les éléments neutres de $G$ et $G'$ respectivement.
+        \item $\forall g \in G, \varphi(g^{-1}) = (\varphi(g))^{-1}$.
+        \item $\forall k \in \mathbb{Z}, \varphi(g^k) = (\varphi(g))^k$.
+    \end{itemize}
+}
+
+\training{Démontrer les propriétés d'un morphisme de groupes.}
+\noindent\carreaux{5}
+
+\theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
+    $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
+}
+
+\noindent{\textbf{Preuve:} Soit \(g', h' \in G'\). Comme \(\varphi\) est bijective, il existe \(g, h \in G\) tels que \(\varphi(g) = g'\) et \(\varphi(h) = h'\). Alors :
 \[
-(g_1, g_2) * (h_1, h_2) = (g_1 *_1 h_1, g_2 *_2 h_2)
+\varphi^{-1}(g' *' h') = \varphi^{-1}(\varphi(g) *' \varphi(h)) = \varphi^{-1}(\varphi(g * h)) = g * h = \varphi^{-1}(g') * \varphi^{-1}(h')
 \]
-pour tout \((g_1, g_2), (h_1, h_2) \in G_1 \times G_2\). 
+Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 
-Alors \((G_1 \times G_2, *)\) est un groupe, appelé le \textbf{groupe produit} de \((G_1, *_1)\) et \((G_2, *_2)\).
+
+\example{
+    \begin{itemize}
+        \item \function{\varphi}{G \rightarrow G'}{g \mapsto e'} est le morphisme trivial.
+        \item Si $H \subset G$ est un sous-groupe, \function{\varphi}{H \rightarrow G}{h \mapsto h} est un morphisme.
+        \item \function{exp}{(\mathbb{C}, +) \rightarrow (\mathbb{C}^*, \times)}{z \mapsto e^z} est un morphisme.
+        \item \function{ln}{(\mathbb{R}^*_+, \times) \rightarrow (\mathbb{R}, +)}{x \mapsto \ln(x)} est un morphisme.
+        \item $n\in\mathbb{Z}$, \function{\varphi}{\mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}}{k \mapsto \overline{k}} est un morphisme.
+        \item $(G, \cdot)$ groupe, $g_0\in G$, \function{\varphi}{\mathbb{Z} \rightarrow G}{n \mapsto g_0^n = exp_{g_0}(n)} est un morphisme.
+    \end{itemize}
 }
 
-\noindent\textbf{Preuve :}
-\begin{itemize}
-    \item \textit{Associativité :} Soient \((g_1, g_2), (h_1, h_2), (k_1, k_2) \in G_1 \times G_2\).
-    \begin{align*}
-        ((g_1, g_2) * (h_1, h_2)) * (k_1, k_2) &= (g_1 *_1 h_1, g_2 *_2 h_2) * (k_1, k_2) \\
-        &= ((g_1 *_1 h_1) *_1 k_1, (g_2 *_2 h_2) *_2 k_2) \\
-        &= (g_1 *_1 (h_1 *_1 k_1), g_2 *_2 (h_2 *_2 k_2)) \quad (\text{par associativité dans } G_1 \text{ et } G_2) \\
-        &= (g_1, g_2) * (h_1 *_1 k_1, h_2 *_2 k_2) \\
-        &= (g_1, g_2) * ((h_1, h_2) * (k_1, k_2))
-    \end{align*}
-
-    \item \textit{Élément neutre :} Soient \(e_1\) et \(e_2\) les éléments neutres de \(G_1\) et \(G_2\) respectivement. Alors \((e_1, e_2) \in G_1 \times G_2\) et pour tout \((g_1, g_2) \in G_1 \times G_2\) :
-    \[
-    (e_1, e_2) * (g_1, g_2) = (e_1 *_1 g_1, e_2 *_2 g_2) = (g_1, g_2)
-    \]
-    et
-    \[
-    (g_1, g_2) * (e_1, e_2) = (g_1 *_1 e_1, g_2 *_2 e_2) = (g_1, g_2)
-    \]
-    Ainsi, \((e_1, e_2)\) est l'élément neutre de \(G_1 \times G_2\).
-
-    \item \textit{Symétrique :} Soit \((g_1, g_2) \in G_1 \times G_2\). Comme \(G_1\) et \(G_2\) sont des groupes, il existe un symétrique \(g_1^{-1} \in G_1\) et un symétrique \(g_2^{-1} \in G_2\). Alors le couple \((g_1^{-1}, g_2^{-1})\) appartient à \(G_1 \times G_2\) et vérifie :
-    \[
-    (g_1, g_2) * (g_1^{-1}, g_2^{-1}) = (g_1 *_1 g_1^{-1}, g_2 *_2 g_2^{-1}) = (e_1, e_2)
-    \]
-    et
-    \[
-    (g_1^{-1}, g_2^{-1}) * (g_1, g_2) = (g_1^{-1} *_1 g_1, g_2^{-1} *_2 g_2) = (e_1, e_2)
-    \]
-    Le symétrique de \((g_1, g_2)\) dans \(G_1 \times G_2\) est donc bien \((g_1^{-1}, g_2^{-1})\).
-\end{itemize}
-\hfill\(\Box\)
-
-\theorem{Propriété}{Produit cartésien et commutativité}{true}{
-    Si \((G_1, *_1)\) et \((G_2, *_2)\) sont des groupes abéliens, alors leur produit cartésien \((G_1 \times G_2, *)\) est aussi un groupe abélien.
+\theorem{Proposition}{Composition de morphismes}{false}{
+    Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
+    Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
 }
 
-\training{Démontrer la propriété précédente.}
-\noindent\carreaux{10}
 
-\remark{On pourrait prendre plus de deux groupes et faire le produit cartésien de plusieurs groupes.}
+\theorem{Proposition}{Noyau et image d'un morphisme de groupes}{false}{
+    Soient $(G, \cdot)$ et $(G', \cdot')$ des groupes et \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes. Alors :
+    \begin{itemize}
+        \item $Ker(\varphi) = \{ g \in G \mid \varphi(g) = e' \}$ est un sous-groupe de $G$.
+        \item $Im(\varphi) = \{ g' \in G' \mid \exists g \in G, \varphi(g) = g' \}$ est un sous-groupe de $G'$.
+    \end{itemize}
+}
+
+\remark{Le noyau d'un morphisme de groupes mesure à quel point le morphisme n'est pas injectif, tandis que l'image mesure à quel point le morphisme n'est pas surjectif.}
+
+\theorem{Proposition}{Injectivité}{false}{
+    $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
+}
+
+\theorem{Proposition}{Surjectivité}{false}{
+    $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
+}
+
+\example{
+    \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
+}
+\theorem{Corollaire}{Image d'un sous-groupe}{true}{
+    Soit $H \subset G$ un sous-groupe.\\
+    Alors $\varphi(H)$ est un sous-groupe de $G'$.
+}
+
+
 \subsection{Sous-groupes}
 \subsubsection{Définitions et propriétés}
 Dans cette section, on utilisera le système de notation multiplicatif, mais il ne faut pas oublier qu'il ne s'agit que de notations !
@@ -310,84 +387,6 @@ On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'e
 \training{Démontrer le théorème précédent.}
 \noindent\carreaux{19}
 
-\section{Morphismes de groupes}
-\ndlr{On a omis les démonstrations dans cette section, cf. OneNote.}
-
-\definition{
-    Soient $(G, *)$ et $(G', *')$ deux groupes.\\
-    Une application \functionSets{\varphi}{G \rightarrow G'} est un \textbf{morphisme de groupes} (ou homomorphisme) si :\\
-    \[\forall g_1,g_2 \in G,\quad \varphi(g_1 * g_2) = \varphi(g_1) *' \varphi(g_2)\]
-}
-
-\vocabulary{Si $\varphi$ est un morphisme de groupes et est bijective, alors $\varphi$ est un \textbf{isomorphisme}.}
-
-\theorem{Proposition}{Propriétés d'un morphisme de groupes}{false}{
-    Soit \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes.\\
-    Alors :
-    \begin{itemize}
-        \item $\varphi(e) = e'$, où $e$ et $e'$ sont les éléments neutres de $G$ et $G'$ respectivement.
-        \item $\forall g \in G, \varphi(g^{-1}) = (\varphi(g))^{-1}$.
-    \end{itemize}
-}
-
-\training{Démontrer les propriétés d'un morphisme de groupes.}
-\noindent\carreaux{10}
-
-\theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
-    $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
-}
-
-\noindent{\textbf{Preuve:} Soit \(g', h' \in G'\). Comme \(\varphi\) est bijective, il existe \(g, h \in G\) tels que \(\varphi(g) = g'\) et \(\varphi(h) = h'\). Alors :
-\[
-\varphi^{-1}(g' *' h') = \varphi^{-1}(\varphi(g) *' \varphi(h)) = \varphi^{-1}(\varphi(g * h)) = g * h = \varphi^{-1}(g') * \varphi^{-1}(h')
-\]
-Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
-
-
-\example{
-    \begin{itemize}
-        \item \function{\varphi}{G \rightarrow G'}{g \mapsto e'} est le morphisme trivial.
-        \item Si $H \subset G$ est un sous-groupe, \function{\varphi}{H \rightarrow G}{h \mapsto h} est un morphisme.
-        \item \function{exp}{(\mathbb{C}, +) \rightarrow (\mathbb{C}^*, \times)}{z \mapsto e^z} est un morphisme.
-        \item \function{ln}{(\mathbb{R}^*_+, \times) \rightarrow (\mathbb{R}, +)}{x \mapsto \ln(x)} est un morphisme.
-        \item $n\in\mathbb{Z}$, \function{\varphi}{\mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}}{k \mapsto \overline{k}} est un morphisme.
-        \item $(G, \cdot)$ groupe, $g_0\in G$, \function{\varphi}{\mathbb{Z} \rightarrow G}{n \mapsto g_0^n = exp_{g_0}(n)} est un morphisme.
-    \end{itemize}
-}
-
-\theorem{Proposition}{Composition de morphismes}{false}{
-    Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
-    Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
-}
-
-
-\theorem{Proposition}{Noyau et image d'un morphisme de groupes}{false}{
-    Soient $(G, \cdot)$ et $(G', \cdot')$ des groupes et \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes. Alors :
-    \begin{itemize}
-        \item $Ker(\varphi) = \{ g \in G \mid \varphi(g) = e' \}$ est un sous-groupe de $G$.
-        \item $Im(\varphi) = \{ g' \in G' \mid \exists g \in G, \varphi(g) = g' \}$ est un sous-groupe de $G'$.
-    \end{itemize}
-}
-
-\remark{Le noyau d'un morphisme de groupes mesure à quel point le morphisme n'est pas injectif, tandis que l'image mesure à quel point le morphisme n'est pas surjectif.}
-
-\theorem{Proposition}{Injectivité}{false}{
-    $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
-}
-
-\theorem{Proposition}{Surjectivité}{false}{
-    $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
-}
-
-\example{
-    \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
-}
-\theorem{Corollaire}{Image d'un sous-groupe}{true}{
-    Soit $H \subset G$ un sous-groupe.\\
-    Alors $\varphi(H)$ est un sous-groupe de $G'$.
-}
-
-
 
 \section{Ordre d'un élément}
 
@@ -433,7 +432,7 @@ Puisque $e_H = f(e_G) = f(x^n) = f(x)^n$, on a $f(x)^n = e_H$. Par la propositio
 \newpage
 \tableofcontents 
 \section*{Crédits}
-Ce cours provient du polycopié de cours de l'Université Paris Cité enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours provient du polycopié de cours de l'Université Paris Cité de Muriel Livernet enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
 
