@@ -195,8 +195,10 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
     Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
     Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
 }
-
-\ndlr{cf. Laurent ou Dan pour la preuve (merci mon Laurent d'amour).}
+\noindent{\textbf{Démonstration :}\\
+    Soient $(G, \cdot), (G', *), (G'', \times)$ des groupes.\\
+    $(g\circ f)(x\cdot y)=g(f(x\cdot y))=g(f(x)*f(y))=g(f(x))\times g(f(y))=(g\circ f)(x)\times (g\circ f)(y)$
+}
 
 \theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
     $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
