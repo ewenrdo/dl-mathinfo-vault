@@ -28,7 +28,7 @@
 
 \definition{Soit \(E\) un ensemble. Une \textbf{loi de composition interne} sur \(E\) est une application \( * : E \times E \to E \) qui à tout couple \((x, y) \in E \times E\) associe un élément \(x * y \in E\).}
 
-\vocabulary{Quelques notations typiques pour les lois de composition interne : \(+\), \(\times\), \(\cdot\), \(\circ\), etc.}
+\example{Quelques notations typiques pour les lois de composition interne : \(+\), \(\times\), \(\cdot\), \(\circ\), etc.}
 
 \definition{
     Soit $(E, *)$ un ensemble muni d'une loi de composition interne. Alors, on définit :
@@ -71,25 +71,51 @@ $\hfill \Box$
 }
 \noindent{\textbf{Preuve:}\\
 Calculons \( (x * y) * (y^{-1} * x^{-1}) \) :
-\begin{align*}
-    (x * y) * (y^{-1} * x^{-1}) &= x * (y * (y^{-1} * x^{-1})) \quad (\text{par associativité}) \\
-    &= x * ((y * y^{-1}) * x^{-1}) \quad (\text{par associativité}) \\
-    &= x * (e * x^{-1}) \quad (\text{car } y * y^{-1} = e) \\
-    &= x * x^{-1} \quad (\text{car } e \text{ est un élément neutre}) \\
-    &= e \quad (\text{car } x * x^{-1} = e)
-\end{align*}
+
+\[ (x * y) * (y^{-1} * x^{-1}) = x * (y * (y^{-1} * x^{-1})) \quad (\text{par associativité}) \]
+\[ = x * ((y * y^{-1}) * x^{-1}) \quad (\text{par associativité}) \]
+\[ = x * (e * x^{-1}) \quad (\text{car } y * y^{-1} = e) \]
+\[ = x * x^{-1} \quad (\text{car } e \text{ est un élément neutre}) \]
+\[ = e \quad (\text{car } x * x^{-1} = e) \]
+
 De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela est égal à \(e\). Ainsi, \(y^{-1} * x^{-1}\) est le symétrique de \(x * y\), c'est-à-dire \((x * y)^{-1} = y^{-1} * x^{-1}\). $\Box$
 }
 
 
+\theorem{Propriété}{Bijection de multiplication}{false}{
+    Soit \((G, *)\) un groupe. Alors les applications "multiplication à gauche" et "multiplication à droite" sont des bijections de \(G\) dans \(G\).
+}
+\noindent{\textbf{Preuve à gauche :} Montrons que $\ell_x : G \to G$ définie par $\ell_x(y) = x * y$ est injective et surjective.\\
+\begin{itemize}
+    \item \textbf{Injectivité :} Soient $y,z \in G$ tels que $\ell_x(y) = \ell_x(z)$, c'est-à-dire $x * y = x * z$.\\
+    $$ y = x^{-1} * (x * y) = x^{-1} * (x * z) = (x^{-1} * x) * z = e * z = z $$
+    Donc $\ell_x$ est injective.
+
+    \item \textbf{Surjectivité :} Soit $z \in G$. On veut trouver $y \in G$ tel que $\ell_x(y) = z$, c'est-à-dire $x * y = z$.\\
+    En multipliant à droite par l'inverse de $x$, on obtient $y = z * x^{-1}$. Donc $\ell_x$ est surjective.
+\end{itemize}
+
+}
+
 \training{Soit \((E, *)\) un ensemble muni d'une loi de composition interne associative. Supposons qu'il existe un élément neutre \(e\). Soit $x \in E$. Montrer que les assertions suivantes sont équivalentes :
 \begin{enumerate}
     \item $x$ possède un symétrique pour la loi $*$.
-    \item L'application $y \mapsto y * x$ est bijective de $E$ dans $E$.
-    \item L'application $y \mapsto x * y$ est bijective de $E$ dans $E$.
+    \item L'application $r_x : E \to E$ définie par $r_x(y) = y * x$ est bijective (multiplication à droite).
 \end{enumerate}
 }
 \noindent\carreaux{10}
+
+\method{Montrer qu'une application est injective}{
+    Pour montrer qu'une application \(f : A \to B\) est injective, il suffit de montrer que si \(f(x_1) = f(x_2)\), alors \(x_1 = x_2\).\\
+    Autrement dit, on suppose que deux éléments de l'ensemble de départ ont la même image et on montre qu'ils sont égaux.
+}
+
+\method{Montrer qu'une application est surjective}{
+    Pour montrer qu'une application \(f : A \to B\) est surjective, il suffit de montrer que pour tout élément \(y \in B\), il existe un élément \(x \in A\) tel que \(f(x) = y\).\\
+    Autrement dit, on prend un élément quelconque de l'ensemble d'arrivée et on montre qu'il existe un élément dans l'ensemble de départ qui lui correspond.
+}
+
+\remark{Jusqu'ici, on a déjà démontré beaucoup de choses qui ne sont pas uniquement vraies pour les groupes, mais pour tout ensemble muni d'une loi de composition interne associative avec un élément neutre.}
 
 \section{Notions de groupe}
 \subsection{Généralités}
@@ -117,27 +143,10 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 \cexample{
     \begin{itemize}
         \item \((\mathbb{N}, +)\) : l'ensemble des entiers naturels avec l'addition (pas d'élément neutre dans \(\mathbb{N}\)).
+        \item \((\mathbb{Z}, \times)\) : l'ensemble des entiers avec la multiplication (pas de symétrique pour les entiers autres que \(1\) et \(-1\)).
+        \item \(\mathbb{R}\) avec la multiplication (pas de symétrique pour \(0\)).
     \end{itemize}
 }
-
-\theorem{Propriété}{Bijection de multiplication}{false}{
-    Soit \((G, *)\) un groupe. Alors les applications "multiplication à gauche" et "multiplication à droite" sont des bijections de \(G\) dans \(G\).
-}
-\noindent{\textbf{Preuve à gauche :} Montrons que $\ell_x : G \to G$ définie par $\ell_x(y) = x * y$ est injective et surjective.\\
-\begin{itemize}
-    \item \textbf{Injectivité :} Soient $y,z \in G$ tels que $\ell_x(y) = \ell_x(z)$, c'est-à-dire $x * y = x * z$.\\
-    $$ y = x^{-1} * (x * y) = x^{-1} * (x * z) = (x^{-1} * x) * z = e * z = z $$
-    Donc $\ell_x$ est injective.
-
-    \item \textbf{Surjectivité :} Soit $z \in G$. On veut trouver $y \in G$ tel que $\ell_x(y) = z$, c'est-à-dire $x * y = z$.\\
-    En multipliant à droite par l'inverse de $x$, on obtient $y = z * x^{-1}$. Donc $\ell_x$ est surjective.
-\end{itemize}
-
-}
-
-\ndlr{La propriété précédente est dans un exercice de la partie I, à laisser ?}
-
-\attention{La méthode pour démontrer qu'une application est injective ou surjective (et donc bijective) est considérée comme acquise.}
 
 \remark{
     Il nous arrive de vouloir aller plus vite, et dans certains cas de se conformer aux notations usuelles. On introduit donc deux systèmes de notation pour les groupes :
@@ -152,6 +161,8 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
         \item Composée de fonctions : on note le groupe \((G, \circ)\), l'élément neutre est noté \(id_G\) et le symétrique \textit{(appelé l'inverse)} de \(f\) est noté \(f^{-1}\).\\
     \end{itemize}
 }
+
+\newpage
 
 \training{Soient $n,m \in \mathbb{Z}$. Montrer par récurrence que $x^n \cdot x^m = x^{n+m}$ et $x^{nm} = (x^n)^m$. On pourra distinguer les cas $\mathbb{N}$ et $\mathbb{Z}$ lorsque nécessaire.}
 \noindent\carreaux{7}
@@ -169,7 +180,6 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 
 
 \section{Morphismes de groupes}
-\ndlr{On a omis les démonstrations dans cette section, cf. OneNote.}
 
 \definition{
     Soient $(G, *)$ et $(G', *')$ deux groupes.\\
@@ -195,9 +205,8 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
     Soient \functionSets{\varphi}{G \rightarrow G'} et \functionSets{\psi}{G' \rightarrow G''} deux morphismes.\\
     Alors \functionSets{\psi \circ \varphi}{G \rightarrow G''} est un morphisme.
 }
-\noindent{\textbf{Démonstration :}\\
-    Soient $(G, \cdot), (G', *), (G'', \times)$ des groupes.\\
-    $(g\circ f)(x\cdot y)=g(f(x\cdot y))=g(f(x)*f(y))=g(f(x))\times g(f(y))=(g\circ f)(x)\times (g\circ f)(y)$
+\noindent{\textbf{Preuve :} Soient $(G, \cdot), (G', *), (G'', \times)$ deux groupes.\\
+    $(g \circ f)(x \cdot y)=g(f(x\cdot y))=g(f(x)*f(y))=g(f(x))\times g(f(y))=(g\circ f)(x)\times (g\circ f)(y)$
 }
 
 \theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
