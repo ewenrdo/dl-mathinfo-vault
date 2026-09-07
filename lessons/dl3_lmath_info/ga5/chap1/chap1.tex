@@ -49,10 +49,11 @@ Supposons qu'il existe deux éléments neutres \(e\) et \(e'\) dans \(E\). Par d
 En combinant ces deux égalités, on obtient \(e = e'\). $\Box$
 }
 
+
 \theorem{Propriété}{Unicité du symétrique}{false}{
-    Soit $E$ un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$.\\
-    Alors tout élément de \(E\) possède un unique symétrique.
+    Soit $E$ un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$. Si $x \in G$ admette un symétrique pour $*$, alors ce symétrique est unique.
 }
+
 \noindent{\textbf{Preuve:}\\
 Soient $x \in E$ et $x', x'' \in E$ tels que $x'$ et $x''$ soient des symétriques de $x$. On a donc :
 
@@ -164,8 +165,10 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 
 \newpage
 
-\training{Soient $n,m \in \mathbb{Z}$. Montrer par récurrence que $x^n \cdot x^m = x^{n+m}$ et $x^{nm} = (x^n)^m$. On pourra distinguer les cas $\mathbb{N}$ et $\mathbb{Z}$ lorsque nécessaire.}
-\noindent\carreaux{7}
+\training{Soient $n,m \in \mathbb{Z}$. Montrer par récurrence que $x^n \cdot x^m = x^{n+m}$ et $x^{nm} = (x^n)^m$. On pourra distinguer les cas $\mathbb{N}$ et $\mathbb{Z}$ lorsque nécessaire.\\
+\textbf{Indication :} Pour les négatifs, considérer les cas \(n < 0, m \geq 0\), \(n \geq 0, m < 0\) et \(n < 0, m < 0\) séparément, et poser $n' = -n$ et $m' = -m$ pour les cas négatifs.
+}
+\noindent\carreaux{6}
 
 \ndlr{À cet endroit, il y a eu un rappel sur les permutations et la décomposition de permutations en cycles à supports disjoints, ainsi que sur $S_n$ et sa non-commutativité (et son cardinal). Le ré-ajouter ?}
 
@@ -453,6 +456,7 @@ Puisque $e_H = f(e_G) = f(x^n) = f(x)^n$, on a $f(x)^n = e_H$. Par la propositio
 \tableofcontents 
 \section*{Crédits}
 Ce cours provient du polycopié de cours de l'Université Paris Cité de Muriel Livernet enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Merci à Laurent Cai à son aide dans la rédaction des démonstrations.\\\\
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
 

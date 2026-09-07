@@ -2,7 +2,7 @@
 - Gros focus sur les groupes/ensembles quotients (et sous-groupes distingués) : c'est la partie la plus difficile à comprendre et manipuler.
 
 - Ordre différent par rapport à l'année dernière.
-- Mo rphismes avant les sous-groupes. 
+- Morphismes avant les sous-groupes. 
 
 - Contact : son email est sur google, ou via Moodle (c'est plus long). Elle est dispo pour des questions, y compris par mail.
 
