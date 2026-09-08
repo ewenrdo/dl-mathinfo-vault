@@ -116,8 +116,159 @@
     Soit $G = (V, E)$ un graphe. Le \textbf{graphe complémentaire} de $G$, noté $\overline{G}$, est le graphe défini par :
     $$\overline{G} = (V, \binom{V}{2} \setminus E)$$
 }
-
+\newpage
 \section{Stockage des graphes}
+
+\subsection{Vocabulaire et conventions}
+
+\remark{Pour les noms de variables, on pose les conventions suivantes :
+    \begin{itemize}
+        \item $V$ \textit{(vertices)} : l'ensemble des sommets du graphe,
+        \item $E$ \textit{(edges)}: l'ensemble des arêtes du graphe,
+        \item $n = |V|$ : le nombre de sommets du graphe,
+        \item $m = |E|$ : le nombre d'arêtes du graphe.
+    \end{itemize}
+}
+
+\definition{
+    Soient $G$ un graphe, $u$ et $v$ deux sommets de $G$ et $e$ une arête de $G$. On dit que :
+    \begin{itemize}
+        \item $u$ et $v$ sont \textbf{adjacents} (ou voisins) si $\{u, v\} \in E$,
+        \item $e$ est \textbf{incident} à $u$ si $u \in e$,
+        \item les deux éléments de $e$ sont ses \textbf{extrémités},
+        \item le \textbf{voisinage} d'un sommet $u$ est l'ensemble des sommets adjacents à $u$, noté $N_G(u)$,
+        \item les \textbf{voisins} de $u$ sont les éléments de $N_G(u)$.
+    \end{itemize}
+}
+
+\subsection{Matrice d'adjacence}
+
+\definition{
+    Soit $G$ un graphe à $n$ sommets. On numérote les sommets $V(G) = \{v_0, v_1, \ldots, v_{n-1}\}$. La \textbf{matrice d'adjacence} de $G$, notée $A(G)$, est la matrice carrée $n \times n$ définie par :
+    \[
+    A(G)_{ij} = \begin{cases}
+    1 & \text{si } \{v_i, v_j\} \in E(G) \\
+    0 & \text{sinon}
+    \end{cases}
+    \]
+}
+
+\example{Pour le graphe $G$ suivant :
+\begin{center}
+\begin{tikzpicture}
+    \node[draw, circle] (v1) at (0, 0) {$v_0$};
+    \node[draw, circle] (v2) at (2, 0) {$v_1$};
+    \node[draw, circle] (v3) at (1, 1.5) {$v_2$};
+    \draw (v1) -- (v2);
+    \draw (v2) -- (v3);
+    \draw (v3) -- (v1);
+\end{tikzpicture}
+\end{center}
+La matrice d'adjacence est :
+\[
+A(G) = \begin{pmatrix}
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0
+\end{pmatrix}
+\]
+}
+\remark{La matrice d'adjacence est symétrique pour un graphe non orienté, et sa diagonale est nulle.}
+
+\subsection{Liste d'adjacence}
+
+\definition{
+    Soit $G$ un graphe à $n$ sommets. On numérote les sommets $V(G) = \{v_0, v_1, \ldots, v_{n-1}\}$.\\
+    La \textbf{liste d'adjacence} de $G$ est une liste contenant, pour chaque sommet $v_i$, la liste de ses voisins.
+}
+
+\example{
+    Pour le graphe $G$ précédent, la liste d'adjacence $L$ est :
+    \[
+    \begin{aligned}
+        L[0] &= [1, 2] \\
+        L[1] &= [0, 2] \\
+        L[2] &= [0, 1]
+    \end{aligned}
+    \]
+}
+
+\subsection{Matrice d'incidence}
+
+\definition{
+    Soit $G$ un graphe à $n$ sommets et $m$ arêtes. On numérote les sommets $V(G) = \{v_0, v_1, \ldots, v_{n-1}\}$ et les arêtes $E(G) = \{e_0, e_1, \ldots, e_{m-1}\}$. La \textbf{matrice d'incidence} de $G$, notée $B(G)$, est la matrice $n \times m$ définie par :
+    \[
+    B(G)_{ij} = \begin{cases}
+    1 & \text{si } v_i \in e_j \\
+    0 & \text{sinon}
+    \end{cases}
+    \]
+}
+
+\remark{La somme des éléments de chaque colonne de la matrice d'incidence est toujours égale à 2 pour un graphe simple non orienté.}
+
+\example{
+    Pour le graphe $G$ précédent, la matrice d'incidence est :
+    \[
+    B(G) = \begin{pmatrix}
+    1 & 0 & 1 \\
+    1 & 1 & 0 \\
+    0 & 1 & 1
+    \end{pmatrix}
+    \]
+}
+
+\subsection{Algorithme : calcul du degré d'un sommet}
+
+\vocabulary{Le \textbf{degré} d'un sommet $v$, noté $\deg(v)$, est le nombre d'arêtes incidentes à $v$.}
+
+\training{Pour chacune des trois représentations (matrice d'adjacence, liste d'adjacence, matrice d'incidence), proposer un algorithme pour calculer le degré moyen du graphe.}
+\noindent\textbf{1. Matrice d'adjacence :}\\
+\ndlr{cf. cours}
+\noindent\textbf{2. Liste d'adjacence :}\\
+\begin{lstlisting}[language=Python, caption=Calcul du degré moyen à partir de la liste d'adjacence (\textbf{naïf})]
+def degre_moyen (L):
+    if(len(L) == 0):
+        return -1
+
+	sum_degre = 0
+	for i in range len(L):
+		sum_degre += len(L[i])
+	return sum_degre/len(L)
+\end{lstlisting}
+\noindent\textbf{3. Matrice d'incidence :}\\
+\ndlr{cf. cours}
+
+\theorem{Théorème}{Somme des degrés}{false}{
+    Soit $G = (V, E)$ un graphe simple non orienté à $n$ sommets et $m$ arêtes. Alors :
+    $$\sum_{v \in V} \deg(v) = 2m$$
+}
+\noindent{\textbf{Preuve :} Soit $S$ la somme de tous les éléments de la matrice d'incidence de $G$.\\
+La somme de chaque ligne est égale au degré du sommet correspondant, donc $S = \sum_{v \in V} \deg(v)$.\\
+La somme de chaque colonne est égale à 2, car chaque arête a exactement deux extrémités, donc $S = 2m$.\\
+Ainsi, $\sum_{v \in V} \deg(v) = 2m$.}
+
+\theorem{Corollaire}{Parité du degré}{false}{
+    Soit $G = (V, E)$ un graphe. Alors :
+    $$\sum_{v \in V} \deg(v) \in 2\mathbb{N}$$
+    Autrement dit, le nombre de sommets de degré impair dans un graphe est pair.
+}
+
+\example{Sept personnes se serrent la main. Il n'est pas possible que chacun d'entre eux serre lla main exactement trois fois (et même un nombre impair de fois). En effet, si chacun serre la main trois fois, le nombre total de poignées de main serait $7 \times 3 = 21$, ce qui est impair. Or, d'après le corollaire précédent, le nombre total de poignées de main doit être pair.}
+
+\subsection{Analyse de complexité}
+
+\definition{
+    La \textbf{complexité temporelle} (dans le pire ca) d'un algorithme $A$, noté $T(n)$, est le nombre d'opérations élémentaires maximum que puisse effectuer $A$ avant d'ariver à un résultat, étant donné une entrée de taille $N$.
+}
+
+\attention{Pour un graphe, on compte la complexité en fonction de $n$ et $m$ (respectivement le nombre de sommets et d'arêtes), et non pas en fonction de la taille de la représentation du graphe.}
+
+\theorem{Proposition}{}{false}{
+    Soit $G$ un graphe connexe. Alors :
+    $$m \geq n - 1$$
+}
+\noindent{\textbf{Preuve :} Partons du graphe sans arête sur les mêmes $n$ sommets : il possède $n$ composantes connexes. Ajouter une arête réduit ce nombre d’au plus 1. Comme $G$ n’a qu’une seule composante, il faut donc au moins $n - 1$ arêtes.}
 
 \newpage
 \tableofcontents
