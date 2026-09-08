@@ -1,0 +1,129 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info AL5}
+\fancyhead[C]{Graphes et complexité d'algorithmes}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Graphes}
+
+\section{Généralités sur les graphes}
+
+\subsection{Définitions et vocabulaire}
+
+\definition{
+    Un \textbf{graphe} est un couple $G = (V, E)$ où :
+    \begin{itemize}
+        \item $V$ est un ensemble fini : l'ensemble des \textbf{sommets} de $G$. On le note aussi $V(G)$,
+        \item $E$ est un ensemble fini de couples d'éléments de $V$ : l'ensemble des \textbf{arêtes} de $G$. On le note aussi $E(G)$.
+    \end{itemize}
+}
+
+\remark{De manière intuitive, un graphe est une collection de points (les sommets) reliés par des lignes (les arêtes).}
+
+\example{Un réseau social peut être représenté par un graphe où les sommets représentent les utilisateurs et les arêtes représentent les relations d'amitié entre eux.}
+
+\ndlr{mettre une image d'une représentation graphique}
+
+\definition{
+    Une \textbf{chaîne} dans un graphe $G = (V, E)$ est une suite de sommets de la forme $(v_0, e_1, v_1, e_2, v_2, \ldots, e_n, v_n)$ où :
+    \begin{itemize}
+        \item $v_i \in V$,
+        \item $e_i \in E$,
+        \item $e_{i+1} = v_i v_{i+1}$ pour $i = 0, 1, \ldots, n-1$.
+    \end{itemize}
+}
+\vocabulary{Une \textbf{chaîne élémentaire} ou \textbf{chemin} est une chaîne ne passant pas deux fois par un même sommet. Un chemin avec $n$ sommets est noté $P_n$.}
+
+\definition{
+    Un graphe est dit \textbf{connexe} si pour tout couple de sommets $(u, v)$, il existe une chaîne reliant $u$ à $v$.
+}
+
+\definition{
+    Une \textbf{composante connexe} d'un graphe est un sous-graphe connexe maximal (par inclusion).
+}
+
+\method{Réflexes pour étudier un problème de graphe}{
+    \begin{enumerate}
+        \item Trouver le graphe associé au problème.
+        \item Identifier les sommets et les arêtes.
+        \item \textit{dans la plupart des cas :} Vérifier si le graphe est connexe.
+    \end{enumerate}
+}
+
+\definition{
+    Soit $G = (V, E)$ un graphe. On considère l'application :
+    $$\omega : E \longrightarrow \mathbb{R}$$
+    qui associe à chaque arête un nombre réel. On appelle $\omega$ \textbf{la fonction de pondération} du graphe.
+}
+\vocabulary{Un graphe pondéré est un graphe muni d'une fonction de pondération.}
+
+\definition{
+    Un \textbf{graphe orienté} est un couple $(V, A)$ où $V$ est l'ensemble des sommets et $A \subset \{(u,v) \in V^2 \mid u \neq v\}$ est l'ensemble des arcs. Chaque arc est une paire ordonnée de sommets, indiquant une direction.
+}
+\remark{Sauf mention contraire, tous les graphes considérés dans ce cours sont simples (ni orientés, ni pondérés et sans boucles ni arêtes multiples).}
+
+\subsection{Sous-graphes}
+
+\definition{
+    Soient $G = (V, E)$ et $H = (W, F)$ deux graphes. On dit que :
+    \begin{itemize}
+        \item $H$ est un \textbf{sous-graphe} de $G$ si $W \subseteq V$ et $F \subseteq \binom{W}{2} \cap E$, 
+        \item $H$ est un \textbf{sous-graphe induit} (et on le note $G[W]$) de $G$ si $W \subseteq V$ et $F$ contient toutes les arêtes de $E$ dont les deux extrémités sont dans $W$ ($F = \binom{W}{2} \cap E$),
+        \item $H$ est un \textbf{sous-graphe couvrant} de $G$ si $W = V$ et $F \subseteq E$.
+    \end{itemize}
+}
+
+\remark{$\binom{W}{2} = \{ \{u, v\} \mid u, v \in W, u \neq v \}$ est l'ensemble de toutes les paires d'éléments distincts de $W$.\\ La différence avec $V^2$ est que $\binom{W}{2}$ ne contient pas les paires ordonnées et ne contient pas les paires avec des éléments identiques.}
+
+\theorem{Proposition}{Sous-graphe induit couvrant}{false}{
+    Soit $G = (V, E)$. Le sous-graphe couvrant induit par $V$ est $G$ lui-même. En d'autres termes, $G[V] = G$.
+}
+
+\subsection{Graphes complets et complémentaires}
+
+\definition{
+    Un graphe $G = (V, E)$ est dit \textbf{complet} si pour tout couple de sommets distincts $(u, v) \in V^2$, il existe une arête entre $u$ et $v$. On note le graphe complet sur $n$ sommets par $K_n$.
+}
+
+\theorem{Proposition}{Caractérisation du graphe complet}{false}{
+    Il vient : $$K_n = (\{1, 2, \ldots, n\}, \binom{\{1, 2, \ldots, n\}}{2})$$.
+}
+
+\theorem{Proposition}{Nombre d'arêtes dans un graphe complet}{false}{
+    Le nombre d'arêtes dans un graphe complet à $n$ sommets est donné par la formule :
+    $$|E(K_n)| = \binom{n}{2} = \frac{n(n-1)}{2} \in \Theta(n^2)$$
+}
+
+\definition{
+    Soit $G = (V, E)$ un graphe. Le \textbf{graphe complémentaire} de $G$, noté $\overline{G}$, est le graphe défini par :
+    $$\overline{G} = (V, \binom{V}{2} \setminus E)$$
+}
+
+\section{Stockage des graphes}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré des slides de cours de l'Université Paris Cité réalisés par Mónika Csikós et Mikäel Rabie. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
