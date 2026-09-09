@@ -7,7 +7,8 @@
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{ccicons}
-
+\usepackage{caption}
+\usepackage{subcaption}
 
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
@@ -22,7 +23,7 @@
 
 \begin{document}
 
-\docTitle{Cours 1 : Introduction aux graphes}
+\docTitle{Cours 1 : Définitions de base, représentations des graphes, complexité algorithmique}
 
 \section{Généralités sur les graphes}
 
@@ -40,7 +41,22 @@
 
 \example{Un réseau social peut être représenté par un graphe où les sommets représentent les utilisateurs et les arêtes représentent les relations d'amitié entre eux.}
 
-\ndlr{mettre une image d'une représentation graphique}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \node[draw, circle] (v1) at (0, 0) {$v_1$};
+        \node[draw, circle] (v2) at (2, 0) {$v_2$};
+        \node[draw, circle] (v3) at (1, 1.5) {$v_3$};
+        \node[draw, circle] (v4) at (3, 1.5) {$v_4$};
+        \node[draw, circle] (v5) at (4, 0) {$v_5$};
+        \draw (v1) -- (v2);
+        \draw (v2) -- (v3);
+        \draw (v3) -- (v1);
+        \draw (v2) -- (v4);
+        \draw (v4) -- (v5);
+    \end{tikzpicture}
+    \caption{Exemple d'un graphe simple avec cinq sommets et cinq arêtes.}
+\end{figure}
 
 \definition{
     Une \textbf{chaîne} dans un graphe $G = (V, E)$ est une suite de sommets de la forme $(v_0, e_1, v_1, e_2, v_2, \ldots, e_n, v_n)$ où :
@@ -52,8 +68,60 @@
 }
 \vocabulary{Une \textbf{chaîne élémentaire} ou \textbf{chemin} est une chaîne ne passant pas deux fois par un même sommet. Un chemin avec $n$ sommets est noté $P_n$.}
 
+\example{
+    \begin{figure}[htbp]
+    \centering
+    \tikzset{
+        vertex/.style={circle, draw, fill=black, inner sep=0pt, minimum size=3pt}
+    }
+
+    % Premier graphe : chemin P5
+    \begin{subfigure}[t]{0.42\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.75]
+            \node[vertex, label=above:{$v_0$}] (v0) at (0,0) {};
+            \node[vertex, label=above:{$v_1$}] (v1) at (1.4,0) {};
+            \node[vertex, label=above:{$v_2$}] (v2) at (2.8,0) {};
+            \node[vertex, label=above:{$v_3$}] (v3) at (4.2,0) {};
+            \node[vertex, label=above:{$v_4$}] (v4) at (5.6,0) {};
+
+            \draw (v0) -- node[below] {$e_1$} (v1);
+            \draw (v1) -- node[below] {$e_2$} (v2);
+            \draw (v2) -- node[below] {$e_3$} (v3);
+            \draw (v3) -- node[below] {$e_4$} (v4);
+        \end{tikzpicture}
+        \caption*{chemin $P_5$}
+    \end{subfigure}
+    \hspace{0cm}
+    \begin{subfigure}[t]{0.42\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.75]
+            \node[vertex, label=above:{$v_0$}] (v0) at (0,0) {};
+            \node[vertex, label=above:{$v_1$}, label=below:{$v_4$}] (v1v4) at (1.4,0) {};
+            \node[vertex, label=above:{$v_2$}] (v2) at (2.8,0) {};
+            \node[vertex, label=above:{$v_3$}] (v3) at (4.5,0) {};
+
+            \draw (v0) -- node[below] {$e_1$} (v1v4);
+            \draw (v1v4) -- node[below] {$e_2$} (v2);
+            \draw (v2) -- node[below] {$e_3$} (v3);
+            \draw[red] (v1v4) to[bend right=45] node[below] {$e_4$} (v3);
+        \end{tikzpicture}
+        \caption*{chaîne (non élémentaire)}
+    \end{subfigure}
+\end{figure}
+}
+
 \definition{
     Un graphe est dit \textbf{connexe} si pour tout couple de sommets $(u, v)$, il existe une chaîne reliant $u$ à $v$.
+}
+
+\example{
+    \begin{center}
+        \includegraphics[width=0.25\textwidth]{../images/maze_empty.png}
+        \captionof{figure}{Labyrinthe}
+    \end{center}
+    \textbf{Problème :} Peut-on sortir du labyrinthe ?\\
+    \textbf{Solution :} On peut modéliser le labyrinthe par un graphe où chaque sommet représente une case du labyrinthe et chaque arête représente un passage entre deux cases adjacentes. Le labyrinthe est connexe si et seulement si il existe un chemin entre la case de départ et la case de sortie.
 }
 
 \definition{
@@ -92,6 +160,15 @@
 }
 
 \remark{$\binom{W}{2} = \{ \{u, v\} \mid u, v \in W, u \neq v \}$ est l'ensemble de toutes les paires d'éléments distincts de $W$.\\ La différence avec $V^2$ est que $\binom{W}{2}$ ne contient pas les paires ordonnées et ne contient pas les paires avec des éléments identiques.}
+
+\remark{
+    De manière intuitive, un sous-graphe...
+    \begin{itemize}
+        \item est un graphe formé à partir d'un ensemble de sommets et d'arêtes du graphe original.
+        \item induit est un sous-graphe qui contient toutes les arêtes entre les sommets choisis.
+        \item couvrant est un sous-graphe qui contient tous les sommets du graphe original, mais seulement certaines arêtes.
+    \end{itemize}
+}
 
 \theorem{Proposition}{Sous-graphe induit couvrant}{false}{
     Soit $G = (V, E)$. Le sous-graphe couvrant induit par $V$ est $G$ lui-même. En d'autres termes, $G[V] = G$.
