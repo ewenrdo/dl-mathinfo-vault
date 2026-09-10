@@ -116,6 +116,14 @@ Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations
         \item si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, alors $\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}$.
     \end{enumerate}
 }
+\remark{$\Omega$ est l'ensemble de tous les résultats possibles, mais tous ne sont pas forcément mesurables. On se restreint alors à un sous-ensemble $\mathcal{F}$ de $\mathcal{P}(\Omega)$, qui est la tribu des événements mesurables. Ses axiomes peuvent être résumés, en français, comme suit :
+\begin{enumerate}
+    \item on est capable de mesurer qu'il y a eu un résultat,
+    \item si un est capable de mesurer que $A$ a eu lieu, alors on sait dire s'il n'a pas eu lieu ($A^c$ a eu lieu),
+    \item si on est capable de mesurer que $A_1, A_2, \ldots$ ont eu lieu, alors on sait dire si au moins un d'entre eux a eu lieu ($\bigcup_{n \in \mathbb{N}} A_n$ a eu lieu).
+\end{enumerate}
+
+}
 \remark{Le troisième point implique que si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, alors $\bigcap_{n \in \mathbb{N}} A_n \in \mathcal{F}$, car $\bigcap_{n \in \mathbb{N}} A_n = \left( \bigcup_{n \in \mathbb{N}} A_n^c \right)^c$.}
 
 \vocabulary{$(\Omega, \mathcal{F})$ est appelé un \textbf{espace mesurable}. Les éléments de $\mathcal{F}$ sont \textit{parfois} appelés les \textbf{événements}.}
@@ -178,7 +186,7 @@ Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations
     Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Alors :
     \begin{enumerate}
         \item $\mu$ est croissante : si $A,B \in \mathcal{F}$ et $A \subset B$, alors $\mu(A) \leq \mu(B)$,
-        \item $mu(\bigcup_{n \in \mathbb{N}} A_n) \leq \sum_{n \in \mathbb{N}} \mu(A_n)$ pour toute suite $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$,
+        \item $\mu(\bigcup_{n \in \mathbb{N}} A_n) \leq \sum_{n \in \mathbb{N}} \mu(A_n)$ pour toute suite $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$,
         \item $\mu$ est continue par rapport à la suite croissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite croissante, alors $\mu(\bigcup_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$,
         \item $\mu$ est continue par rapport à la suite décroissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite décroissante et $\exists n_0 \in \mathbb{N}, \mu(A_{n_0}) < +\infty$, alors $\mu(\bigcap_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$.
     \end{enumerate}
