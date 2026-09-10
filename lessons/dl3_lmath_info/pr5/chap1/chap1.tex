@@ -23,11 +23,11 @@
 
 \begin{document}
 
-\docTitle{Chapitre 1 : ??}
+\docTitle{Chapitre 1 : Espaces mesurés et espaces probabilisés}
 
 \section{Motivation du cours}
 
-\noindent{L'ensemble \textit{(fini)} de mes notes de cours peut être retrouvé sur \href{https://ewenrdo.fr/ressources?slug=licence-3}{www.ewenrdo.fr}.}\\
+\noindent{L'ensemble \textit{(fini)} de mes notes de cours du semestre peut être retrouvé sur \href{https://ewenrdo.fr/ressources?slug=licence-3}{www.ewenrdo.fr}.} Il est régulièrement mis à jour.\\
 
 \problem{Le but d'une théorie de la mesure, et de l'intégration, est de fournir un cadre mathématique rigoureux pour :
 \begin{itemize}
@@ -40,7 +40,7 @@ Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations
 \example{Quelques exemples de problèmes de mesure :
 \begin{enumerate}
     \item mesure d'une durée \textit{(eg. temps du vainqueur du 100m aux Jeux Olympiques)},\\
-    On note que ce qu'on peuti mesure dépend de la précision de l'instrument de mesure (par exemple un chronomètre au $10^e$ de seconde). En terme mathématique, on dirait que l'événement $\{ \text{ le temps est inférieur à 10 secondes } \}$ est mesurable mais pas l'événement $\{ \text{ le temps est inférieur à 10.025 secondes } \}$.
+    On note que ce qu'on peut mesurer dépend de la précision de l'instrument de mesure (par exemple un chronomètre au $10^e$ de seconde). En terme mathématique, on dirait que l'événement $\{ \text{ le temps est inférieur à 10 secondes } \}$ est mesurable mais pas l'événement $\{ \text{ le temps est inférieur à 10.025 secondes } \}$.
     \item cas de tirages uniformes successifs dans une urne contenant initialement $r$ boules rouges et $b$ boules bleues, on peut vouloir mesurer la probabilité que le $1^{er}$ tirage rouge soit le $k^{e}$,
     \item diviser de manière égale un espace avec des contraintes (un champ avec des aires cultivables et non cultivables). On veut calculer l'aire cultivable de la parcelle.\\[0.5em]
 
@@ -104,10 +104,34 @@ Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations
 \end{enumerate}
 }
 
+\section{Univers, tribus et mesures}
+
+\vocabulary{On appelle \textbf{univers} un ensemble quelconque $\Omega$.}
+
+\definition{
+    On appelle \textbf{tribu} sur $\Omega$ un ensemble $\mathcal{F} \subset \mathcal{P}(\Omega)$ tel que :
+    \begin{enumerate}
+        \item $\Omega \in \mathcal{F}$,
+        \item si $A \in \mathcal{F}$, alors $A^c \in \mathcal{F}$ (où $A^c = \Omega \setminus A$ est le complémentaire de $A$),
+        \item si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, alors $\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}$.
+    \end{enumerate}
+}
+\remark{Le troisième point implique que si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, alors $\bigcap_{n \in \mathbb{N}} A_n \in \mathcal{F}$, car $\bigcap_{n \in \mathbb{N}} A_n = \left( \bigcup_{n \in \mathbb{N}} A_n^c \right)^c$.}
+
+\vocabulary{$(\Omega, \mathcal{F})$ est appelé un \textbf{espace mesurable}. Les éléments de $\mathcal{F}$ sont \textit{parfois} appelés les \textbf{événements}.}
+
+\example{Considérons $\Omega = \{0, 1, 2, 3\}$. On peut avoir les tribus suivantes :
+\begin{itemize}
+    \item $\mathcal{F}_1 = \mathcal{P}(\Omega)$, la tribu de toutes les parties de $\Omega$ (c'est d'ailleurs ce qu'on prend dans le cas discret),
+    \item $\mathcal{F}_2 = \{\emptyset, \Omega \}$ : c'est la tribu la plus petite possible, appelée la tribu grossière,
+    \item $\mathcal{F}_3 = \{\emptyset, \Omega, \{0\}, \{1, 2, 3\}\}$.
+\end{itemize}}
+
 \newpage
 \tableofcontents
 \section*{Crédits}
 Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Mathieu Merle. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Certaines illustrations sont générées par intelligence artificielle, mais représentent ce qui a été dessiné au tableau par l'enseignant (comprenez qu'il est compliqué de dessiner sur ordinateur).\\\\
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
 
