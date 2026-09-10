@@ -154,9 +154,36 @@ Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations
             \item $\Omega_c = \{ f : \{1, \ldots, k\} \to \{1, \ldots, b+r\} : f \text{ est injective} \}$, l'ensemble des fonctions injectives de $\{1, \ldots, k\}$ dans $\{1, \ldots, b+r\}$. On garde la même tribu et probabilité que dans le cas précédent.
             \item \textit{(plus dangereux)} $\Omega_d = \{ f : \{1, \ldots, k\} \to \{0,1\} \mid \sum_{i=1}^k f(i) \leq b, \sum_{i=1}^k (1-f(i)) \leq r \}$. $\mathcal{F} = \mathcal{P}(\Omega_d)$ convient, mais on ne peut pas choisir la probabilité uniforme !
         \end{enumerate}
+        \item Pour $\Omega = \mathbb{R}^2$ (le champ). C'est plus compliqué. $\mathcal{F}$ doit contenir \textit{a minima} tous les rectangles ouverts et les disques ouverts (et leurs réunions dénombrables et passage au complémentaire). On verra que n'importe quel ouvert de $\mathbb{R}^2$ est dans $\mathcal{F}$.\\
+        Attention, $\mathcal{F} \neq \mathcal{P}(\mathbb{R}^2)$. On notera $\mathcal{F} = \mathcal{B}(\mathbb{R}^2)$ la tribu de Borel sur $\mathbb{R}^2$.\\
     \end{itemize}
 }
 
+\theorem{Proposition}{Propriété des tribus}{false}{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Alors :
+    \begin{enumerate}
+        \item pour $A,B \in \mathcal{F}$, $A \cap B \in \mathcal{F}$ et $A \cup B \in \mathcal{F}$,
+        \item pour $A,B \in \mathcal{F}$, $A \subset B \Rightarrow B \setminus A \in \mathcal{F}$,
+        \item pour $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, :
+        \begin{itemize}
+            \item $limsup \, A_n = \bigcap_{n \in \mathbb{N}} \bigcup_{k \geq n} A_k \in \mathcal{F}$,
+            \item $liminf \, A_n = \bigcup_{n \in \mathbb{N}} \bigcap_{k \geq n} A_k \in \mathcal{F}$.
+        \end{itemize}
+        \item pour $\mathcal{F_i}_{i \in I}$ une famille de tribus sur $\Omega$, $\bigcap_{i \in I} \mathcal{F}_i$ est une tribu sur $\Omega$.
+    \end{enumerate}
+}
+\noindent{\textbf{Preuve :} suit directement les définitions.}
+
+\theorem{Proposition}{Propriété des mesures positives}{false}{
+    Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Alors :
+    \begin{enumerate}
+        \item $\mu$ est croissante : si $A,B \in \mathcal{F}$ et $A \subset B$, alors $\mu(A) \leq \mu(B)$,
+        \item $mu(\bigcup_{n \in \mathbb{N}} A_n) \leq \sum_{n \in \mathbb{N}} \mu(A_n)$ pour toute suite $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$,
+        \item $\mu$ est continue par rapport à la suite croissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite croissante, alors $\mu(\bigcup_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$,
+        \item $\mu$ est continue par rapport à la suite décroissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite décroissante et $\mu(A_0) < +\infty$, alors $\mu(\bigcap_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$.
+    \end{enumerate}
+}
+\noindent{\textbf{Preuve :} suit directement les définitions.}
 \newpage
 \tableofcontents
 \section*{Crédits}
