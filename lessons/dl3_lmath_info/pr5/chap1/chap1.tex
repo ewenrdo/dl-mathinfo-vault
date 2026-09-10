@@ -1,0 +1,114 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info PR5}
+\fancyhead[C]{Intégration et probabilités}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : ??}
+
+\section{Motivation du cours}
+
+\noindent{L'ensemble \textit{(fini)} de mes notes de cours peut être retrouvé sur \href{https://ewenrdo.fr/ressources?slug=licence-3}{www.ewenrdo.fr}.}\\
+
+\problem{Le but d'une théorie de la mesure, et de l'intégration, est de fournir un cadre mathématique rigoureux pour :
+\begin{itemize}
+    \item Notions classiques de mesures : longueur, aire, volume \textit{(et autres mesures physiques)} et intégrales associées,
+    \item Description et quantification d'expériences aléatoires \textit{(qui est assez compliqué à définir)}.
+\end{itemize}
+Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations dans l'étude des systèmes dynamiques, de la théorie de l'information, de transport optimal, etc.
+}
+
+\example{Quelques exemples de problèmes de mesure :
+\begin{enumerate}
+    \item mesure d'une durée \textit{(eg. temps du vainqueur du 100m aux Jeux Olympiques)},\\
+    On note que ce qu'on peuti mesure dépend de la précision de l'instrument de mesure (par exemple un chronomètre au $10^e$ de seconde). En terme mathématique, on dirait que l'événement $\{ \text{ le temps est inférieur à 10 secondes } \}$ est mesurable mais pas l'événement $\{ \text{ le temps est inférieur à 10.025 secondes } \}$.
+    \item cas de tirages uniformes successifs dans une urne contenant initialement $r$ boules rouges et $b$ boules bleues, on peut vouloir mesurer la probabilité que le $1^{er}$ tirage rouge soit le $k^{e}$,
+    \item diviser de manière égale un espace avec des contraintes (un champ avec des aires cultivables et non cultivables). On veut calculer l'aire cultivable de la parcelle.\\[0.5em]
+
+    \noindent
+    \begin{minipage}[c]{0.42\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=.65]
+
+            % Style pour le champ (carré) - Fond gris clair comme la région V, contour noir
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (6,0);
+            \coordinate (C) at (6,6);
+            \coordinate (D) at (0,6);
+
+            \filldraw[fill=black!5, draw=black, thick] (A) -- (B) -- (C) -- (D) -- cycle;
+
+            % Dessin de la mare - Fond bleu très clair, contour bleu comme la boule B(x,r)
+            \filldraw[fill=blue!10, draw=blue!80!black, thick] 
+                plot [smooth cycle, tension=0.7] coordinates {
+                    (2.5, 3.8) 
+                    (4.2, 4.1) 
+                    (4.8, 2.8) 
+                    (3.8, 1.8) 
+                    (2.1, 2.2) 
+                    (1.8, 3.2)
+                };
+
+            % Point rouge au centre (comme x sur le schéma)
+            \fill[red] (3.3, 3.0) circle (2pt);
+
+            % Légendes avec les couleurs adaptées
+            \node[color=blue!80!black, font=\sffamily] at (3.3, 2.4) {Mare};
+
+        \end{tikzpicture}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.55\textwidth}
+        \begin{enumerate}
+            \item on tire des points au hasard dans le champ, et on estime la proposition limite $p_\ell$ de points qui tombent dans la mare : $p_\ell = \frac{\text{aire de la mare}}{\text{aire du champ}}$,
+            \item approcher par des figures géométriques simples (rectangles, triangles, etc.) l'aire de la mare et du champ, et calculer le rapport des aires.
+            \begin{itemize}
+                \item Si $A_1, \ldots, A_n$ sont deux-à-deux disjoints et tels que $A_1 \cup \ldots \cup A_n \subset \text{mare}$, alors $\sum_{i=1}^n \text{aire}(A_i) \leq \text{aire(mare)}$.
+                \item Si $B_1, \ldots, B_m$ sont deux-à-deux disjoints et tels que $\text{mare} \subset B_1 \cup \ldots \cup B_m$, alors $\text{aire(mare)} \leq \sum_{j=1}^m \text{aire}(B_j)$.
+            \end{itemize}
+        \end{enumerate}
+    \end{minipage}
+    
+    On dira que la partie cultivable du champs a une aire (est $\lambda_2$-mesurable) si $\exists (A_n)_{n \in \mathbb{N}}$ deux suites de parties du plan\footnote{ou figures géométriques} ayant une aire, et deux-à-deux disjointes telles que $$\text{Champ} = \bigcup_{n\in\mathbb{N}} A_n$$
+    et donc : $$\text{aire}(\text{Champ}) = \sum_{n\in\mathbb{N}} \text{aire}(A_n)$$
+    Mais en pratique, les différentes régions du champ n'ont pas forcément de rendement. On veut donc diviser de manière égale (par rapport au rendement) le champ. On peut définir une fonction $r(x)$ qui associe à chaque point $x$ du champ le rendement de la parcelle contenant $x$ (en particulier, $r(x) = 0$ si $x$ est dans la mare).\\
+    
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{../images/graphe-mare-cours1.jpeg}
+        \captionof{figure}{Graphe de $r$}
+    \end{center}
+
+    Cela nous donne une fonction continue par morceaux $r : \text{Champ} \to \mathbb{R}_+$.
+    On peut considérer:
+    $$y = \int_{\text{champ}} r(x) \, d\lambda_2$$
+    \item Comment décrire $\mathbb{P}(\text{l'ampoule en bas à droite de l'amphithéâtre claque avant la fin du semestre})$ ?
+\end{enumerate}
+}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Mathieu Merle. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
