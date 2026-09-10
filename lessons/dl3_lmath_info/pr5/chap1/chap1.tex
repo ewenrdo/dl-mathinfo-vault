@@ -124,8 +124,38 @@ Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations
 \begin{itemize}
     \item $\mathcal{F}_1 = \mathcal{P}(\Omega)$, la tribu de toutes les parties de $\Omega$ (c'est d'ailleurs ce qu'on prend dans le cas discret),
     \item $\mathcal{F}_2 = \{\emptyset, \Omega \}$ : c'est la tribu la plus petite possible, appelée la tribu grossière,
-    \item $\mathcal{F}_3 = \{\emptyset, \Omega, \{0\}, \{1, 2, 3\}\}$.
+    \item $\mathcal{F}_3 = \{\emptyset, \Omega, \{0\}, \{1, 2, 3\}\}$,
+    \item $\mathcal{F}_4 = \{\emptyset, \Omega, \{0\}, \{1\}, \{1,2,3\}, \{0,2,3\}, \{0,1\}, \{2,3\}\}$.
 \end{itemize}}
+
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu : \mathcal{F} \to \mathbb{R}_+ \cap \{+\infty\}$.
+    On dit que $\mu$ est une \textbf{mesure positive} si :
+    \begin{enumerate}
+        \item $\mu(\emptyset) = 0$,
+        \item $\mu$ est \textbf{$\sigma$-additive} : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ sont deux-à-deux disjoints, alors $\mu\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}} \mu(A_n)$.
+    \end{enumerate}
+}
+\remark{On commence à retrouver des notions liées au cours PR4 : la définition d'une probabilité.}
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$.\\
+    On dit que $\mu$ est une \textbf{probabilité} si $\mu(\Omega) = 1$.
+}
+\vocabulary{On appelle $(\Omega, \mathcal{F}, \mu)$ un \textbf{espace mesuré} si $\mu$ est une mesure positive sur $(\Omega, \mathcal{F})$. On appelle $(\Omega, \mathcal{F}, \mathbb{P})$ un \textbf{espace probabilisé} si $\mathbb{P}$ est une probabilité sur $(\Omega, \mathcal{F})$.}
+
+\cexample{Une mesure $\mu$ qui n'est pas une probabilité est la mesure de Lebesgue sur $\mathbb{R}$ : mesurer toute la droite des réels donne $+\infty$, et pas $1$.}
+\example{
+    \begin{itemize}
+        \item On reprend l'idée de la course. On pose $\Omega = \mathbb{R}_+$. $\mathcal{F} = \{ \bigcup_{k \in I}  [\frac{k}{10}, \frac{k+1}{10}[ \; \mid I \subseteq \mathbb{N} \}$ est une tribu qui convient (la tribu du chronomètre au $10^e$).
+        \item On reprend l'idée du tirage. On peut faire plusieurs choix :
+        \begin{enumerate}
+            \item On pose $\Omega_a = \{ \omega \in \{0,1\}^{b+r} : \sum_{i=1}^{b+r} \omega_i = b \}$. On prend $\mathcal{F}_a = \mathcal{P}(\Omega_a)$, la tribu de toutes les parties de $\Omega_a$. On peut définir une probabilité uniforme sur $\Omega_a$ : $\mathbb{P}_a(A) = \frac{|A|}{|\Omega_a|}$ pour tout $A \subseteq \Omega_a$.
+            \item En imaginant les boules numérotées : $\Omega_b = \sigma_{b+r}$, l'ensemble des permutations de $b+r$ éléments. On garde la même tribu et probabilité que dans le cas précédent.
+            \item $\Omega_c = \{ f : \{1, \ldots, k\} \to \{1, \ldots, b+r\} : f \text{ est injective} \}$, l'ensemble des fonctions injectives de $\{1, \ldots, k\}$ dans $\{1, \ldots, b+r\}$. On garde la même tribu et probabilité que dans le cas précédent.
+            \item \textit{(plus dangereux)} $\Omega_d = \{ f : \{1, \ldots, k\} \to \{0,1\} \mid \sum_{i=1}^k f(i) \leq b, \sum_{i=1}^k (1-f(i)) \leq r \}$. $\mathcal{F} = \mathcal{P}(\Omega_d)$ convient, mais on ne peut pas choisir la probabilité uniforme !
+        \end{enumerate}
+    \end{itemize}
+}
 
 \newpage
 \tableofcontents
