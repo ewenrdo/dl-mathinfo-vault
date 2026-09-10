@@ -41,14 +41,14 @@
     \end{enumerate}
 }
 \vocabulary{On dit que le couple $(E, \| \cdot \|)$ est un \textbf{espace vectoriel normé}. Il est commun d'écrire $e.v.n.$.}
-
+\remark{Le dernier point s'appelle séparation car il permet de séparer les vecteurs, c'est-à-dire de savoir si deux vecteurs sont égaux ou non, en calculant $\|u-v\|$.}
 \definition{
     Soit $(E, \langle \cdot, \cdot \rangle)$ un espace préhilbertien. On dit que la norme $\| \cdot \|$ est \textbf{associée} au produit scalaire $\langle \cdot, \cdot \rangle$ si :
     $$\|x\| = \sqrt{\langle x, x \rangle}$$
     pour tout $x \in E$.
 }
 
-\example{Voici quelques normes qu'il convient de connaître sur $\mathbb{R}^n$ :
+\example{Voici quelques normes qu'il convient de connaître sur $\mathbb{K}^n$ :
 \begin{itemize}
     \item La norme $1$ : $\|x\|_1 = \sum_{i=1}^n |x_i|$,
     \item La norme $2$ (euclidienne) : $\|x\|_2 = \sqrt{\sum_{i=1}^n |x_i|^2} = \sqrt{\langle x, x \rangle}$ (c'est la norme associée au produit scalaire canonique),
@@ -56,19 +56,42 @@
 \end{itemize}
 }
 
-\theorem{Théorème}{Inégalité de Cauchy-Schwarz}{false}{
-    Soit $(E, \langle \cdot, \cdot \rangle)$ un espace préhilbertien. Alors pour tous $x,y \in E$, on a :
-    $$|\langle x, y \rangle| \leq \|x\| \cdot \|y\|.$$
+
+\example{Sur $E = \mathcal{C}([0,1], \mathbb{K})$, les normes suivantes sont à connaître :
+\begin{itemize}
+    \item La norme $1$ : $\|f\|_1 = \int_0^1 |f(t)|dt$,
+    \item La norme $2$ : $\|f\|_2 = \sqrt{\int_0^1 |f(t)|^2 dt}$,
+    \item La norme $\infty$ : $\|f\|_\infty = \max_{t \in [0,1]} |f(t)|$.
+\end{itemize}
+Elles sont bien définies car $f$ est continue \textit{(il faut le dire en examen !)}.
 }
-\ndlr{cf. Laurent pour la preuve}
+
+\newpage
+
+\training{Démontrer que la norme $\| \cdot \|_1$ est une norme sur $\mathcal{C}([0,1], \mathbb{K})$.}
+\noindent\carreaux{5}
+
+\theorem{Théorème}{Inégalité de Cauchy-Schwarz}{false}{
+    Soit $(E, \langle \cdot, \cdot \rangle)$ un espace préhilbertien. Alors pour tous $u,v \in E$, on a :
+    $$|\langle u, v \rangle| \leq \|u\| \cdot \|v\|$$
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\training{À l'aide de l'inégalité de Cauchy-Schwarz, démontrer que la $\| \cdot \|_2$ est une norme sur $\mathbb{K}^n$.}
+\noindent \carreaux{5}
+
+\theorem{Corollaire}{Inégalité triangulaire de la norme}{false}{
+    Soit $(E, \langle \cdot, \cdot \rangle)$ un espace préhilbertien. Alors pour tous $u,v \in E$, on a :
+    $$\|u+v\| \leq \|u\| + \|v\|$$
+}
+\noindent{\textbf{Preuve :} Soient $u,v \in E$. On a $\| u+ v \|^2 = \|u\|^2 + 2 \Re(\langle u, v \rangle) + \|v\|^2 \leq \|u\|^2 + 2 |\langle u, v \rangle| + \|v\|^2 \leq \|u\|^2 + 2 \|u\|\|v\| + \|v\|^2 = (\|u\| + \|v\|)^2$. 
+En prenant la racine carrée, on obtient l'inégalité triangulaire. $\hfill \square$}
 
 
 \theorem{Proposition}{Inégalité triangulaire inverse}{false}{
     Soit $(E, \| \cdot \|)$ un espace vectoriel normé. Alors pour tous $x,y \in E$, on a :
     $$|\|x\| - \|y\|| \leq \|x - y\|.$$
 }
-
-\newpage
 
 \training{Montrer l'inégalité triangulaire inverse. On pourra s'appuyer sur l'inégalité triangulaire.}
 \noindent \carreaux{6}
