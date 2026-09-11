@@ -1,0 +1,197 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°2}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $6,7,8,9$\\
+\hline
+Groupes et actions & $10,11,12,13$\\
+\hline
+Calcul différentiel & $1,2,3,4$\\
+\hline
+Systèmes d'exploitation & $14$\\
+\hline
+Algorithmique & $\emptyset$\\
+\hline
+Programmation fonctionnelle & $5$\\
+\hline
+Anglais & $\emptyset$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+\exercise{1}{Boules dans $\mathbb{R}^2$}{
+Pour $x = (x_1, x_2) \in \mathbb{R}^2$, on définit
+\[
+\|x\|_1 := |x_1| + |x_2|, \qquad \|x\|_2 := \sqrt{x_1^2 + x_2^2}, \qquad \|x\|_\infty := \max \{|x_1|, |x_2|\}.
+\]
+\begin{enumerate}
+    \item Montrer que $\|\cdot\|_1$, $\|\cdot\|_2$, $\|\cdot\|_\infty$ sont des normes sur $\mathbb{R}^2$
+    \item Dessiner la boule fermée de centre 0 et rayon 1 pour chacune de ces normes.
+\end{enumerate}
+}
+
+\exercise{2}{Une norme plus exotique sur $\mathbb{R}^2$}{
+On considère l'application $N : \mathbb{R}^2 \to \mathbb{R}$ donnée par $N(x,y) = |2x - y| + |3x + 2y|$.
+\begin{enumerate}
+    \item Montrer que $N$ est une norme sur $\mathbb{R}^2$.
+    \item Montrer les inégalités suivantes pour tout $u \in \mathbb{R}^2$, où $\|\cdot\|_1$ désigne la norme définie dans l'exercice 3.
+    \[
+    N(u) \le 5 \|u\|_1
+    \]
+    \[
+    \|u\|_1 \le \frac{5}{7} N(u)
+    \]
+    En déduire que les normes $N$ et $\|\cdot\|_1$ sont équivalentes.
+\end{enumerate}
+}
+
+\switchcolumn
+
+\exercise{3}{Normes sur l'espace des fonctions continues}{
+On considère $E = \mathcal{C}([0,1], \mathbb{R})$ l'espace vectoriel des fonctions continues sur $[0,1]$ à valeurs réelles. Pour tout $u \in E$ on pose :
+\[
+\|u\|_\infty = \sup_{t \in [0,1]} |u(t)| \qquad \text{et} \qquad \|u\|_1 = \int_0^1 |u(t)| \, dt.
+\]
+\begin{enumerate}
+    \item Montrer que $\|\cdot\|_\infty$ et $\|\cdot\|_1$ sont des normes sur $E$.
+    \item À quoi correspondent les boules fermées de centre $f \in E$ et de rayon $\varepsilon$ pour chacune de ces normes ?
+    \item Montrer que
+    \[
+    \forall u \in E, \qquad \|u\|_1 \le \|u\|_\infty.
+    \]
+    \item Les normes $\|\cdot\|_1$ et $\|\cdot\|_\infty$ sont-elles équivalentes sur $E$ ?\\
+    \textit{Indication : On pourra utiliser la suite de fonctions $u_n(t) = t^n$.}
+    \item Soit
+    \[
+    F = \{u \in E \mid \exists (a,b,c) \in \mathbb{R}^3, \forall t \in [0,1], u(t) = a + bt + ct^2\}.
+    \]
+    l'ensemble des fonctions polynomiales de degré au plus 2.\\
+    Montrer qu'il existe une constante $C > 0$ telle que pour tout $u \in F$,
+    \[
+    \|u\|_\infty \le C \|u\|_1
+    \]
+    \item Montrer que l'espace $(E, \|\cdot\|_\infty)$ est complet.
+\end{enumerate}
+}
+
+\exercise{4}{Topologie des boules}{
+Soit $(E, \|\cdot\|)$ un espace vectoriel normé. Pour tout $x \in E$ et $r > 0$, montrer que
+\[
+B(x,r) = \operatorname{int}(B_f(x,r)),
+\]
+c'est-à-dire que la boule ouverte est l'intérieur de la boule fermée (de même centre et rayon).
+}
+
+\exercise{5}{Programmation fonctionnelle}{Faire le TP2.}
+\switchcolumn
+\newpage
+
+\exercise{6}{Préparation du CM}{Passer le QCM "Rappels de cours 1" sur Moodle.}
+\exercise{7}{}{
+Monsieur Dupont tente d'ouvrir une porte à l'aide d'un trousseau de $n$ clés, dont l'ordre est supposé uniforme parmi tous les ordres possibles. Il essaye les clés successivement.
+\begin{enumerate}
+    \item Si une seule clé ouvre la porte, quelle est la probabilité qu'il parvienne à ouvrir la porte au 1er essai ? au $k$ième essai ($k = 1, 2, \dots, n$) ?
+    \item Même question si deux clés du trousseau ouvrent la porte.
+\end{enumerate}
+}
+
+\exercise{8}{Vrai/Faux}{
+\begin{enumerate}
+    \item Il est plus "raisonnable" d'espérer retrouver une personne en composant au hasard les 8 chiffres finaux de son numéro de téléphone fixe (vous savez seulement que le numéro commence par 01) que d'espérer trouver la combinaison exacte au prochain 'euromillions' (5 boules tirées parmi des boules rouges comportant les numéros 1 à 50 et 2 supplémentaires parmi des boules dorées portant les numéros 1 à 12).
+    \item On suppose que dans une commune, 40\% des foyers sont sans enfant, 25\% comptent un enfant, 25\% deux enfants, 10\% trois enfants. Pour une campagne commerciale, le supermarché local tire uniformément au hasard un enfant sur les listes scolaires du CP pour lui offrir toutes ses fournitures de rentrée. La probabilité qu'il s'agisse d'un enfant unique est supérieure à 25\%.
+    \item La probabilité qu'au moins deux personnes dans un groupe de td de 30 étudiants tous nés en 2002 partagent leur date d'anniversaire est inférieure à 1/2. On me supposera les dates d'anniversaire indépendantes et uniformes.
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+\exercise{9}{Urne de Polya}{
+Une urne contient initialement une boule rouge et 1 boule noire. A l'étape 1 une boule est choisie uniformément au hasard dans l'urne, on note sa couleur, et on la remet avec 1 boule supplémentaire de la même couleur. On procède ensuite à l'étape 2 : à nouveau, une boule est choisie uniformément au hasard dans l'urne, on note sa couleur, et on la remet avec 1 boule supplémentaire de la même couleur. Et ainsi de suite.
+
+Plus formellement pour tout $m \in \mathbb{N}^*$, les étapes $1, 2, \dots, m$ ayant été effectuées, alors à l'étape $m+1$, une boule est choisie uniformément au hasard dans l'urne, on note sa couleur, et on la remet avec 1 boule supplémentaire de la même couleur.
+
+\begin{enumerate}
+    \item A l'issue de l'étape $m \in \mathbb{N}^*$, combien l'urne contient-elle de boules ?
+    \item Soit $N_m$ le nombre total de boules rouges qui ont été tirées lors des étapes $1, 2, \dots, m$.
+    \begin{enumerate}
+        \item Soit $k \in \{0, \dots, m\}$, montrer que $\mathbb{P}(N_{m+1} = k+1 \mid N_m = k) = \frac{k+1}{m+2}$
+        \item Exprimer $\mathbb{P}(N_{m+1} = k \mid N_m = k)$
+        \item Montrer par récurrence que
+        \[
+        \mathbb{P}(N_m = k) = \frac{1}{m+1}, \quad \forall k \in \{0, \dots, m\}
+        \]
+    \end{enumerate}
+\end{enumerate}
+}
+
+\exercise{10}{Groupe symétrique}{
+Soit $S_3$ l'ensemble des applications bijectives de $\{1, 2, 3\}$ dans lui même.
+\begin{enumerate}
+    \item Justifier que la composition des applications munit $S_3$ d'une structure de groupe.
+    \item Déterminer les éléments de $S_3$ et écrire la table de multiplication du groupe. Ce groupe est-il abélien ?
+    \item Déterminer tous les sous-groupes de $S_3$.
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+
+\exercise{11}{Sous-groupes}{
+Dans quel(s) cas $H$ est-il un sous-groupe du groupe $(G, *)$ ?
+\begin{enumerate}
+    \item $G = \mathbb{Q}$ et, étant donné $a \in \mathbb{Z} \setminus \{0\}$, $H = \{x \in \mathbb{Q} \mid (\exists n \in \mathbb{N}) \, a^n x \in \mathbb{Z}\}$.
+    \item $G = \mathbb{Z}$ et $H = 4\mathbb{Z} \cap 6\mathbb{Z} \cap 8\mathbb{Z}$ (resp. $7\mathbb{Z} \cup 49\mathbb{Z}$, $2\mathbb{Z} \cup 3\mathbb{Z}$, $\bigcup_{n=1}^{100} 2^n\mathbb{Z}$).
+\end{enumerate}
+}
+
+\exercise{12}{Groupe des racines de l'unité}{
+On note $\mathbb{U}$ l'ensemble $\{z \in \mathbb{C} \mid |z| = 1\}$. Pour tout $n \in \mathbb{N}$, on note $\mathbb{U}_n$ l'ensemble $\{z \in \mathbb{C} \mid z^n = 1\}$.
+\begin{enumerate}
+    \item Démontrer que $\mathbb{U}$ est un sous-groupe de $(\mathbb{C}^*, \times)$.
+    \item Soit $n \in \mathbb{N} \setminus \{0\}$. Décrire $\mathbb{U}_n$ à l'aide de l'écriture exponentielle des nombres complexes et démontrer que c'est un sous-groupe de $(\mathbb{C}^*, \times)$.
+    \item Décrire $\mathbb{U}_6$. Quels sont ses sous-groupes ?
+    \item Soit $n \in \mathbb{N} \setminus \{0\}$. Démontrer que $\mathbb{U}_n$ est monogène.
+    \item Démontrer que $\bigcup_{n \in \mathbb{N} \setminus \{0\}} \mathbb{U}_n$ est un sous-groupe de $(\mathbb{C}^*, \times)$.
+    \item Démontrer que $\bigcup_{n \in \mathbb{N} \setminus \{0\}} \mathbb{U}_n$ est infini et que tous ses sous-groupes monogènes sont finis.
+\end{enumerate}
+}
+
+\exercise{13}{Centre d'un groupe}{
+Soit $(G, *)$ un groupe. Le centre de $G$, noté $Z(G)$, est l'ensemble $\{z \in G \mid (\forall g \in G) \, z * g = g * z\}$.
+\begin{enumerate}
+    \item Démontrer que $Z(G)$ est un sous-groupe abélien de $G$.
+    \item Déterminer $Z(\operatorname{GL}_2(\mathbb{R}))$.
+\end{enumerate}
+}
+
+\exercise{14}{Révisions de C}{
+    Faire une note de cours et s'entraîner à la manipulation bit-à-bit et sur les tampons circulaires (en faire une note de cours).
+}
+
+\end{paracol}
+
+\end{document}
