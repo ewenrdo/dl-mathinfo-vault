@@ -49,10 +49,11 @@ Supposons qu'il existe deux éléments neutres \(e\) et \(e'\) dans \(E\). Par d
 En combinant ces deux égalités, on obtient \(e = e'\). $\Box$
 }
 
+
 \theorem{Propriété}{Unicité du symétrique}{false}{
-    Soit $E$ un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$.\\
-    Alors tout élément de \(E\) possède un unique symétrique.
+    Soit \((E, *)\) un ensemble muni d'une loi de composition interne associative. Supposons que $*$ admet un élément neutre $e$. Si $x \in E$ admet un symétrique pour $*$, alors ce symétrique est unique.
 }
+
 \noindent{\textbf{Preuve:}\\
 Soient $x \in E$ et $x', x'' \in E$ tels que $x'$ et $x''$ soient des symétriques de $x$. On a donc :
 
@@ -164,8 +165,10 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 
 \newpage
 
-\training{Soient $n,m \in \mathbb{Z}$. Montrer par récurrence que $x^n \cdot x^m = x^{n+m}$ et $x^{nm} = (x^n)^m$. On pourra distinguer les cas $\mathbb{N}$ et $\mathbb{Z}$ lorsque nécessaire.}
-\noindent\carreaux{7}
+\training{Soient $n,m \in \mathbb{Z}$. Montrer par récurrence que $x^n \cdot x^m = x^{n+m}$ et $x^{nm} = (x^n)^m$. On pourra distinguer les cas $\mathbb{N}$ et $\mathbb{Z}$ lorsque nécessaire.\\
+\textbf{Indication :} Pour les négatifs, considérer les cas \(n < 0, m \geq 0\), \(n \geq 0, m < 0\) et \(n < 0, m < 0\) séparément, et poser $n' = -n$ et $m' = -m$ pour les cas négatifs.
+}
+\noindent\carreaux{6}
 
 \ndlr{À cet endroit, il y a eu un rappel sur les permutations et la décomposition de permutations en cycles à supports disjoints, ainsi que sur $S_n$ et sa non-commutativité (et son cardinal). Le ré-ajouter ?}
 
@@ -176,8 +179,7 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 
 \example{$|S_n| = n!$ pour tout $n \in \mathbb{N}^*$.}
 
-\ndlr{Ici, elle a défini la notation $\mathbb{Z}/n\mathbb{Z}$ et rappelé la définition d'une congruence. C'est dans le chapitre 2, le mettre ici ?}
-
+\remark{Il a été vu en cours une introduction à $\mathbb{Z}/n\mathbb{Z}$, se référer au chapitre 3 pour plus de détails\footnote{\href{https://www.ewenrdo.fr/ressources?slug=ga5-chapitre-3-exemples-de-groupes}{Chapitre 3 : Exemples de groupes importants}.}.}
 
 \section{Morphismes de groupes}
 
@@ -210,6 +212,7 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 }
 
 \theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
+    Soit $\varphi$ un morphisme de groupes.\\ 
     $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
 }
 
@@ -251,12 +254,14 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 \remark{Le noyau d'un morphisme de groupes mesure à quel point le morphisme n'est pas injectif, tandis que l'image mesure à quel point le morphisme n'est pas surjectif.}
 
 \theorem{Proposition}{Injectivité}{false}{
-    $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
+    Soit $\varphi$ un morphisme de groupes. $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
 }
+\ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Proposition}{Surjectivité}{false}{
-    $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
+    Soit $\varphi$ un morphisme de groupes. $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
 }
+\ndlr{cf. Laurent pour la preuve.}
 
 \example{
     \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
@@ -267,8 +272,8 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 }
 
 
-\subsection{Sous-groupes}
-\subsubsection{Définitions et propriétés}
+\section{Sous-groupes}
+\subsection{Définitions et propriétés}
 Dans cette section, on utilisera le système de notation multiplicatif, mais il ne faut pas oublier qu'il ne s'agit que de notations !
 \definition{Soit \((G, \cdot)\) un groupe. Un \textbf{sous-groupe} de \(G\) est un sous-ensemble \(H \subseteq G\) tel que \((H, \cdot)\) est lui-même un groupe.}
 \vocabulary{On note, \textit{de manière non-standard}, \(H \leq G\) pour dire que \(H\) est un sous-groupe de \(G\).}
@@ -311,7 +316,7 @@ Dans cette section, on utilisera le système de notation multiplicatif, mais il 
     Soit $(G, \cdot)$ un groupe fini et $(H, \cdot)$ un sous-groupe de $G$. Alors l'ordre de $H$ divise l'ordre de $G$.
 }
 
-\subsubsection{Sous-groupe engendré}
+\subsection{Sous-groupe engendré}
 
 \theorem{Proposition}{Intersection de sous-groupes}{false}{
     Soit \((H_i)_{i \in I}\) une famille de sous-groupes de \((G, \cdot)\). Alors l'intersection \(H = \bigcap_{i \in I} H_i\) est un sous-groupe de \(G\).
@@ -365,7 +370,7 @@ On a posé pour \(n\in \mathbb{Z}, g^n = \underbrace{g \cdot g \cdot ... \cdot g
 On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'ensemble des itérés} de \(g\), noté aussi \(\langle g \rangle\).
 }
 
-\theorem{Proposition}{Sous-groupe engendré}{false}{
+\theorem{Proposition}{Sous-groupe engendré par un élément}{false}{
     Soit $(G, \cdot)$ un groupe et $g \in G$.\\
     Alors \[\langle g \rangle = g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\] est le sous-groupe de G engendré par \(g\).
 }
@@ -393,8 +398,7 @@ On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'e
 
 \vocabulary{Si le sous-groupe engendré par \(X\) est \(G\), on dit que \(X\) est un système de générateurs de \(G\).}
 
-%% 10 septembre 2025
-\subsubsection{Sous-groupes de \((\mathbb{Z}, +)\)}
+\subsection{Sous-groupes de \((\mathbb{Z}, +)\)}
 
 \reminder{On rappelle la notation suivante : \(k\mathbb{Z}\) = \(\langle k\rangle\) pour la loi +.}
 
@@ -454,6 +458,7 @@ Puisque $e_H = f(e_G) = f(x^n) = f(x)^n$, on a $f(x)^n = e_H$. Par la propositio
 \tableofcontents 
 \section*{Crédits}
 Ce cours provient du polycopié de cours de l'Université Paris Cité de Muriel Livernet enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Merci à Laurent Cai à son aide dans la rédaction des démonstrations, ainsi qu'à Alex Theophilos pour ses retours sur des erreurs du cours.\\\\
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
 

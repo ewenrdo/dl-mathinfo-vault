@@ -1,0 +1,203 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info PR5}
+\fancyhead[C]{Intégration et probabilités}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1 : Espaces mesurés et espaces probabilisés}
+
+\section{Motivation du cours}
+
+\noindent{L'ensemble \textit{(fini)} de mes notes de cours du semestre peut être retrouvé sur \href{https://ewenrdo.fr/ressources?slug=licence-3}{www.ewenrdo.fr}.} Il est régulièrement mis à jour.\\
+
+\problem{Le but d'une théorie de la mesure, et de l'intégration, est de fournir un cadre mathématique rigoureux pour :
+\begin{itemize}
+    \item Notions classiques de mesures : longueur, aire, volume \textit{(et autres mesures physiques)} et intégrales associées,
+    \item Description et quantification d'expériences aléatoires \textit{(qui est assez compliqué à définir)}.
+\end{itemize}
+Cette liste n'est bien-sûr par exhaustive, on note par exemple des utilisations dans l'étude des systèmes dynamiques, de la théorie de l'information, de transport optimal, etc.
+}
+
+\example{Quelques exemples de problèmes de mesure :
+\begin{enumerate}
+    \item mesure d'une durée \textit{(eg. temps du vainqueur du 100m aux Jeux Olympiques)},\\
+    On note que ce qu'on peut mesurer dépend de la précision de l'instrument de mesure (par exemple un chronomètre au $10^e$ de seconde). En terme mathématique, on dirait que l'événement $\{ \text{ le temps est inférieur à 10s } \}$ est mesurable mais pas l'événement $\{ \text{ le temps est inférieur à 10.025s } \}$.
+    \item cas de tirages uniformes successifs dans une urne contenant initialement $r$ boules rouges et $b$ boules bleues, on peut vouloir mesurer la probabilité que le $1^{er}$ tirage rouge soit le $k^{e}$,
+    \item diviser de manière égale un espace avec des contraintes (un champ avec des aires cultivables et non cultivables). On veut calculer l'aire cultivable de la parcelle.\\[0.5em]
+
+    \noindent
+    \begin{minipage}[c]{0.42\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=.65]
+
+            % Style pour le champ (carré) - Fond gris clair comme la région V, contour noir
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (6,0);
+            \coordinate (C) at (6,6);
+            \coordinate (D) at (0,6);
+
+            \filldraw[fill=black!5, draw=black, thick] (A) -- (B) -- (C) -- (D) -- cycle;
+
+            % Dessin de la mare - Fond bleu très clair, contour bleu comme la boule B(x,r)
+            \filldraw[fill=blue!10, draw=blue!80!black, thick] 
+                plot [smooth cycle, tension=0.7] coordinates {
+                    (2.5, 3.8) 
+                    (4.2, 4.1) 
+                    (4.8, 2.8) 
+                    (3.8, 1.8) 
+                    (2.1, 2.2) 
+                    (1.8, 3.2)
+                };
+
+            % Point rouge au centre (comme x sur le schéma)
+            \fill[red] (3.3, 3.0) circle (2pt);
+
+            % Légendes avec les couleurs adaptées
+            \node[color=blue!80!black, font=\sffamily] at (3.3, 2.4) {Mare};
+
+        \end{tikzpicture}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.55\textwidth}
+        \begin{enumerate}
+            \item on tire des points au hasard dans le champ, et on estime la proposition limite $p_\ell$ de points qui tombent dans la mare : $p_\ell = \frac{\text{aire de la mare}}{\text{aire du champ}}$,
+            \item approcher par des figures géométriques simples (rectangles, triangles, etc.) l'aire de la mare et du champ, et calculer le rapport des aires.
+            \begin{itemize}
+                \item Si $A_1, \ldots, A_n$ sont deux-à-deux disjoints et tels que $A_1 \cup \ldots \cup A_n \subset \text{mare}$, alors $\sum_{i=1}^n \text{aire}(A_i) \leq \text{aire(mare)}$.
+                \item Si $B_1, \ldots, B_m$ sont deux-à-deux disjoints et tels que $\text{mare} \subset B_1 \cup \ldots \cup B_m$, alors $\text{aire(mare)} \leq \sum_{j=1}^m \text{aire}(B_j)$.
+            \end{itemize}
+        \end{enumerate}
+    \end{minipage}
+    
+    On dira que la partie cultivable du champs a une aire (est $\lambda_2$-mesurable) si $\exists (A_n)_{n \in \mathbb{N}}$ deux suites de parties du plan\footnote{ou figures géométriques} ayant une aire, et deux-à-deux disjointes telles que $$\text{Champ} = \bigcup_{n\in\mathbb{N}} A_n$$
+    et donc : $$\text{aire}(\text{Champ}) = \sum_{n\in\mathbb{N}} \text{aire}(A_n)$$
+    Mais en pratique, les différentes régions du champ n'ont pas forcément de rendement. On veut donc diviser de manière égale (par rapport au rendement) le champ. On peut définir une fonction $r(x)$ qui associe à chaque point $x$ du champ le rendement de la parcelle contenant $x$ (en particulier, $r(x) = 0$ si $x$ est dans la mare).\\
+    
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{../images/graphe-mare-cours1.jpeg}
+        \captionof{figure}{Graphe de $r$}
+    \end{center}
+
+    Cela nous donne une fonction continue par morceaux $r : \text{Champ} \to \mathbb{R}_+$.
+    On peut considérer:
+    $$y = \int_{\text{champ}} r(x) \, d\lambda_2$$
+    \item Comment décrire $\mathbb{P}(\text{l'ampoule en bas à droite de l'amphithéâtre claque avant la fin du semestre})$ ?
+\end{enumerate}
+}
+
+\section{Univers, tribus et mesures}
+
+\vocabulary{On appelle \textbf{univers} un ensemble quelconque $\Omega$.}
+
+\definition{
+    On appelle \textbf{tribu} sur $\Omega$ un ensemble $\mathcal{F} \subset \mathcal{P}(\Omega)$ tel que :
+    \begin{enumerate}
+        \item $\Omega \in \mathcal{F}$,
+        \item si $A \in \mathcal{F}$, alors $A^c \in \mathcal{F}$ (où $A^c = \Omega \setminus A$ est le complémentaire de $A$),
+        \item si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, alors $\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}$.
+    \end{enumerate}
+}
+\remark{$\Omega$ est l'ensemble de tous les résultats possibles, mais tous ne sont pas forcément mesurables. On se restreint alors à un sous-ensemble $\mathcal{F}$ de $\mathcal{P}(\Omega)$, qui est la tribu des événements mesurables. Ses axiomes peuvent être résumés, en français, comme suit :
+\begin{enumerate}
+    \item on est capable de mesurer qu'il y a eu un résultat,
+    \item si un est capable de mesurer que $A$ a eu lieu, alors on sait dire s'il n'a pas eu lieu ($A^c$ a eu lieu),
+    \item si on est capable de mesurer que $A_1, A_2, \ldots$ ont eu lieu, alors on sait dire si au moins un d'entre eux a eu lieu ($\bigcup_{n \in \mathbb{N}} A_n$ a eu lieu).
+\end{enumerate}
+
+}
+\remark{Le troisième point implique que si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, alors $\bigcap_{n \in \mathbb{N}} A_n \in \mathcal{F}$, car $\bigcap_{n \in \mathbb{N}} A_n = \left( \bigcup_{n \in \mathbb{N}} A_n^c \right)^c$.}
+
+\vocabulary{$(\Omega, \mathcal{F})$ est appelé un \textbf{espace mesurable}. Les éléments de $\mathcal{F}$ sont \textit{parfois} appelés les \textbf{événements}.}
+
+\example{Considérons $\Omega = \{0, 1, 2, 3\}$. On peut avoir les tribus suivantes :
+\begin{itemize}
+    \item $\mathcal{F}_1 = \mathcal{P}(\Omega)$, la tribu de toutes les parties de $\Omega$ (c'est d'ailleurs ce qu'on prend dans le cas discret),
+    \item $\mathcal{F}_2 = \{\emptyset, \Omega \}$ : c'est la tribu la plus petite possible, appelée la tribu grossière,
+    \item $\mathcal{F}_3 = \{\emptyset, \Omega, \{0\}, \{1, 2, 3\}\}$,
+    \item $\mathcal{F}_4 = \{\emptyset, \Omega, \{0\}, \{1\}, \{1,2,3\}, \{0,2,3\}, \{0,1\}, \{2,3\}\}$.
+\end{itemize}}
+
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu : \mathcal{F} \to \mathbb{R}_+ \cup \{+\infty\}$.
+    On dit que $\mu$ est une \textbf{mesure positive} si :
+    \begin{enumerate}
+        \item $\mu(\emptyset) = 0$,
+        \item $\mu$ est \textbf{$\sigma$-additive} : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ sont deux-à-deux disjoints, alors $\mu\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}} \mu(A_n)$.
+    \end{enumerate}
+}
+\remark{On commence à retrouver des notions liées au cours PR4 : la définition d'une probabilité.}
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$.\\
+    On dit que $\mu$ est une \textbf{probabilité} si $\mu(\Omega) = 1$.
+}
+\vocabulary{On appelle $(\Omega, \mathcal{F}, \mu)$ un \textbf{espace mesuré} si $\mu$ est une mesure positive sur $(\Omega, \mathcal{F})$. On appelle $(\Omega, \mathcal{F}, \mathbb{P})$ un \textbf{espace probabilisé} si $\mathbb{P}$ est une probabilité sur $(\Omega, \mathcal{F})$.}
+
+\cexample{Une mesure $\mu$ qui n'est pas une probabilité est la mesure de Lebesgue sur $\mathbb{R}$ : mesurer toute la droite des réels donne $+\infty$, et pas $1$.}
+\example{
+    \begin{itemize}
+        \item On reprend l'idée de la course. On pose $\Omega = \mathbb{R}_+$. $\mathcal{F} = \{ \bigcup_{k \in I}  [\frac{k}{10}, \frac{k+1}{10}[ \; \mid I \subseteq \mathbb{N} \}$ est une tribu qui convient (la tribu du chronomètre au $10^e$).
+        \item On reprend l'idée du tirage. On peut faire plusieurs choix :
+        \begin{enumerate}
+            \item On pose $\Omega_a = \{ \omega \in \{0,1\}^{b+r} : \sum_{i=1}^{b+r} \omega_i = b \}$. On prend $\mathcal{F}_a = \mathcal{P}(\Omega_a)$, la tribu de toutes les parties de $\Omega_a$. On peut définir une probabilité uniforme sur $\Omega_a$ : $\mathbb{P}_a(A) = \frac{|A|}{|\Omega_a|}$ pour tout $A \subseteq \Omega_a$.
+            \item En imaginant les boules numérotées : $\Omega_b = \sigma_{b+r}$, l'ensemble des permutations de $b+r$ éléments. On garde la même tribu et probabilité que dans le cas précédent.
+            \item $\Omega_c = \{ f : \{1, \ldots, k\} \to \{1, \ldots, b+r\} : f \text{ est injective} \}$, l'ensemble des fonctions injectives de $\{1, \ldots, k\}$ dans $\{1, \ldots, b+r\}$. On garde la même tribu et probabilité que dans le cas précédent.
+            \item \textit{(plus dangereux)} $\Omega_d = \{ f : \{1, \ldots, k\} \to \{0,1\} \mid \sum_{i=1}^k f(i) \leq b, \sum_{i=1}^k (1-f(i)) \leq r \}$. $\mathcal{F} = \mathcal{P}(\Omega_d)$ convient, mais on ne peut pas choisir la probabilité uniforme !
+        \end{enumerate}
+        \item Pour $\Omega = \mathbb{R}^2$ (le champ). C'est plus compliqué. $\mathcal{F}$ doit contenir \textit{a minima} tous les rectangles ouverts et les disques ouverts (et leurs réunions dénombrables et passage au complémentaire). On verra que n'importe quel ouvert de $\mathbb{R}^2$ est dans $\mathcal{F}$.\\
+        Attention, $\mathcal{F} \neq \mathcal{P}(\mathbb{R}^2)$. On notera $\mathcal{F} = \mathcal{B}(\mathbb{R}^2)$ la tribu de Borel sur $\mathbb{R}^2$.\\
+    \end{itemize}
+}
+
+\theorem{Proposition}{Propriété des tribus}{false}{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Alors :
+    \begin{enumerate}
+        \item pour $A,B \in \mathcal{F}$, $A \cap B \in \mathcal{F}$ et $A \cup B \in \mathcal{F}$,
+        \item pour $A,B \in \mathcal{F}$, $A \subset B \Rightarrow B \setminus A \in \mathcal{F}$,
+        \item pour $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$, :
+        \begin{itemize}
+            \item $limsup \, A_n = \bigcap_{n \in \mathbb{N}} \bigcup_{k \geq n} A_k \in \mathcal{F}$,
+            \item $liminf \, A_n = \bigcup_{n \in \mathbb{N}} \bigcap_{k \geq n} A_k \in \mathcal{F}$.
+        \end{itemize}
+        \item pour $\mathcal{F_i}_{i \in I}$ une famille de tribus sur $\Omega$, $\bigcap_{i \in I} \mathcal{F}_i$ est une tribu sur $\Omega$.
+    \end{enumerate}
+}
+\noindent{\textbf{Preuve :} suit directement les définitions.}
+
+\theorem{Proposition}{Propriété des mesures positives}{false}{
+    Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Alors :
+    \begin{enumerate}
+        \item $\mu$ est croissante : si $A,B \in \mathcal{F}$ et $A \subset B$, alors $\mu(A) \leq \mu(B)$,
+        \item $\mu(\bigcup_{n \in \mathbb{N}} A_n) \leq \sum_{n \in \mathbb{N}} \mu(A_n)$ pour toute suite $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$,
+        \item $\mu$ est continue par rapport à la suite croissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite croissante, alors $\mu(\bigcup_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$,
+        \item $\mu$ est continue par rapport à la suite décroissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite décroissante et $\exists n_0 \in \mathbb{N}, \mu(A_{n_0}) < +\infty$, alors $\mu(\bigcap_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$.
+    \end{enumerate}
+}
+\noindent{\textbf{Preuve :} suit directement les définitions.}
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Mathieu Merle. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Certaines illustrations sont générées par intelligence artificielle, mais représentent ce qui a été dessiné au tableau par l'enseignant (comprenez qu'il est compliqué de dessiner sur ordinateur).\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}

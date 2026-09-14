@@ -26,12 +26,24 @@
 
 \section{Groupe $\mathbb{Z}/n\mathbb{Z}$}
 
-\reminder{On a déjà vu que tout groupe monogène est isomorphe à :
-\begin{itemize}
-    \item  $\mathbb{Z}$ s'il est infini,
-    \item $\mathbb{Z}/n\mathbb{Z}$ s'il est cyclique d'ordre $n$.
-\end{itemize}
-De plus, $\mathbb{Z}$ est engendré par $\{-1, 1\}$. Les sous-groupes de $\mathbb{Z}/n\mathbb{Z}$ sont de la forme $\frac{d\mathbb{Z}}{n\mathbb{Z}}$ où $d$ divise $n$.}
+\definition{
+    Soit $n \in \mathbb{N}^*$. On définit la relation d'équivalence $\sim$ sur $\mathbb{Z}$ (appelée \textbf{congruence modulo $n$}) par :
+    \[
+    x \sim y \iff n \text{ divise } x - y \iff x \equiv y \pmod n
+    \]
+     On note $\mathbb{Z}/n\mathbb{Z}$ l'ensemble des classes d'équivalence de $\mathbb{Z}$ pour cette relation. La classe de $x$ est la partie de $\mathbb{Z}$ formée des entiers de la forme $x + kn$ avec $k \in \mathbb{Z}$, notée $\bar{x}$ ou $x \bmod n$.\\
+    Chaque classe admet un unique représentant dans $\{0, 1, \dots, n-1\}$, qui est le reste de la division euclidienne par $n$. Ainsi, $\mathbb{Z}/n\mathbb{Z} = \{\bar{0}, \bar{1}, \dots, \overline{n-1}\}$.\\\\
+    Muni de l'addition définie par $\bar{x} + \bar{y} = \overline{x+y}$, $(\mathbb{Z}/n\mathbb{Z}, +)$ est un groupe commutatif fini d'ordre $n$, appelé \textbf{groupe des entiers modulo $n$}.
+}
+
+\remark{
+    $(\mathbb{Z}/n\mathbb{Z}, +)$ est le quotient du groupe $(\mathbb{Z}, +)$ par son sous-groupe $n\mathbb{Z}$. On a déjà vu au chapitre précédent que tout groupe monogène est isomorphe à :
+    \begin{itemize}
+        \item $\mathbb{Z}$ s'il est infini,
+        \item $\mathbb{Z}/n\mathbb{Z}$ s'il est cyclique d'ordre $n$.
+    \end{itemize}
+    De plus, $\mathbb{Z}$ est engendré par $\{-1, 1\}$, et pour $n \geq 1$, les sous-groupes de $\mathbb{Z}/n\mathbb{Z}$ sont exactement les sous-groupes de la forme $d\mathbb{Z}/n\mathbb{Z}$ où $d$ est un diviseur de $n$.
+}
 
 \theorem{Lemme chinois}{}{false}{
     Soient $n,m \geq 2$ deux entiers premiers entre-eux.\\
@@ -217,6 +229,7 @@ Soit $H$ un sous-groupe distingué propre. On a $H \cap \mathcal{A}_n$ est disti
 \tableofcontents 
 \section*{Crédits}
 Ce cours provient du polycopié de cours de l'Université Paris Cité de Muriel Livernet enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Merci à Laurent Cai à son aide dans la rédaction des démonstrations, ainsi qu'à Alex Theophilos pour l'ajout d'une définition claire de $\mathbb{Z}/n\mathbb{Z}$.\\\\
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
 
