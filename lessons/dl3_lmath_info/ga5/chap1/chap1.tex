@@ -256,7 +256,16 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 \theorem{Proposition}{Injectivité}{false}{
     Soit $\varphi$ un morphisme de groupes. $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
 }
-\ndlr{cf. Laurent pour la preuve.}
+
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item "$\Rightarrow$" : On a $f(e_G)=e_H$, donc par injectivité de $f$, $Ker(f)=f^{-1}({e_H})={e_G}$ ;
+        \item "$\Leftarrow$" : Soient $x, y\in G$ tels que $f(x)=f(y)$.\\
+            Alors, $f(x) *_H f(y)^{-1}=e_H \Leftrightarrow f(x) *_H f(y^{-1})=e_H \Leftrightarrow f(x *_G y^{-1})=e_H$\\
+            $x *_G y^{-1}\in Ker(f)={e_G}$, donc $x *_G y^{-1}=e_G$, donc $x=y$.\\
+            Donc, $f$ est injectif.
+    \end{itemize}
+}
 
 \theorem{Proposition}{Surjectivité}{false}{
     Soit $\varphi$ un morphisme de groupes. $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
