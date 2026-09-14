@@ -212,6 +212,7 @@ De même, on peut calculer \( (y^{-1} * x^{-1}) * (x * y) \) et montrer que cela
 }
 
 \theorem{Proposition}{Isomorphisme et morphisme inverse}{false}{
+    Soit $\varphi$ un morphisme de groupes.\\ 
     $\varphi$ bijective $\implies$ \functionSets{\varphi^{-1}}{G' \rightarrow G} est un morphisme de groupes.
 }
 
@@ -253,12 +254,14 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 \remark{Le noyau d'un morphisme de groupes mesure à quel point le morphisme n'est pas injectif, tandis que l'image mesure à quel point le morphisme n'est pas surjectif.}
 
 \theorem{Proposition}{Injectivité}{false}{
-    $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
+    Soit $\varphi$ un morphisme de groupes. $\varphi$ injective $\Leftrightarrow Ker(\varphi) = \{ e \}$.
 }
+\ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Proposition}{Surjectivité}{false}{
-    $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
+    Soit $\varphi$ un morphisme de groupes. $\varphi$ surjective $\Leftrightarrow Im(\varphi) = G'$.
 }
+\ndlr{cf. Laurent pour la preuve.}
 
 \example{
     \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
