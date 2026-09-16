@@ -9,6 +9,8 @@
 \usepackage{ccicons}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
@@ -28,6 +30,8 @@
 \section{Généralités sur les graphes}
 
 \subsection{Définitions et vocabulaire}
+
+\subsection{Graphes}
 
 \definition{
     Un \textbf{graphe} est un couple $G = (V, E)$ où :
@@ -58,6 +62,9 @@
     \caption{Exemple d'un graphe simple avec cinq sommets et cinq arêtes.}
 \end{figure}
 
+\subsection{Chaînes et chemins}
+\subsubsection{Généralités}
+
 \definition{
     Une \textbf{chaîne} dans un graphe $G = (V, E)$ est une suite de sommets de la forme $(v_0, e_1, v_1, e_2, v_2, \ldots, e_n, v_n)$ où :
     \begin{itemize}
@@ -67,6 +74,9 @@
     \end{itemize}
 }
 \vocabulary{Une \textbf{chaîne élémentaire} ou \textbf{chemin} est une chaîne ne passant pas deux fois par un même sommet. Un chemin avec $n$ sommets est noté $P_n$.}
+
+\vocabulary{Une \textbf{chaîne simple} est une chaîne où les arêtes sont deux à deux distinctes \textit{(i.e. qu'on ne repasse pas plusieurs fois par la même arête)}.}
+
 
 \example{
     \begin{figure}[htbp]
@@ -111,6 +121,131 @@
 \end{figure}
 }
 
+\vocabulary{Une \textbf{chaîne fermée} est une chaîne dont le premier et le dernier sommet sont identiques.}
+
+\definition{On appelle \textbf{cycle} une chaîne fermée élémentaire de longueur $k \geq 1$. Un cycle avec $k$ sommets est noté $C_k$.}
+\example{Exemples de cycles $C_4$, $C_5$, $C_6$ et $C_7$ :
+\begin{figure}[htbp]
+    \centering
+    \tikzset{
+        vertex/.style={circle, draw, fill=black, inner sep=0pt, minimum size=3pt}
+    }
+
+    % C4 - Carré (rayon réduis à 1.0)
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \node[vertex, label=above:{$v_0$}] (v0) at (90:1) {};
+            \node[vertex, label=left:{$v_1$}] (v1) at (180:1) {};
+            \node[vertex, label=below:{$v_2$}] (v2) at (270:1) {};
+            \node[vertex, label=right:{$v_3$}] (v3) at (0:1) {};
+
+            \draw (v0) -- (v1) -- (v2) -- (v3) -- (v0);
+        \end{tikzpicture}
+        \caption*{Cycle $C_4$}
+    \end{subfigure}
+    \hspace{0.2cm}
+    % C5 - Pentagone (rayon réduis à 1.0)
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \node[vertex, label=above:{$v_0$}] (v0) at (90:1) {};
+            \node[vertex, label=left:{$v_1$}] (v1) at (162:1) {};
+            \node[vertex, label=below left:{$v_2$}] (v2) at (234:1) {};
+            \node[vertex, label=below right:{$v_3$}] (v3) at (306:1) {};
+            \node[vertex, label=right:{$v_4$}] (v4) at (18:1) {};
+
+            \draw (v0) -- (v1) -- (v2) -- (v3) -- (v4) -- (v0);
+        \end{tikzpicture}
+        \caption*{Cycle $C_5$}
+    \end{subfigure}
+
+    \vspace{0.6cm}
+
+    % C6 - Hexagone
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \node[vertex, label=above:{$v_0$}] (v0) at (90:1) {};
+            \node[vertex, label=above left:{$v_1$}] (v1) at (150:1) {};
+            \node[vertex, label=below left:{$v_2$}] (v2) at (210:1) {};
+            \node[vertex, label=below:{$v_3$}] (v3) at (270:1) {};
+            \node[vertex, label=below right:{$v_4$}] (v4) at (330:1) {};
+            \node[vertex, label=above right:{$v_5$}] (v5) at (30:1) {};
+
+            \draw (v0) -- (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v0);
+        \end{tikzpicture}
+        \caption*{Cycle $C_6$}
+    \end{subfigure}
+    \hspace{0.2cm}
+    % C7 - Heptagone
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \node[vertex, label=above:{$v_0$}] (v0) at (90:1) {};
+            \node[vertex, label=left:{$v_1$}] (v1) at (141.43:1) {};
+            \node[vertex, label=below left:{$v_2$}] (v2) at (192.86:1) {};
+            \node[vertex, label=below:{$v_3$}] (v3) at (244.29:1) {};
+            \node[vertex, label=below right:{$v_4$}] (v4) at (295.71:1) {};
+            \node[vertex, label=right:{$v_5$}] (v5) at (347.14:1) {};
+            \node[vertex, label=above right:{$v_6$}] (v6) at (38.57:1) {};
+
+            \draw (v0) -- (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v6) -- (v0);
+        \end{tikzpicture}
+        \caption*{Cycle $C_7$}
+    \end{subfigure}
+\end{figure}
+}
+
+\vocabulary{Un graphe sans cycle est dit \textbf{acyclique} ou appelé une \textbf{forêt}.}
+
+\subsubsection{Sous-chaînes}
+\definition{Une \textbf{sous-chaîne} d'une chaîne $(v_0, e_1, v_1, e_2, v_2, \ldots, e_n, v_n)$ est une chaîne de la forme $(v_i, e_{i+1}, v_{i+1}, \ldots, e_j, v_j)$ pour $0 \leq i < j \leq n$.}
+
+\example{
+    \begin{figure}[htbp]
+    \centering
+    \tikzset{
+        vertex/.style={circle, draw, fill=black, inner sep=0pt, minimum size=3pt},
+        subpath/.style={line width=1.5pt, red}
+    }
+
+    % Graphe principal avec la sous-chaîne mise en valeur
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \node[vertex, label=below:{$v_0$}] (v0) at (0,0) {};
+            \node[vertex, label=below:{$v_1$}] (v1) at (1.5,0) {};
+            \node[vertex, label=below:{$v_2$}] (v2) at (3.0,0) {};
+            \node[vertex, label=below:{$v_3$}] (v3) at (4.5,0) {};
+            \node[vertex, label=below:{$v_4$}] (v4) at (6.0,0) {};
+
+            \draw (v0) -- node[above] {$e_1$} (v1);
+            \draw[subpath] (v1) -- node[above] {$e_2$} (v2);
+            \draw[subpath] (v2) -- node[above] {$e_3$} (v3);
+            \draw (v3) -- node[above] {$e_4$} (v4);
+        \end{tikzpicture}
+        \caption*{Chaîne initiale $(v_0, e_1, v_1, e_2, v_2, e_3, v_3, e_4, v_4)$}
+    \end{subfigure}
+    \hspace{0.5cm}
+    % Sous-chaîne extraite
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \node[vertex, label=below:{$v_1$}] (v1) at (1.5,0) {};
+            \node[vertex, label=below:{$v_2$}] (v2) at (3.0,0) {};
+            \node[vertex, label=below:{$v_3$}] (v3) at (4.5,0) {};
+
+            \draw[subpath] (v1) -- node[above] {$e_2$} (v2);
+            \draw[subpath] (v2) -- node[above] {$e_3$} (v3);
+        \end{tikzpicture}
+        \caption*{Sous-chaîne pour $i=1$ et $j=3$ : $(v_1, e_2, v_2, e_3, v_3)$}
+    \end{subfigure}
+    \end{figure}
+}
+
+
+\subsection{Connexité et composantes connexes}
 \definition{
     Un graphe est dit \textbf{connexe} si pour tout couple de sommets $(u, v)$, il existe une chaîne reliant $u$ à $v$.
 }
@@ -346,6 +481,112 @@ Ainsi, $\sum_{v \in V} \deg(v) = 2m$.}
     $$m \geq n - 1$$
 }
 \noindent{\textbf{Preuve :} Partons du graphe sans arête sur les mêmes $n$ sommets : il possède $n$ composantes connexes. Ajouter une arête réduit ce nombre d’au plus 1. Comme $G$ n’a qu’une seule composante, il faut donc au moins $n - 1$ arêtes.}
+
+\section{Arbres}
+
+\subsection{Définition et caractérisation}
+\definition{Un \textbf{arbre} est un graphe connexe et acyclique.}
+
+\vocabulary{Un sommet de degré 1 dans un arbre est appelé une \textbf{feuille}.}
+
+\theorem{Théorème}{Caractérisation des arbres}{false}{
+    Soit $G = (V, E)$ un graphe simple non orienté à $n$ sommets. Alors les propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $G$ est un arbre,
+        \item Pour toute paire de sommets $u,v \in V(G)$, il existe un unique chemin reliant $u$ à $v$,
+        \item $G$ est connexe, et toute suppression d'une arête de $G$ le rend non connexe,
+        \item $G$ est acyclique, et tout ajout d'une arête à $G$ le rend cyclique,
+        \item $G$ est acyclique et $|E(G)| = |V(G)| - 1$ ($m = n - 1$),
+        \item $G$ est connexe et $m = n - 1$ ($n-1$ arêtes pour $n$ sommets).
+    \end{enumerate}
+}
+
+
+\subsection{Algorithme : faire pousser un arbre}
+
+\theorem{Lemme}{}{false}{Tout arbre avec au moins deux sommets contient au moins deux feuilles.}
+\theorem{Lemme}{}{false}{\begin{center}$G$ est un arbre avec une feuille $v$ $\Leftrightarrow \; G - v$ est un arbre. \end{center}}
+
+\subsection{Arbre couvrant}
+
+\definition{Soit $G=(V, E)$ un graphe.Un \textbf{arbre couvrant} de $G$ est un sous-graphe couvrant de $G$ (ie. contenant tous les sommets de $G$) qui est un arbre.}
+\example{
+    \begin{figure}[htbp]
+    \centering
+    \tikzset{
+        vertex/.style={circle, draw, fill=black, inner sep=0pt, minimum size=3pt},
+        tree edge/.style={line width=1.5pt, red}
+    }
+
+    % 1. Graphe de départ G
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+            % Sommets
+            \node[vertex, label=above:{$v_1$}] (v1) at (0,2) {};
+            \node[vertex, label=above:{$v_2$}] (v2) at (2.5,2) {};
+            \node[vertex, label=below:{$v_3$}] (v3) at (0,0) {};
+            \node[vertex, label=below:{$v_4$}] (v4) at (2.5,0) {};
+            \node[vertex, label=right:{$v_5$}] (v5) at (4,1) {};
+
+            % Arêtes
+            \draw (v1) -- (v2);
+            \draw (v1) -- (v3);
+            \draw (v2) -- (v3);
+            \draw (v2) -- (v4);
+            \draw (v3) -- (v4);
+            \draw (v2) -- (v5);
+            \draw (v4) -- (v5);
+        \end{tikzpicture}
+        \caption*{Graphe initial $G=(V,E)$}
+    \end{subfigure}
+    \hspace{0.2cm}
+    % 2. Arbre couvrant T de G
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+            % Sommets (tous conservés)
+            \node[vertex, label=above:{$v_1$}] (v1) at (0,2) {};
+            \node[vertex, label=above:{$v_2$}] (v2) at (2.5,2) {};
+            \node[vertex, label=below:{$v_3$}] (v3) at (0,0) {};
+            \node[vertex, label=below:{$v_4$}] (v4) at (2.5,0) {};
+            \node[vertex, label=right:{$v_5$}] (v5) at (4,1) {};
+
+            % Arêtes non retenues (pointillées/grises)
+            \draw[gray!40, dashed] (v2) -- (v3);
+            \draw[gray!40, dashed] (v3) -- (v4);
+            \draw[gray!40, dashed] (v4) -- (v5);
+
+            % Arêtes de l'arbre couvrant (rouges et épaissies)
+            \draw[tree edge] (v1) -- (v2);
+            \draw[tree edge] (v1) -- (v3);
+            \draw[tree edge] (v2) -- (v4);
+            \draw[tree edge] (v2) -- (v5);
+        \end{tikzpicture}
+        \caption*{Un arbre couvrant $T=(V, E')$}
+    \end{subfigure}
+    \end{figure}
+}
+
+\theorem{Proposition}{Lien entre connexité et arbre couvrant}{false}{
+    Un graphe $G$ est connexe si et seulement s'il possède un arbre couvrant.
+}
+\noindent{\textbf{Preuve :} Soit $G$ un graphe connexe.
+\begin{itemize}
+    \item Retirons de $G$, tant que possible, une arête qui ne rend pas le graphe non connexe.
+    \item On obtient $T$ un sous-graphe connexe de $G$ qui est acyclique (sinon on pourrait retirer une arête du cycle sans rendre le graphe non connexe).
+    \item Donc $T$ est un arbre couvrant de $G$.
+    \item La réciproque est immédiate : si $G$ possède un arbre couvrant, alors $G$ est connexe.
+\end{itemize}}
+
+\section{Algorithme : décider si un graphe est connexe}
+\subsection{Marquage des sommets}
+
+cf. page 80 (17) du cours 2
+
+\subsection{Algorithme BFS : parcours en largeur}
+
+cf. page 83 (20) du cours 2
 
 \newpage
 \tableofcontents
