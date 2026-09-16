@@ -66,6 +66,7 @@
 Elles sont bien définies car $f$ est continue \textit{(il faut le dire en examen !)}.
 }
 
+
 \newpage
 
 \training{Démontrer que la norme $\| \cdot \|_1$ est une norme sur $\mathcal{C}([0,1], \mathbb{K})$.}
@@ -75,9 +76,10 @@ Elles sont bien définies car $f$ est continue \textit{(il faut le dire en exame
     Soit $(E, \langle \cdot, \cdot \rangle)$ un espace préhilbertien. Alors pour tous $u,v \in E$, on a :
     $$|\langle u, v \rangle| \leq \|u\| \cdot \|v\|$$
 }
-\noindent{\textbf{Démonstration :}
+
+\noindent{\textbf{Preuve :}
     \begin{itemize}
-        \item   Si $\langle u, v\rangle=0$, alors on a $|\langle u, v\rangle\le \|u\|\cdot\|v\|$ de façon triviale.
+        \item   Si $\langle u, v\rangle=0$, alors on a $|\langle u, v| \rangle\le \|u\|\cdot\|v\|$ de façon triviale.
         \item   Supposons que $\langle u, v\rangle=0$ et donc en particulier $u$ et $v$ sont non nuls.\\
                 Pour tout $z\in \mathbb{C}$, on a $0\le\|u+zv\|^2=\|u\|^2+2\Re(z\langle u, v\rangle)+|z|^2\|v\|^2$.\\
                 Pour tout $t\in \mathbb{R}$, posons $z_t=t\cdot\frac{|\langle u, v\rangle|}{\langle u, v\rangle}$. Ainsi, on a $0\le \|u+z_tv\|^2\le \|u\|^2+2t|\langle u, v\rangle|+t^2\|v\|^2$.\\
@@ -86,7 +88,6 @@ Elles sont bien définies car $f$ est continue \textit{(il faut le dire en exame
                 Réciproquement, si $u=\lambda v$, alors $|\langle u, v\rangle|=\|u\|\cdot\|v\|$.
     \end{itemize}
 }
-
 \training{À l'aide de l'inégalité de Cauchy-Schwarz, démontrer que la $\| \cdot \|_2$ est une norme sur $\mathbb{K}^n$.}
 \noindent \carreaux{5}
 
