@@ -312,9 +312,24 @@ Dans cette section, on utilisera le système de notation multiplicatif, mais il 
 }
 
 
-\theorem{Théorème}{Ordre d'un sous-groupe}{true}{
+\theorem{Théorème de Lagrange}{Ordre d'un sous-groupe}{true}{
     Soit $(G, \cdot)$ un groupe fini et $(H, \cdot)$ un sous-groupe de $G$. Alors l'ordre de $H$ divise l'ordre de $G$.
 }
+
+\example{
+    Soient \(G = S_3\) le groupe des permutations de l'ensemble \(\{1, 2, 3\}\) et \(H = \{ e, (1\ 2) \}\) un sous-groupe de \(G\). On a \(|G| = 6\) et \(|H| = 2\). Selon le théorème de Lagrange, l'ordre de \(H\) divise l'ordre de \(G\), ce qui est bien le cas puisque \(2\) divise \(6\).
+}
+
+
+\theorem{Proposition}{Image et image réciproque par un morphisme}{false}{
+    Soit \functionSets{\varphi}{G \rightarrow G'} un morphisme de groupes. Alors :
+    \begin{itemize}
+        \item Si $H$ est un sous-groupe de $G$, alors $\varphi(H)$ est un sous-groupe de $G'$.
+        \item Si $H'$ est un sous-groupe de $G'$, alors $\varphi^{-1}(H')$ est un sous-groupe de $G$.
+    \end{itemize}
+}
+
+\ndlr{cf. Laurent pour la preuve.}
 
 \subsection{Sous-groupe engendré}
 
@@ -406,11 +421,44 @@ On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'e
     Soit \((H, +)\) un sous-groupe de \((\mathbb{Z}, +)\).\\
     Alors \(\exists !n \in \mathbb{N}\) tel que \(H = n\mathbb{Z}\).
 }
+\noindent{\textbf{Preuve:}
+
+\begin{itemize}
+    \item Soit $n \in \mathbb{N}$ et vérifions que $n\mathbb{Z} < \mathbb{Z}$.
+    \begin{align*}
+        (Q_1) : & \quad 0 = n \cdot 0 \in n\mathbb{Z}. \\
+        (Q_2) : & \quad \text{Si } x, y \in n\mathbb{Z}, \text{ on peut écrire } x = nk \text{ et } y = n\ell \text{ avec } k, \ell \in \mathbb{Z}, \\
+                & \quad \text{et alors } -x + y = -nk + n\ell = n(\ell - k) \in n\mathbb{Z}.
+    \end{align*}
+    Donc, $n\mathbb{Z} < \mathbb{Z}$.
+
+    \item Soit maintenant $G$ un sous-groupe de $(\mathbb{Z}, +)$.
+    \begin{itemize}
+        \item $1^\text{e}$ cas : $G = \{0\} = 0 \times \mathbb{Z}$ ;
+        \item $2^\text{e}$ cas : $G \neq \{0\}$. Alors $G$ contient un élément non nul $x_0$. Quitte à remplacer $x_0$ par $-x_0$, on peut supposer que $x_0 > 0$.
+        On peut alors choisir $y_0$ le plus petit élément de $G \cap \mathbb{N}^*$. Montrons que $G = y_0\mathbb{Z}$.
+        
+        Comme $y_0 \in G$, pour $k \in \mathbb{N}$, $k y_0 = \underbrace{y_0 + \dots + y_0}_{\times k} \in G$, d'où :
+        
+        $$(-k)y_0 = -(ky_0) \in G,\text{ donc } G \supseteq y_0\mathbb{Z}$$.
+        
+        Soit maintenant $x \in G$, on écrit la division euclidienne de $x$ par $y_0$ :
+        \[
+        x = q y_0 + r \quad \text{avec } 0 \le r \le y_0 - 1.
+        \]
+        Alors, $r = \underset{\in G}{\underbrace{x}} - q \underset{\in G}{\underbrace{y_0}} \in G$ car $G$ est un sous-groupe de $\mathbb{Z}$.
+        
+        On a donc trouvé $r \in G \cap \{0, \dots, y_0 - 1\}$.
+        
+        Par minimalité de $y_0$, $r = 0$ et donc $x = q y_0 \in y_0\mathbb{Z}$.
+        
+        Ainsi $G = y_0\mathbb{Z}$.
+    \end{itemize}
+\end{itemize}
+}
 
 \remark{Cela veut dire que tout sous-groupe de \((\mathbb{Z}, +)\) est de la forme \(n\mathbb{Z}\) pour un certain \(n \in \mathbb{N}\).}
 
-\training{Démontrer le théorème précédent.}
-\noindent\carreaux{19}
 
 
 \section{Ordre d'un élément}
