@@ -1,0 +1,145 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°2}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $\sout{6,7,8,9}$\\
+\hline
+Groupes et actions & $\sout{10,11,12,13}$\\
+\hline
+Calcul différentiel & $\sout{1,2,3,4}$\\
+\hline
+Systèmes d'exploitation & $14$\\
+\hline
+Algorithmique & $\emptyset$\\
+\hline
+Programmation fonctionnelle & $5$\\
+\hline
+Anglais & $\emptyset$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+\exercise{1}{le professeur McBrain}{
+Le professeur McBrain et son épouse Muriel organisent une soirée à laquelle ils invitent 4 autres couples mariés. À l'arrivée, certaines paires de personnes se serrent la main ; aucun couple marié ne se serre la main. À la fin de la soirée, le professeur demande à chacune des neuf autres personnes combien de personnes elle a saluées en leur serrant la main. Il obtient neuf réponses toutes différentes. Combien de personnes Muriel a-t-elle saluées en leur serrant la main ?
+\begin{enumerate}
+    \item Modéliser ce problème à l'aide d'un graphe et déterminer la réponse.
+    \item Généraliser le résultat au cas où la soirée réunit $n$ couples, dont le prof McBrain et Muriel.
+\end{enumerate}
+}
+\exercise{2}{L'intérieur, l'adhérence et la frontière}{
+Dans l'espace normé $(\mathbb{R}, |\cdot|)$, déterminer l'intérieur, l'adhérence et la frontière de chacun des sous-ensembles suivants :
+\[
+A = \{2,4,5\} \quad B = [1,3] \cup \{\pi\}, \quad C = [-1,1[\,\cup\,\{3\},
+\]
+\[
+D = \mathbb{Z}, \qquad E = \bigcup_{n \in \mathbb{N}^*} \left\{\frac{1}{n}\right\}, \qquad F = \mathbb{Q}.
+\]
+}
+\switchcolumn
+\exercise{3}{Une journée en enfer}{
+\begin{itemize}
+    \item John et Zeus ont, en leur possession, deux bidons non gradués, un pouvant contenir 5 litres, et l'autre 3 litres.
+    \item Il y a une fontaine à proximité.
+    \item Ils ont recours à 3 opérations :
+    \begin{enumerate}
+        \item verser le contenu d'un bidon dans l'autre, en ne s'arrêtant que lorsque le bidon source soit vide ou que le bidon de destination soit plein ;
+        \item remplir un bidon avec de l'eau de la fontaine, jusqu'à ce que ce bidon soit plein ;
+        \item vider un bidon.
+    \end{enumerate}
+    \item Comment faire pour avoir 4 litres dans le bidon de 5 litres, sans, bien sûr, avoir recours à un instrument de mesure ?
+\end{itemize}
+}
+
+\exercise{4}{}{
+On munit $\mathbb{R}^2$ de la norme $\|\cdot\|_\infty$ définie par
+\[ \forall (x,y) \in \mathbb{R}^2, \quad \|(x,y)\|_\infty = \max(|x|, |y|). \]
+\begin{enumerate}
+    \item Soit $\varphi : \mathbb{R}^2 \to \mathbb{R}^2$ l'application linéaire définie par
+    \[ \forall (x,y) \in \mathbb{R}^2, \quad \varphi(x,y) = (2x+y, x+y). \]
+    Montrer que $\varphi$ est bijective et déterminer $\varphi^{-1}$.
+    \item Déterminer la norme subordonnée de $\varphi$, puis celle de $\varphi^{-1}$, relativement à la norme $\|\cdot\|_\infty$.
+    \item Montrer que l'application $\|\cdot\| : \mathbb{R}^2 \to \mathbb{R}$ donnée par
+    \[ \forall (x,y) \in \mathbb{R}^2, \quad \|(x,y)\| = \max(|2x+y|, |x+y|). \]
+    est une norme sur $\mathbb{R}^2$.
+    \item Déterminer deux constantes $c_1, c_2 > 0$ telles que
+    \[ \forall (x,y) \in \mathbb{R}^2, \quad c_1 \|(x,y)\|_\infty \le \|(x,y)\| \le c_2 \|(x,y)\|_\infty \]
+\end{enumerate}
+}
+
+\switchcolumn
+\newpage
+\exercise{5}{L'espace $\ell^1$}{
+Soit $\ell^1$ l'espace vectoriel des applications $u : \mathbb{N} \to \mathbb{R}$ pour lesquelles la somme $\sum_n |u(n)|$ converge. Pour chaque élément $u$ de $\ell^1$, on note
+\[ \|u\|_1 = \sum_n |u(n)|. \]
+\begin{enumerate}
+    \item Démontrer que $\|\cdot\|_1$ est une norme sur $\ell^1$.\\
+    Dans la suite de cette exercice, on munit l'espace vectoriel $\ell^1$ de la norme $\|\cdot\|_1$.
+    \item Soit $u$ un élément de $\ell^1$, et considérons les éléments $u_k$ de $\ell^1$ tels que $u_k(n) = u(n)$ pour $n \le k$ et $u_k(n) = 0$ pour $n > k$. Démontrer que la suite $(u_k)_k$ converge vers $u$ dans l'espace vectoriel normé $\ell^1$.
+    \item Démontrer que l'ensemble $F$ des éléments $u$ de $\ell^1$ tels que $\sum_n u(n) = 0$ est une partie fermée de $\ell^1$.
+    \item Déterminer l'intérieur de $F$.
+\end{enumerate}
+}
+
+\exercise{6}{Croissance des sous-groupes de $\mathbb{U}_n$}{
+Soient $m, n \in \mathbb{N} \setminus \{0\}$.
+\begin{enumerate}
+    \item Démontrer : $\mathbb{U}_m \subseteq \mathbb{U}_n \iff m \mid n$.
+    \item En déduire que les seuls sous-groupes de $\mathbb{U}_n$ sont : $\mathbb{U}_d$ ($d$ divisant $n$).
+\end{enumerate}
+}
+
+\exercise{7}{Ordre des éléments dans un groupe}{
+Soit $G$ un groupe et $x \in G$ un élément d'ordre $n$. Démontrer que $x^m$ est d'ordre $\frac{n}{\operatorname{pgcd}(m,n)}$ pour tout $m \in \mathbb{N}^*$.
+}
+
+\exercise{8}{Ordre des éléments dans un groupe (bis)}{
+Dans le groupe $(\operatorname{GL}_2(\mathbb{R}), \cdot)$ on considère les matrices $A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$ et $B = \begin{pmatrix} 0 & 1 \\ -1 & -1 \end{pmatrix}$.\\
+Calculer l'ordre de $A$, de $B$ et de $C := AB$. Que remarque-t-on ?
+}
+
+\switchcolumn
+\newpage
+\exercise{9}{Préparation du CM}{Passer le QCM "Rappels de cours 2" sur la page Moodle de Intégration et Probabilités.}
+
+\exercise{10}{}{
+Soient $\Omega$ un ensemble non vide et $A, B$ des parties de $\Omega$.
+\begin{enumerate}
+    \item Montrer que $(A \cap B)^c = A^c \cup B^c$ et que $(A \cup B)^c = A^c \cap B^c$.
+    \item Soit $A_i, i \in I$ (où $I = \{1, 2, \dots, n\}$ ou bien $I = \mathbb{N}$), des parties de $\Omega$. Montrer que
+    \[ \left(\bigcap_{i \in I} A_i\right)^c = \bigcup_{i \in I} A_i^c \quad \text{et} \quad \left(\bigcup_{i \in I} A_i\right)^c = \bigcap_{i \in I} A_i^c. \]
+    \item Montrer que l'opération de réunion est distributive par rapport à l'opération d'intersection, c'est-à-dire que $B \cap (A \cup C) = (B \cap A) \cup (B \cap C)$ pour tout $A, B, C \subset \Omega$, et que l'opération d'intersection est distributive par rapport à l'opération de réunion, c'est-à-dire que $B \cup (A \cap C) = (B \cup A) \cap (B \cup C)$.
+    \item Montrer que
+    \[ B \cap \left(\bigcup_i A_i\right) = \bigcup_i (B \cap A_i) \quad \text{et} \quad B \cup \left(\bigcap_i A_i\right) = \bigcap_i (B \cup A_i). \]
+\end{enumerate}
+}
+
+\end{paracol}
+
+\end{document}
