@@ -107,6 +107,52 @@ En prenant la racine carrée, on obtient l'inégalité triangulaire. $\hfill \sq
 \training{Montrer l'inégalité triangulaire inverse. On pourra s'appuyer sur l'inégalité triangulaire.}
 \noindent \carreaux{5}
 
+\theorem{Proposition}{Norme induite par une application linéaire injective}{false}{
+    Soient $(E, \| \cdot \|_E)$ un espace vectoriel normé, $F$ un espace vectoriel et $f : F \to E$ une application linéaire.
+    L'application $N = \| \cdot \|_E \circ f$ est une norme sur $F$ si et seulement si $f$ est injective.
+}
+
+\noindent{\textbf{Preuve :}
+
+\begin{itemize}
+    \item[$\Rightarrow/$] Supposons que $N = \|\cdot\|_F \circ f$ soit une norme sur $E$.
+    Soit $x \in \ker(f)$, c'est-à-dire $f(x) = 0_F$.
+    Alors $N(x) = \|f(x)\|_F = \|0_F\|_F = 0$.
+    Puisque $N$ est une norme sur $E$, l'axiome de séparation implique que $x = 0_E$.
+    Ainsi, $\ker(f) = \{0_E\}$, ce qui prouve que $f$ est injective.
+
+    \item[$\Leftarrow/$] Supposons que $f$ soit injective. Vérifions que $N$ satisfait les trois axiomes d'une norme sur $E$ :
+    \begin{enumerate}
+        \item \textbf{Séparation :} 
+        Soit $x \in E$.
+        \begin{align*}
+            N(x) = 0 &\iff \|f(x)\|_F = 0 \\
+                     &\iff f(x) = 0_F \quad \text{(car } \|\cdot\|_F \text{ est une norme sur } F\text{)} \\
+                     &\iff x \in \ker(f) \\
+                     &\iff x = 0_E \quad \text{(car } f \text{ est injective)}.
+        \end{align*}
+
+        \item \textbf{Homogénéité :} 
+        Soient $x \in E$ et $\lambda \in \mathbb{K}$.
+        \begin{align*}
+            N(\lambda x) &= \|f(\lambda x)\|_F \\
+                         &= \|\lambda f(x)\|_F \quad \text{(par linéarité de } f\text{)} \\
+                         &= |\lambda| \cdot \|f(x)\|_F \quad \text{(par homogénéité de } \|\cdot\|_F\text{)} \\
+                         &= |\lambda| N(x).
+        \end{align*}
+
+        \item \textbf{Inégalité triangulaire :} 
+        Soient $x, y \in E$.
+        \begin{align*}
+            N(x + y) &= \|f(x + y)\|_F \\
+                     &= \|f(x) + f(y)\|_F \quad \text{(par linéarité de } f\text{)} \\
+                     &\le \|f(x)\|_F + \|f(y)\|_F \quad \text{(par subadditivité de } \|\cdot\|_F\text{)} \\
+                     &= N(x) + N(y).
+        \end{align*}
+    \end{enumerate}
+    Ainsi, $N$ définit bien une norme sur $E$. \hfill $\square$
+\end{itemize}}
+    
 \subsection{Équivalence des normes}
 \definition{
     Soient $\|\cdot\|$ et $\|\cdot\|'$ deux normes sur $E$. On dit que ces deux normes sont \textbf{équivalentes} s'il existe des constantes $c, C > 0$ telles que :
@@ -351,12 +397,12 @@ La notion de norme nous permet de définir une relation de "proximité" entre le
 \section{Suites et limites}
 
 \subsection{Généralités sur les suites}
-\definition{
-    Soit $A \subset E$. Une \textbf{suite} d'éléments de $A$ est une application $k \in \mathbb{N} \mapsto x_k \in A$, souvent notée $(x_k)_{k \in \mathbb{N}}$.
-}
+\vocabulary{    Soit $A \subset E$. Une \textbf{suite} d'éléments de $A$ est une application $k \in \mathbb{N} \mapsto x_k \in A$, souvent notée $(x_k)_{k \in \mathbb{N}}$.}
 
 \definition{
-    On dit d'une suite $(x_k)_{k \in \mathbb{N}}$ qu'elle est \textbf{bornée} s'il existe $r > 0$ tel que $\forall k \in \mathbb{N}, x_k \in B(0,r)$.
+    On dit d'une suite $(x_k)_{k \in \mathbb{N}}$ qu'elle est \textbf{bornée} si :
+    $$\exists r > 0 : \forall k \in \mathbb{N}, x_k \in B(0,r)$$
+    ou en terme de normes : $\exists r > 0 : \forall k \in \mathbb{N}, \|x_k\| < r$.
 }
 
 \subsection{Convergence des suites}
@@ -374,10 +420,11 @@ La notion de norme nous permet de définir une relation de "proximité" entre le
     \item si $\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \geq N, x_n \in B(l,\varepsilon)$.
 \end{itemize}}
 
-\attention{ convergence dépend de la norme choisie. Ainsi, une suite peut converger pour une norme et ne pas converger pour une autre norme (sauf en dimension finie, vous l'aurez compris).}
+\attention{La convergence dépend de la norme choisie. Ainsi, une suite peut converger pour une norme et ne pas converger pour une autre norme (sauf en dimension finie, vous l'aurez compris).}
 
 \theorem{Proposition}{Convergence et équivalence des normes}{false}{
-    Soient $\| \cdot \|_a$ et $\| \cdot \|_b$ deux normes équivalentes sur $E$. Alors une suite $(x_n)_{n \in \mathbb{N}}$ converge pour la norme $\| \cdot \|_a$ vers $l$ si, et seulement si, elle converge pour la norme $\| \cdot \|_b$ vers $l$.
+    Soient $\| \cdot \|_a$ et $\| \cdot \|_b$ deux normes équivalentes sur $E$. Alors une suite $(x_n)_{n \in \mathbb{N}}$ converge pour la norme $\| \cdot \|_a$ vers $l$ si, et seulement si, elle converge pour la norme $\| \cdot \|_b$ vers $l$.\\\\
+    En particulier, si $dim(E) < +\infty$, la convergence d'une suite ne dépend pas du choix de la norme.
 }
 \ndlr{cf. Laurent pour la preuve.}
 
@@ -386,8 +433,6 @@ La notion de norme nous permet de définir une relation de "proximité" entre le
 
 \training{Montrer que la suite de fonctions $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(t) = t^n$ converge pour la norme $1$ vers la limite $f(t) = 0$, mais pas pour la norme $\infty$.}
 \noindent \carreaux{4}
-
-\remark{Dans le cas d'espaces vectoriels normés de dimension finie, par équivalence des normes, la convergence d'une suite ne dépend pas de la norme choisie. }
 
 \theorem{Proposition}{Unicité de la limite}{false}{
     Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $E$. Si $(x_n)_{n \in \mathbb{N}}$ converge vers $l_1$ et $l_2$, alors $l_1 = l_2$.
@@ -408,15 +453,6 @@ et comme $\varepsilon$ est arbitraire, on en déduit que $l_1 = l_2$. $ \hfill \
     \item si $k \ge N$, $\|x_k\| = \|x_k - l + l\| \le \|x_k - l\| + \|l\| \le 1 + \|l\| \le R$.
 \end{itemize}
 Dans les deux cas on conclut que $x_k \in B(0, R)$. \hfill $\square$
-
-\theorem{Proposition}{Convergence des suites et des suites extraites}{false}{
-    Toute sous-suite d'une suite convergente converge vers la même limite.
-}
-\noindent\textbf{Preuve :} Soit $\{x_k\}_{k \in \mathbb{N}}$ une suite convergente vers la limite $x \in E$. Alors
-$$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_k - x\| < \varepsilon.$$
-Soit $\{x_{\varphi(k)}\}_{k \in \mathbb{N}}$ une sous-suite, puisque $\varphi$ est monotone strictement croissante, $\varphi(n) \ge n$, on en déduit que
-$$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_{\varphi(k)} - x\| < \varepsilon$$
-ce qui implique que $x_{\varphi(k)} \to x$. \hfill $\square$
 
 \theorem{Proposition}{Linéarité de la limite}{false}{
     Soient $(x_n)_{n \in \mathbb{N}}$ et $(y_n)_{n \in \mathbb{N}}$ deux suites convergentes vers $x$ et $y$ respectivement. Alors pour tout $\alpha, \beta \in \mathbb{R}$, la suite $(\alpha x_n + \beta y_n)_{n \in \mathbb{N}}$ converge vers $\alpha x + \beta y$.
@@ -439,24 +475,18 @@ ce qui implique que $x_{\varphi(k)} \to x$. \hfill $\square$
 \theorem{Proposition}{Caractérisation de la convergence par les suites extraites}{false}{
     Soit $(x_k)_{k \in \mathbb{N}}$ une suite d'éléments de $E$. Alors $(x_k)_{k \in \mathbb{N}}$ converge vers $l$ si et seulement si toute suite extraite de $(x_k)_{k \in \mathbb{N}}$ converge vers $l$.
 }
+\noindent{\textbf{Preuve :} \begin{itemize}
+    \item[$\Rightarrow/$] Soit $\{x_k\}_{k \in \mathbb{N}}$ une suite convergente vers la limite $x \in E$. Alors
+$$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_k - x\| < \varepsilon.$$
+Soit $\{x_{\varphi(k)}\}_{k \in \mathbb{N}}$ une sous-suite, puisque $\varphi$ est monotone strictement croissante, $\varphi(n) \ge n$, on en déduit que
+$$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_{\varphi(k)} - x\| < \varepsilon$$
+ce qui implique que $x_{\varphi(k)} \to x$. \hfill $\square$
+    \item[$\Leftarrow/$] cf. Laurent pour la preuve.
+\end{itemize}}
 
-\remark{En particulier, si une suite admet deux sous-suites convergeant vers des limites différentes, alors la suite n'est pas convergente.}
-
-\subsection{Topologie et suites}
-
-\theorem{Proposition}{Convergence et adhérence}{false}{
-    Soit $A \subset E$. Alors $a \in \overline{A}$ si et seulement si il existe une suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $A$ qui converge vers $a$.
+\method{Montrer qu'une suite n'est pas convergente}{
+    Il suffit de trouver deux sous-suites convergeant vers des limites différentes.
 }
-\noindent\textbf{Preuve :} \\
-$\Rightarrow/$ Pour tout $\varepsilon > 0$ $B(a,\varepsilon) \cap \{x_k\}_k \neq \varnothing$ par la remarque sur les définitions équivalentes de la convergence. Par le lemme sur les propriétés de l'intérieur et de l'adhérence, on a que $a \in \overline{A}$. \\[0.5em]
-$\Leftarrow/$ Pour tout $k \in \mathbb{N}$ posons $\varepsilon = \frac{1}{k}$, par le même lemme $B(a,1/k) \cap A \neq \varnothing$ et posons $x_k$ élément quelconque de $B(a,1/k) \cap A$. Alors la suite construite $\{x_k\}_k \subset A$ et $x_k \to a$. \hfill $\square$
-
-\theorem{Proposition}{Caractérisation des fermés par les suites}{false}{
-    Soit $F \subset E$. Alors $F$ est fermé si et seulement si pour toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $F$ qui converge vers un élément $x \in E$, on a $x \in F$.
-}
-
-\training{Montrer que $B(0,1) \setminus \{0\}$ est ouvert et que $\overline{B}(0,1) \setminus \{0\}$ n'est ni ouvert, ni fermé.}
-\noindent \carreaux{10}
 
 \section{Topologie des espaces vectoriels normés}
 \subsection{Adhérence}
@@ -800,6 +830,25 @@ $ \hfill \square$
 \theorem{Théorème}{Parties ouverts-fermés d'un evn}{true}{
     Soit $E$ un espace vectoriel normé. Alors les seuls sous-ensembles de $E$ qui sont à la fois ouverts et fermés sont $\varnothing$ et $E$ lui-même.
 }
+
+
+\section{Topologie et suites}
+
+\theorem{Proposition}{Convergence et adhérence}{false}{
+    Soit $A \subset E$. Alors $a \in \overline{A}$ si et seulement si il existe une suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $A$ qui converge vers $a$.
+}
+\noindent\textbf{Preuve :} \\
+$\Rightarrow/$ Pour tout $\varepsilon > 0$ $B(a,\varepsilon) \cap \{x_k\}_k \neq \varnothing$ par la remarque sur les définitions équivalentes de la convergence. Par le lemme sur les propriétés de l'intérieur et de l'adhérence, on a que $a \in \overline{A}$. \\[0.5em]
+$\Leftarrow/$ Pour tout $k \in \mathbb{N}$ posons $\varepsilon = \frac{1}{k}$, par le même lemme $B(a,1/k) \cap A \neq \varnothing$ et posons $x_k$ élément quelconque de $B(a,1/k) \cap A$. Alors la suite construite $\{x_k\}_k \subset A$ et $x_k \to a$. \hfill $\square$
+
+\theorem{Proposition}{Caractérisation des fermés par les suites}{false}{
+    Soit $F \subset E$. Alors $F$ est fermé si et seulement si pour toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $F$ qui converge vers un élément $x \in E$, on a $x \in F$.
+}
+
+\training{Montrer que $B(0,1) \setminus \{0\}$ est ouvert et que $\overline{B}(0,1) \setminus \{0\}$ n'est ni ouvert, ni fermé.}
+\noindent \carreaux{10}
+
+
 
 \section{Limite de fonctions}
 
