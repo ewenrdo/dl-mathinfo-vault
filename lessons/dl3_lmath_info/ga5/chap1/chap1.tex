@@ -270,10 +270,28 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 \example{
     \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
 }
-\theorem{Corollaire}{Image d'un sous-groupe}{true}{
+\theorem{Corollaire}{Image et image réciproque d'un sous-groupe par un morphisme}{true}{
     Soit $H \subset G$ un sous-groupe.\\
-    Alors $\varphi(H)$ est un sous-groupe de $G'$.
+    Alors $\varphi(H)$ est un sous-groupe de $G'$. De même, si $H' \subset G'$ est un sous-groupe, alors $\varphi^{-1}(H')$ est un sous-groupe de $G$.
 }
+\noindent{\textbf{Preuve :} \begin{enumerate}
+    \item Soit $K$ un sous-groupe de $G$.
+    \begin{itemize}
+        \item \textbf{Élément neutre (ensemble non vide) :} On a $f(e_G) = e_H$, et $e_G \in K$ car $K < G$. Donc $e_H \in f(K)$.
+        \item \textbf{Stabilité par la loi et l'inverse :} Soient $x, y \in f(K)$. Soient $a, b \in K$ tels que $x = f(a)$ et $y = f(b)$.
+        \[
+        \text{Alors, } x^{-1} *_H y = f(a)^{-1} *_H f(b) = f(a^{-1}) *_H f(b) = f(a^{-1} *_G b) \in f(K).
+        \]
+    \end{itemize}
+    On conclut que $f(K) < H$.
+
+    \item Soit $K < H$.
+    \begin{itemize}
+        \item \textbf{Élément neutre (ensemble non vide) :} On a $e_H \in K$ car $K < H$ et $f(e_G) = e_H$. Donc $e_G \in f^{-1}(K)$.
+        \item \textbf{Stabilité par la loi et l'inverse :} Soient $x, y \in f^{-1}(K)$. Alors $f(x^{-1} *_G y) = f(x^{-1}) *_H f(y) = f(x)^{-1} *_H f(y) \in K$ (car $f(x), f(y) \in K$ et $K < H$). Donc $x^{-1} *_G y \in f^{-1}(K)$.
+    \end{itemize}
+    Ainsi, $f^{-1}(K) < G$.
+\end{enumerate}}
 
 
 \section{Sous-groupes}
