@@ -351,7 +351,22 @@ Dans cette section, on utilisera le système de notation multiplicatif, mais il 
     \end{itemize}
 }
 
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration : }
+    \begin{enumerate}
+        \item On utilise la caractérisation. Soit $K$ un sous-groupe de $G$. 
+        \begin{itemize}
+            \item On a $f(e_G)=e_{G'}$ et $e_{G'}\in K$ car $K\le G$. Donc $e_{G'}\in G$
+            \item Soit $x, y\in f(K)$. Soient $a, b\in K$ tels que $x=f(a)$ et $y=f(b)$.\\
+                Alors, $x^{-1} *_{G'} y = f(a)^{-1} *{G'} f(b) = f(a^{-1}) *_{G'} f(b) = f(a^{-1} *_G b)\in f(K)$. On conclut que $f(K)\le G'$.
+        \end{itemize}
+        \item Soit $K\le H$.
+        \begin{itemize}
+            \item On a $e_{G'}\in K$ car $K\le G'$ et $f(e_G)=f(e_{G'})$. Donc $e_G\in f^{-1}(K)$.
+            \item Soient $x, y\in f^{-1}(K)$. Alors $f(x^{-1} *_G y) = f(x^{-1}) *_{G'} f(y) = f(x)^{-1} *_{G'} f(y) \in K$ (car $f(x), f(y)\in K$ et $K\le G'$). \\
+            Donc $x^{-1} *_G y\in f^{-1}(K)$. Ainsi, $f^{-1}(K)\le G$.
+        \end{itemize}
+    \end{enumerate}
+}
 
 \subsection{Sous-groupe engendré}
 
