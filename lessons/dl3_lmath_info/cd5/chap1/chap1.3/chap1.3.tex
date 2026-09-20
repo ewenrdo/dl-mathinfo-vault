@@ -24,33 +24,48 @@
 
 \begin{document}
 
-\docTitle{Chapitre 3 : Compacité\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
+\docTitle{Chapitre 1.3 : Compacité et complétude\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
 
-\section{Définition et premières propriétés}
+\section{Compacité}
+\subsection{Définition et premières propriétés}
+
+\reminder{Toute suite réelle $(x_n)_{n \in \mathbb{N}}$ admet une sous-suite monotone.}
+
+\theorem{Théorème de Bolzano-Weierstrass}{}{true}{
+    Toute suite bornée $(x_n)_{n \in \mathbb{N}}$ d'éléments de $\mathbb{R}^n$ admet une sous-suite convergente vers un élément de $\mathbb{R}^n$.
+}
+\ndlr{cf. Laurent pour la preuve.}
 
 \definition{
     Soit $K \subset \mathbb{R}^n$. On dit que $K$ est \textbf{compact} si toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $K$ admet une sous-suite convergente vers un élément de $K$.
 }
 
-\example{Un singleton $\{x\}$ est compact. En effet, toute suite $(x_n)$ d'éléments de $\{x\}$ est constante et converge vers $x \in \{x\}$.}
+\example{
+    \begin{enumerate}
+        \item Un singleton $\{x\}$ est compact. En effet, toute suite $(x_n)$ d'éléments de $\{x\}$ est constante et converge vers $x \in \{x\}$.
+        \item Tout intervalle fermé et borné $[a,b]$ est compact. En effet, toute suite $(x_n)$ d'éléments de $[a,b]$ est bornée, donc admet une sous-suite convergente vers un élément $x \in [a,b]$ (par le théorème de Bolzano-Weierstrass).   
+    \end{enumerate}
+}
 
-\remark{Tout comme la notation de convergence sur $\mathbb{R}^n$, la notion de compacité est indépendante de la norme choisie sur $\mathbb{R}^n$ (par indépendance des normes).}
+\remark{Tout comme la notion de convergence sur $\mathbb{R}^n$, la notion de compacité est indépendante de la norme choisie sur $\mathbb{R}^n$ (par indépendance des normes).}
 
-\theorem{Théorème de Bolzano-Weierstrass}{Segments et compacité}{true}{
-    Tout segment $[a,b] \subset \mathbb{R}$ est compact.
+\theorem{Proposition}{}{false}{
+    Soit $K$ une partie d'un espace vectoriel normé.
+    $$K \text{ est compact } \Rightarrow K \text{ est fermé et borné.}$$
 }
 \ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Proposition}{}{false}{
-    Soit $F \subset K \subset \mathbb{R}^n$. Supposons que $K$ est compact et que $F$ est fermé. Alors $F$ est compact.
+    Soit $F$ une partie contenue dans $K$ un compact.
+    $$F \text{ est fermé } \Rightarrow F \text{ est compact.}$$
 }
-\noindent{\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite d'éléments de $F$. Comme $F \subset K$ et que $K$ est compact, il existe une sous-suite $(x_{n_k})_{k \in \mathbb{N}}$ qui converge vers un élément $x \in K$.\\
-Or $(x_{n_k})_{k \in \mathbb{N}}$ est une suite d'éléments de $F$ et $F$ est fermé, donc $x \in F$. On en déduit que $x_{n_k} \to x \in F$, et donc que $F$ est compact. \hfill $\square$
-}
+\ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Proposition}{Produit cartésien de compacts}{false}{
-    Soient $K_1 \subset \mathbb{R}^{p}$ et $K_2 \subset \mathbb{R}^{q}$ deux compacts. \\
-    Alors $K_1 \times K_2 \subset \mathbb{R}^{p+q}$ est compact.
+Soit $K_1$ et $K_2$ deux parties compactes respectivement des deux espaces vectoriels normés $E_1$ et $E_2$. Alors le produit cartésien $K_1 \times K_2$ est une partie compacte de l'espace vectoriel normé $E_1 \times E_2$ muni de la norme
+\[
+\|(x, y)\| = \max(\|x\|_{E_1}, \|y\|_{E_2}).
+\]
 }
 \noindent{\textbf{Preuve :} On choisit sur $\mathbb{R}^{p+q}$ la norme
 $$\|(x, y)\| = \max(\|x\|_{(n)}, \|y\|_{(l)}) \quad \forall(x, y) \in \mathbb{R}^{p+q}.$$
@@ -61,17 +76,16 @@ De la même manière, puisque $K_2$ est compact, il existe une sous-suite $\{y_{
 La suite $\{x_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ est sous-suite d'une suite convergente, elle converge donc vers la même limite $x$. La sous-suite $\{(x_{\psi(\varphi(n))}, y_{\psi(\varphi(n))})\}_{n \in \mathbb{N}} \subset K_1 \times K_2$ converge vers $(x, y) \in K_1 \times K_2$. \hfill $\square$
 }
 \theorem{Théorème de Bolzano-Weierstrass}{Caractérisation des compacts}{true}{
-    Soit $K \subset \mathbb{R}^n$. Alors $K$ est compact si et seulement si $K$ est fermé et borné.
+    Soit $E$ un espace vectoriel normé de dimension finie. Alors $K \subset E$ est compact si et seulement si $K$ est fermé et borné.
 }
 
-\attention{Cela n'est vrai que pour les sous-ensembles de $\mathbb{R}^n$. Dans un espace vectoriel normé quelconque, il existe des ensembles fermés et bornés qui ne sont pas compacts.}
-
 \ndlr{cf. Laurent pour la preuve.}
+
 \cexample{Soit $X = \mathcal{C}([0,1])$ muni de la norme $\| \cdot \|_\infty$. Alors $\overline{B}(0,1)$ (un ferme et borné) n'est pas un sous-ensemble compact de $X$. En effet, la suite $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(x) = x^n$ est contenue dans $\overline{B}(0,1)$ mais ne possède pas de sous-suite convergente dans $X$.}
 
-\section{Continuité et compacité}
+\subsection{Lien avec la continuité}
 
-\theorem{Théorème}{Image d'un compact par une fonction continue}{true}{
+\theorem{Théorème}{Image d'un compact par une fonction continue}{false}{
     Soit $K \subset \mathbb{R}^n$ un compact et $f : K \to \mathbb{R}^m$ une fonction continue. Alors $f(K)$ est un compact de $\mathbb{R}^m$.
 }
 \noindent{\textbf{Preuve :} Soit $f : A \subset \mathbb{R}^n \to \mathbb{R}^k$ une application continue et $K \subset A$ un compact, considérons $\{y_k\} \subset f(K)$ une suite quelconque et $\{x_k\} \subset K$ telle que $f(x_k) = y_k$. Puisque $K$ est un compact il existe $\{x_{\varphi(k)}\}$ sous-suite et $x \in K$ telle que $x_{\varphi(k)} \to x$. En outre, $f$ étant une fonction continue, on a
@@ -79,8 +93,7 @@ $$\lim_{k \to +\infty} y_{\varphi(k)} = \lim_{k \to +\infty} f(x_{\varphi(k)}) =
 Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite convergente, $f(K)$ est un compact. \hfill $\square$
 }
 \theorem{Théorème}{Fonctions continues et bornes}{false}{
-    Une fonction continue sur un compact est bornée et atteint ses bornes.
-}
+    Soit $f$ une fonction continue réelle. La restriction $f|_K$ de $f$ à un compact $K$ est bornée et atteint ses bornes.}
 \ndlr{cf. Laurent pour la preuve.}
 
 \example{La fonction $f : \overline{B}(0,1) \to \mathbb{R}$ définie par $f(x,y) = x - x^2 + y^2$ atteint ses bornes car elle est continue et définie sur un ensemble compact.}
@@ -91,11 +104,12 @@ Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite conve
 \ndlr{cf. Laurent pour la preuve.}
 
 
-\section{Équivalence des normes}
+\subsection{Équivalence des normes}
 
-\theorem{Théoreme}{Équivalence des normes sur $\mathbb{R}^n$}{true}{
-    Toutes les normes sur $\mathbb{R}^n$ sont équivalentes.
+\theorem{Théoreme}{Équivalence des normes en dimension}{true}{
+    Soit $K$ un espace vectoriel de dimension finie. Toutes les normes sur $K$ sont équivalentes.
 }
+
 \noindent\textbf{Preuve :} Par transitivité de l'équivalence, il suffit de montrer que toute norme $N$ est équivalente, entre-autre, à la norme $\| \cdot \|_\infty$.\\
 \begin{itemize}
     \item Soit $(e_1, \ldots, e_n)$ une base de $\mathbb{R}^n$. Soit $x \in \mathbb{R}^n$ et $x = \sum_{i=1}^{n} x_i e_i$. Alors, on a :\\
@@ -111,6 +125,88 @@ Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite conve
     Pour $x = 0$, on a $N(0) = 0 = \alpha \|0\|_\infty$.\\
     Ainsi, on a montré que $\alpha \|x\|_\infty \leq N(x) \leq \beta \|x\|_\infty$ pour tout $x \in \mathbb{R}^n$, et donc que les normes $N$ et $\| \cdot \|_\infty$ sont équivalentes. \hfill $\square$
 \end{itemize}
+
+\section{Densité et séparabilité}
+\definition{
+    Soit $E$ un espace vectoriel normé et $A \subset E$. On dit que $A$ est \textbf{dense} dans $E$ si $\overline{A} = E$.
+}
+
+\example{$\mathbb{Q}$ est dense dans $(\mathbb{R}, | \cdot |)$, car $\overline{\mathbb{Q}} = \mathbb{R}$.}
+
+\definition{
+    Soit $E$ un espace vectoriel normé. On dit que $E$ est \textbf{séparable} s'il existe un sous-ensemble dense $A \subset E$ qui est au plus dénombrable.
+}
+
+\example{$\mathbb{R}$ est séparable, car $\mathbb{Q}$ est dense dans $\mathbb{R}$ et $\mathbb{Q}$ est au plus dénombrable.}
+
+\section{Complétude}
+\subsection{Suites de Cauchy}
+\definition{Une suite $(x_n)_{n \in \mathbb{N}}$ de $E$ est dite \textbf{de Cauchy} si pour tout $\varepsilon > 0$ il existe $N \in \mathbb{N}$ tel que,
+    \[
+    \forall(n, m) \in \mathbb{N}^2, \quad m \ge N \text{ et } n \ge N \implies \|x_n - x_m\| \le \varepsilon.
+    \]
+}
+
+\theorem{Proposition}{}{false}{
+    Toute suite convergente est une suite de Cauchy.
+}
+
+\noindent\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite de $E$ qui converge vers $\ell \in E$. Soit $\varepsilon > 0$. Donc il existe $N \in \mathbb{N}$ tel que, pour tout entier $n \ge N$ on a :
+\[
+|x_n - \ell| \le \frac{\varepsilon}{2}.
+\]
+En particulier, grâce à l'inégalité triangulaire, pour tout $(n, m) \in \mathbb{N}^2$ tels que $m \ge N$ et $n \ge N$ on a
+\[
+\|x_n - x_m\| \le \|x_n - \ell\| + \|\ell - x_m\| \le \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+\]
+et donc notre suite est de Cauchy. \hfill $\square$
+
+\theorem{Lemme}{}{false}{
+    Toute suite de Cauchy est bornée.
+}
+
+\noindent\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite de Cauchy de l'espace vectoriel normé $E$. Donc pour $\varepsilon = 1$, il existe $N \in \mathbb{N}$ tel que, pour tout $(n, m) \in \mathbb{N}^2$ tels que $m \ge N$ et $n \ge N$ on a
+\[
+\|x_n - x_m\| \le 1.
+\]
+En particulier, en prenant $m = N$, il vient que pour tout $n \ge N$, on a
+\[
+\|x_n\| \le \|x_n - x_N\| + \|x_N\| \le 1 + \|x_N\|.
+\]
+Posons $M = \max(\|x_0\|, \|x_1\|, \dots, \|x_{N-1}\|, 1 + \|x_N\|)$. Ainsi, pour tout $n \in \mathbb{N}$, on a
+\[
+\|x_n\| \le M
+\]
+et notre suite est majorée.
+
+\theorem{Lemme}{}{false}{
+    Si une suite de Cauchy possède une sous suite extraite convergente vers une limite $\ell$ alors elle converge vers $\ell$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+\subsection{Définition et exemples}
+
+\definition{
+    Un espace vectoriel normé $E$ est dit \textbf{complet} si toute suite de Cauchy de $E$ converge vers un élément de $E$.
+}
+\vocabulary{On dit que $(E, \| \cdot \|)$ est un espace de Banach.}
+
+\example{L'espace $E = \mathcal{C}([0,1], \mathbb{R})$ des fonctions continues sur l'intervalle $[0,1]$ à valeurs réelles muni de la norme $\|\cdot\|_\infty$ est complet.}
+
+\theorem{Théorème}{Convergence uniforme des séries de fonctions}{false}{
+Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $(u_n)_{n \in \mathbb{N}}$ une suite de $E$. Si la série $\sum \|u_n\|$ est convergente alors la série $\sum u_n$ est convergente, c-à-d la suite $s_n = u_0 + \dots + u_n$ converge dans $E$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Théorème}{Complétude des espaces de dimension finie}{true}{
+    Tout espace vectoriel normé de dimension finie est complet.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{}{true}{
+    Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $F$ un sous espace vectoriel de $E$ que nous munissons de la norme $\|\cdot\|$. Alors $(F, \|\cdot\|)$ est complet si, et seulement si, $F$ est fermé dans $E$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
 
 \newpage
 \tableofcontents
