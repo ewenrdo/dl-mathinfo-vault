@@ -1,0 +1,262 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{../../../../../components/mathtex}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{caption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Calcul différentiel}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 1.2 : Continuité\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
+
+\section{Continuité}
+
+\subsection{Définition et propriétés}
+
+\definition{
+    Soit $x_0 \in \mathcal{U}$ et soit $f : \mathcal{U} \to \mathbb{R}^p$.\\
+    On dit que $f$ est continue en $x_0$ si :
+    \[ \forall \epsilon > 0, \exists \alpha > 0, \forall x \in \mathcal{U}, \quad \|x - x_0\| \le \alpha \Rightarrow \|f(x) - f(x_0)\| < \epsilon \]
+    De manière plus informelle, $f$ est continue en $x_0$ si $lim_{x \to x_0} f(x) = f(x_0)$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E, F, G$ des espaces vectoriels normés et $A \subset E$ et $B \subset F$.
+\begin{enumerate}
+    \item Soit $f, g : A \to F$ deux applications et $\lambda \in \mathbb{K}$. Si $f$ et $g$ sont continues alors $\lambda f + g$ est continue.
+    \item Soit $f : A \to \mathbb{K}$ et $g : A \to F$ deux applications continues alors $fg$ est continue.
+    \item Soit $f : A \to \mathbb{K}$ une application continue ne s'annulant en aucun point de $A$ alors $1/f$ est continue.
+    \item Soit $f : A \to F$ et $g : B \to G$ deux applications continues telles que $f(A) \subset B$. Alors la composée $g \circ f$ est continue.
+\end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{}{false}{
+    Soit $a$ un point d'une partie $A$ de $E$ et $f : A \to F$ une application. Supposons que $F$ est de dimension finie et $\mathcal{B}$ une base de $F$. Alors $f$ est continue en $a$ si, et seulement si, les coordonnées de $f$ dans $\mathcal{B}$ le sont.}
+\ndlr{cf. Laurent pour la preuve.}
+
+\method{Montrer qu'une fonction de plusieurs variables est continue}{
+    Si $f(x_1, \dots, x_q) = (f_1(x_1, \dots, x_q), \dots, f_p(x_1, \dots, x_q))$ est une fonction de plusieurs variables à valeurs dans $\mathbb{R}^p$, il suffit de montrer que chacune des fonctions $f_i$ est continue pour conclure que $f$ est continue.
+}
+
+\subsection{Prolongement par continuité}
+
+\theorem{Théorème}{Prolongement par continuité}{false}{
+    Soit $a$ un point adhérent à une partie $A$ de $E$ et $f : A \setminus \{a\} \to F$ une application. Si $\lim_{x \to a} f(x) = \ell$ alors l'application $\tilde{f}$ définie sur $A$ par
+\[
+\tilde{f}(x) = \begin{cases} 
+f(x) & \text{si } x \neq a \\ 
+\ell & \text{si } x = a 
+\end{cases}
+\]
+est continue en $a$. On appelle $\tilde{f}$ le prolongement par continuité de $f$ au point $a$.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{}{false}{
+    Une application $f : A \to F$ est continue en un point $a$ de $A$ si, et seulement si, il existe un voisinage $V$ de $a$ et une fonction numérique $w$ définie sur un voisinage de $0$ telle que $w(r) \xrightarrow[r \to 0]{} 0$ et
+\[
+\forall x \in A \cap V, \quad \|f(x) - f(a)\| \le w(\|x - a\|)
+\]
+}
+\remark{Cette proposition est très utile pour montrer la continuité d'une fonction en un point. Il suffit de trouver une fonction $w$ qui tend vers 0 lorsque son argument tend vers 0 et qui majore l'écart entre $f(x)$ et $f(a)$.}
+
+\example{Soit $(E, \|\cdot\|)$ un espace vectoriel normé et $u, v$ deux vecteurs de $E$. Alors la fonction $f : \mathbb{R} \to E$ définie par $f(t) = u + tv$ est continue. En effet, soit $t_0$ un réel donné. Pour tout réel $t$, on a :
+\[
+\|f(t) - f(t_0)\| = \|(t - t_0)v\| = |t - t_0| \xrightarrow[t \to t_0]{} 0
+\]
+}
+
+\method{Étudier la continuité en $(0,0)$}{
+    Pour étudier la limite en $(0,0)$ d'une fonction $f(x,y)$, on exprime $f(r\cos(\theta), r\sin(\theta))$. Si l'expression tend vers une constante indépendante de $\theta$ lorsque $r \to 0^+$, la fonction est continue.
+}
+
+\example{
+    Soit $f(x,y) = \frac{x^3}{x^2+y^2}$ pour $(x,y) \neq (0,0)$ et $f(0,0)=0$. En coordonnées polaires :
+    \[ f(r\cos(\theta), r\sin(\theta)) = \frac{r^3\cos^3(\theta)}{r^2} = r\cos^3(\theta) \]
+    Comme $|r\cos^3(\theta)| \le r \xrightarrow[r \to 0^+]{} 0$, $f$ est continue en $(0,0)$.
+}
+
+\remark{Cette méthode est particulièrement performante lorsque l'expression comporte le terme $x^2+y^2$, car il se simplifie directement en $r^2$.}
+
+\subsection{Lien entre continuité et topologie}
+
+\theorem{Théorème de la continuité globale}{}{true}{
+    Une fonction $f : \mathcal{U} \to \mathbb{R}^p$ est continue 
+    \begin{itemize}
+        \item $\iff$ pour tout ouverte $\mathcal{O}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{O})$ est un ouvert de $\mathcal{U}$.
+        \item $\iff$ pour tout fermé $\mathcal{F}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{F})$ est un fermé de $\mathcal{U}$.
+    \end{itemize}
+}
+
+\training{Pour chacun des ensembles suivants, déterminer s'il est ouvert, fermé, ouvert-fermé ou ni l'un, ni l'autre.
+\[
+\{ (x,y) \mid x^2 - y^2 < 1 \}, \quad \{ (x,y) \mid e^{x+y^3} > 0\}, \quad \{ (x,y,z) \mid \arctan(xz) \geq \cos(yz) \}, \quad \{ (x,y,z) \mid x+y+z > xyz \}
+\]
+}
+\noindent\carreaux{10}
+\subsection{Continuité uniforme}
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :
+    \[
+    \forall \epsilon > 0, \exists \alpha > 0, \forall x,y \in \mathcal{U}, \quad \|x - y\| \le \alpha \Rightarrow \|f(x) - f(y)\| < \epsilon
+    \]
+}
+
+\remark{
+    Dans la définition de la continuité en un point $x_0$, le réel $\alpha$ dépend de $\epsilon$ et de $x_0$. Dans le cas de la continuité uniforme, le réel $\alpha$ ne dépend plus que de $\epsilon$ : il est globalement valable pour tout couple de points $(x,y)$ de l'ouvert $\mathcal{U}$.
+}
+
+\theorem{Proposition}{Caractérisation séquentielle de la continuité uniforme}{false}{
+Soit $A$ une partie de l'evn $E$. Une fonction $f : A \to F$ est uniformément continue, si et seulement si,
+\[
+\forall (x_n)_n, (y_n)_n \subset A, \quad \|x_n - y_n\|_E \xrightarrow[n \to +\infty]{} 0 \implies \|f(x_n) - f(y_n)\|_F \xrightarrow[n \to +\infty]{} 0.
+\]
+}
+
+\example{
+    L'application identité ou toute application linéaire $f : \mathbb{R}^q \to \mathbb{R}^p$ est uniformément continue sur $\mathbb{R}^q$. 
+    En effet, par linéarité en dimension finie, il existe une constante $C > 0$ telle que pour tous $x,y \in \mathbb{R}^q$, $\|f(x) - f(y)\| \le C \|x - y\|$. Pour un $\epsilon > 0$ donné, il suffit alors de choisir $\alpha = \frac{\epsilon}{C}$ (qui est indépendant de $x$ et $y$) pour vérifier la définition.
+}
+
+\cexample{
+    La fonction $f : ]0,1] \to \mathbb{R}, \, x \mapsto \frac{1}{x}$ est continue sur $]0,1]$ mais \textbf{n'est pas} uniformément continue sur cet intervalle. En effet, si l'on choisit les deux suites de $]0,1]$ définies pour $n \in \mathbb{N}^*$ par $x_n = \frac{1}{n}$ and $y_n = \frac{1}{n+1}$, on a :
+    \[
+    |x_n - y_n| = \frac{1}{n(n+1)} \xrightarrow[n \to +\infty]{} 0
+    \]
+    Pourtant, l'écart entre leurs images reste constant et ne tend pas vers 0 :
+    \[
+    |f(x_n) - f(y_n)| = |n - (n+1)| = 1
+    \]
+    Il est donc impossible de trouver un $\alpha$ global qui rende les images proches dès que les antécédents le sont.
+}
+
+
+\subsection{Fonctions lipschitziennes}
+
+\definition{
+    Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^q$ et $f : \mathcal{U} \to \mathbb{R}^p$. Soit $k \ge 0$ un réel. 
+    On dit que $f$ est \textbf{$k$-lipschitzienne} sur $\mathcal{U}$ si :
+    \[
+    \forall (x,y) \in \mathcal{U}^2, \quad \|f(x) - f(y)\| \le k \|x - y\|
+    \]
+    On dit que $f$ est \textbf{lipschitzienne} s'il existe un tel réel $k$. 
+    Si $0 \le k < 1$, l'application $f$ est dite \textbf{contractante}.
+}
+
+\theorem{Proposition}{Rapport avec la continuité uniforme}{false}{
+    Toute fonction lipschitzienne sur $\mathcal{U}$ est uniformément continue sur $\mathcal{U}$ (et est donc, a fortiori, continue sur $\mathcal{U}$).
+}
+
+\remark{
+    Pour une fonction $k$-lipschitzienne, face à un $\epsilon > 0$ donné, le choix du pas $\alpha = \frac{\epsilon}{k}$ (si $k > 0$) convient globalement en tout point, ce qui montre de manière immédiate l'uniforme continuité. 
+}
+
+\example{
+    Soit $f : \mathbb{R}^q \to \mathbb{R}^p$ une application linéaire. En dimension finie, toutes les applications linéaires sont continues et il existe une constante $M \ge 0$ telle que pour tout $h \in \mathbb{R}^q$, $\|f(h)\| \le M \|h\|$. 
+    Par conséquent :
+    \[
+    \forall (x,y) \in (\mathbb{R}^q)^2, \quad \|f(x) - f(y)\| = \|f(x-y)\| \le M \|x - y\|
+    \]
+    Ainsi, toute application linéaire en dimension finie est $M$-lipschitzienne.
+}
+
+\section{Applications linéaires continues}
+
+\theorem{Proposition}{}{false}{
+    Soit $f \in \mathcal{L}(E, F)$. Les assertions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item L'application $f$ est continue
+        \item l'application $f$ est continue en $0$
+        \item il existe une constante $C$ telle que,
+        \[
+        \forall x \in E, \quad \|f(x)\|_F \le C\|x\|_E
+        \]
+        \item $\displaystyle\sup_{\|x\|_E=1} \|f(x)\|_F < +\infty$
+        \item l'application $f$ est lipschitzienne.
+    \end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{}{false}{
+    Toute application linéaire en dimension finie est continue.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\section{Norme subordonnée d'une application linéaire}
+
+Soit $(E, \|\cdot\|_E)$ et $(F, \|\cdot\|_F)$ deux espaces vectoriels normés. Notons $\mathcal{L}_c(E, F)$ l'espace vectoriel des applications linéaires continues de $E$ vers $F$.
+
+\reminder{On a vu que
+\[ f \in \mathcal{L}_c(E, F) \iff \sup_{\|x\|_E=1} \|f(x)\|_F < \infty.
+\]}
+
+\definition{
+Soit $(E, \|\cdot\|_E)$ et $(F, \|\cdot\|_F)$ deux espaces vectoriels normés et $f \in \mathcal{L}(E, F)$ une application linéaire continue. On appelle \textbf{norme subordonnée} de $f$, et on note $|||f|||$, le réel défini par :
+\[
+|||f||| = \sup_{\|x\|_E=1} \|f(x)\|_F = \sup_{x \in E, \; x \neq 0} \frac{\|f(x)\|_F}{\|x\|_E}
+\]
+}
+
+
+\theorem{Proposition}{Propriétés de la norme subordonnée}{false}{
+\begin{enumerate}
+    \item $|||\cdot|||$ est une norme sur $\mathcal{L}_c(E,F)$ appelée norme subordonnée à $\|\cdot\|_E$ et $\|\cdot\|_F$. Si $E = F$ et $\|\cdot\|_E = \|\cdot\|_F$ alors $|||\cdot|||$ s'appelle simplement la norme subordonnée à $\|\cdot\|_E$.
+    \item Soit $f \in \mathcal{L}_c(E,F)$. On a
+    \begin{itemize}
+        \item $\forall x \in E, \quad \|f(x)\|_F \le |||f||| \cdot \|x\|_E$.
+        \item $|||f|||$ est la plus petite des constantes $C > 0$ vérifiant
+        \[
+        \forall x \in E, \quad \|f(x)\|_F \le C \cdot \|x\|_E.
+        \]
+    \end{itemize}
+    \item De plus, si $E = F$ alors $|||\cdot|||$ est sous-multiplicative dans le sens suivant :
+    \[
+    |||f \circ g||| \le |||f||| \cdot |||g|||.
+    \]
+\end{enumerate}
+}
+
+\example{
+Soit $\mathbb{R}^2$ muni de la norme $\|\cdot\|_\infty$ et $f : \mathbb{R}^2 \to \mathbb{R}$ la forme linéaire définie par
+\[
+\forall (x,y) \in \mathbb{R}^2, \quad f(x,y) = 3x + 4y.
+\]
+Montrons que $f$ est continue et déterminer sa norme subordonnée.\\
+$f$ est linéaire sur l'espace $\mathbb{R}^2$ qui est de dimension finie et donc continue. En fait,
+\[
+\forall (x,y) \in \mathbb{R}^2, \quad |f(x,y)| \le 3|x| + 4|y| \le 7\|(x,y)\|_\infty.
+\]
+Donc $f$ est continue et $|||f||| \le 7$. De plus,
+\[
+\|(1,1)\|_\infty = 1 \quad \text{et} \quad f(1,1) = 7
+\]
+Ainsi $|||f||| = 7$.
+}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours provient du polycopié de cours de l'Université Paris Cité réalisé par Alessandro Zilio enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
