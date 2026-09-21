@@ -513,7 +513,11 @@ On pose \(g^{\mathbb{Z}} = \{ g^n \mid n \in \mathbb{Z} \}\) : c'est \textbf{l'e
     Soit $(G, *)$ un groupe. Soit $y \in G : \exists m > 0 : y^m = e$. Alors l'ordre de $y$ divise $m$.
 }
 
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Preuve:}\\
+Soit $n = ord(y)$ On peut écrire la division euclidienne de $m$ par $n$ : $m = qn + r$, avec $0 \leq r < n$.\\
+Il vient : $$y^m = y^{qn + r} = (y^n)^q * y^r = e^q * y^r = y^r$$
+Or $n$ est le plus petit entier positif tel que $y^n = e$, donc $r = 0$. Ainsi, $m = qn$, ce qui montre que $n$ divise $m$. $\Box$
+}
 
 \theorem{Corollaire}{Ordre d'un élément et ordre du groupe}{true}{
     Soient $(G, *)$ et $(H, *)$ deux groupes. Soit $f : G \rightarrow H$ un morphisme de groupes.\\
