@@ -252,6 +252,26 @@ Donc $f$ est continue et $|||f||| \le 7$. De plus,
 Ainsi $|||f||| = 7$.
 }
 
+\method{Calculer la norme subordonnée d'une application linéaire}{
+    Pour calculer la norme subordonnée d'une application linéaire $f : \mathbb{R}^q \to \mathbb{R}^p$, on peut procéder de la manière suivante :
+    \begin{enumerate}
+        \item Vérifier que $f$ est continue (ce qui est automatique si $q$ est fini).
+        \item Trouver une constante $C$ telle que $\|f(x)\|_F \le C\|x\|_E$ pour tout $x \in \mathbb{R}^q$. Cela donne une majoration de $|||f|||$.
+        \item Trouver un vecteur $x_0$ tel que $\|x_0\|_E = 1$ et $\|f(x_0)\|_F = C$. Cela permet de montrer que $|||f||| = C$.
+    \end{enumerate}
+}
+
+\method{Montrer que deux normes sont équivalentes avec la norme subordonnée}{
+    Pour montrer que deux normes $\|\cdot\|_1$ et $\|\cdot\|_2$ sur un espace vectoriel normé $E$ sont équivalentes, on peut procéder de la manière suivante :
+    \begin{enumerate}
+        \item Considérer l'application identité $Id : (E, \|\cdot\|_1) \to (E, \|\cdot\|_2)$.
+        \item Montrer que $Id$ est continue. Cela implique qu'il existe une constante $C_1 > 0$ telle que $\|x\|_2 \le C_1 \|x\|_1$ pour tout $x \in E$.
+        \item Considérer l'application inverse $Id^{-1} : (E, \|\cdot\|_2) \to (E, \|\cdot\|_1)$.
+        \item Montrer que $Id^{-1}$ est continue. Cela implique qu'il existe une constante $C_2 > 0$ telle que $\|x\|_1 \le C_2 \|x\|_2$ pour tout $x \in E$.
+        \item Conclure que les deux normes sont équivalentes avec les constantes $C_1$ et $C_2$.
+    \end{enumerate}
+}
+
 \newpage
 \tableofcontents
 \section*{Crédits}
