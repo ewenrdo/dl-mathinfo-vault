@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info PR5}
+\fancyhead[C]{Intégration et probabilités}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Applications mesurables et intégrales généralisées}
+
+\section{Introduction et exemples}
+
+\example{On fait un lancer simultané de deux dés équilibrés à six faces.
+    \begin{itemize}
+        \item S'ils sont distinguables, l'espace des résultats est $\Omega_1 = \{1,2,3,4,5,6\}^2$ (avec $\mathcal{F}_1 = \mathcal{P}(\Omega_1)$) et on peut définir la probabilité uniforme $\mathbb{P}$ sur $(\Omega_1, \mathcal{P}(\Omega_1))$ par $\mathbb{P}(\{(i,j)\}) = \frac{1}{36}$ pour tout $i,j \in \{1,\ldots,6\}$.
+        \item S'ils sont indistingables, l'espace des résultats est $\Omega_2 = \{(i,j) \in \{1,2,3,4,5,6\}^2 : i \leq j\}$ (avec $\mathcal{F}_2 = \mathcal{P}(\Omega_2)$).
+    \end{itemize}
+    On a une application $f : \Omega_1 \to \Omega_2$ définie par 
+    \begin{align*}
+        f(i,j) = \begin{cases}
+            (i,j) & \text{si } i \leq j,\\
+            (j,i) & \text{si } i > j.
+        \end{cases}
+    \end{align*}
+    On a $\mathbb{P}(f^{-1}(\{(i,j)\})) = \mathbb{P}(\{(i,j), (j,i)\}) = \frac{2}{36} = \frac{1}{18}$ si $i < j$ et $\mathbb{P}(f^{-1}(\{(i,i)\})) = \mathbb{P}(\{(i,i)\}) = \frac{1}{36}$ si $i = j$. Ainsi, la probabilité uniforme sur $\Omega_2$ n'est pas l'image de la probabilité uniforme sur $\Omega_1$ par $f$.
+}
+\remark{On peut définir la probabilité $\mathbb{P}_f$ sur $(\Omega_2, \mathcal{F}_2)$ par $\mathbb{P}_f(A) = \mathbb{P}(f^{-1}(A))$ pour tout $A \in \mathcal{F}_2$. On a $\mathbb{P}_f(\{(i,j)\}) = \frac{1}{18}$ si $i < j$ et $\mathbb{P}_f(\{(i,i)\}) = \frac{1}{36}$ si $i = j$.\\
+    Ainsi, la probabilité uniforme sur $\Omega_2$ est l'image de la probabilité uniforme sur $\Omega_1$ par $f$.
+}
+
+\remark{En particulier, on sait mesurer $\Omega_2$ si on sait mesure $f^{-1}(\Omega_2)$.}
+
+\example{
+    Posons $E = [-1,1]$ muni de sa tribu $\mathcal{E} = \mathcal{B}([-1,1])$ et de la mesure de Lebesgue $\mu = \frac{\lambda_{|[-1,1]|}}{2}$ (qui est une probabilité). La densité est constante sur $E$ (on reverra ça plus tard), \textit{i.e.} $\mu(A) = \int_A \frac{1}{2} d\lambda$ pour tout $A \in \mathcal{E}$.\\
+    On considère aussi $F = \mathbb{R}$ muni de sa tribu $\mathcal{F} = \mathcal{B}(\mathbb{R})$.
+    On définit l'application $f : E \to F$ par 
+    $$f(x) = \begin{cases}
+        ln(-x) & \text{si } x < 0,\\
+        0 & \text{si } x = 0,\\
+        ln(x) & \text{si } x > 0.
+    \end{cases}$$
+    On veut trouver la mesure $\mu_f$ de $F$.
+    \begin{itemize}
+        \item Si $a < b < 0$, $\mu_f(]a,b[) = \mu(f^{-1}(]a,b[)) = \mu(]-e^b,-e^a[) = \frac{1}{2} (e^b - e^a)$,
+        \item Si $0 < a < b$, $\mu_f(]a,b[) = \mu(f^{-1}(]a,b[)) = \mu(]e^{-b},e^{-a}[) = \frac{e^{-a} - e^{-b}}{2}$,
+        \item Si $0 < a < b$, $\mu_f(]a,b[) = \mu(f^{-1}(]a,b[)) = \frac{1 - e^{a}}{2} + \frac{1 - e^{-b}}{2} = 1 - \frac{e^{a} + e^{-b}}{2}$.
+    \end{itemize}
+}
+
+\section{Applications mesurables, mesures image}
+\definition{
+    Soient $(E, \mathcal{E})$ et $(F, \mathcal{F})$ deux espaces mesurables. Une application $f : E \to F$ est dite \textit{mesurable} et on note $f : E \toMesurable F$ (ou $f \circ \mu$) si pour tout $B \in \mathcal{F}$, $f^{-1}(B) \in \mathcal{E}$.
+}
+
+\definition{
+    Soit $(E, \mathcal{E}, \mu)$ un espace mesuré. Soit $f : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ une application mesurable.\\
+    On définit la mesure image de $\mu$ par $f$, et on note $\mu_f$, par la mesure sur $(F, \mathcal{F})$ définie par :
+    $$\forall B \in \mathcal{F}, \quad \mu_f(B) = \mu(f^{-1}(B)).$$
+}
+\remark{$\mu_f$ est bien un mesure sur $(F, \mathcal{F})$ et a la même mesure totale que $\mu$ : $\mu_f(F) = \mu(f^{-1}(F)) = \mu(E)$.}
+\remark{Si $\mu$ est une probabilité, alors $\mu_f$ est aussi une probabilité.}
+
+\theorem{Propriétés}{}{false}{
+    Soit $(E, \mathcal{E})$ un espace mesurable et $A \in \mathcal{P}(E)$.
+    \begin{enumerate}
+        \item $\indic{A} : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est mesurable si et seulement si $A \in \mathcal{E}$,
+        \item Si $f : (E, \mathcal{E}) \toMesurable (G, \mathcal{G})$ et $g : (G, \mathcal{G}) \toMesurable (F, \mathcal{F})$ sont mesurables, alors $g \circ f : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ est mesurable,
+    \end{enumerate}
+}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Mathieu Merle. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
