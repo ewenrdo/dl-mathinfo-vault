@@ -25,7 +25,9 @@
 
 \docTitle{Chapitre 1 : Espaces mesurés et espaces probabilisés}
 
-\section{Univers, tribus et mesures}
+\section{Tribus et espaces mesurables}
+
+\subsection{Généralités et définitions}
 
 \vocabulary{On appelle \textbf{univers} un ensemble quelconque $\Omega$.}
 
@@ -58,36 +60,7 @@
     \item $\mathcal{F}_4 = \{\emptyset, \Omega, \{0\}, \{1\}, \{1,2,3\}, \{0,2,3\}, \{0,1\}, \{2,3\}\}$.
 \end{itemize}}
 
-\definition{
-    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu : \mathcal{F} \to \mathbb{R}_+ \cup \{+\infty\}$.
-    On dit que $\mu$ est une \textbf{mesure positive} si :
-    \begin{enumerate}
-        \item $\mu(\emptyset) = 0$,
-        \item $\mu$ est \textbf{$\sigma$-additive} : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ sont deux-à-deux disjoints, alors $\mu\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}} \mu(A_n)$.
-    \end{enumerate}
-}
-\remark{On commence à retrouver des notions liées au cours PR4 : la définition d'une probabilité.}
-\definition{
-    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$.\\
-    On dit que $\mu$ est une \textbf{probabilité} si $\mu(\Omega) = 1$.
-}
-\vocabulary{On appelle $(\Omega, \mathcal{F}, \mu)$ un \textbf{espace mesuré} si $\mu$ est une mesure positive sur $(\Omega, \mathcal{F})$. On appelle $(\Omega, \mathcal{F}, \mathbb{P})$ un \textbf{espace probabilisé} si $\mathbb{P}$ est une probabilité sur $(\Omega, \mathcal{F})$.}
-
-\cexample{Une mesure $\mu$ qui n'est pas une probabilité est la mesure de Lebesgue sur $\mathbb{R}$ : mesurer toute la droite des réels donne $+\infty$, et pas $1$.}
-\example{
-    \begin{itemize}
-        \item On reprend l'idée de la course. On pose $\Omega = \mathbb{R}_+$. $\mathcal{F} = \{ \bigcup_{k \in I}  [\frac{k}{10}, \frac{k+1}{10}[ \; \mid I \subseteq \mathbb{N} \}$ est une tribu qui convient (la tribu du chronomètre au $10^e$).
-        \item On reprend l'idée du tirage. On peut faire plusieurs choix :
-        \begin{enumerate}
-            \item On pose $\Omega_a = \{ \omega \in \{0,1\}^{b+r} : \sum_{i=1}^{b+r} \omega_i = b \}$. On prend $\mathcal{F}_a = \mathcal{P}(\Omega_a)$, la tribu de toutes les parties de $\Omega_a$. On peut définir une probabilité uniforme sur $\Omega_a$ : $\mathbb{P}_a(A) = \frac{|A|}{|\Omega_a|}$ pour tout $A \subseteq \Omega_a$.
-            \item En imaginant les boules numérotées : $\Omega_b = \sigma_{b+r}$, l'ensemble des permutations de $b+r$ éléments. On garde la même tribu et probabilité que dans le cas précédent.
-            \item $\Omega_c = \{ f : \{1, \ldots, k\} \to \{1, \ldots, b+r\} : f \text{ est injective} \}$, l'ensemble des fonctions injectives de $\{1, \ldots, k\}$ dans $\{1, \ldots, b+r\}$. On garde la même tribu et probabilité que dans le cas précédent.
-            \item \textit{(plus dangereux)} $\Omega_d = \{ f : \{1, \ldots, k\} \to \{0,1\} \mid \sum_{i=1}^k f(i) \leq b, \sum_{i=1}^k (1-f(i)) \leq r \}$. $\mathcal{F} = \mathcal{P}(\Omega_d)$ convient, mais on ne peut pas choisir la probabilité uniforme !
-        \end{enumerate}
-        \item Pour $\Omega = \mathbb{R}^2$ (le champ). C'est plus compliqué. $\mathcal{F}$ doit contenir \textit{a minima} tous les rectangles ouverts et les disques ouverts (et leurs réunions dénombrables et passage au complémentaire). On verra que n'importe quel ouvert de $\mathbb{R}^2$ est dans $\mathcal{F}$.\\
-        Attention, $\mathcal{F} \neq \mathcal{P}(\mathbb{R}^2)$. On notera $\mathcal{F} = \mathcal{B}(\mathbb{R}^2)$ la tribu de Borel sur $\mathbb{R}^2$.\\
-    \end{itemize}
-}
+\subsection{Propriétés des tribus}
 
 \theorem{Proposition}{Propriété des tribus}{false}{
     Soit $(\Omega, \mathcal{F})$ un espace mesurable. Alors :
@@ -119,43 +92,10 @@
     \end{enumerate} 
 }
 
-\theorem{Proposition}{Propriété des mesures positives}{false}{
-    Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Alors :
-    \begin{enumerate}
-        \item $\mu$ est croissante : si $A,B \in \mathcal{F}$ et $A \subset B$, alors $\mu(A) \leq \mu(B)$,
-        \item $\mu(\bigcup_{n \in \mathbb{N}} A_n) \leq \sum_{n \in \mathbb{N}} \mu(A_n)$ pour toute suite $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$,
-        \item $\mu$ est continue par rapport à la suite croissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite croissante, alors $\mu(\bigcup_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$,
-        \item $\mu$ est continue par rapport à la suite décroissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite décroissante et $\exists n_0 \in \mathbb{N}, \mu(A_{n_0}) < +\infty$, alors $\mu(\bigcap_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$.
-    \end{enumerate}
-}
-\noindent{\textbf{Preuve :}
-\begin{enumerate}
-    \item Soit $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ une suite croissante. Alors :
-    $$\mu(\bigcup_{n \in \mathbb{N}} A_n) = \mu(\bigcup_{k \in \mathbb{N}} B_k) = \sum_{k \in \mathbb{N}} \mu(B_k) = \lim_{n \to +\infty} \sum_{k=0}^n \mu(B_k) = \lim_{n \to +\infty} \mu(A_n)$$
-    \item Soit $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ quelconque. Posons :
-    $$B_0 = A_0, \quad B_1 = A_1 \setminus A_0, \quad B_2 = A_2 \setminus (A_0 \cup A_1), \quad \ldots, \quad B_n = A_n \setminus \left( \bigcup_{k=0}^{n-1} A_k \right), \quad \ldots$$    On remarque que $B_n \subset A_n$ pour tout $n \in \mathbb{N}$, et que $(B_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite de parties deux-à-deux disjointes. On a : $\bigcup_{k=0}^n B_k = \bigcup_{k=0}^n A_k$ pour tout $n \in \mathbb{N}$, donc :
-    $$\bigcup_{k\in \mathbb{N}} A_k = \bigcup_{k\in \mathbb{N}} B_k = \sum_{k\in \mathbb{N}} \mu(B_k) \leq \sum_{k\in \mathbb{N}} \mu(A_k)$$
-    \item Non démontré.
-    \item Non démontré.
-\end{enumerate}}
 
-\noindent{\textbf{Résultat :} \textit{démontre une propriété 1 du polycopié mais non énoncée dans le cours} \\
-    Soit $(A_i)_{i \in \mathbb{N}}$ une famille d'ensembles deux à deux disjoints, et on pose $A_{k} = \emptyset$ pour $k > n$.\\
-    Alors $\mu(\bigcup_{k=0}^{+\infty} A_k) = \mu(\bigcup_{k=0}^{n} A_k) = \sum_{k=0}^{n} \mu(A_k) = \sum_{k=0}^{+\infty} \mu(A_k)$, donc $\mu$ est $\sigma$-additive.\\
-    En particulier, $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$.
-}
+\section{Tribus engendrées et tribus boréliennes}
 
-\ndlr{Reprendre correctement les propositions 3.1 et 3.2 du polycopié.}
-
-\definition{
-    Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$. On dit que $\mu$ est \textbf{$\sigma$-finie} si $\exists (\Omega_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ telle que $\Omega = \bigcup_{n \in \mathbb{N}} \Omega_n$ et $\mu(\Omega_n) < +\infty$ pour tout $n \in \mathbb{N}$.
-}
-\example{$\lambda$ est $\sigma$-finie sur $\mathbb{R}$, car $\mathbb{R} = \bigcup_{n \in \mathbb{N}} [-n, n]$ et $\lambda([-n, n]) = 2n < +\infty$.}
-
-
-\disclaimer{Dans la suite du cours, on suppose toujours que les mesures sont $\sigma$-finies.}
-
-\section{Tribus engendrées, boréliennes, mesure de Lebesgue}
+\subsection{Notion de tribu engendrée}
 
 \definition{
     Soit $A \subset \mathcal{P}(\Omega)$. On appelle \textbf{tribu engendrée par $A$} la plus petite tribu contenant $A$, notée $\sigma(A)$.
@@ -163,6 +103,8 @@
 \remark{$\sigma(A) = \bigcap \{ \mathcal{F} \subset \mathcal{P}(\Omega) : \mathcal{F} \text{ est une tribu et } A \subset \mathcal{F} \}$. Donc $\sigma(A)$ est bien définie.}
 
 \vocabulary{Si $\Omega$ est métrique (ou topologique), on appelle \textbf{tribu de Borel} la tribu engendrée par les ouverts de $\Omega$, notée $\mathcal{B}(\Omega)$.}
+
+\subsection{Exemples et étude de la tribu de Borel sur $\mathbb{R}^d$}
 
 \example{
     \begin{enumerate}
@@ -203,7 +145,7 @@
             \end{tikzpicture}
         \end{center}
         \item Si $\Omega$ est fini ou dénombrable, alors $\sigma(\{\{x\} : x \in \Omega\}) = \mathcal{P}(\Omega)$.
-        \item Si $\Omega$ est muni de $\mathcal{F}$ engendrée par une partition finie ou dénombrable de $\Oùega$, caractériser $\mu$ sur $(\Omega, \mathcal{F})$ revient à se donner $m_k = \mu(A_k)$ pour tout $k \in \mathbb{N}$ : On aura $\mu(\bigcup_{k \in I} A_k) = \sum_{k \in I} m_k$ pour tout $I \subseteq \mathbb{N}$.\\
+        \item Si $\Omega$ est muni de $\mathcal{F}$ engendrée par une partition finie ou dénombrable de $\Omega$, caractériser $\mu$ sur $(\Omega, \mathcal{F})$ revient à se donner $m_k = \mu(A_k)$ pour tout $k \in \mathbb{N}$ : On aura $\mu(\bigcup_{k \in I} A_k) = \sum_{k \in I} m_k$ pour tout $I \subseteq \mathbb{N}$.\\
         Si de plus $\sum_{k \in \mathbb{N}} m_k = 1$, alors $\mu$ est une probabilité.
         \item On pose $\Omega = \mathbb{R}^2$, $\sigma(\{\{x\}, x\in \mathbb{R}^2\}) = \{A, A^c \mid A \subset \mathbb{R}^2 \text{ est dénombrable}\}$, la tribu des parties dénombrables et de leurs complémentaires. C'est une tribu très petite, juste assez grande pour contenir des éléments dénombrables : ce n'est pas la bonne tribu pour définir une mesure d'aire.
         \item A priori, on veut pouvoir mesurer les rectangles. $\mathcal{F} = \sigma(\{[a,b] \times [c,d] : a < b, c < d\})$ est la tribu engendrée par les rectangles. On peut montrer que $\sigma(\{[a,b] \times [c,d] : a < b, c < d\}) = \mathcal{B}(\mathbb{R}^2)$.
@@ -216,6 +158,7 @@
         \end{itemize}
     \end{enumerate}
 }
+
 \begin{center}
 \begin{tikzpicture}[scale=0.85, >=stealth]
 
@@ -238,7 +181,7 @@
     coordinates {(4.6, 1.2) (5.6, 1.5) (5.7, 0.7) (5.0, 0.3) (4.5, 0.6)};
   \node at (5.1, 0.8) {\small $\mathcal{O}_2$};
 
-  % Point x et sa boule B(x, eps_x) strictement incluse dans O
+  % Point x et sa boule B(x, eps_x) strictly incluse dans O
   \coordinate (X) at (1.8, 2.5);
   \fill (X) circle (2pt) node[below left] {$x$};
 
@@ -298,6 +241,83 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
 \remark{
     Il est impossible d'exprimer simplement un élément générateur de $\mathcal{B}(\mathbb{R}^d)$. Heureusement, pour définir $\mu$ sur $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$, il suffit de définir $\mu$ sur les pavés (ou même des coins).
 }
+
+
+\section{Mesures positives et probabilités}
+
+\subsection{Définitions et cadres d'étude}
+
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu : \mathcal{F} \to \mathbb{R}_+ \cup \{+\infty\}$.
+    On dit que $\mu$ est une \textbf{mesure positive} si :
+    \begin{enumerate}
+        \item $\mu(\emptyset) = 0$,
+        \item $\mu$ est \textbf{$\sigma$-additive} : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ sont deux-à-deux disjoints, alors $\mu\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}} \mu(A_n)$.
+    \end{enumerate}
+}
+\remark{On commence à retrouver des notions liées au cours PR4 : la définition d'une probabilité.}
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$.\\
+    On dit que $\mu$ est une \textbf{probabilité} si $\mu(\Omega) = 1$.
+}
+\vocabulary{On appelle $(\Omega, \mathcal{F}, \mu)$ un \textbf{espace mesuré} si $\mu$ est une mesure positive sur $(\Omega, \mathcal{F})$. On appelle $(\Omega, \mathcal{F}, \mathbb{P})$ un \textbf{espace probabilisé} si $\mathbb{P}$ est une probabilité sur $(\Omega, \mathcal{F})$.}
+
+\cexample{Une mesure $\mu$ qui n'est pas une probabilité est la mesure de Lebesgue sur $\mathbb{R}$ : mesurer toute la droite des réels donne $+\infty$, et pas $1$.}
+
+\example{
+    \begin{itemize}
+        \item On reprend l'idée de la course. On pose $\Omega = \mathbb{R}_+$. $\mathcal{F} = \{ \bigcup_{k \in I}  [\frac{k}{10}, \frac{k+1}{10}[ \; \mid I \subseteq \mathbb{N} \}$ est une tribu qui convient (la tribu du chronomètre au $10^e$).
+        \item On reprend l'idée du tirage. On peut faire plusieurs choix :
+        \begin{enumerate}
+            \item On pose $\Omega_a = \{ \omega \in \{0,1\}^{b+r} : \sum_{i=1}^{b+r} \omega_i = b \}$. On prend $\mathcal{F}_a = \mathcal{P}(\Omega_a)$, la tribu de toutes les parties de $\Omega_a$. On peut définir une probabilité uniforme sur $\Omega_a$ : $\mathbb{P}_a(A) = \frac{|A|}{|\Omega_a|}$ pour tout $A \subseteq \Omega_a$.
+            \item En imaginant les boules numérotées : $\Omega_b = \sigma_{b+r}$, l'ensemble des permutations de $b+r$ éléments. On garde la même tribu et probabilité que dans le cas précédent.
+            \item $\Omega_c = \{ f : \{1, \ldots, k\} \to \{1, \ldots, b+r\} : f \text{ est injective} \}$, l'ensemble des fonctions injectives de $\{1, \ldots, k\}$ dans $\{1, \ldots, b+r\}$. On garde la même tribu et probabilité que dans le cas précédent.
+            \item \textit{(plus dangereux)} $\Omega_d = \{ f : \{1, \ldots, k\} \to \{0,1\} \mid \sum_{i=1}^k f(i) \leq b, \sum_{i=1}^k (1-f(i)) \leq r \}$. $\mathcal{F} = \mathcal{P}(\Omega_d)$ convient, mais on ne peut pas choisir la probabilité uniforme !
+        \end{enumerate}
+        \item Pour $\Omega = \mathbb{R}^2$ (le champ). C'est plus compliqué. $\mathcal{F}$ doit contenir \textit{a minima} tous les rectangles ouverts et les disques ouverts (et leurs réunions dénombrables et passage au complémentaire). On verra que n'importe quel ouvert de $\mathbb{R}^2$ est dans $\mathcal{F}$.\\
+        Attention, $\mathcal{F} \neq \mathcal{P}(\mathbb{R}^2)$. On notera $\mathcal{F} = \mathcal{B}(\mathbb{R}^2)$ la tribu de Borel sur $\mathbb{R}^2$.\\
+    \end{itemize}
+}
+
+\definition{
+    Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$. On dit que $\mu$ est \textbf{$\sigma$-finie} si $\exists (\Omega_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ telle que $\Omega = \bigcup_{n \in \mathbb{N}} \Omega_n$ et $\mu(\Omega_n) < +\infty$ pour tout $n \in \mathbb{N}$.
+}
+\example{$\lambda$ est $\sigma$-finie sur $\mathbb{R}$, car $\mathbb{R} = \bigcup_{n \in \mathbb{N}} [-n, n]$ et $\lambda([-n, n]) = 2n < +\infty$.}
+
+\disclaimer{Dans la suite du cours, on suppose toujours que les mesures sont $\sigma$-finies.}
+
+\subsection{Propriétés fondamentales des mesures}
+
+\theorem{Proposition}{Propriété des mesures positives}{false}{
+    Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Alors :
+    \begin{enumerate}
+        \item $\mu$ est croissante : si $A,B \in \mathcal{F}$ et $A \subset B$, alors $\mu(A) \leq \mu(B)$,
+        \item $\mu(\bigcup_{n \in \mathbb{N}} A_n) \leq \sum_{n \in \mathbb{N}} \mu(A_n)$ pour toute suite $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$,
+        \item $\mu$ est continue par rapport à la suite croissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite croissante, alors $\mu(\bigcup_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$,
+        \item $\mu$ est continue par rapport à la suite décroissante : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite décroissante et $\exists n_0 \in \mathbb{N}, \mu(A_{n_0}) < +\infty$, alors $\mu(\bigcap_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$.
+    \end{enumerate}
+}
+\noindent{\textbf{Preuve :}
+\begin{enumerate}
+    \item Soit $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ une suite croissante. Alors :
+    $$\mu(\bigcup_{n \in \mathbb{N}} A_n) = \mu(\bigcup_{k \in \mathbb{N}} B_k) = \sum_{k \in \mathbb{N}} \mu(B_k) = \lim_{n \to +\infty} \sum_{k=0}^n \mu(B_k) = \lim_{n \to +\infty} \mu(A_n)$$
+    \item Soit $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ quelconque. Posons :
+    $$B_0 = A_0, \quad B_1 = A_1 \setminus A_0, \quad B_2 = A_2 \setminus (A_0 \cup A_1), \quad \ldots, \quad B_n = A_n \setminus \left( \bigcup_{k=0}^{n-1} A_k \right), \quad \ldots$$    On remarque que $B_n \subset A_n$ pour tout $n \in \mathbb{N}$, et que $(B_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite de parties deux-à-deux disjointes. On a : $\bigcup_{k=0}^n B_k = \bigcup_{k=0}^n A_k$ pour tout $n \in \mathbb{N}$, donc :
+    $$\bigcup_{k\in \mathbb{N}} A_k = \bigcup_{k\in \mathbb{N}} B_k = \sum_{k\in \mathbb{N}} \mu(B_k) \leq \sum_{k\in \mathbb{N}} \mu(A_k)$$
+    \item Non démontré.
+    \item Non démontré.
+\end{enumerate}}
+
+\noindent{\textbf{Résultat :} \textit{démontre une propriété 1 du polycopié mais non énoncée dans le cours} \\
+    Soit $(A_i)_{i \in \mathbb{N}}$ une famille d'ensembles deux à deux disjoints, et on pose $A_{k} = \emptyset$ pour $k > n$.\\
+    Alors $\mu(\bigcup_{k=0}^{+\infty} A_k) = \mu(\bigcup_{k=0}^{n} A_k) = \sum_{k=0}^{n} \mu(A_k) = \sum_{k=0}^{+\infty} \mu(A_k)$, donc $\mu$ est $\sigma$-additive.\\
+    En particulier, $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$.
+}
+
+\ndlr{Reprendre correctement les propositions 3.1 et 3.2 du polycopié.}
+
+
+\section{La mesure de Lebesgue sur $\mathbb{R}^d$}
 
 \theorem{Théorème}{}{true}{
     Soient $a \leq b, c \leq d$ des réels.
@@ -389,6 +409,7 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
   \end{scope}
 
 \end{tikzpicture}
+
 
 \newpage
 \tableofcontents
