@@ -26,8 +26,8 @@
 
 \docTitle{Chapitre 1.3 : Compacité et complétude\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
 
-\section{Compacité}
-\subsection{Définition et premières propriétés}
+\subsection{Compacité}
+\subsubsubsection{Définition et premières propriétés}
 
 \reminder{Toute suite réelle $(x_n)_{n \in \mathbb{N}}$ admet une sous-suite monotone.}
 
@@ -83,7 +83,7 @@ La suite $\{x_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ est sous-suite d'une suit
 
 \cexample{Soit $X = \mathcal{C}([0,1])$ muni de la norme $\| \cdot \|_\infty$. Alors $\overline{B}(0,1)$ (un ferme et borné) n'est pas un sous-ensemble compact de $X$. En effet, la suite $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(x) = x^n$ est contenue dans $\overline{B}(0,1)$ mais ne possède pas de sous-suite convergente dans $X$.}
 
-\subsection{Lien avec la continuité}
+\subsubsubsection{Lien avec la continuité}
 
 \theorem{Théorème}{Image d'un compact par une fonction continue}{false}{
     Soit $K \subset \mathbb{R}^n$ un compact et $f : K \to \mathbb{R}^m$ une fonction continue. Alors $f(K)$ est un compact de $\mathbb{R}^m$.
@@ -104,7 +104,7 @@ Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite conve
 \ndlr{cf. Laurent pour la preuve.}
 
 
-\subsection{Équivalence des normes}
+\subsubsubsection{Équivalence des normes}
 
 \theorem{Théoreme}{Équivalence des normes en dimension}{true}{
     Soit $K$ un espace vectoriel de dimension finie. Toutes les normes sur $K$ sont équivalentes.
@@ -126,7 +126,7 @@ Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite conve
     Ainsi, on a montré que $\alpha \|x\|_\infty \leq N(x) \leq \beta \|x\|_\infty$ pour tout $x \in \mathbb{R}^n$, et donc que les normes $N$ et $\| \cdot \|_\infty$ sont équivalentes. \hfill $\square$
 \end{itemize}
 
-\section{Densité et séparabilité}
+\subsection{Densité et séparabilité}
 \definition{
     Soit $E$ un espace vectoriel normé et $A \subset E$. On dit que $A$ est \textbf{dense} dans $E$ si $\overline{A} = E$.
 }
@@ -139,8 +139,8 @@ Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite conve
 
 \example{$\mathbb{R}$ est séparable, car $\mathbb{Q}$ est dense dans $\mathbb{R}$ et $\mathbb{Q}$ est au plus dénombrable.}
 
-\section{Complétude}
-\subsection{Suites de Cauchy}
+\subsection{Complétude}
+\subsubsubsection{Suites de Cauchy}
 \definition{Une suite $(x_n)_{n \in \mathbb{N}}$ de $E$ est dite \textbf{de Cauchy} si pour tout $\varepsilon > 0$ il existe $N \in \mathbb{N}$ tel que,
     \[
     \forall(n, m) \in \mathbb{N}^2, \quad m \ge N \text{ et } n \ge N \implies \|x_n - x_m\| \le \varepsilon.
@@ -183,7 +183,7 @@ et notre suite est majorée.
     Si une suite de Cauchy possède une sous suite extraite convergente vers une limite $\ell$ alors elle converge vers $\ell$.
 }
 \ndlr{cf. Laurent pour la preuve.}
-\subsection{Définition et exemples}
+\subsubsubsection{Définition et exemples}
 
 \definition{
     Un espace vectoriel normé $E$ est dit \textbf{complet} si toute suite de Cauchy de $E$ converge vers un élément de $E$.
@@ -210,7 +210,7 @@ Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $(u_n)_{n \in \mathb
 
 \newpage
 \tableofcontents
-\section*{Crédits}
+\subsection*{Crédits}
 Ce cours provient du polycopié de cours de l'Université Paris Cité réalisé par Alessandro Zilio enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
 Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
 Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
