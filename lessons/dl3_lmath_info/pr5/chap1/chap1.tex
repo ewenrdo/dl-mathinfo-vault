@@ -93,6 +93,7 @@
 }
 
 
+
 \section{Tribus engendrées et tribus boréliennes}
 
 \subsection{Notion de tribu engendrée}
@@ -103,6 +104,11 @@
 \remark{$\sigma(A) = \bigcap \{ \mathcal{F} \subset \mathcal{P}(\Omega) : \mathcal{F} \text{ est une tribu et } A \subset \mathcal{F} \}$. Donc $\sigma(A)$ est bien définie.}
 
 \vocabulary{Si $\Omega$ est métrique (ou topologique), on appelle \textbf{tribu de Borel} la tribu engendrée par les ouverts de $\Omega$, notée $\mathcal{B}(\Omega)$.}
+
+\method{Montrer qu'une tribu engendrée est inclue dans une tribu donnée}{
+    Soit $\mathcal{F}$ une tribu sur $\Omega$ et $A \subset \mathcal{P}(\Omega)$. Si $A \subset \mathcal{F}$, alors $\sigma(A) \subset \mathcal{F}$.\\
+    Alors, il suffit de montrer que les générateurs de $\sigma(A)$ sont dans $\mathcal{F}$ pour montrer que $\sigma(A) \subset \mathcal{F}$.
+}
 
 \subsection{Exemples et étude de la tribu de Borel sur $\mathbb{R}^d$}
 

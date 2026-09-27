@@ -1,0 +1,219 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°4}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+\usepackage{paracol}
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $9,10$\\
+\hline
+Groupes et actions & $\sout{6,7,8}$\\
+\hline
+Calcul différentiel & $\sout{2,4,5}$\\
+\hline
+Systèmes d'exploitation & $\emptyset$\\
+\hline
+Algorithmique & $1,3$\\
+\hline
+Programmation fonctionnelle & $\emptyset$\\
+\hline
+Anglais & $\emptyset$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+\exercise{26}{Propriétés des groupes finis}{
+    Soit $(G,*)$ un groupe fini.
+    \begin{enumerate}
+        \item On suppose que $G$ est d'ordre pair. Démontrer que le cardinal de l'ensemble $\{g \in G \mid g = g^{-1}\}$ est pair et non nul.
+        \item On suppose que l'application $G \to G, \; x \mapsto x^2$ est bijective. Démontrer que $G$ est d'ordre impair.
+    \end{enumerate}
+}
+
+\exercise{6}{Sous-groupes de $\mathbb{Z}/n\mathbb{Z}$}{
+    Soit $n \in \mathbb{N}\setminus\{0\}$.
+    \begin{enumerate}
+        \item Démontrer que les groupes $\mathbb{Z}/n\mathbb{Z}$ et $\mathbb{U}_n$ sont isomorphes.
+        \item En déduire que les seuls sous-groupes de $\mathbb{Z}/n\mathbb{Z}$ sont : $k\mathbb{Z}/n\mathbb{Z}$ ($k$ divisant $n$).
+    \end{enumerate}
+}
+
+\exercise{7}{Homomorphismes entre groupes d'ordres premiers entre eux}{
+    Soient $G$ et $G'$ deux groupes finis. On suppose que les ordres de ces groupes sont premiers entre eux. Déterminer tous les homomorphismes de $G$ dans $G'$.
+}
+
+\switchcolumn
+
+\exercise{8}{Image d'un sous-groupe par un morphisme}{
+    Soit $f : G \to H$ un morphisme de groupes finis et $K$ un sous-groupe de $G$.
+    \begin{enumerate}
+        \item Montrer que l'ordre de $f(K)$ divise les ordres de $K$ et de $H$.
+        \item Montrer que si l'ordre de $K$ est premier à l'ordre de $H$ alors $K \subset \mathrm{Ker}(f)$.
+    \end{enumerate}
+}
+
+\exercise{18}{Isomorphismes et morphismes de groupes}{
+    \begin{enumerate}
+        \item Le groupe $(\mathbb{R}^*, \times)$ est-il isomorphe au groupe $(\mathbb{C}^*, \times)$ ?
+        \item Le groupe $(\mathbb{C}, +)$ est-il isomorphe au groupe $(\mathbb{C}^*, \times)$ ?
+        \item Trouver tous les endomorphismes de $(\mathbb{Q}, +)$.
+        \item Trouver tous les morphismes de $\mathbb{Z}$ dans $\mathbb{Q}$.
+    \end{enumerate}
+}
+
+\exercise{19}{Étude d'un groupe de matrices}{
+    Soit $G$ l'ensemble des matrices de la forme :
+    \[
+    \begin{pmatrix} 1 & 0 \\ a & \varepsilon \end{pmatrix}
+    \]
+    avec $a \in \mathbb{Z}$ et $\varepsilon \in \{-1, 1\}$. On pose $r = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$ et $s = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$.
+    \begin{enumerate}
+        \item 
+        \begin{enumerate}
+            \item Montrer que $G$ est un sous-groupe de $(\mathrm{GL}_2(\mathbb{R}), \times)$.
+            \item Est-il abélien ?
+        \end{enumerate}
+        \item 
+        \begin{enumerate}
+            \item Montrer que l'application
+            \[
+            f : \mathbb{Z} \to G, \quad k \mapsto \begin{pmatrix} 1 & 0 \\ k & 1 \end{pmatrix}
+            \]
+            est un morphisme de groupes de $(\mathbb{Z}, +)$ dans $G$.
+            \switchcolumn
+            \newpage
+            \item Vérifier que $\mathrm{Im}(f) = \langle r \rangle$.
+            \item Montrer que $\langle r \rangle$ est isomorphe à $\mathbb{Z}$ puis que $r^k$ est d'ordre infini pour chaque entier relatif non nul $k$.
+            \item Montrer que, pour tout sous-groupe $H$ de $G$, il existe un entier naturel $n$ tel que $H \cap \langle r \rangle = \langle r^n \rangle$.
+        \end{enumerate}
+        \item 
+        \begin{enumerate}
+            \item Calculer $sr^k$ pour $k \in \mathbb{Z}$ et justifier que $G$ est engendré par $r$ et $s$.
+            \item Quel est l'ordre de $sr^k$ ?
+        \end{enumerate}
+        \item Soient $m$ et $n$ deux entiers relatifs.
+        \begin{enumerate}
+            \item Montrer qu'il existe un unique morphisme de groupes $\varphi$ de $G$ dans $G$ tel que $\varphi(r) = r^m$ et $\varphi(s) = sr^n$. On pourra commencer par supposer l'existence d'un tel morphisme et exprimer pour chaque entier $k$ les éléments $\varphi(r^k)$ et $\varphi(sr^k)$ en fonction de $k$.
+            \item Préciser pour quelles valeurs du couple $(m, n)$ on obtient un automorphisme de $G$.
+        \end{enumerate}
+    \end{enumerate}
+}
+
+\exercise{1}{Normes}{
+    Soient $N_1, N_2 : \mathbb{R}^n \to \mathbb{R}$ deux normes. On définit $N : \mathbb{R}^n \to \mathbb{R}$ par $N(x) = N_1(x) + 2N_2(x)$. Montrer que $N$ est une norme.
+}
+
+\exercise{2}{Topologie}{
+    Pour chacun des ensembles suivants, déterminer leur intérieur et leur adhérence. Sont-ils ouverts ? Fermés ? \textit{On n'attend pas de justification pour cet exercice.}
+    \begin{itemize}
+        \item $A = [-1, 1[$ un ensemble de $\mathbb{R}$.
+        \item $B = \overline{\mathbb{B}}(0, 2) \setminus \mathbb{B}(0, 1)$ un ensemble de $\mathbb{R}^2$. \textit{Faire un dessin vous aidera certainement.}
+    \end{itemize}
+}
+
+\exercise{3}{Topologie}{
+    Soit $I = [1, +\infty[ \subset \mathbb{R}$. Montrer que l'intérieur de $I$ est égal à $]1, +\infty[$. \textit{Une preuve soignée est attendue. Tout raisonnement bien rédigé bien qu'incomplet sera récompensé.}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{4}{Question de cours}{
+    Montrer que $\mathcal{B}(\mathbb{R}^d)$ est généré par $\{]-inf, a_i[ | a_i \in \mathbb{Q}\}$, où $\mathcal{B}(\mathbb{R}^d)$ est la tribu borélienne de $\mathbb{R}^d$.
+}
+
+\exercise{6}{Préparation du CM}{Passer le QCM "Rappels de cours 1" sur la page Moodle de Intégration et Probabilités.}
+\exercise{1}{Questions de cours}{
+    \textit{(on pourra, dans cet exercice uniquement, donner les réponses sans justification)}
+    \begin{enumerate}
+        \item Donner la définition de tribu sur un univers $\Omega$.
+        \item Soient $k \in \mathbb{N}^*$, $\ell \in \mathbb{N}^*$, quel est le cardinal de $\{B \in \mathcal{P}(\{1,\dots,\ell\}) : \mathrm{card}(B) = k\}$ ?
+        \item Soit $(\Omega, \mathcal{F}, \mathbb{P})$ un espace probabilisé. Pour un $n \in \mathbb{N}^*$ on se donne $\{A_1, A_2, \dots, A_n\}$ des éléments de $\mathcal{F}$ formant une partition de $\Omega$ et on suppose que $\mathbb{P}(A_i) > 0$, pour tout $i \in \{1,\dots,n\}$. Pour $B \in \mathcal{F}$, que vaut
+        \[
+        \sum_{k=1}^n \mathbb{P}(B \mid A_i)\mathbb{P}(A_i) \quad ?
+        \]
+    \end{enumerate}
+}
+
+\exercise{2}{Étude d'une mesure de probabilité sur $\mathbb{N}$}{
+    On considère $\Omega = \mathbb{N}$ muni de la tribu de ses parties, et d'une mesure de probabilité $\mathbb{P}$ telle que
+    \[
+    \mathbb{P}(\{0\}) = \mathbb{P}(\{1\}), \quad \mathbb{P}(\{2\}) = 0, \quad \text{et}
+    \]
+    \[
+    \mathbb{P}(\{k\}) = 3^{2-k}, \quad \forall k \in \mathbb{N}, k \ge 3.
+    \]
+    \begin{enumerate}
+        \item Établir que
+        \[
+        \mathbb{P}(\mathbb{N} \setminus \{0, 1, 2\}) = \frac{1}{2}
+        \]
+        \item En déduire $\mathbb{P}(\{0\}), \mathbb{P}(\{1\})$.
+        \item Pour tout $x \in (-3, 3)$ montrer que
+        \[
+        \sum_{k \in \mathbb{N}} x^k 3^{-k} = \frac{3}{3 - x}.
+        \]
+        \switchcolumn
+        \newpage
+        En déduire que
+        \[
+        \sum_{k \in \mathbb{N}, k \ge 3} k 3^{2-k} = \frac{7}{4},
+        \]
+        et calculer finalement
+        \[
+        \sum_{k \in \mathbb{N}} k \mathbb{P}(\{k\}).
+        \]
+        \item Calculer $\sum_{k \in \mathbb{N}} k^2 \mathbb{P}(\{k\})$.
+    \end{enumerate}
+}
+
+\exercise{3}{Mesure de probabilité paramétrique}{
+    Soit $\lambda > 0$. Existe-t-il une constante $c(\lambda)$ telle que
+    \[
+    \mathbb{P}(\{i\}) = c(\lambda) \frac{(i + 1)\lambda^i}{i!} \quad \text{pour tout } i \in \mathbb{N},
+    \]
+    définisse une probabilité sur $\mathbb{N}$ ?
+}
+
+\exercise{4}{Mesures définies par une densité}{
+    Soit $f : \mathbb{R} \to \mathbb{R}_+$ une fonction positive, continue par morceaux. On admet qu'il existe une unique mesure positive $\mu$ sur $\mathcal{B}(\mathbb{R})$ telle pour tous $a < b$,
+    \[
+    \mu([a,b]) = \int_a^b f(x) dx.
+    \]
+    \begin{enumerate}
+        \item Soit $a \in \mathbb{R}$, que vaut $\mu(\{a\})$ ?
+        \item Peut-il y avoir une différence entre $\mu((a,b))$, $\mu((a,b])$ et $\mu([a,b])$ ?
+        \item Que vaut $\mu(\mathbb{Q})$ ?
+        \item Exprimer $\mu(\mathbb{R} \setminus ([-2, -1] \cup [1, 2]))$ en fonction de $f$. Calculer cette quantité lorsque $f(x) = \exp(-|x|), x \in \mathbb{R}$
+        \item Exprimer $\mu\left(\bigcup_{n \in \mathbb{N}} [0, n]\right)$ en fonction de $f$. Calculer cette quantité lorsque $f(x) = \frac{1}{1+x^2}, x \in \mathbb{R}$.
+        \item À quelle condition sur $f$ la mesure $\mu$ est-elle finie ? À quelle condition est-elle une probabilité ? Donner un exemple.
+        \item Comment appelle-t-on $\mu$ lorsque $f \equiv 1$ ?
+    \end{enumerate}
+}
+\end{paracol}
+
+\end{document}
