@@ -50,12 +50,23 @@ La bibliothèque standard de OCaml fournit plusieurs exceptions courantes prête
     \item \texttt{Not\_found} : Déclenchée lorsqu'un élément cherché n'existe pas.
 \end{itemize}
 
+\remark{Ces exceptions sont de type \texttt{exn}, qui est un type prédéfini dans OCaml. Elles peuvent être levées automatiquement par le système ou manuellement par le programmeur (via \texttt{raise} ou \texttt{failwith}).}
+
+
 \example{Exemples d'expressions provoquant des exceptions natives :}
 \begin{lstlisting}[language=Caml]
 1 / 0;;                (* Exception: Division_by_zero *)
 List.hd [];;           (* Exception: Failure "hd" *)
 String.get "hello" 17; (* Exception: Invalid_argument "index out of bounds" *)
 List.assoc "z" [("a", 5)];; (* Exception: Not_found *)
+\end{lstlisting}
+
+\example{Exemple d'une fonction qui lève une exception prédéfinie :}
+\begin{lstlisting}[language=Caml]
+let rec mem x l =
+  match l with
+  | [] -> raise Not_found
+  | h :: r -> if h = x then true else mem x r;;
 \end{lstlisting}
 
 \subsection{La fonction \texttt{failwith}}

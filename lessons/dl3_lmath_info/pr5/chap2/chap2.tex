@@ -1,0 +1,244 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info PR5}
+\fancyhead[C]{Intégration et probabilités}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 2 : Applications mesurables et intégrales généralisées}
+
+\section{Introduction et exemples}
+
+\example{On fait un lancer simultané de deux dés équilibrés à six faces.
+    \begin{itemize}
+        \item S'ils sont distinguables, l'espace des résultats est $\Omega_1 = \{1,2,3,4,5,6\}^2$ (avec $\mathcal{F}_1 = \mathcal{P}(\Omega_1)$) et on peut définir la probabilité uniforme $\mathbb{P}$ sur $(\Omega_1, \mathcal{P}(\Omega_1))$ par $\mathbb{P}(\{(i,j)\}) = \frac{1}{36}$ pour tout $i,j \in \{1,\ldots,6\}$.
+        \item S'ils sont indistingables, l'espace des résultats est $\Omega_2 = \{(i,j) \in \{1,2,3,4,5,6\}^2 : i \leq j\}$ (avec $\mathcal{F}_2 = \mathcal{P}(\Omega_2)$).
+    \end{itemize}
+    On a une application $f : \Omega_1 \to \Omega_2$ définie par 
+    \begin{align*}
+        f(i,j) = \begin{cases}
+            (i,j) & \text{si } i \leq j,\\
+            (j,i) & \text{si } i > j.
+        \end{cases}
+    \end{align*}
+    On a $\mathbb{P}(f^{-1}(\{(i,j)\})) = \mathbb{P}(\{(i,j), (j,i)\}) = \frac{2}{36} = \frac{1}{18}$ si $i < j$ et $\mathbb{P}(f^{-1}(\{(i,i)\})) = \mathbb{P}(\{(i,i)\}) = \frac{1}{36}$ si $i = j$. Ainsi, la probabilité uniforme sur $\Omega_2$ n'est pas l'image de la probabilité uniforme sur $\Omega_1$ par $f$.
+}
+\remark{On peut définir la probabilité $\mathbb{P}_f$ sur $(\Omega_2, \mathcal{F}_2)$ par $\mathbb{P}_f(A) = \mathbb{P}(f^{-1}(A))$ pour tout $A \in \mathcal{F}_2$. On a $\mathbb{P}_f(\{(i,j)\}) = \frac{1}{18}$ si $i < j$ et $\mathbb{P}_f(\{(i,i)\}) = \frac{1}{36}$ si $i = j$.\\
+    Ainsi, la probabilité uniforme sur $\Omega_2$ est l'image de la probabilité uniforme sur $\Omega_1$ par $f$.
+}
+
+\remark{En particulier, on sait mesurer $\Omega_2$ si on sait mesure $f^{-1}(\Omega_2)$.}
+
+\example{
+    Posons $E = [-1,1]$ muni de sa tribu $\mathcal{E} = \mathcal{B}([-1,1])$ et de la mesure de Lebesgue $\mu = \frac{\lambda_{|[-1,1]|}}{2}$ (qui est une probabilité). La densité est constante sur $E$ (on reverra ça plus tard), \textit{i.e.} $\mu(A) = \int_A \frac{1}{2} d\lambda$ pour tout $A \in \mathcal{E}$.\\
+    On considère aussi $F = \mathbb{R}$ muni de sa tribu $\mathcal{F} = \mathcal{B}(\mathbb{R})$.
+    On définit l'application $f : E \to F$ par 
+    $$f(x) = \begin{cases}
+        ln(-x) & \text{si } x < 0,\\
+        0 & \text{si } x = 0,\\
+        ln(x) & \text{si } x > 0.
+    \end{cases}$$
+    On veut trouver la mesure $\mu_f$ de $F$.
+    \begin{itemize}
+        \item Si $a < b < 0$, $\mu_f(]a,b[) = \mu(f^{-1}(]a,b[)) = \mu(]-e^b,-e^a[) = \frac{1}{2} (e^b - e^a)$,
+        \item Si $0 < a < b$, $\mu_f(]a,b[) = \mu(f^{-1}(]a,b[)) = \mu(]e^{-b},e^{-a}[) = \frac{e^{-a} - e^{-b}}{2}$,
+        \item Si $0 < a < b$, $\mu_f(]a,b[) = \mu(f^{-1}(]a,b[)) = \frac{1 - e^{a}}{2} + \frac{1 - e^{-b}}{2} = 1 - \frac{e^{a} + e^{-b}}{2}$.
+    \end{itemize}
+}
+
+\section{Applications mesurables, mesures image}
+\subsection{Généralités}
+\definition{
+    Soient $(E, \mathcal{E})$ et $(F, \mathcal{F})$ deux espaces mesurables. Une application $f : E \to F$ est dite \textit{mesurable} et on note $f : E \toMesurable F$ (ou $f \circ \mu$) si pour tout $B \in \mathcal{F}$, $f^{-1}(B) \in \mathcal{E}$.
+}
+
+\definition{
+    Soit $(E, \mathcal{E}, \mu)$ un espace mesuré. Soit $f : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ une application mesurable.\\
+    On définit la mesure image de $\mu$ par $f$, et on note $\mu_f$, par la mesure sur $(F, \mathcal{F})$ définie par :
+    $$\forall B \in \mathcal{F}, \quad \mu_f(B) = \mu(f^{-1}(B)).$$
+}
+\remark{$\mu_f$ est bien un mesure sur $(F, \mathcal{F})$ et a la même mesure totale que $\mu$ : $\mu_f(F) = \mu(f^{-1}(F)) = \mu(E)$.}
+\remark{Si $\mu$ est une probabilité, alors $\mu_f$ est aussi une probabilité.}
+
+\theorem{Propriétés}{}{false}{
+    Soit $(E, \mathcal{E})$ un espace mesurable et $A \in \mathcal{P}(E)$.
+    \begin{enumerate}
+        \item $\indic{A} : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est mesurable si et seulement si $A \in \mathcal{E}$,
+        \item Si $f : (E, \mathcal{E}) \toMesurable (G, \mathcal{G})$ et $g : (G, \mathcal{G}) \toMesurable (F, \mathcal{F})$ sont mesurables, alors $g \circ f : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ est mesurable,
+        \item Si $\mathcal{F} \subset \mathcal{F}$ : $\sigma(\mathcal{C}) = \mathcal{F}$, $f  : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ est mesurable si et seulement si $\forall C \in \mathcal{C}, f^{-1}(C) \in \mathcal{E}$.\\
+        \textit{En particulier}, si $F = \mathbb{R}$ et $\mathcal{F} = \mathcal{B}(\mathbb{R})$, alors pour vérifier que $f : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est mesurable il faut et il suffit que $\forall a \in \mathbb{R}, \{ x \in E : f(x) \leq a \} \in \mathcal{E}$,
+        \item $f : (\mathbb{R}, \mathcal{B}(\mathbb{R})) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est dite borélienne. $f$ est continue ou continue par morceaux sur $\mathbb{R}$ implique que $f$ est borélienne. ($\indic{\cdot}$ est borélienne).
+        \item $f : (E, \mathcal{E}) \toMesurable (\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ est mesurable si et seulement si $\forall i \in \{1,\ldots,d\}, f_i : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est mesurable.
+    \end{enumerate}
+}
+
+\subsection{Applications à valerus réelles mesurables et applications étagées}
+
+\vocabulary{On note $\mathcal{M} = \{ f : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R})) \}$ l'ensemble des applications à valeurs réelles mesurables sur $(E, \mathcal{E})$, et $\mathcal{M}_+ = \{ f \in \mathcal{M} : f \geq 0 \}$ l'ensemble des applications à valeurs réelles mesurables positives sur $(E, \mathcal{E})$.}
+
+\definition{
+    Soient $(\alpha_, \ldots, \alpha_n) \in \mathbb{R}^n$ et $(A_1, \ldots, A_n) \in \mathcal{E}^n$. Considérons :
+    $$f = \sum_{i=1}^n \alpha_i \indic{A_i} \text{ est dit étagée }.$$
+    On note $\mathfrak{E} = \{ f \text{ est étagée } \}$ l'ensemble des applications étagées sur $(E, \mathcal{E})$.
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9, >=stealth]
+
+% =========================================================
+% GRAPH 1: FONCTION EN ESCALIER (GAUCHE)
+% =========================================================
+\begin{scope}[shift={(0,0)}]
+    % Titre
+    \node[font=\small\itshape, color=black!70] at (3.25, 3.9) {Fonction escalier sur des intervalles $[x_i, x_{i+1}[$};
+
+    % Axes
+    \draw[->, thick] (-0.5,0) -- (7,0) node[right] {$x$};
+    \draw[->, thick] (0,-0.5) -- (0,3.5) node[above] {$y$};
+
+    % Graduation X
+    \draw (1,0.08) -- (1,-0.08) node[below] {$x_0$};
+    \draw (2.5,0.08) -- (2.5,-0.08) node[below] {$x_1$};
+    \draw (4,0.08) -- (4,-0.08) node[below] {$x_2$};
+    \draw (6,0.08) -- (6,-0.08) node[below] {$x_3$};
+
+    % Valeurs Y
+    \draw[dotted] (0,1) node[left] {$c_1$} -- (2.5,1);
+    \draw[dotted] (0,2.5) node[left] {$c_2$} -- (4,2.5);
+    \draw[dotted] (0,1.8) node[left] {$c_3$} -- (6,1.8);
+
+    % Palier 1 : [x0, x1[ -> c1
+    \draw[very thick, blue] (1,1) -- (2.5,1);
+    \fill[blue] (1,1) circle (2pt);
+    \draw[blue, fill=white] (2.5,1) circle (2pt);
+
+    % Palier 2 : [x1, x2[ -> c2
+    \draw[very thick, blue] (2.5,2.5) -- (4,2.5);
+    \fill[blue] (2.5,2.5) circle (2pt);
+    \draw[blue, fill=white] (4,2.5) circle (2pt);
+
+    % Palier 3 : [x2, x3[ -> c3
+    \draw[very thick, blue] (4,1.8) -- (6,1.8);
+    \fill[blue] (4,1.8) circle (2pt);
+    \draw[blue, fill=white] (6,1.8) circle (2pt);
+
+    % Zéro ailleurs
+    \draw[very thick, blue] (-0.5,0) -- (1,0);
+    \draw[blue, fill=white] (1,0) circle (2pt);
+    \draw[very thick, blue] (6,0) -- (6.8,0);
+    \fill[blue] (6,0) circle (2pt);
+\end{scope}
+
+% =========================================================
+% GRAPH 2: FONCTION ETAGEE GENERALISEE (DROITE)
+% =========================================================
+\begin{scope}[shift={(8.5,0)}]
+    % Titre
+    \node[font=\small\itshape, color=black!70] at (3.25, 3.9) {Fonction étagée généralisée};
+
+    % Axes
+    \draw[->, thick] (-0.5,0) -- (7,0) node[right] {$x$};
+    \draw[->, thick] (0,-0.5) -- (0,3.5) node[above] {$y$};
+
+    % Niveaux Alpha
+    \draw[dotted] (0,1.2) node[left] {$\alpha_1$} -- (6.5,1.2);
+    \draw[dotted] (0,2.6) node[left] {$\alpha_2$} -- (6.5,2.6);
+
+    % Segments pour A1 = [0.8, 2.2] U [4.2, 5.8] (couleur rouge)
+    \draw[very thick, red!80!black] (0.8, 1.2) -- (2.2, 1.2);
+    \fill[red!80!black] (0.8, 1.2) circle (2pt);
+    \fill[red!80!black] (2.2, 1.2) circle (2pt);
+
+    \draw[very thick, red!80!black] (4.2, 1.2) -- (5.8, 1.2);
+    \fill[red!80!black] (4.2, 1.2) circle (2pt);
+    \fill[red!80!black] (5.8, 1.2) circle (2pt);
+
+    % Ensemble A1 sur l'axe des x
+    \draw[line width=1.5pt, red!80!black] (0.8,0) -- (2.2,0);
+    \draw[line width=1.5pt, red!80!black] (4.2,0) -- (5.8,0);
+    \node[below, red!80!black, font=\small] at (1.5, -0.1) {$A_1$};
+    \node[below, red!80!black, font=\small] at (5.0, -0.1) {$A_1$};
+
+    % Segments pour A2 = [2.6, 3.8] (couleur verte/orange)
+    \draw[very thick, teal] (2.6, 2.6) -- (3.8, 2.6);
+    \fill[teal] (2.6, 2.6) circle (2pt);
+    \fill[teal] (3.8, 2.6) circle (2pt);
+
+    % Ensemble A2 sur l'axe des x
+    \draw[line width=1.5pt, teal] (2.6,0) -- (3.8,0);
+    \node[below, teal, font=\small] at (3.2, -0.1) {$A_2$};
+
+    % Zero ailleurs sur l'axe
+    \draw[very thick, black!40] (-0.5,0) -- (0.8,0);
+    \draw[very thick, black!40] (2.2,0) -- (2.6,0);
+    \draw[very thick, black!40] (3.8,0) -- (4.2,0);
+    \draw[very thick, black!40] (5.8,0) -- (6.8,0);
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\theorem{Proposition}{Stabilité par combinaison linéaire}{}{
+    $\mathfrak{E}$ est stable par combinaison linéaire.
+}
+
+\theorem{Propriétés}{}{false}{
+    \begin{itemize}
+        \item $\mathfrak{E}_+ \subset \mathcal{E} \subset \mathcal{M}$,
+        \item Soit $f \in \mathcal{M}_+$, $\exists (f_n)_{n \in \mathbb{N}} \in \mathfrak{E}_+^{\mathbb{N}}$ croissante telle que $f_n \to f$.\\
+        \textit{En particulier}, on peut choisir $f_n = \sum_{k=0}^{n2^n-1} \frac{k}{2^n} \indic{\{x : \frac{k}{2^n} \leq f(x) <\frac{k+1}{2^n}\}} \; + n \cdot \indic{\{x \in E: f(x) \geq n\}}$.
+    \end{itemize}
+}
+
+\ndlr{cf. Laurent pour les preuves.}
+
+\section{Intégrales généralisées (au sens de Lebesgue)}
+\subsection{Intégrale d'une fonction étagée}
+
+\definition{
+    Soit $f \in \mathfrak{E}$, notons $f = \sum_{i=1}^n \alpha_i \indic{A_i}$ avec $(\alpha_1, \ldots, \alpha_n) \in \mathbb{R}^n$ et $(A_1, \ldots, A_n) \in \mathcal{E}^n$.\\
+    On définit l'intégrale de $f$ par rapport à $\mu$ par :
+    $$\int_E f d\mu := \sum_{i=1}^n \alpha_i \mu(A_i) \; \text{ avec la convention } \; \alpha_i \mu(A_i) = 0 \text{ si } \alpha_i = 0 \text{ ou } \mu(A_i) = 0.$$
+}
+
+\remark{On note parfois la variable d'intégration : $$\int_E f(x) d\mu(x) := \sum_{i=1}^n \alpha_i \mu(A_i).$$}
+
+\subsection{Intégrale d'une fonction mesurable positive}
+
+\definition{
+    Soit $f \in \mathcal{M}_+$. On définit l'intégrale de $f$ par rapport à $\mu$ par :
+    $$\int_E f d\mu := lim_{n \to +\infty} \int_E f_n d\mu = lim_{n \to +\infty} [ \sum_{i=1}^{n2^n-1} \frac{k}{2^n} \mu(A_k^n) + n \cdot \mu(\tilde{A}^n_{n2^n})] \in \mathbb{R} \cup \{+\infty\}$$
+}
+\noindent avec : 
+\begin{itemize}
+    \item $f_n = \sum_{k=0}^{n2^n-1} \frac{k}{2^n} \indic{A_k^n} + n \cdot \indic{\tilde{A}^n_{n2^n}}$,
+    \item $A_k^n = \{x : \frac{k}{2^n} \leq f(x) <\frac{k+1}{2^n}\}$,
+    \item $\tilde{A}^n_{n2^n} = \{x : f(x) \geq n\}$.
+\end{itemize}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Mathieu Merle. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}

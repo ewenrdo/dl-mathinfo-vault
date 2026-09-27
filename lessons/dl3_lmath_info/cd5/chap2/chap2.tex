@@ -11,7 +11,6 @@
 \usepackage{ccicons}
 \usepackage{caption}
 
-
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
 \fancyhf{} % reset tout
@@ -25,8 +24,436 @@
 
 \begin{document}
 
-\docTitle{Chapitre 2 : Différentiabilité}
+\docTitle{Chapitre 2 : Continuité, compacité et complétude\footnote{Ce chapitre peut être vu comme un sous-chapitre du \href{https://www.ewenrdo.fr/ressources?slug=analyse-3-chapitre-4-topologie-des-espaces-metriques}{Chapitre 4 : Topologie des espaces métriques et des espaces vectoriels normés} du cours Analyse 3.}}
 
+\section{Continuité}
+
+\subsection{Définition et propriétés}
+
+\definition{
+    Soit $x_0 \in \mathcal{U}$ et soit $f : \mathcal{U} \to \mathbb{R}^p$.\\
+    On dit que $f$ est continue en $x_0$ si :
+    \[ \forall \epsilon > 0, \exists \alpha > 0, \forall x \in \mathcal{U}, \quad \|x - x_0\| \le \alpha \Rightarrow \|f(x) - f(x_0)\| < \epsilon \]
+    De manière plus informelle, $f$ est continue en $x_0$ si $lim_{x \to x_0} f(x) = f(x_0)$.
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $E, F, G$ des espaces vectoriels normés et $A \subset E$ et $B \subset F$.
+\begin{enumerate}
+    \item Soit $f, g : A \to F$ deux applications et $\lambda \in \mathbb{K}$. Si $f$ et $g$ sont continues alors $\lambda f + g$ est continue.
+    \item Soit $f : A \to \mathbb{K}$ et $g : A \to F$ deux applications continues alors $fg$ est continue.
+    \item Soit $f : A \to \mathbb{K}$ une application continue ne s'annulant en aucun point de $A$ alors $1/f$ est continue.
+    \item Soit $f : A \to F$ et $g : B \to G$ deux applications continues telles que $f(A) \subset B$. Alors la composée $g \circ f$ est continue.
+\end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{}{false}{
+    Soit $a$ un point d'une partie $A$ de $E$ et $f : A \to F$ une application. Supposons que $F$ est de dimension finie et $\mathcal{B}$ une base de $F$. Alors $f$ est continue en $a$ si, et seulement si, les coordonnées de $f$ dans $\mathcal{B}$ le sont.}
+\ndlr{cf. Laurent pour la preuve.}
+
+\method{Montrer qu'une fonction de plusieurs variables est continue}{
+    Si $f(x_1, \dots, x_q) = (f_1(x_1, \dots, x_q), \dots, f_p(x_1, \dots, x_q))$ est une fonction de plusieurs variables à valeurs dans $\mathbb{R}^p$, il suffit de montrer que chacune des fonctions $f_i$ est continue pour conclure que $f$ est continue.
+}
+
+\subsection{Prolongement par continuité}
+
+\theorem{Théorème}{Prolongement par continuité}{false}{
+    Soit $a$ un point adhérent à une partie $A$ de $E$ et $f : A \setminus \{a\} \to F$ une application. Si $\lim_{x \to a} f(x) = \ell$ alors l'application $\tilde{f}$ définie sur $A$ par
+\[
+\tilde{f}(x) = \begin{cases} 
+f(x) & \text{si } x \neq a \\ 
+\ell & \text{si } x = a 
+\end{cases}
+\]
+est continue en $a$. On appelle $\tilde{f}$ le prolongement par continuité de $f$ au point $a$.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{}{false}{
+    Une application $f : A \to F$ est continue en un point $a$ de $A$ si, et seulement si, il existe un voisinage $V$ de $a$ et une fonction numérique $w$ définie sur un voisinage de $0$ telle que $w(r) \xrightarrow[r \to 0]{} 0$ et
+\[
+\forall x \in A \cap V, \quad \|f(x) - f(a)\| \le w(\|x - a\|)
+\]
+}
+\remark{Cette proposition est très utile pour montrer la continuité d'une fonction en un point. Il suffit de trouver une fonction $w$ qui tend vers 0 lorsque son argument tend vers 0 et qui majore l'écart entre $f(x)$ et $f(a)$.}
+
+\example{Soit $(E, \|\cdot\|)$ un espace vectoriel normé et $u, v$ deux vecteurs de $E$. Alors la fonction $f : \mathbb{R} \to E$ définie par $f(t) = u + tv$ est continue. En effet, soit $t_0$ un réel donné. Pour tout réel $t$, on a :
+\[
+\|f(t) - f(t_0)\| = \|(t - t_0)v\| = |t - t_0| \xrightarrow[t \to t_0]{} 0
+\]
+}
+
+\method{Étudier la continuité en $(0,0)$}{
+    Pour étudier la limite en $(0,0)$ d'une fonction $f(x,y)$, on exprime $f(r\cos(\theta), r\sin(\theta))$. Si l'expression tend vers une constante indépendante de $\theta$ lorsque $r \to 0^+$, la fonction est continue.
+}
+
+\example{
+    Soit $f(x,y) = \frac{x^3}{x^2+y^2}$ pour $(x,y) \neq (0,0)$ et $f(0,0)=0$. En coordonnées polaires :
+    \[ f(r\cos(\theta), r\sin(\theta)) = \frac{r^3\cos^3(\theta)}{r^2} = r\cos^3(\theta) \]
+    Comme $|r\cos^3(\theta)| \le r \xrightarrow[r \to 0^+]{} 0$, $f$ est continue en $(0,0)$.
+}
+
+\remark{Cette méthode est particulièrement performante lorsque l'expression comporte le terme $x^2+y^2$, car il se simplifie directement en $r^2$.}
+
+\subsection{Lien entre continuité et topologie}
+
+\theorem{Théorème de la continuité globale}{}{true}{
+    Une fonction $f : \mathcal{U} \to \mathbb{R}^p$ est continue 
+    \begin{itemize}
+        \item $\iff$ pour tout ouverte $\mathcal{O}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{O})$ est un ouvert de $\mathcal{U}$.
+        \item $\iff$ pour tout fermé $\mathcal{F}$ de $\mathbb{R}^p$, l'image réciproque $f^{-1}(\mathcal{F})$ est un fermé de $\mathcal{U}$.
+    \end{itemize}
+}
+
+\training{Pour chacun des ensembles suivants, déterminer s'il est ouvert, fermé, ouvert-fermé ou ni l'un, ni l'autre.
+\[
+\{ (x,y) \mid x^2 - y^2 < 1 \}, \quad \{ (x,y) \mid e^{x+y^3} > 0\}, \quad \{ (x,y,z) \mid \arctan(xz) \geq \cos(yz) \}, \quad \{ (x,y,z) \mid x+y+z > xyz \}
+\]
+}
+\noindent\carreaux{10}
+\subsection{Continuité uniforme}
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}^p$. On dit que $f$ est \textbf{uniformément continue} sur $\mathcal{U}$ si :
+    \[
+    \forall \epsilon > 0, \exists \alpha > 0, \forall x,y \in \mathcal{U}, \quad \|x - y\| \le \alpha \Rightarrow \|f(x) - f(y)\| < \epsilon
+    \]
+}
+
+\remark{
+    Dans la définition de la continuité en un point $x_0$, le réel $\alpha$ dépend de $\epsilon$ et de $x_0$. Dans le cas de la continuité uniforme, le réel $\alpha$ ne dépend plus que de $\epsilon$ : il est globalement valable pour tout couple de points $(x,y)$ de l'ouvert $\mathcal{U}$.
+}
+
+\theorem{Proposition}{Caractérisation séquentielle de la continuité uniforme}{false}{
+Soit $A$ une partie de l'evn $E$. Une fonction $f : A \to F$ est uniformément continue, si et seulement si,
+\[
+\forall (x_n)_n, (y_n)_n \subset A, \quad \|x_n - y_n\|_E \xrightarrow[n \to +\infty]{} 0 \implies \|f(x_n) - f(y_n)\|_F \xrightarrow[n \to +\infty]{} 0.
+\]
+}
+
+\example{
+    L'application identité ou toute application linéaire $f : \mathbb{R}^q \to \mathbb{R}^p$ est uniformément continue sur $\mathbb{R}^q$. 
+    En effet, par linéarité en dimension finie, il existe une constante $C > 0$ telle que pour tous $x,y \in \mathbb{R}^q$, $\|f(x) - f(y)\| \le C \|x - y\|$. Pour un $\epsilon > 0$ donné, il suffit alors de choisir $\alpha = \frac{\epsilon}{C}$ (qui est indépendant de $x$ et $y$) pour vérifier la définition.
+}
+
+\cexample{
+    La fonction $f : ]0,1] \to \mathbb{R}, \, x \mapsto \frac{1}{x}$ est continue sur $]0,1]$ mais \textbf{n'est pas} uniformément continue sur cet intervalle. En effet, si l'on choisit les deux suites de $]0,1]$ définies pour $n \in \mathbb{N}^*$ par $x_n = \frac{1}{n}$ and $y_n = \frac{1}{n+1}$, on a :
+    \[
+    |x_n - y_n| = \frac{1}{n(n+1)} \xrightarrow[n \to +\infty]{} 0
+    \]
+    Pourtant, l'écart entre leurs images reste constant et ne tend pas vers 0 :
+    \[
+    |f(x_n) - f(y_n)| = |n - (n+1)| = 1
+    \]
+    Il est donc impossible de trouver un $\alpha$ global qui rende les images proches dès que les antécédents le sont.
+}
+
+
+\subsection{Fonctions lipschitziennes}
+
+\definition{
+    Soit $\mathcal{U}$ un ouvert de $\mathbb{R}^q$ et $f : \mathcal{U} \to \mathbb{R}^p$. Soit $k \ge 0$ un réel. 
+    On dit que $f$ est \textbf{$k$-lipschitzienne} sur $\mathcal{U}$ si :
+    \[
+    \forall (x,y) \in \mathcal{U}^2, \quad \|f(x) - f(y)\| \le k \|x - y\|
+    \]
+    On dit que $f$ est \textbf{lipschitzienne} s'il existe un tel réel $k$. 
+    Si $0 \le k < 1$, l'application $f$ est dite \textbf{contractante}.
+}
+
+\theorem{Proposition}{Rapport avec la continuité uniforme}{false}{
+    Toute fonction lipschitzienne sur $\mathcal{U}$ est uniformément continue sur $\mathcal{U}$ (et est donc, a fortiori, continue sur $\mathcal{U}$).
+}
+
+\remark{
+    Pour une fonction $k$-lipschitzienne, face à un $\epsilon > 0$ donné, le choix du pas $\alpha = \frac{\epsilon}{k}$ (si $k > 0$) convient globalement en tout point, ce qui montre de manière immédiate l'uniforme continuité. 
+}
+
+\example{
+    Soit $f : \mathbb{R}^q \to \mathbb{R}^p$ une application linéaire. En dimension finie, toutes les applications linéaires sont continues et il existe une constante $M \ge 0$ telle que pour tout $h \in \mathbb{R}^q$, $\|f(h)\| \le M \|h\|$. 
+    Par conséquent :
+    \[
+    \forall (x,y) \in (\mathbb{R}^q)^2, \quad \|f(x) - f(y)\| = \|f(x-y)\| \le M \|x - y\|
+    \]
+    Ainsi, toute application linéaire en dimension finie est $M$-lipschitzienne.
+}
+
+\section{Applications linéaires continues}
+
+\theorem{Proposition}{}{false}{
+    Soit $f \in \mathcal{L}(E, F)$. Les assertions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item L'application $f$ est continue
+        \item l'application $f$ est continue en $0$
+        \item il existe une constante $C$ telle que,
+        \[
+        \forall x \in E, \quad \|f(x)\|_F \le C\|x\|_E
+        \]
+        \item $\displaystyle\sup_{\|x\|_E=1} \|f(x)\|_F < +\infty$
+        \item l'application $f$ est lipschitzienne.
+    \end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{}{false}{
+    Toute application linéaire en dimension finie est continue.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\section{Norme subordonnée d'une application linéaire}
+
+Soit $(E, \|\cdot\|_E)$ et $(F, \|\cdot\|_F)$ deux espaces vectoriels normés. Notons $\mathcal{L}_c(E, F)$ l'espace vectoriel des applications linéaires continues de $E$ vers $F$.
+
+\reminder{On a vu que
+\[ f \in \mathcal{L}_c(E, F) \iff \sup_{\|x\|_E=1} \|f(x)\|_F < \infty.
+\]}
+
+\definition{
+Soit $(E, \|\cdot\|_E)$ et $(F, \|\cdot\|_F)$ deux espaces vectoriels normés et $f \in \mathcal{L}(E, F)$ une application linéaire continue. On appelle \textbf{norme subordonnée} de $f$, et on note $|||f|||$, le réel défini par :
+\[
+|||f||| = \sup_{\|x\|_E=1} \|f(x)\|_F = \sup_{x \in E, \; x \neq 0} \frac{\|f(x)\|_F}{\|x\|_E}
+\]
+}
+
+
+\theorem{Proposition}{Propriétés de la norme subordonnée}{false}{
+\begin{enumerate}
+    \item $|||\cdot|||$ est une norme sur $\mathcal{L}_c(E,F)$ appelée norme subordonnée à $\|\cdot\|_E$ et $\|\cdot\|_F$. Si $E = F$ et $\|\cdot\|_E = \|\cdot\|_F$ alors $|||\cdot|||$ s'appelle simplement la norme subordonnée à $\|\cdot\|_E$.
+    \item Soit $f \in \mathcal{L}_c(E,F)$. On a
+    \begin{itemize}
+        \item $\forall x \in E, \quad \|f(x)\|_F \le |||f||| \cdot \|x\|_E$.
+        \item $|||f|||$ est la plus petite des constantes $C > 0$ vérifiant
+        \[
+        \forall x \in E, \quad \|f(x)\|_F \le C \cdot \|x\|_E.
+        \]
+    \end{itemize}
+    \item De plus, si $E = F$ alors $|||\cdot|||$ est sous-multiplicative dans le sens suivant :
+    \[
+    |||f \circ g||| \le |||f||| \cdot |||g|||.
+    \]
+\end{enumerate}
+}
+
+\example{
+Soit $\mathbb{R}^2$ muni de la norme $\|\cdot\|_\infty$ et $f : \mathbb{R}^2 \to \mathbb{R}$ la forme linéaire définie par
+\[
+\forall (x,y) \in \mathbb{R}^2, \quad f(x,y) = 3x + 4y.
+\]
+Montrons que $f$ est continue et déterminer sa norme subordonnée.\\
+$f$ est linéaire sur l'espace $\mathbb{R}^2$ qui est de dimension finie et donc continue. En fait,
+\[
+\forall (x,y) \in \mathbb{R}^2, \quad |f(x,y)| \le 3|x| + 4|y| \le 7\|(x,y)\|_\infty.
+\]
+Donc $f$ est continue et $|||f||| \le 7$. De plus,
+\[
+\|(1,1)\|_\infty = 1 \quad \text{et} \quad f(1,1) = 7
+\]
+Ainsi $|||f||| = 7$.
+}
+
+\method{Calculer la norme subordonnée d'une application linéaire}{
+    Pour calculer la norme subordonnée d'une application linéaire $f : \mathbb{R}^q \to \mathbb{R}^p$, on peut procéder de la manière suivante :
+    \begin{enumerate}
+        \item Vérifier que $f$ est continue (ce qui est automatique si $q$ est fini).
+        \item Trouver une constante $C$ telle que $\|f(x)\|_F \le C\|x\|_E$ pour tout $x \in \mathbb{R}^q$. Cela donne une majoration de $|||f|||$.
+        \item Trouver un vecteur $x_0$ tel que $\|x_0\|_E = 1$ et $\|f(x_0)\|_F = C$. Cela permet de montrer que $|||f||| = C$.
+    \end{enumerate}
+}
+
+\method{Montrer que deux normes sont équivalentes avec la norme subordonnée}{
+    Pour montrer que deux normes $\|\cdot\|_1$ et $\|\cdot\|_2$ sur un espace vectoriel normé $E$ sont équivalentes, on peut procéder de la manière suivante :
+    \begin{enumerate}
+        \item Considérer l'application identité $Id : (E, \|\cdot\|_1) \to (E, \|\cdot\|_2)$.
+        \item Montrer que $Id$ est continue. Cela implique qu'il existe une constante $C_1 > 0$ telle que $\|x\|_2 \le C_1 \|x\|_1$ pour tout $x \in E$.
+        \item Considérer l'application inverse $Id^{-1} : (E, \|\cdot\|_2) \to (E, \|\cdot\|_1)$.
+        \item Montrer que $Id^{-1}$ est continue. Cela implique qu'il existe une constante $C_2 > 0$ telle que $\|x\|_1 \le C_2 \|x\|_2$ pour tout $x \in E$.
+        \item Conclure que les deux normes sont équivalentes avec les constantes $C_1$ et $C_2$.
+    \end{enumerate}
+}
+
+
+
+\section{Compacité}
+\subsection{Définition et premières propriétés}
+
+\reminder{Toute suite réelle $(x_n)_{n \in \mathbb{N}}$ admet une sous-suite monotone.}
+
+\theorem{Théorème de Bolzano-Weierstrass}{}{true}{
+    Toute suite bornée $(x_n)_{n \in \mathbb{N}}$ d'éléments de $\mathbb{R}^n$ admet une sous-suite convergente vers un élément de $\mathbb{R}^n$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\definition{
+    Soit $K \subset \mathbb{R}^n$. On dit que $K$ est \textbf{compact} si toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $K$ admet une sous-suite convergente vers un élément de $K$.
+}
+
+\example{
+    \begin{enumerate}
+        \item Un singleton $\{x\}$ est compact. En effet, toute suite $(x_n)$ d'éléments de $\{x\}$ est constante et converge vers $x \in \{x\}$.
+        \item Tout intervalle fermé et borné $[a,b]$ est compact. En effet, toute suite $(x_n)$ d'éléments de $[a,b]$ est bornée, donc admet une sous-suite convergente vers un élément $x \in [a,b]$ (par le théorème de Bolzano-Weierstrass).   
+    \end{enumerate}
+}
+
+\remark{Tout comme la notion de convergence sur $\mathbb{R}^n$, la notion de compacité est indépendante de la norme choisie sur $\mathbb{R}^n$ (par indépendance des normes).}
+
+\theorem{Proposition}{}{false}{
+    Soit $K$ une partie d'un espace vectoriel normé.
+    $$K \text{ est compact } \Rightarrow K \text{ est fermé et borné.}$$
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{}{false}{
+    Soit $F$ une partie contenue dans $K$ un compact.
+    $$F \text{ est fermé } \Rightarrow F \text{ est compact.}$$
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{Produit cartésien de compacts}{false}{
+Soit $K_1$ et $K_2$ deux parties compactes respectivement des deux espaces vectoriels normés $E_1$ et $E_2$. Alors le produit cartésien $K_1 \times K_2$ est une partie compacte de l'espace vectoriel normé $E_1 \times E_2$ muni de la norme
+\[
+\|(x, y)\| = \max(\|x\|_{E_1}, \|y\|_{E_2}).
+\]
+}
+\noindent{\textbf{Preuve :} On choisit sur $\mathbb{R}^{p+q}$ la norme
+$$\|(x, y)\| = \max(\|x\|_{(n)}, \|y\|_{(l)}) \quad \forall(x, y) \in \mathbb{R}^{p+q}.$$
+Soit $\{(x_n, y_n)\}_{n \in \mathbb{N}}$ une suite de $K_1 \times K_2$. Puisque $K_1$ est compact, il existe une sous-suite $\{x_{\varphi(n)}\}_{n \in \mathbb{N}}$ et un élément $x \in K_1$ tel que $x_{\varphi(n)} \to x$ dans $\mathbb{R}^p$.\\
+
+De la même manière, puisque $K_2$ est compact, il existe une sous-suite $\{y_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ et un élément $y \in K_2$ tel que $y_{\psi(\varphi(n))} \to y$ dans $\mathbb{R}^q$ (on souligne le fait que la deuxième sous-suite est extraite à partir de la première sous-suite, et pas de la suite originelle).\\
+
+La suite $\{x_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ est sous-suite d'une suite convergente, elle converge donc vers la même limite $x$. La sous-suite $\{(x_{\psi(\varphi(n))}, y_{\psi(\varphi(n))})\}_{n \in \mathbb{N}} \subset K_1 \times K_2$ converge vers $(x, y) \in K_1 \times K_2$. \hfill $\square$
+}
+\theorem{Théorème de Bolzano-Weierstrass}{Caractérisation des compacts}{true}{
+    Soit $E$ un espace vectoriel normé de dimension finie. Alors $K \subset E$ est compact si et seulement si $K$ est fermé et borné.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\cexample{Soit $X = \mathcal{C}([0,1])$ muni de la norme $\| \cdot \|_\infty$. Alors $\overline{B}(0,1)$ (un ferme et borné) n'est pas un sous-ensemble compact de $X$. En effet, la suite $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(x) = x^n$ est contenue dans $\overline{B}(0,1)$ mais ne possède pas de sous-suite convergente dans $X$.}
+
+\subsection{Lien avec la continuité}
+
+\theorem{Théorème}{Image d'un compact par une fonction continue}{false}{
+    Soit $K \subset \mathbb{R}^n$ un compact et $f : K \to \mathbb{R}^m$ une fonction continue. Alors $f(K)$ est un compact de $\mathbb{R}^m$.
+}
+\noindent{\textbf{Preuve :} Soit $f : A \subset \mathbb{R}^n \to \mathbb{R}^k$ une application continue et $K \subset A$ un compact, considérons $\{y_k\} \subset f(K)$ une suite quelconque et $\{x_k\} \subset K$ telle que $f(x_k) = y_k$. Puisque $K$ est un compact il existe $\{x_{\varphi(k)}\}$ sous-suite et $x \in K$ telle que $x_{\varphi(k)} \to x$. En outre, $f$ étant une fonction continue, on a
+$$\lim_{k \to +\infty} y_{\varphi(k)} = \lim_{k \to +\infty} f(x_{\varphi(k)}) = f(x) \in f(K).$$
+Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite convergente, $f(K)$ est un compact. \hfill $\square$
+}
+\theorem{Théorème}{Fonctions continues et bornes}{false}{
+    Soit $f$ une fonction continue réelle. La restriction $f|_K$ de $f$ à un compact $K$ est bornée et atteint ses bornes.}
+\ndlr{cf. Laurent pour la preuve.}
+
+\example{La fonction $f : \overline{B}(0,1) \to \mathbb{R}$ définie par $f(x,y) = x - x^2 + y^2$ atteint ses bornes car elle est continue et définie sur un ensemble compact.}
+
+\theorem{Théorème}{Heine-Cantor}{false}{
+    Toute fonction continue $f : K \subset \mathbb{R}^q \to \mathbb{R}^p$ sur un compact $K$ est uniformément continue.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+
+\subsection{Équivalence des normes}
+
+\theorem{Théoreme}{Équivalence des normes en dimension}{true}{
+    Soit $K$ un espace vectoriel de dimension finie. Toutes les normes sur $K$ sont équivalentes.
+}
+
+\noindent\textbf{Preuve :} Par transitivité de l'équivalence, il suffit de montrer que toute norme $N$ est équivalente, entre-autre, à la norme $\| \cdot \|_\infty$.\\
+\begin{itemize}
+    \item Soit $(e_1, \ldots, e_n)$ une base de $\mathbb{R}^n$. Soit $x \in \mathbb{R}^n$ et $x = \sum_{i=1}^{n} x_i e_i$. Alors, on a :\\
+    $$N(x) = N(x_1 e_1 + \ldots + x_n e_n) \leq |x_1| N(e_1) + \ldots + |x_n| N(e_n) \leq (\sum_{i=1}^{n} N(e_i)) \|x\|_\infty.$$
+    Ainsi, on peut prendre $\beta := \sum_{i=1}^{n} N(e_i)$.
+    \item Soit $K = \{ x : \|x\|_\infty = 1 \}$ un compact (car fermé et borné). La fonction $N : \mathbb{R}^n \to \mathbb{R}$ est lipschitzienne (et donc continue) par rapport à la norme $\| \cdot \|_\infty$ (on ne peut pas utiliser l'équivalence des normes ici !). En effet, pour tous $x,y \in \mathbb{R}^n$, on a :
+    $$|N(x) - N(y)| \leq N(x-y) \leq \beta \|x-y\|_\infty.$$
+    Il s'ensuit que $N$ atteint sa borne inférieure sur $K$ : il existe $\bar x \in K$ tel que :
+    $$N(\bar x) \leq N(x), \forall x \in K.$$
+    Posons $\alpha := N(\bar x) > 0$ (car $\bar x \neq 0$). Alors, pour tout $x \in \mathbb{R}^n \setminus \{0\}$, on a :
+    $$\frac{x}{\|x\|_\infty} \in K \implies N\left(\frac{x}{\|x\|_\infty}\right) \geq N(\bar x) = \alpha \implies N(x) \geq \alpha \|x\|_\infty.$$
+    Ainsi, on peut prendre $\alpha := N(\bar x)$.
+    Pour $x = 0$, on a $N(0) = 0 = \alpha \|0\|_\infty$.\\
+    Ainsi, on a montré que $\alpha \|x\|_\infty \leq N(x) \leq \beta \|x\|_\infty$ pour tout $x \in \mathbb{R}^n$, et donc que les normes $N$ et $\| \cdot \|_\infty$ sont équivalentes. \hfill $\square$
+\end{itemize}
+
+\section{Densité et séparabilité}
+\definition{
+    Soit $E$ un espace vectoriel normé et $A \subset E$. On dit que $A$ est \textbf{dense} dans $E$ si $\overline{A} = E$.
+}
+
+\example{$\mathbb{Q}$ est dense dans $(\mathbb{R}, | \cdot |)$, car $\overline{\mathbb{Q}} = \mathbb{R}$.}
+
+\definition{
+    Soit $E$ un espace vectoriel normé. On dit que $E$ est \textbf{séparable} s'il existe un sous-ensemble dense $A \subset E$ qui est au plus dénombrable.
+}
+
+\example{$\mathbb{R}$ est séparable, car $\mathbb{Q}$ est dense dans $\mathbb{R}$ et $\mathbb{Q}$ est au plus dénombrable.}
+
+\section{Complétude}
+\subsection{Suites de Cauchy}
+\definition{Une suite $(x_n)_{n \in \mathbb{N}}$ de $E$ est dite \textbf{de Cauchy} si pour tout $\varepsilon > 0$ il existe $N \in \mathbb{N}$ tel que,
+    \[
+    \forall(n, m) \in \mathbb{N}^2, \quad m \ge N \text{ et } n \ge N \implies \|x_n - x_m\| \le \varepsilon.
+    \]
+}
+
+\theorem{Proposition}{}{false}{
+    Toute suite convergente est une suite de Cauchy.
+}
+
+\noindent\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite de $E$ qui converge vers $\ell \in E$. Soit $\varepsilon > 0$. Donc il existe $N \in \mathbb{N}$ tel que, pour tout entier $n \ge N$ on a :
+\[
+|x_n - \ell| \le \frac{\varepsilon}{2}.
+\]
+En particulier, grâce à l'inégalité triangulaire, pour tout $(n, m) \in \mathbb{N}^2$ tels que $m \ge N$ et $n \ge N$ on a
+\[
+\|x_n - x_m\| \le \|x_n - \ell\| + \|\ell - x_m\| \le \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+\]
+et donc notre suite est de Cauchy. \hfill $\square$
+
+\theorem{Lemme}{}{false}{
+    Toute suite de Cauchy est bornée.
+}
+
+\noindent\textbf{Preuve :} Soit $(x_n)_{n \in \mathbb{N}}$ une suite de Cauchy de l'espace vectoriel normé $E$. Donc pour $\varepsilon = 1$, il existe $N \in \mathbb{N}$ tel que, pour tout $(n, m) \in \mathbb{N}^2$ tels que $m \ge N$ et $n \ge N$ on a
+\[
+\|x_n - x_m\| \le 1.
+\]
+En particulier, en prenant $m = N$, il vient que pour tout $n \ge N$, on a
+\[
+\|x_n\| \le \|x_n - x_N\| + \|x_N\| \le 1 + \|x_N\|.
+\]
+Posons $M = \max(\|x_0\|, \|x_1\|, \dots, \|x_{N-1}\|, 1 + \|x_N\|)$. Ainsi, pour tout $n \in \mathbb{N}$, on a
+\[
+\|x_n\| \le M
+\]
+et notre suite est majorée.
+
+\theorem{Lemme}{}{false}{
+    Si une suite de Cauchy possède une sous suite extraite convergente vers une limite $\ell$ alors elle converge vers $\ell$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+\subsection{Définition et exemples}
+
+\definition{
+    Un espace vectoriel normé $E$ est dit \textbf{complet} si toute suite de Cauchy de $E$ converge vers un élément de $E$.
+}
+\vocabulary{On dit que $(E, \| \cdot \|)$ est un espace de Banach.}
+
+\example{L'espace $E = \mathcal{C}([0,1], \mathbb{R})$ des fonctions continues sur l'intervalle $[0,1]$ à valeurs réelles muni de la norme $\|\cdot\|_\infty$ est complet.}
+
+\theorem{Théorème}{Convergence uniforme des séries de fonctions}{false}{
+Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $(u_n)_{n \in \mathbb{N}}$ une suite de $E$. Si la série $\sum \|u_n\|$ est convergente alors la série $\sum u_n$ est convergente, c-à-d la suite $s_n = u_0 + \dots + u_n$ converge dans $E$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Théorème}{Complétude des espaces de dimension finie}{true}{
+    Tout espace vectoriel normé de dimension finie est complet.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Proposition}{}{true}{
+    Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $F$ un sous espace vectoriel de $E$ que nous munissons de la norme $\|\cdot\|$. Alors $(F, \|\cdot\|)$ est complet si, et seulement si, $F$ est fermé dans $E$.
+}
+\ndlr{cf. Laurent pour la preuve.}
 
 
 \newpage
