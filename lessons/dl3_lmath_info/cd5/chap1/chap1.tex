@@ -426,7 +426,13 @@ La notion de norme nous permet de définir une relation de "proximité" entre le
     Soient $\| \cdot \|_a$ et $\| \cdot \|_b$ deux normes équivalentes sur $E$. Alors une suite $(x_n)_{n \in \mathbb{N}}$ converge pour la norme $\| \cdot \|_a$ vers $l$ si, et seulement si, elle converge pour la norme $\| \cdot \|_b$ vers $l$.\\\\
     En particulier, si $dim(E) < +\infty$, la convergence d'une suite ne dépend pas du choix de la norme.
 }
-\ndlr{cf. Laurent pour la preuve.}
+
+\noindent{\textbf{Démonstration :}\\
+    Par l'hypothèse, il existe deux constantes $C_1$ et $C_2$ telles que $\forall  y\in E, C_1 \|\cdot\|_a\le \|\cdot\|_b\le C_2\|\cdot\|_a$.\\
+    Ainsi, si $x_n$ sont les termes d'une suite de $E$ et $\ell\in E$, alors $C_1\|x_n-\ell\|_a\le \|x_n-\ell\|_b\le C_2\|x_n-\ell\|_b$ de sorte que $\|x_n-\ell\|_a\rightarrow_{n\to +\infty}0$ si et seulement si $\|x_n-\ell\|_b\rightarrow_{n\to +\infty}0$.\\
+    Dit autrement, $x_n\rightarrow_{n\to +\infty}^{\|\cdot\|_a}\ell 
+    \Leftrightarrow x_n\rightarrow_{n\to +\infty}^{\|\cdot\|_b}\ell'$.
+}
 
 \training{Montrer que la suite $(x_n)_{n \in \mathbb{N}}$ définie par $x_n = (\frac{1}{n}, 1 - \frac{1}{n})$ converge vers $(0,1)$ selon les normes $1$, $2$ et $\infty$ sur $\mathbb{R}^2$.}
 \noindent \carreaux{6}
@@ -481,7 +487,10 @@ $$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_k - x
 Soit $\{x_{\varphi(k)}\}_{k \in \mathbb{N}}$ une sous-suite, puisque $\varphi$ est monotone strictement croissante, $\varphi(n) \ge n$, on en déduit que
 $$\forall \varepsilon > 0, \exists N \in \mathbb{N} : \forall k \ge N, \|x_{\varphi(k)} - x\| < \varepsilon$$
 ce qui implique que $x_{\varphi(k)} \to x$. \hfill $\square$
-    \item[$\Leftarrow/$] cf. Laurent pour la preuve.
+    \item[$\Leftarrow/$] Supposons que toutes les sous-suites extraites de $(x_n)_{n\in \mathbb{N}}$ convergent vers la même limite $\ell$.\\
+        En particulier, les deux sous suites extraites $(x_{2n})_{n\in \mathbb{N}}$ et $(x_{2n+1})_{n\in \mathbb{N}}$ convergent vers $\ell$.\\
+        Soit $\varepsilon>0$, alors il existe $N\ge 1$ tel que pour tout $n\ge N$, $\|x_{2n}-\ell\|\le \varepsilon$ et $\|x_{2n+1}-\ell\|\le \varepsilon$.\\
+        Autrement dit, pour tout $n\ge 2N$, $\|x_n-\ell\|\le \varepsilon$.
 \end{itemize}}
 
 \method{Montrer qu'une suite n'est pas convergente}{
@@ -502,7 +511,16 @@ ce qui implique que $x_{\varphi(k)} \to x$. \hfill $\square$
     Soient $A \subset E$ et $a \in E$. Alors :
     $$a \in \overline{A} \Leftrightarrow \exists (x_n)_{n \in \mathbb{N}} \subset A, x_n \to a$$
 }
-\ndlr{cf. Laurent pour la preuve.}
+
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item[$\Rightarrow/$] Supposons que $a$ est un point adhérent a $A$. Donc pour tout $n\ge 1$, $A\cap B(a, 1/n)\ne\emptyset$.
+            Ainsi pour tout $n\ge$, il existe $x_n\in A\cap B(a, A/n)$. \\
+            Ainsi $(x_n)_n$ est une suite d'éléments de $A$ telle que $\|x_n-a\|\le \frac{1}{n}\to_{n\to +\infty}0$ et donc $x_n\to_{n\to +\infty}^{\|\cdot\|} a$.
+        \item[$\Leftarrow/$] Supposons qu'il existe une suite $(x_n)_n$ d'éléments de $A$ telle que $lim_{n\to +\infty}x_n=a$. Donc, pour tout $r>0$, il existe $N\in \mathbb{N}$ tel que $\|x_n-a\|\le r$ pour tout $n\ge N$.\\
+            En particulier, $x_N\in B(a, r)\cap A$ et $a$ est un point adhérentà $A$.
+    \end{itemize}
+}
 
 \definition{
     Soit $A \subset E$. On appelle \textbf{adhérence} de $A$ et on note $\overline{A}$ l'intersection de tous les fermés contenant $A$. On a :
@@ -825,7 +843,7 @@ $ \hfill \square$
         \item $A$ est un voisinage de $x \iff x \in \overset{\circ}{A}$.
     \end{enumerate}
 }
-\ndlr{cf. Laurent pour la preuve}
+\ndlr{cf. Laurent pour la preuve (enlève ça stp, on l'a pas fait)}
 
 \theorem{Théorème}{Parties ouverts-fermés d'un evn}{true}{
     Soit $E$ un espace vectoriel normé. Alors les seuls sous-ensembles de $E$ qui sont à la fois ouverts et fermés sont $\varnothing$ et $E$ lui-même.
