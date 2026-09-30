@@ -6,9 +6,11 @@
 \pgfplotsset{compat=1.18}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
+\usepackage{paracol}
 \usepackage{ccicons}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{float}
 \usepackage{tikz}
 \usetikzlibrary{shapes, arrows.meta, positioning, calc}
 
@@ -25,17 +27,17 @@
 
 \begin{document}
 
-\docTitle{Chapitre 1 : Introduction aux Systèmes d'Exploitation et Entrées/Sorties}
+\docTitle{Polycopié de cours : Systèmes d'Exploitation 5}
 
-% ==========================================
-% SECTION 1 : INTRODUCTION AUX SYSTÈMES D'EXPLOITATION
-% ==========================================
+Ce document propose un polycopié de cours basé sur les cours magistraux de Dominique Poulalhon à l'Université Paris Cité. Il est destiné à servir de support d'apprentissage personnel, mais il peut sans doute être utile à d'autres.\\\\
+Attention, ce polycopié n'est pas officiel et peut contenir des erreurs. Il est fortement recommandé de se référer aux cours magistraux et aux ressources officielles pour un apprentissage complet et précis.
+
 \section{Introduction aux Systèmes d'Exploitation}
 
-\subsection{Rôle du système d'exploitation}
+\subsection{Système d'exploitation et appels système}
 
 \definition{
-    Un \textbf{Système d'Exploitation} (SE) est une couche logicielle qui fait l'interface entre le matériel (processeur, mémoire, périphériques) et les applications ou l'utilisateur. Il fournit le bon niveau d'abstraction et gère les ressources de façon équitable et sécurisée.
+    Un \textbf{Système d'Exploitation} (OS : Operating System) est une couche logicielle qui fait l'interface entre le matériel (processeur, mémoire, périphériques) et les applications ou l'utilisateur. Il fournit le bon niveau d'abstraction et gère les ressources de façon équitable et sécurisée.
 }
 
 \remark{
@@ -44,22 +46,69 @@
         \item \textbf{Mode Utilisateur (User mode) :} Mode bridé où seules les instructions inoffensives sont exécutées.
         \item \textbf{Mode Noyau (Kernel mode) :} Mode privilégié où toutes les instructions et tous les accès matériels sont autorisés.
     \end{itemize}
-    La transition entre le mode utilisateur et le mode noyau s'effectue via un \textbf{appel système} (\textit{syscall}).
+}
+\vocabulary{La transition entre le mode utilisateur et le mode noyau s'effectue via un \textbf{appel système} (\textit{syscall}).}
+
+\remark{Sur Linux, la commande \texttt{strace} permet de tracer les appels système effectués par un programme. La page 2 du manuel fournit l'ensemble des appels système disponibles.}
+
+\theorem{Important}{}{false}{
+    Un appel système est plus long qu'un appel de fonction classique car il nécessite :
+    \begin{enumerate}
+        \item Le passage du mode utilisateur au mode noyau (changement de contexte).
+        \item La sauvegarde et la restauration des registres du processeur.
+    \end{enumerate}
 }
 
 \subsection{Espace d'adressage et états d'un processus}
 
+\begin{paracol}{2}
 \definition{
     Un \textbf{processus} est l'instance dynamique d'un programme en cours d'exécution. Il possède un espace d'adressage propre divisé en :
     \begin{itemize}
-        \item \textbf{Code (Text) :} Instructions exécutables du programme.
-        \item \textbf{Données statiques (Data/BSS) :} Variables globales et statiques.
-        \item \textbf{Tas (Heap) :} Zone d'allocation dynamique (\texttt{malloc}).
+        \item \textbf{Code :} Instructions exécutables du programme.
+        \item \textbf{Données statiques :} Variables globales et statiques.
+        \item \textbf{Tas (Heap) :} Zone d'allocation dynamique (ex. \texttt{malloc}).
         \item \textbf{Pile (Stack) :} Zone de stockage des variables locales et contextes d'appel.
     \end{itemize}
 }
 
+\switchcolumn
+
 \begin{center}
+    \begin{tikzpicture}[
+        >=stealth,
+        cell/.style={draw=blue!80!black, thick, rectangle, minimum width=3.8cm, align=center, font=\small}
+    ]
+        % Conteneur principal
+        \draw[thick, blue!80!black] (0, 0) rectangle (3.8, 5.2);
+
+        % Segments
+        \node[cell, fill=blue!10, minimum height=0.5cm] at (1.9, 4.95) {\texttt{argv / env}};
+        \node[cell, fill=blue!5, minimum height=1.1cm] (stack) at (1.9, 4.15) {pile \quad $\downarrow$};
+        
+        % Espace libre au milieu (adressage virtuel)
+        
+        \node[cell, fill=blue!5, minimum height=0.9cm] (heap) at (1.9, 1.65) {tas \quad $\uparrow$};
+        \node[cell, fill=blue!10, minimum height=0.7cm] at (1.9, 0.85) {données statiques};
+        \node[cell, fill=blue!15, minimum height=0.5cm] at (1.9, 0.25) {code};
+
+        % Séparateurs internes
+        \draw[thick, blue!80!black] (0, 4.7) -- (3.8, 4.7);
+        \draw[thick, blue!80!black] (0, 3.6) -- (3.8, 3.6);
+        \draw[thick, blue!80!black] (0, 2.1) -- (3.8, 2.1);
+        \draw[thick, blue!80!black] (0, 1.2) -- (3.8, 1.2);
+        \draw[thick, blue!80!black] (0, 0.5) -- (3.8, 0.5);
+
+    \end{tikzpicture}
+    \captionof{figure}{Espace d'adressage mémoire}
+\end{center}
+
+\end{paracol}
+
+\remark{Le processus peut se trouver dans différents états au cours de son cycle de vie. En particulier, quand une opération est en attente et demande un temps d'attente (ex: lecture sur disque), le processus passe de l'état \textbf{ACTIF} à l'état \textbf{EN ATTENTE}. Il ne peut revenir à l'état \textbf{ACTIF} que lorsqu'un signal ou la fin de l'opération d'entrée/sortie est reçue.}
+
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[
     state/.style={circle, draw=blue!80!black, thick, minimum size=1.6cm, align=center, font=\bfseries},
     >=stealth
@@ -82,13 +131,13 @@
     \draw[->, thick, blue!80!black] (attente) to[out=165, in=-110] node[midway, left=4pt, align=right, font=\small] {signal ou\\fin d'I/O} (pret);
 
 \end{tikzpicture}
-\captionof{figure}{Diagramme des états d'un processus}
-\end{center}
+\caption{Diagramme des états d'un processus}
+\end{figure}
 
 \subsection{Hiérarchie des mémoires}
 
 \theorem{Principe}{Hiérarchie de stockage}{false}{
-    Les composants de stockage présentent des compromis opposés entre la vitesse d'accès, la capacité et le coût :
+    Pour stocker des données, on doit faire des compromis entre la vitesse d'accès, la capacité et le coût :
     \begin{enumerate}
         \item \textbf{Registres} ($\sim 0.5$ ns, très faibles capacités).
         \item \textbf{Caches} ($\sim 2$ ns).
@@ -109,6 +158,35 @@
     Un \textbf{descripteur de fichier} (\textit{file descriptor} ou \texttt{fd}) est un entier positif renvoyé par un appel système (comme \texttt{open}) qui sert d'index à un processus pour accéder à un fichier.
 }
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.5cm, 
+        >=stealth, 
+        block/.style={draw=blue!80!black, thick, rectangle, fill=blue!10, minimum height=0.8cm, align=center}
+    ]
+
+        % Processus
+        \node[block] (fdtable) {\textbf{Table des descripteurs}\\(Propre au processus)\\ \texttt{fd 0, 1, 2, 3...}};
+        
+        % Table des ouvertures
+        \node[block, right=1.2cm of fdtable] (openfile) {\textbf{Table des ouvertures}\\(Système - Open File Table)\\Mode, offset, compteur};
+        
+        % Table des i-nœuds virtuels
+        \node[block, right=1.2cm of openfile] (vnode) {\textbf{Table des i-nœuds virtuels}\\(V-node / En mémoire)\\Taille, verrous, infos structurelles};
+        
+        % Disque dur
+        \node[block, below=1.2cm of vnode] (inode) {\textbf{i-nœuds physiques}\\(Sur le disque / SSD)};
+
+        % Liens
+        \draw[->, thick, blue!80!black] (fdtable) -- (openfile);
+        \draw[->, thick, blue!80!black] (openfile) -- (vnode);
+        \draw[->, thick, blue!80!black] (vnode) -- (inode);
+
+    \end{tikzpicture}
+    \caption{Indirections lors de l'accès à un fichier}
+\end{figure}
+
 \remark{
     Tout processus hérite par défaut de 3 descripteurs ouverts :
     \begin{itemize}
@@ -117,30 +195,6 @@
         \item \texttt{2} : Sortie d'erreur standard (\texttt{STDERR\_FILENO}).
     \end{itemize}
 }
-
-\begin{center}
-\begin{tikzpicture}[node distance=1.5cm, >=stealth, block/.style={draw, rectangle, minimum height=0.8cm, align=center}]
-
-    % Processus
-    \node[block, fill=yellow!20] (fdtable) {\textbf{Table des descripteurs}\\(Propre au processus)\\ \texttt{fd 0, 1, 2, 3...}};
-    
-    % Table des ouvertures
-    \node[block, fill=blue!10, right=1.5cm of fdtable] (openfile) {\textbf{Table des ouvertures}\\(Système - Open File Table)\\Mode, offset, compteur};
-    
-    % Table des i-nœuds virtuels
-    \node[block, fill=green!10, right=1.5cm of openfile] (vnode) {\textbf{Table des i-nœuds virtuels}\\(V-node / In-memory i-node)\\Taille, verrous, infos structurelles};
-    
-    % Disque dur
-    \node[block, fill=red!10, below=1.2cm of vnode] (inode) {\textbf{i-nœuds physiques}\\(Sur le disque dur/SSD)};
-
-    % Liens
-    \draw[->, thick] (fdtable) -- (openfile);
-    \draw[->, thick] (openfile) -- (vnode);
-    \draw[->, thick] (vnode) -- (inode);
-
-\end{tikzpicture}
-\captionof{figure}{Indirections lors de l'accès à un fichier}
-\end{center}
 
 \subsection{Appels système fondamentaux pour les I/O}
 
@@ -178,6 +232,9 @@
     \end{enumerate}
 }
 
+\attention{Certains appels systèmes sont bufferisés par la bibliothèque standard C. Par exemple, \texttt{printf} utilise un tampon interne et ne déclenche pas immédiatement un appel système \texttt{write}. Pour forcer l'écriture immédiate, on peut utiliser \texttt{fflush(stdout)}.}
+
+
 \subsection{Surcouche \texttt{FILE*} de la bibliothèque standard}
 
 \remark{
@@ -205,5 +262,13 @@
 \example{
     L'ouverture avec \texttt{O\_CREAT | O\_EXCL} garantit que la vérification de l'existence et la création du fichier se font de façon atomique. De même, l'ouverture en mode \texttt{O\_APPEND} garantit que le repositionnement en fin de fichier et l'écriture s'effectuent atomiquement.
 }
+
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Dominique Poulalhon. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
 
 \end{document}
