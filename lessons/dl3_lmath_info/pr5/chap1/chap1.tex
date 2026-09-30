@@ -294,7 +294,7 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
 
 \subsection{Propriétés fondamentales des mesures}
 
-\theorem{Proposition}{Propriété des mesures positives}{false}{
+\theorem{Proposition}{Croissance et continuité des mesures}{false}{
     Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Alors :
     \begin{enumerate}
         \item $\mu$ est croissante : si $A,B \in \mathcal{F}$ et $A \subset B$, alors $\mu(A) \leq \mu(B)$,
@@ -310,18 +310,24 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
     \item Soit $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ quelconque. Posons :
     $$B_0 = A_0, \quad B_1 = A_1 \setminus A_0, \quad B_2 = A_2 \setminus (A_0 \cup A_1), \quad \ldots, \quad B_n = A_n \setminus \left( \bigcup_{k=0}^{n-1} A_k \right), \quad \ldots$$    On remarque que $B_n \subset A_n$ pour tout $n \in \mathbb{N}$, et que $(B_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ est une suite de parties deux-à-deux disjointes. On a : $\bigcup_{k=0}^n B_k = \bigcup_{k=0}^n A_k$ pour tout $n \in \mathbb{N}$, donc :
     $$\bigcup_{k\in \mathbb{N}} A_k = \bigcup_{k\in \mathbb{N}} B_k = \sum_{k\in \mathbb{N}} \mu(B_k) \leq \sum_{k\in \mathbb{N}} \mu(A_k)$$
-    \item Non démontré.
-    \item Non démontré.
 \end{enumerate}}
+
+\theorem{Proposition}{Continuité croissance}{true}{
+    Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré. Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$.\\
+    Soit $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ une suite croissante (au sens de l'inclusion) d'ensembles. Alors :
+    $$\mu(\bigcup_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$$
+}
+\theorem{Proposition}{Continuité décroissance}{true}{
+    Soit $(\Omega, \mathcal{F}, \mu)$ un espace mesuré.
+    Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$ et supposons $\exists n_0 \in \mathbb{N}, \mu(A_{n_0}) < +\infty$ (ie. $\mu$ est $\sigma$-finie). Alors : 
+    $$\mu(\bigcap_{n \in \mathbb{N}} A_n) = \lim_{n \to +\infty} \mu(A_n)$$
+}
 
 \noindent{\textbf{Résultat :} \textit{démontre une propriété 1 du polycopié mais non énoncée dans le cours} \\
     Soit $(A_i)_{i \in \mathbb{N}}$ une famille d'ensembles deux à deux disjoints, et on pose $A_{k} = \emptyset$ pour $k > n$.\\
     Alors $\mu(\bigcup_{k=0}^{+\infty} A_k) = \mu(\bigcup_{k=0}^{n} A_k) = \sum_{k=0}^{n} \mu(A_k) = \sum_{k=0}^{+\infty} \mu(A_k)$, donc $\mu$ est $\sigma$-additive.\\
     En particulier, $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$.
 }
-
-\ndlr{Reprendre correctement les propositions 3.1 et 3.2 du polycopié.}
-
 
 \section{La mesure de Lebesgue sur $\mathbb{R}^d$}
 
