@@ -329,7 +329,25 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
     En particulier, $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$.
 }
 
-\section{La mesure de Lebesgue sur $\mathbb{R}^d$}
+\subsection{La mesure de Dirac}
+
+\definition{
+    Soit $(\Omega, \mathcal{F})$ un espace mesuré. Soit $x_0 \in \Omega$. On définit la \textbf{mesure de Dirac en $x_0$} par :
+    $$\delta_{x_0}(A) = \begin{cases}
+        1 & \text{si } x_0 \in A,\\
+        0 & \text{si } x_0 \notin A.
+    \end{cases}$$
+}
+\remark{On vérifie facilement que $\delta_{x_0}$ est une probabilité sur $(\Omega, \mathcal{F})$.}
+
+\example{
+    \begin{itemize}
+        \item Si $\Omega = \mathbb{R}$, $\mathcal{F} = \mathcal{B}(\mathbb{R})$, $x_0 = 0$, alors $\delta_0$ est la mesure de Dirac en $0$. On a $\delta_0(\{0\}) = 1$, $\delta_0(]0,1[) = 0$, $\delta_0(\mathbb{R}) = 1$.
+        \item Si $\Omega = \mathbb{R}^2$, $\mathcal{F} = \mathcal{B}(\mathbb{R}^2)$, $x_0 = (1,2)$, alors $\delta_{(1,2)}$ est la mesure de Dirac en $(1,2)$. On a $\delta_{(1,2)}(\{(1,2)\}) = 1$, $\delta_{(1,2)}(]0,1[ \times ]0,1[) = 0$, $\delta_{(1,2)}(\mathbb{R}^2) = 1$.
+    \end{itemize}
+}
+
+\subsection{La mesure de Lebesgue sur $\mathbb{R}^d$}
 
 \theorem{Théorème}{}{true}{
     Soient $a \leq b, c \leq d$ des réels.
