@@ -226,6 +226,15 @@
 
 \remark{On note parfois la variable d'intégration : $$\int_E f(x) d\mu(x) := \sum_{i=1}^n \alpha_i \mu(A_i).$$}
 
+\example{
+    Soit $a \in E$ et $\delta_a$ la mesure de Dirac en $a$ définie par $\delta_a(A) = 1$ si $a \in A$ et $0$ sinon.
+    \begin{itemize}
+        \item Pour $f = \sum_{i=1}^n \alpha_i \indic{A_i} \in \mathfrak{E}$, on a :
+        $$\int_E f \, d\delta_a = \sum_{i=1}^n \alpha_i \delta_a(A_i) = f(a).$$
+        \item Plus généralement, pour toute fonction $f \in \mathcal{M}_+$, on a $\int_E f \, d\delta_a = f(a)$.
+    \end{itemize}
+}
+
 \subsection{Intégrale d'une fonction mesurable positive}
 
 \definition{
@@ -238,6 +247,16 @@
     \item $A_k^n = \{x : \frac{k}{2^n} \leq f(x) <\frac{k+1}{2^n}\}$,
     \item $\tilde{A}^n_{n2^n} = \{x : f(x) \geq n\}$.
 \end{itemize}
+
+\example{
+    On pose $E = [0,2]$ muni de la mesure de Lebesgue $\lambda$. Soit $f(x) = x^2 \in \mathcal{M}_+$.
+    \begin{itemize}
+        \item En construisant la suite étagée $(f_n)_{n \ge 1}$ découpant l'axe d'arrivée en tranches de hauteur $1/2^n$, on a $A_k^n = [\sqrt{k/2^n}, \sqrt{(k+1)/2^n}[$.
+        \item Le calcul explicite de la limite donne :
+        $$\int_{[0,2]} x^2 \, d\lambda = \lim_{n \to +\infty} \int_{[0,2]} f_n \, d\lambda = \frac{8}{3}.$$
+        \item On retrouve bien la valeur de l'intégrale de Riemann usuelle $\int_0^2 x^2 \, dx = \left[ \frac{x^3}{3} \right]_0^2 = \frac{8}{3}$.
+    \end{itemize}
+}
 
 \newpage
 \tableofcontents
