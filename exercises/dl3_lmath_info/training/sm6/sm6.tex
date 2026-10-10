@@ -1,0 +1,307 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\usepackage{paracol}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°6}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $11,12,13,14,15,16$\\
+\hline
+Groupes et actions & $1,2,3,4,5$\\
+\hline
+Calcul différentiel & $6,7,8,9,10$\\
+\hline
+Systèmes d'exploitation & $\emptyset$\\
+\hline
+Algorithmique & $17$\\
+\hline
+Programmation fonctionnelle & $\emptyset$\\
+\hline
+Anglais & $\emptyset$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+\exercise{1}{Groupe de matrices}{
+Soit $G$ l'ensemble des matrices de la forme :
+\[
+\begin{pmatrix} \varepsilon & a \\ 0 & 1 \end{pmatrix}
+\]
+avec $a \in \mathbb{Z}$ et $\varepsilon \in \{-1, 1\}$. On pose $r = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ et $s = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$.
+
+\begin{enumerate}
+    \item 
+    \begin{enumerate}
+        \item Montrer que $G$ est un sous-groupe de $(\mathrm{GL}_2(\mathbb{R}), \times)$.
+        \item Est-il abélien ?
+    \end{enumerate}
+    \item 
+    \begin{enumerate}
+        \item Montrer que l'application
+        \[
+        f : \mathbb{Z} \to G
+        \]
+        \[
+        k \mapsto \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}
+        \]
+        est un morphisme de groupes de $(\mathbb{Z}, +)$ dans $G$.
+        \item Vérifier que $\mathrm{Im}(f) = \langle r \rangle$.
+        \item Montrer que $\langle r \rangle$ est isomorphe à $\mathbb{Z}$ puis que $r^k$ est d'ordre infini pour chaque entier relatif non nul $k$.
+        \item Montrer que pour tout sous-groupe $H$ de $G$, il existe un entier naturel $n$ tel que $H \cap \langle r \rangle = \langle r^n \rangle$.
+    \end{enumerate}
+    \item
+    \begin{enumerate}
+        \item Calculer $r^k s$ pour $k \in \mathbb{Z}$ et justifier que $G$ est engendré par $r$ et $s$.
+    \switchcolumn
+        \setcounter{enumi}{2}
+        \item Quel est l'ordre de $r^k s$ ?
+    \end{enumerate}
+
+    \setcounter{enumi}{3}
+    \item Soient $m$ et $n$ deux entiers relatifs.
+    \begin{enumerate}
+        \item Montrer qu'il existe un unique morphisme de groupes $\varphi$ de $G$ dans $G$ tel que $\varphi(r) = r^m$ et $\varphi(s) = r^n s$. On pourra commencer par supposer l'existence d'un tel morphisme et exprimer pour chaque entier $k$ les éléments $\varphi(r^k)$ et $\varphi(r^k s)$ en fonction de $k$.
+        \item Préciser pour quelles valeurs du couple $(m, n)$ on obtient un automorphisme de $G$.
+    \end{enumerate}
+\end{enumerate}
+}
+
+\exercise{2}{Relations d'équivalence et espace projectif}{
+\begin{enumerate}
+    \item Soit $\mathcal{D}$ l'ensemble des droites affines dans l'espace $\mathbf{R}^3$. On définit une relation $\mathcal{S}$ sur $\mathcal{D}$ de la manière suivante :
+    \[
+    \text{pour toutes droites } d, d' \in \mathcal{D}, \text{ on pose : } d \mathcal{S} d' \iff d \text{ et } d' \text{ sont coplanaires.}
+    \]
+    Est ce que $\mathcal{S}$ est une relation d'équivalence ?
+    \item Pour $\mathbb{K} = \mathbb{R}, \mathbb{C}$, on munit $\mathbb{K}^{n+1} \setminus \{(0)\}$ de la relation $\mathcal{R}$ définie par : $u \mathcal{R} v$ s'il existe $\lambda \in \mathbb{K}^*$ tel que $u = \lambda v$. Montrer que $\mathcal{R}$ est une relation d'équivalence. L'espace quotient $(\mathbb{K}^{n+1} \setminus \{(0)\}) / \mathcal{R}$ s'appelle l'espace projectif de dimension $n$ sur $\mathbb{K}$ et se note $\mathbf{P}^n(\mathbb{K})$.
+\end{enumerate}
+}
+
+\exercise{3}{Matrices équivalentes et semblables}{
+On considère des matrices à coefficients dans $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$.
+
+Deux matrices carrées $A$ et $B$ sont dites \textit{semblables}, notée $A \mathcal{S} B$, s'il existe une matrice inversible $P$ telle que $A = P^{-1} B P$.
+
+Deux matrices $A$ et $B$ de taille $m \times n$ sont dites \textit{équivalentes}, notée $A \mathcal{E} B$, s'il existe deux matrices carrées inversibles $P$ et $Q$ de tailles respectives $n \times n$ et $m \times m$ telles que $B = Q A P$.
+
+\begin{enumerate}
+    \item Montrer que $\mathcal{E}$ définie sur $\mathcal{M}_{m,n}(\mathbb{K})$ est une relation d'équivalence. Déterminer $\mathcal{M}_{m,n}(\mathbb{K}) / \mathcal{E}$.
+    \item Montrer que $\mathcal{S}$ définie sur $\mathcal{M}_{n,n}(\mathbb{K})$ est une relation d'équivalence.
+    \item Montrer que la fonction déterminant $\mathrm{Det} : \mathcal{M}_{n,n}(\mathbb{K}) \longrightarrow \mathbb{K}$ induit une fonction $\mathcal{D} : \mathcal{M}_{n,n}(\mathbb{K}) / \mathcal{S} \longrightarrow \mathbb{K}$ ; on dit que le déterminant est un \textit{invariant de similitude}. La fonction $\mathcal{D}$ est-elle injective ? surjective ?
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+\exercise{4}{Relation d'équivalence sur l'ensemble des parties}{
+Soit $E$ un ensemble. Soit $A \in \mathcal{P}(E)$. On note $\mathcal{R}$ la relation binaire de $\mathcal{P}(E)$ telle que : $(\forall X, Y \in \mathcal{P}(E)) \ X \mathcal{R} Y \iff X \cap A = Y \cap A$.
+
+\begin{enumerate}
+    \item Démontrer que $\mathcal{R}$ est une relation d'équivalence.
+    \item Démontrer que $\mathcal{P}(A)$ est un système de représentants.
+\end{enumerate}
+}
+
+\exercise{5}{Relation d'équivalence sur $\mathbb{R} \times \mathbb{R}^*$}{
+Soit $E = \mathbb{R} \times \mathbb{R}^*$, on considère la relation sur $\mathbb{R} \times \mathbb{R}^*$ définie par :
+\[
+(x, y) \mathcal{R} (x', y') \iff x y' = x' y.
+\]
+
+\begin{enumerate}
+    \item Montrer que $\mathcal{R}$ est une relation d'équivalence sur $\mathbb{R} \times \mathbb{R}^*$. On note $\mathcal{C}_{(x,y)}$ la classe d'équivalence associée à l'élément $(x,y)$ de $\mathbb{R} \times \mathbb{R}^*$.
+    \item Parmi les éléments suivants de $\mathbb{R} \times \mathbb{R}^*$, lesquels sont en relation ?
+    \[
+    (2, 4), \ (-1, 3), \ (6, 12), \ (-1/2, -1) \text{ et } (1, -3).
+    \]
+    \item Soit $b \in \mathbb{R}^*$, déterminer $\mathcal{C}_{(0,b)}$.
+    \item Soit $(a, b) \in \mathbb{R} \times \mathbb{R}^*$, montrer que $\mathcal{C}_{(\frac{a}{b}, 1)} = \mathcal{C}_{(a,b)}$.
+    \item Soit $m \in \mathbb{R}$ et $m' \in \mathbb{R}$, montrer que si $\mathcal{C}_{(m,1)} = \mathcal{C}_{(m',1)}$ alors $m = m'$.
+    \item Montrer que l'application $f : \mathbb{R} \times \mathbb{R}^* \longrightarrow \mathbb{R}, \ (a,b) \longmapsto \frac{a}{b}$ induit une bijection $\tilde{f} : (\mathbb{R} \times \mathbb{R}^*) / \mathcal{R} \to \mathbb{R}$.
+    \item Exprimer la bijection réciproque de $\tilde{f}$ et en déduire un système de représentants des classes modulo $\mathcal{R}$.
+\end{enumerate}
+}
+
+\exercise{6}{Continuité scalaires et vectorielles}{
+Montrer que les fonctions suivantes sont continues.
+\begin{enumerate}
+    \item $f : (\mathbb{R}^2, \|\cdot\|_\infty) \to (\mathbb{R}, |\cdot|)$ donnée par $f(x_1, x_2) = x_1 x_2$.
+    \item $f : (\mathbb{R}^n, \|\cdot\|_1) \to (\mathbb{R}, |\cdot|)$ donnée par $f(x_1, \dots, x_n) = \sum_{k=1}^n x_k$.
+    \item $f : (\mathbb{R}, |\cdot|) \to (\mathbb{R}^n, \|\cdot\|_1)$ donnée par $f(t) = (t, 0, \dots, 0)$.
+    \item $f : (\mathbb{R}^2, \|\cdot\|_\infty) \to (\mathbb{R}^3, \|\cdot\|_1)$ donnée par $f(x, y) = (x^2, xy, y^2)$.
+\end{enumerate}
+}
+\switchcolumn
+
+\exercise{7}{Fonctions discontinues}{
+La fonction $f : \mathbb{R} \to \mathbb{R}$ définie par
+    \[
+    f(x) = \begin{cases} 
+    \sin\left(\dfrac{1}{x}\right) & \text{si } x \neq 0, \\ 
+    0 & \text{si } x = 0. 
+    \end{cases}
+    \]
+est-elle continue en $0$ ? Justifier votre réponse.
+}
+
+\exercise{8}{Prolongement par continuité}{
+Pour chaque fonction $f, g : \mathbb{R}^2 \to \mathbb{R}$, trouver les limites en $(0,0)$, si elles existent,
+\[
+f(x,y) = \frac{x - y}{(x^2 + y^2)^\alpha} \qquad g(x,y) = \frac{|x|^\alpha y^4}{x^2 + y^4}
+\]
+où $\alpha \in ]0, +\infty[$. Peut-on prolonger ces fonctions par continuité ?
+}
+
+\exercise{9}{Continuité et ouverts}{
+Considérons $\mathbb{R}^n$ muni de sa norme euclidienne $\|\cdot\|_2$. Déterminer si les ensembles suivants sont ouverts / fermés et justifier votre réponse :
+\begin{enumerate}
+    \item $A = \{(x,y) \in \mathbb{R}^2 : -1 < x < 1, -1 < y < 1\}$
+    \item $B = \{(x,y,z) \in \mathbb{R}^3 \mid z \ge 1, \ln z \le y^2 + x^2\}$
+    \item $C = \{(x,y) \in \mathbb{R}^2 : 2 < x^2 + y^2 \le 4\}$
+    \item $D = \{(x,y) \in \mathbb{R}^2 \mid x \ge 0, y^2 - x < 0\}$.
+\end{enumerate}
+}
+
+\exercise{10}{Normes}{
+\begin{enumerate}
+    \item Soit $N$ une norme sur $\mathbb{R}^d$ et $f$ une application linéaire de $\mathbb{R}^d$ vers $\mathbb{R}^d$. On cherche à montrer que
+    \[
+    N_f(x) = N(f(x)),
+    \]
+    définit une norme sur $\mathbb{R}^d$ si et seulement si $f$ est de noyau nul.
+    \begin{enumerate}
+        \item Montrer que $N_f$ vérifie la propriété d'homogénéité pour tout $f$ linéaire.
+
+        \item Montrer que $N_f$ vérifie l'inégalité triangulaire pour tout $f$ linéaire.
+        \switchcolumn
+        
+        \setcounter{enumi}{2}
+        \item Montrer que $N_f$ vérifie la propriété de séparation si et seulement si $f$ est de noyau nul. En déduire le résultat souhaité.
+    \end{enumerate}
+    \setcounter{enumi}{1}
+    \item En déduire lesquelles des fonctions suivantes sont des normes
+    \[
+    N_1(x,y) = |x - y| + |x + y|,
+    \]
+    \[
+    N_2(x,y,z) = \sup(|x|, |y - 2z|, |2z - y|),
+    \]
+    \[
+    N_3(x,y) = \sqrt{x^2 + (x + y)^2}.
+    \]
+\end{enumerate}
+}
+
+\exercise{11}{Fonction de répartition discrète}{
+Soit $\mathbb{P}$ la probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ associée à la fonction de répartition $F$ telle que pour tout $x \in \mathbb{R}$,
+\[
+F(x) = \frac{1}{4} \mathbf{1}_{[0,+\infty[}(x) + \frac{1}{2} \mathbf{1}_{[1,+\infty[}(x) + \frac{1}{4} \mathbf{1}_{[2,+\infty[}(x)
+\]
+
+\begin{enumerate}
+    \item Tracer $F$
+    \item Exprimer $\mathbb{P}(A)$ lorsque
+    \begin{enumerate}
+        \item $A = \mathbb{R}_+$
+        \item $A = \ ]-\frac{1}{2}, \frac{1}{2}[$
+        \item $A = \ ]-\frac{1}{2}, \frac{3}{2}[$
+        \item $A = \ ]\frac{2}{3}, \frac{5}{2}[$
+        \item $A = [0, 2[$
+        \item $A = \ ]3, \infty[$
+    \end{enumerate}
+    \item Soit $X$ la variable aléatoire réelle dont $F$ est la fonction de répartition. Reconnaissez-vous la loi de $X$ parmi les lois usuelles vues en PR4 ?
+\end{enumerate}
+}
+
+\exercise{12}{Lancer de dés}{
+On lance 3 fois de suite un dé équilibré à 6 faces. Déterminer la loi de la variable aléatoire égale au nombre de valeurs distinctes obtenues.
+}
+
+\exercise{13}{Parité d'une loi binomiale}{
+Avec $X \sim \mathrm{Bin}(n, p)$ calculer la probabilité pour que $X$ soit pair.
+}
+\switchcolumn
+\newpage
+\exercise{14}{Fonction de répartition en série}{
+Soit $F$ la fonction définie pour tout $x \in \mathbb{R}$ par
+\[
+F(x) = \sum_{i=1}^{\infty} \frac{1}{2^i} \mathbf{1}_{[\frac{1}{i}, \infty[}(x).
+\]
+
+\begin{enumerate}
+    \item Montrer qu'il s'agit d'une fonction de répartition. Soit alors $X$ une variable aléatoire dont la fonction de répartition est donnée par $F$.
+    \item Trouver la probabilité que $X$ prenne ses valeurs dans les ensembles suivants :
+    \begin{itemize}
+        \item $A = [1, \infty[$
+        \item $B = [\frac{1}{10}, \infty[$
+        \item $C = \{0\}$
+        \item $D = [0, \frac{1}{2}[$
+        \item $E = \ ]-\infty, 0[$
+        \item $G = \ ]0, \infty[$
+    \end{itemize}
+    \item Quelle est la loi de $1/X$ ?
+\end{enumerate}
+}
+
+
+\exercise{15}{Loi sans mémoire discrète}{
+Soit $X$ une variable aléatoire à valeurs dans $\mathbb{N}^*$ telle que pour tous $m, n \in \mathbb{N}^*$, on ait :
+\[
+\mathbb{P}(X > m + n \mid X > m) = \mathbb{P}(X > n).
+\]
+On suppose que $\mathbb{P}(X = 1) = a$, où $a \in ]0, 1[$. Déterminer la loi de $X$.
+}
+
+\exercise{16}{Mode d'une loi binomiale}{
+On considère une variable binomiale $X \sim \mathrm{Bin}(n, p)$. Quelle(s) valeur(s) de $j$ me maximise(nt) l'expression $\mathbb{P}(X = j)$ ?
+
+\textit{Indication :} On pourra commencer par calculer $\frac{\mathbb{P}(X = k)}{\mathbb{P}(X = k - 1)}$.
+}
+
+\switchcolumn
+\newpage
+
+\exercise{17}{Graphe de change}{
+On souhaite convertir de l'argent d'une devise dans une autre. Le problème est que toutes les conversions ne sont pas possibles : pour deux monnaies $A$ et $B$, on peut parfois convertir de l'argent de $A$ en $B$, parfois non. On considère donc un \textit{graphe de change} $G = (V, E)$ entre monnaies donnant les conversions possibles. Ce graphe est orienté (parfois on peut convertir $A$ en $B$ mais pas $B$ en $A$).
+
+La \textit{fonction de change} est une fonction $c$ telle que
+\begin{itemize}
+    \item une somme $S$ en monnaie $A$ vaut $S \cdot c(A, B)$ en monnaie $B$ (taxes éventuelles incluses).
+    \item $c(A, B)$ est défini si et seulement si $(A, B)$ est un arc du graphe de change.
+    \item si $c(A, B)$ est défini, $c(A, B) > 0$.
+\end{itemize}
+
+Le \textit{graphe de change étendu} est le graphe $G' = (V, E, c)$ pondéré par la fonction de change. Une \textit{séquence de change} $S$ est la conversion d'une monnaie $A_1$ en monnaie $A_k$ en passant par les monnaies intermédiaires $A_2 \dots A_{k-1}$ (en supposant bien sûr toutes ces conversions possibles). Il lui correspond un chemin dans le graphe de change.
+
+\begin{enumerate}
+    \item Quel est le taux de change de $A_1$ en $A_k$ en suivant la séquence de change $A_1, A_2, \dots, A_k$ ?
+    \item Dans quelle condition (exprimée sur $G'$) quelqu'un peut-il devenir \textit{infiniment riche} en changeant de l'argent ?
+\end{enumerate}
+}
+
+\end{paracol}
+\end{document}
