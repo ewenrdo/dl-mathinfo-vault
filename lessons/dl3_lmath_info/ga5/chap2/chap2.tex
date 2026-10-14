@@ -178,12 +178,29 @@ Pour tous \(x, y, z \in G\) on a :
 
 Enfin montrons que \(\text{cl}_{\equiv_g}(x) = xH\). On a : \(y \equiv_g x\) si et seulement si il existe \(h \in H\) tel que \(x^{-1} * y = h\), si et seulement si il existe \(h \in H\) tel que \(y = x * h\), si et seulement si \(y \in xH\). \hfill \(\Box\)
 
-\definition{
-    On note \(G/H\) l'ensemble quotient par la relation \(\equiv_g\) et \(H\backslash G\) l'ensemble quotient par la relation \(\equiv_d\). \(G/H\) est l'ensemble des \textbf{classes à gauche modulo \(H\)} et \(H\backslash G\) l'ensemble des \textbf{classes à droite modulo \(H\)}. On notera \(\pi : G \rightarrow G/H\) la projection canonique.
+\example{
+    Soit \(G = (\mathbb{Z}, +)\) et \(H = 3\mathbb{Z}\). Alors \(x \equiv_g y \iff x - y \in 3\mathbb{Z} \iff x \equiv y \pmod 3\). Les classes d'équivalence sont donc les classes de congruence modulo 3. On a \(G/H = \{0 + H, 1 + H, 2 + H\}\) et \(H\backslash G = \{H + 0, H + 1, H + 2\}\).
 }
 
+\definition{
+    Soient $G$ un groupe et $H \subseteq G$. On note :
+    \begin{itemize}
+        \item $G/H$ l'ensemble des classes à gauche modulo $H$, \textit{i.e.} $G/H = \{ xH \mid x \in G \}$, l'ensemble quotient de $G$ par la relation d'équivalence $\equiv_g$.
+        \item $H\backslash G$ l'ensemble des classes à droite modulo $H$, \textit{i.e.} $H\backslash G = \{ Hx \mid x \in G \}$, l'ensemble quotient de $G$ par la relation d'équivalence $\equiv_d$.
+    \end{itemize}
+}
+\begin{example}
+    Soit $n \in \mathbb{N}^*$. Considérons le groupe $(\mathbb{Z}, +)$ et le sous-groupe $n\mathbb{Z}$.\\
+    La relation d'équivalence à gauche associée est $x \equiv_g y \iff -x + y \in n\mathbb{Z} \iff x \equiv y \pmod n$. Les classes d'équivalence sont les classes de congruence modulo $n$. Alors :
+    $$G/H = \{0 + n\mathbb{Z}, 1 + n\mathbb{Z}, \ldots, (n-1) + n\mathbb{Z}\} = \{\overline{0}, \overline{1}, \ldots, \overline{n-1}\}$$
+    
+    \textit{Remarque :} Comme le groupe $(\mathbb{Z}, +)$ est abélien, pour tout $x \in \mathbb{Z}$, la classe à gauche $x + n\mathbb{Z}$ est égale à la classe à droite $n\mathbb{Z} + x$. On a donc :
+    $$G/H = H\backslash G$$
+\end{example}
+
 \theorem{Lemme}{Bijections des classes}{true}{
-    Fixons \(x \in G\). Les applications \(l_x : H \rightarrow xH\) et \(r_x : H \rightarrow Hx\) définies par \(l_x(h) = x * h\) et \(r_x(h) = h * x\) sont des bijections.
+    Fixons \(x \in G\). Les applications \(l_x : H \rightarrow xH\) et \(r_x : H \rightarrow Hx\) définies par \(l_x(h) = x * h\) et \(r_x(h) = h * x\) sont des bijections.\\\\
+    En particulier, toutes les classes d'équivalence ont le même nombre d'éléments que \(H\).
 }
 
 
@@ -272,6 +289,9 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
         \item Soient $H, K$ deux sous-groupes de $G$. Si $H \triangleleft G$, alors $HK$ est un sous-groupe de $G$ et on a $HK = KH$. De plus, si $K \triangleleft G$, alors $HK \triangleleft G$.
     \end{itemize}
 }
+
+\courseEnd{VISIO : Fin du cours à lire pour le 19 octobre 2026}
+
 
 \subsection{Quotient par un sous-groupe distingué}
 
