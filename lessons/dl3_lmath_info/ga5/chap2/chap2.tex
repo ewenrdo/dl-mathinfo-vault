@@ -189,14 +189,12 @@ Enfin montrons que \(\text{cl}_{\equiv_g}(x) = xH\). On a : \(y \equiv_g x\) si 
         \item $H\backslash G$ l'ensemble des classes à droite modulo $H$, \textit{i.e.} $H\backslash G = \{ Hx \mid x \in G \}$, l'ensemble quotient de $G$ par la relation d'équivalence $\equiv_d$.
     \end{itemize}
 }
-\begin{example}
-    Soit $n \in \mathbb{N}^*$. Considérons le groupe $(\mathbb{Z}, +)$ et le sous-groupe $n\mathbb{Z}$.\\
+\example{Soit $n \in \mathbb{N}^*$. Considérons le groupe $(\mathbb{Z}, +)$ et le sous-groupe $n\mathbb{Z}$.\\
     La relation d'équivalence à gauche associée est $x \equiv_g y \iff -x + y \in n\mathbb{Z} \iff x \equiv y \pmod n$. Les classes d'équivalence sont les classes de congruence modulo $n$. Alors :
     $$G/H = \{0 + n\mathbb{Z}, 1 + n\mathbb{Z}, \ldots, (n-1) + n\mathbb{Z}\} = \{\overline{0}, \overline{1}, \ldots, \overline{n-1}\}$$
     
     \textit{Remarque :} Comme le groupe $(\mathbb{Z}, +)$ est abélien, pour tout $x \in \mathbb{Z}$, la classe à gauche $x + n\mathbb{Z}$ est égale à la classe à droite $n\mathbb{Z} + x$. On a donc :
-    $$G/H = H\backslash G$$
-\end{example}
+    $$G/H = H\backslash G$$}
 
 \theorem{Lemme}{Bijections des classes}{true}{
     Fixons \(x \in G\). Les applications \(l_x : H \rightarrow xH\) et \(r_x : H \rightarrow Hx\) définies par \(l_x(h) = x * h\) et \(r_x(h) = h * x\) sont des bijections.\\\\
