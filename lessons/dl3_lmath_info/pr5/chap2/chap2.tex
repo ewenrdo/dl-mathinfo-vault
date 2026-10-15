@@ -258,17 +258,6 @@
     \end{itemize}
 }
 
-\theorem{Théorème}{}{false}{
-    Soit $f : E \to \mathbb{R} \in \mathcal{M}_+$.\\
-    Alors $f$ est limite croissante d'une suite de fonctions étagées.
-}
-\noindent{\textbf{Preuve :}\\
-La suite croissance de fonctions étagées suivante convient :
-\[
-f_n := \sum_{k=0}^{n2^n - 1} \frac{k}{2^n} \indic{\left\{x : \frac{k}{2^n} \le f(x) < \frac{k+1}{2^n}\right\}} + n \indic{\{x : f(x) \ge n\}}
-\]
-}
-
 \theorem{Proposition}{Linéarité par rapport à la mesure}{}{
     Soit $f : E \to \mathbb{R} \in \mathcal{M}_+$ et $\alpha \ge 0$. Alors :
     $$\int_E f d(\mu + \nu) = \int_E f d\mu + \int_E f d\nu.$$
