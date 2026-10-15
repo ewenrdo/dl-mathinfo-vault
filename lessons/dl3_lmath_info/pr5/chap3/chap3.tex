@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info PR5}
+\fancyhead[C]{Intégration et probabilités}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Fonctions de répartition et variables aléatoires}
+
+\section{Fonction de répartition}
+
+\subsection{Généralités et premières propriétés}
+\definition{
+    Soit $\mu$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. 
+    On définit la \textbf{fonction de répartition} $F_\mu : \mathbb{R} \to [0,1]$ par : 
+    $$F_\mu(x) = \mu(]-\infty, x])$$
+}
+
+\theorem{Théorème}{Caractérisation de l'égalité des mesures}{false}{
+    Soient $\mu$ et $\nu$ deux mesures de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Alors :
+    $$\mu = \nu \iff F_\mu = F_\nu$$
+}
+\noindent{\textbf{Preuve :}
+    \begin{itemize}
+        \item[$\Rightarrow$/] Direct.
+        \item[$\Leftarrow$] $\{]-\infty, x], x \in \mathbb{R}\}$ est une classe de parties de $\mathbb{R}$ stable par intersection finies, qui engendre la tribu des boréliens, donc on peut utiliser le lemme d'unicité des mesures.
+    \end{itemize}
+}
+
+
+\theorem{Proposition}{Croissance}{false}{
+    Soit $\mu$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Alors $F_\mu$ est croissante.
+}
+\noindent{\textbf{Preuve :} Si $a < b$, $]-\infty, a] \subset ]-\infty, b]$ et donc
+    \[
+    F_{\mu}(a) = \mu(]-\infty, a]) \leq \mu(]-\infty, b]) = F_{\mu}(b)
+    \]
+
+où, pour la dernière égalité on a utilisé la propriété de limite décroissante pour une mesure de probabilités.}
+
+\theorem{Proposition}{Continuité à droite}{false}{
+    Soit $\mu$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Alors $F_\mu$ est continue à droite.
+}
+\noindent{\textbf{Preuve :} On a $]-\infty, a] = \bigcap_{n \in \mathbb{N}^*} ]-\infty, a + \frac{1}{n}]$, et en utilisant que $F_{\mu}$ est croissante pour la première égalité ci-dessous,
+    \begin{align*}
+    \lim_{x \to a, x > a} F_{\mu}(x) &= \lim_{n \to \infty} F_{\mu}\left(a + \frac{1}{n}\right) \\
+    &= \lim_{n \to \infty} \mu\left(]-\infty, a + \frac{1}{n}]\right) = \mu(]-\infty, a])
+    \end{align*}}
+
+
+\theorem{Proposition}{Limites aux bornes}{false}{
+    Soit $\mu$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Alors :
+    $$\lim_{x \to -\infty} F_\mu(x) = 0$$
+    $$\lim_{x \to +\infty} F_\mu(x) = 1$$
+}
+
+\theorem{Proposition}{Fonction de répartition sur un singleton}{false}{
+    Soit $\mu$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Il vient 
+    $$\mu(\{a\}) = F_\mu(a) - \lim_{x \to a^-} F_\mu(x)$$
+}
+
+\remark{En particulier, $F_\mu$ est continue en $a \in \mathbb{R}$ si et seulement si $\mu(\{a\}) = 0$.}
+\remark{$F_\mu$ admet un nombre au plus dénombrable de discontinuités.}
+
+\training{Démontrer les deux dernières propositions (limites aux bornes et fonction de répartition sur un singleton).}
+\noindent\carreaux{10}
+
+\example{Soit $\mu$ telle que \[
+F_{\mu}(x) = \sum_{k \in \mathbb{N}} \frac{2^k \cdot \exp(-3)}{k!} \indic{\{x \ge k\}} + (1 - \exp(-1)) * (1 - \exp(-x)) \indic{\{x \ge 0\}}
+\]
+
+\begin{itemize}
+    \item \textbf{Que vaut $\mu(\{0\})$ ?} On a :
+    $\mu(\{0\}) = F_\mu(0) - \lim_{x \to 0^-} F_\mu(x) = F_\mu(0) - 0 = \frac{2^0 \cdot \exp(-3)}{0!} + (1 - \exp(-1)) * (1 - \exp(-0)) = \exp(-3)$
+    \item \textbf{Déterminer $\{x \in \mathbb{R} : \mu(\{x\}) > 0\}$.} Les seuls points où $\mu(\{x\}) > 0$ sont les points $x \in \mathbb{N}$, car pour ces points, $\mu(\{x\}) = \frac{2^x \cdot \exp(-3)}{x!}$. Ainsi, $\{x \in \mathbb{R} : \mu(\{x\}) > 0\} = \mathbb{N}$.
+    \item \textbf{Que vaut $\mu([1, 2])$ ?} 
+
+La mesure d'un intervalle fermé $[a, b]$ s'exprime par :
+\[
+\mu([1, 2]) = F_\mu(2) - \lim_{x \to 1^-} F_\mu(x)
+\]
+
+Calculons séparément chaque terme :
+\begin{itemize}
+    \item Pour $F_\mu(2)$, les termes $k \in \{0, 1, 2\}$ contribuent à la somme :
+    \[
+    F_\mu(2) = e^{-3}\left(\frac{2^0}{0!} + \frac{2^1}{1!} + \frac{2^2}{2!}\right) + (1 - e^{-1})(1 - e^{-2}) = 5e^{-3} + (1 - e^{-1})(1 - e^{-2})
+    \]
+    \item Pour la limite à gauche $\lim_{x \to 1^-} F_\mu(x)$, seul le terme $k=0$ intervient (car $x < 1$) :
+    \[
+    \lim_{x \to 1^-} F_\mu(x) = e^{-3}\left(\frac{2^0}{0!}\right) + (1 - e^{-1})(1 - e^{-1}) = e^{-3} + (1 - e^{-1})^2
+    \]
+\end{itemize}
+
+En faisant la différence, on obtient :
+\[
+\mu([1, 2]) = (5e^{-3} - e^{-3}) + (1 - e^{-1})\Big[(1 - e^{-2}) - (1 - e^{-1})\Big]
+\]
+\[
+\mu([1, 2]) = 4e^{-3} + (1 - e^{-1})(e^{-1} - e^{-2}) = 4e^{-3} + e^{-1}(1 - e^{-1})^2
+\]
+\end{itemize}
+}
+
+\remark{Cette fonction de répartition est un mélange d'une loi de Poisson (avec paramètre $\lambda = 3$) et d'une loi exponentielle (avec paramètre $\lambda = 1$).}
+
+\theorem{Théorème}{}{false}{
+    Soit $F : \mathbb{R} \to \mathbb{R}$ croissante, continue à droite, telle que $\lim_{x \to -\infty} F(x) = 0$ et $\lim_{x \to +\infty} F(x) = 1$. Alors il existe une unique mesure de probabilité $\mu$ sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que $F = F_\mu$.
+}
+
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours est inspiré du cours de l'Université Paris Cité réalisés par Mathieu Merle. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Certaines illustrations sont générées par intelligence artificielle, mais représentent ce qui a été dessiné au tableau par l'enseignant (comprenez qu'il est compliqué de dessiner sur ordinateur).\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}

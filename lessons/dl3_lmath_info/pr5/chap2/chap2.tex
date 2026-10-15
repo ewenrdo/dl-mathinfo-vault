@@ -96,7 +96,7 @@
 
 \definition{
     Soient $(\alpha_, \ldots, \alpha_n) \in \mathbb{R}^n$ et $(A_1, \ldots, A_n) \in \mathcal{E}^n$. Considérons :
-    $$f = \sum_{i=1}^n \alpha_i \indic{A_i} \text{ est dit étagée }.$$
+    $$f = \sum_{i=1}^n \alpha_i {A_i} \text{ est dit étagée }.$$
     On note $\mathfrak{E} = \{ f \text{ est étagée } \}$ l'ensemble des applications étagées sur $(E, \mathcal{E})$.
 }
 
@@ -257,6 +257,37 @@
         \item On retrouve bien la valeur de l'intégrale de Riemann usuelle $\int_0^2 x^2 \, dx = \left[ \frac{x^3}{3} \right]_0^2 = \frac{8}{3}$.
     \end{itemize}
 }
+
+\theorem{Théorème}{}{false}{
+    Soit $f : E \to \mathbb{R} \in \mathcal{M}_+$.\\
+    Alors $f$ est limite croissante d'une suite de fonctions étagées.
+}
+\noindent{\textbf{Preuve :}\\
+La suite croissance de fonctions étagées suivante convient :
+\[
+f_n := \sum_{k=0}^{n2^n - 1} \frac{k}{2^n} \indic{\left\{x : \frac{k}{2^n} \le f(x) < \frac{k+1}{2^n}\right\}} + n \indic{\{x : f(x) \ge n\}}
+\]
+}
+
+\theorem{Proposition}{Linéarité par rapport à la mesure}{}{
+    Soit $f : E \to \mathbb{R} \in \mathcal{M}_+$ et $\alpha \ge 0$. Alors :
+    $$\int_E f d(\mu + \nu) = \int_E f d\mu + \int_E f d\nu.$$
+}
+
+\subsection{Intégrale d'une fonction mesurable (de signe quelconque)}
+
+\definition{On dit qu'une fonction $f \in \mathcal{M}$ mesurable (non nécessairement positive) est intégrable sur $E$ vis-à-vis de la mesure $\mu$ ssi $\int_E |f| \, d\mu < +\infty$. Dans ce cas, en posant $f^+ = \max(f, 0)$, $f^- = \max(-f, 0)$, de sorte que $f = f^+ - f^-$, $|f| = f^+ + f^-$, on définit
+\[
+\int_E f \, d\mu = \int_E f^+ \, d\mu - \int_E f^- \, d\mu.
+\]
+
+On note
+\[
+\mathcal{L}^1(E, \mathcal{E}, \mu) = \left\{ f \in \mathcal{M} : \int_E |f| \, d\mu < \infty \right\},
+\]
+l'ensemble des fonctions intégrables.}
+
+\ndlr{exemples sur Moodle, non vu en cours (visio du 15 octobre)}
 
 \newpage
 \tableofcontents

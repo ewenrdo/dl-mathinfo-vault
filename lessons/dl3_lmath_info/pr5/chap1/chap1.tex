@@ -261,7 +261,7 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
         \item $\mu$ est \textbf{$\sigma$-additive} : si $(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}$ sont deux-à-deux disjoints, alors $\mu\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}} \mu(A_n)$.
     \end{enumerate}
 }
-\remark{On commence à retrouver des notions liées au cours PR4 : la définition d'une probabilité.}
+\remark{On commence à retrouver des notions liées au cours PR4 : quelques axiomes d'une probabilité.}
 \definition{
     Soit $(\Omega, \mathcal{F})$ un espace mesurable. Soit $\mu$ une mesure positive sur $(\Omega, \mathcal{F})$.\\
     On dit que $\mu$ est une \textbf{probabilité} si $\mu(\Omega) = 1$.
@@ -327,11 +327,25 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
     En particulier, $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$.
 }
 
+\definition{
+    Soit $(E, \epsilon)$ un espace mesurable.     Supposons que $\epsilon$ contient les singletons de $E$. \\
+    On dit que $\mu$ est \textbf{atomique} si et seulement il existe  $D \subset E$ dénombrable et $(m_x, x\in D)$ des réels strictements positifs tels que :
+    $$\mu = \sum_{x \in D} m_x \delta_x$$
+}
+\vocabulary{Si $m_x = 1$ pour tout $x \in D$, on dit que $\mu$ est \textbf{de comptage}.}
+
+\example{
+    On considère $\mu = \sum_{k\in\mathbb{N}^*} p(1-p)^{k-1} \delta_k$ sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$.\\
+    Alors $\mu$ est atomique avec pour coefficients $m_k = p(1-p)^{k-1}$ pour $k \in \mathbb{N}^*$ et $D = \mathbb{N}^*$. On vérifie que $\mu$ est une probabilité car $\sum_{k\in\mathbb{N}^*} p(1-p)^{k-1} = 1$.
+}
+
+\remark{Si $E$ est au plus dénombrable, toute mesure positive sur $(E, \epsilon)$ est atomique.}
+
 \subsection{La mesure de Dirac}
 
 \definition{
     Soit $(\Omega, \mathcal{F})$ un espace mesuré. Soit $x_0 \in \Omega$. On définit la \textbf{mesure de Dirac en $x_0$} par :
-    $$\delta_{x_0}(A) = \begin{cases}
+    $$\delta_{x_0}(A) = \indic{\{x_0 \in A\}} = \begin{cases}
         1 & \text{si } x_0 \in A,\\
         0 & \text{si } x_0 \notin A.
     \end{cases}$$
@@ -438,6 +452,14 @@ Soit $d \in \mathbb{N}^*$. Alors la tribu de Borel sur $\mathbb{R}^d$ est engend
 
 \end{tikzpicture}
 
+
+\section{Fonction de répartition}
+
+\definition{
+    Soit $\mu$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. 
+    On définit la \textbf{fonction de répartition} $F_\mu : \mathbb{R} \to [0,1]$ par : 
+    $$F_\mu(x) = \mu(]-\infty, x])$$
+}
 
 \newpage
 \tableofcontents
