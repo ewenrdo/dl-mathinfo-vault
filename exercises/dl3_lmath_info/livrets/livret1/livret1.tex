@@ -68,22 +68,629 @@ Si besoin d'un corrigé, réferrez-vous à \href{https://ewenrdo.fr/ressources}{
 \newpage
 \renewcommand{\arraystretch}{1.3}
 \section{Jour 1}
+\subsection{Groupes et actions}
+
+\exercise{1}{Automorphismes du groupe $\mathbb{Z}/8\mathbb{Z}$}{
+    On s'intéresse au groupe $(\mathrm{Aut}(\mathbb{Z}/8\mathbb{Z}), \circ)$ des automorphismes du groupe $(\mathbb{Z}/8\mathbb{Z}, +)$.
+    \begin{enumerate}
+        \item Donner sans justification l'ordre de tous les éléments du groupe $(\mathbb{Z}/8\mathbb{Z}, +)$.
+        \item 
+        \begin{enumerate}
+            \item Pour tout $a \in \mathbb{Z}$, on définit l'application
+            \[
+            \phi_a : \mathbb{Z}/8\mathbb{Z} \to \mathbb{Z}/8\mathbb{Z}, \quad \bar{k} \mapsto \overline{ka}
+            \]
+            Montrer que $\mathrm{Aut}(\mathbb{Z}/8\mathbb{Z}) = \{\phi_a \mid \bar{a} \text{ générateur de } \mathbb{Z}/8\mathbb{Z}\}$.
+            \item Quel est son ordre ?
+        \end{enumerate}
+        \item Montrer que tous les éléments de $\mathrm{Aut}(\mathbb{Z}/8\mathbb{Z})$ autres que l'identité sont d'ordre 2.
+        \item À quel groupe $\mathrm{Aut}(\mathbb{Z}/8\mathbb{Z})$ est-il isomorphe ?
+    \end{enumerate}
+}
+
+\exercise{2}{Produit de deux sous-groupes et application dans $\mathcal{S}_6$}{
+    \begin{enumerate}
+        \item Soit $G$ un groupe et soient $K$ et $H$ deux sous-groupes de $G$. On suppose que :
+        \[
+        \forall (h, k) \in H \times K, \quad hk = kh \quad (*)
+        \]
+        \begin{enumerate}
+            \item Montrer que le sous-ensemble $HK$ de $G$ constitué des éléments de la forme $hk$ avec $h \in H$ et $k \in K$ est un sous-groupe de $G$.
+            \item Soit $D$ l'ensemble des éléments de $H \times K$ de la forme $(g, g^{-1})$ où $g \in H \cap K$. Montrer que $D$ est un sous-groupe distingué de $H \times K$.
+            \item Construire un isomorphisme de groupes entre $(H \times K)/D$ et $HK$.
+        \end{enumerate}
+        \item Application : on se place dans le groupe symétrique $\mathcal{S}_6$ et on considère les deux sous-groupes $H = \langle (12), (34) \rangle$ et $K = \langle (12), (56) \rangle$.
+        \begin{enumerate}
+            \item Montrer que $H$ et $K$ sont deux groupes abéliens d'ordre 4 et qu'ils vérifient l'hypothèse $(*)$.
+            \item En utilisant la question 1.(c) calculer l'ordre de $HK$.
+            \item Donner un système complet de représentants de $(H \times K)/D$.
+        \end{enumerate}
+    \end{enumerate}
+}
+
+\subsection{Programmation fonctionnelle}
+\exercise{20}{Arbres binaires à deux couleurs}{
+    On considère les arbres binaires « à deux couleurs » représentés en OCaml à l'aide du type suivant :
+    \begin{quote}
+    \texttt{type br\_tree = Nil | B of br\_tree * br\_tree | R of br\_tree * br\_tree}
+    \end{quote}
+
+    \begin{enumerate}
+        \item Écrire la fonction \texttt{count\_B : br\_tree -> int} qui compte les nœuds internes étiquetés par \texttt{B}.\\
+        Par exemple \texttt{count\_B (B (R (Nil, B (Nil, Nil)), Nil))} vaut \texttt{2}.
+
+        \item Écrire la fonction \texttt{all\_R : br\_tree -> bool} qui vérifie si tous les nœuds internes sont étiquetés par \texttt{R}.\\
+        Par exemple \texttt{all\_R (R (R (Nil, R (Nil, Nil)), Nil))} vaut \texttt{true}.
+
+        \item On dit qu'une valeur de type \texttt{br\_tree} est \textit{correcte} si sur chaque chemin de la racine à une feuille il y a autant de \texttt{B} que de \texttt{R}. Par exemple \texttt{B (R (Nil, Nil), R (B (Nil, Nil), B (Nil, Nil)), Nil))} est correcte, et \texttt{B (Nil, R (Nil, Nil))} ne l'est pas.\\
+        Écrire la fonction \texttt{is\_correct : br\_tree -> bool} qui vérifie si un arbre est correct.
+
+        \item On considère l'itérateur suivant :
+        \begin{quote}
+        \texttt{let rec fold\_br fNil fB fR t =}\\
+        \texttt{\phantom{XX}match t with}\\
+        \texttt{\phantom{XX}| Nil -> fNil}\\
+        \texttt{\phantom{XX}| B (l,r) -> fB (fold\_br fNil fB fR l) (fold\_br fNil fB fR r)}\\
+        \texttt{\phantom{XX}| R (l,r) -> fR (fold\_br fNil fB fR l) (fold\_br fNil fB fR r)}
+        \end{quote}
+        de type
+        \begin{quote}
+        \texttt{'a -> ('a -> 'a -> 'a) -> ('a -> 'a -> 'a) -> br\_tree -> 'a}
+        \end{quote}
+        Redéfinir les fonctions des points 1 et 2 en utilisant \texttt{fold\_br}.
+
+        \item On considère la fonction suivante, de type \texttt{br\_tree -> int list} :
+        \begin{quote}
+        \texttt{let aux = fold\_br [0] (fun x y -> List.map (fun n -> n+1) (x@y))}\\
+        \texttt{\phantom{XXXXXXXXXXXXXXXXX}(fun x y -> List.map (fun n -> n-1) (x@y))}
+        \end{quote}
+        \begin{itemize}
+            \item Donner la valeur de l'appel \texttt{aux (B (R (Nil, Nil), B (Nil, Nil)))}.
+            \item Redéfinir la fonction du point 3 en utilisant \texttt{aux}.
+        \end{itemize}
+    \end{enumerate}
+}
+
+\exercise{21}{Files de priorité sous forme d'arbres binaires}{
+    Une \textit{file de priorité} est une file où chaque élément est associé à une priorité (un nombre, un ordre, un poids, etc.). Dans une file, les éléments sortent dans l'ordre de leur arrivée (FIFO : \textit{First In, First Out}). Dans une file de priorité, les éléments sortent \textbf{selon leur priorité} :
+    \begin{itemize}
+        \item l'élément avec la priorité la plus basse (ou la plus haute, selon la convention adoptée) est retiré en premier,
+        \item l'ordre de retrait n'est donc pas nécessairement l'ordre d'arrivée.
+    \end{itemize}
+    Nous allons utiliser la convention suivante : l'élément de la file ayant la \textit{priorité minimale} est prioritaire. Le but de cet exercice est d'implémenter les files de priorité en utilisant des arbres binaires. On considère le type :
+
+    \begin{quote}
+    \texttt{type ('a, 'p) tree =}\\
+    \texttt{| Empty}\\
+    \texttt{| Node of ('a * 'p) * ('a, 'p) tree * ('a, 'p) tree}
+    \end{quote}
+
+    où \texttt{'a} est le type des éléments de la file et \texttt{'p} le type des priorités.\\
+    Une valeur \texttt{t} de type \texttt{('a, 'p) tree} est dite \textit{bien formée} si, \textbf{pour tout sous-arbre de \texttt{t} de la forme \texttt{Node ((x,p), g, d)}, la priorité \texttt{p} est minimale parmi toutes les priorités présentes dans les sous-arbres \texttt{g} et \texttt{d}.} En particulier, la racine d'un arbre bien formé possède toujours la priorité minimale de l'arbre.\\
+    Dans la suite de l'exercice, une file de priorité sera une valeur bien formée de type \texttt{('a, 'p) tree}.
+
+    \begin{enumerate}
+        \item Expliquer en quoi la structure \texttt{('a, 'p) tree} peut représenter une file de priorité.
+        \item Écrire une fonction \texttt{is\_empty} de type \texttt{('a, 'p) tree -> bool} qui teste si une file de priorité est vide. Par exemple :
+        \[
+        \texttt{is\_empty (Node ((1,0), Empty, Empty)) = false}
+        \]
+        \item Écrire une fonction \texttt{push} de type \texttt{('a * 'p) -> ('a, 'p) tree -> ('a, 'p) tree} qui insère un couple dans une file de priorité. L'arbre renvoyé par \texttt{push} doit être bien formé.
+        \item Écrire une fonction \texttt{peek} de type \texttt{('a, 'p) tree -> 'a} qui retourne l'élément le plus prioritaire de la file sans le retirer. Si la file est vide, la fonction arrête le calcul par \texttt{failwith "File vide"}.
+        \item Écrire une fonction \texttt{pop} de type \texttt{('a, 'p) tree -> ('a, 'p) tree} qui prend en argument une file \texttt{t}, retire son élément prioritaire et reconstruit un arbre bien formé à partir des deux sous-arbres de \texttt{t}. À nouveau, si la file est vide, la fonction arrête le calcul par \texttt{failwith "File vide"}.
+    \end{enumerate}
+}
+\subsection{Calcul différentiel}
+
+\exercise{1}{Questions de cours : convergence uniforme et différentielle}{
+    \begin{enumerate}
+        \item Soit $(f_n)_{n \ge 0}$ une suite d'applications de $\mathbb{R}^+$ dans $\mathbb{R}$. Quand dit-on que $(f_n)_{n \ge 0}$ converge uniformément ?
+        \item Soient $U$ un ouvert de $\mathbb{R}^2$, $F : U \to \mathbb{R}^3$ et $a \in U$. Quelle est la définition de la différentielle $\mathrm{D}F_a$ de $F$ en $a$ (condition d'existence, notation) ?
+    \end{enumerate}
+}
+
+\exercise{2}{Continuité d'une application}{
+    On note $A := \{(x,y) \in \mathbb{R}^2 \mid \sin(x) < \sin(y)\}$.
+    Démontrer que l'application 
+    \[
+    h : \begin{array}{ccc}
+    A & \to & \mathbb{R} \\
+    (x,y) & \mapsto & \frac{1}{\sin(x) - \sin(y)}
+    \end{array}
+    \]
+    est continue.
+}
+
+\exercise{3}{Absence de prolongement continu en l'origine}{
+    On considère l'application $g : \mathbb{R}^2 \setminus \{(0,0)\} \to \mathbb{R}$ définie par :
+    \[
+    g(x,y) = \begin{cases} 
+    1 & \text{s'il existe } r \in \mathbb{Q} \text{ tel que } y = rx \\ 
+    2 & \text{sinon} 
+    \end{cases}.
+    \]
+    Démontrer que $g$ n'a pas de prolongement continu en $(0,0)$.
+}
+
+\exercise{4}{Norme subordonnée d'une application linéaire}{
+    Soit $L : \mathbb{R}^2 \to \mathbb{R}^2$ l'application linéaire de matrice $A = \begin{pmatrix} 0 & 4 \\ 1 & 0 \end{pmatrix}$ dans la base canonique de $\mathbb{R}^2$.
+    Calculer la norme subordonnée $\|L\|$ de $L$ lorsque $\mathbb{R}^2$ est muni de la norme $\|\cdot\|_2$ au niveau de l'espace vectoriel de départ et de l'espace vectoriel d'arrivée.
+}
+
+\exercise{5}{Propriétés topologiques d'une partie de $\mathbb{R}^3$}{
+    On note : $K := \{(x,y,z) \in \mathbb{R}^3 \mid x^2 + y^2 \le z^2 \text{ et } z = \cos(xy)\}$.
+    \begin{enumerate}
+        \item Démontrer que $K$ est une partie fermée de $\mathbb{R}^3$.
+        \item Soit $(x,y,z) \in K$. Démontrer que $|z| \le 1$, $|x| \le 1$ et $|y| \le 1$.
+        \item Montrer qu'il existe $(x_0, y_0, z_0) \in K$ tel que $z_0 \le z$ pour tout $(x,y,z) \in K$.
+    \end{enumerate}
+}
+
 \newpage
 \section{Jour 2}
+
+\subsection{Algorithmique}
+
+\exercise{1}{Single Target Shortest Path}{
+    On est donné un graphe $G(V, E)$ orienté et pondéré sur les arcs, où les poids sont une fonction $w : E \to \mathbb{N}$ (i.e. tous les poids sont positifs). Le graphe nous est donné en forme de listes d'adjacences. Soit $t \in V$ un sommet du graphe. Trouver un algorithme pour calculer, pour tout sommet $v \in V$, les distances $d(v,t)$. La sortie de votre algorithme doit être un tableau de taille $|V|$ où la case qui correspond au sommet $v \in V$ contiendra la longueur d'un plus court chemin de $v$ à $t$. Quelle est la complexité de votre algorithme ?
+}
+
+\exercise{2}{Multiple Sources Shortest Path}{
+    On est donné un graphe $G(V, E)$ non-orienté et non-pondéré. Le graphe nous est donné en forme de listes d'adjacences. Soit $s_1, s_2, \dots, s_k \in V$ $k$ sommets du graphe (où $k \le |V|$). Trouver un algorithme pour calculer, pour tout sommet $v \in V$, la quantité $\delta_v = \min\{d(s_1, v), d(s_2, v), \dots, d(s_k, v)\}$, où $d(s_i, v)$ est la distance entre $s_i$ et $v$. La sortie de votre algorithme doit être un tableau de taille $|V|$ où la case qui correspond au sommet $v \in V$ contiendra la quantité $\delta_v$. Quelle est la complexité de votre algorithme ? Trouver un algorithme linéaire dont la complexité ne dépend pas de $k$ pour obtenir tous les points.
+}
+
+\exercise{3}{Parcours en profondeur}{Faire le QCM de l'examen 2025-2026 sur Moodle partie "Parcours en profondeur".}
+
+\subsection{Intégration et probabilités}
+
+\exercise{1}{Calculs de mesures et mesure de probabilité}{
+    Soit $\alpha > 0$ et $\mu$ la mesure sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que pour tous $a < b$ réels :
+    \[
+    \mu((a,b)) = \alpha \int_a^b \exp(-|x|) \, \mathrm{d}x.
+    \]
+    \begin{enumerate}
+        \item Calculer $\mu((0,1))$ et $\mu((-1,1))$ en fonction de $\alpha$.
+        \item Montrer que $\mu((-\infty, 0)) = \frac{\alpha}{2}$.
+        \item Calculer $\alpha$ pour que $\mu$ soit une mesure de probabilité.
+        \item Montrer que
+        \[
+        \mu\left(\left(x_0 - \frac{1}{n}, x_0 + \frac{1}{n}\right)\right) \le \frac{2\alpha}{n}.
+        \]
+        En déduire $\mu(\{x_0\})$.
+    \end{enumerate}
+}
+
+\exercise{2}{Nature de différentes applications mesurables}{
+    On liste ci-dessous des applications $\mu : \mathcal{B}(\mathbb{R}) \to \mathbb{R}_+ \cup \{+\infty\}$, en exprimant $\mu(A)$, $A \in \mathcal{B}(\mathbb{R})$. Déterminer lesquelles sont des mesures positives et/ou des mesures de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. On justifiera la réponse.
+    \begin{enumerate}
+        \item Pour tout $A \in \mathcal{B}(\mathbb{R})$, $\mu(A) = \sum_{k=-5}^5 k \mathbb{1}_{\{k \in A\}}$.
+        \item Pour tout $A \in \mathcal{B}(\mathbb{R})$, $\mu(A) = \sum_{k \ge 0} 2^{-k} \mathbb{1}_{\{k \in A\}}$.
+        \item Pour tout $A \in \mathcal{B}(\mathbb{R})$, $\mu(A) = \sum_{k \ge 1} 2^{-k} \mathbb{1}_{\{4-k \in A\}}$.
+        \item Pour tout $A \in \mathcal{B}(\mathbb{R})$, $\mu(A) = \frac{8}{15} + \frac{4}{15} \sum_{k \ge 1} \frac{(\ln(3))^k}{k!} \mathbb{1}_{\{k \in A\}}$.
+        \item Pour tout $A \in \mathcal{B}(\mathbb{R})$, $\mu(A) = \frac{8}{15} \mathbb{1}_{\{0 \in A\}} + \frac{4}{15} \sum_{k \ge 1} \frac{(\ln(3))^k}{k!} \mathbb{1}_{\{k \in A\}}$.
+        \item Pour tout $A \in \mathcal{B}(\mathbb{R})$, $\mu(A) = \sum_{x \in \mathbb{Q}} \mathbb{1}_{\{x \in A\}}$.
+    \end{enumerate}
+}
+
+\exercise{3}{Règle de succession de Laplace}{
+    Une boîte contient $k+1$ pièces numérotées de $0$ à $k$. Lorsque la $i$-ième pièce est lancée, $0 \le i \le k$, on obtient Pile avec la probabilité $\frac{i}{k}$. On tire au hasard une pièce dans l'urne pour la jeter ensuite un grand nombre de fois et on suppose alors que le choix de la pièce à lancer étant fait, les jets sont indépendants.
+    \begin{enumerate}
+        \item Quelle est la probabilité conditionnelle $p_{k,n}$ que le $(n+1)$-ième lancer donne Pile sachant que les $n$ premiers l'ont fait ? Quelle est la limite de $p_{k,n}$ quand $k$ tend vers l'infini ?
+        \item Sachant que les $n$ premiers lancers ont donné Pile, montrer que la probabilité conditionnelle que les $m$ suivants fassent de même tend, pour $k$ tendant vers l'infini, vers $\frac{n+1}{n+m+1}$.
+        \item On suppose que les $n$ premiers jets ont donné $r$ Piles et $n-r$ Faces. Montrer que la probabilité conditionnelle que le $(n+1)$-ième donne Pile tend, pour $k$ tendant vers l'infini, vers $\frac{r+1}{n+2}$.\\
+        \textit{Indication :} on pourra utiliser l'identité :
+        \[
+        \int_0^1 y^n (1-y)^m \, \mathrm{d}y = \frac{n! \, m!}{(n+m+1)!}.
+        \]
+        \item Quelle est la probabilité que la $i$-ième pièce ait été tirée si les $n$ premiers jets ont donné Pile ?
+    \end{enumerate}
+}
+
+\subsection{Groupes et actions}
+\exercise{1}{Homotopie et espaces de chemins sur le cercle}{
+    L'exercice utilise les notations suivantes :
+    \begin{itemize}
+        \item $\mathbb{U}$ désigne l'ensemble des nombres complexes de module 1,
+        \item $\pi$ désigne l'application $\mathbb{R} \to \mathbb{U}, \; t \mapsto \exp(it)$,
+        \item $\mathcal{C}$ désigne l'ensemble $\{g \in \mathcal{C}^0([0, 1], \mathbb{R}) \mid g(0) = 0, \, g(1) \in 2\pi\mathbb{Z}\}$,
+        \item $\mathcal{L}$ désigne l'ensemble $\{f \in \mathcal{C}^0([0, 1], \mathbb{U}) \mid f(0) = f(1) = 1\}$,
+        \item $\gamma_n$ (où $n \in \mathbb{Z}$) désigne l'application $[0, 1] \to \mathbb{U}, \; t \mapsto \exp(2in\pi t)$,
+        \item pour toute application $h$ de $[0, 1] \times [0, 1]$ dans un ensemble $E$, pour tout $s \in [0, 1]$, on note $h(s, -)$ l'application $[0, 1] \to E, \; t \mapsto h(s, t)$.
+    \end{itemize}
+
+    \begin{enumerate}
+        \item On note $\mathcal{R}$ la relation binaire sur $\mathbb{R}$ définie par
+        \[
+        (\forall x, y \in \mathbb{R}) \quad x\mathcal{R}y \iff x - y \in 2\pi\mathbb{Z}.
+        \]
+        Démontrer que $\mathcal{R}$ est une relation d'équivalence et que $\pi$ induit une application bijective de $\mathbb{R}/\mathcal{R}$ sur $\mathbb{U}$.
+
+        \item On note $\equiv$ la relation binaire sur $\mathcal{C}$ telle que, pour toutes $g_0, g_1 \in \mathcal{C}$, on a $g_0 \equiv g_1$ si et seulement si il existe une application continue $h : [0, 1] \times [0, 1] \to \mathbb{R}$ telle que $h(s, -) \in \mathcal{C}$ pour tout $s \in [0, 1]$, et $h(0, -) = g_0$ et $h(1, -) = g_1$.\\
+        Démontrer que $\equiv$ est une relation d'équivalence.
+
+        \item On note $\sim$ la relation binaire sur $\mathcal{L}$ telle que, pour toutes $f_0, f_1 \in \mathcal{L}$, on a $f_0 \sim f_1$ si et seulement si il existe une application continue $h : [0, 1] \times [0, 1] \to \mathbb{U}$ telle que $h(s, -) \in \mathcal{L}$ pour tout $s \in [0, 1]$, et $h(0, -) = f_0$ et $h(1, -) = f_1$.\\
+        Démontrer que $\sim$ est une relation d'équivalence.
+
+        \item Démontrer que l'application $\mathcal{C} \to \mathcal{L}, \; g \mapsto \pi \circ g$ induit une application de $\mathcal{C}/\equiv$ dans $\mathcal{L}/\sim$.
+    \end{enumerate}
+}
+
+\exercise{2}{Groupe d'Heisenberg et sous-groupes}{
+    Soit $G = \left\{ \begin{pmatrix} 1 & a & c \\ 0 & 1 & b \\ 0 & 0 & 1 \end{pmatrix}, \, (a, b, c) \in \mathbb{R}^3 \right\}$, $H = \left\{ \begin{pmatrix} 1 & 0 & c \\ 0 & 1 & b \\ 0 & 0 & 1 \end{pmatrix}, \, (b, c) \in \mathbb{R}^2 \right\}$ et $K = \left\{ \begin{pmatrix} 1 & a & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \, a \in \mathbb{R} \right\}$.
+
+    \begin{enumerate}
+        \item Montrer que $G$ est un sous-groupe non-abélien de $\mathrm{GL}_3(\mathbb{R})$, que $H$ est un sous-groupe abélien et distingué de $G$ et que $G/H$ est isomorphe à $\mathbb{R}$.
+        \item Montrer que $K$ est un sous-groupe non distingué dans $G$.
+        \item Déterminer le centre $Z(G)$ de $G$, puis montrer que $G/Z(G)$ est isomorphe à $\mathbb{R}^2$.
+    \end{enumerate}
+}
+
+\exercise{3}{Non-isomorphisme de groupes quotients}{
+    Le groupe $\mathbb{Z}/9\mathbb{Z}$ est-il isomorphe au groupe $\mathbb{Z}/3\mathbb{Z} \times \mathbb{Z}/3\mathbb{Z}$ ?
+}
+
 \newpage
 \section{Jour 3}
+
+\subsection{Intégration et probabilités}
+\exercise{1}{Contrôle de qualité de grille-pains}{
+    Une entreprise produit des grille-pains à la chaîne, 1000 par jour. On suppose que indépendamment, le $i$-ème grille-pain produit est défectueux avec probabilité 0.002. On note $D_i$ l'événement \{ le $i$-ème grille pain est défectueux \}. L'entreprise fait subir des tests de conformité à chaque grille-pain produit (on suppose que ces tests sont également menés de manière indépendante). On note $C_i$ l'événement \{ le $i$-ème grille-pain produit passe le test de conformité \}. On suppose enfin que $\mathbb{P}(C_i \mid D_i) = 0.02$, $\mathbb{P}(C_i \mid D_i^c) = 0.99$. Les grille-pains qui passent le test de conformité sont mis sur le marché, les autres sont détruits.
+    \begin{enumerate}
+        \item Quelle est la loi de $G$, le nombre de grille-pains non défectueux détruits en une journée ?
+        \item Calculer la probabilité que le $i$-ème grille-pain soit défectueux sachant qu'il ne passe pas le test de conformité.
+        \item Calculer la probabilité que le $i$-ème grille-pain soit défectueux et, malgré tout, mis sur le marché ?
+        \item Quelle est la loi de $D_m$ le nombre de grille-pains défectueux mis sur le marché par l'entreprise sur une période de 10 jours ? Quelle autre loi usuelle me approche raisonnablement la loi de $D_m$ ? En déduire une valeur approchée de la probabilité qu'il y en ait au moins un.
+    \end{enumerate}
+}
+
+\exercise{2}{Étude d'une famille de fonctions de répartition}{
+    Pour un $C > 0$ on considère la fonction
+    \[
+    F^{(C)}(x) = \begin{cases} 
+    1 - \frac{C}{x^6} & \text{si } x \ge 2 \\ 
+    0 & \text{sinon.} 
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Montrer que $F^{(C)}$ est la fonction de répartition d'une variable aléatoire réelle $X^{(C)}$ \underline{si et seulement si} $C \le 64$.\\
+        On suppose dans la suite de l'exercice que $C \le 64$.
+        \item Soit $a > 2$, exprimer $\mathbb{P}(X^{(C)} > a)$ en fonction de $a, C$.
+        \item Calculer $\mathbb{P}(X^{(C)} = 2)$ en fonction de la valeur de $C$. Pour quelle valeur $C_0$ de $C$ cette probabilité est-elle nulle ?
+        \item Montrer que si $C = C_0$, la variable aléatoire $X$ telle que $F_X = F^{(C_0)}$ admet une densité $f_X$ que l'on exprimera.
+    \end{enumerate}
+}
+
+\subsection{Calcul différentiel}
+\exercise{1}{Convergence simple et uniforme}{
+    Soit $f_n : [0, +\infty[ \to \mathbb{R}$, la suite des fonctions donnée pour tout $n \in \mathbb{N}$ par
+    \[
+    f_n(x) = \frac{2nx^2}{1 + n^2 x^4}.
+    \]
+    \begin{enumerate}
+        \item Montrer que $(f_n)_{n \in \mathbb{N}}$ converge simplement, et calculer sa limite.
+        \item Montrer que pour tout $a > 0$, la suite $(f_n)_{n \in \mathbb{N}}$ converge uniformément sur $[a, +\infty[$, mais ne converge pas uniformément sur $[0, a]$.
+    \end{enumerate}
+}
+
+\exercise{2}{Applications linéaires continues et normes subordonnées}{
+    Soient $E$ et $F$ deux espaces vectoriels normés et $\varphi : E \to F$ une application linéaire. Calculer $\|\varphi\|$, la norme d'application linéaire subordonnée aux normes de $E$ et $F$, dans les cas suivants :
+    \begin{enumerate}
+        \item $E = (\mathbb{R}^2, \|\cdot\|_2)$, \quad $F = (\mathbb{R}, |\cdot|)$, \quad $\varphi(x,y) = 2x - 3y$.
+        \item $E = (\mathbb{R}^3, \|\cdot\|_\infty)$, \quad $F = (\mathbb{R}^2, \|\cdot\|_1)$, \quad $\varphi(x,y,z) = (2x + y, 3z - y)$.
+        \item $E = (\mathbb{R}^2, \|\cdot\|_\infty)$, \quad $F = (\mathrm{M}_2(\mathbb{R}), \|\cdot\|_\infty)$, \quad $\varphi(a,b) = \begin{pmatrix} a & b \\ -b & a \end{pmatrix}$.
+    \end{enumerate}
+}
+
+\exercise{3}{Continuité et compacts}{
+    On munit $\mathbb{R}^n$ de sa topologie usuelle (induite par n'importe quelle norme). Déterminer si les parties suivantes sont compactes :
+    \begin{enumerate}
+        \item $A = [0,1] \times \{2\}$.
+        \item $B = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^4 \le 3\}$. Existe-t-il une plus grande valeur de $\sin(xy) + e^{x-y}$ sur $B$ ?
+        \item $C = \{(x,y) \in \mathbb{R}^2 \mid \max\{|x|, |y|\} = 2\}$.
+    \end{enumerate}
+}
+
+\subsection{Système d'exploitation}
+
+Revoir les notions du cours et les premiers TPs.
+
 \newpage
 \section{Jour 4}
+
+\subsection{Programmation fonctionnelle}
+Faire le TP numéro 7.
+
+\subsection{Calcul différentiel}
+\exercise{1}{Questions de cours : continuité et application lipschitzienne}{
+    \begin{enumerate}
+        \item Soit $f : (\mathbb{R}^2, \|\cdot\|_1) \to (\mathbb{R}^2, \|\cdot\|_\infty)$ une fonction, et $x_0 \in \mathbb{R}^2$. Donner la définition de la continuité de $f$ en $x_0$ avec des quantificateurs $(\forall, \exists)$ et les normes adéquates $(\|\cdot\|_1, \|\cdot\|_\infty)$.
+        \item À quelle condition une fonction $f : \mathbb{R} \to \mathbb{R}$ est-elle Lipschitzienne ?
+    \end{enumerate}
+}
+
+\exercise{2}{Normes d'opérateurs et constante optimale}{
+    On rappelle la notation $\|(x,y,z)\|_\infty = \max(|x|, |y|, |z|)$. On cherche la plus petite constante $C_\infty \ge 0$, si elle existe, telle que
+    \[
+    \tag{1} \forall (x,y,z) \in \mathbb{R}^3, \quad \max(|x-y|, |y-2z|, |x-y+3z|) \le C_\infty \|(x,y,z)\|_\infty.
+    \]
+    \begin{enumerate}
+        \item Montrer qu'il existe une constante $C_\infty$ vérifiant (1). (On donnera une constante explicite.)
+        \item Déterminer la plus petite constante $C_\infty$ possible vérifiant (1).
+        \item Déterminer une matrice $A \in \mathrm{M}_3(\mathbb{R})$ telle que $A \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} x-y \\ y-2z \\ x-y+3z \end{pmatrix}$ pour tout $(x,y,z)$ dans $\mathbb{R}^3$.
+        \item En déduire un lien entre $C_\infty$ et une norme subordonnée de $A$.
+    \end{enumerate}
+}
+
+\exercise{3}{Étude de continuité en l'origine}{
+    \begin{enumerate}
+        \item Soit la fonction $f : \mathbb{R}^2 \to \mathbb{R}$ définie par
+        \[
+        f(x,y) = \begin{cases}
+        \frac{|x|^{1/2} y}{|x| + |y|} & \text{si } (x,y) \neq (0,0) \\
+        0 & \text{sinon}
+        \end{cases}
+        \]
+        Montrer que $f$ est continue en $(0,0)$.
+        \item Soit la fonction $g : \mathbb{R}^2 \to \mathbb{R}$ définie par
+        \[
+        g(x,y) = \begin{cases}
+        \frac{|x|^{1/2} y}{x^2 + y^2} & \text{si } (x,y) \neq (0,0) \\
+        0 & \text{sinon}
+        \end{cases}
+        \]
+        Montrer que $g$ n'est pas continue en $(0,0)$. (\textit{Indication :} on pourra trouver une suite $(x_n, y_n)$ qui converge vers $(0,0)$ mais telle que $g(x_n, y_n)$ ne converge pas.)
+    \end{enumerate}
+}
+
+\exercise{4}{L'intérieur, l'adhérence et la frontière}{
+    Dans l'espace normé $(\mathbb{R}, |\cdot|)$, déterminer l'intérieur, l'adhérence et la frontière de chacun des sous-ensembles suivants :
+    \begin{itemize}
+        \item $B = [1,3] \cup \{\pi\}$ ;
+        \item $D = \mathbb{Z}$ ;
+        \item $E = \bigcup_{n \in \mathbb{N}^*} \left\{ \frac{1}{n} \right\}$.
+    \end{itemize}
+}
+
+\subsection{Groupes et actions}
+
+\exercise{1}{Morphismes et reste chinois}{
+    Soient $m$ et $n \in \mathbb{N} \setminus \{0\}$. Pour tout $d \in \mathbb{N}$, on note $\pi_d$ la surjection canonique $\mathbb{Z} \to \mathbb{Z}/d\mathbb{Z}$.
+    \begin{enumerate}
+        \item Démontrer qu'il existe un et un seul homomorphisme de groupes $\varphi$ de $\mathbb{Z}/mn\mathbb{Z}$ dans $\mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z}$ tel $\varphi \circ \pi_{mn}$ soit l'application $x \mapsto (\pi_m(x), \pi_n(x))$.
+        \item Déterminer $\mathrm{Im}(\varphi)$ et $\mathrm{Ker}(\varphi)$.
+        \item On suppose que $\mathrm{pgcd}(m,n) = 1$. Démontrer que $\varphi$ est un isomorphisme.
+        \item Décrire $\{k \in \mathbb{Z} \mid k \equiv 1 \bmod 5 \text{ et } k \equiv 3 \bmod 7\}$.
+    \end{enumerate}
+}
+
+\exercise{2}{Propriétés de puissance dans les sous-groupes}{
+    Soient $G$ un groupe et $H$ un sous-groupe distingué d'indice $n$.
+    \begin{enumerate}
+        \item Montrer que pour tout $a \in G$, on a $a^n \in H$.
+        \item Donner un exemple de sous-groupe $H$ non distingué de $G$ pour lequel il existe $a \in G$ avec $a^n \notin H$.
+    \end{enumerate}
+}
+
+\exercise{3}{Sous-groupe d'indice fini de $\mathbb{C}^*$}{
+    Soit $G$ un sous-groupe d'indice fini du groupe $(\mathbb{C}^*, \times)$. Montrer que $G = \mathbb{C}^*$.
+}
+
 \newpage
 \section{Jour 5}
+
+\subsection{Groupes et actions}
+\exercise{1}{Homomorphismes de groupes cycliques}{
+    Soit $G$ un groupe. Soient $m, n \in \mathbb{N} \setminus \{0\}$.
+    \begin{enumerate}
+        \item Déterminer tous les homomorphismes de $\mathbb{Z}$ dans $G$.
+        \item Déterminer tous les homomorphismes de $\mathbb{Z}/n\mathbb{Z}$ dans $G$.
+        \item En déduire tous les homomorphismes de $\mathbb{Z}/n\mathbb{Z}$ dans $\mathbb{Z}/m\mathbb{Z}$ (resp. les automorphismes du groupe $\mathbb{Z}/n\mathbb{Z}$).
+    \end{enumerate}
+}
+
+\exercise{2}{Parties génératrices et morphismes de groupes}{
+    Soit $G$ un groupe et soit $X$ une partie génératrice de $G$.
+    \begin{enumerate}
+        \item Soit $f : G \to H$ un morphisme. Montrer que $f(X)$ engendre l'image de $f$.
+        \item Montrer que $\mathrm{Im}(f)$ est cyclique d'ordre divisant $|G|$ lorsque $G$ est cyclique.
+    \end{enumerate}
+    On suppose dans la suite de l'exercice que $X$ est fini, $X = \{x_1, x_2, \dots, x_n\}$.
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item On suppose que $x_i x_j = x_j x_i$, $i, j = 1, \dots, n$.
+        \begin{enumerate}
+            \item Montrer que le groupe $G$ est abélien.
+            \item Montrer que l'application $\varphi : (m_1, m_2, \dots, m_n) \mapsto x_1^{m_1} x_2^{m_2} \dots x_n^{m_n}$ est un morphisme surjectif du groupe $\mathbb{Z}^n$ sur le groupe $G$.
+        \end{enumerate}
+        \item L'application $\varphi$ est-elle encore un morphisme si $G$ n'est pas abélien ?
+    \end{enumerate}
+}
+
+\exercise{3}{Morphismes d'un groupe fini vers $\mathbb{Z}$}{
+    Soit $G$ un groupe fini. Déterminer les morphismes de $G$ dans $\mathbb{Z}$.
+}
+
+\exercise{4}{Étude de morphismes de groupes et sous-groupes}{
+    Soit $n \in \mathbb{N}^*$ et soit $\mathbb{U}_n = \{z \in \mathbb{C} : z^n = 1\}$. Soit $\zeta$ un élément quelconque de $\mathbb{U}_n$. Les applications $f : (\mathbb{Z}^2, +) \to (\mathbb{Z}, +)$ et $g : (\mathbb{Z}, +) \to \mathbb{U}_n$ définies par $f(x, y) = x + y$, $g(k) = \zeta^k$ sont-elles des morphismes de groupes ?\\
+    Si c'est le cas donner leur noyau et image.
+}
+\subsection{Intégration et probabilités}
+Revoir les notions du cours.
+\subsection{Programmation fonctionnelle}
+Revoir les notions du cours.
+
 \newpage
 \section{Jour 6}
+
+\subsection{Intégration et probabilités}
+\exercise{1}{Tirages de boules dans une urne}{
+    Dans une urne contenant 10 boules rouges, 10 boules bleues et 5 boules vertes, on effectue 5 tirages uniformes, avec remise.
+    \begin{enumerate}
+        \item Décrire un espace probabilisé $(\Omega, \mathcal{F}, \mathbb{P})$ adéquat pour analyser l'expérience aléatoire.
+        \item Déterminer la probabilité de ne tirer aucune boule verte lors des 5 tirages.
+        \item Déterminer la probabilité de tirer un total de 3 boules rouges, sachant qu'on ne tire aucune boule verte.
+        \item Déterminer la probabilité de tirer un total de 3 boules rouges, 1 bleue et 1 verte lors des 5 tirages.
+    \end{enumerate}
+}
+
+\exercise{2}{Problème des clés et de la porte}{
+    Monsieur Dupont tente d'ouvrir une porte à l'aide d'un trousseau de $n$ clés, dont l'ordre est supposé uniforme parmi tous les ordres possibles. Il essaye les clés successivement.
+    \begin{enumerate}
+        \item Si une seule clé ouvre la porte, quelle est la probabilité qu'il parvienne à ouvrir la porte au 1er essai ? au $k$-ième essai ($k = 1, 2, \dots, n$) ?
+        \item Même question si deux clés du trousseau ouvrent la porte.
+    \end{enumerate}
+}
+
+\exercise{3}{Urne de Polya}{
+    Une urne contient initialement une boule rouge et 1 boule noire. À l'étape 1 une boule est choisie uniformément au hasard dans l'urne, on note sa couleur, et on la remet avec 1 boule supplémentaire de la même couleur. On procède ensuite à l'étape 2 : à nouveau, une boule est choisie uniformément au hasard dans l'urne, on note sa couleur, et on la remet avec 1 boule supplémentaire de la même couleur. Et ainsi de suite.
+
+    Plus formellement pour tout $m \in \mathbb{N}^*$, les étapes $1, 2, \dots, m$ ayant été effectuées, alors à l'étape $m + 1$, une boule est choisie uniformément au hasard dans l'urne, on note sa couleur, et on la remet avec 1 boule supplémentaire de la même couleur.
+
+    \begin{enumerate}
+        \item À l'issue de l'étape $m \in \mathbb{N}^*$, combien l'urne contient-elle de boules ?
+        \item Soit $N_m$ le nombre total de boules rouges qui ont été tirées lors des étapes $1, 2, \dots, m$.
+        \begin{enumerate}
+            \item Soit $k \in \{0, \dots, m\}$, montrer que $\mathbb{P}(N_{m+1} = k + 1 \mid N_m = k) = \frac{k+1}{m+2}$
+            \item Exprimer $\mathbb{P}(N_{m+1} = k \mid N_m = k)$
+            \item Montrer par récurrence que
+            \[
+            \mathbb{P}(N_m = k) = \frac{1}{m+1}, \quad \forall k \in \{0, \dots, m\}
+            \]
+        \end{enumerate}
+    \end{enumerate}
+}
+\subsection{Programmation fonctionnelle}
+\exercise{1}{Bulletin de notes et gestion d'absences en OCaml}{
+    Dans cet exercice, il est autorisé (mais pas obligatoire) d'utiliser les fonctions du module \texttt{List} de la bibliothèque standard d'OCaml.
+
+    \textbf{Bulletin de notes.} Nous allons représenter un bulletin de notes à l'aide des types OCaml suivants :
+    \begin{quote}
+    \texttt{type resultat = Note of int | Absence of bool}\\
+    \texttt{type bulletin = resultat list}
+    \end{quote}
+    Ainsi, un résultat pour une épreuve donnée peut être soit une note (qui est un nombre entier), soit une absence qui peut être justifiée (avec la valeur \texttt{true}) ou non-justifiée (avec la valeur \texttt{false}). Un bulletin de notes est une liste de résultats.\\
+    Par exemple, la ligne suivante définit une valeur de type \texttt{bulletin} :
+    \begin{quote}
+    \texttt{let exemple = [Note 8; Absence true; Note 14; Note 16; Absence false; Absence true]}
+    \end{quote}
+
+    \begin{enumerate}
+        \item Écrire une fonction \texttt{separer : bulletin -> int list * int * int} qui prend en entrée un bulletin, et renvoie un triplet constitué de :
+        \begin{itemize}
+            \item la liste des notes,
+            \item le nombre d'absences justifiées,
+            \item le nombre d'absences non-justifiées.
+        \end{itemize}
+        Ainsi, pour l'exemple donné, on doit avoir \texttt{separer exemple = ([8; 14; 16], 2, 1)}.
+
+        \item Écrire une fonction \texttt{verifier\_notes : bulletin -> bool} qui vérifie que toutes les notes sont comprises entre 0 et 20 (inclus).
+
+        \item Écrire une fonction \texttt{moyenne : bulletin -> float} qui calcule la moyenne du bulletin, en prenant en compte que :
+        \begin{itemize}
+            \item les absences justifiées sont ignorées,
+            \item les absences non-justifiées comptent comme des 0,
+            \item et toutes les notes ont le même coefficient.
+        \end{itemize}
+        Ainsi, pour l'exemple donné, on doit avoir \texttt{moyenne exemple = 9.5}.
+    \end{enumerate}
+
+    \bigskip
+    \textbf{Généralisation : listes et types sommes.} Le type \texttt{bulletin} des questions précédentes est un exemple de liste hétérogène : elle peut contenir des valeurs qui sont soit des entiers, soit des booléens. On peut généraliser cette idée à l'aide du type somme défini ci-dessous :
+    \begin{quote}
+    \texttt{type ('a, 'b) sum = Gauche of 'a | Droite of 'b}
+    \end{quote}
+    Une valeur de type \texttt{('a, 'b) sum} peut être soit de type \texttt{'a}, soit de type \texttt{'b}. Le constructeur (\texttt{Gauche} ou \texttt{Droite}) permet de savoir quel est le type de l'élément. Ainsi, le type \texttt{(int, bool) sum} est isomorphe au type \texttt{resultat} vu précédemment.
+
+    \begin{enumerate}
+        \setcounter{enumi}{3}
+        \item Écrire une fonction \texttt{convertir : bulletin -> (int, bool) sum list} qui transforme une valeur de type \texttt{bulletin} en une liste de valeurs de type \texttt{(int, bool) sum} contenant les mêmes données.
+
+        \item Écrire une fonction \texttt{filter\_map : ('a -> 'c option) -> ('b -> 'c option) -> ('a, 'b) sum list -> 'c list} telle que \texttt{filter\_map f g l} parcourt la liste \texttt{l}, dont les éléments sont de type \texttt{('a, 'b) sum}, de la manière suivante :
+        \begin{itemize}
+            \item si un élément est de type \texttt{'a}, on applique la fonction \texttt{f} ;
+            \item si un élément est de type \texttt{'b}, on applique la fonction \texttt{g} ;
+            \item dans les deux cas, si l'application de la fonction renvoie \texttt{None}, l'élément est ignoré ;
+            \item sinon, lorsque l'application de \texttt{f} ou \texttt{g} renvoie \texttt{Some c}, l'élément \texttt{c} est ajouté au résultat.
+        \end{itemize}
+        Ainsi, le résultat final de \texttt{filter\_map f g l} est une liste de type \texttt{'c list}.\\
+        Par exemple, l'appel ci-dessous :
+        \begin{quote}
+        \texttt{let f n = if n mod 2 = 0 then Some (n / 2) else None in}\\
+        \texttt{let g s = Some (String.length s) in}\\
+        \texttt{let l = [Gauche 4; Gauche 7; Droite "Hello"; Gauche 24; Droite "World!"] in}\\
+        \texttt{filter\_map f g l}
+        \end{quote}
+        doit renvoyer la liste \texttt{[2; 5; 12; 6]} (où l'élément \texttt{Gauche 7} a été ignoré).
+
+        \item Réécrire la fonction \texttt{moyenne : bulletin -> float} de la question 1.3, sans utiliser la récursivité, en vous servant des fonctions précédentes \texttt{convertir} et \texttt{filter\_map}, de la fonction \texttt{List.length}, et de la fonction \texttt{List.fold\_left (+) 0}.
+    \end{enumerate}
+}
+\subsection{Algorithmique}
+\exercise{1}{Vrai ou Faux : propriétés des graphes et algorithmes}{
+    Les affirmations suivantes sont-elles vraies ou fausses ? Justifier par une courte preuve ou un contre-exemple. Sauf mention contraire, $G = (V, E)$ est un graphe orienté à $n$ sommets, sans boucles.
+    \begin{enumerate}
+        \item $G$ est un DAG si et seulement s'il possède exactement $n$ CFC.
+        \item Un graphe orienté a autant de composantes fortement connexes que d'arcs retour dans un parcours en profondeur.
+        \item Si l'on ajoute une même constante $c > 0$ au poids de chaque arc, les plus courts chemins restent les mêmes.
+        \item Si l'on multiplie le poids de chaque arc par une même constante $c > 0$, les plus courts chemins restent les mêmes.
+        \item Si $G$ possède exactement un arc de poids négatif, les plus courts chemins depuis $s$ ne sont pas définis.
+        \item Si $G$ contient exactement un arc de poids négatif, l'algorithme de Dijkstra renvoie forcément au moins une distance fausse.
+    \end{enumerate}
+}
+
+\exercise{2}{Vrai ou Faux : parcours en largeur (BFS) et en profondeur (DFS)}{
+    Pour chacune des affirmations suivantes, indiquer si elle est vraie ou fausse et justifier la réponse.
+    \begin{enumerate}
+        \item Il existe un graphe connexe non orienté à 4 sommets tel que le BFS et le DFS, en partant du même sommet, traitent les sommets dans le même ordre.
+        \item Dans la forêt d'un DFS, entre deux sommets ayant le même parent, il peut y avoir :
+        \begin{enumerate}
+            \item un arc avant,
+            \item un arc retour,
+            \item un arc transverse.
+        \end{enumerate}
+        \item Si on fait un DFS sur un graphe où l'on a deux sommets $u$ et $v$ tels que $(u, v)$ et $(v, u)$ sont des arcs, alors l'un d'eux sera dans la forêt du DFS.
+    \end{enumerate}
+}
+
+\exercise{3}{Cycle de longueur minimale passant par un sommet}{
+    Proposer un algorithme renvoyant, s'il existe, un cycle de longueur minimale passant par un sommet $s$ donné dans un graphe $G$ non orienté. Prouver sa correction.
+}
 \newpage
 \section{Jour 7}
-\newpage
-\section{Jour 8}
-\newpage
-\section{Jour 9}
+\subsection{Groupes et actions}
+\exercise{1}{Groupe opposé}{
+    Soit $(G, *)$ un groupe. On note $\circledast$ la loi de composition interne sur $G$ telle que $x \circledast y = y * x$ pour tous $x, y \in G$. Démontrer que $(G, \circledast)$ est un groupe.
+}
+
+\exercise{2}{Union de sous-groupes}{
+    Soient $H$ et $K$ deux sous-groupes d'un groupe $(G, *)$. Démontrer que $H \cup K$ est un sous-groupe de $G$ si, et seulement si, ($H \subset K$ ou $K \subset H$).
+}
+
+\exercise{3}{Ordre d'un produit d'éléments qui commutent}{
+    Soit $x, y$ deux éléments d'ordre fini d'un groupe $G$ tels que $xy = yx$. On note $n$ et $m$ leur ordre.
+    \begin{enumerate}
+        \item Démontrer que si $\mathrm{pgcd}(m, n) = 1$ alors $xy$ est d'ordre $mn$.
+        \item Démontrer que $xy$ est d'ordre fini et que $\frac{mn}{d^2} \mid k \mid \frac{mn}{d}$, en notant $k$ l'ordre de $xy$ et $d$ l'entier $\mathrm{pgcd}(m, n)$.
+        \item On suppose que $m = 24$ et $n = 18$. Démontrer que $G$ contient un élément d'ordre 72.
+    \end{enumerate}
+}
+\subsection{Intégration et probabilités}
+\exercise{1}{Vrai/Faux : probabilités et dénombrement}{
+    \begin{enumerate}
+        \item Il est plus "raisonnable" d'espérer retrouver une personne en composant au hasard les 8 chiffres finaux de son numéro de téléphone fixe (vous savez seulement que le numéro commence par 01) que d'espérer trouver la combinaison exacte au prochain 'euromillions' (5 boules tirées parmi des boules rouges comportant les numéros 1 à 50 et 2 supplémentaires parmi des boules dorées portant les numéros 1 à 12).
+        \item On suppose que dans une commune, 40\% des foyers sont sans enfant, 25\% comptent un enfant, 25\% deux enfants, 10\% trois enfants. Pour une campagne commerciale, le supermarché local tire uniformément au hasard un enfant sur les listes scolaires du CP pour lui offrir toutes ses fournitures de rentrée. La probabilité qu'il s'agisse d'un enfant unique est supérieure à 25\%.
+        \item La probabilité qu'au moins deux personnes dans un groupe de td de 30 étudiants tous nés en 2002 partagent leur date d'anniversaire est inférieure à 1/2. On supposera les dates d'anniversaire indépendantes et uniformes.
+    \end{enumerate}
+}
+
+\exercise{2}{Mode d'une loi binomiale}{
+    On considère une variable binomiale $X \sim \mathrm{Bin}(n,p)$. Quelle(s) valeur(s) de $j$ me maximise(nt) l'expression $\mathbb{P}(X = j)$ ?\\
+    \textit{Indication :} On pourra commencer par calculer $\frac{\mathbb{P}(X=k)}{\mathbb{P}(X=k-1)}$.
+}
+
+\exercise{3}{Densité d'une puissance d'une variable uniforme}{
+    Soit $X$ une variable aléatoire uniforme sur $[-1,1]$. On pose $Y_k = X^k$ pour un entier $k \ge 1$. Déterminer la densité de $Y_k$ (\textit{Indication :} Distinguer les $k$ pairs et impairs).
+}
 \newpage
 
 \end{document}

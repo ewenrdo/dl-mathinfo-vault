@@ -1,0 +1,258 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\usepackage{paracol}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°7}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $14,15,16,17$\\
+\hline
+Groupes et actions & $1,2,3,4,5,6,7$\\
+\hline
+Calcul différentiel & $8,9,10,11,12,13$\\
+\hline
+Systèmes d'exploitation & $\emptyset$\\
+\hline
+Algorithmique & $\emptyset$\\
+\hline
+Programmation fonctionnelle & $\emptyset$\\
+\hline
+Anglais & $\emptyset$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+\exercise{1}{Relation d'équivalence sur les suites de rationnels}{
+    On note $E$ l'ensemble $\{u \in \mathbb{Q}^{\mathbb{N}} \mid u \text{ converge dans } \mathbb{R}\}$ et $\mathcal{R}$ la relation binaire sur $E$ telle que : $(\forall u, v \in E) \; u\mathcal{R}v \iff \lim_{n \to +\infty} (u_n - v_n) = 0$. Démontrer que $\mathcal{R}$ est une relation d'équivalence puis, à l'aide des nombres décimaux, déterminer une bijection $\mathbb{R} \to E/\mathcal{R}$.
+}
+
+\exercise{2}{Relation d'équivalence associée à une application}{
+    Soit $f : E \to F$ une application. On note $\mathcal{R}_f$ la relation binaire sur $E$ telle que : $(\forall e, e' \in E) \; e\mathcal{R}_f e' \iff f(e) = f(e')$.
+    \begin{enumerate}
+        \item Démontrer que $\mathcal{R}_f$ est une relation d'équivalence.
+        \item Soit $e \in E$. Démontrer que la classe d'équivalence de $e$ est égale à $f^{-1}(f(e))$.
+        \item Démontrer qu'il existe une application bijective de $E/\mathcal{R}_f$ dans $f(E)$.
+        \item Soit $\mathcal{R}$ une relation d'équivalence sur $E$. On note $p$ la surjection canonique de $E$ dans $E/\mathcal{R}$. Démontrer que $\mathcal{R} = \mathcal{R}_p$.
+    \end{enumerate}
+}
+
+\exercise{3}{Morphisme déterminant}{
+    Soit $n \ge 0$ un entier. Montrer que l'application déterminant est un morphisme $\text{GL}_n(\mathbb{R}) \to \mathbb{R}^*$ est un morphisme de groupes. En déduire que $\text{SL}_n(\mathbb{R})$ est une sous-groupe distingué de $\text{GL}_n(\mathbb{R})$.
+}
+
+\exercise{4}{Sous-groupes et quotients du groupe symétrique $\mathcal{S}_3$}{
+    On considère le groupe $\mathcal{S}_3$ des six permutations de trois éléments.
+    \begin{enumerate}
+        \item Déterminer tous les sous-groupes de $\mathcal{S}_3$.
+        \switchcolumn
+        \setcounter{enumi}{1}
+        \item Lesquels de ces sous-groupes sont distingués dans $\mathcal{S}_3$ ?
+        \item Donner la liste complète de tous les groupes quotients de $\mathcal{S}_3$.
+    \end{enumerate}
+}
+
+\exercise{5}{Étude du groupe quotient $(\mathbb{Q}/\mathbb{Z}, +)$}{
+    Pour tout $x \in \mathbb{Q}$, on notera $[x]$ sa classe dans le groupe quotient $(\mathbb{Q}/\mathbb{Z}, +)$.
+    \begin{enumerate}
+        \item À quelle condition deux rationnels $x$ et $y$ ont-ils la même classe dans le quotient $\mathbb{Q}/\mathbb{Z}$ ?
+        \item On considère la classe $\alpha = [\frac{1}{4}] + [\frac{1}{3}]$.
+        \begin{enumerate}
+            \item Donner un représentant de $\alpha$ dans $\mathbb{Q}$.
+            \item Quel est l'ordre de $\alpha$ dans $\mathbb{Q}/\mathbb{Z}$ ?
+        \end{enumerate}
+        \item On considère l'application $\varphi : \mathbb{Q} \to \mathbb{Q}/\mathbb{Z}, \; x \mapsto 2[x]$.
+        \begin{enumerate}
+            \item Montrer que $\varphi$ est un morphisme de groupes additifs.
+            \item Montrer que $\varphi$ est surjective.
+            \item Déterminer le noyau de $\varphi$. Justifier que c'est un sous-groupe de $\mathbb{Q}$. Est-il monogène ?
+        \end{enumerate}
+    \end{enumerate}
+}
+
+\exercise{6}{Isomorphismes et sous-groupe de torsion dans $\mathbb{C}^*$}{
+    On considère le groupe quotient $(\mathbb{Q}/\mathbb{Z}, +)$.
+    \begin{enumerate}
+        \item Montrer que l'application $\varphi : (\mathbb{R}, +) \to (\mathbb{C}^*, \times)$ définie par $\varphi(x) = e^{2i\pi x}$ est un homomorphisme de groupes.
+        \item Calculer son noyau et son image, et en déduire que $\mathbb{R}/\mathbb{Z} \simeq \mathbb{U} := \{z \in \mathbb{C} \mid |z| = 1\}$.
+        \item On note $\phi$ la restriction de $\varphi$ au sous-groupe $\mathbb{Q}$. Montrer (par double inclusion) que l'image de $\phi$ est égale à 
+        \[
+        \mathbb{U}_\infty = \{z \in \mathbb{C} \mid \text{il existe } n \in \mathbb{N}^* \text{ tel que } z^n = 1\} = \bigcup_{n \in \mathbb{N}^*} \mathbb{U}_n.
+        \]
+        \item En déduire que $\mathbb{Q}/\mathbb{Z} \simeq \mathbb{U}_\infty$.
+    \end{enumerate}
+}
+\switchcolumn
+\newpage
+
+\exercise{7}{Propriétés du centre d'un groupe}{
+    Soit $G$ un groupe.
+    \begin{enumerate}
+        \item Rappeler la définition du centre $Z(G)$ de $G$.
+        \item Montrer que $Z(G)$ est un sous-groupe distingué de $G$.
+        \item Quel est le centre d'un groupe abélien ?
+        \item On suppose que $G/Z(G)$ est cyclique. Montrer que $G$ est abélien et donc $Z(G) = G$.
+    \end{enumerate}
+}
+\exercise{8}{Norme et équivalence de normes sur $\mathbb{R}^2$}{
+    On fixe deux nombres réels $\alpha$ et $\beta$. On pose alors, pour tout $u = (x, y) \in \mathbb{R}^2$ :
+    \[
+    \|u\|_1 := |x| + |y|
+    \]
+    \[
+    N(u) := |\alpha x + \beta y| + |y|
+    \]
+    On admet que $\|\cdot\|_1$ est une norme sur $\mathbb{R}^2$.
+    \begin{enumerate}
+        \item Montrer que, si $\alpha = 0$, $N$ n'est pas une norme sur $\mathbb{R}^2$.
+    \end{enumerate}
+    Dans la suite de l'exercice, on suppose $\alpha \neq 0$.
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item Montrer que $N$ est une norme sur $\mathbb{R}^2$.
+        \item Montrer que $N$ et $\|\cdot\|_1$ sont équivalentes.
+        \item Donner, en fonctions de $\alpha$ et $\beta$, deux constantes $C, c > 0$ telles que
+        \[
+        \forall u \in \mathbb{R}^2, c \|u\|_1 \le N(u) \le C \|u\|_1
+        \]
+    \end{enumerate}
+}
+
+\exercise{9}{Ouverts et fermés dans $\mathbb{R}^2$}{
+    Les ensembles suivants sont ils ouverts dans $\mathbb{R}^2$ ? Sont-ils fermés ?
+    \begin{itemize}
+        \item $A = \{(x, y) \in \mathbb{R}^2 \mid x^2 + y^2 \le 1, x > y^2\}$ ;
+        \item $B = \{(x, y) \in \mathbb{R}^2 \mid xy > 1\}$ ;
+        \item $C = \{(x, y) \in \mathbb{R}^2 \mid y = \sin(x)\}$ ;
+        \item $D = \{(x, y) \in \mathbb{R}^2 \mid x > 0, y = \sin(x)\}$ ;
+        \switchcolumn
+        \newpage
+        \item $E = \{(e^t, e^t \cos(e^t)) \mid t \in \mathbb{R}\}$.
+    \end{itemize}
+}
+
+\exercise{10}{Adhérence et intérieur d'ensembles de $\mathbb{R}^2$}{
+    Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction continue. Calculer l'adhérence et l'intérieur des trois ensembles suivants.
+    \begin{itemize}
+        \item $A = \{(x, y) \in \mathbb{R}^2 \mid y = f(x)\}$ ;
+        \item $B = \{(x, y) \in \mathbb{R}^2 \mid y < f(x)\}$ ;
+        \item $C = \{(x, y) \in \mathbb{R}^2 \mid y \le f(x)\}$.
+    \end{itemize}
+}
+
+\exercise{11}{Norme à poids exponentiel sur $\mathcal{C}([0,1], \mathbb{R})$}{
+    On considère $E = \mathcal{C}([0, 1], \mathbb{R})$ l'espace vectoriel des fonctions continues sur $[0, 1]$ à valeurs réelles. Pour tout $u \in E$ on pose :
+    \[
+    \|u\|_1 = \int_0^1 |u(t)| \, \mathrm{d}t \quad \text{et} \quad N(u) = \int_0^1 e^t |u(t)| \, \mathrm{d}t
+    \]
+    On admet que $\|\cdot\|_1$ est une norme sur $E$.
+    \begin{enumerate}
+        \item Montrer que $N$ est une norme sur $E$.
+        \item Montrer que $\|\cdot\|_1$ et $N$ sont équivalentes.
+    \end{enumerate}
+}
+
+\exercise{12}{Fermeture et intérieur de l'hyperplan d'intégrale nulle}{
+    On considère l'espace vectoriel $E = \mathcal{C}([0, 1], \mathbb{R})$ des fonctions continues sur $[0, 1]$ à valeurs réelles, muni de la norme $\|\cdot\|_\infty$ définie par
+    \[
+    \|u\|_\infty = \sup_{0 \le t \le 1} |u(t)|
+    \]
+    Montrer que l'ensemble $F = \left\{ u \in E \mid \int_0^1 u(t) \, \mathrm{d}t = 0 \right\}$ est fermé et d'intérieur vide dans $(E, \|\cdot\|_\infty)$.
+}
+
+\switchcolumn
+\newpage
+
+\exercise{13}{Généralisation à une fonction poids continue strictement positive}{
+    On reprend les notations de l'exercice 11. On fixe une fonction $f : [0, 1] \to \mathbb{R}_+^*$ continue et strictement positive, et on pose, pour tout $u \in E$, $M(u) := \int_0^1 f(t) |u(t)| \, \mathrm{d}t$.
+    \begin{enumerate}
+        \item Montrer que $M$ est une norme sur $E$.
+        \item Montrer qu'on a, pour tout $u \in E$, l'inégalité
+        \[
+        \left( \inf_{0 \le t \le 1} f(t) \right) \cdot \|u\|_1 \le M(u) \le \left( \sup_{0 \le t \le 1} f(t) \right) \cdot \|u\|_1
+        \]
+        \item En déduire que $\|\cdot\|_1$ et $M$ sont équivalentes.
+    \end{enumerate}
+
+}
+
+\exercise{14}{Fonction de répartition CPM et calcul de probabilités}{
+    Soit $F$ la fonction définie pour tout $x \in \mathbb{R}$ par
+    \[
+    F(x) = \frac{\min(x, 1)}{3} \mathbb{1}_{[0, +\infty[}(x) + \sum_{i=0}^{\infty} \frac{1}{3 \cdot 2^i} \mathbb{1}_{[i, +\infty[}(x).
+    \]
+    \begin{enumerate}
+        \item Montrer qu'il s'agit d'une fonction de répartition. Soit alors $X$ une variable aléatoire dont la fonction de répartition est donnée par $F$.
+        \item Trouver la probabilité que $X$ prenne ses valeurs dans les ensembles suivants :
+        \begin{itemize}
+            \item $A = [1, +\infty[$
+            \item $B = {]0, 1[}$
+            \item $C = \{0\}$
+            \item $D = \{1, 2, 3\}$
+            \item $E_n = [n, +\infty[$ pour un $n \in \mathbb{N}^*$
+            \item $F = {]-\infty, 0[}$
+            \item $G_n = \{1, \dots, n\}$ pour un $n \in \mathbb{N}^*$.
+        \end{itemize}
+    \end{enumerate}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{15}{Transformations de variables aléatoires et densités}{
+    Soit $X$ une variable aléatoire réelle, $F_X$ sa fonction de répartition.
+    \begin{enumerate}
+        \item Soient $a, b$ deux réels fixés, avec $a \neq 0$, et $Y := aX + b$. Comment déduire $F_Y$ de $F_X$ ? Dans l'hypothèse où $X$ admet une densité, à quelle condition sur $a$ en est-il de même de $Y$ ?
+        \item Trouver les fonctions de répartition des variables réelles suivantes :
+        \[
+        X^3, \quad \log X, \quad e^X.
+        \]
+        Dans le deuxième cas ci-dessus on suppose que $X$ est p.s. à valeurs strictement positives.
+
+        Lorsque $X$ possède une densité, trouver la fonction densité de ces variables aléatoires.
+        \item Supposons que $X$ suive une loi uniforme sur $[1, 5]$. Donner la fonction de répartition et la densité de la variable $\frac{X}{5-X}$.
+    \end{enumerate}
+}
+
+\exercise{16}{Médiane d'une variable aléatoire}{
+    On dit que $\lambda$ est une médiane de $X$ si
+    \[
+    \mathbb{P}(X \ge \lambda) \ge \frac{1}{2} \quad \text{et} \quad \mathbb{P}(X \le \lambda) \ge \frac{1}{2}
+    \]
+    \begin{enumerate}
+        \item Montrer qu'il existe toujours au moins une médiane.
+        \item Caractériser cette médiane à l'aide de la fonction de répartition de $X$.
+        \item Donner un exemple de v.a.r dont la médiane n'est pas unique. Une telle v.a.r peut-elle posséder une densité ?
+    \end{enumerate}
+}
+
+\exercise{17}{Points de discontinuité d'une fonction de répartition}{
+    Soit $F$ une fonction de répartition. Montrer que $F$ peut avoir une infinité de points de discontinuité, mais que le nombre de ces points est au plus dénombrable. (\textit{Indication :} Construire une application injective de l'ensemble des discontinuités de $F$ dans l'ensemble des rationnels).
+}
+
+\end{paracol}
+\end{document}
