@@ -128,9 +128,19 @@ Dans cette section, on note $\pi_E$ l'application quotient de $E$ par $R$.
     On dit que cette décomposition est la \textbf{décomposition canonique} de $f$ \textit{(car elle ne dépend que de $f$)}.
 }
 
-\theorem{Proposition}{Décomposition canonique}{true}{
+\theorem{Théorème}{Décomposition canonique}{}{
     Soit \(f : E \rightarrow F\) une application. \(f\) se décompose de façon \textbf{canonique} en \(f = j \circ \bar{f} \circ \pi\) avec \(\pi : E \rightarrow E/\mathcal{R}_f\) la projection canonique (surjective), \(\bar{f} : E/\mathcal{R}_f \rightarrow f(E)\) définie par \(\bar{f}(\text{cl}_{\mathcal{R}_f}(x)) = f(x)\) bijective et \(j : f(E) \rightarrow F\) l'inclusion canonique d'ensembles.
 }
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item Par la remarque précédente, puisque $f$ est constante sur les classes modulo $R_f$. $[xR_f y \Longrightarrow_{(\Leftarrow)}f(x)=f(y)]$, il existe une unique décomposition $f=\overline{f}\circ \pi$ avec \function{\overline{f}}{E/R_f\to F}{cl_R(x)\mapsto f(x)}
+        \item Montrons que $\overline{f}$ est injective.\\
+            Supposons que $\bar{f}(cl_{R_f}(x))=\bar{f}=(cl_{R_f}(x))$, alors $f(x)=f(y)\Rightarrow x R_f y\Rightarrow cl_{R_f}(x)=cl_{R_f}(y)$.
+        \item $\bar{f}(E/R_f)={\bar{f}(cl_{R_f}(x)), x\in E}={f(x), x\in E}=f(E)$.\\
+            Donc, $\bar{f}$ s'écrit de manière unique $\overline{f}=j\circ \bar{f}$ où \function{\bar{f}}{E/R_f \to f(E)}{cl_{R_f}(x)\mapsto f(x)} et $j : f(E)\to F$ et $\bar{f}$ est injective (car $\overline{f}$ l'est) et surjective car $\bar{f}(E/R_f)=f(E)$ donc bijective.
+    \end{itemize}
+}
+
 \example{
     Soit l'application \(f : \mathbb{Z} \rightarrow \mathbb{Z}\) définie par \(f(x) = x \pmod 3\) (qui à chaque entier associe son reste dans la division euclidienne par 3).
     \begin{itemize}
