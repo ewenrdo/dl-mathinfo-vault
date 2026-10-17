@@ -244,9 +244,15 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 
 \section{Application du théorème de Lagrange}
 
-\theorem{Corollaire}{}{true}{
+\theorem{Corollaire}{}{}{
     Soit $(G, *)$ un groupe fini. Si l'ordre de $G$ est premier, alors $G$ est cyclique et engendré par n'importe quel élément de $G$ différent de l'élément neutre.
 }
+\noindent{\textbf{Démonstration :} \\
+    Soit $(G, *)$ un groupe d'ordre p avec $p\in \mathbb{N}$. Comme $p\ge2$, il existe $x\in G$ avec $x\ne e_G$. \\
+    Alors l'ordre de $x$ est fini et divise $p$. Donc il vaut $p$, car le seul élément d'ordre 1 de $G$ est $e_G$.\\
+    Donc $\langle x\rangle=G$ est cyclique d'ordre $p$.
+}
+
 \example{
     Soit $p$ un nombre premier. Alors $(\mathbb{Z}/p\mathbb{Z}, +)$ est un groupe cyclique d'ordre $p$ engendré par $\overline{1}$.
 }
@@ -258,6 +264,18 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
         \item $\langle x \rangle \cap \langle y \rangle = \{ e_G \}$,
         \item Si de plus $x*y = y*x$, alors $\omega(x*y) = \omega(x)\omega(y)$ et $\langle x*y \rangle = \langle \{x,y\} \rangle = \langle x \rangle \times \langle y \rangle$.
     \end{enumerate}
+}
+\noindent{\textbf{Démonstration : }
+    \begin{itemize}
+        \item L'ordre de $\langle x\rangle \cap \langle y\rangle$ divise l'ordre de $\langle x \rangle$ et de $\langle y\rangle$.
+        \item Supposons $x*y=y*x$. Alors, pour $k\in \mathbb{Z}$, on a $(x*y)^k=x^k y^k$. \\
+            Par ailleurs, si $x^ky^k=e_G$, alors $x^k=y^{-k}$, et cet élément est dans $\langle x \rangle \cap \langle y \rangle={e_G}$. \\
+            Donc, $x^k y^k=e_G$ implique $x^k=e_G$ et $y^k=e_G$ est un multiple de $ppcm(\omega(x), \omega(y))=\omega(x)\omega(y)$.\\
+            De plus, $(x*y)^{\omega(x)\omega(y)}=e_G$ donc l'ordre de $x*y$ est $\omega(x)\omega(y)$, puisque c'est le plus petit entier $k$ tel que $(x*y)^k=e_G$.\\
+            Comme $(x*y)\in\langle{x, y}\rangle$, on a $\langle x*y \rangle \subset \langle{x, y}\rangle$ car $\langle x*y \rangle$ est le plus petit sous-groupe de $G$ qui conteient l'élément $x*y$. Par Bézout, on a l'existence d'un couple $(a, b)\in \mathbb{Z}^2$ tel que $\omega(x)a+\omega(y)b=1$. \\
+            Donc, $x=x^{\omega(x)a+\omega(y)b}=x^{\omega(y)b}=x^{\omega(y)b}=x^{\omega(y)b}*y^{\omega(y)b}\in \langle x*y \rangle$ \\
+            et $y=^{\omega(x)a+\omega(y)b}=y^{\omega(x)a}=x^{\omega(x)a}*y^{\omega(x)a}\in \langle x*y \rangle$ Ainsi $\langle{x, y}\rangle \subset \langle x*y \rangle$.
+    \end{itemize}
 }
 
 \section{Groupe quotient}
