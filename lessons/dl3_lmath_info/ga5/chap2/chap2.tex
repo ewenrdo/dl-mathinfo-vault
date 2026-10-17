@@ -128,9 +128,19 @@ Dans cette section, on note $\pi_E$ l'application quotient de $E$ par $R$.
     On dit que cette décomposition est la \textbf{décomposition canonique} de $f$ \textit{(car elle ne dépend que de $f$)}.
 }
 
-\theorem{Proposition}{Décomposition canonique}{true}{
+\theorem{Théorème}{Décomposition canonique}{}{
     Soit \(f : E \rightarrow F\) une application. \(f\) se décompose de façon \textbf{canonique} en \(f = j \circ \bar{f} \circ \pi\) avec \(\pi : E \rightarrow E/\mathcal{R}_f\) la projection canonique (surjective), \(\bar{f} : E/\mathcal{R}_f \rightarrow f(E)\) définie par \(\bar{f}(\text{cl}_{\mathcal{R}_f}(x)) = f(x)\) bijective et \(j : f(E) \rightarrow F\) l'inclusion canonique d'ensembles.
 }
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item Par la remarque précédente, puisque $f$ est constante sur les classes modulo $R_f$. $[xR_f y \Longrightarrow_{(\Leftarrow)}f(x)=f(y)]$, il existe une unique décomposition $f=\overline{f}\circ \pi$ avec \function{\overline{f}}{E/R_f\to F}{cl_R(x)\mapsto f(x)}
+        \item Montrons que $\overline{f}$ est injective.\\
+            Supposons que $\bar{f}(cl_{R_f}(x))=\bar{f}=(cl_{R_f}(x))$, alors $f(x)=f(y)\Rightarrow x R_f y\Rightarrow cl_{R_f}(x)=cl_{R_f}(y)$.
+        \item $\bar{f}(E/R_f)={\bar{f}(cl_{R_f}(x)), x\in E}={f(x), x\in E}=f(E)$.\\
+            Donc, $\bar{f}$ s'écrit de manière unique $\overline{f}=j\circ \bar{f}$ où \function{\bar{f}}{E/R_f \to f(E)}{cl_{R_f}(x)\mapsto f(x)} et $j : f(E)\to F$ et $\bar{f}$ est injective (car $\overline{f}$ l'est) et surjective car $\bar{f}(E/R_f)=f(E)$ donc bijective.
+    \end{itemize}
+}
+
 \example{
     Soit l'application \(f : \mathbb{Z} \rightarrow \mathbb{Z}\) définie par \(f(x) = x \pmod 3\) (qui à chaque entier associe son reste dans la division euclidienne par 3).
     \begin{itemize}
@@ -234,9 +244,15 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 
 \section{Application du théorème de Lagrange}
 
-\theorem{Corollaire}{}{true}{
+\theorem{Corollaire}{}{}{
     Soit $(G, *)$ un groupe fini. Si l'ordre de $G$ est premier, alors $G$ est cyclique et engendré par n'importe quel élément de $G$ différent de l'élément neutre.
 }
+\noindent{\textbf{Démonstration :} \\
+    Soit $(G, *)$ un groupe d'ordre p avec $p\in \mathbb{N}$. Comme $p\ge2$, il existe $x\in G$ avec $x\ne e_G$. \\
+    Alors l'ordre de $x$ est fini et divise $p$. Donc il vaut $p$, car le seul élément d'ordre 1 de $G$ est $e_G$.\\
+    Donc $\langle x\rangle=G$ est cyclique d'ordre $p$.
+}
+
 \example{
     Soit $p$ un nombre premier. Alors $(\mathbb{Z}/p\mathbb{Z}, +)$ est un groupe cyclique d'ordre $p$ engendré par $\overline{1}$.
 }
@@ -248,6 +264,18 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
         \item $\langle x \rangle \cap \langle y \rangle = \{ e_G \}$,
         \item Si de plus $x*y = y*x$, alors $\omega(x*y) = \omega(x)\omega(y)$ et $\langle x*y \rangle = \langle \{x,y\} \rangle = \langle x \rangle \times \langle y \rangle$.
     \end{enumerate}
+}
+\noindent{\textbf{Démonstration : }
+    \begin{itemize}
+        \item L'ordre de $\langle x\rangle \cap \langle y\rangle$ divise l'ordre de $\langle x \rangle$ et de $\langle y\rangle$.
+        \item Supposons $x*y=y*x$. Alors, pour $k\in \mathbb{Z}$, on a $(x*y)^k=x^k y^k$. \\
+            Par ailleurs, si $x^ky^k=e_G$, alors $x^k=y^{-k}$, et cet élément est dans $\langle x \rangle \cap \langle y \rangle={e_G}$. \\
+            Donc, $x^k y^k=e_G$ implique $x^k=e_G$ et $y^k=e_G$ est un multiple de $ppcm(\omega(x), \omega(y))=\omega(x)\omega(y)$.\\
+            De plus, $(x*y)^{\omega(x)\omega(y)}=e_G$ donc l'ordre de $x*y$ est $\omega(x)\omega(y)$, puisque c'est le plus petit entier $k$ tel que $(x*y)^k=e_G$.\\
+            Comme $(x*y)\in\langle{x, y}\rangle$, on a $\langle x*y \rangle \subset \langle{x, y}\rangle$ car $\langle x*y \rangle$ est le plus petit sous-groupe de $G$ qui conteient l'élément $x*y$. Par Bézout, on a l'existence d'un couple $(a, b)\in \mathbb{Z}^2$ tel que $\omega(x)a+\omega(y)b=1$. \\
+            Donc, $x=x^{\omega(x)a+\omega(y)b}=x^{\omega(y)b}=x^{\omega(y)b}=x^{\omega(y)b}*y^{\omega(y)b}\in \langle x*y \rangle$ \\
+            et $y=^{\omega(x)a+\omega(y)b}=y^{\omega(x)a}=x^{\omega(x)a}*y^{\omega(x)a}\in \langle x*y \rangle$ Ainsi $\langle{x, y}\rangle \subset \langle x*y \rangle$.
+    \end{itemize}
 }
 
 \section{Groupe quotient}
@@ -264,26 +292,56 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
     Soit $H$ un sous-groupe de $(G, *)$. Il est distingué dans $G$ si et seulement si 
     $$ \forall x \in G, xH = Hx \Leftrightarrow \forall x \in G, x * H * x^{-1} = H $$
 }
+\noindent{\textbf{Démonstration :} \\
+    On a $\forall x \in G, xH=Hx \Leftrightarrow \forall x \in G, \forall h \in H, \exists h' \in H, x*h=h'*x \Leftrightarrow \forall x \in G, \forall h \in H, x*h*x^{-1} \in H$\\
+    Il faut justifier la première équivalence. Supposons que $(1)$ : $\forall x \in G, \forall h \in H, \exists h' \in H, x*h=h'*x$.\\
+    On a donc $\forall x \in G, xH \subset Hx$. Montrons que $\forall u \in G, Hu \subset uH$. \\
+    Fixons $u \in G, k \in H$ ; en utilisant l'hypothèse $(1)$ ci-dessus à $x=u^{-1}$ et $h=k^{-1}$, il existe $h' \in H$ tel que $x*h=h'*x$, donc $h^{-1}*x^{-1}=x^{-1}*h'^{-1}$, ce qui s'écrit $k*u=u*h^{-1}$, donc $Hu \subset uH$ et ceci pour tout $u \in G$.\\
+    Enfin, on a $xHx^{-1}=H \Leftrightarrow xHx^{-1}x=Hx \Leftrightarrow xH=Hx$.
+}
 
 \remark{Si $G$ est abélien, tout sous-groupe de $G$ est distingué.}
 
 \theorem{Proposition}{}{false}{
     Soit $f : G \to H$ un morphisme de groupes.
-    \begin{itemize}
+    \begin{enumerate}
         \item L'image réciproque d'un sous-groupe distingué de $H$ est un sous-groupe distingué de $G$.\\
         \textit{En particulier, $ker(f)$ est un sous-groupe distingué de $G$.}
         \item L'image d'un sous-groupe distingué de $G$ est un sous-groupe distingué de $f(G)$.\\
-    \end{itemize}
+    \end{enumerate}
+}
+\noindent{\textbf{Démonstration :}
+    \begin{enumerate}
+        \item Soit $L \triangleleft H$ et $x \in G$. Soit $h \in f^{-1}(L)$. Montrons que $xhx^{-1}\in f^{-1}(L)$.\\
+            Pour ceci il suffit d'appliquer $f$. On a $f(xhx^{-1})=f(x)f(h)f(x)^{-1} \in L$, car $f(h) \in L$ et $L$ distingué dans $H$. Donc $xhx^{-1}\in f^{-1}(L)$. Comme le noyau de $f$ est défini comme l'image réciproque du singleton ${e_H}$, sous-groupe distingué de $H$, on en déduit $Ker(f) \triangleleft G$. 
+        \item Soit $K \triangleleft G$ et $x\in f(G)$ (on rappelle que $f(G)$ est un groupe et que $f(K)$ est un sous-groupe de $f(G)$). \\
+            Soit $k \in K$. On a $x f(k) x^{-1}=f(g)f(k)f(g)^{-1}=f(gkg^{-1}) \in f(K)$.
+    \end{enumerate}
 }
 
 \attention{L'image d'un sous-groupe distingué de $G$ n'est pas forcément un sous-groupe distingué de $H$.}
 
 \theorem{Proposition}{}{false}{
     Soit $G$ un groupe.
-    \begin{itemize}
+    \begin{enumerate}
         \item Une intersection de sous-groupes distingués de $G$ est un sous-groupe distingué de $G$. En particulier, si $X \subseteq G$, il existe un plus petit sous-groupe distingué de $G$ contenant $X$.
         \item Soient $H, K$ deux sous-groupes de $G$. Si $H \triangleleft G$, alors $HK$ est un sous-groupe de $G$ et on a $HK = KH$. De plus, si $K \triangleleft G$, alors $HK \triangleleft G$.
-    \end{itemize}
+    \end{enumerate}
+}
+\noindent{\textbf{Démonstration :}
+    \begin{enumerate}
+        \item Soit $(H_i)_{i \in I}$ une famille de sous-groupes distingués d'un groupe $G$. Posons $H=\bigcap_iH_i$.\\
+            On sait que $H$ est un sous-groupe de $G$. Il reste à démontrer qu'il est distingué.\\
+            Soit $x \in G$, $h \in H$. Pour tout $i \in I$ on a $h \in H_i$ et $H_i \triangleleft G$, donc $xhx^{-1} \in H_i$. \\
+            Ceci est vraie pour tout $i \in I$, donc $xhx^{-1} \in H$.
+        \item Supposons $H \triangleleft G$, donc pour tout $x \in G$, on a $Hx=xH$. Ainsi, $HK=\bigcup_{k \in K}Hk=\bigcup_{k \in K} kH=KH$. \\
+            Remarquons que $HK$ est non vide. Soient $x, h \in H$ et $y, k \in K$. On veut montrer que $xy(hk)^{-1} \in HK$. \\ 									
+            Notons que $yk^{-1}$ et son symétrique $ky^{-1}$ sont dans $K$ car $K$ est un sous-groupe de $G$. De même, on a $h^(-1) \in H$. \\
+            Comme $H$ est distingué dans $G$, il existe $u \in H$ tel que $yk^{-1} h^{-1} ky^{-1}=u$ ou encore $yk^{-1} h^{-1}=uyk^{-1}$. \\
+            Donc, $xyk^{-1} h^{-1}=xuyk^{-1} \in HK$, avec $xu \in H$ et $yk^{-1} \in K$. \\
+            Supposons de plus que $K \triangleleft G$ et montrons que $HK \triangleleft G$. Soit $g \in G$, $hk \in HK$. \\
+            On a $ghkg^{-1}=ghg^{-1}gkg^{-1} \in HK$ avec $ghg^{-1} \in H$ et $gkg^{-1} \in K$.
+    \end{enumerate}
 }
 
 \courseEnd{Fin du programme pour le partiel}
