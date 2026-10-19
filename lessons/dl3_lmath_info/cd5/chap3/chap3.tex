@@ -628,6 +628,31 @@ L'application $t \mapsto f(a+th)$ est donc dérivable en $0$, ce qui prouve l'ex
     Cette quantité admet pour limites à droite et à gauche en $0$ respectivement $+\|h\|$ et $-\|h\|$. La limite n'existe pas en $0$ car $h \neq 0_{\mathbb{R}^p}$. La fonction norme n'admet donc pas de dérivées directionnelles à l'origine, elle n'y est donc pas différentiable.
 }
 
+\subsection{Opérations sur les fonctions différentiables}
+\subsubsection{Opérations générales et composition}
+Soient $E$ et $F$ deux espaces vectoriels normés de dimension finie.
+\theorem{Théorème}{Stabilité des opérations}{false}{
+    Soit $f,g : \mathcal{U} \to F$ deux fonctions différentiables en un point $a \in \mathcal{U}$ et $\lambda, \mu \in \mathbb{R}$. Alors :
+    \begin{itemize}
+        \item $\lambda f + \mu g$ est différentiable en $a$ et $D(\lambda f + \mu g)(a) = \lambda Df(a) + \mu Dg(a)$.
+        \item Si $F = \mathbb{R}$, le produit $fg$ est différentiable en $a$ et $D(fg)(a) = f(a) Dg(a) + g(a) Df(a)$.
+        \item Si $F = \mathbb{R}$ et $g(a) \neq 0$, le quotient $\frac{f}{g}$ est différentiable en $a$ et :
+        $$D\left(\frac{f}{g}\right)(a) = \frac{g(a) Df(a) - f(a) Dg(a)}{(g(a))^2}$$
+        \item Si $F = \mathbb{R}$ et si $g(a) \neq 0$, alors $\frac{1}{g}$ est différentiable en $a$ et :
+        $$D\left(\frac{1}{g}\right)(a) = -\frac{1}{(g(a))^2} \cdot Dg(a)$$
+    \end{itemize}
+}
+
+\remark{La différentiabilité nous offre donc une structure similaire à celle des fonctions d'une variable réelle. On peut additionner, multiplier et composer des fonctions différentiables pour obtenir de nouvelles fonctions différentiables.}
+\theorem{Théorème}{Différentiabilité de la composition}{false}{
+    Soient $E,F,G$ des espaces vectoriels normés de dimension finie, $\mathcal{U}$ un ouvert de $E$ et $\mathcal{V}$ un ouvert de $F$. Soit $f : \mathcal{U} \to F$ une fonction différentiable en un point $a \in \mathcal{U}$ telle que $f(\mathcal{U}) \subset \mathcal{V}$. Soit $g : \mathcal{V} \to G$ une fonction différentiable au point $f(a) \in \mathcal{V}$. Alors la composition $g \circ f : \mathcal{U} \to G$ est différentiable en $a$ et :
+    \[ D(g \circ f)(a) = Dg(f(a)) \circ Df(a) \]
+}
+
+\remark{En particulier, les polynômes et les composées de fonctions usuelles (exponentielle, logarithme, fonctions trigonométriques, etc.) sont différentiables en tout point de leur domaine de définition.}
+
+\subsubsection{Formule de la chaîne (chain rule)}
+
 \subsection{Cas des fonctions scalaires : Le Gradient}
 
 Lorsque l'espace d'arrivée est $\mathbb{R}$ ($q=1$), la différentielle $Df(a)$ est une forme linéaire ($\in \mathcal{L}(\mathbb{R}^p, \mathbb{R})$). Le théorème de représentation de Riesz permet de l'identifier à un vecteur via le produit scalaire usuel, noté $\langle \cdot, \cdot \rangle$.
