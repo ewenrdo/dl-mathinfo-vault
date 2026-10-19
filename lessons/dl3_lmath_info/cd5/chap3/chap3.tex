@@ -1,0 +1,704 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{ccicons}
+\usepackage{caption}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Calcul différentiel}
+\fancyhead[R]{2025-2026}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 3 : Différentiabilité}
+
+\section{Rappels d'analyse à une variable réelle}
+
+\subsection{Fonctions dérivables}
+\subsubsection{Définition}
+\definition{
+    Soit $I \subset \mathbb{R}$ un intervalle non vide, $a \in \mathbb{R}$ et $f : I \to \mathbb{R}$ une fonction. On dit que $f$ est \textbf{dérivable} en un point $a \in I$ si la limite suivante existe :
+    $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
+}
+
+\theorem{Proposition}{Caractérisation par une application linéaire}{false}{
+    Supposons $f$ dérivable en $a$, et considérons $\ell \in \mathcal{L}(\mathbb{R}, \mathbb{R})$ l'application linéaire définie par $\ell(h) = f'(a) \cdot h$
+    Alors on a que $f$ est dérivable en $a$ si et seulement si :
+    $$lim_{h \to 0} \frac{f(a+h) - f(a) - \ell(h)}{h} = 0$$
+    soit $$f(a+h) = f(a) + \ell(h) + o(h) \quad \text{quand } h \to 0$$
+}
+
+\remark{Ce sera exactement cette caractérisation qui sera généralisée à la notion de différentiabilité pour les fonctions de plusieurs variables.}
+
+\remark{Graphiquement, cela signifie que la fonction $f$ peut être approchée localement par une application linéaire (une droite) au voisinage du point $a$ (c'est la tangente !).}
+\subsubsection{Classe $\mathcal{C}^1$}
+
+\definition{
+    On dit que $f$ est de classe $\mathcal{C}^1$ sur $I$ si $f$ est dérivable sur $I$ et si sa dérivée $f'$ est continue sur $I$.
+}
+
+\theorem{Proposition}{Stabilité de la classe $\mathcal{C}^1$}{true}{
+    Si $f$ et $g$ sont de classe $\mathcal{C}^1$ sur $I$, alors les fonctions suivantes sont également de classe $\mathcal{C}^1$ sur $I$ :
+    \begin{itemize}
+        \item $f + g$
+        \item $f \cdot g$
+        \item $\frac{f}{g}$ si $g(x) \neq 0$ pour tout $x \in I$
+        \item $f \circ g$ si l'image de $g$ est contenue dans le domaine de définition de $f$
+    \end{itemize}
+}
+
+\subsection{Extrema}
+
+\definition{
+    Soit $f : I \to \mathbb{R}$ une application, avec $I$ un intervalle ouvert.\\
+    \begin{itemize}
+        \item On dit que $f$ admet un \textbf{maximum local} en $a \in I$ tel que : $\forall x \in I, |x-a| < \delta \implies f(x) \leq f(a)$
+        \item On dit que $f$ admet un \textbf{minimum local} en $a \in I$ tel que : $\forall x \in I, |x-a| < \delta \implies f(x) \geq f(a)$
+        \item On dit que $f$ admet un \textbf{extremum local} en $a \in I$ si $f$ admet un maximum local ou un minimum local en $a$.
+    \end{itemize}
+}
+
+\theorem{Théorème}{Lien entre extremum et dérivée}{false}{
+    Soit $f : I \to \mathbb{R}$ une application dérivable, avec $I$ un intervalle ouvert.\\
+    Si $f$ admet un extremum local en $a \in I$, alors $f'(a) = 0$.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Théorème de Rolle}{}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une application continue sur $[a,b]$ et dérivable sur $]a,b[$.\\
+    Si $f(a) = f(b)$, alors il existe $c \in ]a,b[$ tel que $f'(c) = 0$.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Théorème des accroissements finis}{}{false}{
+    Soit $f : [a,b] \to \mathbb{R}$ une application continue sur $[a,b]$ et dérivable sur $]a,b[$.\\
+    Alors il existe $c \in ]a,b[$ tel que :
+    $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+}
+\ndlr{cf. Laurent pour la preuve.}
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Axes
+  \draw[->] (-0.2,0) -- (5.2,0) node[right] {$x$};
+  \draw[->] (0,-0.2) -- (0,3.5) node[above] {$y$};
+
+  % Courbe f(x) = -0.15*x^2 + 1.2*x + 0.5
+  \draw[thick, blue, domain=0.5:4.8, samples=100] 
+    plot (\x, {-0.15*\x*\x + 1.2*\x + 0.5});
+
+  % Points
+  % a = 1.0   -> f(a) = 1.55
+  % b = 4.5   -> f(b) = 2.8625
+  % Pente de (AB) = (2.8625 - 1.55) / 3.5 = 0.375
+  % f'(x) = -0.3*x + 1.2 = 0.375 => x = c = 2.75
+  % Mais avec les bornes a=1, b=4.5 :
+  % c est plus à droite
+  
+  \coordinate (A) at (1.0, 1.55);
+  \coordinate (B) at (4.5, 2.8625);
+  \coordinate (C) at (2.75, 2.66875);
+
+  % Sécante (AB)
+  \draw[dashed, red, thick] (0.5, 1.3625) -- (5.0, 3.05);
+
+  % Tangente en c (parallèle)
+  \draw[red, thick] (1.25, 2.10625) -- (4.25, 3.23125);
+
+  % Projections
+  \draw[dotted] (1.0,0) node[below] {$a$} -- (A) -- (0,1.55) node[left] {$f(a)$};
+  \draw[dotted] (4.5,0) node[below] {$b$} -- (B) -- (0,2.8625) node[left] {$f(b)$};
+  \draw[dotted] (2.75,0) node[below] {$c$} -- (C);
+
+  % Points
+  \fill[blue] (A) circle (2pt) node[above left, black] {$(a, f(a))$};
+  \fill[blue] (B) circle (2pt) node[above right, black] {$(b, f(b))$};
+  \fill[red] (C) circle (2pt) node[above left, black] {$(c, f(c))$};
+\end{tikzpicture}
+\end{center}
+
+\theorem{Théorème}{}{false}{
+    Soit $f$ une application continue sur l'intervalle $[a,b]$ à valeurs dans $\mathbb{R}^n$. Supposons que $f$ est dérivable sur $]a,b[$ qu'il existe une constante $K > 0$ telle que
+    $$||f'(t)|| \leq K \quad, \forall t \in ]a,b[.$$
+    Alors
+    $$||f(b) - f(a)|| \leq K|b - a|.$$
+}
+
+\theorem{Corollaire}{Caractérisation des fonctions constantes sur un intervalle}{false}{
+    Soit $a < b$ des réels et $f$ une fonction continue sur $[a,b]$, dérivable sur $]a,b[$. Supposons qu'il existe une constante $M \ge 0$ telle que
+    $$\forall x \in ]a,b[, \quad |f'(x)| \leq M.$$
+    Alors
+    $$|f(b) - f(a)| \leq M \cdot |b - a|.$$
+    En particulier, toute fonction dérivable sur un intervalle $I$ est constante si, et seulement si, $f'$ est nulle sur $I$.
+}
+
+\attention{Cette caractérisation des fonctions constantes n'est vraie en général si $I$ n'est pas un intervalle.}
+
+\theorem{Corollaire}{}{false}{
+    Pour qu'une fonction dérivable soit croissante sur $I$, il faut, et il suffit que, $f'$ soit positive sur $I$.
+}
+
+\theorem{Corollaire}{}{false}{
+    Supposons que $f$ est une fonction dérivable telle que $f'(x) > 0$ pour tout $x \in I$. Alors $f$ est strictement croissante sur $I$.
+}
+
+\remark{
+    La réciproque est en général fausse. La fonction $f(x) = x^3$ est strictement croissante dans $\mathbb{R}$ et pourtant $f'(0) = 0$. En revanche, la dérivée est toujours positive ou nulle.
+}
+
+\subsection{Dérivées successives et formules de Taylor}
+\subsubsection{Définition}
+\definition{
+    Soit $I$ un intervalle ouvert et $f : I \to \mathbb{R}$ une fonction dérivable sur $I$ Nous avons alors la fonction dérivée $f' : I \to \mathbb{R}$ qui à tout $x \in I$ associe le nombre dérivée $f'(x)$
+    \begin{enumerate}
+        \item Si $f'$ est dérivable en tout point de $I$ alors la fonction $(f')'$ dérivée de $f'$ se note $f''$ et s'appelle \textbf{la dérivée seconde de $f$}
+        \item Plus généralement, si $n \in \mathbb{N}$, on définit, si elle existe, \textbf{la dérivée $n$-ième de $f$} par        $$f^{(0)} = f, \quad f^{(k)} = (f^{(k-1)})' \quad \text{pour tout entier } k \text{ tel que } 1 \leq k \leq n.$$
+        Dans ce cas, on dit que $f$ est $n$ fois dérivable sur $I$
+        \item On dit que $f$ est de classe $\mathcal{C}^n$ sur $I$ si $f$ est $n$ fois dérivable sur $I$ et $f^{(n)}$ est continue sur $I$
+    \end{enumerate}
+}
+\subsubsection{Formules de Taylor}
+Dans toute cette partie $I$ est un intervalle ouvert et $a \in I$ fixé et $f : I \to \mathbb{R}$ est une application.
+
+\theorem{Théorème}{formule de Taylor avec reste intégral}{false}{
+    Supposons que $f$ est de classe $\mathcal{C}^{n+1}$ sur $I$. Alors pour tout $x \in I$,
+    $$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x - a)^k + \int_{a}^{x} \frac{f^{(n+1)}(t)}{n!}(x - t)^n dt.$$
+}
+
+\noindent{\textbf{Preuve :} On remarque que pour $n = 0$ la formule s'écrit
+$$f(x) = f(a) + \int_{a}^{x} f'(t) dt$$
+qui n'est rien d'autre que le théorème fondamental de l'analyse. Supposons que la formule est montrée pour l'ordre $n$ et montrons l'ordre $n + 1$. Supposons que $\mathcal{C}^{n+2}$ sur $I$. Alors pour tout $x \in I$,
+$$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x - a)^k + \int_{a}^{x} \frac{f^{(n+1)}(t)}{n!}(x - t)^n dt.$$
+Or par une intégration par parties
+\begin{align*}
+R(x) = \int_{a}^{x} \frac{f^{(n+1)}(t)}{n!}(x - t)^n dt &= -\left[ \frac{f^{(n+1)}(t)}{(n+1)!}(x - t)^{n+1} \right]_{a}^{x} + \int_{a}^{x} \frac{f^{(n+2)}(t)}{(n+1)!}(x - t)^{n+1} dt \\
+&= \frac{f^{(n+1)}(a)}{(n+1)!}(x - a)^{n+1} + \int_{a}^{x} \frac{f^{(n+2)}(t)}{(n+1)!}(x - t)^{n+1} dt.
+\end{align*}
+En additionnant les equations précédentes, on obtient le résultat au rang $n + 1$. \hfill $\square$}
+
+\theorem{Formule de Taylor-Lagrange}{}{false}{
+    Soit $n \in \mathbb{N}$ et $f$ une fonction de classe $\mathcal{C}^n$ sur $[a,b]$ et $(n+1)$ fois dérivable sur $]a,b[$. Alors il existe $c \in ]a,b[$ tel que,
+    $$f(b) = \sum_{k=0}^{n} \frac{(b - a)^k}{k!} f^{(k)}(a) + \frac{(b - a)^{n+1}}{(n + 1)!} f^{(n+1)}(c).$$
+}
+
+\noindent{\textbf{Preuve :} On remarque d'abord que si $n = 0$ alors le théorème devient : il existe $c \in ]a,b[$ tel que
+$$f(b) - f(a) = (b - a) f'(c)$$
+qui n'est rien d'autre que le théorème des accroissements finis.
+
+Supposons que $n \geq 1$. On peut définir la fonction
+$$g(x) = f(b) - \sum_{k=0}^{n} \frac{f^{(k)}(x)}{k!}(b - x)^k - \frac{(b - x)^{n+1}}{(n + 1)!} A$$
+où $A$ est une constante définie par $g(a) = 0$. Il s'agit d'une fonction continue sur $[a,b]$, dérivable sur $]a,b[$ et $g(a) = g(b) = 0$. En appliquant le théorème de Rolle, on trouve un nombre $c$ strictement compris entre $a$ et $b$ qui annule $g'$. Or
+\begin{align*}
+g'(x) &= -\sum_{k=0}^{n} \frac{f^{(k+1)}(x)}{k!}(b - x)^k + \sum_{k=1}^{n} \frac{f^{(k)}(x)}{(k - 1)!}(b - x)^{k-1} + \frac{(b - x)^n}{n!} A \\
+&= \frac{(b - x)^n}{n!} (A - f^{(n+1)}(x))
+\end{align*}
+de sorte que $g'(c) = 0$ signifie que
+$$A = f^{(n+1)}(c)$$
+Finalement, $g(a) = 0$ signifie que
+$$f(b) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(b - a)^k + \frac{(b - a)^{n+1}}{(n + 1)!} f^{(n+1)}(c).$$
+qui est la formule souhaitée. \hfill $\square$}
+
+\example{
+    Soit $f(x) = x^2$ et $a < b$ deux réels distincts. La fonction $f$ est de classe $\mathcal{C}^2$ sur $D_f = \mathbb{R}$. De plus, pour tout $x \in \mathbb{R}$, $f''(x) = 2$. Ainsi pour tout réel $c \in ]a,b[$ on a
+    \begin{align*}
+    f(a) + (b - a)f'(a) + \frac{(b - a)^2}{2} f''(c) &= a^2 + 2a(b - a) + \frac{(b - a)^2}{2} 2 \\
+    &= b^2 = f(b).
+    \end{align*}
+    Dans ce cas, tout les $c$ conviennent.
+    
+    En revanche, il existe un unique $c \in ]a,b[$ tel que $f(b) - f(a) = (b - a)f'(c)$. En effet,
+    $$f(b) - f(a) = b^2 - a^2 = (b - a)f'(c) = 2c(b - a)$$
+    et donc $c = (a + b)/2$.
+}
+
+\theorem{Formule de Taylor-Young}{}{false}{
+    Soit $n \geq 1$. Supposons que $f$ est $n$ fois dérivable sur l'intervalle $I$ et $a \in I$. Alors pour tout $x \in I$,
+    $$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x - a)^k + o_a((x - a)^n).$$
+}
+
+\remark{Le théorème est évidemment vrai si $n = 0$ sous l'hypothèse que $f$ soit continue au point $a$.}
+
+\noindent{\textbf{Preuve :} Ici aussi on procède par récurrence sur $n$. On remarque que si $n = 1$ alors la formule devient
+$$f(x) = f(a) + (x - a)f'(a) + o_a(x - a)$$
+qui est exactement la définition de dérivabilité en $a$.
+
+Supposons que c'est vraie à l'ordre $n$ et montrer la formule à l'ordre $n + 1$. Supposons alors que $f$ est $n + 1$ fois dérivable au point $a$. Par conséquent, la fonction $f'$ est $n$ fois dérivable. En utilisant l'hypothèse de récurrence on sait que
+$$f'(x) - \sum_{k=0}^{n} \frac{f^{(k+1)}(a)}{k!}(x - a)^k = o_a((x - a)^n).$$
+La fonction $f'$ est continue, donc donc en intégrant cette identité entre $a$ et $x$ on obtient
+$$f(x) - f(a) - \sum_{k=0}^{n} \frac{f^{(k+1)}(a)}{(k + 1)!}(x - a)^{k+1} = o_a((x - a)^{n+1}).$$ \hfill $\square$}
+
+\subsubsection{Application à l'étude des extrema locaux}
+\theorem{Corollaire}{}{false}{
+    Supposons que $f$ est de classe $\mathcal{C}^2$ sur l'intervalle $I$ et soit $a \in I$ un point critique de $f$.
+    \begin{enumerate}
+        \item Si $f''(a) > 0$ alors $f$ admet un minimum local en $a$.
+        \item Si $f''(a) < 0$ alors $f$ admet un maximum local en $a$.
+    \end{enumerate}
+    Si $f''(a) = 0$ alors on ne peut conclure par cette méthode, il faudra approfondir l'analyse.
+}
+
+\training{
+    Soit $a$ un nombre réel. Étudier les extrema locaux de la fonction définie sur $\mathbb{R}$ par $f(x) = x^3 + ax$.
+}
+\noindent \carreaux{10}
+
+\courseEnd{Fin de la partie suivant le polycopié de Jaouad.}
+
+\section{Dérivabilité}
+\subsection{Dérivées partielles}
+
+Soit $p, q \in \mathbb{N}^*$ et $\mathcal{U}$ un ouvert de $\mathbb{R}^p$. On considère une application $f : \mathcal{U} \to \mathbb{R}^q$.
+
+\remark{Pour visualiser les concepts, on pourra penser au cas simple où $f : \mathbb{R}^2 \to \mathbb{R}$, dans lequel l'essentiel des propriétés et des difficultés de cette section se manifestent déjà.}
+
+\subsubsection{Définition en un point et interprétation géométrique}
+Soit $a = (a_1, \dots, a_p) \in \mathcal{U}$ et soit $k \in \{1, \dots, p\}$.
+
+\definition{
+    On appelle \textbf{$k$-ième fonction partielle} de $f$ au point $a$ l'application $g_k$ d'une variable réelle définie par :
+    \[
+    g_k : x_k \mapsto f(a_1, \dots, a_{k-1}, x_k, a_{k+1}, \dots, a_p)
+    \]
+    Cette fonction est définie sur un intervalle ouvert de $\mathbb{R}$ contenant $a_k$.
+}
+
+\definition{
+    On dit que $f$ admet une \textbf{$k$-ième dérivée partielle} au point $a$ si la fonction partielle $g_k$ est dérivable au point $a_k$. 
+    Le cas échéant, on note ce vecteur de $\mathbb{R}^q$ :
+    \[
+    \frac{\partial f}{\partial x_k}(a) = g_k'(a_k)
+    \]
+}
+
+\theorem{Proposition}{Caractérisation de la dérivée partielle}{false}{
+    L'existence de la $k$-ième dérivée partielle de $f$ en $a$ est équivalente à l'existence de la limite du taux d'accroissement suivant, où $e_k$ désigne le $k$-ième vecteur de la base canonique de $\mathbb{R}^p$ :
+    \[
+    \frac{\partial f}{\partial x_k}(a) = \lim_{t \to 0} \frac{f(a + t e_k) - f(a)}{t}
+    \]
+}
+
+\subsubsection{Extension globale et pratique du calcul}
+
+\definition{
+    On dit que $f$ \textbf{admet des dérivées partielles} en $a$ si $\frac{\partial f}{\partial x_k}(a)$ existe pour tout $k \in \{1, \dots, p\}$ (autrement dit, si toutes ses dérivées partielles existent en ce point).
+}
+\vocabulary{On dit que $f$ admet des dérivées partielles sur $\mathcal{U}$ si elle admet des dérivées partielles en tout point de $\mathcal{U}$.}
+
+\attention{
+    Avant de calculer explicitement une dérivée partielle en un point par les règles usuelles, il est impératif de justifier son existence en vérifiant la dérivabilité de la fonction partielle correspondante.
+}
+
+\example{
+    Soit $f : \mathbb{R}^2 \to \mathbb{R}$ définie par $f(x,y) = x^2 + y^2$. Soit $a = (a_1, a_2) \in \mathbb{R}^2$.
+    \begin{itemize}
+        \item Pour tout $y \in \mathbb{R}$ fixé, la fonction partielle $x \mapsto x^2 + y^2$ est polynomiale donc dérivable sur $\mathbb{R}$. Ainsi, la première dérivée partielle existe sur $\mathbb{R}^2$ et :
+        \[ \frac{\partial f}{\partial x}(a_1, a_2) = 2a_1 \quad \text{notée usuellement} \quad \frac{\partial f}{\partial x}(x, y) = 2x \]
+        \item Pour tout $x \in \mathbb{R}$ fixé, la fonction partielle $y \mapsto x^2 + y^2$ est également polynomiale donc dérivable sur $\mathbb{R}$. Ainsi, la seconde dérivée partielle existe sur $\mathbb{R}^2$ et :
+        \[ \frac{\partial f}{\partial y}(a_1, a_2) = 2a_2 \quad \text{notée usuellement} \quad \frac{\partial f}{\partial y}(x, y) = 2y \]
+    \end{itemize}
+}
+
+\subsubsection{Liens avec la continuité}
+\attention{
+    Contrairement aux fonctions d'une variable réelle, l'existence de toutes les dérivées partielles d'une fonction $f$ en un point $a$ \textbf{ne suffit pas} à garantir que $f$ soit continue en ce point.
+}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+
+    % Premier volet : Dérivées partielles (déplacement le long des axes)
+    \begin{scope}[shift={(0,0)}]
+        % Grille d'arrière-plan légère
+        \draw[gray!10, thin, step=0.5] (-1.9,-1.9) grid (1.9,1.9);
+        
+        % Axes
+        \draw[->, >=stealth, thick] (-2,0) -- (2,0) node[right] {$x$};
+        \draw[->, >=stealth, thick] (0,-2) -- (0,2) node[above] {$y$};
+        
+        % Flèches de déplacement le long des axes (bleues)
+        \draw[blue, ultra thick, ->] (-1.5,0) -- (-0.2,0);
+        \draw[blue, ultra thick, ->] (1.5,0) -- (0.2,0);
+        \draw[blue, ultra thick, ->] (0,-1.5) -- (0,-0.2);
+        \draw[blue, ultra thick, ->] (0,1.5) -- (0,0.2);
+        
+        % Point d'étude
+        \fill[red] (0,0) circle (2.5pt);
+        \node[red, above right] at (0,0) {$a$};
+        
+        \node[blue!80!black, font=\small\bfseries, align=center] at (0,-2.5) {Dérivées partielles :\\Déplacements exclusivement\\le long des axes coordonnées};
+    \end{scope}
+
+    % Second volet : Continuité (n'importe quelle direction, échec sur y = x)
+    \begin{scope}[shift={(5.5,0)}]
+        % Grille d'arrière-plan
+        \draw[gray!10, thin, step=0.5] (-1.9,-1.9) grid (1.9,1.9);
+        
+        % Axes en gris pour atténuer
+        \draw[->, >=stealth, gray, thick] (-2,0) -- (2,0) node[right, black] {$x$};
+        \draw[->, >=stealth, gray, thick] (0,-2) -- (0,2) node[above, black] {$y$};
+        
+        % Droite y = x
+        \draw[domain=-1.5:1.5, smooth, variable=\t, red, thick, dashed] plot ({\t},{\t});
+        \node[red!80!black, right] at (1.2, 1.5) {$y=x$};
+        
+        % Approches directionnelles quelconques
+        \draw[red, ultra thick, ->] (-1.2,-1.2) -- (-0.3,-0.3);
+        \draw[red, ultra thick, ->] (1.2,1.2) -- (0.3,0.3);
+        
+        % Point d'étude
+        \fill[red] (0,0) circle (2.5pt);
+        \node[red, below right] at (0,0) {$a$};
+        
+        \node[red!80!black, font=\small\bfseries, align=center] at (0,-2.5) {Continuité globale :\\Doit tendre vers $f(a)$ dans\\toutes les directions};
+    \end{scope}
+
+\end{tikzpicture}
+\caption{Visualisation de l'insuffisance des dérivées partielles pour la continuité en un point.}
+\label{fig:continuite_vs_partielles}
+\end{figure}
+\cexample{
+    Soit $f : \mathbb{R}^2 \to \mathbb{R}$ définie par :
+    \[
+    f(x,y) = \begin{cases} \frac{xy}{x^2 + y^2} & \text{si } (x,y) \neq (0,0) \\ 0 & \text{si } (x,y) = (0,0) \end{cases}
+    \]
+    \begin{enumerate}
+        \item \textbf{Existence des dérivées partielles en $(0,0)$ :}
+        \begin{itemize}
+            \item La première fonction partielle en $(0,0)$ est $g_1(x) = f(x,0) = 0$ pour tout $x \in \mathbb{R}$. Cette fonction est nulle donc dérivable en $0$, d'où $\frac{\partial f}{\partial x}(0,0) = g_1'(0) = 0$.
+            \item Par symétrie, la seconde fonction partielle en $(0,0)$ est $g_2(y) = f(0,y) = 0$. Elle est dérivable en $0$, d'où $\frac{\partial f}{\partial y}(0,0) = g_2'(0) = 0$.
+        \end{itemize}
+        Ainsi, $f$ admet des dérivées partielles en $(0,0)$ (et on montrerait de même qu'elles existent sur tout $\mathbb{R}^2$).
+        
+        \item \textbf{Défaut de continuité en $(0,0)$ :}
+        Considérons la restriction de $f$ à la droite d'équation $y = x$. Pour tout $x \neq 0$ :
+        \[
+        f(x,x) = \frac{x^2}{x^2 + x^2} = \frac{1}{2}
+        \]
+        Par conséquent, $\lim_{x \to 0} f(x,x) = \frac{1}{2} \neq f(0,0)$. L'application $f$ n'est donc pas continue en $(0,0)$.
+    \end{enumerate}
+}
+
+\noindent{\textit{Transition :} Le défaut de continuité observé dans le contre-exemple provient du fait que les dérivées partielles analysent uniquement le comportement de la fonction le long des axes de coordonnées. Dès que l'on s'approche de l'origine selon une autre trajectoire (comme la droite $y=x$), le comportement nous échappe. Cela motive l'introduction d'une notion plus générale s'affranchissant des axes du repère : la dérivée directionnelle.}
+
+\subsection{Dérivées directionnelles}
+
+Soit $f : \mathcal{U} \to \mathbb{R}^q$ où $\mathcal{U} \subset \mathbb{R}^p$ est un ouvert.
+Soit $a \in \mathcal{U}$ et soit $h$ un vecteur de $\mathbb{R}^p$.
+Considérons la fonction d'une variable réelle $\varphi : t \mapsto f(a + th)$ où $t$ varie dans un voisinage de $0$ tel que $a + th \in \mathcal{U}$.
+
+\definition{
+    On dit que $f$ admet une \textbf{dérivée directionnelle} en $a$ selon la direction (ou le vecteur) $h$ si la fonction $\varphi$ est dérivable en $0$. Le cas échéant, on note cette dérivée :
+    \[
+        D_h f(a) = \varphi'(0) = \lim_{t \to 0} \frac{f(a + th) - f(a)}{t}
+    \]
+}
+
+% --- REPRÉSENTATION GÉOMÉTRIQUE AVEC TIKZ ---
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4]
+    % Dessin de l'ensemble U (forme ouverte et arrondie)
+    \fill[blue!5, draw=blue!50, dashed, thick] 
+        (-2.5,-1.5) to[out=20,in=180] (0,-1.2)
+                    to[out=0,in=260] (2.2,-0.5)
+                    to[out=80,in=300] (1.8,1.5)
+                    to[out=120,in=0] (0,1.2)
+                    to[out=180,in=110] (-2.2,0.8)
+                    to[out=290,in=200] cycle;
+    \node[blue!80!black] at (1.8,-1) {$\mathcal{U}$};
+
+    % Axes de coordonnées discrets
+    \draw[->, >=stealth, gray!70, thin] (-3,0) -- (3,0) node[right] {$x_1$};
+    \draw[->, >=stealth, gray!70, thin] (0,-1.8) -- (0,1.8) node[above] {$x_2$};
+
+    % Point a
+    \coordinate (A) at (-0.8, -0.4);
+    \fill[red] (A) circle (2.5pt) node[below left, black] {$a$};
+
+    % Vecteur h
+    \coordinate (H_end) at (0.4, 0.5); % vecteur (1.2, 0.9) relatif
+    \draw[->, >=latex, green!60!black, ultra thick] (A) -- ++(1.2, 0.9) coordinate (B);
+    \node[green!60!black, above left] at (-0.2, 0.0) {$h$};
+
+    % Droite passant par a dirigée par h (représentée pour t réel)
+    \draw[domain=-1.2:2.2, smooth, variable=\t, red, thick] plot ({ -0.8 + \t*1.2 }, { -0.4 + \t*0.9 });
+    \node[red!80!black, right] at (1.8, 1.55) {Droite $\{a + th \mid t \in \mathbb{R}\}$};
+
+    % Points de la forme a + th
+    \coordinate (Ath) at (0.8, 0.8);
+    \fill[red] (Ath) circle (2pt) node[below right, black] {$a + th$};
+    
+\end{tikzpicture}
+\caption{Visualisation géométrique de l'étude locale dans la direction du vecteur $h$.}
+\label{fig:directionnelle_geom}
+\end{figure}
+
+\theorem{Proposition}{Lien avec la dérivée partielle}{false}{
+    Si on choisit comme direction $h = e_k$ (le $k$-ième vecteur de la base canonique de $\mathbb{R}^p$), alors la dérivée directionnelle de $f$ en $a$ selon la direction $e_k$ est la $k$-ième dérivée partielle de $f$ en $a$.
+}
+
+\noindent{\textbf{Preuve :}}\\
+En posant $h = e_k$, la fonction de l'évaluation locale s'écrit pour $t$ proche de 0 :
+\[
+\varphi(t) = f(a + te_k) = f(a_1, \ldots, a_{k-1}, a_k + t, a_{k+1}, \ldots, a_p)
+\]
+On observe alors que $\varphi(t) = g_k(a_k + t)$ où $g_k$ est la $k$-ième fonction partielle définie dans la section précédente.
+Par conséquent, la dérivabilité de $\varphi$ en $0$ équivaut précisément à la dérivabilité de la fonction partielle $g_k$ en $a_k$. On en conclut que :
+\[
+D_{e_k} f(a) = \varphi'(0) = g_k'(a_k) = \frac{\partial f}{\partial x_k}(a)
+\]
+\hfill $\square$
+
+\example{
+    Étudions la dérivée directionnelle en toutes les directions au point $a = (0,0)$ de la fonction $f$ définie sur $\mathbb{R}^2$ par :
+    \[
+    f(x,y) = \begin{cases} \frac{xy}{x^2 + y^2} & \text{si } (x,y) \neq (0,0) \\ 0 & \text{si } (x,y) = (0,0) \end{cases}
+    \]
+    
+    \noindent Soit $h = (h_1, h_2) \in \mathbb{R}^2$ un vecteur non nul représentatif de la direction choisie. Par définition, on cherche à étudier la dérivabilité en $t=0$ de la fonction d'une variable réelle :
+    \[
+    \varphi : t \mapsto f(a + th) = f(th) = f(th_1, th_2)
+    \]
+    Pour tout $t \neq 0$, le point $(th_1, th_2)$ est distinct de $(0,0)$. On a donc :
+    \[
+    \varphi(t) = \frac{(th_1)(th_2)}{(th_1)^2 + (th_2)^2} = \frac{t^2 h_1 h_2}{t^2 (h_1^2 + h_2^2)} = \frac{h_1 h_2}{h_1^2 + h_2^2}
+    \]
+    On calcule maintenant la limite du taux d'accroissement de $\varphi$ en $0$ lorsque $t \to 0$ :
+    \[
+    \frac{\varphi(t) - \varphi(0)}{t} = \frac{\frac{h_1 h_2}{h_1^2 + h_2^2} - 0}{t} = \frac{1}{t} \cdot \frac{h_1 h_2}{h_1^2 + h_2^2}
+    \]
+    Distinguons alors deux cas selon la direction du vecteur $h$ :
+    \begin{itemize}
+        \item \textbf{Cas 1 : } Si $h_1 = 0$ ou $h_2 = 0$ (déplacement le long de l'axe des abscisses ou des ordonnées). \\
+        Le numérateur $h_1 h_2$ est nul. Le taux d'accroissement est identiquement nul pour tout $t \neq 0$, sa limite en $0$ existe et vaut $0$. Ainsi, les dérivées directionnelles selon les axes de coordonnées existent et l'on retrouve les dérivées partielles : $D_{(1,0)}f(0,0) = 0$ et $D_{(0,1)}f(0,0) = 0$.
+        
+        \item \textbf{Cas 2 : } Si $h_1 \neq 0$ et $h_2 \neq 0$ (déplacement hors des axes). \\
+        La quantité $\frac{h_1 h_2}{h_1^2 + h_2^2}$ est une constante réelle non nulle. Par conséquent :
+        \[
+        \lim_{t \to 0^{\pm}} \frac{1}{t} \cdot \frac{h_1 h_2}{h_1^2 + h_2^2} = \pm \infty
+        \]
+        La limite n'étant pas finie, la fonction $\varphi$ n'est pas dérivable en $0$.
+    \end{itemize}
+    \textbf{Conclusion : } La fonction $f$ admet des dérivées directionnelles en $(0,0)$ uniquement selon les directions des axes de coordonnées (les dérivées partielles). Elle n'en admet dans aucune autre direction.
+}
+
+\attention{
+    L'existence de toutes les dérivées directionnelles d'une fonction $f$ en un point $a$ \textbf{ne suffit toujours pas} à garantir sa continuité en ce point.
+}
+
+\training{
+Considérer la fonction $f : \mathbb{R}^2 \to \mathbb{R}$ définie par :
+\[
+f(x,y)=\begin{cases} \frac{y^2}{x} & \text{si } x \neq 0 \\ y & \text{sinon} \end{cases}
+\]
+\begin{enumerate}
+    \item Montrer que $f$ admet des dérivées directionnelles en tout point de $\mathbb{R}^2$ et dans toutes les directions.
+    \item Montrer que $f$ n'est pas continue en $(0,1)$ (on pourra s'intéresser à la suite de points $(\frac{1}{n},1)$).
+\end{enumerate}
+}
+\noindent\carreaux{13}
+\section{Notion de différentiabilité}
+
+La différentiabilité est la véritable extension de la notion de dérivabilité aux espaces de plusieurs variables. Contrairement aux dérivées partielles ou directionnelles, elle assure une approximation linéaire globale de la fonction au voisinage d'un point.
+
+Dans toute cette section, $\mathcal{U}$ désigne un ouvert de $\mathbb{R}^p$.
+
+\subsection{Définition générale}
+
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}^q$ et $a \in \mathcal{U}$. On dit que $f$ est \textbf{différentiable} au point $a$ s'il existe une application linéaire $L \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$ telle que, pour tout $h \in \mathbb{R}^p$ tel que $a+h \in \mathcal{U}$ :
+    \[
+    f(a+h) = f(a) + L(h) + o(\|h\|) \quad \text{quand } h \to 0
+    \]
+    c'est-à-dire $f(a+h) = f(a) + L(h) + \|h\|\varepsilon(h)$ avec $\lim_{h \to 0} \varepsilon(h) = 0_{\mathbb{R}^q}$.\\
+    Si une telle application linéaire existe, elle est unique. On l'appelle la \textbf{différentielle} de $f$ en $a$ et on la note $Df(a)$.
+}
+
+
+\attention{On a les notations suivantes, qui sont proches mais qu'il ne faut pas confondre :
+\begin{itemize}
+    \item $Df(a) \cdot h = (Df(a))(h)$ : application de la différentielle $Df(a)$ au vecteur $h$ \textit{(égal à $L(h) = \langle \nabla f(a), h \rangle = J_f(a) \cdot h$ si $f$ est différentiable et admet un gradient en $a$)}.
+    \item $D_h f(a)$ : dérivée directionnelle de $f$ en $a$ selon la direction $h$.
+\end{itemize}
+}
+
+%\example{
+%    Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction d'une variable réelle dérivable en $a$. La formule de Taylor-Young donne $f(a+h) = f(a) + f'(a)h + o(h)$. La différentielle $Df(a)$ est l'application linéaire de $\mathcal{L}(\mathbb{R}, \mathbb{R})$ définie par :
+%    \[ Df(a) : h \mapsto f'(a) \cdot h \]
+%    Il s'agit géométriquement de l'application linéaire associée à la multiplication par le scalaire $f'(a)$.
+%}
+
+\example{
+    Soit $f \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$ une application linéaire. Pour tout $a \in \mathbb{R}^p$ et tout $h \in \mathbb{R}^p$, on a par linéarité :
+    \[ f(a+h) = f(a) + f(h) + 0 \]
+    Le reste étant identiquement nul, il est un $o(\|h\|)$. Ainsi, $f$ est différentiable en tout point $a \in \mathbb{R}^p$ et sa différentielle est l'application $f$ elle-même, indépendamment du point $a$ :
+    \[ \forall a \in \mathbb{R}^p, \quad Df(a) = f \]
+}
+
+\method{Vérifier la différentiabilité d'une fonction $f : \mathbb{R}^p \to \mathbb{R}^q$ en un point $a$}{
+\begin{enumerate}
+    \item \textbf{Calculer les dérivées partielles de $f$ en $a$} pour déterminer le candidat $L$ à la différentielle.\\
+    Si les dérivées partielles existent en $a$, alors $L$ est l'application linéaire définie par :
+\[ L(h_1, \dots, h_p) = \sum_{k=1}^p \frac{\partial f}{\partial x_k}(a) h_k \]
+    \item \textbf{Calculer le reste} $R(h) = f(a+h) - f(a) - L(h)$.
+    \item \textbf{Vérifier que $R(h) = o(\|h\|)$} en calculant la limite $\lim_{h \to 0} \frac{\|R(h)\|}{\|h\|}$ et en vérifiant qu'elle est nulle.
+\end{enumerate}
+}
+
+\example{Soit $f : \mathbb{R}^2 \to \mathbb{R}$ définie par $f(x, y) = x^2 + y^2$. Nous étudions sa différentiabilité au point $a = (0, 0)$ en utilisant la définition.
+\begin{enumerate}
+
+\item \textbf{Recherche du candidat pour la différentielle}
+Pour former l'application linéaire candidate $L$, nous calculons les dérivées partielles en $(0,0)$ :
+\begin{itemize}
+    \item \textbf{Selon $x$ :} $\frac{\partial f}{\partial x}(0,0) = \lim_{t \to 0} \frac{f(t, 0) - f(0,0)}{t} = \lim_{t \to 0} \frac{t^2 - 0}{t} = 0$.
+    \item \textbf{Selon $y$ :} $\frac{\partial f}{\partial y}(0,0) = \lim_{t \to 0} \frac{f(0, t) - f(0,0)}{t} = \lim_{t \to 0} \frac{t^2 - 0}{t} = 0$.
+\end{itemize}
+L'unique application linéaire candidate est donc l'application nulle : $L(h_1, h_2) = 0$.
+
+\item \textbf{Étude du reste}
+D'après la définition, $f$ est différentiable en $a$ s'il existe $L$ telle que $f(a+h) = f(a) + L(h) + R(h)$ avec $R(h) = o(\|h\|)$. Ici :
+\[ f(0+h_1, 0+h_2) = h_1^2 + h_2^2 \]
+\[ f(0,0) = 0 \quad \text{et} \quad L(h) = 0 \]
+Le reste est donc :
+\[ R(h) = f(h_1, h_2) - f(0,0) - L(h) = h_1^2 + h_2^2 \]
+
+\item \textbf{Vérification de la limite}
+Nous utilisons la norme euclidienne $\|h\| = \sqrt{h_1^2 + h_2^2}$. Calculons le rapport $\frac{R(h)}{\|h\|}$ :
+\[ \frac{R(h)}{\|h\|} = \frac{h_1^2 + h_2^2}{\sqrt{h_1^2 + h_2^2}} = \sqrt{h_1^2 + h_2^2} = \|h\| \]
+Or, par définition de la limite d'une norme :
+\[ \lim_{h \to (0,0)} \frac{R(h)}{\|h\|} = \lim_{h \to (0,0)} \|h\| = 0 \]
+
+\item \textbf{Conclusion}
+Le reste est bien un $o(\|h\|)$ au voisinage de l'origine. La fonction $f$ est donc
+\end{enumerate}
+}
+
+
+
+\subsection{Propriétés fondamentales}
+
+Le premier grand intérêt de la différentiabilité est qu'elle résout les défauts des notions précédentes en garantissant la continuité.
+
+\theorem{Proposition}{Différentiabilité implique continuité}{false}{
+    Si $f : \mathcal{U} \to \mathbb{R}^q$ est différentiable en $a \in \mathcal{U}$, alors $f$ est continue en $a$.
+}
+
+\noindent{\textbf{Preuve :}\\
+Soit $f$ différentiable en $a$. Pour tout $h$ au voisinage de $0$, on a par l'inégalité triangulaire :
+\[ \|f(a+h) - f(a)\| \leq \|Df(a) \cdot h\| + \|o(\|h\|)\| \]
+Puisque nous sommes en dimension finie, l'application linéaire $Df(a)$ est automatiquement continue. Il existe donc une constante $C_a > 0$ telle que $\|Df(a) \cdot h\| \leq C_a \|h\|$. On en déduit :
+\[ \|f(a+h) - f(a)\| \leq C_a \|h\| + \|h\|\|\varepsilon(h)\| = \|h\| \big(C_a + \|\varepsilon(h)\|\big) \]
+Lorsque $h \to 0$, le membre de droite tend vers $0$. On a donc $\lim_{h \to 0} f(a+h) = f(a)$, ce qui prouve la continuité de $f$ en $a$. \hfill $\square$
+}
+
+\theorem{Proposition}{Lien avec les dérivées directionnelles}{false}{
+    Si $f : \mathcal{U} \to \mathbb{R}^q$ est différentiable en $a \in \mathcal{U}$, alors $f$ admet des dérivées directionnelles en $a$ selon toutes les directions $h \in \mathbb{R}^p$, et on a :
+    \[ Df(a) \cdot h = \lim_{t \to 0} \frac{f(a+th) - f(a)}{t} \]
+    Autrement dit, $Df(a) \cdot h$ est la dérivée directionnelle de $f$ en $a$ selon la direction $h$.
+}
+
+
+\noindent{\textbf{Preuve :}\\
+Soit $h \in \mathbb{R}^p$. En évaluant le développement limité de $f$ en $a$ le long de la droite passant par $a$ et de vecteur directeur $h$ (pour $t \in \mathbb{R}$ proche de $0$), on obtient par linéarité de $Df(a)$ :
+\[ f(a+th) = f(a) + Df(a) \cdot (th) + o(\|th\|) = f(a) + t \big(Df(a) \cdot h\big) + |t|\|h\|\varepsilon(th) \]
+Formons le taux d'accroissement pour $t \neq 0$ :
+\[ \frac{f(a+th) - f(a)}{t} = Df(a) \cdot h + \frac{|t|}{t} \|h\|\varepsilon(th) \]
+Puisque $\lim_{t \to 0} \varepsilon(th) = 0$ et que le facteur $\frac{|t|}{t}$ est borné (il vaut $\pm 1$), le second terme tend vers $0_{\mathbb{R}^q}$ quand $t \to 0$. On obtient bien :
+\[ \lim_{t \to 0} \frac{f(a+th) - f(a)}{t} = Df(a) \cdot h \]
+L'application $t \mapsto f(a+th)$ est donc dérivable en $0$, ce qui prouve l'existence de la dérivée directionnelle, égale à $Df(a) \cdot h$. \hfill $\square$
+}
+
+\remark{La réciproque est fausse. Une fonction peut admettre des dérivées directionnelles dans toutes les directions sans pour autant être différentiable.}
+
+\cexample{
+    Considérons une norme quelconque $\|\cdot\| : \mathbb{R}^p \to \mathbb{R}$. Montrons que cette fonction n'est pas différentiable en $a = 0_{\mathbb{R}^p}$.\\
+    Pour tout vecteur non nul $h \in \mathbb{R}^p$ et tout $t \in \mathbb{R}^*$, le taux d'accroissement en $0$ s'écrit :
+    \[ \frac{\|0 + th\| - \|0\|}{t} = \frac{|t|\|h\|}{t} = \frac{|t|}{t}\|h\| \]
+    Cette quantité admet pour limites à droite et à gauche en $0$ respectivement $+\|h\|$ et $-\|h\|$. La limite n'existe pas en $0$ car $h \neq 0_{\mathbb{R}^p}$. La fonction norme n'admet donc pas de dérivées directionnelles à l'origine, elle n'y est donc pas différentiable.
+}
+
+\subsection{Cas des fonctions scalaires : Le Gradient}
+
+Lorsque l'espace d'arrivée est $\mathbb{R}$ ($q=1$), la différentielle $Df(a)$ est une forme linéaire ($\in \mathcal{L}(\mathbb{R}^p, \mathbb{R})$). Le théorème de représentation de Riesz permet de l'identifier à un vecteur via le produit scalaire usuel, noté $\langle \cdot, \cdot \rangle$.
+
+\theorem{Proposition et définition}{Le Gradient}{false}{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ une fonction différentiable en $a \in \mathcal{U}$. Il existe un unique vecteur de $\mathbb{R}^p$, appelé \textbf{gradient} de $f$ en $a$ et noté $\nabla f(a)$, tel que :
+    \[ \forall h \in \mathbb{R}^p, \quad Df(a) \cdot h = \langle \nabla f(a), h \rangle \]
+    Dans la base canonique de $\mathbb{R}^p$, ce vecteur a pour coordonnées les dérivées partielles de $f$ :
+    \[ \nabla f(a) = \begin{pmatrix} \frac{\partial f}{\partial x_1}(a) \\ \vdots \\ \frac{\partial f}{\partial x_p}(a) \end{pmatrix} \]
+}
+
+\noindent{\textbf{Preuve :}\\
+Soit $(e_1, \dots, e_p)$ la base canonique de $\mathbb{R}^p$. Pour tout $h = \sum_{i=1}^p h_i e_i \in \mathbb{R}^p$, on a par linéarité de la différentielle :
+\[ Df(a) \cdot h = Df(a) \cdot \left(\sum_{i=1}^p h_i e_i\right) = \sum_{i=1}^p h_i \big(Df(a) \cdot e_i\big) \]
+Or, d'après les liens avec les dérivées directionnelles et partielles, $Df(a) \cdot e_i = \frac{\partial f}{\partial x_i}(a)$. Ainsi :
+\[ Df(a) \cdot h = \sum_{i=1}^p \frac{\partial f}{\partial x_i}(a) h_i \]
+Cette expression correspond exactement au produit scalaire usuel $\langle \nabla f(a), h \rangle$ en posant pour $\nabla f(a)$ le vecteur colonne des dérivées partielles. \hfill $\square$
+}
+
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}$ une fonction différentiable. On appelle \textbf{point critique} de $f$ tout point $x \in \mathcal{U}$ où le gradient s'annule, c'est-à-dire :
+    \[ \nabla f(x) = 0_{\mathbb{R}^p} \]
+}
+
+\example{
+    Soit $f(x,y,z) = x^2 (1 + z \cos(y))$ définie sur $\mathbb{R}^3$. Son gradient est donné par :
+    \[ \nabla f(x,y,z) = \begin{pmatrix} 2x(1 + z \cos(y)) \\ -x^2 z \sin(y) \\ x^2 \cos(y) \end{pmatrix} \]
+    Calculons la dérivée directionnelle de $f$ au point $a = (1,\pi,1)$ selon le vecteur $h = (1,1,1)^T$. On évalue d'abord le gradient en $a$ :
+    \[ \nabla f(1,\pi,1) = \begin{pmatrix} 2(1) (1 + 1 \cdot \cos(\pi)) \\ -1^2 \cdot 1 \cdot \sin(\pi) \\ 1^2 \cos(\pi) \end{pmatrix} = \begin{pmatrix} 2(1-1) \\ 0 \\ -1 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix} \]
+    La dérivée directionnelle cherchée vaut alors :
+    \[ Df(1,\pi,1) \cdot h = \langle \nabla f(1,\pi,1), h \rangle = \left\langle \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix} , \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix} \right\rangle = 0\cdot 1 + 0\cdot 1 + (-1)\cdot 1 = -1 \]
+}
+
+\subsection{Cas des fonctions vectorielles : La Matrice Jacobienne}
+
+Lorsque $f : \mathcal{U} \to \mathbb{R}^q$, la différentielle $Df(a)$ est représentée matriciellement dans les bases canoniques de $\mathbb{R}^p$ et $\mathbb{R}^q$.
+
+\definition{
+    Soit $f : \mathcal{U} \to \mathbb{R}^q$ une fonction différentiable en $a \in \mathcal{U}$. On appelle \textbf{matrice jacobienne} de $f$ en $a$, notée $J_f(a)$, la matrice de l'application linéaire $Df(a)$ exprimée dans les bases canoniques de départ et d'arrivée.\\
+    Cette matrice appartient à $\mathcal{M}_{q,p}(\mathbb{R})$ et ses coefficients sont donnés par les dérivées partielles des composantes $f_i$ de $f$ :
+    \[
+    J_f(a) = \begin{pmatrix}
+        \frac{\partial f_1}{\partial x_1}(a) & \frac{\partial f_1}{\partial x_2}(a) & \ldots & \frac{\partial f_1}{\partial x_p}(a) \\
+        \frac{\partial f_2}{\partial x_1}(a) & \frac{\partial f_2}{\partial x_2}(a) & \ldots & \frac{\partial f_2}{\partial x_p}(a) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \frac{\partial f_q}{\partial x_1}(a) & \frac{\partial f_q}{\partial x_2}(a) & \ldots & \frac{\partial f_q}{\partial x_p}(a)
+    \end{pmatrix} = \left(\frac{\partial f_i}{\partial x_j}(a)\right)_{\substack{1 \leq i \leq q \\ 1 \leq j \leq p}}
+    \]
+}
+
+\remark{Si $q = 1$ (fonction scalaire), la matrice jacobienne est une matrice ligne contenant les dérivées partielles. On observe la relation de transposition avec le gradient : $J_f(a) = {}^t(\nabla f(a))$.}
+
+\example{
+    Considérons le changement de coordonnées polaires en coordonnées cartésiennes défini par l'application $f : \mathbb{R}^2 \to \mathbb{R}^2$ telle que $f(r,\theta) = (r \cos \theta, r \sin \theta)$. Ici $p=q=2$. Ses composantes sont $f_1(r,\theta) = r \cos \theta$ et $f_2(r,\theta) = r \sin \theta$.\\
+    La matrice jacobienne en tout point $(r,\theta)$ s'écrit :
+    \[
+    J_f(r,\theta) = \begin{pmatrix}
+        \frac{\partial f_1}{\partial r} & \frac{\partial f_1}{\partial \theta} \\
+        \frac{\partial f_2}{\partial r} & \frac{\partial f_2}{\partial \theta}
+    \end{pmatrix} = \begin{pmatrix}
+        \cos \theta & -r \sin \theta \\
+        \sin \theta & r \cos \theta
+    \end{pmatrix}
+    \]
+}
+
+\newpage
+\tableofcontents
+
+\section*{Crédits}
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
