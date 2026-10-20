@@ -652,6 +652,34 @@ Soient $E$ et $F$ deux espaces vectoriels normés de dimension finie.
 \remark{En particulier, les polynômes et les composées de fonctions usuelles (exponentielle, logarithme, fonctions trigonométriques, etc.) sont différentiables en tout point de leur domaine de définition.}
 
 \subsubsection{Formule de la chaîne (chain rule)}
+Supposons que $E = \mathbb{R}^p, F = \mathbb{R}^q$ et $G = \mathbb{R}^s$. Notons $F = g \circ f$. On a donc
+
+\begin{center}
+\begin{tikzpicture}
+  % Nœuds
+  \node (A) at (0, 1.2) {$(x_1, \dots, x_p)$};
+  \node (B) at (5, 1.2) {$(f_1(x), \dots, f_q(x)) = (y_1, \dots, y_q)$};
+  \node (C) at (5, 0) {$(F_1(x), \dots, F_s(x)) = (g_1(y), \dots, g_s(y))$};
+
+  % Flèches
+  \draw[->] (A) -- (B) node[midway, above] {$f$};
+  \draw[->] (B) -- (C) node[midway, right] {$g$};
+  \draw[->] (A) -- (C) node[midway, below left] {$F$};
+\end{tikzpicture}
+\end{center}
+
+\theorem{Corollaire}{}{false}{
+Avec les notations du théorème précédent, on a
+\[
+(Jac\ g \circ f)(a) = (Jac\ g)(f(a))(Jac\ f)(a).
+\]
+Ce qui signifie en terme de dérivées partielles,
+\[
+\frac{\partial F_i}{\partial x_j}(a) = \sum_{k=1}^{q} \frac{\partial g_i}{\partial y_k}(f(a)) \frac{\partial f_k}{\partial x_j}(a).
+\]
+}
+
+\remark{Si $p=s=1$, on retrouve la formule de la chaîne pour les fonctions d'une variable réelle : $(g \circ f)'(a) = g'(f(a)) f'(a)$.}
 
 \subsection{Cas des fonctions scalaires : Le Gradient}
 
@@ -718,6 +746,83 @@ Lorsque $f : \mathcal{U} \to \mathbb{R}^q$, la différentielle $Df(a)$ est repr�
     \end{pmatrix}
     \]
 }
+
+\section{Théorème des Accroissement finis}
+
+L'objectif est d'étudier les accroissements finis d'une fonction $f$, i.e. $f(b) - f(a)$, à partir des informations fournies par sa différentielle.
+
+\subsection{Parties convexes}
+
+Soit $E$ un espace vectoriel et $(a,b) \in E^2$. On rappelle que le segment entre $a$ et $b$ est l'ensemble
+\[[a,b] := \{a + t(b-a) \ /\ t \in [0,1] \}.\]
+
+\theorem{Définition}{}{false}{
+Une partie $U$ de $E$ est convexe si pour tout $a,b \in U$ le segment $[a,b]$ est inclus dans $U$
+}
+
+Par exemple, l'espace $E$ est convexe. Les intervalles sont les parties convexes de $\mathbb{R}$.
+
+\example{
+Soit $\Vert{}\cdot\Vert{}$ une norme sur $E$. Alors les boules ouvertes et fermées sont des parties convexes de $E$.
+}
+
+\noindent\textbf{Preuve :} On fait la preuve pour le cas de la boule fermée $\overline{B}(0,1)$, les autres cas sont laissés en exercice. Soit $a,b \in \overline{B}(0,1)$ et $t \in [0,1]$. Alors $\Vert{}a\Vert{} \le 1$ et $\Vert{}b\Vert{} \le 1$ et
+\[\Vert{}(1-t)a + tb\Vert{} \le \Vert{}(1-t)a\Vert{} + \Vert{}tb\Vert{} = (1-t)\Vert{}a\Vert{} + t\Vert{}b\Vert{} \le 1 - t + t = 1.\]
+Ainsi $(1-t)a + tb \in \overline{B}(0,1)$. \hfill $\square$
+
+
+\subsection{Cas scalaire}
+
+\theorem{Théorème}{}{false}{
+Soit $U$ un ouvert d'un espace vectoriel normé $E$ de dimension finie et $f$ une application différentiable sur $U$ à valeurs réelles. Alors pour tout $(a,b) \in E^2$ tel que le segment $[a,b] \subset U$ il existe $\theta \in ]0,1[$ vérifiant :
+\[f(b) - f(a) = df_{a+\theta(b-a)}(b-a).\]
+En particulier, si $E = \mathbb{R}^n$ et en posant $h = b - a$ alors la relation ci-dessus s'écrit
+\[f(a+h) - f(a) = \sum_{i=1}^{n} h_i \frac{\partial f}{\partial x_i}(a + \theta h).\]
+}
+
+\noindent\textbf{Preuve :} Soit $(a,b) \in E^2$ tel que le segment $[a,b] \subset U$. Considérons la fonction $u : [0,1] \longrightarrow F$ définie par
+\[u(t) = f(a + t(b-a)).\]
+Il s'agit d'une application continue sur $[0,1]$ et dérivable sur $]0,1[$. De plus, on a :
+\begin{align*}
+u(0) &= f(a) \quad,\quad u(1) = f(b); \\
+u'(t) &= df_{a+t(b-a)}(b-a) \quad \text{pour tout } t \in ]0,1[.
+\end{align*}
+Donc d'après le théorème des accroissements finis, il existe $\theta \in ]0,1[$ tel que
+\[f(b) - f(a) = u(1) - u(0) = u'(\theta) = df_{a+\theta(b-a)}(b-a).\]
+Ce qui termine la preuve. \hfill $\square$
+
+
+\subsection{Cas vectoriel}
+
+\theorem{Théorème}{}{false}{
+Soit $U$ un ouvert de $E$ et $f$ une application différentiable sur $U$ à valeurs dans un espace vectoriel normé $F$. Supposons qu'il existe une constante $C > 0$ telle que,
+\[\forall x \in U, \quad \vert{}\vert{}\vert{} df_x \vert{}\vert{}\vert{} \le C.\]
+Alors pour tout $(a,b) \in E^2$ tel que le segment $[a,b] \subset U$ on a
+\[\Vert{}f(b) - f(a)\Vert{} \le C\Vert{}b - a\Vert{}.\]
+}
+
+\noindent\textbf{Preuve :} Preuve similaire à celle de la version précédente du théorème des Accroissement finis pour les fonctions scalaires. Nous répétons ici pour le confort du lecteur. Considérons la fonction $u : [0,1] \longrightarrow F$ définie par
+\[u(t) = f(a + t(b-a)).\]
+Il s'agit d'une application continue sur $[0,1]$ et dérivable sur $]0,1[$. De plus,
+\begin{align*}
+u(0) &= f(a) \quad,\quad u(1) = f(b); \\
+u'(t) &= df_{a+t(b-a)}(b-a) \quad \text{pour tout } t \in ]0,1[.
+\end{align*}
+Donc, pour tout $t \in [0,1]$, on a
+\[\Vert{}u'(t)\Vert{} = \Vert{}df_{a+t(b-a)}(b-a)\Vert{} \le \vert{}\vert{}\vert{} df_{a+t(b-a)} \vert{}\vert{}\vert{} \cdot \Vert{}b-a\Vert{} \le C\Vert{}b-a\Vert{}\]
+Donc d'après l'inégalité des accroissements finis des fonctions réelles appliquée à $u$ on a
+\[\Vert{}f(b) - f(a)\Vert{} = \Vert{}u(1) - u(0)\Vert{} \le C\Vert{}b-a\Vert{}.\]
+\hfill $\square$
+
+En particulier, si dans le théorème ci-dessus $U$ est convexe alors l'inégalité des accroissement finis est vérifiée pour tout couple $(a,b) \in E^2$. Un conséquence notable de ce théorème est la caractérisation des fonctions constantes sur les ouverts connexes :
+
+\theorem{Corollaire}{}{false}{
+Soit $U$ un ouvert convexe d'un espace vectoriel normé $E$ de dimension finie et $f$ une application de classe $C^1$ sur $U$ à valeurs dans un espace vectoriel normé $F$. Alors $f$ est constante si, et seulement si, sa différentielle est nulle.
+}
+
+\noindent\textbf{Preuve :} Si $f$ est constante alors sa différentielle est clairement nulle. Réciproquement, supposons que $df_x = 0$ pour tout $x \in U$. Ainsi $\Vert{}df_x(h)\Vert{} = 0$ pour tout $x \in U$ et $h \in E$. Soit $a \in U$ quelconque mais fixé. Comme $U$ est convexe, le segment $[a,b] \subset U$ quel que soit $b \in U$. L'inégalité des accroissement finis ($f$ étant de classe $C^1$ sur $U$) implique $f(b) = f(a)$ pour tout $b \in U$. \hfill $\square$
+
+\remark{L'hypothèse de la convexité de l'ouvert $U$ est fondamentale. En fait, il suffit que $U$ soit connexe, c'est-à-dire que $U$ ne puisse pas s'écrire comme réunion de deux ouverts non vides disjoints. Par exemple, soit $U = U_1 \cup U_2$ est la réunion de deux ouverts non vides $U_1$ et $U_2$ tel que $U_1 \cap U_2 = \emptyset$. Alors la fonction $f : U_1 \cup U_2 \to \mathbb{R}$ définie par $f(x,y) = 0$ si $(x,y) \in U_1$ et $f(x,y) = 1$ si $(x,y) \in U_2$. Alors $f$ est da classe $C^1$ et $df_{(x,y)}$ est nulle pour tout $(x,y) \in U$. Cependant, $f$ n'est pas constante.}
 
 \newpage
 \tableofcontents
