@@ -1,0 +1,320 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+\usepackage{stmaryrd}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info GA5}
+\fancyhead[C]{Théorie des groupes}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 4 : Actions de groupes}
+
+\section{Introduction et généralités}
+\subsection{Définition}
+\definition{
+    Soit $(G, \star)$ un groupe et $X$ un ensemble. Une \textbf{action} de $G$ sur $X$ est la donnée d'une application $G \times X \to X$ notée $(g, x) \mapsto g \cdot x$ telle que :
+    \begin{enumerate}
+        \item $\forall x \in X, e_G \cdot x = x$,
+        \item $\forall g, h \in G, \forall x \in X, g \cdot (h \cdot x) = (g \star h) \cdot x$.
+    \end{enumerate}
+}
+\vocabulary{On dit que $G$ agit sur $X$.}
+\remark{Si $g \cdot x = y$ alors $x = g^{-1} \cdot y$.}
+
+\theorem{Proposition}{}{false}{
+    La donnée d'une action de $G$ sur $X$ est équivalente à la donnée d'un morphisme de groupes $\phi : G \to S(X)$, où $S(X)$ est le groupe des permutations de $X$.
+    La correspondance est donnée par $\phi(g)(x) = g \cdot x$.
+}
+
+\ndlr{cf. Laurent pour la preuve.}
+
+\example{Quelques exemples d'actions de groupes :
+    \begin{enumerate}
+        \item Le groupe $S_n$ agit sur l'ensemble $\{1, 2, \ldots, n\}$ par $\sigma \cdot i = \sigma(i)$. Le morphisme correspondant $\rho : S_n \to S(\{1, 2, \ldots, n\})$ est l'identité.
+        \item De même, $GL_n(\mathbb{R})$ agit sur $\mathbb{R}^n$ par $A \cdot x = Ax$ où $A$ est une matrice et $x$ une matrice colonne.
+        \item Soit $(G, \star)$ un groupe et $H \leq G$. Alors $G$ agit par translation à gauche sur l'ensemble quotient $G/H$ par $g \cdot (aH) = (g \star a)H$.
+        \item Soit $(G, \star)$ un groupe. On note $\mathcal{H}$ l'ensemble des sous-groupes de $G$. Alors $G$ agit sur $\mathcal{H}$ par conjugaison : $g \cdot H = gHg^{-1}$.
+    \end{enumerate}
+}
+
+\subsection{Orbites et stabilisateurs}
+
+\theorem{Lemme}{}{false}{
+    Soit $(G, \star)$ un groupe, soit $X$ un ensemble.\\
+    Une action de $G$ sur $X$ définit une relation d'équivalence sur $X$ par $x \sim y$ si et seulement si il existe $g \in G$ tel que $g \cdot x = y$.\\
+}
+\ndlr{cf. Laurent pour la preuve.}
+\ndlr{La relation d'équivalence est sur $X$ ou sur $G$ ? Corriger ça pour $x$ et $y$.}
+
+
+\definition{
+    Soit $G$ un groupe agissant sur un ensemble $X$.\\
+    On appelle \textbf{orbite} de $x \in X$ les classes d'équivalence de $x$ pour la relation $\sim$, et on note l'orbite de $x$ par : $$G \cdot x = O_x = \{g \cdot x \mid g \in G\}$$
+}
+\remark{On note aussi parfois $X/G$ ou $G \backslash X$ l'ensemble des classes d'équivalences dans $X$ modulo la relation $\sim$.}
+
+\definition{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$, et soit $x \in X$.\\
+    On appelle \textbf{stabilisateur} de $x$ le sous-groupe de $G$ défini par : $$Stab(x) = \{g \in G \mid g \cdot x = x\}$$
+}
+
+\definition{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+    L'ensemble des \textbf{points fixes} sous l'action de $G$ est défini par : $$X^G = \{x \in X \mid \forall g \in G, g \cdot x = x\}$$
+}
+
+\theorem{Proposition}{}{false}{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$. Notons $\rho : G \to S(X)$ le morphisme de groupes associé à l'action. Alors :
+    \begin{enumerate}
+        \item $x \in \mathbb{R}, \; Stab(x) \leq G$,
+        \item $\forall g \in G, Stab(g \cdot x) = g Stab(x) g^{-1}$,
+        \item $ker \rho = \bigcap_{x \in X} Stab(x)$.
+        \item $x \in X^G \iff G\cdot x = \{x\} \iff Stab(x) = G$. Ainsi, l'ensemble des points fixes est l'union des orbites à un élément.
+    \end{enumerate}
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\definition{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+    On dit que l'action est \textbf{transitive} si et seulement si il existe $x \in X$ tel que $G \cdot x = X$.\\
+    \textit{Autrement dit, l'action est transitive si et seulement si il n'y a qu'une seule orbite.}
+}
+
+\definition{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+    On dit que l'action est \textbf{libre} si $\forall x \in X, Stab(x) = \{e_G\}$.
+}
+
+\definition{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+    On dit que l'action est \textbf{simplement transitive} si $\forall x, y \in X, \exists ! g \in G$ tel que $g \cdot x = y$.
+}
+
+\definition{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+    On dit que l'action est \textbf{fidèle} si le morphisme $\rho : G \to S(X)$ associé à l'action est injectif.
+}
+
+\theorem{Proposition}{Caractérisation des ations fidèles et simplement transitives}{false}{
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.
+    \begin{itemize}
+        \item Une action libre est fidèle.
+        \item L'action est simplement transitive si et seulement si elle est libre et transitive.
+    \end{itemize}
+}
+\noindent{\textbf{Preuve :} immédiat.}
+
+\theorem{Proposition}{}{false}{
+    Soient $G$ un groupe et $H \leq G$. On considère l'action par translation à gauche de $G$ sur $G/H$. Soit $aH \in G/H$.
+    \begin{enumerate}
+        \item $Stab(aH) = aHa^{-1}$ (qui est bien un sous-groupe de $G$).,
+        \item $O_{aH} = G \cdot (aH) = \{gaH, g \in G\} = G/H$ (donc l'action est transitive).
+    \end{enumerate} 
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\remark{Si $G$ est d'ordre fini $n$, alors il existe un morphisme injectif de $G$ dans $S_n$.}
+
+\theorem{Proposition}{}{false}{
+\textit{(exemple 3)} Soit $G$ un groupe. Pour l'action par conjugaison sur lui-même, on a
+\begin{enumerate}
+    \item Le stabilisateur $\operatorname{Stab}(x) = \{g \in G, gx = xg\}$ s'appelle le \textbf{centralisateur de $x$ (dans $G$)} et est noté $C_G(x)$.
+    \item L'orbite $G \cdot x = \{gxg^{-1}, g \in G\}$ est la \textbf{classe de conjugaison de $x$}.
+    \item L'ensemble des points fixes pour l'action par conjugaison est le centre de $G$.
+\end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} Pour 1 et 2, direct d'après les définitions. On a $x$ est un point fixe si et seulement si pour tout $g \in G$ on a $gxg^{-1} = x$ si et seulement si, pour tout $g \in G, gx = xg$ si et seulement si $x \in Z(G)$.}
+
+\theorem{Proposition}{}{false}{
+\textit{(exemple 4)} Soit $(G, \star)$ un groupe. Pour l'action par conjugaison sur l'ensemble de ses sous-groupes $\mathcal{H}$, on a
+\begin{enumerate}
+    \item Le stabilisateur $\operatorname{Stab}(H) = \{g \in G, gHg^{-1} = H\}$ s'appelle le \textbf{normalisateur de $H$ dans $G$}.
+    \item L'orbite $G \cdot H = \{gHg^{-1}, g \in G\}$ est l'ensemble des sous-groupes conjugués à $H$.
+\end{enumerate}
+}
+
+\noindent{\textbf{Preuve :} Direct d'après les définitions.}
+
+\remark{
+On se donne une action de $G$ sur $X$, et on note $\rho : G \to \operatorname{Bij}(X)$ le morphisme de groupes correspondants. On peut lui associer les actions suivantes
+\begin{enumerate}
+    \item Pour tout sous-groupe $H$ de $G$, une action de $H$ sur $X$, par restriction.
+    \item Si $K = \ker \rho$ alors $G/K$ agit sur $X$ et cette action est fidèle.
+    \item Si $\mathcal{P}(X)$ désigne l'ensemble des parties de $X$ alors $G$ agit sur $\mathcal{P}(X)$ par
+    \[
+    g \cdot A = \{g \cdot a, a \in A\}
+    \]
+    On peut se restreindre aux parties de $X$ d'un cardinal $n$ donné.
+\end{enumerate}
+}
+
+\section{Formule des classes et formule de Burnside}
+\theorem{Lemme}{}{false}{
+Soit $x \in X$ et $G$ un groupe agissant sur $X$. L'application $G \to G \cdot x$ qui à $g$ associe $g \cdot x$ induit une bijection entre l'ensemble quotient $G / \operatorname{Stab}(x)$ et l'orbite de $x$ sous l'action de $G$.
+}
+
+\noindent{\textbf{Preuve :} L'application $\varphi_x : G \to O_x = G \cdot x$ qui à $g$ associe $g \cdot x$ est surjective par définition de l'orbite. On rappelle que $\varphi_x$ induit une bijection $G / \mathcal{R}_{\varphi_x} \to O_x$ avec, pour tous $g, h \in G$,
+\[
+g \mathcal{R}_{\varphi_x} h \iff \varphi_x(g) = \varphi_x(h) \iff g \cdot x = h \cdot x \iff h^{-1}g \in \operatorname{Stab}(x) \iff h \operatorname{Stab}(x) = g \operatorname{Stab}(x).
+\]
+Donc
+\[
+G / \mathcal{R}_{\varphi_x} = G / \operatorname{Stab}(x)
+\]
+et $\varphi_x$ induit une application bijective $G / \operatorname{Stab}(x) \to O_x$. \hfill $\square$}
+
+\theorem{Théorème}{Formule des classes}{false}{
+Soit $G$ un groupe fini agissant sur un ensemble fini $X$. Soit $\Omega$ l'ensemble des orbites de l'action. Soit $w \in \Omega$ et $x, x' \in w$. Les groupes $\operatorname{Stab}(x)$ et $\operatorname{Stab}(x')$ sont isomorphes, donc ont même cardinal que l'on note $c_w$. On a :
+\[
+|X| = \sum_{w \in \Omega} |w| = |G| \sum_{w \in \Omega} \frac{1}{c_w}
+\]
+}
+
+\noindent{\textbf{Preuve :} Les orbites forment une partition de $X$ donc la première égalité est vérifiée. Pour $x, x' \in w$, il existe $g \in G$ tel que $x' = g \cdot x$ et $\operatorname{Stab}(x') = g \operatorname{Stab}(x) g^{-1}$ est donc isomorphe à $\operatorname{Stab}(x)$. Comme $G \cdot x$ est en bijection avec $G / \operatorname{Stab}(x)$ on en déduit que pour $x \in w$ on a $|w| = \frac{|G|}{|\operatorname{Stab}(x)|} = \frac{|G|}{c_w}$ et la seconde égalité est vérifiée. \hfill $\square$}
+
+\theorem{Théorème}{Formule de Burnside}{false}{
+Soit $G$ un groupe fini agissant sur un ensemble fini $X$. Soit $\Omega$ l'ensemble de ses orbites. Pour $g \in G$, notons
+\[
+\operatorname{Fix}(g) = \{x \in X, g \cdot x = x\} \subset X.
+\]
+On a
+\[
+|\Omega| = \frac{1}{|G|} \sum_{g \in G} |\operatorname{Fix}(g)|
+\]
+}
+
+\noindent{\textbf{Preuve :} On vérifie en comptant de deux manières que :
+\[
+\sum_{g \in G} |\operatorname{Fix}(g)| = |\{(g,x) \in G \times X \mid g \cdot x = x\}| = \sum_{x \in X} |\operatorname{Stab}(x)|
+\]
+On a aussi
+\[
+\sum_{x \in X} |\operatorname{Stab}(x)| = |G| \sum_{x \in X} \frac{1}{|G \cdot x|}
+\]
+On utilise que les orbites forment une partition de $X$, donc :
+\[
+\sum_{x \in X} \frac{1}{|G \cdot x|} = \sum_{w \in \Omega} \sum_{x \in w} \frac{1}{|w|} = \sum_{w \in \Omega} 1 = |\Omega|
+\]
+ce qui donne le résultat. \hfill $\square$}
+
+\section{Exemples sur des groupes particuliers}
+
+\subsection{Le groupe symétrique (suite, partie 2)}
+
+Notons $\llbracket 1, n \rrbracket$ l'ensemble $\{1, \dots, n\}$. Pour $\sigma \neq \operatorname{id} \in S_n$ on appelle \textbf{support de $\sigma$} l'ensemble des entiers $1 \le i \le n$ tel que $\sigma(i) \neq i$.
+
+\theorem{Lemme}{}{false}{
+L'action de $S_n$ sur $\{1, \dots, n\}$ est fidèle et transitive. Le stabilisateur de n'importe quel élément de $\{1, \dots, n\}$ est isomorphe à $S_{n-1}$.
+}
+
+\noindent{\textbf{Preuve :} Soit $1 \le i \le n$. La transposition $(1 \; i)$ envoie $1$ sur $i$, donc $S_n \cdot 1 = \llbracket 1, n \rrbracket$ ce qui prouve que l'action est transitive. Par définition,
+\[
+\operatorname{Stab}(i) = \{\sigma \in S_n \mid \sigma(i) = i\}.
+\]
+Ainsi l'intersection de tous les stabilisateurs est l'identité, ce qui prouve que l'action est fidèle. Pour $i \in \{1, \dots, n\}$, on pose $Y_i = \{1, \dots, n\} \setminus \{i\}$. On a un isomorphisme de groupes $\operatorname{Stab}(i) \to \operatorname{Bij}(Y_i)$ donné par la restriction de $\sigma \in \operatorname{Stab}(i)$ à l'ensemble $Y_i$. Par ailleurs, $\operatorname{Bij}(Y_i)$ est un groupe isomorphe à $S_{n-1}$. \hfill $\square$}
+
+\theorem{Théorème}{}{false}{
+Toute permutation $\sigma \in S_n$ se décompose de manière unique (à l'ordre des facteurs près) comme produit de cycles à supports disjoints.
+}
+
+\noindent{\textbf{Preuve :} Soit $\sigma \in S_n$ et considérons l'action (par restriction) du groupe $\langle \sigma \rangle$ sur $\llbracket 1, n \rrbracket$. Notons $X_1, \dots, X_r$ les orbites sous cette action, qui forment une partition de $\llbracket 1, n \rrbracket$. Remarquons que $X_a = \{i\}$ si et seulement si $\sigma(i) = i$. Soit $A = \{a_1 < a_2 < \dots < a_l\}$ le sous-ensemble de $\{1, \dots, r\}$ constitué des éléments $a$ tels que $|X_a| \ge 2$. Définissons pour $a \in A$ et $k \in \llbracket 1, n \rrbracket$, l'application suivante :
+\[
+\sigma_a(k) = \begin{cases}
+k, & \text{si } k \notin X_a \\
+\sigma(k), & \text{si } k \in X_a.
+\end{cases}
+\]
+Comme $X_a$ est une orbite sous l'action de $\langle \sigma \rangle$, il existe $1 \le u \le n$ tel que $X_a = \{\sigma^k(u) ; k \in \mathbb{Z}\}$, donc $\sigma_a(X_a) = X_a$ et $\sigma_a$ est une bijection, de support $X_a$. Si $n_a = |X_a|$ alors $\sigma_a$ est le cycle $(u \; \sigma(u) \; \dots \; \sigma^{n_a - 1}(u))$. Enfin :
+\[
+\sigma = \sigma_{a_1} \dots \sigma_{a_l}
+\]
+Les supports de $\sigma_i$ sont tous disjoints. Il y a unicité de cette décomposition à l'ordre des facteurs près. \hfill $\square$}
+
+\theorem{Définition}{}{false}{
+On définit la signature d'une permutation
+\[
+\epsilon(\sigma) = \prod_{1 \le i < j \le n} \frac{\sigma(j) - \sigma(i)}{j - i}
+\]
+}
+
+\theorem{Proposition}{}{false}{
+La signature définit un morphisme de groupes $\epsilon : S_n \to \{\pm 1\}$. La signature d'un $k$-cycle est $(-1)^{k-1}$.
+}
+
+\noindent{\textbf{Preuve :} On note $\mathcal{P}_2(n)$ l'ensemble des parties à 2 éléments de $\{1, \dots, n\}$. Pour $\sigma \in S_n$ on définit l'application $f_\sigma : \mathcal{P}_2(n) \to \mathcal{P}_2(n)$ qui à $\{i, j\}$ associe $\{\sigma(i), \sigma(j)\}$. Cette application est une bijection (la bijection réciproque est $f_{\sigma^{-1}}$). Ceci implique que $\epsilon(\sigma)$ est à valeurs dans $\{\pm 1\}$, et par un petit changement de variables, on montre facilement que c'est un morphisme de groupes. On calcule :
+\[
+\epsilon((12)) = \frac{1 - 2}{2 - 1} = -1.
+\]
+On a pour tous $\sigma, \sigma' \in S_n$, $\epsilon(\sigma \sigma') = \epsilon(\sigma')\epsilon(\sigma)$ car $\{\pm 1\}$ est un groupe commutatif. Or toute transposition $\tau$ s'écrit sous la forme $\tau = \sigma (12) \sigma^{-1}$, pour un certain $\sigma \in S_n$, donc $\epsilon(\tau) = \epsilon((12)) = -1$. Enfin comme un $k$-cycle peut s'écrire comme produit de $k - 1$ transpositions, sa signature vaut $(-1)^{k-1}$. \hfill $\square$}
+
+\theorem{Proposition}{}{false}{
+Soit $\sigma \in S_n$, on a
+\[
+\epsilon(\sigma) = (-1)^{n - m(\sigma)}
+\]
+où $m(\sigma)$ désigne le nombre d'orbites de $\sigma$.
+}
+
+\noindent{\textbf{Preuve :} On a montré que toute permutation $\sigma \in S_n$ s'écrit $\sigma = \sigma_1 \dots \sigma_r$ avec $\sigma_i$ un cycle. Notons $l_i \ge 2$ la longueur du cycle $\sigma_i$. On a
+\[
+\epsilon(\sigma) = (-1)^{\sum_{i=1}^r (l_i - 1)}.
+\]
+Il y a $r$ orbites à $\ge 2$ éléments et il reste à compter le nombre d'orbites à 1 élément : ce sont les éléments de $\{1, \dots, n\}$ qui ne se trouvent pas dans le support des $\sigma_i$. Il y en a exactement $n - \sum_{i=1}^r l_i$. Donc $m(\sigma) = r + n - \sum_{i=1}^r l_i$ et $\sum_{i=1}^r (l_i - 1) = n - m(\sigma)$. \hfill $\square$}
+
+\subsection{$p$-groupes}
+
+\definition{Un groupe $G$ est appelé $p$-groupe si son cardinal est une puissance de $p$.}
+
+\theorem{Proposition}{}{false}{
+Soit $p$ un nombre premier, et $G$ un $p$-groupe agissant sur $X$, on a
+\[
+|X^G| \equiv |X| \pmod p
+\]
+En particulier, si $G \neq \{e\}$, alors $Z(G)$ est un $p$-groupe non trivial.
+}
+
+\noindent{\textbf{Preuve :} On rappelle que l'ensemble $X^G$ des point fixes de $X$ sous l'action de $G$ est l'union des orbites à un élément. Comme le cardinal d'une orbite divise le cardinal de $G$ (par le lemme \ref{4.3.1}), soit il vaut 1, soit c'est un multiple de $p$, puisque $G$ est un $p$-groupe. Comme les orbites forment une partition de $X$ on obtient
+\[
+|X| = |X^G| + pu \implies |X^G| \equiv |X| \pmod p
+\]
+Supposons $G$ non trivial. On a vu que $Z(G)$ est l'ensemble des points fixes pour l'action de $G$ par conjugaison sur lui-même, donc $|Z(G)| \equiv |G| \pmod p$ et $p$ divise $|Z(G)|$. C'est de plus un sous-groupe de $G$ donc il existe $\alpha \ge 0$ tel que $|Z(G)| = p^\alpha$. Conclusion $\alpha > 0$. \hfill $\square$}
+
+\theorem{Théorème}{}{false}{
+Soit $p$ un nombre premier. Tout groupe d'ordre $p$ ou $p^2$ est abélien.
+}
+
+\noindent{\textbf{Preuve :} On sait déjà que si $G$ est d'ordre $p$ alors $G$ est cyclique, donc abélien. Si $G$ est d'ordre $p^2$, un $p$-groupe non trivial, alors $Z(G)$ est d'ordre $p$ ou $p^2$. Si $Z(G)$ est d'ordre $p^2$, $G$ est abélien. Si $Z(G)$ est d'ordre $p$, comme $Z(G)$ est distingué dans $G$, le groupe $G/Z(G)$ est d'ordre $p$ donc cyclique. Soit $[g]$ un génératuer de ce groupe. Pour tout $x, x' \in G$, il existe $k, k' \in \mathbb{Z}$ tel que $[x] = [g^k], [x'] = [g^{k'}]$. Il existe $h, h' \in Z(G)$ tel que
+\[
+x = g^k h \quad \text{et} \quad x' = g^{k'} h'.
+\]
+On a alors
+\[
+xx' = g^k h g^{k'} h' = g^{k+k'} hh' = g^{k'} h' g^k h = x'x,
+\]
+donc $G$ est abélien. \hfill $\square$}
+
+\newpage
+\tableofcontents 
+\section*{Crédits}
+Ce cours provient du polycopié de cours de l'Université Paris Cité de Muriel Livernet enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Merci à Laurent Cai à son aide dans la rédaction des démonstrations.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
