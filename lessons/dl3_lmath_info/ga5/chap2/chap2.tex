@@ -141,6 +141,9 @@ Dans cette section, on note $\pi_E$ l'application quotient de $E$ par $R$.
     \end{itemize}
 }
 
+\remark{La projection canonique $\pi : E \to E/R_f$ est surjective, plus explicitement, on a : $\pi(x) = \overline{x}$ pour tout $x \in E$.}
+\vocabulary{On appelle aussi la projection canonique \textbf{l'application quotient} de $E$ par $R_f$.}
+
 \example{
     Soit l'application \(f : \mathbb{Z} \rightarrow \mathbb{Z}\) définie par \(f(x) = x \pmod 3\) (qui à chaque entier associe son reste dans la division euclidienne par 3).
     \begin{itemize}
@@ -281,7 +284,38 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 \section{Groupe quotient}
 
 \definition{
-    Un groupe quotient $G$ est un quotient $G/\mathcal{R}$, qui est un groupe tel que l'application quotient $\pi : G \to G/\mathcal{R}$ est un morphisme de groupes.
+    Un groupe $\mathcal{Q}$ est un groupe quotient si :
+    \begin{enumerate}
+        \item il est de la forme $G/\mathcal{R}$, où $G$ est un groupe et $\mathcal{R}$ une relation d'équivalence sur $G$ ;
+        \item la projection canonique $\pi : G \to G/\mathcal{R}$ est un morphisme de groupes.
+    \end{enumerate}
+}
+
+
+\example{
+    Considérons le groupe $(\mathbb{Z}, +)$ et la relation d'équivalence $\mathcal{R}$ définie sur $\mathbb{Z}$ par la même parité :
+\[x \mathcal{R} y \iff x \equiv y \pmod 2 \iff x - y \in 2\mathbb{Z}\]
+
+Montrons que $\mathcal{Q} = \mathbb{Z}/\mathcal{R}$ est un groupe quotient :
+
+\begin{enumerate}
+    \item \textbf{Structure de l'ensemble quotient :} 
+    La relation $\mathcal{R}$ découpe $\mathbb{Z}$ en deux classes d'équivalence :
+    \begin{itemize}
+        \item $\bar{0} = \{2k \mid k \in \mathbb{Z}\}$ (les entiers pairs) ;
+        \item $\bar{1} = \{2k + 1 \mid k \in \mathbb{Z}\}$ (les entiers impairs).
+    \end{itemize}
+    Ainsi, $\mathcal{Q} = \mathbb{Z}/\mathcal{R} = \{\bar{0}, \bar{1}\}$.
+    
+    \item \textbf{Morphisme de la projection canonique :} 
+    On définit l'addition sur $\mathcal{Q}$ par $\bar{x} + \bar{y} = \overline{x + y}$. 
+    
+    La projection canonique $\pi : \mathbb{Z} \to \mathbb{Z}/\mathcal{R}$ définie par $\pi(n) = \bar{n}$ vérifie :
+    \[\forall x, y \in \mathbb{Z}, \quad \pi(x + y) = \overline{x + y} = \bar{x} + \bar{y} = \pi(x) + \pi(y)\]
+    $\pi$ est donc bien un morphisme de groupes.
+\end{enumerate}
+
+$\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotient avec $G = \mathbb{Z}$ et $\mathcal{R}$ la relation de congruence modulo 2.
 }
 
 \subsection{Sous-groupes distingués}
@@ -352,11 +386,10 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 
 \theorem{Théorème}{}{false}{
     Soit $(G, *)$ un groupe et soit $H$ un sous-groupe de $G$. Alors les deux assertions suivantes sont équivalentes :
-    \begin{enumerate}
-        \item $H$ est distingué dans $G$,
-        \item L'ensemble quotient $G/H$ admet une unique structure de groupe telle que l'application quotient $\pi : G \to G/H$ soit un morphisme de groupes.
-    \end{enumerate}
+
+    $$H \triangleleft G \; \Longleftrightarrow \; \exists! \text{ structure de groupe sur } G/H \text{ telle que } \pi : G \to G/H \text{ soit un morphisme.}$$
 }
+\remark{Cette structure est la seule qui fait de $\pi$ un morphisme de groupes. Elle est définie par la loi : $(xH) * (yH) = (x * y)H$.}
 
 \example{
     \begin{itemize}
@@ -366,15 +399,34 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
 }
 
 \theorem{Théorème}{Propriété universelle du quotient}{false}{
-    Soit $f : G \to G'$ un morphisme de groupe. Soit $H$ un sous-groupe de $G$ et $\pi : G \to G/H$ la projection canonique.\\
+    Soient $f : G \to G'$ un morphisme de groupe et $H \leq G$.\\
+    Considérons $\pi : G \to G/H$ la projection canonique.\\\\
     Il existe une application $\overline{f} : G/H \to G'$ telle que $f = \overline{f} \circ \pi$ si et seulement si $H \subseteq ker(f)$.\\
     Dans ce cas, si de plus $H \triangleleft G$, alors $\overline{f}$ est un morphisme de groupes et $\overline{f}(G/H) = f(G)$ et $ker(\overline{f}) = ker(f)/H$.
 }
+\reminder{$\overline{f}$ est appelée l'application induite par $f$, définie par $\overline{f}(xH) = f(x)$.}
+\attention{
+    \textbf{Attention à ne pas confondre avec la décomposition canonique du théorème de décomposition.} On a deux applications $\overline{f}$ induites par $f$ :
 
-\theorem{Corollaire}{Théorème de l'isomorphisme}{true}{
+    \begin{itemize}
+        \item \textbf{$\bar{f}_{\text{canonique}} : G/\mathcal{R}_f \to f(G)$} (issue du théorème de décomposition) :
+        Existe \textbf{toujours} pour n'importe quelle application. Elle est définie sur le quotient $G/\mathcal{R}_f$ induit par $f$ lui-même et est toujours bijective.
+
+        \item \textbf{$\bar{f}_H : G/H \to G'$} (issue de la propriété universelle) :
+        Elle cherche à passer par un quotient $G/H$ fixé à l'avance. Cette application n'est \textbf{bien définie} que si et seulement si :
+        \[
+        H \subseteq \ker(f)
+        \]
+    \end{itemize}
+    Il peut être pertinent d'ajouter en indice la relation d'équivalence à $\bar{f}$ pour éviter toute confusion.
+}
+\ndlr{cf. Laurent pour la preuve.}
+
+\theorem{Corollaire}{Première théorème d'isomorphisme}{true}{
     Soit $f : G \to G'$ un morphisme de groupes. Alors $f$ induit un isomorphisme de groupes $\overline{f} : G/ker(f) \to Im(G)$ défini par $\overline{f}(x + ker(f)) = f(x)$.\\
     Si $f$ est surjective, alors $f$ induit un isomorphisme de groupes $G/ker(f) \to G'$.
 }
+\ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Corollaire}{}{false}{
     \begin{enumerate}
@@ -382,6 +434,7 @@ Comme les classes d'équivalence forment une partition de \(G\), on a \(|G| = \s
         \item Tout groupe monogène infini est isomorphe à $(\mathbb{Z}, +)$.
     \end{enumerate}
 }
+\ndlr{cf. Laurent pour la preuve.}
 
 \courseEnd{Fin du programme pour le partiel}
 
