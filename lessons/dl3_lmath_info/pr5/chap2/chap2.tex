@@ -278,6 +278,50 @@ l'ensemble des fonctions intégrables.}
 
 \ndlr{exemples sur Moodle, non vu en cours (visio du 15 octobre)}
 
+\example{
+    On considère $\mu = \sum_{k \in \mathbb{N}} \frac{1}{k!} \delta_k$ sur $(\mathbb{N}, \mathcal{P}(\mathbb{N}))$. Alors $\int_{\mathbb{N}} f d\mu = \sum_{k=0}^{+\infty} f(k)$.
+    Par exemple si $f(x) = x$, on a :
+    $$\int_{\mathbb{N}} f d\mu = \sum_{k=0}^{+\infty} k \cdot \frac{1}{k!} = \sum_{k=1}^{+\infty} \frac{1}{(k-1)!} = \sum_{n=0}^{+\infty} \frac{1}{n!} = e.$$
+}
+
+
+\section{Résultats notables sur l'intégrale de Lebesgue}
+
+\theorem{Théorème}{Convergence monotone}{}{
+    Soit $f : E \to \mathbb{R} \in \mathcal{M}_+$ et $(f_n)_{n \in \mathbb{N}}$ une suite croissante de fonctions mesurables positives sur $E$ telle que $f_n \to f$. Alors :
+    $$\int_E f d\mu = \lim_{n \to +\infty} \int_E f_n d\mu.$$
+}
+\remark{Ce théorème nous permet d'interchanger la limite et l'intégrale pour des suites croissantes de fonctions mesurables positives.}
+
+\theorem{Proposition}{Linéarité de l'intégrale}{}{
+    Soient $f, g \in \mathcal{L}^1(E, \mathcal{E}, \mu)$ et $\alpha, \beta \in \mathbb{R}$. Alors :
+    $$\int_E (\alpha f + \beta g) d\mu = \alpha \int_E f d\mu + \beta \int_E g d\mu.$$
+}
+\noindent{\textbf{Preuve :}
+    \begin{itemize}
+        \item Si $f,g$ sont étagées, la propriété est immédiate par linéarité de la somme.
+        \item Si $f,g \in \mathcal{M}_+$, on peut approcher $f$ et $g$ par des suites étagées croissantes $(f_n)_{n \ge 1}$ et $(g_n)_{n \ge 1}$.\\
+        Alors $\alpha f_n + \beta g_n$ est étagée et $(\alpha f_n + \beta g_n)_{n \ge 1}$ est croissante vers $\alpha f + \beta g$. On a :
+        $\int_E (\alpha f_n + \beta g_n) d\mu = \alpha \int_E f_n d\mu + \beta \int_E g_n d\mu$. En passant à la limite et par le TCM, on obtient le résultat.
+    \end{itemize}
+}
+
+\theorem{Proposition}{}{}{
+    Considérons $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \mu)$. où $\forall B \in \mathcal{B}(\mathbb{R}), \mu(B) = \int_R g\indic{B} d\lambda$ avec $g$ mesurable positive.
+    $$\int_\mathbb{R} fd\mu = \int_\mathbb{R} fg d \lambda$$
+    Si $f : \mathbb{R} \to \mathbb{R}$ est borélienne et intégrable, alors l'égalité précédente est encore valable.
+}
+\ndlr{cf. Laurent pour la preuve.}
+\ndlr{Généraliser ça pour un $g$ un peu plus général (densité).}
+\example{
+    On prend $g = 2x \indic{[0,1]}$. Alors :
+    \begin{itemize}
+        \item Si $f(x) = 1$, $\int_\mathbb{R} f d\mu = \int_0^1 2x dx = 1$,
+        \item Si $f(x) = x$, $\int_\mathbb{R} f d\mu = \int_0^1 2x^2 dx = \frac{2}{3}$,
+        \item Si $f(x) = x^2$, $\int_\mathbb{R} f d\mu = \int_0^1 2x^3 dx = \frac{1}{2}$.
+    \end{itemize}
+    On prend bien $\int_0^1$ et pas $\int_\mathbb{R}$ car $g$ est nulle en dehors de $[0,1]$.
+}
 \newpage
 \tableofcontents
 \section*{Crédits}

@@ -8,6 +8,7 @@
 \usepackage{fancyhdr}
 \usepackage{ccicons}
 \usepackage{caption}
+\usepackage{tabularx}
 \usepackage{subcaption}
 
 % Configuration des en-têtes et pieds de page
@@ -125,6 +126,185 @@ En faisant la différence, on obtient :
 \theorem{Théorème}{}{false}{
     Soit $F : \mathbb{R} \to \mathbb{R}$ croissante, continue à droite, telle que $\lim_{x \to -\infty} F(x) = 0$ et $\lim_{x \to +\infty} F(x) = 1$. Alors il existe une unique mesure de probabilité $\mathbb{P}$ sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que $F = F_\mathbb{P}$.
 }
+
+\section{Variables aléatoires}
+
+\subsection{Définition}
+\definition{
+    Soit $(\Omega, \mathcal{F}, \mathbb{P})$ un espace de probabilité. Soit $E$ muni de la tribu $\mathcal{E}$.
+    Toute application mesurable $X : \Omega \to E$ est une variable aléatoire à valeurs dans $E$.\\\\
+    La loi de $X$, $\mathbb{P}_X$, est la mesure-image de $\mathbb{P}$ par $X$.
+}
+
+\subsection{Variable aléatoire réelle}
+\subsubsection{Propriétés immédiates}
+\remark{Si $E = \mathbb{R}$, on parle de variable aléatoire réelle (v.a.r.). Sa loi $\mathbb{P}_X$ est une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$.}
+
+\theorem{Proposition}{Caractérisation par la fonction de répartition}{false}{
+    Soit $X$ une variable aléatoire réelle. Alors sa loi $\mathbb{P}_X$ est entièrement caractérisée par sa fonction de répartition $F_X = F_{\mathbb{P}_X}$, définie par :
+    $$F_X(a) = \mathbb{P}_X(]-\infty, a]) = \mathbb{P}(X \le a)$$
+}
+
+\theorem{Proposition}{Image par une fonction borélienne}{false}{
+    Soit $X$ une variable aléatoire réelle et $f : \mathbb{R} \to \mathbb{R}$ une fonction borélienne. Alors $f(X)$ est une variable aléatoire réelle.
+}
+
+\theorem{Proposiiton}{Couple de variables aléatoires}{false}{
+    $(X,Y)$ est une variable aléatoire à valeurs dans $\mathbb{R}^2$ si et seulement si $X$ et $Y$ sont des variables aléatoires réelles sur le même espace.\\
+    Dans ce cas, $X+Y$ et $X \cdot Y$ sont des variables aléatoires réelles.
+}
+
+\theorem{Proposition}{Suite de variables aléatoires}{false}{
+    Soit $(X_n)_{n \in \mathbb{N}}$ une suite de variables aléatoires réelles sur un même espace. Alors $\sup_{n \in \mathbb{N}} X_n$, $\inf_{n \in \mathbb{N}} X_n$, $\limsup_{n \to \infty} X_n$ et $\liminf_{n \to \infty} X_n$ sont des variables aléatoires réelles (sous réserve d'existence).
+}
+
+\subsubsection{Espérance et variance}
+
+\definition{
+    Soit $X$ est une v.a.r. positive ou dans $\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P})$. On définit l'espérance de $X$ par :
+    $$\mathbb{E}[X] = \int_\Omega X d\mathbb{P}$$
+}
+
+\definition{
+    Soit $X$ est dans $\mathcal{L}^2(\Omega, \mathcal{F}, \mathbb{P})$. On définit la variance de $X$ par :
+    $$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \begin{cases}
+\mathbb{E}[X^2] - (\mathbb{E}[X])^2 & \text{si } \mathbb{E}[|X|] < \infty \\
+\end{cases}$$
+}
+
+\theorem{Théorème de transfert}{}{false}{
+    Soit $phi : \mathbb{R} \to \mathbb{R}$ une fonction borélienne et $X$ une variable aléatoire réelle. Alors :
+    $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) d\mathbb{P}_X(x)$$
+    Si $\phi : \mathbb{R} \to \mathbb{R}$ est borélienne, alors $\phi \circ X \in \mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P})$ si et seulement si $\phi \in \mathcal{L}^1(\mathbb{R}, \mathcal{B}(\mathbb{R}), \mathbb{P}_X)$ et dans ce cas :
+    $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) d\mathbb{P}_X(x)$$
+}
+
+\subsubsection{Lois usuelles}
+
+\definition{
+    Soit $X$ une variable aléatoire réelle. On dit que $X$ suit la loi de Bernoulli de paramètre $p \in [0,1]$ si :
+    $$\mathbb{P}(X = 1) = p \quad \text{et} \quad \mathbb{P}(X = 0) = 1 - p$$
+    Autrement dit $X \sim Ber(p) \iff \mathbb{P}_X = p \delta_1 + (1 - p) \delta_0 \iff F_X(x) = (1-p) \indic{x \ge 0} + p \indic{x \ge 1}$
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive, on a $\mathbb{E}[\phi(X)] = (1-p) \phi(0) + p \phi(1)$. En particulier, $\mathbb{E}[X] = p$ et $\text{Var}(X) = p(1-p)$.}
+
+\definition{
+    Soit $n \in \mathbb{N}^*$, $p \in [0,1]$. On dit que $X$ suit la loi binomiale de paramètres $n$ et $p$ et on note $X \sim Bin(n,p)$ si :
+    $$\mathbb{P}(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, \ldots, n$$
+    Autrement dit, $X \sim Bin(n,p) \iff \mathbb{P}_X = \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k} \delta_k \iff F_X(x) = \sum_{k=0}^{n} \binom{n}{k} p^k (1-p)^{n-k} \indic{\{x \ge k\}}$
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive, on a $\mathbb{E}[\phi(X)] = \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k} \phi(k)$. En particulier, $\mathbb{E}[X] = np$ et $\text{Var}(X) = np(1-p)$.}
+
+\definition{
+    Soit $p \in ]0,1]$. On dit que $X$ suit la loi géométrique de paramètre $p$ et on note $X \sim Geom(p)$ si :
+    $$\mathbb{P}(X = k) = p (1-p)^{k-1}, \quad k \in \mathbb{N}^*$$
+    Autrement dit, $X \sim Geom(p) \iff \mathbb{P}_X = \sum_{k=1}^{\infty} p (1-p)^{k-1} \delta_k \iff F_X(x) = \sum_{k=1}^{+\infty} p (1-p)^{k-1} \indic{\{x \ge k\}}$
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive, on a $\mathbb{E}[\phi(X)] = \sum_{k=1}^{\infty} p (1-p)^{k-1} \phi(k)$.}
+\remark{En particulier, $\mathbb{E}[t^X] = \frac{p t}{1 - (1-p) t}$ et on en déduit $\mathbb{E}[X] = \frac{1}{p}$ et $\text{Var}(X) = \frac{1-p}{p^2}$.}
+
+\definition{
+    Soit $\lambda > 0$. On dit que $X$ suit la loi de Poisson de paramètre $\lambda$ et on note $X \sim Poi(\lambda)$ si :
+    $$\mathbb{P}(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}, \quad k \in \mathbb{N}$$
+    Autrement dit, $X \sim Poi(\lambda) \iff \mathbb{P}_X = \sum_{k=0}^{\infty} \frac{\lambda^k e^{-\lambda}}{k!} \delta_k \iff F_X(x) = \sum_{k=0}^{+\infty} \frac{\lambda^k e^{-\lambda}}{k!} \indic{\{x \ge k\}}$
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \sum_{k=0}^{\infty} \frac{\lambda^k e^{-\lambda}}{k!} \phi(k)$. En particulier, $\mathbb{E}[X] = \lambda$ et $\text{Var}(X) = \lambda$.}
+
+\definition{
+    Soit $n \in \mathbb{N}^*$. On dit que $X$ suit la loi uniforme sur $\{1, \ldots, n\}$ et on note $X \sim U(\{1, \ldots, n\})$ si :
+    $$\mathbb{P}(X = k) = \frac{1}{n}, \quad k = 1, \ldots, n$$
+    Autrement dit, $X \sim U(\{1, \ldots, n\}) \iff \mathbb{P}_X = \sum_{k=1}^{n} \frac{1}{n} \delta_k \iff F_X(x) = \sum_{k=1}^{n} \frac{1}{n} \indic{\{x \ge k\}}$
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \sum_{k=1}^{n} \frac{1}{n} \phi(k)$. En particulier, $\mathbb{E}[X] = \frac{n+1}{2}$ et $\text{Var}(X) = \frac{n^2 - 1}{12}$.}
+
+\definition{
+    On dit que $X$ suit la loi uniforme sur $[a, b]$ et on note $X \sim U([a, b])$ si :
+    $$F_X(t) = \begin{cases}
+        0 & \text{si } t < a, \\
+        \frac{t - a}{b - a} & \text{si } a \le t \le b, \\
+        1 & \text{si } t > b.
+    \end{cases}$$
+    On dit aussi que $X$ (on devrait dire $\mathbb{P}_X$) possède la densité $f_X(t) = \frac{1}{b - a} \indic{[a, b]}(t)$ vis-à-vis de la mesure de Lebesgue.
+}  
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \int_a^b \frac{\phi(t)}{b - a} dt$. En particulier, $\mathbb{E}[X] = \frac{a + b}{2}$ et $\text{Var}(X) = \frac{(b - a)^2}{12}$.}
+\ndlr{vérifier la remarque}
+
+\definition{
+    Soient $\lambda > 0$. On dit que $X$ suit la loi exponentielle de paramètre $\lambda$ et on note $X \sim Exp(\lambda)$ si :
+    $$F_X(t) = (1 - e^{-\lambda t}) \indic{t \ge 0} = \int_{-\infty}^t \lambda e^{-\lambda x} \indic{x \ge 0} dx$$
+    On dit que $X$ possède la densité $f_x = \lambda e^{-\lambda x} \indic{x \ge 0}$ vis-à-vis de la mesure de Lebesgue.
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \int_0^{\infty} \lambda e^{-\lambda x} \phi(x) dx$. En particulier, $\mathbb{E}[X] = \frac{1}{\lambda}$ et $\text{Var}(X) = \frac{1}{\lambda^2}$.}
+
+\definition{
+    On dit que $X$ suit une loi normale centrée réduite et on note $X \sim N(0, 1)$ si :
+    $$F_X(t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^t e^{-\frac{x^2}{2}} dx$$
+    On dit que $X$ possède la densité $f_X(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$ vis-à-vis de la mesure de Lebesgue.
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \int_{-\infty}^{\infty} \frac{\phi(x)}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx$. En particulier, $\mathbb{E}[X] = 0$ et $\text{Var}(X) = 1$.}
+
+\definition{
+    Soient $\mu \in \mathbb{R}$ et $\sigma > 0$. On dit que $X$ suit une loi normale de paramètres $\mu$ et $\sigma^2$ et on note $X \sim N(\mu, \sigma^2)$ si :
+    $$F_X(t) = \frac{1}{\sigma \sqrt{2\pi}} \int_{-\infty}^t e^{-\frac{(x - \mu)^2}{2\sigma^2}} dx$$
+    On dit que $X$ possède la densité $f_X(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}$ vis-à-vis de la mesure de Lebesgue.
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \int_{-\infty}^{\infty} \frac{\phi(x)}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} dx$. En particulier, $\mathbb{E}[X] = \mu$ et $\text{Var}(X) = \sigma^2$.}
+\courseEnd{Fin du cours du 22 octobre 2026}
+
+\definition{
+    Soit $a > 0, \lambda > 0$. On dit que $X$ suit une loi Gamma de paramètres $a$ et $\lambda$ et on note $X \sim \Gamma(a, \lambda)$ si :
+    $$F_X(t) = \int_{-\infty}^t \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \indic{x \ge 0} dx$$
+    où $\Gamma(a) = \int_0^{\infty} x^{a-1} e^{-x} dx$ est la fonction Gamma. On dit que $X$ possède la densité $f_X(x) = \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \indic{x \ge 0}$ vis-à-vis de la mesure de Lebesgue.
+}
+\remark{Pour $\phi : \mathbb{R} \to \mathbb{R}$ borélienne positive ou telle que $\mathbb{E}[|\phi(X)|] < \infty$, on a $\mathbb{E}[\phi(X)] = \int_0^{\infty} \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \phi(x) dx$. En particulier, $\mathbb{E}[X] = \frac{a}{\lambda}$ et $\text{Var}(X) = \frac{a}{\lambda^2}$.}
+
+\subsubsection{Tableau récapitulatif des lois usuelles}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{2.0}
+\setlength{\tabcolsep}{5pt} % On réduit légèrement l'espacement latéral
+\small
+\begin{tabularx}{\linewidth}{|l|X|X|c|c|}
+\hline
+\textbf{Loi discrète} & \textbf{Support / Loi} $\mathbb{P}(X = k)$ & \textbf{Fonction de Répartition} $F_X(x)$ & $\mathbb{E}[X]$ & $\text{Var}(X)$ \\
+\hline
+Bernoulli \newline {\scriptsize $\mathcal{B}er(p)$} & $\mathbb{P}(X=1)=p, \, \mathbb{P}(X=0)=1-p$ \newline ($p \in [0,1]$) & $(1-p)\indic{x \ge 0} + p\indic{x \ge 1}$ & $p$ & $p(1-p)$ \\
+\hline
+Binomiale \newline {\scriptsize $\mathcal{B}in(n,p)$} & $\binom{n}{k} p^k (1-p)^{n-k}, \quad k \in \{0, \ldots, n\}$ & $\sum_{k=0}^{n} \binom{n}{k} p^k (1-p)^{n-k} \indic{x \ge k}$ & $np$ & $np(1-p)$ \\
+\hline
+Géométrique \newline {\scriptsize $\mathcal{G}eom(p)$} & $p(1-p)^{k-1}, \quad k \in \mathbb{N}^*$ ($p \in ]0,1]$) & $\sum_{k=1}^{+\infty} p (1-p)^{k-1} \indic{x \ge k}$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ \\
+\hline
+Poisson \newline {\scriptsize $\mathcal{P}oi(\lambda)$} & $\dfrac{\lambda^k e^{-\lambda}}{k!}, \quad k \in \mathbb{N}$ ($\lambda > 0$) & $\sum_{k=0}^{+\infty} \dfrac{\lambda^k e^{-\lambda}}{k!} \indic{x \ge k}$ & $\lambda$ & $\lambda$ \\
+\hline
+Uniforme \newline {\scriptsize $\mathcal{U}(\{1, \ldots, n\})$} & $\dfrac{1}{n}, \quad k \in \{1, \ldots, n\}$ & $\sum_{k=1}^{n} \dfrac{1}{n} \indic{x \ge k}$ & $\dfrac{n+1}{2}$ & $\dfrac{n^2 - 1}{12}$ \\
+\hline
+\end{tabularx}
+\end{table}
+
+\vspace{0.5cm}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{2.2}
+\setlength{\tabcolsep}{5pt}
+\small
+\begin{tabularx}{\linewidth}{|l|X|X|c|c|}
+\hline
+\textbf{Loi à densité} & \textbf{Densité} $f_X(x)$ & \textbf{Fonction de Répartition} $F_X(t)$ & $\mathbb{E}[X]$ & $\text{Var}(X)$ \\
+\hline
+Uniforme \newline {\scriptsize $\mathcal{U}([a,b])$} & $\dfrac{1}{b-a} \indic{[a,b]}(x)$ & $\begin{cases} 0 & t < a \\ \dfrac{t-a}{b-a} & a \le t \le b \\ 1 & t > b \end{cases}$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ \\
+\hline
+Exponentielle \newline {\scriptsize $\mathcal{E}xp(\lambda)$} & $\lambda e^{-\lambda x} \indic{x \ge 0} \quad (\lambda > 0)$ & $(1 - e^{-\lambda t}) \indic{t \ge 0}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ \\
+\hline
+Normale \newline {\scriptsize $\mathcal{N}(0,1)$} & $\dfrac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$ & $\dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^t e^{-\frac{x^2}{2}} dx$ & $0$ & $1$ \\
+\hline
+Normale \newline {\scriptsize $\mathcal{N}(\mu, \sigma^2)$} & $\dfrac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \quad (\sigma > 0)$ & $\dfrac{1}{\sigma \sqrt{2\pi}} \int_{-\infty}^t e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx$ & $\mu$ & $\sigma^2$ \\
+\hline
+Gamma \newline {\scriptsize $\Gamma(a, \lambda)$} & $\dfrac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \indic{x \ge 0} \quad (a,\lambda > 0)$ & $\int_{-\infty}^t \dfrac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \indic{x \ge 0} dx$ & $\dfrac{a}{\lambda}$ & $\dfrac{a}{\lambda^2}$ \\
+\hline
+\end{tabularx}
+\end{table}
 
 \newpage
 \tableofcontents
