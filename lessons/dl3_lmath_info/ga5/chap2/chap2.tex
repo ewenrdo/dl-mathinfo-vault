@@ -390,6 +390,17 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     $$H \triangleleft G \; \Longleftrightarrow \; \exists! \text{ structure de groupe sur } G/H \text{ telle que } \pi : G \to G/H \text{ soit un morphisme.}$$
 }
 \remark{Cette structure est la seule qui fait de $\pi$ un morphisme de groupes. Elle est définie par la loi : $(xH) * (yH) = (x * y)H$.}
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item "$\Leftarrow$" : Elle découle de la proposition sur les images de groupes distingués en remarquant que $H=Ker(\pi)$.
+        \item "$\Rightarrow$" : Montrons cette assertion. On construit d'abord une structure de groupe sur $G/H$.\\
+        Remarquons que $(xH)(yH)=(x*y)H$ avec la notation $(xH)(yH)={x*h*y*k,k\in H}$.\\
+        En effet, comme $H$ est distingué dans $G$ on a $yH=Hy$ donc $xHyH=(x*y)HH=(x*y)H$ 	(à priori il faut montrer que $HH=H$, ce qui est vrai car pour tout $h \in H$, on a $hH=H$).\\
+        Montrons que la loi de composition interne ainsi définie, confère à $G/H$ une structure de groupes.\\
+        Elle est associative car $*$ l'est. Elle possède un élément neutre qui est $H$ et $xH$ a pour symétrique $x^(-1) H$. De plus $\pi : G \to G/H$ est un morphisme de groupes.\\
+        Remarquons que, si $\pi$ est un morphisme de groupe, on doit avoir $\pi(x)\pi(y)=\pi(x*y)$ ; comme $\pi$ est surjective, cela prouve qu'il ne peut y avoir qu'au plus une structure de groupe sur $G/H$ pour laquelle $\pi$ est un morphisme de groupes.
+    \end{itemize}
+}
 
 \noindent{\textbf{Démonstration :}
     \begin{itemize}
@@ -417,13 +428,11 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     Dans ce cas, si de plus $H \triangleleft G$, alors $\overline{f}$ est un morphisme de groupes et $\overline{f}(G/H) = f(G)$ et $ker(\overline{f}) = ker(f)/H$.
 }
 \reminder{$\overline{f}$ est appelée l'application induite par $f$, définie par $\overline{f}(xH) = f(x)$.}
-
 \noindent{\textbf{Démonstration :}\\
     Si $\overline{f}$ existe, alors $f$ est constante sur les classes modulo $H$. Plus précisément, pour tous $x,y \in G$, on a $xH=yH \Rightarrow f(x)=f(y)$. En particulier si $x \in H$, comme $xH=H$ $(=e_GH)$, on a $f(x)=f(e_G)=e_{G'}$ et $x \in Ker(f)$. Ce qui montre que si $\overline{f}$ existe alors $H \subset Ker(f)$.\\
     Réciproquement, si $H \subset Ker(f)$, alors pour tous $x,y \in G$ tels que $xH=yH$ ($\Leftrightarrow x \in yH$), il existe $h \in H$ tel que $x=yh$. Ainsi, l'application $\overline{f}$ existe.\\
     Il reste à montrer que $\overline{f}$ est un morphisme de groupes. On rappelle que par définition $\overline{f}(xH)=f(x)$ et on a vu que si $H$ est distingué dans $G$, alors la structure de groupe sur $G/H$ est donnée par $xHyH=xyH$ donc, pour tous $x,y \in G$, on a : $\overline{f}(xHyH)=\overline{f}(xyH)=f(xy)=f(x)f(y)=\overline{f}(xH) \overline{f}(yH)$. Ce qui montre que $\overline{f}$ est un morphisme de groupes.
 }
-
 \attention{
     \textbf{Attention à ne pas confondre avec la décomposition canonique du théorème de décomposition.} On a deux applications $\overline{f}$ induites par $f$ :
 
