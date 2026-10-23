@@ -46,11 +46,12 @@
     \item Soit $f : A \to F$ et $g : B \to G$ deux applications continues telles que $f(A) \subset B$. Alors la composée $g \circ f$ est continue.
 \end{enumerate}
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{
+    \textbf{Démonstration :} Suit immédiatement du résultat similaire aux limites
+}
 
 \theorem{Corollaire}{}{false}{
     Soit $a$ un point d'une partie $A$ de $E$ et $f : A \to F$ une application. Supposons que $F$ est de dimension finie et $\mathcal{B}$ une base de $F$. Alors $f$ est continue en $a$ si, et seulement si, les coordonnées de $f$ dans $\mathcal{B}$ le sont.}
-\ndlr{cf. Laurent pour la preuve.}
 
 \method{Montrer qu'une fonction de plusieurs variables est continue}{
     Si $f(x_1, \dots, x_q) = (f_1(x_1, \dots, x_q), \dots, f_p(x_1, \dots, x_q))$ est une fonction de plusieurs variables à valeurs dans $\mathbb{R}^p$, il suffit de montrer que chacune des fonctions $f_i$ est continue pour conclure que $f$ est continue.
@@ -68,8 +69,6 @@ f(x) & \text{si } x \neq a \\
 \]
 est continue en $a$. On appelle $\tilde{f}$ le prolongement par continuité de $f$ au point $a$.
 }
-
-\ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Proposition}{}{false}{
     Une application $f : A \to F$ est continue en un point $a$ de $A$ si, et seulement si, il existe un voisinage $V$ de $a$ et une fonction numérique $w$ définie sur un voisinage de $0$ telle que $w(r) \xrightarrow[r \to 0]{} 0$ et
@@ -194,12 +193,26 @@ Soit $A$ une partie de l'evn $E$. Une fonction $f : A \to F$ est uniformément c
         \item l'application $f$ est lipschitzienne.
     \end{enumerate}
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item $1) \Rightarrow 2)$ : Si $f$ est continue en tout point alors elle l'est en particulier en 0.
+        \item $2) \Rightarrow 3)$ : Supposons que $f$ est continue en zéro. Alors, pour $\varepsilon =1$, il existe $\eta >0$ tel que
+        \[ \forall x \in E, \|x\|_E \le \eta \Rightarrow \|f(x)\|_F \le 1 \]
+        Soit $x \ne 0$ et posons $y=\frac{\eta}{\|x\|_E}x$. Puisque $\|y\|_E \le \eta$, on a $\|f(y)\|_F \le 1$, c'est-à-dire que $\|f(x)\|_F \le \frac{1}{\eta}\|x\|_E$. D'où l'égalité recherchée. Comme ceci est vrai pour $x=0$ on a fini.
+        \item $3) \Rightarrow 4)$ : Supposons qu'il existe une constante $C$ telle que, $\forall x \in E, \|f(x)\|_F \le C\|x\|_E$. En particulier, pour tout $x \in E$ tel que $\|x\|_E=1$, on aura $\|f(x)\|_F \le C$. Donc, $sup_{\|x\|_E=1}\|f(x)\|_F \le C <\infty$.
+        \item $4) \Rightarrow 5)$ : Supposons que $C=sup_{\|x\|_E=1}\|f(x)\|_F < \infty$. Soit $x \in E \setminus {0}$ et posons $y=\frac{1}{\|x\|_E}x$. \\
+        Puisque $\|y\|_E=1$, on a $\|f(y)\|_F \le C$. Or $f(y)=f(\frac{1}{\|x\|_E}x)=\frac{1}{\|x\|_E}f(x)$. On en déduit que $\|f(x)\|_F \le C\|x\|_E$. Ainsi pour tout $x,y \in E$, on a $\|f(x)-f(y)\|_F=\|f(x-y)\|_F \le C\|x-y\|_E$.
+        \item $5) \Rightarrow 1)$ : Si $f$ est lipschitzienne alors elle est uniformément continue et donc continue.
+    \end{itemize}
+}
 
 \theorem{Corollaire}{}{false}{
     Toute application linéaire en dimension finie est continue.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}\\
+    Soit $f \in \mathcal{L}(E,F)$ et supposons que $E$ est de dimension finie. Choisissons une base $(e_1,...,e_n)$ de $E$ et posons $C=max_{1 \le i \le n} \|f(e_i)\|_F$. Soit $x \in E$. \\
+    Alors, en décomposant $x=\sum_{i=1}^n x_i e_i$ dans la base $(e_1,...,e_n)$ on voit, grâce à l'inégalité que $\|f(x)\|=\|\sum_{i=1}^n x_if(e_i)\| \le \sum_{i=1}^n |x_i| \cdot \|f(e_i)\| \le C\sum_{i=1}^n|x_i|=C\|x\|_1$. Ainsi $f$ est continue (toutes les normes sont équivalentes). 
+}
 
 \section{Norme subordonnée d'une application linéaire}
 
