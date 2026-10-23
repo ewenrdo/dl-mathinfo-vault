@@ -402,6 +402,18 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     \end{itemize}
 }
 
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item "$\Leftarrow$" : Elle découle de la proposition sur les images de groupes distingués en remarquant que $H=Ker(\pi)$.
+        \item "$\Rightarrow$" : Montrons cette assertion. On construit d'abord une structure de groupe sur $G/H$.\\
+        Remarquons que $(xH)(yH)=(x*y)H$ avec la notation $(xH)(yH)={x*h*y*k,k\in H}$.\\
+        En effet, comme $H$ est distingué dans $G$ on a $yH=Hy$ donc $xHyH=(x*y)HH=(x*y)H$ 	(à priori il faut montrer que $HH=H$, ce qui est vrai car pour tout $h \in H$, on a $hH=H$).\\
+        Montrons que la loi de composition interne ainsi définie, confère à $G/H$ une structure de groupes.\\
+        Elle est associative car $*$ l'est. Elle possède un élément neutre qui est $H$ et $xH$ a pour symétrique $x^(-1) H$. De plus $\pi : G \to G/H$ est un morphisme de groupes.\\
+        Remarquons que, si $\pi$ est un morphisme de groupe, on doit avoir $\pi(x)\pi(y)=\pi(x*y)$ ; comme $\pi$ est surjective, cela prouve qu'il ne peut y avoir qu'au plus une structure de groupe sur $G/H$ pour laquelle $\pi$ est un morphisme de groupes.
+    \end{itemize}
+}
+
 \example{
     \begin{itemize}
         \item Les sous-groupes ${e_G}$ et $G$ sont distingués dans $G$.
