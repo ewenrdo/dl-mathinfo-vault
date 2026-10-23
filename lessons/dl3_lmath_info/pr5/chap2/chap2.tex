@@ -78,6 +78,8 @@
 \remark{$\mu_f$ est bien un mesure sur $(F, \mathcal{F})$ et a la même mesure totale que $\mu$ : $\mu_f(F) = \mu(f^{-1}(F)) = \mu(E)$.}
 \remark{Si $\mu$ est une probabilité, alors $\mu_f$ est aussi une probabilité.}
 
+\vocabulary{$f : (\mathbb{R}, \mathcal{B}(\mathbb{R})) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est dite borélienne.}
+
 \theorem{Propriétés}{}{false}{
     Soit $(E, \mathcal{E})$ un espace mesurable et $A \in \mathcal{P}(E)$.
     \begin{enumerate}
@@ -85,7 +87,7 @@
         \item Si $f : (E, \mathcal{E}) \toMesurable (G, \mathcal{G})$ et $g : (G, \mathcal{G}) \toMesurable (F, \mathcal{F})$ sont mesurables, alors $g \circ f : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ est mesurable,
         \item Si $\mathcal{F} \subset \mathcal{F}$ : $\sigma(\mathcal{C}) = \mathcal{F}$, $f  : (E, \mathcal{E}) \toMesurable (F, \mathcal{F})$ est mesurable si et seulement si $\forall C \in \mathcal{C}, f^{-1}(C) \in \mathcal{E}$.\\
         \textit{En particulier}, si $F = \mathbb{R}$ et $\mathcal{F} = \mathcal{B}(\mathbb{R})$, alors pour vérifier que $f : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est mesurable il faut et il suffit que $\forall a \in \mathbb{R}, \{ x \in E : f(x) \leq a \} \in \mathcal{E}$,
-        \item $f : (\mathbb{R}, \mathcal{B}(\mathbb{R})) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est dite borélienne. $f$ est continue ou continue par morceaux sur $\mathbb{R}$ implique que $f$ est borélienne. ($\indic{\cdot}$ est borélienne).
+        \item $f$ est continue ou CPM sur $\mathbb{R}$ implique que $f$ est borélienne. ($\indic{\cdot}$ est borélienne).
         \item $f : (E, \mathcal{E}) \toMesurable (\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ est mesurable si et seulement si $\forall i \in \{1,\ldots,d\}, f_i : (E, \mathcal{E}) \toMesurable (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ est mesurable.
     \end{enumerate}
 }
