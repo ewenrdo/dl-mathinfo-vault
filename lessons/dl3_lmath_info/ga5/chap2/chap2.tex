@@ -390,6 +390,17 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     $$H \triangleleft G \; \Longleftrightarrow \; \exists! \text{ structure de groupe sur } G/H \text{ telle que } \pi : G \to G/H \text{ soit un morphisme.}$$
 }
 \remark{Cette structure est la seule qui fait de $\pi$ un morphisme de groupes. Elle est définie par la loi : $(xH) * (yH) = (x * y)H$.}
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item "$\Leftarrow$" : Elle découle de la proposition sur les images de groupes distingués en remarquant que $H=Ker(\pi)$.
+        \item "$\Rightarrow$" : Montrons cette assertion. On construit d'abord une structure de groupe sur $G/H$.\\
+        Remarquons que $(xH)(yH)=(x*y)H$ avec la notation $(xH)(yH)={x*h*y*k,k\in H}$.\\
+        En effet, comme $H$ est distingué dans $G$ on a $yH=Hy$ donc $xHyH=(x*y)HH=(x*y)H$ 	(à priori il faut montrer que $HH=H$, ce qui est vrai car pour tout $h \in H$, on a $hH=H$).\\
+        Montrons que la loi de composition interne ainsi définie, confère à $G/H$ une structure de groupes.\\
+        Elle est associative car $*$ l'est. Elle possède un élément neutre qui est $H$ et $xH$ a pour symétrique $x^(-1) H$. De plus $\pi : G \to G/H$ est un morphisme de groupes.\\
+        Remarquons que, si $\pi$ est un morphisme de groupe, on doit avoir $\pi(x)\pi(y)=\pi(x*y)$ ; comme $\pi$ est surjective, cela prouve qu'il ne peut y avoir qu'au plus une structure de groupe sur $G/H$ pour laquelle $\pi$ est un morphisme de groupes.
+    \end{itemize}
+}
 
 \example{
     \begin{itemize}
@@ -405,6 +416,11 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     Dans ce cas, si de plus $H \triangleleft G$, alors $\overline{f}$ est un morphisme de groupes et $\overline{f}(G/H) = f(G)$ et $ker(\overline{f}) = ker(f)/H$.
 }
 \reminder{$\overline{f}$ est appelée l'application induite par $f$, définie par $\overline{f}(xH) = f(x)$.}
+\noindent{\textbf{Démonstration :}\\
+    Si $\overline{f}$ existe, alors $f$ est constante sur les classes modulo $H$. Plus précisément, pour tous $x,y \in G$, on a $xH=yH \Rightarrow f(x)=f(y)$. En particulier si $x \in H$, comme $xH=H$ $(=e_GH)$, on a $f(x)=f(e_G)=e_{G'}$ et $x \in Ker(f)$. Ce qui montre que si $\overline{f}$ existe alors $H \subset Ker(f)$.\\
+    Réciproquement, si $H \subset Ker(f)$, alors pour tous $x,y \in G$ tels que $xH=yH$ ($\Leftrightarrow x \in yH$), il existe $h \in H$ tel que $x=yh$. Ainsi, l'application $\overline{f}$ existe.\\
+    Il reste à montrer que $\overline{f}$ est un morphisme de groupes. On rappelle que par définition $\overline{f}(xH)=f(x)$ et on a vu que si $H$ est distingué dans $G$, alors la structure de groupe sur $G/H$ est donnée par $xHyH=xyH$ donc, pour tous $x,y \in G$, on a : $\overline{f}(xHyH)=\overline{f}(xyH)=f(xy)=f(x)f(y)=\overline{f}(xH) \overline{f}(yH)$. Ce qui montre que $\overline{f}$ est un morphisme de groupes.
+}
 \attention{
     \textbf{Attention à ne pas confondre avec la décomposition canonique du théorème de décomposition.} On a deux applications $\overline{f}$ induites par $f$ :
 
@@ -420,13 +436,15 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     \end{itemize}
     Il peut être pertinent d'ajouter en indice la relation d'équivalence à $\bar{f}$ pour éviter toute confusion.
 }
-\ndlr{cf. Laurent pour la preuve.}
 
 \theorem{Corollaire}{Première théorème d'isomorphisme}{true}{
     Soit $f : G \to G'$ un morphisme de groupes. Alors $f$ induit un isomorphisme de groupes $\overline{f} : G/ker(f) \to Im(G)$ défini par $\overline{f}(x + ker(f)) = f(x)$.\\
     Si $f$ est surjective, alors $f$ induit un isomorphisme de groupes $G/ker(f) \to G'$.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}\\
+    On applique le théorème de la décomposition canonique. Posons $H=Ker(f)$. On a $x R_f y \Leftrightarrow f(x)=f(y) \Leftrightarrow xy^(-1) \in H \Leftrightarrow xH=yH$.\\
+    Donc la relation d'équivalence coïncide avec les classes à gauche modulo $H$ (et aussi les classes à droite modulo $H$ puisque $H$ est distingué dans $G$).
+}
 
 \theorem{Corollaire}{}{false}{
     \begin{enumerate}
@@ -434,7 +452,13 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
         \item Tout groupe monogène infini est isomorphe à $(\mathbb{Z}, +)$.
     \end{enumerate}
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration : }\\
+    Soit $G= \langle x \rangle$ un groupe monogène et $\phi : Z \to G$ définie par $\phi(n)=x^n$, qui est un morphisme surjectif. Il existe $n \in \mathbb{Z}$ tel que $Ker(\phi)=n\mathbb(Z)$ (c'est un sous-groupe de $\mathbb{Z}$).
+    \begin{itemize}
+        \item Si $n=0$, alors $\phi$ est un isomorphisme, donc $G$ est monogène infini isomorphe à $\mathbb{Z}$.
+        \item Si $n>0$, alors $\phi$ induit un isomorphisme $\tilde{\phi} : Z/nZ \to \phi(\mathbb(Z))=G$. Donc $G$ est isomorphe à $\mathbb{Z}/n\mathbb{Z}$, donc il est monogène fini d'ordre $n$ donc cyclique.
+    \end{itemize}																	
+}
 
 \courseEnd{Fin du programme pour le partiel}
 
