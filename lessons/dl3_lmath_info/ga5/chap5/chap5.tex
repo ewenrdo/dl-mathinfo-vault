@@ -1,0 +1,192 @@
+\documentclass{article}
+
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{../../../../components/mathtex}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ccicons}
+
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % reset tout
+
+\fancyhead[L]{DL3 Math-Info GA5}
+\fancyhead[C]{Théorie des groupes}
+\fancyhead[R]{2026-2027}
+
+\fancyfoot[L]{Ewen Rodrigues de Oliveira\\\ccbyncsa}
+\fancyfoot[R]{\thepage}
+
+\begin{document}
+
+\docTitle{Chapitre 5 : Produit semi-direct de groupes}
+
+\subsection{Définition d'un produit semi-direct}
+
+\theorem{Proposition}{}{false}{
+Soient $N$ et $H$ deux groupes, notés multiplicativement, et $\varphi : H \to \mathrm{Aut}(N)$ un morphisme de groupes. On munit l'ensemble $G = N \times H$ de la loi de composition interne suivante : pour tous $n, n' \in N, h, h' \in H$
+\[
+(n, h) * (n', h') = (n\varphi(h)(n'), hh')
+\]
+Alors $(G, *)$ est un groupe.
+}
+
+\noindent{\textbf{Preuve :}
+Montrons tout d'abord que la loi est associative. On a
+\[
+((n, h) * (n', h')) * (n'', h'') = (n\varphi(h)(n'), hh') * (n'', h'') = (n\varphi(h)(n')\varphi(hh')(n''), hh'h'').
+\]
+et
+\[
+(n, h) * ((n', h') * (n'', h'')) = (n, h) * (n'\varphi(h')(n''), h'h'') = (n\varphi(h)(n'\varphi(h')(n'')), hh'h'').
+\]
+Comme $\varphi(h) : N \to N$ est un morphisme de groupes, on a
+\[
+\varphi(h)(n'\varphi(h')(n'')) = \varphi(h)(n')\varphi(h)(\varphi(h')(n''))
+\]
+et comme $\varphi : H \to \mathrm{Aut}(N)$ est un morphisme de groupes, on a $\varphi(h) \circ \varphi(h') = \varphi(hh')$, ce qui donne le résultat.
+
+\medskip
+Montrons que $(e_N, e_H)$ est l'élément neutre :
+\[
+(n, h) * (e_N, e_H) = (n\varphi(h)(e_N), he_H) = (n, h) ; \quad (e_N, e_H) * (n, h) = (e_N\varphi(e_H)(n), e_H h) = (n, h).
+\]
+
+On vérifie que $(\varphi(h^{-1})(n^{-1}), h^{-1})$ est le symétrique de $(n, h)$ pour la loi $*$ :
+\[
+(n, h) * (\varphi(h^{-1})(n^{-1}), h^{-1}) = (n\varphi(h)\left(\varphi(h^{-1})(n^{-1})\right), hh^{-1}) = (nn^{-1}, e_H) = (e_N, e_H)
+\]
+car $\varphi(h) \circ \varphi(h^{-1}) = \varphi(hh^{-1}) = \mathrm{id}_N$. On a
+\[
+(\varphi(h^{-1})(n^{-1}), h^{-1}) * (n, h) = (\varphi(h^{-1})(n^{-1})\varphi(h^{-1})(n), h^{-1}h) = (\varphi(h^{-1})(n^{-1}n), h^{-1}h) = (e_N, e_H)
+\]
+car $\varphi(h^{-1}) : N \to N$ est un morphisme de groupes.
+\hfill $\square$}
+
+\bigskip
+
+Définition 5.1.2. Le groupe $(G, *)$ ainsi obtenu s'appelle le **produit semi-direct** de $N$ par $H$ (relativement à $\varphi$) et est noté $N \rtimes_\varphi H$.
+
+\theorem{Proposition}{}{false}{
+Soient $N$ et $H$ deux groupes et $\varphi : H \to \mathrm{Aut}(N)$ un morphisme de groupes. Soit $G = N \rtimes_\varphi H$ le produit semi-direct de $N$ par $H$ relativement à $\varphi$. On a
+\begin{enumerate}
+    \item $H$ est (isomorphe à) un sous-groupe de $G$.
+    \item $N$ est (isomorphe à) un sous-groupe distingué de $G$.
+    \item L'application $G \to H$ qui à $(n, h)$ associe $h$ est un morphisme de groupes de noyau $N$ induisant un isomorphe $G/N \to H$.
+    \item $G = NH = HN$.
+\end{enumerate}
+}
+
+\noindent{\textbf{Preuve :}
+On considère les deux applications $H \to G$ et $N \to G$ définies par $h \mapsto (e_N, h)$ et $n \mapsto (n, e_H)$. On vérifie aisément que ces deux applications sont des morphismes de groupes, et qu'ils sont injectifs. Si on note $H'$ et $N'$ leur image respective, alors $H \cong H'$ et $N \cong N'$. Dans les énoncés on identifie $H$ à $H'$ et $N$ à $N'$. La projection $G \to H$ qui à $(n, h)$ associe $h$ est un morphisme de groupes, surjectif, de noyau $N'$. Donc $N'$ est distingué dans $G$ et cette projection induit un morphisme $G/N' \to H$. Enfin comme $N'$ est distingué dans $G$, on a $N'H'$ est un sous-groupe de $G$ et $N'H' = H'N'$ (voir Proposition 2.4.7). Par ailleurs tout élément $(n, h)$ de $G = N \rtimes_\varphi H$ se décompose en $(n, h) = (n, e_H) * (e_N, h) \in N'H'$ donc $G = N'H'$.
+\hfill $\square$}
+
+\subsection{Suites exactes courtes de groupes}
+
+Définition 5.2.1. Une **suite exacte courte de groupes** est la donnée de 3 groupes $N, G, H$, de deux morphismes de groupes $i : N \to G$ et $\pi : G \to H$ tels que $i$ soit injective, $\pi$ surjective et $i(N) = \mathrm{ker}\,\pi$. On note une telle suite comme ceci :
+\[
+1 \longrightarrow N \overset{i}{\longrightarrow} G \overset{\pi}{\longrightarrow} H \longrightarrow 1
+\]
+Une suite exacte courte de groupes est dite **scindée** s'il existe un morphisme de groupes $s : H \to G$ tel que $\pi \circ s = \mathrm{id}_H$.
+
+\example{
+\begin{itemize}
+    \item Les deux suites exactes courtes suivantes sont scindées
+    \[
+    1 \longrightarrow \mathcal{A}_n \longrightarrow \mathcal{S}_n \overset{\epsilon}{\longrightarrow} \{\pm 1\} \longrightarrow 1
+    \]
+    \[
+    1 \longrightarrow \mathrm{SL}_n(\mathbb{R}) \longrightarrow \mathrm{GL}_n(\mathbb{R}) \overset{\mathrm{det}}{\longrightarrow} \mathbb{R}^* \longrightarrow 1
+    \]
+    Pour la première on peut prendre $s : \{\pm 1\} \to \mathcal{S}_n$ l'application qui à $-1$ associe la transposition $(12)$. Pour la deuxième suite exacte, on peut prendre $s : \mathbb{R}^* \to \mathrm{GL}_n(\mathbb{R})$ l'application qui à $\lambda$ associe la matrice diagonale $\mathrm{Diag}(\lambda, 1, \dots, 1)$. On vérifie que ces deux sections sont des morphismes de groupes.
+    
+    \item Pour $\varphi : H \to \mathrm{Aut}(N)$ on a une suite exacte courte scindée
+    \[
+    1 \longrightarrow N \longrightarrow N \rtimes_\varphi H \longrightarrow H \longrightarrow 1
+    \]
+    
+    \item La suite exacte courte suivante n'est pas scindée
+    \[
+    1 \longrightarrow \mathbb{Z} \overset{\times 2}{\longrightarrow} \mathbb{Z} \overset{\pi}{\longrightarrow} \mathbb{Z}/2\mathbb{Z} \longrightarrow 1
+    \]
+    car si elle était scindée, on aurait un morphisme de groupes non nul $s : \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}$, ce qui est absurde car $\mathbb{Z}$ ne contient pas d'élément d'ordre 2.
+\end{itemize}
+}
+
+\theorem{Théorème}{}{false}{
+Soit
+\[
+1 \longrightarrow N \overset{i}{\longrightarrow} G \overset{\pi}{\longrightarrow} H \longrightarrow 1
+\]
+une suite exacte courte scindée de groupes. Alors il existe un morphisme de groupes $\varphi : H \to \mathrm{Aut}(N)$ et un morphisme de groupes $f : N \rtimes_\varphi H \to G$ tel que $\pi \circ f$ soit la projection sur $H$.
+}
+
+\noindent{\textbf{Preuve :}
+On identifie $N$ à $i(N) = \mathrm{ker}\,\pi$ et on note $s : H \to G$ une section de $\pi$. On remarque que pour tout $h \in H$, $s(h)n s(h^{-1}) \in N$. En effet
+\[
+\pi(s(h)n s(h^{-1})) = \pi(s(h))\pi(n)\pi(s(h^{-1})) = h e_H h^{-1} = e_H.
+\]
+Par ailleurs $n \mapsto s(h)n s(h^{-1})$ est un automorphisme du groupe $N$ que l'on note $\varphi(h)$. Comme $s$ est un morphisme de groupes, on a $\varphi(h) \circ \varphi(h') = \varphi(hh')$ donc $\varphi : H \to \mathrm{Aut}(N)$ est un morphisme de groupes. Montrons que l'application $f : N \rtimes_\varphi H \to G$ définie par $f(n, h) = n s(h)$ est un morphisme de groupes bijectif. La suite d'égalités
+\[
+f((n, h)*(n', h')) = f(n\varphi(h)(n'), hh') = f(n s(h)n' s(h)^{-1}, hh') = n s(h)n' s(h') = f(n, h)f(n', h')
+\]
+montre que $f$ est un morphisme de groupes. Supposons $n s(h) = e_G$. En appliquant $\pi$ on obtient $\pi(n s(h)) = \pi(n)\pi(s(h)) = h = e_H$ et $n = e_G = e_N$. Ainsi $f$ est injective. Fixons $g \in G$. On pose $n = g s(\pi(g^{-1}))$ et on vérifie que $n \in N$: $\pi(n) = \pi(g)\pi(s(\pi(g^{-1}))) = \pi(g)\pi(g^{-1}) = e_H$. Ainsi $g = n s(\pi(g)) = f(n, \pi(g))$ et $f$ est surjective.
+\hfill $\square$}
+
+
+\subsection{Exemples}
+
+\subsubsection{Le groupe $\mathcal{S}_3$}
+
+Le sous-groupe de $\mathcal{S}_3$ engendré par le cycle $(123)$ est distingué dans $\mathcal{S}_3$, on le note $N$. On considère le sous-groupe $H$ d'ordre 2 engendré par $(12)$.
+
+\theorem{Proposition}{}{false}{
+Le groupe symétrique $\mathcal{S}_3$ est isomorphe à $N \rtimes_\varphi H$ avec $\varphi : H \to \mathrm{Aut}(N)$ défini par $\varphi(\mathrm{id}) = \mathrm{id}$ et $\varphi((12))(x) = (12)x(12)$.
+}
+
+\noindent{\textbf{Preuve :}
+Soit $\psi : N \rtimes_\varphi H \to G$ l'application qui à $(x, y)$ associe $xy$. Il faut montrer que $\psi$ est un morphisme de groupes. Si tel est le cas, il sera bijectif car $\psi$ est surjectif.
+
+On a
+\[
+\psi((n, h) * (n', h')) = \psi(n\varphi(h)(n'), hh') = n\varphi(h)(n')hh'
+\]
+Montrons que pour tout $n' \in N, h \in H$ on a
+\[
+\varphi(h)(n')h = hn'.
+\]
+Si $h = \mathrm{id}$ c'est vérifié. Si $h = (12)$, calculons
+\[
+\varphi(h)(n')h = (12)n'(12)(12) = (12)n' = hn'.
+\]
+D'où l'isomorphisme.
+\hfill $\square$}
+
+
+\subsubsection{Le groupe diédral}
+
+Le groupe diédral d'ordre $2n$ noté $D_n$ peut être défini comme le groupe des isométries d'un polygone régulier à $n$ côtés. En fixant 0 l'isobarycentre d'un tel polygone et en fixant un sommet $A_0$ de ce polygone, on définit un repère orthonormé $(0, \vec{i}, \vec{j})$ de $\mathbb{R}^2$ ce qui nous permet d'identifier $\mathbb{R}^2$ muni de ce repère à $\mathbb{C}$ via la bijection $x\vec{i} + y\vec{j} \mapsto x + iy$. Notons $\sigma$ la rotation d'angle $\frac{2\pi}{n}$ et $\tau$ la symétrie d'axe $(0x)$. L'expression dans $\mathbb{C}$ de $\sigma$ et $\tau$ sont données par
+\[
+\sigma(z) = e^{\frac{2i\pi}{n}}z, \quad \tau(z) = \bar{z}.
+\]
+
+On sait que le groupe des isométries vectorielles du plan est l'ensemble des rotations et des symétries (c'est $O_2(\mathbb{R})$). Le groupe des isométries d'un polygone régulier à $n$ côtés, avec l'identification précédente, est le sous-groupe de $O_2(\mathbb{R})$ engendré par $\sigma$ et $\tau$. Remarquons que $\sigma$ est d'ordre $n$ et $\tau$ est d'ordre 2. De plus $\tau\sigma\tau = \sigma^{-1}$, donc
+\[
+D_n = \langle \sigma \rangle \cup \langle \sigma \rangle \tau
+\]
+a exactement $2n$ éléments. En notant $H = \langle \tau \rangle \cong \mathbb{Z}/2\mathbb{Z}$ et $N = \langle \sigma \rangle \cong \mathbb{Z}/n\mathbb{Z}$ on a $\varphi : H \to \mathrm{Aut}(N)$ donnée par $\varphi(\tau)(\sigma) = \tau\sigma\tau^{-1} = \sigma^{-1}$ est un morphisme de groupes et
+\[
+D_n \cong \mathbb{Z}/n\mathbb{Z} \rtimes_\varphi \mathbb{Z}/2\mathbb{Z}.
+\]
+\newpage
+\tableofcontents
+\section*{Crédits}
+Ce cours provient du polycopié de cours de l'Université Paris Cité de Muriel Livernet enrichi et modifié par mes soins à des fins pédagogiques. Assurez-vous de citer correctement la source si vous utilisez ce cours dans vos travaux.\\\\
+Merci à Laurent Cai à son aide dans la rédaction des démonstrations.\\\\
+Ce cours est mis à disposition selon les termes de la Licence Creative Commons \ccbyncsa\ \textbf{Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International}. 
+Pour voir une copie de cette licence, visitez \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+
+\end{document}
