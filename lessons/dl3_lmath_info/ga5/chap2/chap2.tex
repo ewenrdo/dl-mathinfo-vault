@@ -181,7 +181,7 @@ Dans cette section, on note $\pi_E$ l'application quotient de $E$ par $R$.
 
 
 \theorem{Proposition}{Classes de sous-groupes}{true}{
-Soit \(G\) un groupe et soit \(H \subset G\) un sous-groupe. Sur \(G\) on définit deux relations, notées \(\equiv_g\) et \(\equiv_d\) par
+Soient \(G\) un groupe \(H \leq G\). Sur \(G\) on définit deux relations, notées \(\equiv_g\) et \(\equiv_d\) par
 \[ x \equiv_g y \iff x^{-1} * y \in H \iff xH = yH \]
 \[ x \equiv_d y \iff y * x^{-1} \in H \iff Hx = Hy \]
 
@@ -400,18 +400,6 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
     $$H \triangleleft G \; \Longleftrightarrow \; \exists! \text{ structure de groupe sur } G/H \text{ telle que } \pi : G \to G/H \text{ soit un morphisme.}$$
 }
 \remark{Cette structure est la seule qui fait de $\pi$ un morphisme de groupes. Elle est définie par la loi : $(xH) * (yH) = (x * y)H$.}
-\noindent{\textbf{Démonstration :}
-    \begin{itemize}
-        \item "$\Leftarrow$" : Elle découle de la proposition sur les images de groupes distingués en remarquant que $H=Ker(\pi)$.
-        \item "$\Rightarrow$" : Montrons cette assertion. On construit d'abord une structure de groupe sur $G/H$.\\
-        Remarquons que $(xH)(yH)=(x*y)H$ avec la notation $(xH)(yH)={x*h*y*k,k\in H}$.\\
-        En effet, comme $H$ est distingué dans $G$ on a $yH=Hy$ donc $xHyH=(x*y)HH=(x*y)H$ 	(à priori il faut montrer que $HH=H$, ce qui est vrai car pour tout $h \in H$, on a $hH=H$).\\
-        Montrons que la loi de composition interne ainsi définie, confère à $G/H$ une structure de groupes.\\
-        Elle est associative car $*$ l'est. Elle possède un élément neutre qui est $H$ et $xH$ a pour symétrique $x^(-1) H$. De plus $\pi : G \to G/H$ est un morphisme de groupes.\\
-        Remarquons que, si $\pi$ est un morphisme de groupe, on doit avoir $\pi(x)\pi(y)=\pi(x*y)$ ; comme $\pi$ est surjective, cela prouve qu'il ne peut y avoir qu'au plus une structure de groupe sur $G/H$ pour laquelle $\pi$ est un morphisme de groupes.
-    \end{itemize}
-}
-
 \noindent{\textbf{Démonstration :}
     \begin{itemize}
         \item "$\Leftarrow$" : Elle découle de la proposition sur les images de groupes distingués en remarquant que $H=Ker(\pi)$.
