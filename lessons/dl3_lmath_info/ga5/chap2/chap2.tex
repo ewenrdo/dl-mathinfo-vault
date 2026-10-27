@@ -80,17 +80,21 @@
     \textit{i.e.  $E/R = \{ \overline{x} \mid x \in E \}$.}
 }
 
-\theorem{Proposition}{Bijection de l'application quotient}{false}{
-    Soit $R$ une relation d'équivalence sur $E$.\\
-    L'application \function{\pi}{E \rightarrow E/R}{x \mapsto \overline{x}} est une surjection.
-}
-
-\vocabulary{On appelle $\pi$ l'\textbf{application quotient} de $E$ par $R$.}
-
 \definition{
-    Soit $S \subseteq E$. On dit que $S$ est un \textbf{système de représentants} pour $R$ si pour toute classe $C$ de $R$, il existe un unique élément dans $S \cap C$.\\\\
-    De manière équivalente, $S$ est un système de représentants si $\pi_{|S} : S \to E/R$ est une bijection.
+    Soit $R$ une relation d'équivalence sur $E$.\\
+    On appelle \textbf{application quotient} ou \textbf{projection canonique} de $E$ par $R$ l'application \function{\pi}{E \rightarrow E/R}{x \mapsto \overline{x}}.
 }
+
+\theorem{Proposition}{Surjection de l'application quotient}{false}{
+    Soit $R$ une relation d'équivalence sur $E$. Alors l'application quotient $\pi : E \to E/R$ est surjective.
+}
+
+\vocabulary{Soit $S \subseteq E$. On dit que $S$ est un \textbf{système de représentants} pour $R$ si : 
+\begin{itemize}
+    \item pour toute classe $C$ de $R$, il existe un élément dans $S \cap C$ ;
+    \item ou bien que $\pi_{|S} : S \to E/R$ est une bijection.
+\end{itemize}}
+
 
 \example{
     Considérons $E = \mathbb{Z}/7\mathbb{Z}$ et la relation d'équivalence $xRy \iff x \equiv y \pmod 7$. Alors $E/R = \{ \overline{0}, \overline{1}, \overline{2}, \overline{3}, \overline{4}, \overline{5}, \overline{6} \}$ et un système de représentants est $S = \{ 0, 1, 2, 3, 4, 5, 6 \}$.\\
@@ -129,20 +133,26 @@ Dans cette section, on note $\pi_E$ l'application quotient de $E$ par $R$.
 }
 
 \theorem{Théorème}{Décomposition canonique}{false}{
-    Soit \(f : E \rightarrow F\) une application. \(f\) se décompose de façon \textbf{canonique} en \(f = j \circ \bar{f} \circ \pi\) avec \(\pi : E \rightarrow E/\mathcal{R}_f\) la projection canonique (surjective), \(\bar{f} : E/\mathcal{R}_f \rightarrow f(E)\) définie par \(\bar{f}(\text{cl}_{\mathcal{R}_f}(x)) = f(x)\) bijective et \(j : f(E) \rightarrow F\) l'inclusion canonique d'ensembles.
+    Soit \(f : E \rightarrow F\) une application. \(f\) se décompose de façon \textbf{canonique} en $$f = j \circ \check{f} \circ \pi$$
+    
+    avec : 
+    \begin{itemize}
+        \item \(\pi : E \rightarrow E/\mathcal{R}_f\) la projection canonique (surjective),
+        \item \(j : f(E) \rightarrow F\) l'inclusion canonique d'ensembles,
+        \item \(\check{f} : E/\mathcal{R}_f \rightarrow f(E)\) définie par \(\check{f}(\text{cl}_{\mathcal{R}_f}(x)) = f(x)\) bijective (en fait : $\bar{f} = j \circ \check{f}$).
+
+    \end{itemize}
 }
 \noindent{\textbf{Démonstration :}
     \begin{itemize}
-        \item Par la remarque précédente, puisque $f$ est constante sur les classes modulo $R_f$. $[xR_f y \Longrightarrow_{(\Leftarrow)}f(x)=f(y)]$, il existe une unique décomposition $f=\overline{f}\circ \pi$ avec \function{\overline{f}}{E/R_f\to F}{cl_R(x)\mapsto f(x)}
+        \item Par la remarque précédente, puisque $f$ est constante sur les classes modulo $R_f$. $[xR_f y \Longrightarrow_{(\Leftarrow)}f(x)=f(y)]$, il existe une unique décomposition $f=\check{f}\circ \pi$ avec \function{\check{f}}{E/R_f\to F}{cl_R(x)\mapsto f(x)}
         \item Montrons que $\overline{f}$ est injective.\\
-            Supposons que $\bar{f}(cl_{R_f}(x))=\bar{f}=(cl_{R_f}(x))$, alors $f(x)=f(y)\Rightarrow x R_f y\Rightarrow cl_{R_f}(x)=cl_{R_f}(y)$.
-        \item $\bar{f}(E/R_f)={\bar{f}(cl_{R_f}(x)), x\in E}={f(x), x\in E}=f(E)$.\\
-            Donc, $\bar{f}$ s'écrit de manière unique $\overline{f}=j\circ \bar{f}$ où \function{\bar{f}}{E/R_f \to f(E)}{cl_{R_f}(x)\mapsto f(x)} et $j : f(E)\to F$ et $\bar{f}$ est injective (car $\overline{f}$ l'est) et surjective car $\bar{f}(E/R_f)=f(E)$ donc bijective.
+            Supposons que $\check{f}(cl_{R_f}(x))=\check{f}=(cl_{R_f}(x))$, alors $f(x)=f(y)\Rightarrow x R_f y\Rightarrow cl_{R_f}(x)=cl_{R_f}(y)$.
+        \item $\check{f}(E/R_f)={\check{f}(cl_{R_f}(x)), x\in E}={f(x), x\in E}=f(E)$.\\
+            Donc, $\check{f}$ s'écrit de manière unique $\overline{f}=j\circ \bar{f}$ où \function{\bar{f}}{E/R_f \to f(E)}{cl_{R_f}(x)\mapsto f(x)} et $j : f(E)\to F$ et $\bar{f}$ est injective (car $\overline{f}$ l'est) et surjective car $\bar{f}(E/R_f)=f(E)$ donc bijective.
     \end{itemize}
 }
 
-\remark{La projection canonique $\pi : E \to E/R_f$ est surjective, plus explicitement, on a : $\pi(x) = \overline{x}$ pour tout $x \in E$.}
-\vocabulary{On appelle aussi la projection canonique \textbf{l'application quotient} de $E$ par $R_f$.}
 
 \example{
     Soit l'application \(f : \mathbb{Z} \rightarrow \mathbb{Z}\) définie par \(f(x) = x \pmod 3\) (qui à chaque entier associe son reste dans la division euclidienne par 3).
