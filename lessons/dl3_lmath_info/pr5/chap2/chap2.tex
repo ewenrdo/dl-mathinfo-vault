@@ -313,7 +313,13 @@ l'ensemble des fonctions intégrables.}
     $$\int_\mathbb{R} fd\mu = \int_\mathbb{R} fg d \lambda$$
     Si $f : \mathbb{R} \to \mathbb{R}$ est borélienne et intégrable, alors l'égalité précédente est encore valable.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Preuve : }
+    \begin{itemize}
+        \item Si $B \in \mathcal{B}(\mathbb{R})$ et $f=\indic{B}$ le membre de gauche est $\mu(B)$ qui est bien égal au membre de droite par définition.
+        \item Si $f$ est étagée on déduit l'égalité du premier point et la linéarité des intégrales vis-à-vis de $\mu$ et $\lambda$.
+        \item Si $f$ est mesurable positive, on considère la suite $(f_n)$. La suite $(f_n g)$ croît vers $fg$ et on peut appliquer la convergence monotone des deux côtés.
+    \end{itemize}
+}
 \ndlr{Généraliser ça pour un $g$ un peu plus général (densité).}
 \example{
     On prend $g = 2x \indic{[0,1]}$. Alors :
