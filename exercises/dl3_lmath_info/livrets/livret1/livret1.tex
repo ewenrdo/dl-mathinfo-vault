@@ -60,7 +60,15 @@ Si besoin d'un corrigé, réferrez-vous à \href{https://ewenrdo.fr/ressources}{
 
 \section*{Crédits}
 \begin{itemize}
-\item \textit{Non rédigé pour le moment.}
+\item Université Paris Cité, Faculté des Sciences (UFR d'Informatique et UFR de Mathématiques)
+\item Delia Kesner
+\end{itemize}
+
+\section*{Modifications}
+
+\begin{itemize}
+    \item \textbf{24 octobre 2026 :} Erreur de typo sur les indicatrices ($\mathbb{1} \to \indic{}$)
+    \item \textbf{31 octobre 2026 :} Retrait des exercices hors programme (notions pas encore traités du fait des blocages)
 \end{itemize}
 
 \tableofcontents
@@ -182,11 +190,8 @@ Si besoin d'un corrigé, réferrez-vous à \href{https://ewenrdo.fr/ressources}{
 }
 \subsection{Calcul différentiel}
 
-\exercise{1}{Questions de cours : convergence uniforme et différentielle}{
-    \begin{enumerate}
-        \item Soit $(f_n)_{n \ge 0}$ une suite d'applications de $\mathbb{R}^+$ dans $\mathbb{R}$. Quand dit-on que $(f_n)_{n \ge 0}$ converge uniformément ?
-        \item Soient $U$ un ouvert de $\mathbb{R}^2$, $F : U \to \mathbb{R}^3$ et $a \in U$. Quelle est la définition de la différentielle $\mathrm{D}F_a$ de $F$ en $a$ (condition d'existence, notation) ?
-    \end{enumerate}
+\exercise{1}{Questions de cours : convergence uniforme}{
+    Soit $(f_n)_{n \ge 0}$ une suite d'applications de $\mathbb{R}^+$ dans $\mathbb{R}$. Quand dit-on que $(f_n)_{n \ge 0}$ converge uniformément ?
 }
 
 \exercise{2}{Continuité d'une application}{
@@ -314,6 +319,7 @@ Si besoin d'un corrigé, réferrez-vous à \href{https://ewenrdo.fr/ressources}{
         \item Démontrer que l'application $\mathcal{C} \to \mathcal{L}, \; g \mapsto \pi \circ g$ induit une application de $\mathcal{C}/\equiv$ dans $\mathcal{L}/\sim$.
     \end{enumerate}
 }
+\remark{Cet exercice est plus difficile que les autres. Je l'ai mis ici pour ceux qui veulent s'amuser.}
 
 \exercise{2}{Groupe d'Heisenberg et sous-groupes}{
     Soit $G = \left\{ \begin{pmatrix} 1 & a & c \\ 0 & 1 & b \\ 0 & 0 & 1 \end{pmatrix}, \, (a, b, c) \in \mathbb{R}^3 \right\}$, $H = \left\{ \begin{pmatrix} 1 & 0 & c \\ 0 & 1 & b \\ 0 & 0 & 1 \end{pmatrix}, \, (b, c) \in \mathbb{R}^2 \right\}$ et $K = \left\{ \begin{pmatrix} 1 & a & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \, a \in \mathbb{R} \right\}$.
@@ -356,7 +362,7 @@ Si besoin d'un corrigé, réferrez-vous à \href{https://ewenrdo.fr/ressources}{
         On suppose dans la suite de l'exercice que $C \le 64$.
         \item Soit $a > 2$, exprimer $\mathbb{P}(X^{(C)} > a)$ en fonction de $a, C$.
         \item Calculer $\mathbb{P}(X^{(C)} = 2)$ en fonction de la valeur de $C$. Pour quelle valeur $C_0$ de $C$ cette probabilité est-elle nulle ?
-        \item Montrer que si $C = C_0$, la variable aléatoire $X$ telle que $F_X = F^{(C_0)}$ admet une densité $f_X$ que l'on exprimera.
+        \item \textbf{(HP)} Montrer que si $C = C_0$, la variable aléatoire $X$ telle que $F_X = F^{(C_0)}$ admet une densité $f_X$ que l'on exprimera.
     \end{enumerate}
 }
 
@@ -396,9 +402,6 @@ Revoir les notions du cours et les premiers TPs.
 
 \newpage
 \section{Jour 4}
-
-\subsection{Programmation fonctionnelle}
-Faire le TP numéro 7.
 
 \subsection{Calcul différentiel}
 \exercise{1}{Questions de cours : continuité et application lipschitzienne}{
@@ -688,9 +691,6 @@ Revoir les notions du cours.
     \textit{Indication :} On pourra commencer par calculer $\frac{\mathbb{P}(X=k)}{\mathbb{P}(X=k-1)}$.
 }
 
-\exercise{3}{Densité d'une puissance d'une variable uniforme}{
-    Soit $X$ une variable aléatoire uniforme sur $[-1,1]$. On pose $Y_k = X^k$ pour un entier $k \ge 1$. Déterminer la densité de $Y_k$ (\textit{Indication :} Distinguer les $k$ pairs et impairs).
-}
 \newpage
 
 \end{document}
