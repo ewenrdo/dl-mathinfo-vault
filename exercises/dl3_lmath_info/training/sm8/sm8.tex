@@ -30,11 +30,11 @@
 \rowcolor[RGB]{230,237,247}
 \textbf{Matière} & \textbf{Exercices} \\
 \hline
-Intégration et probabilités & $\emptyset$\\
+Intégration et probabilités & $8,9,10,11,12,13,14,15$\\
 \hline
-Groupes et actions & $\emptyset$\\
+Groupes et actions & $1,2,3,4,5,6,7$\\
 \hline
-Calcul différentiel & $\emptyset$\\
+Calcul différentiel & $16,17,18$\\
 \hline
 Systèmes d'exploitation & $\emptyset$\\
 \hline
@@ -48,7 +48,187 @@ Anglais & $\emptyset$\\
 
 \vspace{1em}
 
-\remark{À venir demain en fin de soirée}
+\exercise{1}{Question de cours}{
+Soient $G$ un groupe, et $H$ un sous-groupe de $G$. Montrer que l'on a l'équivalence suivante :
+\[ \forall x \in G, \forall h \in H, x h x^{-1} \in H \iff \forall x \in G, x H = H x \]
+}
 
+\exercise{2}{Sous-groupes distingués et morphismes}{
+Les questions suivantes sont indépendantes.
+\begin{enumerate}
+    \item Le groupe $\{\text{id}, (123), (132)\}$ est-il distingué dans $S_4$ ?
+    \item Donner tous les générateurs du groupe $(\mathbb{Z}/15\mathbb{Z}, +)$.
+    \item Soit $G$ un groupe. Décrire tous les morphismes de groupes de $(\mathbb{Z}, +)$ dans $G$.
+\end{enumerate}
+}
+
+\exercise{3}{Relation d'équivalence sur un groupe}{
+Soit $G$ un groupe, on note $e$ son élément neutre.
+
+Soit $\mathcal{R}$ la relation binaire sur $G$ définie par :
+\[ \forall x, y \in G, \quad x \mathcal{R} y \iff x^3 = y^3 \]
+
+\begin{enumerate}
+    \item Démontrer que $\mathcal{R}$ est une relation d'équivalence.
+    \item Décrire la classe d'équivalence de $e$.
+    \item Dans cette question $G$ est le groupe des permutations $S_4$.
+    \begin{enumerate}
+        \item Donner la liste des éléments de la classe d'équivalence de $e$.
+        \switchcolumn
+        \item[(b)] Montrer que la classe d'équivalence de $e$ n'est pas un sous-groupe de $S_4$.
+    \end{enumerate}
+    \setcounter{enumi}{3}
+    \item Dans cette question $G$ est un groupe abélien. Montrer que la classe d'équivalence de $e$ est un sous-groupe de $G$.
+\end{enumerate}
+}
+
+\exercise{4}{Matrices triangulaires supérieures et sous-groupes}{
+Soit $n \ge 2$ et $(\text{GL}_n(\mathbb{C}), \times)$ le groupe des matrices inversibles de taille $n$ à coefficients dans $\mathbb{C}$. On note $\mathcal{T}_n$ le sous-ensemble de $\text{GL}_n(\mathbb{C})$ constitué des matrices triangulaires supérieures.
+
+\begin{enumerate}
+    \item Montrer que $\mathcal{T}_n$ est un sous-groupe de $(\text{GL}_n(\mathbb{C}), \times)$.
+    \item Soit $T = (t_{ij})_{1 \le i, j \le n}$ une matrice de $\mathcal{T}$. Montrer que pour tout $1 \le i \le n$, $t_{ii} \neq 0$.
+    \item En déduire que pour tout $1 \le i \le n$, l'application $\pi_i : \mathcal{T} \to (\mathbb{C}^*, \times)$ qui à la matrice $T = (t_{ij})_{1 \le i, j \le n}$ associe $t_{ii}$ est un morphisme de groupes.
+    \item On note $H_i$ le noyau de $\pi_i$. Montrer que $\mathcal{T}/H_i$ est un groupe isomorphe à $(\mathbb{C}^*, \times)$.
+    \item On note $H$ l'intersection des groupes $H_i$ pour $1 \le i \le n$. Montrer que $\mathcal{T}/H$ est isomorphe au groupe multiplicatif $(\mathbb{C}^*)^{\times n}$.
+\end{enumerate}
+}
+
+\exercise{5}{Automorphismes et automorphismes intérieurs}{
+Soit $G$ un groupe. On rappelle qu'un morphisme de groupes $f : G \to G$ bijectif est appelé automorphisme de $G$ et que l'ensemble des automorphismes de $G$ est un groupe pour la composition. Il est noté $(\text{Aut}(G), \circ)$.
+
+\begin{enumerate}
+    \item Soit $a \in G$. Montrer que l'application $\phi_a : G \to G$ définie par $\phi_a(x) = axa^{-1}$ est un morphisme de groupes.
+    \item Montrer que pour tous $a, b \in G$ on a $\phi_a \circ \phi_b = \phi_{ab}$.
+    \item En déduire que $\phi_a \in \text{Aut}(G)$.
+    \item On note $\text{Int}(G)$ le sous-ensemble de $\text{Aut}(G)$ constitué des éléments $\phi_a$, pour $a \in G$. Montrer que $\text{Int}(G)$ est un sous-groupe distingué de $\text{Aut}(G)$.
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+\exercise{6}{Ordre de la puissance d'un élément}{
+Soit $G$ un groupe et $x \in G$ un élément d'ordre $n$. Démontrer que $x^m$ est d'ordre $\frac{n}{\text{pgcd}(m,n)}$ pour tout $m \in \mathbb{N}^*$.
+}
+
+\exercise{7}{Isomorphismes et sous-groupes distingués}{
+\begin{enumerate}
+    \item Donner un exemple de groupe $G$ muni d'un sous-groupe distingué $H$ avec $G$ non isomorphe à $H \times G/H$.
+    \item Donner un tel exemple avec $G$ abélien, puis avec $G$ fini, $|H|$ et $|G/H|$ premiers entre eux.
+    \item Y a-t-il de tels exemples avec $G$ abélien fini, $|H|$ et $|G/H|$ premiers entre eux ?
+\end{enumerate}
+}
+
+\exercise{8}{Questions diverses de cours}{
+\begin{enumerate}
+    \item Donner la définition de tribu sur $\Omega$.
+    \item Soit $\mathcal{C} \subset \mathcal{P}(\Omega)$. Donner la définition de tribu $\sigma(\mathcal{C})$ engendrée par $\mathcal{C}$.
+    \item Donner la définition de mesure positive sur $(\Omega, \mathcal{F})$. À quelle condition cette mesure est-elle finie ? $\sigma$-finie ?
+    \item Donner la définition de fonction étagée sur $(E, \mathcal{E}, \mu)$.
+    \item Donner la définition de fonction mesurable de $(E, \mathcal{E})$ vers $(F, \mathcal{F})$.
+    \item Soit $f$ mesurable de $(E, \mathcal{E})$ vers $(F, \mathcal{F})$, $\mathbb{P}$ une probabilité sur $(E, \mathcal{E})$. Définir $\mathbb{P}_f$, mesure-image de $\mathbb{P}$ par $f$. La mesure $\mathbb{P}_f$ est-elle une probabilité ?
+    \item Soit $\mu$ une mesure (positive) sur $(\Omega, \mathcal{F})$, $(A_n)$ une suite croissante d'éléments de $\mathcal{F}$, et $A = \bigcup_{n \in \mathbb{N}} A_n$. Que peut-on dire de $\lim_{n \to \infty} \mu(A_n)$ ?
+    \item Donner un exemple de mesure atomique sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$.
+    \item Est-il possible de construire une mesure sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que $\mu((a,b)) = 1$ pour tous $a < b$ réels ?
+    \item Est-il possible de construire une mesure sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que $\mu((a,b)) = \pi(b-a)$ pour tous $a < b$ réels ?
+\end{enumerate}
+}
+
+\switchcolumn
+\newpage
+
+\exercise{9}{Exemples de tribus}{
+\begin{enumerate}
+    \item Si $\Omega = \{1, 2, 3\}$, écrire explicitement les tribus $\sigma(\{1\})$ et $\sigma(\{2\})$. Est ce que $\sigma(\{1\}) \cup \sigma(\{2\})$ est une tribu ?
+    \item Soit $\Omega$ un ensemble et $\mathcal{F}_j, j = 1, 2, \dots$ des tribus constituées de sous-ensembles de $\Omega$. On suppose que $\mathcal{F}_j \subset \mathcal{F}_{j+1}$ pour tout $j$. Montrer que $\bigcup_{j=1}^n \mathcal{F}_j$ est une tribu.
+    \item On considère $\Omega = \mathbb{N} = \{1, 2, \dots\}$ et la tribu $\mathcal{G}_n := \sigma(\{1\}, \{2\}, \dots, \{n\})$. Montrer que $\bigcup_{n \in \mathbb{N}} \mathcal{G}_n$ n'est pas une tribu. \textit{Suggestion :} on pourra raisonner par l'absurde et considérer l'ensemble $2\mathbb{N}$ des entiers pairs.
+\end{enumerate}
+}
+
+\exercise{10}{Indépendance d'événements}{
+On lance deux dés au hasard et on considère les événements suivants :
+\begin{itemize}
+    \item $A$ : Le premier dé donne un chiffre pair.
+    \item $B$ : Le deuxième dé donne un chiffre pair.
+    \item $C$ : La somme des valeurs obtenues est paire.
+\end{itemize}
+Montrer que les événements sont deux à deux indépendants mais que $A, B, C$ ne sont pas indépendants.
+}
+
+\exercise{11}{Calculs sur une mesure sur les boréliens}{
+Soit $\alpha > 0$ et $\mu$ la mesure sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que pour tous $a < b$ réels :
+\[ \mu((a,b)) = \alpha \int_a^b \left( x \indic{\{x \in [0,1]\}} + \alpha x^2 \indic{[0,2]}(x) \right) dx \]
+\begin{enumerate}
+    \item Que vaut $\mu(\mathbb{R}_-)$ ? $\mu((2,3))$ ? et $\mu((1, +\infty))$ ?
+    \item Exprimer $\mu([0,1])$ en fonction de $\alpha$. En déduire la valeur de $\alpha$ pour que $\mu$ soit une probabilité.
+    \item Soit $x_0 \in \mathbb{R}$, montrer que
+    \[ \mu\left(\left(x_0 - \frac{1}{n}, x_0 + \frac{1}{n}\right)\right) \le \frac{2}{n} + \frac{4\alpha}{n} \]
+    Que vaut $\mu(\{x_0\})$ ?
+\end{enumerate}
+}
+
+\switchcolumn
+\newpage
+\exercise{12}{Mesure de probabilité discrète sur R}{
+On considère $\Omega = \mathbb{R}$, muni de sa tribu des boréliens, et une mesure $\mathbb{P}$ telle que
+\[ \mathbb{P}(\{0\}) = q, \quad \mathbb{P}(\{2\}) = \frac{1}{e}, \quad \mathbb{P}\left(\left\{\frac{1}{k}\right\}\right) = \frac{\exp(-2)}{(k-1)!}, \quad \forall k \in \mathbb{N}^*, \]
+\[ \mathbb{P}\left( \mathbb{R} \setminus \left(\{0\} \cup \{2\} \cup \left\{\frac{1}{k}, k \in \mathbb{N}^*\right\}\right) \right) = 0. \]
+\begin{enumerate}
+    \item Montrer que $\sum_{k \in \mathbb{N}^*} \frac{1}{(k-1)!} = e$, en déduire la valeur de $q$ qui fait de $\mathbb{P}$ une probabilité. Dans la suite, on suppose que $q$ adopte cette valeur.
+    \item Calculer
+    \[ \sum_{k \in \mathbb{N}^*} \frac{1}{k} \mathbb{P}\left(\left\{\frac{1}{k}\right\}\right), \]
+    en déduire que
+    \[ \sum_{\{x \in \mathbb{R} : \mathbb{P}(\{x\}) > 0\}} x \mathbb{P}(\{x\}) = \frac{3}{e} \]
+    \item Montrer que pour tout $t \in \mathbb{R}$,
+    \[ \sum_{k \in \mathbb{N}^*} \frac{t^{k-1}}{k!} = \frac{1}{t}(\exp(t) - 1), \]
+    en déduire $(\star)$ :
+    \[ \sum_{k \in \mathbb{N}^*} \frac{t^k}{k \cdot k!} = \int_0^t \frac{\exp(u) - 1}{u} du \]
+\end{enumerate}
+}
+\exercise{13}{Mesurabilité de fonctions élémentaires et dérivées}{
+Prouver que les fonctions suivantes sont mesurables (boréliennes) :
+\begin{enumerate}
+    \item la fonction indicatrice de $\mathbb{Q}$ ;
+    \item la fonction $x \mapsto x + 1$ si $x > 0$ et $-x$ si $x \le 0$ ;
+    \item la dérivée $f'$ d'une fonction dérivable $f$.
+\end{enumerate}
+}
+
+\switchcolumn
+\exercise{14}{Prolongement par zéro et mesurabilité}{
+Soit $E$ une partie mesurable de $\mathbb{R}^n$ et $f : E \to \mathbb{R}$. Soit $g : \mathbb{R}^n \to \mathbb{R}$ définie par $g(x) = f(x)$ si $x \in E$ et $g(x) = 0$ sinon. Démontrer que $f$ est mesurable si et seulement si $g$ est mesurable.
+}
+
+\exercise{15}{Mesurabilité de la valeur absolue}{
+Donner un exemple d'espace mesurable $(E, \mathcal{T})$ et d'application $f : E \to \mathbb{R}$ qui n'est pas mesurable, mais telle que $|f|$ est mesurable.
+}
+\exercise{16}{Intérieur, adhérence... dans $\mathbb{R}$}{
+Dans l'espace normé $(\mathbb{R}, |\cdot|)$, déterminer l'intérieur, l'adhérence et la frontière de chacun des sous-ensembles suivants, et préciser lesquels sont denses :
+\[ A = \{2, 4, 5\}, \quad B = [1,3] \cup \{\pi\}, \quad C = [-1,1[\,\cup\,\{3\}, \]
+\[ D = \mathbb{Z}, \quad E = \bigcup_{n \in \mathbb{N}^*} \left\{\frac{1}{n}\right\}, \quad F = \mathbb{Q}. \]
+}
+
+\exercise{17}{Intérieur, adhérence... dans $\mathbb{R}^N$}{
+Dans $(\mathbb{R}^n, \|\cdot\|_2)$, déterminer l'intérieur, l'adhérence et la frontière des sous-ensembles suivants, et préciser lesquels sont denses :
+\[ A = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \le 1\}, \quad B = \{(x,y,z) \in \mathbb{R}^3 \mid z - x^2 \ge 0, y > x\}, \]
+\[ C = \{(x,y,z) \in \mathbb{R}^3 \mid x + y + z = 0\}, \quad D = \mathbb{Q} \times \mathbb{Z}. \]
+}
+
+\exercise{18}{Topologie en dimension infinie}{
+On considère $E = \ell^\infty$ l'espace vectoriel des suites réelles bornées. Pour tout $u = (u(k))_k \in E$ on pose :
+\[ \|u\|_\infty = \sup_{k \in \mathbb{N}} |u(k)| \]
+On considère deux sous-espaces vectoriels de $E$, définis par :
+\[ A := \left\{ u = (u(k))_k \in E \; \middle| \; u(k) \xrightarrow[k \to +\infty]{} 0 \right\} \]
+\[ B := \left\{ u = (u(k))_k \in E \; \middle| \; \exists K \in \mathbb{N}, \forall k \ge K, u(k) = 0 \right\} \]
+
+\begin{enumerate}
+    \item Montrer que $\|\cdot\|_\infty$ est une norme sur $E$.
+    \switchcolumn
+    \newpage
+    \item[2.] Montrer que $A$ est fermé dans $(E, \|\cdot\|_\infty)$, mais que $B$ ne l'est pas.
+    
+    \textit{Indication :} On pourra utiliser la suite $(u_n)_n$ d'éléments de $B$ définie par $u_n(k) = \begin{cases} 1 & \text{si } k \le n \\ 0 & \text{sinon} \end{cases}$.
+    \item[3.] Montrer que $A$ est l'adhérence de $B$ dans $(E, \|\cdot\|_\infty)$.
+\end{enumerate}
+}
 \end{paracol}
 \end{document}
