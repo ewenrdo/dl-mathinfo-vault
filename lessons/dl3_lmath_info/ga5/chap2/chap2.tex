@@ -476,10 +476,12 @@ $\mathcal{Q} = (\mathbb{Z}/2\mathbb{Z}, +)$ est par conséquent un groupe quotie
 \subsection{Sous-groupes de $G/H$ avec $H \triangleleft G$}
 
 \theorem{Proposition}{}{false}{
-    Soit $G$ un groupe et $H$ un sous-groupe distingué de $G$. Notons $\pi : G \to G/H$ l'application quotient.\\
-    Les sous-groupes de $G/H$ sont de la forme $K/H$ avec $K$ un sous-groupe de $G$ contenant $H$.\\
-    L'application $K \mapsto K/H$ est une bijection entre l'ensemble des sous-groupes de $G$ contenant $H$ et l'ensemble des sous-groupes de $G/H$.\\
-    Si $K$ est un sous-groupe de $G$, alors $\pi(K) = KH/H$.
+    Soit $G$ un groupe et $H$ un sous-groupe distingué de $G$. Notons $\pi : G \to G/H$ la projection canonique. Alors :
+    \begin{enumerate}
+        \item Les sous-groupes de $G/H$ sont de la forme $K/H$ avec $K \leq G$ et $H \subseteq K$.
+        \item L'application $K \mapsto K/H$ est une bijection entre l'ensemble des sous-groupes de $G$ contenant $H$ et l'ensemble des sous-groupes de $G/H$.
+        \item Si $K$ est un sous-groupe de $G$, alors $\pi(K) = KH/H$.
+    \end{enumerate}
 }
 
 \example{Les sous-groupes $\mathbb{Z}/n\mathbb{Z}$ sont de la forme $k\mathbb{Z}/n\mathbb{Z}$ avec $k$ un diviseur de $n$.}
