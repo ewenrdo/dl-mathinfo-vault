@@ -127,13 +127,29 @@ En faisant la différence, on obtient :
     Soit $F : \mathbb{R} \to \mathbb{R}$ croissante, continue à droite, telle que $\lim_{x \to -\infty} F(x) = 0$ et $\lim_{x \to +\infty} F(x) = 1$. Alors il existe une unique mesure de probabilité $\mathbb{P}$ sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ telle que $F = F_\mathbb{P}$.
 }
 
+\subsection{Densité}
+
+\definition{
+    Soit $\mathbb{P}$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Soit $f_X : \mathbb{R} \to \mathbb{R}_+$  une fonction mesurable.\\
+    On dit que $\mathbb{P}$ possède la densité $f_X$ vis-à-vis de la mesure de Lebesgue si :
+    $$\forall A \in \mathcal{B}(\mathbb{R}), \quad \mathbb{P}(A) = \int_A f_X(x) dx$$
+}
+
+\remark{
+    Il vient le résultat suivant : $$\int_\mathbb{R} fd\mathbb{P} = \int_\mathbb{R} f \cdot g d\lambda = \int_\mathbb{R} f(x) \cdot g(x) dx$$
+    En particulier, si $f\cdot g$ est positive (ou intégrable au sens de Riemann, ie. $\int_\mathbb{R} |f(x)| \cdot g(x) dx < \infty$), $\int_\mathbb{R} f(x)g(x)dx$ coïncide avec l'intégrale de Lebesgue $\int_\mathbb{R} f d\mathbb{P}$.
+
+}
+
+\vocabulary{Par abus de langage, on dit que $X$ possède la densité $f_X$.}
+
 \section{Variables aléatoires}
 
 \subsection{Définition}
 \definition{
     Soit $(\Omega, \mathcal{F}, \mathbb{P})$ un espace de probabilité. Soit $E$ muni de la tribu $\mathcal{E}$.
     Toute application mesurable $X : \Omega \to E$ est une variable aléatoire à valeurs dans $E$.\\\\
-    La loi de $X$, $\mathbb{P}_X$, est la mesure-image de $\mathbb{P}$ par $X$.
+    La loi de $X$, $\mathbb{P}_X$, est la mesure-image de $\mathbb{P}$ par $X$. On a : $F_X := F_{\mathbb{P}_X}$.
 }
 
 \subsection{Variable aléatoire réelle}
@@ -169,6 +185,7 @@ En faisant la différence, on obtient :
     Soit $X$ est dans $\mathcal{L}^2(\Omega, \mathcal{F}, \mathbb{P})$. On définit la variance de $X$ par :
     $$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \begin{cases}
 \mathbb{E}[X^2] - (\mathbb{E}[X])^2 & \text{si } \mathbb{E}[|X|] < \infty \\
+\infty & \text{sinon}
 \end{cases}$$
 }
 
@@ -177,6 +194,12 @@ En faisant la différence, on obtient :
     $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) d\mathbb{P}_X(x)$$
     Si $\phi : \mathbb{R} \to \mathbb{R}$ est borélienne, alors $\phi \circ X \in \mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P})$ si et seulement si $\phi \in \mathcal{L}^1(\mathbb{R}, \mathcal{B}(\mathbb{R}), \mathbb{P}_X)$ et dans ce cas :
     $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) d\mathbb{P}_X(x)$$
+}
+\ndlr{cf. Laurent pour la preuve (pas encore vue en cours)}
+
+\theorem{Corollaire}{Transfert avec densité}{false}{
+    Soit $X$ une variable aléatoire réelle et $f_X$ sa densité vis-à-vis de la mesure de Lebesgue. Alors pour toute fonction borélienne $\phi : \mathbb{R} \to \mathbb{R}$, positive ou telle que $\int_\mathbb{R} |\phi(x)| f_X(x) dx < \infty$, on a :
+    $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) f_X(x) dx$$
 }
 
 \subsubsection{Lois usuelles}
@@ -282,6 +305,8 @@ Uniforme \newline {\scriptsize $\mathcal{U}(\{1, \ldots, n\})$} & $\dfrac{1}{n},
 \end{tabularx}
 \end{table}
 
+\remark{Dans ce cours, la géométrique est définie sur $\mathbb{N}^*$, c'est-à-dire que l'on compte le nombre d'essais jusqu'au premier succès (ce qui garanti l'absence de mémoire).}
+
 \vspace{0.5cm}
 
 \begin{table}[h!]
@@ -305,6 +330,27 @@ Gamma \newline {\scriptsize $\Gamma(a, \lambda)$} & $\dfrac{\lambda^a}{\Gamma(a)
 \hline
 \end{tabularx}
 \end{table}
+
+\newpage
+
+\section{5 nov}
+
+\reminder{$\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P}) = \{ X : \Omega \to \mathbb{R} \text{ v.a.r. telle que } \mathbb{E}[|X|] < \infty\}$.}
+Lorsque
+\[
+\mathbb{P}(X \neq Y) = \mathbb{P}(\{\omega : X(\omega) \neq Y(\omega)\}) = 0
+\]
+on dit que $X$ et $Y$ sont indistinguables. L'indistinguabilité est une relation d'équivalence, notée parfois $\sim$.
+
+On travaille à indistinguabilité près quand on se place dans
+\[
+\mathbb{L}^1(\Omega, \mathcal{F}, \mathbb{P}) = \mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P}) / \sim
+\]
+ou encore pour $p \ge 1$,
+\[
+\mathbb{L}^p(\Omega, \mathcal{F}, \mathbb{P}) = \{ X \text{ v.a.r. telle que } \mathbb{E}[X^p] < \infty \} / \sim,
+\]
+La norme $\|X\|_p = (\mathbb{E}[X^p])^{1/p}$ fait de $\mathbb{L}^p(\Omega, \mathcal{F}, \mathbb{P})$ un e.v. normé complet, et ces espaces sont décroissants au sens de l'inclusion.
 
 \newpage
 \tableofcontents
