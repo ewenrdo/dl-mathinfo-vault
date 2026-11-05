@@ -268,28 +268,6 @@ Ainsi, \(\varphi^{-1}\) est un morphisme de groupes. $\Box$}
 \example{
     \function{\varphi}{\mathbb{R} \rightarrow \mathbb{R}^*}{t \mapsto e^t} est un morphisme injectif mais pas surjectif. \textit{À l'inverse, considéré dans $\mathbb{C}$, $\varphi$ devient surjectif mais pas injectif.}
 }
-\theorem{Corollaire}{Image et image réciproque d'un sous-groupe par un morphisme}{true}{
-    Soit $H \subset G$ un sous-groupe.\\
-    Alors $\varphi(H)$ est un sous-groupe de $G'$. De même, si $H' \subset G'$ est un sous-groupe, alors $\varphi^{-1}(H')$ est un sous-groupe de $G$.
-}
-\noindent{\textbf{Preuve :} \begin{enumerate}
-    \item Soit $K$ un sous-groupe de $G$.
-    \begin{itemize}
-        \item \textbf{Élément neutre (ensemble non vide) :} On a $f(e_G) = e_H$, et $e_G \in K$ car $K < G$. Donc $e_H \in f(K)$.
-        \item \textbf{Stabilité par la loi et l'inverse :} Soient $x, y \in f(K)$. Soient $a, b \in K$ tels que $x = f(a)$ et $y = f(b)$.
-        \[
-        \text{Alors, } x^{-1} *_H y = f(a)^{-1} *_H f(b) = f(a^{-1}) *_H f(b) = f(a^{-1} *_G b) \in f(K).
-        \]
-    \end{itemize}
-    On conclut que $f(K) < H$.
-
-    \item Soit $K < H$.
-    \begin{itemize}
-        \item \textbf{Élément neutre (ensemble non vide) :} On a $e_H \in K$ car $K < H$ et $f(e_G) = e_H$. Donc $e_G \in f^{-1}(K)$.
-        \item \textbf{Stabilité par la loi et l'inverse :} Soient $x, y \in f^{-1}(K)$. Alors $f(x^{-1} *_G y) = f(x^{-1}) *_H f(y) = f(x)^{-1} *_H f(y) \in K$ (car $f(x), f(y) \in K$ et $K < H$). Donc $x^{-1} *_G y \in f^{-1}(K)$.
-    \end{itemize}
-    Ainsi, $f^{-1}(K) < G$.
-\end{enumerate}}
 
 
 \section{Sous-groupes}
@@ -349,23 +327,24 @@ Dans cette section, on utilisera le système de notation multiplicatif, mais il 
     \end{itemize}
 }
 
-\noindent{\textbf{Démonstration : }
-    \begin{enumerate}
-        \item On utilise la caractérisation. Soit $K$ un sous-groupe de $G$. 
-        \begin{itemize}
-            \item On a $f(e_G)=e_{G'}$ et $e_{G'}\in K$ car $K\le G$. Donc $e_{G'}\in G$
-            \item Soit $x, y\in f(K)$. Soient $a, b\in K$ tels que $x=f(a)$ et $y=f(b)$.\\
-                Alors, $x^{-1} *_{G'} y = f(a)^{-1} *{G'} f(b) = f(a^{-1}) *_{G'} f(b) = f(a^{-1} *_G b)\in f(K)$. On conclut que $f(K)\le G'$.
-        \end{itemize}
-        \item Soit $K\le H$.
-        \begin{itemize}
-            \item On a $e_{G'}\in K$ car $K\le G'$ et $f(e_G)=f(e_{G'})$. Donc $e_G\in f^{-1}(K)$.
-            \item Soient $x, y\in f^{-1}(K)$. Alors $f(x^{-1} *_G y) = f(x^{-1}) *_{G'} f(y) = f(x)^{-1} *_{G'} f(y) \in K$ (car $f(x), f(y)\in K$ et $K\le G'$). \\
-            Donc $x^{-1} *_G y\in f^{-1}(K)$. Ainsi, $f^{-1}(K)\le G$.
-        \end{itemize}
-    \end{enumerate}
-}
+\noindent{\textbf{Preuve :} \begin{enumerate}
+    \item Soit $K$ un sous-groupe de $G$.
+    \begin{itemize}
+        \item \textbf{Élément neutre (ensemble non vide) :} On a $f(e_G) = e_H$, et $e_G \in K$ car $K < G$. Donc $e_H \in f(K)$.
+        \item \textbf{Stabilité par la loi et l'inverse :} Soient $x, y \in f(K)$. Soient $a, b \in K$ tels que $x = f(a)$ et $y = f(b)$.
+        \[
+        \text{Alors, } x^{-1} *_H y = f(a)^{-1} *_H f(b) = f(a^{-1}) *_H f(b) = f(a^{-1} *_G b) \in f(K).
+        \]
+    \end{itemize}
+    On conclut que $f(K) < H$.
 
+    \item Soit $K < H$.
+    \begin{itemize}
+        \item \textbf{Élément neutre (ensemble non vide) :} On a $e_H \in K$ car $K < H$ et $f(e_G) = e_H$. Donc $e_G \in f^{-1}(K)$.
+        \item \textbf{Stabilité par la loi et l'inverse :} Soient $x, y \in f^{-1}(K)$. Alors $f(x^{-1} *_G y) = f(x^{-1}) *_H f(y) = f(x)^{-1} *_H f(y) \in K$ (car $f(x), f(y) \in K$ et $K < H$). Donc $x^{-1} *_G y \in f^{-1}(K)$.
+    \end{itemize}
+    Ainsi, $f^{-1}(K) < G$.
+\end{enumerate}}
 \subsection{Sous-groupe engendré}
 
 \theorem{Proposition}{Intersection de sous-groupes}{false}{
