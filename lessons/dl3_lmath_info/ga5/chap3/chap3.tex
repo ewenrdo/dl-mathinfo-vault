@@ -111,13 +111,20 @@ Le théorème d'isomorphisme permet de conclure que $\psi$ induit un isomorphism
 \reminder{On rappelle que le groupe symétrique $S_n$ est le groupe des permutations de l'ensemble $\{1, 2, \ldots, n\}$.}
 
 \theorem{Lemme}{}{false}{
-    Soit $(a_1 \ldots a_n)$ un $r$-cycle et $\sigma \in S_n$. On a :
-    $$\sigma (a_1 \ldots a_r) \sigma^{-1} = (\sigma(a_1) \ldots \sigma(a_r)).$$
+    \begin{enumerate}
+    \item Soit $(a_1 \dots a_r)$ un $r$-cycle et $\sigma \in S_n$. On a
+    \[
+    \sigma (a_1 \dots a_r) \sigma^{-1} = (\sigma(a_1) \dots \sigma(a_r)).
+    \]
+    \item Soient $(a_1 \dots a_r)$ et $(b_1 \dots b_r)$ deux $r$-cycles de $S_n$. Il existe $\sigma \in S_n$ tel que
+    \[
+    \sigma (a_1 \dots a_r) \sigma^{-1} = (b_1 \dots b_r).
+    \]
+    \item Soit $H$ un sous-groupe distingué de $S_n$. Si $H$ contient un $r$-cycle, alors il contient tous les $r$-cycles.
+\end{enumerate}
 }
 
-\noindent{\textbf{Preuve}:\\
-Comme $\sigma$ est une permutation tous les $\sigma(a_j)$ sont distincts. Soit $\sigma(j) \notin \{\sigma(a_1), \dots, \sigma(a_r)\}$ alors $j \notin \{a_1, \dots, a_r\}$ donc $\sigma(a_1 \dots a_r)\sigma^{-1}(\sigma(j)) = \sigma(j)$. Par ailleurs $\sigma(a_1 \dots a_r)\sigma^{-1}(\sigma(a_k)) = \sigma(a_{k+1})$ pour $1 \leq k \leq r - 1$ et $\sigma(a_1 \dots a_r)\sigma^{-1}(\sigma(a_r)) = \sigma(a_1)$. Donc le résultat est démontré. \hfill $\square$
-}
+\ndlr{cf. Laurent pour la preuve.}
 
 
 \remark{On verra que les cycles engendrent le groupe $S_n$.}
