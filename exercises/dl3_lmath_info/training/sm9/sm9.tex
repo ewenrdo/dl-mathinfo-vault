@@ -1,0 +1,177 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\usepackage{paracol}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°9}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $6,7,8,9,10$\\
+\hline
+Groupes et actions & $1,2,3,4,5$\\
+\hline
+Calcul différentiel & $11,12,13$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\exercise{1}{Partitions et classes de conjugaison dans $\mathcal{S}_n$}{
+Soit $n \ge 1$. Étant donnée une permutation $\sigma \in \mathcal{S}_n$, on écrit $\sigma$ comme produit de cycles à supports disjoints $\sigma = \sigma_1 \dots \sigma_r$. On note $\ell_i$ la longueur du cycle $\sigma_i$ pour chaque $1 \le i \le r$.
+\begin{enumerate}
+    \item Expliquer pourquoi on peut supposer que $\ell_1 \le \ell_2 \le \dots \le \ell_r$. On fera cette hypothèse dans la suite de l'exercice.
+    \item Soit $m$ le nombre de points fixes de $\sigma$. On associe à $\sigma$ le $(r+m)$-uplet $\mathrm{type}(\sigma) = (1, \dots, 1, \ell_1, \dots, \ell_r)$, où les $m$ premières entrées sont égales à 1. Montrer que $\mathrm{type}(\sigma)$ est une partition de $n$, c'est-à-dire un $s$-uplet $(a_1, \dots, a_s)$ (pour un certain $s \ge 1$) d'entiers strictement positifs tels que $a_1 + \dots + a_s = n$ et $a_1 \le \dots \le a_s$.
+    \item Montrer que le type induit une bijection entre l'ensemble des classes de conjugaison de $\mathcal{S}_n$ et l'ensemble des partitions de $n$.
+    \item On se place dans $\mathcal{S}_9$. Parmi les permutations suivantes, lesquelles sont conjuguées :
+    \[
+    \sigma_1 = (1 \; 6 \; 3)(2 \; 8 \; 9 \; 5), \quad \sigma_2 = (1 \; 9 \; 2)(4 \; 9 \; 8 \; 5), \quad \sigma_3 = (2 \; 6 \; 7 \; 9)(4 \; 5 \; 8) ?
+    \]
+    \item Combien y a-t-il de classes de conjugaisons dans $\mathcal{S}_6$ ?
+\end{enumerate}
+}
+
+\exercise{2}{Sous-groupes normaux de $\mathcal{S}_4$ et du groupe alterné}{
+\begin{enumerate}
+    \item Faire la liste des sous-groupes normaux de $\mathcal{S}_4$ (\emph{indication : un sous-groupe normal est une réunion disjointes de classes de conjugaison}). Vérifier qu'il y en a exactement un d'ordre 4. On le note $H$.
+
+    \item Vérifier que $H$ est contenu dans $\mathcal{A}_4$ et calculer le quotient $\mathcal{A}_4 / H$.
+    \item Montrer que le morphisme obtenu en composant l'injection naturelle $\mathcal{S}_3 \to \mathcal{S}_4$ et la projection canonique $\mathcal{S}_4 \to \mathcal{S}_4 / H$ est un isomorphisme.
+    \item Montrer que $D(\mathcal{A}_4) = H$.
+       \switchcolumn
+    \setcounter{enumi}{4}
+    \item Combien y a-t-il de morphismes de $\mathcal{A}_4$ dans $\mathbb{C}^\times$ ?
+\end{enumerate}
+}
+
+\exercise{3}{Étude d'un sous-groupe engendré dans $\mathcal{S}_{11}$}{
+Dans le groupe symétrique $\mathcal{S}_{11}$, on considère les éléments :
+\[
+\sigma := (1 \; 2), \quad \tau := (1 \; 2 \; 4 \; 3)(5 \; 6 \; 7 \; 8)(10 \; 3 \; 2 \; 4 \; 8 \; 9).
+\]
+On pose $H := \langle \sigma, \tau \rangle$.
+\begin{enumerate}
+    \item Écrire $\tau$ comme produit de cycles à supports disjoints. Quel est l'ordre de $\tau$ ? Est-ce que $\tau$ appartient au groupe alterné $\mathcal{A}_{11}$ ?
+    \item Reconnaître le groupe $H$. Quel est son indice dans $\mathcal{S}_{11}$ ?
+    \item Montrer que, pour tout $\rho \in \mathcal{S}_{11} \setminus H$, le groupe $\mathcal{S}_{11}$ est engendré par $\sigma$, $\tau$ et $\rho$.
+\end{enumerate}
+}
+
+\exercise{4}{Normalisateur et centralisateur}{
+Soient $G$ un groupe et $A$ une partie de $G$.\\
+Posons $N(A) = \{g \in G,\; gAg^{-1} = A\}$ et $C(A) = \{g \in G,\; \forall a \in A,\; gag^{-1} = a\}$, ce sont respectivement le \emph{normalisateur} et le \emph{centralisateur} de $A$.\\
+Montrer que $N(A)$ et $C(A)$ sont des sous-groupes de $G$ et que $C(A)$ est un sous-groupe distingué de $N(A)$.
+}
+
+\exercise{5}{Groupe quotient $\mathbb{Q}/\mathbb{Z}$}{
+On considère le groupe quotient $(\mathbb{Q}/\mathbb{Z}, +)$.
+\begin{enumerate}
+    \item Montrer que l'application $\varphi : (\mathbb{R}, +) \to (\mathbb{C}^*, \times)$ définie par $\varphi(x) = e^{2i\pi x}$ est un homomorphisme de groupes.
+    \item Calculer son noyau et son image, et en déduire que $\mathbb{R}/\mathbb{Z} \simeq \mathbb{U} := \{z \in \mathbb{C} \,;\, |z| = 1\}$.
+
+    \item On note $\phi$ la restriction de $\varphi$ au sous-groupe $\mathbb{Q}$. Montrer (par double inclusion) que l'image de $\phi$ est égale à
+    \[
+    \mathbb{U}_\infty = \{z \in \mathbb{C} \,;\, \text{il existe } n \in \mathbb{N}^* \text{ tel que } z^n = 1\} = \bigcup_{n \in \mathbb{N}^*} \mathbb{U}_n.
+    \]
+    \item En déduire que $\mathbb{Q}/\mathbb{Z} \simeq \mathbb{U}_\infty$.
+\end{enumerate}
+}
+\switchcolumn
+\newpage
+
+\exercise{6}{Vrai/Faux}{
+\begin{enumerate}
+    \item Lorsque la v.a.r. $X$ ne prend qu'un nombre fini de valeurs $\{x_1, \dots, x_n\}$, l'espérance de $X$ est égale à la moyenne arithmétique de ces valeurs.
+    \item Une v.a.r de carré intégrable et possédant une densité ne peut avoir une variance nulle.
+    \item Une v.a.r de carré intégrable est toujours intégrable.
+    \item Si la v.a.r $X$ vérifie $\mathbb{E}[\exp(X)] < \infty$ alors $X$ est intégrable.
+    \item Si la v.a.r $X$ possède des moments de tous ordres et si $f$ est une fonction continue de $\mathbb{R}$ dans $\mathbb{R}$ alors $f(X)$ possède des moments de tous ordres.
+    \item Pour une v.a.r $X$ telle que les espérances ci-dessous sont définies, on a toujours
+    \[
+    \mathbb{E}[\exp(-X)] \ge \exp(-\mathbb{E}[X]) \quad \mathbb{E}[\exp(X)] \ge \exp(\mathbb{E}[X]).
+    \]
+\end{enumerate}
+}
+
+\exercise{7}{Minimisation de l'erreur quadratique moyenne}{
+Soit $X$ une variable aléatoire réelle de carré intégrable. Trouver la constante $m$ telle que
+\[
+\mathbb{E}[(X - m)^2] = \inf_{y \in \mathbb{R}} \mathbb{E}[(X - y)^2]
+\]
+}
+
+\exercise{8}{Espérance d'une variable aléatoire à valeurs entières}{
+Soit $X$ une variable aléatoire. Montrer que si $X$ prend ses valeurs dans $\mathbb{N}$, alors :
+\[
+\mathbb{E}(X) = \sum_{n=0}^{\infty} \mathbb{P}(X > n)
+\]
+}
+
+\exercise{9}{Espérance d'une variable aléatoire à densité positive}{
+Soit $X$ une variable aléatoire positive de densité $f$. On note $F$ sa fonction de répartition. Montrer que l'on a :
+\[
+\mathbb{E}(X) = \int_{0}^{\infty} (1 - F(t)) \, dt.
+\]
+}
+\switchcolumn
+\newpage
+
+\exercise{10}{Continuité et compacts}{
+On munit $\mathbb{R}^n$ de sa topologie usuelle (induite par n'importe quelle norme). Déterminer si les parties suivantes sont compactes :
+\begin{enumerate}
+    \item $A = [0,1] \times \{2\}$.
+    \item $B = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^4 \le 3\}$. Existe-t-il une plus grande valeur de $\sin(xy) + e^{x-y}$ sur $B$ ?
+    \item $C = \{(x,y) \in \mathbb{R}^2 \mid \max\{|x|, |y|\} = 2\}$.
+\end{enumerate}
+}
+
+\exercise{11}{Complétude de $(\mathbb{R}^n, \|\cdot\|_\infty)$}{
+Soit $E = \mathbb{R}^n$ muni de la norme $\|\cdot\|_\infty$ donnée par
+\[
+\forall x = (x_1, x_2, \dots, x_n) \in \mathbb{R}^n, \quad \|x\|_\infty = \max_{1 \le i \le n} |x_i|.
+\]
+Montrer que $(E, \|\cdot\|_\infty)$ est complet.
+}
+
+\exercise{12}{Topologie en dimension infinie}{
+On considère $E = \ell^\infty$ l'espace vectoriel des suites réelles bornées. Pour tout $u = (u(k))_k \in E$ on pose :
+\[ \|u\|_\infty = \sup_{k \in \mathbb{N}} |u(k)| \]
+On considère deux sous-espaces vectoriels de $E$, définis par :
+\[ A := \left\{ u = (u(k))_k \in E \; \middle| \; u(k) \xrightarrow[k \to +\infty]{} 0 \right\} \]
+\[ B := \left\{ u = (u(k))_k \in E \; \middle| \; \exists K \in \mathbb{N}, \forall k \ge K, u(k) = 0 \right\} \]
+
+\begin{enumerate}
+    \item Montrer que $\|\cdot\|_\infty$ est une norme sur $E$.
+
+    \item[2.] Montrer que $A$ est fermé dans $(E, \|\cdot\|_\infty)$, mais que $B$ ne l'est pas.
+    
+    \textit{Indication :} On pourra utiliser la suite $(u_n)_n$ d'éléments de $B$ définie par $u_n(k) = \begin{cases} 1 & \text{si } k \le n \\ 0 & \text{sinon} \end{cases}$.
+    \item[3.] Montrer que $A$ est l'adhérence de $B$ dans $(E, \|\cdot\|_\infty)$.
+\end{enumerate}
+}
+
+\end{paracol}
+\end{document}
