@@ -123,8 +123,18 @@ Le théorème d'isomorphisme permet de conclure que $\psi$ induit un isomorphism
     \item Soit $H$ un sous-groupe distingué de $S_n$. Si $H$ contient un $r$-cycle, alors il contient tous les $r$-cycles.
 \end{enumerate}
 }
-
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}
+    \begin{enumerate}
+        \item Comme $\sigma$ est une permutation, tous les $\sigma(a_j)$ sont distincts. \\
+        Si $\sigma(k)\notin {\sigma(a_1), ..., \sigma(a_r)}$, alors $k\notin{a_1, ..., a_r}$, donc $\sigma(a_1 ... a_r)\sigma^{-1}(\sigma(k))=\sigma(k)$. \\
+        Par ailleurs, $\sigma(a_1 ... a_r)\sigma^{-1}(\sigma(a_j))=\sigma(a_{j+1})$ pour $1\le j\le r-1$ et $\sigma(a_1 ... a_r)\sigma^{-1}(\sigma(a_r))=\sigma(a_1)$. \\ Donc le resultat est démontré.
+        \item Complétons les ensembles $\{a_1, ..., a_r\}$ et $\{b_1, ..., b_r\}$ en les ensembles $\{a_1, ..., a_r, a_{r+1}, ..., a_n\}=\{1, ..., n\}$ et $\{b_1, ..., b_r, b_{r+1}, ..., b_n\}=\{1, ..., n\}$. \\
+        Il existe une unique permutation telle que $\sigma(a_i)=b_i, 1\le i\le n$. On a alors $\sigma(a_1 ... a_r)\sigma^{-1}=(\sigma(a_1)...\sigma(a_r))=(b_1 ... b_r)$.
+        \item Soit $H$ un sous-groupe distingué de $S_n$ qui contient un $r$-cycle $(a_1 ... a_r)$.\\ 
+        Par la question 2, pour n'importe quelle autre $r$-cycle $(b_1 ... b_r)$, il existe $\sigma\in S_n$ tel que $\sigma(a_1 ... a_r)\sigma^{-1}=(b_1 ... b_r)$. \\
+        Comme $H$ est distingué dans $S_n$, on en déduit que $(b_1 ... b_r)\in H$, donc $H$ contient tous les $r$-cycles.
+    \end{enumerate}
+}
 
 
 \remark{On verra que les cycles engendrent le groupe $S_n$.}
