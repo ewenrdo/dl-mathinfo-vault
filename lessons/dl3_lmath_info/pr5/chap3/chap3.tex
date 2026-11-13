@@ -130,7 +130,7 @@ En faisant la différence, on obtient :
 \subsection{Densité}
 
 \definition{
-    Soit $\mathbb{P}$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Soit $f : \mathbb{R} \to \mathbb{R}_+$  une fonction mesurable.\\
+    Soit $\mathbb{P}$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Soit $f : \mathbb{R} \to \mathbb{R}_+$ une fonction mesurable.\\
     On dit que $\mathbb{P}$ possède la densité $f$ vis-à-vis de la mesure de Lebesgue si :
     $$\forall A \in \mathcal{B}(\mathbb{R}), \quad \mathbb{P}(A) = \int_A f(x) dx$$
 }
@@ -138,22 +138,20 @@ En faisant la différence, on obtient :
 \remark{
     Il vient le résultat suivant : $$\int_\mathbb{R} fd\mathbb{P} = \int_\mathbb{R} f \cdot g d\lambda = \int_\mathbb{R} f(x) \cdot g(x) dx$$
     En particulier, si $f\cdot g$ est positive (ou intégrable au sens de Riemann, ie. $\int_\mathbb{R} |f(x)| \cdot g(x) dx < \infty$), $\int_\mathbb{R} f(x)g(x)dx$ coïncide avec l'intégrale de Lebesgue $\int_\mathbb{R} f d\mathbb{P}$.
-
 }
 
 \vocabulary{Par abus de langage, si $X$ est une variable aléatoire de loi $\mathbb{P}_X$, on dit que $X$ possède la densité $f_X$.}
 
 \section{Variables aléatoires}
 
-\subsection{Définition}
 \definition{
     Soit $(\Omega, \mathcal{F}, \mathbb{P})$ un espace de probabilité. Soit $E$ muni de la tribu $\mathcal{E}$.
     Toute application mesurable $X : \Omega \toMesurable E$ est une variable aléatoire à valeurs dans $E$.\\\\
     La loi de $X$, $\mathbb{P}_X$, est la mesure-image de $\mathbb{P}$ par $X$. On a : $F_X := F_{\mathbb{P}_X}$.
 }
 
-\subsection{Variable aléatoire réelle}
-\subsubsection{Propriétés immédiates}
+\section{Variables aléatoires réelles}
+\subsection{Propriétés immédiates}
 \remark{Si $E = \mathbb{R}$, on parle de variable aléatoire réelle (v.a.r.). Sa loi $\mathbb{P}_X$ est une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$.}
 
 \theorem{Proposition}{Caractérisation par la fonction de répartition}{false}{
@@ -165,7 +163,7 @@ En faisant la différence, on obtient :
     Soit $X$ une variable aléatoire réelle et $f : \mathbb{R} \to \mathbb{R}$ une fonction borélienne. Alors $f(X)$ est une variable aléatoire réelle.
 }
 
-\theorem{Proposiiton}{Couple de variables aléatoires}{false}{
+\theorem{Proposition}{Couple de variables aléatoires}{false}{
     $(X,Y)$ est une variable aléatoire à valeurs dans $\mathbb{R}^2$ si et seulement si $X$ et $Y$ sont des variables aléatoires réelles sur le même espace.\\
     Dans ce cas, $X+Y$ et $X \cdot Y$ sont des variables aléatoires réelles.
 }
@@ -174,16 +172,16 @@ En faisant la différence, on obtient :
     Soit $(X_n)_{n \in \mathbb{N}}$ une suite de variables aléatoires réelles sur un même espace. Alors $\sup_{n \in \mathbb{N}} X_n$, $\inf_{n \in \mathbb{N}} X_n$, $\limsup_{n \to \infty} X_n$ et $\liminf_{n \to \infty} X_n$ sont des variables aléatoires réelles (sous réserve d'existence).
 }
 
-\subsubsection{Espérance et variance}
+\subsection{Espérance, moments et variance}
 
 \reminder{$\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P}) = \{ X : \Omega \to \mathbb{R} \text{ v.a.r. mesurable telle que } \int_\Omega |X| \, \mathrm{d}\mathbb{P} < \infty\}$ et $\mathcal{L}^2(\Omega, \mathcal{F}, \mathbb{P}) = \{ X : \Omega \to \mathbb{R} \text{ v.a.r. mesurable telle que } \int_\Omega X^2 \, \mathrm{d}\mathbb{P} < \infty\}$.}
 \definition{
-    Soit $X$ est une v.a.r. positive ou dans $\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P})$. On définit l'espérance de $X$ par :
+    Soit $X$ une v.a.r. positive ou dans $\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P})$. On définit l'espérance de $X$ par :
     $$\mathbb{E}[X] = \int_\Omega X d\mathbb{P}$$
 }
 
 \definition{
-    Soit $X$ est dans $\mathcal{L}^2(\Omega, \mathcal{F}, \mathbb{P})$. On définit la variance de $X$ par :
+    Soit $X$ dans $\mathcal{L}^2(\Omega, \mathcal{F}, \mathbb{P})$. On définit la variance de $X$ par :
     $$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \begin{cases}
 \mathbb{E}[X^2] - (\mathbb{E}[X])^2 & \text{si } \mathbb{E}[|X|] < \infty \\
 \infty & \text{sinon}
@@ -203,7 +201,18 @@ En faisant la différence, on obtient :
     $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) f_X(x) dx$$
 }
 
-\subsubsection{Indistinguabilité des variables aléatoires}
+\definition{
+    Soit $k \in \mathbb{N}^*$ et $X$ une v.a.r. telle que $X \in \mathcal{L}^k(\Omega, \mathcal{F}, \mathbb{P})$ (c'est-à-dire $\mathbb{E}[|X|^k] < \infty$).
+    \begin{itemize}
+        \item On appelle \textbf{moment d'ordre $k$} de $X$ le réel :
+        $$m_k(X) = \mathbb{E}[X^k]$$
+        \item On appelle \textbf{moment factoriel d'ordre $k$} de $X$ le réel $\mathbb{E}\big[X(X-1)\cdots(X-k+1)\big]$.
+    \end{itemize}
+}
+
+\remark{Sur un espace de probabilité, les espaces $\mathcal{L}^k(\Omega, \mathcal{F}, \mathbb{P})$ sont emboîtés : si $1 \le p \le q$, alors $\mathcal{L}^q(\Omega, \mathcal{F}, \mathbb{P}) \subset \mathcal{L}^p(\Omega, \mathcal{F}, \mathbb{P})$. En particulier, si $X$ admet un moment d'ordre $k$, alors $X$ admet des moments de tout ordre $j \le k$.}
+
+\subsection{Indistinguabilité des variables aléatoires}
 \reminder{$\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P}) = \{ X : \Omega \to \mathbb{R} \text{ v.a.r. telle que } \mathbb{E}[|X|] < \infty\}$.}
 
 \definition{
@@ -221,13 +230,12 @@ ou plus généralement pour $p \ge 1$,
 \]
 La norme $\|X\|_p = (\mathbb{E}[|X|^p])^{1/p}$ fait de $\mathbb{L}^p(\Omega, \mathcal{F}, \mathbb{P})$ un espace vectoriel normé complet (espace de Banach).
 
-\subsubsection{Lois usuelles discrètes}
-\remark{Dans ce cours, la loi géométrique est définie sur $\mathbb{N}^*$, c'est-à-dire que l'on compte le nombre d'essais jusqu'au premier succès (ce qui garanti l'absence de mémoire).}
+\subsection{Lois usuelles discrètes}
+\remark{Dans ce cours, la loi géométrique est définie sur $\mathbb{N}^*$, c'est-à-dire que l'on compte le nombre d'essais jusqu'au premier succès (ce qui garantit l'absence de mémoire).}
 
-\begin{table}[h!]
-\centering
+\begin{center}
 \renewcommand{\arraystretch}{2.0}
-\setlength{\tabcolsep}{5pt} % On réduit légèrement l'espacement latéral
+\setlength{\tabcolsep}{5pt}
 \small
 \begin{tabularx}{\linewidth}{|l|X|X|c|c|}
 \hline
@@ -244,7 +252,7 @@ Poisson \newline {\scriptsize $\mathcal{P}oi(\lambda)$} & $\dfrac{\lambda^k e^{-
 Uniforme \newline {\scriptsize $\mathcal{U}(\{1, \ldots, n\})$} & $\dfrac{1}{n}, \quad k \in \{1, \ldots, n\}$ & $\sum_{k=1}^{n} \dfrac{1}{n} \indic{x \ge k}$ & $\dfrac{n+1}{2}$ & $\dfrac{n^2 - 1}{12}$ \\
 \hline
 \end{tabularx}
-\end{table}
+\end{center}
 
 \theorem{Proposition}{Caractérisation des lois usuelles par leur loi}{false}{
     Soit $X$ une variable aléatoire réelle. Alors :
@@ -257,10 +265,9 @@ Uniforme \newline {\scriptsize $\mathcal{U}(\{1, \ldots, n\})$} & $\dfrac{1}{n},
     \end{itemize}
 }
 
-\subsubsection{Lois usuelles à densité}
+\subsection{Lois usuelles à densité}
 
-\begin{table}[h!]
-\centering
+\begin{center}
 \renewcommand{\arraystretch}{2.2}
 \setlength{\tabcolsep}{5pt}
 \small
@@ -279,16 +286,89 @@ Normale \newline {\scriptsize $\mathcal{N}(\mu, \sigma^2)$} & $\dfrac{1}{\sigma 
 Gamma \newline {\scriptsize $\Gamma(a, \lambda)$} & $\dfrac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \indic{x \ge 0} \quad (a,\lambda > 0)$ & $\int_{-\infty}^t \dfrac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \indic{x \ge 0} dx$ & $\dfrac{a}{\lambda}$ & $\dfrac{a}{\lambda^2}$ \\
 \hline
 \end{tabularx}
-\end{table}
-
+\end{center}
 \remark{On remarque que $\Gamma(1, \lambda) = \mathcal{E}xp(\lambda)$.}
 
-\section{note du jour : 12 novembre}
-- Rappels du k-ième moment d'une variable aléatoire.\\
-- Quizs et exercices de reconnaissance de lois usuelles partant d'une caractérisation.\\
-- fonctions génératrices et propriétés et vu pour les lois usuelles, lien avec l'espérance (et limite 1-)\\
-- transformée de Laplace (et $\psi_X$)\\
-- calcul de la loi de X = a+bZ, $Z \sim \mathcal{N}(0,1)$ (et donc $X \sim \mathcal{N}(a, b^2)$) et on trouve la densité de $X$.
+\theorem{Proposition}{Transformation affine d'une loi normale}{false}{
+    Soient $a \in \mathbb{R}$ et $b \in \mathbb{R}^*$. Si $Z \sim \mathcal{N}(0,1)$, alors la variable aléatoire $X = a + bZ$ suit la loi normale $\mathcal{N}(a, b^2)$.\\
+    Réciproquement, si $X \sim \mathcal{N}(\mu, \sigma^2)$ (avec $\sigma > 0$), alors $Z = \dfrac{X - \mu}{\sigma} \sim \mathcal{N}(0,1)$.
+}
+\noindent{\textbf{Preuve :} Pour toute fonction borélienne positive $\phi : \mathbb{R} \to \mathbb{R}_+$, le théorème de transfert donne :
+    $$\mathbb{E}[\phi(X)] = \mathbb{E}[\phi(a + bZ)] = \int_{\mathbb{R}} \phi(a + bz) \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}} \, dz$$
+    En effectuant le changement de variable affine $x = a + bz$ (de sorte que $z = \frac{x-a}{b}$ et $dz = \frac{dx}{|b|}$), on obtient :
+    $$\mathbb{E}[\phi(X)] = \int_{\mathbb{R}} \phi(x) \frac{1}{|b|\sqrt{2\pi}} \exp\left(-\frac{(x-a)^2}{2b^2}\right) dx$$
+    Par identification de la densité, on conclut que $X \sim \mathcal{N}(a, b^2)$.
+}
+
+\training{Reconnaître la loi de $X$ à partir des caractérisations suivantes :
+\begin{enumerate}
+    \item $\forall x \in \mathbb{R}, \quad F_X(x) = \left(1 - e^{-4x}\right)\indic{x \ge 0}$.
+    \item $\forall \phi : \mathbb{R} \to \mathbb{R}_+ \text{ borélienne}, \quad \mathbb{E}[\phi(X)] = \sum_{k=0}^{10} \binom{10}{k} \frac{2^k}{3^{10}} \phi(k)$.
+    \item $X = 3 - 2Z$ où $Z \sim \mathcal{N}(0,1)$.
+\end{enumerate}
+}
+\noindent\carreaux{8}
+
+\subsection{Fonctions génératrices}
+
+\definition{
+    Soit $X$ une variable aléatoire à valeurs dans $\mathbb{N}$. On définit la \textbf{fonction génératrice} de $X$, notée $G_X$, sur $[-1, 1]$ par :
+    $$G_X(t) = \mathbb{E}[t^X] = \sum_{k=0}^{+\infty} t^k \mathbb{P}(X = k)$$
+    La série entière associée a un rayon de convergence $R \ge 1$, ce qui garantit que $G_X$ est de classe $\mathcal{C}^\infty$ sur $]-1, 1[$ et continue sur $[-1, 1]$.
+}
+
+\theorem{Proposition}{Caractérisation et lien avec les moments}{false}{
+    Soit $X$ une variable aléatoire à valeurs dans $\mathbb{N}$ de fonction génératrice $G_X$.
+    \begin{enumerate}
+        \item \textbf{Caractérisation de la loi :} $G_X$ caractérise de manière unique la loi de $X$, et pour tout $k \in \mathbb{N}$ :
+        $$\mathbb{P}(X = k) = \frac{G_X^{(k)}(0)}{k!}$$
+        \item \textbf{Lien avec l'espérance et les moments factoriels :} Pour tout $r \in \mathbb{N}^*$, $X$ admet un moment d'ordre $r$ fini si et seulement si $\lim_{s \to 1^-} G_X^{(r)}(s) < +\infty$, et dans ce cas :
+        $$\mathbb{E}\big[X(X-1)\cdots(X-r+1)\big] = \lim_{s \to 1^-} G_X^{(r)}(s) = G_X^{(r)}(1^-)$$
+        En particulier, $\mathbb{E}[X] = G_X'(1^-)$ et $\text{Var}(X) = G_X''(1^-) + G_X'(1^-) - \big(G_X'(1^-)\big)^2$.
+    \end{enumerate}
+}
+
+\subsection{Transformée de Laplace}
+
+\definition{
+    Soit $X$ une variable aléatoire réelle. On définit la \textbf{transformée de Laplace} de $X$ (parfois notée $\mathcal{L}_X$ ou $\psi_X$) pour tout $t \in \mathbb{R}$ tel que $\mathbb{E}[e^{-tX}] < \infty$ (ou $\mathbb{E}[e^{tX}] < \infty$ selon la convention) par :
+    $$\psi_X(t) = \mathbb{E}[e^{tX}]$$
+    Si $X \ge 0$ presque sûrement, $\mathcal{L}_X(t) = \mathbb{E}[e^{-tX}]$ est toujours bien définie et finie sur $\mathbb{R}_+$.
+}
+
+\theorem{Proposition}{Propriétés de la transformée de Laplace}{false}{
+    \begin{enumerate}
+        \item \textbf{Caractérisation de la loi :} Si $\psi_X(t) = \psi_Y(t) < \infty$ pour tout $t \in ]-\varepsilon, \varepsilon[$ ($\varepsilon > 0$), alors $X$ et $Y$ ont même loi ($\mathbb{P}_X = \mathbb{P}_Y$).
+        \item \textbf{Transformation affine :} Pour tous $a, b \in \mathbb{R}$, $\psi_{a + bX}(t) = e^{at} \psi_X(bt)$.
+        \item \textbf{Lien avec les moments :} Si $\psi_X$ est finie sur un voisinage de $0$, alors $\psi_X$ est $\mathcal{C}^\infty$ au voisinage de $0$, $X$ admet des moments de tout ordre, et :
+        $$\forall k \in \mathbb{N}, \quad \mathbb{E}[X^k] = \psi_X^{(k)}(0)$$
+    \end{enumerate}
+}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.9}
+\setlength{\tabcolsep}{6pt}
+\small
+\begin{tabularx}{\linewidth}{|l|X|X|}
+\hline
+\textbf{Loi usuelle} & \textbf{Fonction génératrice} $G_X(s) = \mathbb{E}[s^X]$ & \textbf{Transformée de Laplace} $\psi_X(t) = \mathbb{E}[e^{tX}]$ \\
+\hline
+$\mathcal{B}er(p)$ & $(1 - p) + ps$ & $(1 - p) + pe^t$ \\
+\hline
+$\mathcal{B}in(n,p)$ & $(1 - p + ps)^n$ & $(1 - p + pe^t)^n$ \\
+\hline
+$\mathcal{G}eom(p)$ & $\dfrac{ps}{1 - (1-p)s} \quad \left(|s| < \dfrac{1}{1-p}\right)$ & $\dfrac{pe^t}{1 - (1-p)e^t} \quad \big(t < -\ln(1-p)\big)$ \\
+\hline
+$\mathcal{P}oi(\lambda)$ & $\exp\big(\lambda(s - 1)\big)$ & $\exp\big(\lambda(e^t - 1)\big)$ \\
+\hline
+$\mathcal{E}xp(\lambda)$ & --- & $\dfrac{\lambda}{\lambda - t} \quad (t < \lambda)$ \\
+\hline
+$\mathcal{N}(\mu, \sigma^2)$ & --- & $\exp\left(\mu t + \dfrac{\sigma^2 t^2}{2}\right)$ \\
+\hline
+$\Gamma(a, \lambda)$ & --- & $\left(\dfrac{\lambda}{\lambda - t}\right)^a \quad (t < \lambda)$ \\
+\hline
+\end{tabularx}
+\end{center}
 
 \newpage
 \tableofcontents
