@@ -295,7 +295,6 @@ Ainsi $|||f||| = 7$.
 \theorem{Théorème de Bolzano-Weierstrass}{}{true}{
     Toute suite bornée $(x_n)_{n \in \mathbb{N}}$ d'éléments de $\mathbb{R}^n$ admet une sous-suite convergente vers un élément de $\mathbb{R}^n$.
 }
-\ndlr{cf. Laurent pour la preuve.}
 
 \definition{
     Soit $K \subset \mathbb{R}^n$. On dit que $K$ est \textbf{compact} si toute suite $(x_n)_{n \in \mathbb{N}}$ d'éléments de $K$ admet une sous-suite convergente vers un élément de $K$.
@@ -314,13 +313,23 @@ Ainsi $|||f||| = 7$.
     Soit $K$ une partie d'un espace vectoriel normé.
     $$K \text{ est compact } \Rightarrow K \text{ est fermé et borné.}$$
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}\\
+    Soit $\bar{x} \in K$. Donc il existe une suite $(x_n)_{n \ge 1}$ d'élément de $K$ qui converge vers $x$.\\
+    Comme $K$ est compact alors il existe une sous-suite extraite $(x_{n_k})_{k \ge 1}$ de $(x_n)_{n \ge 1}$ qui converge vers un $\ell$ de $K$.\\
+    L'unicité de la limite montre que $x=\ell$, et donc $x \in K$. Ainsi, K est fermée.\\
+    Maintenant, si $K$ n'est pas bornée, alors pour tout $n \ge 1$, il existe $x_n \in K$ tel que $\|x_n\| \ge n$. Une telle suite ne peut admettre une sous-suite convergente.\\
+    En effet, pour tout $\ell \in E$, $\|x_n-\ell\| \ge \|x_n\|-\|\ell\| \ge n-\|\ell\| \to_{n \to +\infty} +\infty$ ce qui contredit l'existence d'une sous-suite extraite de $x_n$ qui converge vers $\ell$. Ainsi K est bornée. \\
+}
 
 \theorem{Proposition}{}{false}{
     Soit $F$ une partie contenue dans $K$ un compact.
     $$F \text{ est fermé } \Rightarrow F \text{ est compact.}$$
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}\\
+    Soit $E$ un espace vectoriel normé, $K$ un compact de $E$ et $F$ un fermé contenu dans $K$.\\
+    Soit $(x_n)_{n \ge 1}$ une suite d'éléments de $F$ et donc de $K$.\\
+    Elle admet donc une sous-suite convergente vers un élément $\ell$ de $K$. Ainsi $\ell \in F=\bar{F}$, car $F$ est fermé.\\
+}
 
 \theorem{Proposition}{Produit cartésien de compacts}{false}{
 Soit $K_1$ et $K_2$ deux parties compactes respectivement des deux espaces vectoriels normés $E_1$ et $E_2$. Alors le produit cartésien $K_1 \times K_2$ est une partie compacte de l'espace vectoriel normé $E_1 \times E_2$ muni de la norme
@@ -339,8 +348,20 @@ La suite $\{x_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ est sous-suite d'une suit
 \theorem{Théorème de Bolzano-Weierstrass}{Caractérisation des compacts}{true}{
     Soit $E$ un espace vectoriel normé de dimension finie. Alors $K \subset E$ est compact si et seulement si $K$ est fermé et borné.
 }
-
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration : }\\
+    \begin{itemize}
+        \item[$\Rightarrow$] On sait déjà qu'une partie compacte est fermée bornée.
+        \item[$\Leftarrow$] Supposons maintenant que $K$ est une partie fermée bornée. 
+            \begin{itemize}
+                \item Supposons d'abord que $E=\mathbb{R}^m$. \\
+                Comme $K$ est bornée, il existe $I$ un intervalle fermé borné tel que $K \subset I \times I \times ... \times I$.\\
+                Or, $I$ est un compact de $\mathbb{R}$ et donc $I \times I \times ... \times I$ est un compact dans $\mathbb{R}^m$.\\
+                Ainsi, $K$ est un fermé contenu dans le compact $I \times I \times ... \times I$, $K$ est un compact de $\mathbb{R}^m$.\\
+                \item Supposons maintenant que $E=\mathbb{C}^m$. Alors $E$ peut être considéré comme un espace vectoriel sur $\mathbb{R}$ mais de dimension $2m$.
+                \item Supposons maintenant que $E$ un espace vectoriel de dimension $m$, alors en fixant une base de $E$ on se ramène à l'un des cas précédents.
+            \end{itemize}
+    \end{itemize}
+}
 
 \cexample{Soit $X = \mathcal{C}([0,1])$ muni de la norme $\| \cdot \|_\infty$. Alors $\overline{B}(0,1)$ (un ferme et borné) n'est pas un sous-ensemble compact de $X$. En effet, la suite $(f_n)_{n \in \mathbb{N}}$ définie par $f_n(x) = x^n$ est contenue dans $\overline{B}(0,1)$ mais ne possède pas de sous-suite convergente dans $X$.}
 
@@ -354,15 +375,22 @@ $$\lim_{k \to +\infty} y_{\varphi(k)} = \lim_{k \to +\infty} f(x_{\varphi(k)}) =
 Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite convergente, $f(K)$ est un compact. \hfill $\square$
 }
 \theorem{Théorème}{Fonctions continues et bornes}{false}{
-    Soit $f$ une fonction continue réelle. La restriction $f|_K$ de $f$ à un compact $K$ est bornée et atteint ses bornes.}
-\ndlr{cf. Laurent pour la preuve.}
+    Soit $f$ une fonction continue réelle. La restriction $f|_K$ de $f$ à un compact $K$ est bornée et atteint ses bornes.
+}
+\noindent{\textbf{Démonstration : }\\
+    D'après le théorème précédent, $f(K)$ est un compact de $\mathbb{R}$. Donc $f(K)$ est bornée dans $\mathbb{R}$. \\
+    Posons $m=inf_{x \in K}f(k)$ et $M=sup_{x \in K}f(K)$. Soit $(x_n)_{n \in \mathbb{N}}$ une suite de $K$ telle que $f(x_n) \to _{n \to +\infty} m$.\\
+    Elle admet une sous suite extraite $(x_{n_k})_{k \ge 1}$ convergeant vers un $a \in K$.
+    Par unicité de la limite $m = f(a) \in f(K)$. \\
+    Ainsi, il existe $a \in K$ tel que $f(a)=m=min_{x \in K}f(x)$. De même, il existe $b \in K$ tel que $f(b)=M=max_{x \in K}f(x)$. \\
+    En particulier, en dimension finie toute fonction continue sur un fermé borné non vide est bornée est atteint ses bornes. 
+}
 
 \example{La fonction $f : \overline{B}(0,1) \to \mathbb{R}$ définie par $f(x,y) = x - x^2 + y^2$ atteint ses bornes car elle est continue et définie sur un ensemble compact.}
 
 \theorem{Théorème}{Heine-Cantor}{false}{
     Toute fonction continue $f : K \subset \mathbb{R}^q \to \mathbb{R}^p$ sur un compact $K$ est uniformément continue.
 }
-\ndlr{cf. Laurent pour la preuve.}
 
 
 \subsection{Équivalence des normes}
@@ -443,7 +471,7 @@ et notre suite est majorée.
 \theorem{Lemme}{}{false}{
     Si une suite de Cauchy possède une sous suite extraite convergente vers une limite $\ell$ alors elle converge vers $\ell$.
 }
-\ndlr{cf. Laurent pour la preuve.}
+
 \subsection{Définition et exemples}
 
 \definition{
@@ -456,17 +484,21 @@ et notre suite est majorée.
 \theorem{Théorème}{Convergence uniforme des séries de fonctions}{false}{
 Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $(u_n)_{n \in \mathbb{N}}$ une suite de $E$. Si la série $\sum \|u_n\|$ est convergente alors la série $\sum u_n$ est convergente, c-à-d la suite $s_n = u_0 + \dots + u_n$ converge dans $E$.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\remark{
+    Autrement dit, un espace vectoriel normé si et seulement si toute série absolument convergente est convergente. (on a aussi la résiproque)
+}
 
 \theorem{Théorème}{Complétude des espaces de dimension finie}{true}{
     Tout espace vectoriel normé de dimension finie est complet.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration : }\\
+    Quitte à choisir une base de l'espace vectoriel normé, il suffit de faire la démonstration dans $K^d$. Alors cette suite est bornée.Donc il existe $R>0$ tel que $(x_n)_{n \in \mathbb{N}}$ est contenue dans la boule fermée $D(0,R)$. \\
+    Le sous-ensemble $D(0,R)$ est fermé borné donc compact. Ainsi, il existe une sous-suite $(x_{n_k})_{k \ge 1}$ convergente vers une limite $\ell \in D(0,R)$. Finalement, la suite $(x_n)_{n \in N}$ est convergente.
+}
 
 \theorem{Proposition}{}{true}{
     Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $F$ un sous espace vectoriel de $E$ que nous munissons de la norme $\|\cdot\|$. Alors $(F, \|\cdot\|)$ est complet si, et seulement si, $F$ est fermé dans $E$.
 }
-\ndlr{cf. Laurent pour la preuve.}
 
 
 \newpage
