@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{../../../../components/mathtex}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\usepackage{paracol}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{DL3 Math-Info}
+\fancyhead[C]{Fiche d'entraînement hebdomadaire N°10}
+\fancyhead[R]{2026-2027}
+\fancyfoot[L]{Ewen Rodrigues de Oliveira}
+\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\setlength{\columnsep}{2cm}
+
+\begin{paracol}{2}
+
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{|p{0.6\columnwidth}|>{\centering\arraybackslash}p{0.35\columnwidth}|}
+\hline
+\rowcolor[RGB]{230,237,247}
+\textbf{Matière} & \textbf{Exercices} \\
+\hline
+Intégration et probabilités & $6,7,8$\\
+\hline
+Groupes et actions & $2,3,4$\\
+\hline
+Calcul différentiel & $1, \text{CM}$\\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\exercise{1}{Continuité et compacts}{
+On munit $\mathbb{R}^n$ de sa topologie usuelle (induite par n'importe quelle norme). Déterminer si les parties suivantes sont compactes :
+\begin{enumerate}
+    \item $A = [0,1] \times \{2\}$.
+    \item $B = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^4 \leq 3\}$. Existe-t-il une plus grande valeur de $\sin(xy) + \mathrm{e}^{x-y}$ sur $B$ ?
+    \item $C = \{(x,y) \in \mathbb{R}^2 \mid \max\{|x|, |y|\} = 2\}$.
+\end{enumerate}
+}
+
+\exercise{2}{Unicité d'un sous-groupe distingué}{
+Soient $G$ un groupe fini et $H$ un sous-groupe distingué d'ordre $n$ et d'indice $m$. On suppose que $m$ et $n$ sont premiers entre eux. Montrer que $H$ est l'unique sous-groupe de $G$ d'ordre $n$. On pourra considérer la surjection canonique $G \to G/H$.
+}
+
+\exercise{3}{Sous-groupe de $\mathrm{GL}_2(\mathbb{R})$ engendré par deux matrices}{
+On considère le sous-groupe $G$ de $(\mathrm{GL}_2(\mathbb{R}), \cdot)$ engendré par les matrices $A = \frac{1}{\sqrt{2}} \begin{pmatrix} -1 & 1 \\ 1 & 1 \end{pmatrix}$ et $B = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$ ainsi que le sous-groupe $H$ de $G$ engendré par la matrice $C = AB$.
+\begin{enumerate}
+    \item Démontrer que $A$ et $B$ sont d'ordre fini et déterminer leur ordre. Que peut-on en \underline{déduire} concernant l'ordre de $G$ ? L'ordre de $H$ ?
+    \item Calculer $C$, $C^2$, $C^4$ et en déduire l'ordre de $H$. Que peut-on en déduire concernant l'ordre de $G$ ?
+    \item Sans calculs supplémentaires, montrer que $BA = B^{-1}A^{-1} = C^{-1}$ et en déduire que $H$ est un sous-groupe distingué de $G$.
+    \item On considère la surjection canonique $\pi : G \to G/H$. Démontrer que $\pi(A) = \pi(B)$. En déduire l'ordre de $G/H$ puis l'ordre de $G$.
+\end{enumerate}
+}
+\switchcolumn
+
+\exercise{4}{Sous-groupes normaux de $\mathcal{S}_4$ et du groupe alterné}{
+\begin{enumerate}
+    \item Faire la liste des sous-groupes normaux de $\mathcal{S}_4$ (\emph{indication : un sous-groupe normal est une réunion disjointes de classes de conjugaison}). Vérifier qu'il y en a exactement un d'ordre 4. On le note $H$.
+
+    \item Vérifier que $H$ est contenu dans $\mathcal{A}_4$ et calculer le quotient $\mathcal{A}_4 / H$.
+    \item Montrer que le morphisme obtenu en composant l'injection naturelle $\mathcal{S}_3 \to \mathcal{S}_4$ et la projection canonique $\mathcal{S}_4 \to \mathcal{S}_4 / H$ est un isomorphisme.
+    \item Combien y a-t-il de morphismes de $\mathcal{A}_4$ dans $\mathbb{C}^\times$ ?
+\end{enumerate}
+}
+
+\exercise{5}{Ajouter les résultats élémentaires de AL3 dans le cours de GA5 (chapitre 3).}{}
+
+\exercise{6}{Faire le DM de probabilités.}{}
+
+\exercise{7}{Décorrélation et indépendance de variables aléatoires}{
+Soient $X$ et $Y$ deux v.a.r définies sur un même espace probabilisé.
+\begin{enumerate}
+    \item On suppose dans cette question que $X$ et $Y$ ne peuvent p.s. prendre chacune que deux valeurs distinctes. Montrer dans ce cas que $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ si et seulement si $X$ et $Y$ sont indépendantes.
+    \item On ne fait plus d'hypothèse sur le nombre de valeurs prises par $X$ ou $Y$. Laquelle des deux implications reste vraie ? Trouver un exemple qui met en défaut l'implication réciproque.
+\end{enumerate}
+}
+\exercise{8}{Fonctions génératrices, transformées de Laplace et moments}{
+Lorsque $X$ est discrète, calculer $\mathbb{E}[t^X], t \in [0, 1]$, et, sous réserve d'existence, exprimer $\mathbb{E}[X(X - 1) \dots (X - j + 1)], j \in \mathbb{N}^*$, et $\mathrm{Var}[X]$.
+
+Lorsque $X$ est à densité, sous réserve d'existence, calculer $\mathbb{E}[\exp(-tX)], t \geq 0$, et exprimer $\mathbb{E}[X^k], k \in \mathbb{N}$, et $\mathrm{Var}[X]$.
+
+\begin{enumerate}
+    \item $X \sim \mathrm{Unif}(\{1, \dots, n\}), n \in \mathbb{N}^*$
+    \item $X \sim \mathrm{Ber}(p), p \in [0, 1]$
+    \item $X \sim \mathrm{Bin}(n, p), p \in [0, 1]$ et $n \in \mathbb{N}$
+    \switchcolumn
+    \newpage
+    \setcounter{enumi}{3}
+    \item $X \sim \mathrm{Geom}(p)$ avec $p \in (0, 1]$
+    \item $X \sim \mathrm{Poisson}(\lambda)$ avec $\lambda > 0$
+    \item $X \sim \mathrm{Unif}([a, b])$ avec $a < b$
+    \item $X \sim \mathcal{N}(\mu, \sigma^2)$ avec $\mu \in \mathbb{R}$ et $\sigma > 0$
+    \item $X \sim \mathrm{Exp}(\lambda)$ avec $\lambda > 0$
+    \item $X \sim \Gamma(a, \lambda)$, où $a > 0, \lambda > 0$.
+    \item $X \sim \mathrm{Cauchy}(1)$
+\end{enumerate}
+
+\textit{Indications} : En 1, on pourra utiliser que $\binom{n+1}{j+1} = \sum_{k=j}^n \binom{k}{j}$.
+
+En 6, on pourra commencer par le cas $U \sim \mathrm{Unif}[-1, 1]$, puis pour $a < b$ quelconques, considérer $X = \frac{b-a}{2}U + \frac{a+b}{2}$.
+
+En 8 on rappelle que $f_X(x) = \frac{\lambda^a}{\Gamma(a)} x^{a-1} \exp(-x) \mathbf{1}_{\{x>0\}}$, avec $\Gamma(a) = \int_0^\infty x^{a-1} \exp(-x) \, \mathrm{d}x$.
+
+En 9 on pourra commencer par le cas $Z \sim \mathcal{N}(0, 1)$, puis considérer $X = \mu + \sigma Z$. On pourra se contenter d'exprimer uniquement $\mathbb{E}[X^n], n \in \mathbb{N}$ dans le cas $\mu = 0$.
+}
+\end{paracol}
+\end{document}
