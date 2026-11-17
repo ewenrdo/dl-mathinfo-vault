@@ -106,8 +106,7 @@ Le théorème d'isomorphisme permet de conclure que $\psi$ induit un isomorphism
     Ainsi, les sous-groupes propres de $\mathbb{Z}/8\mathbb{Z}$ sont $2\mathbb{Z}/8\mathbb{Z}$ et $4\mathbb{Z}/8\mathbb{Z}$.
 }
 
-\section{Première approche du groupe symétrique}
-\subsection{Générateurs du groupe symétrique $S_n$}
+\section{Générateurs du groupe symétrique $S_n$}
 \reminder{On rappelle que le groupe symétrique $S_n$ est le groupe des permutations de l'ensemble $\{1, 2, \ldots, n\}$.}
 
 \theorem{Lemme}{}{false}{
@@ -167,80 +166,6 @@ Soit $(ij) \in T$, avec $i < j$. On montre par récurrence sur $j - i$ que $(ij)
 $\hfill \square$
 }
 
-\subsection{Simplicité de $\mathcal{A}_n$}
-
-\remark{Retenons pour l'instant que la signature est un morphisme de groupes $\epsilon : S_n \to \{-1, 1\}$ qui envoie toute transposition sur $-1$ \textit{(on reverra la défintion formelle plus tard)}.}
-
-\definition{
-    Le groupe alterné $\mathcal{A}_n$ est le noyau de la signature. On l'appelle le \textbf{n-ième groupe alterné}. C'est-à-dire :
-    $$\mathcal{A}_n = \ker(\epsilon) = \{\sigma \in S_n \mid \epsilon(\sigma) = 1\}.$$
-}
-
-
-\theorem{Proposition}{Groupe alterné $\mathcal{A}_n$}{false}{
-    Le groupe $\mathcal{A}_n$ est un sous-groupe distingué dans $S_n$ et $S_n/\mathcal{A}_n$ est isomorphe à $\mathbb{Z}/2\mathbb{Z}$. L'ordre du groupe $\mathcal{A}_n$ est $\frac{n!}{2}$. Pour $n \geq 3$, le groupe $\mathcal{A}_n$ est engendré par les 3-cycles.
-}
-
-\noindent{\textbf{Preuve}:\\
-Seule la dernière assertion nécessite une preuve. Un élément $\sigma \in \mathcal{A}_n$ s'écrit comme un produit pair de transpositions. Pour $i, j, k$ tous distincts on a $(ij)(jk) = (ijk)$ est un 3-cycle et pour $i, j, k, l$ tous distincts, on a $(ij)(kl) = (ij)(jk)(jk)(kl) = (ijk)(jkl)$ est un produit de 3-cycles. \hfill $\square$
-}
-
-
-\theorem{Lemme}{Sous-groupe distingué de $\mathcal{A}_n$}{false}{
-    Supposons $n \geq 5$ et $H$ un sous-groupe distingué de $\mathcal{A}_n$. Si $H$ contient un 3-cycle, alors $H = \mathcal{A}_n$.
-}
-
-\noindent{\textbf{Preuve}:\\
-Soit $\rho = (abc)$ un 3-cycle contenu dans $H$. Montrons que $H$ contient tous les 3-cycles de $\mathcal{A}_n$. Soit $\rho'$ un tel 3-cycle. Il existe $\sigma \in S_n$ tel que $\sigma \rho \sigma^{-1} = \rho'$. Si $\sigma \in \mathcal{A}_n$ c'est fini. Comme $n \geq 5$, il existe une transposition $\tau \in S_n$ telle que le support de $\tau$ est distinct de celui de $\rho$ (donc $\tau$ commute avec $\rho$). On a $\sigma \tau \in \mathcal{A}_n$ et
-\[
-\sigma \tau \rho \tau^{-1} \sigma^{-1} = \sigma \rho \sigma^{-1} = \rho'.
-\]
-Comme $H$ est distingué on en déduit que tous les 3-cycles de $\mathcal{A}_n$ sont dans $H$ et donc par la proposition précédente $H = \mathcal{A}_n$. \hfill $\square$
-}
-
-\theorem{Théorème}{Simplicité de $\mathcal{A}_5$}{false}{
-    Le groupe $\mathcal{A}_5$ est simple.
-}
-
-\noindent{\textbf{Preuve}:\\
-Soit $H \neq \{\text{id}\}$ un sous-groupe distingué de $\mathcal{A}_5$. Soit $\rho \in H$.\\
-Si $\rho$ est un 3-cycle, par le lemme précédent $H = \mathcal{A}_5$.\\
-Si $\rho = (ab)(cd)$, montrons que si $\rho'$ est une double transposition, alors $\rho' \in H$. Il existe $\sigma \in S_n$ tel que $\sigma \rho \sigma^{-1} = \rho'$. Si $\sigma \in \mathcal{A}_n$ c'est fini. Sinon $\sigma(ab) \in \mathcal{A}_5$ et
-\[
-\sigma(ab)\rho(ab)\sigma^{-1} = \sigma \rho \sigma^{-1} = \rho'.
-\]
-Donc $H$ contient toutes les doubles transpositions. On écrit, avec $a,b,c,d,e$ tous distincts
-\[
-(abc) = (ab)(bc) = (ab)(de)(de)(bc) \in H
-\]
-donc $H$ contient un 3-cycle et $H = \mathcal{A}_5$.\\
-Si $\rho = (abcde)$ alors
-\[
-(abc)\rho(abc)^{-1}\rho^{-1} = (bcade)(aedcb) = (abd) \in H
-\]
-donc $H$ contient un 3-cycle et $H = \mathcal{A}_5$. \hfill $\square$
-}
-
-\theorem{Corollaire}{Simplicité de $\mathcal{A}_n$}{false}{
-    Le groupe $\mathcal{A}_n$ est simple pour $n \geq 5$.
-}
-
-\noindent{\textbf{Preuve}:\\
-La démonstration se fait par récurrence sur $n$ sachant que le résultat est vrai pour $n = 5$. Soit $n > 5$ et supposons que $\mathcal{A}_{n-1}$ est simple. Soit $H \neq \{\text{id}\}$ un sous-groupe distingué de $\mathcal{A}_n$. Soit $\tau \in H$. Supposons dans un premier temps que $\tau(n) \neq n$. Il existe $b \in \{1, \dots, n\} \setminus \{n, \tau(n)\}$ tel que $\tau(b) \neq b$ (existe car $\tau$ de signature $1$ n'est pas la transposition $(n\tau(n))$). Comme $n > 5$, il existe $c, d$ distincts dans $\{1, \dots, n\} \setminus \{n, \tau(n), b, \tau(b)\}$. Posons
-\[
-\tau' = (bcd)\tau^{-1}(bcd)^{-1}\tau \in H
-\]
-Remarquons que $\tau'(n) = n$ et $\tau'(b) = c$. Le sous-groupe $G = \{\tau \in \mathcal{A}_n \mid \tau(n) = n\}$ de $\mathcal{A}_n$ est isomorphe à $\mathcal{A}_{n-1}$ donc est simple. De plus $H \cap G$ est distingué dans $G$. Or $\tau' \in (H \cap G) \setminus \{1\}$, donc $H \cap G = G$. Ainsi $H$ contient un 3-cycle (inclus dans $G \simeq \mathcal{A}_{n-1}$) donc $H = \mathcal{A}_n$. \hfill $\square$
-}
-
-
-\theorem{Corollaire}{Sous-groupes distingués de $S_n$}{false}{
-    Pour $n \geq 5$, $S_n$ ne possède qu'un seul sous-groupe distingué propre : $\mathcal{A}_n$.
-}
-
-\noindent{\textbf{Preuve}:\\
-Soit $H$ un sous-groupe distingué propre. On a $H \cap \mathcal{A}_n$ est distingué dans $\mathcal{A}_n$ donc il vaut soit $\{1\}$ soit $\mathcal{A}_n$. Si $H \cap \mathcal{A}_n = \{1\}$, alors $\epsilon : H \to \{+1, -1\}$ est injective (son noyau est précisément $H \cap \mathcal{A}_n$). Donc $H = \{\text{id}, \tau\}$ avec $\epsilon(\tau) = -1$ et $\tau^2 = \text{id}$. Or il existe $\sigma \in S_n$ qui ne commute pas avec $\tau$, donc $\sigma \tau \sigma^{-1} = \tau' \in H$ mais $\tau' \neq \text{id}$ et $\tau' \neq \tau$, absurde. Si $H \cap \mathcal{A}_n = \mathcal{A}_n$, on a $\mathcal{A}_n \subset H \subset S_n$ et $\mathcal{A}_n$ est d'indice 2. Donc $H \neq S_n \Rightarrow H = \mathcal{A}_n$. \hfill $\square$
-}
 
 \newpage
 \tableofcontents 
