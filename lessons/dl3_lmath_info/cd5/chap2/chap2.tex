@@ -346,8 +346,8 @@ La suite $\{x_{\psi(\varphi(n))}\}_{n \in \mathbb{N}}$ est sous-suite d'une suit
 
 \subsection{Lien avec la continuité}
 
-\theorem{Théorème}{Image d'un compact par une fonction continue}{false}{
-    Soit $K \subset \mathbb{R}^n$ un compact et $f : K \to \mathbb{R}^m$ une fonction continue. Alors $f(K)$ est un compact de $\mathbb{R}^m$.
+\theorem{Théorème}{Image d'un compact par une application continue}{false}{
+    Soient $E$ et $F$ deux espaces vectoriels normés et $f : E \to F$ une application continue. Alors $f(K)$ est un compact de $F$ pour tout compact $K \subset E$.
 }
 \noindent{\textbf{Preuve :} Soit $f : A \subset \mathbb{R}^n \to \mathbb{R}^k$ une application continue et $K \subset A$ un compact, considérons $\{y_k\} \subset f(K)$ une suite quelconque et $\{x_k\} \subset K$ telle que $f(x_k) = y_k$. Puisque $K$ est un compact il existe $\{x_{\varphi(k)}\}$ sous-suite et $x \in K$ telle que $x_{\varphi(k)} \to x$. En outre, $f$ étant une fonction continue, on a
 $$\lim_{k \to +\infty} y_{\varphi(k)} = \lim_{k \to +\infty} f(x_{\varphi(k)}) = f(x) \in f(K).$$
@@ -359,11 +359,16 @@ Pour toute suite contenue dans $f(K)$ on peut donc extraire une sous-suite conve
 
 \example{La fonction $f : \overline{B}(0,1) \to \mathbb{R}$ définie par $f(x,y) = x - x^2 + y^2$ atteint ses bornes car elle est continue et définie sur un ensemble compact.}
 
-\theorem{Théorème}{Heine-Cantor}{false}{
-    Toute fonction continue $f : K \subset \mathbb{R}^q \to \mathbb{R}^p$ sur un compact $K$ est uniformément continue.
+\theorem{Corollaire}{Restriction d'une application continue}{false}{
+Soient $E$ et $F$ deux espaces vectoriels normés et $f : E \to F$ une application continue.\\
+Si $K$ un compact de $E$, alors $f|_K$ est bornée et atteint ses bornes.
 }
 \ndlr{cf. Laurent pour la preuve.}
 
+\theorem{Théorème}{Heine-Cantor}{true}{
+    Soit $K$ un compact de $E$ et $f : K \to F$ une application continue. Alors $f$ est uniformément continue sur $K$.
+}
+\ndlr{cf. Laurent pour la preuve.}
 
 \subsection{Équivalence des normes}
 
@@ -468,6 +473,7 @@ Soit $(E, \|\cdot\|)$ un espace vectoriel normé complet et $(u_n)_{n \in \mathb
 }
 \ndlr{cf. Laurent pour la preuve.}
 
+\example{Ce n'est pas automatique en dimension infinie, mais $E = \mathcal{C}([0,1], \mathbb{R})$ est complet avec la norme $\|\cdot\|_\infty$ mais pas avec la norme $\|\cdot\|_1$.}
 
 \newpage
 \tableofcontents
