@@ -8,7 +8,7 @@
 \usepackage{fancyhdr}
 \usepackage{ccicons}
 \usepackage{stmaryrd}
-
+ 
 % Configuration des en-têtes et pieds de page
 \pagestyle{fancy}
 \fancyhf{} % reset tout
@@ -27,28 +27,21 @@
 \section{Introduction et généralités}
 \subsection{Définition}
 \definition{
-    Soit $(G, \star)$ un groupe et $X$ un ensemble. Une \textbf{action} de $G$ sur $X$ est la donnée d'une application $G \times X \to X$ notée $(g, x) \mapsto g \cdot x$ telle que :
+    Soit $(G, \star)$ un groupe et $X$ un ensemble. Une \textbf{action} de $G$ sur $X$ est la donnée d'une application $G \times X \to X$ notée $(g, x) \mapsto g \bullet x$ telle que :
     \begin{enumerate}
-        \item $\forall x \in X, e_G \cdot x = x$,
-        \item $\forall g, h \in G, \forall x \in X, g \cdot (h \cdot x) = (g \star h) \cdot x$.
+        \item $\forall x \in X, e_G \bullet x = x$,
+        \item $\forall g, h \in G, \forall x \in X, g \bullet (h \bullet x) = (g \star h) \bullet x$.
     \end{enumerate}
 }
 \vocabulary{On dit que $G$ agit sur $X$.}
-\remark{Si $g \cdot x = y$ alors $x = g^{-1} \cdot y$.}
-
-\theorem{Proposition}{}{false}{
-    La donnée d'une action de $G$ sur $X$ est équivalente à la donnée d'un morphisme de groupes $\phi : G \to S(X)$, où $S(X)$ est le groupe des permutations de $X$.
-    La correspondance est donnée par $\phi(g)(x) = g \cdot x$.
-}
-
-\ndlr{cf. Laurent pour la preuve.}
+\remark{Si $g \bullet x = y$ alors $x = g^{-1} \bullet y$.}
 
 \example{Quelques exemples d'actions de groupes :
     \begin{enumerate}
-        \item Le groupe $S_n$ agit sur l'ensemble $\{1, 2, \ldots, n\}$ par $\sigma \cdot i = \sigma(i)$. Le morphisme correspondant $\rho : S_n \to S(\{1, 2, \ldots, n\})$ est l'identité.
-        \item De même, $GL_n(\mathbb{R})$ agit sur $\mathbb{R}^n$ par $A \cdot x = Ax$ où $A$ est une matrice et $x$ une matrice colonne.
-        \item Soit $(G, \star)$ un groupe et $H \leq G$. Alors $G$ agit par translation à gauche sur l'ensemble quotient $G/H$ par $g \cdot (aH) = (g \star a)H$.
-        \item Soit $(G, \star)$ un groupe. On note $\mathcal{H}$ l'ensemble des sous-groupes de $G$. Alors $G$ agit sur $\mathcal{H}$ par conjugaison : $g \cdot H = gHg^{-1}$.
+        \item Le groupe $S_n$ agit sur l'ensemble $\{1, 2, \ldots, n\}$ par $\sigma \bullet i = \sigma(i)$. 
+        \item De même, $GL_n(\mathbb{R})$ agit sur $\mathbb{R}^n$ par $A \bullet x = Ax$ où $A$ est une matrice et $x$ une matrice colonne.
+        \item Soit $(G, \star)$ un groupe et $H \leq G$. Alors $G$ agit par translation à gauche sur l'ensemble quotient $G/H$ par $g \bullet (aH) = (g \star a)H$.
+        \item Soit $(G, \star)$ un groupe. On note $\mathcal{H}$ l'ensemble des sous-groupes de $G$. Alors $G$ agit sur $\mathcal{H}$ par conjugaison : $g \bullet H = gHg^{-1}$.
     \end{enumerate}
 }
 
@@ -56,44 +49,40 @@
 
 \theorem{Lemme}{}{false}{
     Soit $(G, \star)$ un groupe, soit $X$ un ensemble.\\
-    Une action de $G$ sur $X$ définit une relation d'équivalence sur $X$ par $x \sim y$ si et seulement si il existe $g \in G$ tel que $g \cdot x = y$.\\
+    Une action de $G$ sur $X$ définit une relation d'équivalence sur $X$ par :
+    $$\forall x,y \in X,\; x \sim y \iff \exists g \in G, g \bullet x = y.$$
 }
 \ndlr{cf. Laurent pour la preuve.}
-\ndlr{La relation d'équivalence est sur $X$ ou sur $G$ ? Corriger ça pour $x$ et $y$.}
 
 
 \definition{
     Soit $G$ un groupe agissant sur un ensemble $X$.\\
-    On appelle \textbf{orbite} de $x \in X$ les classes d'équivalence de $x$ pour la relation $\sim$, et on note l'orbite de $x$ par : $$G \cdot x = O_x = \{g \cdot x \mid g \in G\}$$
+    On appelle \textbf{orbite} de $x \in X$ les classes d'équivalence de $x$ pour la relation $\sim$, et on note l'orbite de $x$ par : $$G \bullet x = O_x = \{g \bullet x \mid g \in G\} \subset X$$
 }
 \remark{On note aussi parfois $X/G$ ou $G \backslash X$ l'ensemble des classes d'équivalences dans $X$ modulo la relation $\sim$.}
 
 \definition{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$, et soit $x \in X$.\\
-    On appelle \textbf{stabilisateur} de $x$ le sous-groupe de $G$ défini par : $$Stab(x) = \{g \in G \mid g \cdot x = x\}$$
-}
-
-\definition{
-    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
-    L'ensemble des \textbf{points fixes} sous l'action de $G$ est défini par : $$X^G = \{x \in X \mid \forall g \in G, g \cdot x = x\}$$
+    On appelle \textbf{stabilisateur} de $x$ le sous-groupe de $G$ défini par : $$Stab_G(x) = \{g \in G \mid g \bullet x = x\}$$
 }
 
 \theorem{Proposition}{}{false}{
-    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$. Notons $\rho : G \to S(X)$ le morphisme de groupes associé à l'action. Alors :
-    \begin{enumerate}
-        \item $x \in \mathbb{R}, \; Stab(x) \leq G$,
-        \item $\forall g \in G, Stab(g \cdot x) = g Stab(x) g^{-1}$,
-        \item $ker \rho = \bigcap_{x \in X} Stab(x)$.
-        \item $x \in X^G \iff G\cdot x = \{x\} \iff Stab(x) = G$. Ainsi, l'ensemble des points fixes est l'union des orbites à un élément.
-    \end{enumerate}
+    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$. Soit $x \in X$. Alors $Stab_G(x) \leq G$.
 }
 \ndlr{cf. Laurent pour la preuve.}
 
 \definition{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
-    On dit que l'action est \textbf{transitive} si et seulement si il existe $x \in X$ tel que $G \cdot x = X$.\\
+    On dit que l'action est \textbf{transitive} si et seulement si il existe $x \in X$ tel que $G \bullet x = X$.\\
     \textit{Autrement dit, l'action est transitive si et seulement si il n'y a qu'une seule orbite.}
 }
+
+\example{
+    L'action de $S_n$ sur $\{1, \ldots, n\}$ est transitive.\\
+    En effet, soit $i \in \{1, \ldots, n\}$. Alors la transposition $(1 \; i)$ envoie $1$ sur $i$, donc $i \in S_n \bullet 1$ (l'orbite de $1$) et ce pour tout $i$. Ainsi $S_n \bullet 1 = \{1, \ldots, n\}$.
+}
+
+\courseEnd{Fin du cours du 16 novembre}
 
 \definition{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
@@ -110,7 +99,7 @@
     On dit que l'action est \textbf{fidèle} si le morphisme $\rho : G \to S(X)$ associé à l'action est injectif.
 }
 
-\theorem{Proposition}{Caractérisation des ations fidèles et simplement transitives}{false}{
+\theorem{Proposition}{Caractérisation des actions fidèles et simplement transitives}{false}{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.
     \begin{itemize}
         \item Une action libre est fidèle.
