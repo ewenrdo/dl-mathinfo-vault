@@ -52,7 +52,14 @@
     Une action de $G$ sur $X$ définit une relation d'équivalence sur $X$ par :
     $$\forall x,y \in X,\; x \sim y \iff \exists g \in G, g \bullet x = y.$$
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item Réflexivité : Par 1), on a $e_G \bullet x=x$.
+        \item Transitivité : Par2), supposons $x~y$ et $y~z$, c'est-à-dire que $\exists g \in G, y=g \bullet x$ et $\exists h \in G, z=h \bullet y$.\\
+                Alors, $z=h \bullet y = h \bullet (g \bullet x) = (hg) \bullet x$, avec $hg \in G$, donc $x~z$. 
+        \item Si $y=g \bullet x$, alors $x=g^{-1} \bullet y$ par la remarque, donc $y~x$. 
+    \end{itemize}
+}
 
 
 \definition{
@@ -69,7 +76,13 @@
 \theorem{Proposition}{}{false}{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$. Soit $x \in X$. Alors $Stab_G(x) \leq G$.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item[a)] Il est non vide car $e_G \in Stab_G(x)$ (car $e_G \bullet x=x$ par 1))
+        \item[b)] Soit $g, h \in Stab_G(x)$, alors $(gh) \bullet x = g \bullet (h \bullet x) = g \bullet x = x$ par 2) 
+        \item[c)] Soit $g \in Stab_G(x)$, alors $g \bullet x = x \Rightarrow x = g^{-1} \bullet x \Rightarrow g^{-1} \in Stab_G(x)$.
+    \end{itemize}
+} 
 
 \definition{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
