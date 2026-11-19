@@ -289,6 +289,10 @@ Gamma \newline {\scriptsize $\Gamma(a, \lambda)$} & $\dfrac{\lambda^a}{\Gamma(a)
 \end{center}
 \remark{On remarque que $\Gamma(1, \lambda) = \mathcal{E}xp(\lambda)$.}
 
+\reminder{
+    On a que $\Gamma(a) = \int_0^{+\infty} x^{a-1} e^{-x} dx$ pour $a > 0$. En particulier, pour $n \in \mathbb{N}^*$, $\Gamma(n) = (n-1)!$.
+}
+
 \theorem{Proposition}{Transformation affine d'une loi normale}{false}{
     Soient $a \in \mathbb{R}$ et $b \in \mathbb{R}^*$. Si $Z \sim \mathcal{N}(0,1)$, alors la variable aléatoire $X = a + bZ$ suit la loi normale $\mathcal{N}(a, b^2)$.\\
     Réciproquement, si $X \sim \mathcal{N}(\mu, \sigma^2)$ (avec $\sigma > 0$), alors $Z = \dfrac{X - \mu}{\sigma} \sim \mathcal{N}(0,1)$.
