@@ -394,7 +394,10 @@ l'ensemble des fonctions intégrables.}
 }
 \remark{Ce théorème nous permet d'interchanger la limite et l'intégrale pour des suites croissantes de fonctions mesurables positives.}
 
-\ndlr{Il manque le théorème de convergence dominée (cf. Laurent rappelle le moi si j'oublie de l'ajouter).}
+\theorem{Théorème}{Théorème de convergence dominée}{true}{
+    Soit $(E,\mathcal{E},\mu)$, et $(f_n)$ une suite de fonctions mesurables à valeurs réelles et convergeant vers la fonction $f : E \to \mathbb{R}$. On suppose qu'il existe $g \in \mathcal{L}^1(E,\mathcal{E},\mu)$ vérifiant $|fn| \le g$ pour tout $n \in \mathbb{N}$.\\
+    Alors $\int_E f d\mu = lim_{n \to +\infty}\int_E f_n d\mu$.
+}
 
 \theorem{Proposition}{Linéarité de l'intégrale}{}{
     Soient $f, g \in \mathcal{L}^1(E, \mathcal{E}, \mu)$ et $\alpha, \beta \in \mathbb{R}$. Alors :

@@ -194,7 +194,29 @@ En faisant la différence, on obtient :
     Si $\phi : \mathbb{R} \to \mathbb{R}$ est borélienne, alors $\phi \circ X \in \mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P})$ si et seulement si $\phi \in \mathcal{L}^1(\mathbb{R}, \mathcal{B}(\mathbb{R}), \mathbb{P}_X)$ et dans ce cas :
     $$\mathbb{E}[\phi(X)] = \int_\Omega \phi(X(\omega)) d\mathbb{P}(\omega) = \int_\mathbb{R} \phi(x) d\mathbb{P}_X(x)$$
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration :}
+    \begin{itemize}
+        \item \underline{Première étape} : Supposons tout d'abord que pour $B \in \mathcal{B}(\mathbb{R})$ on a $\varphi = \indic{B}$. Alors 
+            \begin{itemize}
+                \item[ ] ${\omega : X(\omega) \in B}=X^{-1}(B) =: A \in F$ et 
+                \item[ ] $\varphi \circ X=\indic{X(\cdot) \in B} = \indic{A}$ de sorte que 
+                \begin{itemize}
+                    \item[ ] $\int_\Omega \varphi \circ X d\mathbb{P} = \int_\Omega \indic{A} d\mathbb{P} = \mathbb{P}(A)=\mathbb{P}(X^{-1}(B))$ et 
+                    \item[ ] $\int_\mathbb{R} \varphi d\mathbb{P}_X = \int_\mathbb{R} \indic{B} d\mathbb{P}_X =\mathbb{P}_X (B)$ et 
+                    \item[ ] On a bien égalité entre les deux quantités par définition de la mesure-image $\mathbb{P}_X$.
+                \end{itemize}
+            \end{itemize}
+        \item \underline{Deuxième étape} : 	Supposons $\varphi = \sum_{i=1}^N \alpha_i \indic{B_i}$ étagée. \\
+            En utilisant la première étape, pour tout $1 \le i \le N$, $\int_\Omega \indic{B_i} \circ X d\mathbb{P} = \mathbb{P}(X^{-1}(B_i)) = \int _\mathbb{R} \indic{B_i} d\mathbb{P}_X$\\
+            Et on conclut à l'égalité souhaitée en utilisant la linéarité de chacune des deux intégrales.
+        \item \underline{Troisième étape} : Supposons $\varphi$ borélienne positive.\\
+        Il existe une suite de fonctions étagées positives $(\varphi_n)$ qui croît vers $\varphi$. \\
+        Grâce à la deuxième étape, pour tout $n \in N$, $\int_\Omega \varphi_n \circ X d\mathbb{P} = \int_\mathbb{R} \varphi_n d\mathbb{P}_X$, et grâce au théorème de convergence monotone pour chacune des deux intégrales on conclut que $\int_\Omega \varphi \circ X d\mathbb{P} = \int_\mathbb{R} \varphi d\mathbb{P}_X$.
+        \item \underline{Dernière étape} : 	Enfin si $\varphi$ est borélienne, $|\varphi|$ est borélienne positive, et donc par la troisième étape ci-dessus on a $\int_\Omega |\varphi| \circ X d\mathbb{P} = \int_\mathbb{R} |\varphi| d\mathbb{P}_X$, de sorte que $\varphi \circ X \in \mathcal{L}^1(\Omega,\mathcal{F},\mathbb{P})$ si et seulement si $\varphi \in \mathcal{L}^1(\mathbb{R},\mathcal{B}(\mathbb{R}),\mathbb{P}_X)$.\\
+        Lorsque c'est le cas on décompose $\varphi = \varphi^+ - \varphi^-$, ces parties positives et négatives sont boréliennes positives et bornées par $|\varphi|$ donc on par exemple $\int_\Omega \varphi^+ \circ X d\mathbb{P} = \int_\mathbb{R} \varphi^+ d\mathbb{P}_X < \infty$ et de même pour $\varphi^-$.\\
+        Il ne reste plus qu'à utiliser la linéarité des deux intégrales pour conclure.
+    \end{itemize}
+}
 
 \theorem{Corollaire}{Transfert avec densité}{false}{
     Soit $X$ une variable aléatoire réelle et $f_X$ sa densité vis-à-vis de la mesure de Lebesgue. Alors pour toute fonction borélienne $\phi : \mathbb{R} \to \mathbb{R}$, positive ou telle que $\int_\mathbb{R} |\phi(x)| f_X(x) dx < \infty$, on a :
