@@ -353,25 +353,23 @@ Gamma \newline {\scriptsize $\Gamma(a, \lambda)$} & $\dfrac{\lambda^a}{\Gamma(a)
         En particulier, $\mathbb{E}[X] = G_X'(1^-)$ et $\text{Var}(X) = G_X''(1^-) + G_X'(1^-) - \big(G_X'(1^-)\big)^2$.
     \end{enumerate}
 }
-
 \subsection{Transformée de Laplace}
-\disclaimer{Cette section n'est pas sur la bonne convention, modification à venir (à remplacer par $\mathbb{E}[e^{-tX}]$).}
-\ndlr{Faire la modification (cf. Laurent, rappelle-le moi si j'oublie stp).}
+
 \definition{
-    Soit $X$ une variable aléatoire réelle. On définit la \textbf{transformée de Laplace} de $X$ (parfois notée $\mathcal{L}_X$ ou $\psi_X$) pour tout $t \in \mathbb{R}$ tel que $\mathbb{E}[e^{-tX}] < \infty$ (ou $\mathbb{E}[e^{tX}] < \infty$ selon la convention) par :
-    $$\psi_X(t) = \mathbb{E}[e^{tX}]$$
-    Si $X \ge 0$ presque sûrement, $\mathcal{L}_X(t) = \mathbb{E}[e^{-tX}]$ est toujours bien définie et finie sur $\mathbb{R}_+$.
+    Soit $X$ une variable aléatoire réelle. On définit la \textbf{transformée de Laplace} de $X$ (notée $\psi_X$) pour tout $t \in \mathbb{R}$ tel que $\mathbb{E}[e^{-tX}] < \infty$ par :
+    $$\psi_X(t) = \mathbb{E}[e^{-tX}]$$
+    En particulier, si $X \ge 0$ presque sûrement, $\psi_X(t)$ est toujours bien définie et finie pour tout $t \in \mathbb{R}_+$.
 }
 
 \theorem{Proposition}{Propriétés de la transformée de Laplace}{false}{
     \begin{enumerate}
-        \item \textbf{Caractérisation de la loi :} Si $\psi_X(t) = \psi_Y(t) < \infty$ pour tout $t \in ]-\varepsilon, \varepsilon[$ ($\varepsilon > 0$), alors $X$ et $Y$ ont même loi ($\mathbb{P}_X = \mathbb{P}_Y$).
-        \item \textbf{Transformation affine :} Pour tous $a, b \in \mathbb{R}$, $\psi_{a + bX}(t) = e^{at} \psi_X(bt)$.
+        \item \textbf{Caractérisation de la loi :} Si $\psi_X(t) = \psi_Y(t) < \infty$ pour tout $t \in ]-\varepsilon, \varepsilon[$ ($\varepsilon > 0$) — ou sur un intervalle non vide $]0, \varepsilon[$ lorsque $X, Y \ge 0$ p.s. — alors $X$ et $Y$ ont même loi ($\mathbb{P}_X = \mathbb{P}_Y$).
+        \item \textbf{Transformation affine :} Pour tous $a, b \in \mathbb{R}$, $\psi_{a + bX}(t) = e^{-at} \psi_X(bt)$.
         \item \textbf{Lien avec les moments :} Si $\psi_X$ est finie sur un voisinage de $0$, alors $\psi_X$ est $\mathcal{C}^\infty$ au voisinage de $0$, $X$ admet des moments de tout ordre, et :
-        $$\forall k \in \mathbb{N}, \quad \mathbb{E}[X^k] = \psi_X^{(k)}(0)$$
+        $$\forall k \in \mathbb{N}, \quad \mathbb{E}[X^k] = (-1)^k \psi_X^{(k)}(0)$$
+        \item \textbf{Somme de variables indépendantes :} Si $X$ et $Y$ sont indépendantes, alors $\mathcal{L}_{X+Y}(t) = \psi_X(t)\,\mathcal{L}_Y(t)$ là où les transformées sont finies.
     \end{enumerate}
 }
-
 
 \begin{center}
 \renewcommand{\arraystretch}{1.9}
@@ -379,23 +377,23 @@ Gamma \newline {\scriptsize $\Gamma(a, \lambda)$} & $\dfrac{\lambda^a}{\Gamma(a)
 \small
 \begin{tabularx}{\linewidth}{|l|X|X|}
 \hline
-\textbf{Loi usuelle} & \textbf{Fonction génératrice} $G_X(s) = \mathbb{E}[s^X]$ & \textbf{Transformée de Laplace} $\psi_X(t) = \mathbb{E}[e^{tX}]$ \\
+\textbf{Loi usuelle} & \textbf{Fonction génératrice} $G_X(s) = \mathbb{E}[s^X]$ & \textbf{Transformée de Laplace} $\psi_X(t) = \mathbb{E}[e^{-tX}]$ \\
 \hline
-$\mathcal{B}er(p)$ & $(1 - p) + ps$ & $(1 - p) + pe^t$ \\
+$\mathcal{B}er(p)$ & $(1 - p) + ps$ & $(1 - p) + pe^{-t}$ \\
 \hline
-$\mathcal{B}in(n,p)$ & $(1 - p + ps)^n$ & $(1 - p + pe^t)^n$ \\
+$\mathcal{B}in(n,p)$ & $(1 - p + ps)^n$ & $(1 - p + pe^{-t})^n$ \\
 \hline
-$\mathcal{G}eom(p)$ & $\dfrac{ps}{1 - (1-p)s} \quad \left(|s| < \dfrac{1}{1-p}\right)$ & $\dfrac{pe^t}{1 - (1-p)e^t} \quad \big(t < -\ln(1-p)\big)$ \\
+$\mathcal{G}eom(p)$ & $\dfrac{ps}{1 - (1-p)s} \quad \left(|s| < \dfrac{1}{1-p}\right)$ & $\dfrac{pe^{-t}}{1 - (1-p)e^{-t}} \quad \big(t > \ln(1-p)\big)$ \\
 \hline
-$\mathcal{P}oi(\lambda)$ & $\exp\big(\lambda(s - 1)\big)$ & $\exp\big(\lambda(e^t - 1)\big)$ \\
+$\mathcal{P}oi(\lambda)$ & $\exp\big(\lambda(s - 1)\big)$ & $\exp\big(\lambda(e^{-t} - 1)\big)$ \\
 \hline
-$\mathcal{U}([a,b])$ & --- & $\dfrac{e^{tb} - e^{ta}}{t(b-a)} \quad (t \neq 0)$ \\
+$\mathcal{U}([a,b])$ & --- & $\dfrac{e^{-ta} - e^{-tb}}{t(b-a)} \quad (t \neq 0)$ \\
 \hline
-$\mathcal{E}xp(\lambda)$ & --- & $\dfrac{\lambda}{\lambda - t} \quad (t < \lambda)$ \\
+$\mathcal{E}xp(\lambda)$ & --- & $\dfrac{\lambda}{\lambda + t} \quad (t > -\lambda)$ \\
 \hline
-$\mathcal{N}(\mu, \sigma^2)$ & --- & $\exp\left(\mu t + \dfrac{\sigma^2 t^2}{2}\right)$ \\
+$\mathcal{N}(\mu, \sigma^2)$ & --- & $\exp\left(-\mu t + \dfrac{\sigma^2 t^2}{2}\right)$ \\
 \hline
-$\Gamma(a, \lambda)$ & --- & $\left(\dfrac{\lambda}{\lambda - t}\right)^a \quad (t < \lambda)$ \\
+$\Gamma(a, \lambda)$ & --- & $\left(\dfrac{\lambda}{\lambda + t}\right)^a \quad (t > -\lambda)$ \\
 \hline
 \end{tabularx}
 \end{center}
