@@ -96,78 +96,116 @@
 }
 
 
-\definition{
-    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
-    On dit que l'action est \textbf{libre} si $\forall x \in X, Stab(x) = \{e_G\}$.
-}
+%\definition{
+%    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+%    On dit que l'action est \textbf{libre} si $\forall x \in X, Stab(x) = \{e_G\}$.
+%}
 
-\definition{
-    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
-    On dit que l'action est \textbf{simplement transitive} si $\forall x, y \in X, \exists ! g \in G$ tel que $g \cdot x = y$.
-}
+%\definition{
+%    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+%    On dit que l'action est \textbf{simplement transitive} si $\forall x, y \in X, \exists ! g \in G$ tel que $g \cdot x = y$.
+%}
 
-\definition{
-    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
-    On dit que l'action est \textbf{fidèle} si le morphisme $\rho : G \to S(X)$ associé à l'action est injectif.
-}
+%\definition{
+%    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.\\
+%    On dit que l'action est \textbf{fidèle} si le morphisme $\rho : G \to S(X)$ associé à l'action est injectif.
+%}
 
-\theorem{Proposition}{Caractérisation des actions fidèles et simplement transitives}{false}{
-    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.
-    \begin{itemize}
-        \item Une action libre est fidèle.
-        \item L'action est simplement transitive si et seulement si elle est libre et transitive.
-    \end{itemize}
-}
-\noindent{\textbf{Preuve :} immédiat.}
+%\theorem{Proposition}{Caractérisation des actions fidèles et simplement transitives}{false}{
+%    Soit $(G, \star)$ un groupe agissant sur un ensemble $X$.
+%    \begin{itemize}
+%        \item Une action libre est fidèle.
+%        \item L'action est simplement transitive si et seulement si elle est libre et transitive.
+%    \end{itemize}
+%}
+%\noindent{\textbf{Preuve :} immédiat.}
 
-\theorem{Proposition}{}{false}{
-    Soient $G$ un groupe et $H \leq G$. On considère l'action par translation à gauche de $G$ sur $G/H$. Soit $aH \in G/H$.
-    \begin{enumerate}
-        \item $Stab(aH) = aHa^{-1}$ (qui est bien un sous-groupe de $G$).,
-        \item $O_{aH} = G \cdot (aH) = \{gaH, g \in G\} = G/H$ (donc l'action est transitive).
-    \end{enumerate} 
-}
-\ndlr{cf. Laurent pour la preuve.}
+\theorem{Proposition}{}{false}{La donnée d'une action de $G$ sur $X$ équivaut à la donnée d'un morphisme $\rho : G \to \mathrm{Bij}(X)$. La correspondance est donnée par
+\[
+\rho(g)(x) = g \bullet x.
+\]}
+
+\noindent{\textbf{Preuve :} Remarquons tout d'abord que :
+\[
+\forall x \in X, \ \rho(g \star g')(x) = (g \star g') \bullet x, \ (\rho(g) \circ \rho(g'))(x) = g \bullet (g' \bullet x) \text{ et } \rho(e_G)(x) = e_G \bullet x.
+\]
+Ainsi si $G$ agit sur $X$, $\rho(g) : X \to X$ est une bijection, de bijection réciproque $\rho(g^{-1})$ puisque $\rho(e_G) = \mathrm{Id}_X$, $\rho(g) \circ \rho(g^{-1}) = \mathrm{Id}_X$ et $\rho(g^{-1}) \circ \rho(g) = \mathrm{Id}_X$. Donc $\rho : G \to \mathrm{Bij}(X)$ est bien définie et les formules ci-dessus montrent que c'est un morphisme de groupes.
+
+Réciproquement si $\rho : G \to \mathrm{Bij}(X)$ est un morphisme de groupes, les formules ci-dessus montrent que, en posant $g \bullet x = \rho(g)(x)$, on obtient une action de $G$ sur $X$.}
+
+\definition{Soit $G$ un groupe agissant sur un ensemble $X$. L'ensemble des points fixes sous l'action de $G$ est
+\[
+X^G = \{x \in X \mid g \bullet x = x, \forall g \in G\}
+\]}
+
+\theorem{Proposition}{}{false}{Soit $(G, \star)$ un groupe agissant sur $X$ ; on note $\rho : G \to \mathrm{Bij}(X)$ le morphisme de groupes correspondant.
+\begin{enumerate}
+    \item Pour tout $g \in G$, on a $\mathrm{Stab}_G(g \bullet x) = g\,\mathrm{Stab}_G(x)g^{-1}$.
+    \item $\mathrm{Ker}\,\rho = \bigcap_{x \in X} \mathrm{Stab}_G(x)$.
+    \item $x \in X^G \iff G \bullet x = \{x\} \iff \mathrm{Stab}_G(x) = G$. Ainsi l'ensemble des points fixes est l'union des orbites à un élément.
+\end{enumerate}}
+
+\noindent{\textbf{Preuve :} \begin{enumerate}
+    \item On a
+    \begin{align*}
+    h \in \mathrm{Stab}_G(g \bullet x) &\iff (h \star g) \bullet x = g \bullet x \iff (g^{-1} \star h \star g) \bullet x = x \\
+    &\iff g^{-1} \star h \star g \in \mathrm{Stab}_G(x) \iff h \in g\,\mathrm{Stab}_G(x)g^{-1}.
+    \end{align*}
+    \item On a
+    \[
+    g \in \mathrm{Ker}\,\rho \iff \rho(g) = \mathrm{id}_X \iff \forall x \in X, g \bullet x = x \iff \forall x \in X, g \in \mathrm{Stab}_G(x).
+    \]
+    \item Pour la partie sur les points fixes il suffit d'appliquer les définitions.
+\end{enumerate}}
+
+
+%\theorem{Proposition}{}{false}{
+%    Soient $G$ un groupe et $H \leq G$. On considère l'action par translation à gauche de $G$ sur $G/H$. Soit $aH \in G/H$.
+%    \begin{enumerate}
+%        \item $Stab(aH) = aHa^{-1}$ (qui est bien un sous-groupe de $G$).,
+%        \item $O_{aH} = G \cdot (aH) = \{gaH, g \in G\} = G/H$ (donc l'action est transitive).
+%    \end{enumerate} 
+%}
+%\ndlr{cf. Laurent pour la preuve.}
 
 \remark{Si $G$ est d'ordre fini $n$, alors il existe un morphisme injectif de $G$ dans $S_n$.}
 
-\theorem{Proposition}{}{false}{
-\textit{(exemple 3)} Soit $G$ un groupe. Pour l'action par conjugaison sur lui-même, on a
-\begin{enumerate}
-    \item Le stabilisateur $\operatorname{Stab}(x) = \{g \in G, gx = xg\}$ s'appelle le \textbf{centralisateur de $x$ (dans $G$)} et est noté $C_G(x)$.
-    \item L'orbite $G \cdot x = \{gxg^{-1}, g \in G\}$ est la \textbf{classe de conjugaison de $x$}.
-    \item L'ensemble des points fixes pour l'action par conjugaison est le centre de $G$.
-\end{enumerate}
-}
+%\theorem{Proposition}{}{false}{
+%\textit{(exemple 3)} Soit $G$ un groupe. Pour l'action par conjugaison sur lui-même, on a
+%\begin{enumerate}
+%    \item Le stabilisateur $\operatorname{Stab}(x) = \{g \in G, gx = xg\}$ s'appelle le \textbf{centralisateur de $x$ (dans $G$)} et est noté $C_G(x)$.
+%    \item L'orbite $G \cdot x = \{gxg^{-1}, g \in G\}$ est la \textbf{classe de conjugaison de $x$}.
+%    \item L'ensemble des points fixes pour l'action par conjugaison est le centre de $G$.
+%\end{enumerate}
+%}
 
-\noindent{\textbf{Preuve :} Pour 1 et 2, direct d'après les définitions. On a $x$ est un point fixe si et seulement si pour tout $g \in G$ on a $gxg^{-1} = x$ si et seulement si, pour tout $g \in G, gx = xg$ si et seulement si $x \in Z(G)$.}
+%\noindent{\textbf{Preuve :} Pour 1 et 2, direct d'après les définitions. On a $x$ est un point fixe si et seulement si pour tout $g \in G$ on a $gxg^{-1} = x$ si et seulement si, pour tout $g \in G, gx = xg$ si et seulement si $x \in Z(G)$.}
 
-\theorem{Proposition}{}{false}{
-\textit{(exemple 4)} Soit $(G, \star)$ un groupe. Pour l'action par conjugaison sur l'ensemble de ses sous-groupes $\mathcal{H}$, on a
-\begin{enumerate}
-    \item Le stabilisateur $\operatorname{Stab}(H) = \{g \in G, gHg^{-1} = H\}$ s'appelle le \textbf{normalisateur de $H$ dans $G$}.
-    \item L'orbite $G \cdot H = \{gHg^{-1}, g \in G\}$ est l'ensemble des sous-groupes conjugués à $H$.
-\end{enumerate}
-}
+%\theorem{Proposition}{}{false}{
+%\textit{(exemple 4)} Soit $(G, \star)$ un groupe. Pour l'action par conjugaison sur l'ensemble de ses sous-groupes $\mathcal{H}$, on a
+%\begin{enumerate}
+%    \item Le stabilisateur $\operatorname{Stab}(H) = \{g \in G, gHg^{-1} = H\}$ s'appelle le \textbf{normalisateur de $H$ dans $G$}.
+%    \item L'orbite $G \cdot H = \{gHg^{-1}, g \in G\}$ est l'ensemble des sous-groupes conjugués à $H$.
+%\end{enumerate}
+%}
 
-\noindent{\textbf{Preuve :} Direct d'après les définitions.}
+%\noindent{\textbf{Preuve :} Direct d'après les définitions.}
 
-\remark{
-On se donne une action de $G$ sur $X$, et on note $\rho : G \to \operatorname{Bij}(X)$ le morphisme de groupes correspondants. On peut lui associer les actions suivantes
-\begin{enumerate}
-    \item Pour tout sous-groupe $H$ de $G$, une action de $H$ sur $X$, par restriction.
-    \item Si $K = \ker \rho$ alors $G/K$ agit sur $X$ et cette action est fidèle.
-    \item Si $\mathcal{P}(X)$ désigne l'ensemble des parties de $X$ alors $G$ agit sur $\mathcal{P}(X)$ par
-    \[
-    g \cdot A = \{g \cdot a, a \in A\}
-    \]
-    On peut se restreindre aux parties de $X$ d'un cardinal $n$ donné.
-\end{enumerate}
-}
+%\remark{
+%On se donne une action de $G$ sur $X$, et on note $\rho : G \to \operatorname{Bij}(X)$ le morphisme de groupes correspondants. On peut lui associer les actions suivantes
+%\begin{enumerate}
+%    \item Pour tout sous-groupe $H$ de $G$, une action de $H$ sur $X$, par restriction.
+%    \item Si $K = \ker \rho$ alors $G/K$ agit sur $X$ et cette action est fidèle.
+%    \item Si $\mathcal{P}(X)$ désigne l'ensemble des parties de $X$ alors $G$ agit sur $\mathcal{P}(X)$ par
+%    \[
+%    g \cdot A = \{g \cdot a, a \in A\}
+%    \]
+%    On peut se restreindre aux parties de $X$ d'un cardinal $n$ donné.
+%\end{enumerate}
+%}
 
-\courseEnd{Fin du programme du semestre 5.}
-
-\section{Formule des classes et formule de Burnside}
+%\section{Formule des classes et formule de Burnside}
+\section{Formule des classes}
 \theorem{Lemme}{}{false}{
 Soit $x \in X$ et $G$ un groupe agissant sur $X$. L'application $G \to G \cdot x$ qui à $g$ associe $g \cdot x$ induit une bijection entre l'ensemble quotient $G / \operatorname{Stab}(x)$ et l'orbite de $x$ sous l'action de $G$.
 }
@@ -191,6 +229,8 @@ Soit $G$ un groupe fini agissant sur un ensemble fini $X$. Soit $\Omega$ l'ensem
 
 \noindent{\textbf{Preuve :} Les orbites forment une partition de $X$ donc la première égalité est vérifiée. Pour $x, x' \in w$, il existe $g \in G$ tel que $x' = g \cdot x$ et $\operatorname{Stab}(x') = g \operatorname{Stab}(x) g^{-1}$ est donc isomorphe à $\operatorname{Stab}(x)$. Comme $G \cdot x$ est en bijection avec $G / \operatorname{Stab}(x)$ on en déduit que pour $x \in w$ on a $|w| = \frac{|G|}{|\operatorname{Stab}(x)|} = \frac{|G|}{c_w}$ et la seconde égalité est vérifiée. \hfill $\square$}
 
+\courseEnd{Fin du programme du semestre 5.}
+\iffalse
 \theorem{Théorème}{Formule de Burnside}{false}{
 Soit $G$ un groupe fini agissant sur un ensemble fini $X$. Soit $\Omega$ l'ensemble de ses orbites. Pour $g \in G$, notons
 \[
@@ -311,6 +351,7 @@ On a alors
 xx' = g^k h g^{k'} h' = g^{k+k'} hh' = g^{k'} h' g^k h = x'x,
 \]
 donc $G$ est abélien. \hfill $\square$}
+\fi
 
 \newpage
 \tableofcontents 
