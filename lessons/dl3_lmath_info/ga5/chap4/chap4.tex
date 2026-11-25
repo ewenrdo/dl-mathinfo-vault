@@ -27,12 +27,15 @@
 \section{Introduction et généralités}
 \subsection{Définition}
 \definition{
-    Soit $(G, \star)$ un groupe et $X$ un ensemble. Une \textbf{action} de $G$ sur $X$ est la donnée d'une application $G \times X \to X$ notée $(g, x) \mapsto g \bullet x$ telle que :
+    Soit $(G, \star)$ un groupe et $X$ un ensemble. Une \textbf{action} de $G$ sur $X$ est une application $G \times X \to X$ notée $(g, x) \mapsto g \bullet x$ telle que :
     \begin{enumerate}
         \item $\forall x \in X, e_G \bullet x = x$,
         \item $\forall g, h \in G, \forall x \in X, g \bullet (h \bullet x) = (g \star h) \bullet x$.
     \end{enumerate}
 }
+\remark{On pourrait aussi écrire $(g,x) \mapsto f(g,x)$ avec $f$ qui satisfait les mêmes conditions, \textit{i.e.} $f(e_G, x) = x$ et $f(g, f(h, x)) = f(g \star h, x)$.}
+\remark{Une action est une loi de composition externe entre un groupe et un ensemble.}
+
 \vocabulary{On dit que $G$ agit sur $X$.}
 \remark{Si $g \bullet x = y$ alors $x = g^{-1} \bullet y$.}
 
@@ -66,12 +69,15 @@
     Soit $G$ un groupe agissant sur un ensemble $X$.\\
     On appelle \textbf{orbite} de $x \in X$ les classes d'équivalence de $x$ pour la relation $\sim$, et on note l'orbite de $x$ par : $$G \bullet x = O_x = \{g \bullet x \mid g \in G\} \subset X$$
 }
-\remark{On note aussi parfois $X/G$ ou $G \backslash X$ l'ensemble des classes d'équivalences dans $X$ modulo la relation $\sim$.}
+\remark{Intuitivement, l'orbite d'un élément $x$ est l'ensemble des éléments de $X$ que l'on peut atteindre à partir de $x$ en appliquant les éléments de $G$.\\
+On note aussi parfois $X/G$ ou $G \backslash X$ l'ensemble des classes d'équivalences dans $X$ modulo la relation $\sim$.}
+
 
 \definition{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$, et soit $x \in X$.\\
     On appelle \textbf{stabilisateur} de $x$ le sous-groupe de $G$ défini par : $$Stab_G(x) = \{g \in G \mid g \bullet x = x\}$$
 }
+\remark{Intuitivement, le stabilisateur d'un élément $x$ est l'ensemble des éléments de $G$ qui laissent $x$ inchangé.}
 
 \theorem{Proposition}{}{false}{
     Soit $(G, \star)$ un groupe agissant sur un ensemble $X$. Soit $x \in X$. Alors $Stab_G(x) \leq G$.
