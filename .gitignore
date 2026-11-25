@@ -8,4 +8,4 @@
 lessons/dl2_lmath_info/cp3/tp2
 %OUTDIR%
 _tmp/
-bin/
+*tmp/
