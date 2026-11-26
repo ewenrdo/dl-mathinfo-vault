@@ -257,17 +257,29 @@ En faisant la différence, on obtient :
 
 \remark{Sur un espace de probabilité, les espaces $\mathcal{L}^k(\Omega, \mathcal{F}, \mathbb{P})$ sont emboîtés : si $1 \le p \le q$, alors $\mathcal{L}^q(\Omega, \mathcal{F}, \mathbb{P}) \subset \mathcal{L}^p(\Omega, \mathcal{F}, \mathbb{P})$. En particulier, si $X$ admet un moment d'ordre $k$, alors $X$ admet des moments de tout ordre $j \le k$.}
 
-\theorem{Théorème}{Inégalité de Markov}{false}{
+\theorem{Théorème}{Inégalité de Markov classique}{false}{
     Soit $X$ une v.a.r. telle que $\mathbb{E}[|X|] < \infty$. Alors pour tout $a > 0$ :
     $$\mathbb{P}(|X| \ge a) \le \frac{\mathbb{E}[|X|]}{a}$$
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }
+    $\indic{|X| \ge a} \le |X|/a$ et positivité de l'espérance.
+}
+
+\theorem{Théorème}{Inégalité de Markov généralisée}{false}{
+    Soit $X$ une v.a.r et $h : \mathbb{R}_+ \to \mathbb{R}_+$ croissante, telle que $\mathbb{E}[h|X|] < \infty$.
+    Alors pour tout $a>0$, tel que $h(a)>0$, $$\mathbb{P}(|X| \ge a) \le \frac{\mathbb{E}[h(|X|)]}{h(a)}$$
+}
+\noindent{\textbf{Démonstration :} 
+    Par croissance de $h$, $\indic{|X| \ge a} \le \indic{h(|X|) \ge h(a)}$, donc $\indic{|X|>a} \le \frac{h(|X|)}{h(a)}$ et on conclut par positivité de l'espérance.
+}
 
 \theorem{Théorème}{Inégalité de Bienaymé-Tchebychev}{false}{
     Soit $X$ de variance finie. Alors pour tout $a > 0$ :
     $$\mathbb{P}(|X - \mathbb{E}[X]| \ge a) \le \frac{\text{Var}(X)}{a^2}$$
 }
-\ndlr{cf. Laurent pour la preuve}
+\noindent{\textbf{Démonstration : }
+    On applique Markov généralisée à $Y=X-\mathbb{E}[X] et h : y \to y^2$.
+}
 
 \subsection{Indistinguabilité des variables aléatoires}
 \reminder{$\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P}) = \{ X : \Omega \to \mathbb{R} \text{ v.a.r. telle que } \mathbb{E}[|X|] < \infty\}$.}
@@ -540,7 +552,12 @@ La notion d'indépendance se généralise naturellement à une famille finie ou 
     \]
     Alors il existe un espace de probabilité $(\Omega, \mathcal{F}, \mathbb{P})$ et une variable aléatoire réelle $X$ sur cet espace telle que $F_X = F$.
 }
-\ndlr{cf. Laurent pour la preuve.}
+\noindent{\textbf{Démonstration : }\\
+    Soit $\Omega=(0,1)$, $\mathcal{F}=\mathcal{B}((0,1))$, $\mathbb{P}=\lambda_{|(0,1)}$. On définit $H$ comme plus haut : $\forall q \in \Omega, H(q)=inf\{t \in \mathbb{R} : F(t) \ge q\}$.\\
+    $H$ est bien une v.a.r puisque par le théorème précédent, pour tout $t \in \mathbb{R}$, $$\{q \in \Omega : H(q) \le t\}=\{q \in \Omega : F(t) \ge q\}=(0,F(t)] \in \mathcal{B}((0,1))$$
+    et sa fonction de répartition $F_H$ vérifie $F_H(t)=\mathbb{P}(H \le t)=\mathbb{P}({q : H(q) \le t})=\lambda((0,F(t)])=F(t)$.
+}
+
 \newpage
 \tableofcontents
 \section*{Crédits}
