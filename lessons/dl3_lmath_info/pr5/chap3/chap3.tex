@@ -133,6 +133,29 @@ En faisant la différence, on obtient :
     Soit $\mathbb{P}$ une mesure de probabilité sur $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Soit $f : \mathbb{R} \to \mathbb{R}_+$ une fonction mesurable.\\
     On dit que $\mathbb{P}$ possède la densité $f$ vis-à-vis de la mesure de Lebesgue si :
     $$\forall A \in \mathcal{B}(\mathbb{R}), \quad \mathbb{P}(A) = \int_A f(x) dx$$
+    En particulier, on a sur $\mathbb{R}$ : $\int_\mathbb{R} f(x) dx = 1$.
+}
+\method{Vérifier qu'une fonction $f$ est une densité de probabilité}{
+    \begin{itemize}
+        \item Vérifier que $f$ est positive ($f(x) \ge 0$ presque partout) et borélienne (mesurable).
+        \item Vérifier que $\int_{\mathbb{R}} f(x) \, \mathrm{d}x = 1$.
+    \end{itemize}
+}
+
+\method{Déterminer ou vérifier la densité $f_X$ d'une variable aléatoire $X$}{
+    \begin{itemize}
+        \item \textbf{Méthode 1 (via la fonction de répartition $F_X(t) = \mathbb{P}(X \le t)$) :}
+        \begin{enumerate}
+            \item Vérifier que $F_X$ est \textbf{continue sur $\mathbb{R}$} tout entier.
+            \item Vérifier que $F_X$ est de classe $\mathcal{C}^1$ sur $\mathbb{R}$ privé d'un ensemble fini de points $D$.
+            \item Poser $f_X(x) = F_X'(x)$ pour tout $x \notin D$ (et $f_X(x) = 0$ pour $x \in D$).
+        \end{enumerate}
+        \item \textbf{Méthode 2 (par transfert / identification) :}
+        \begin{enumerate}
+            \item Pour toute fonction test $\varphi$ borélienne bornée (ou continue bornée), exprimer $\mathbb{E}[\varphi(X)]$ sous la forme $\int_{\mathbb{R}} \varphi(x) f_X(x) \, \mathrm{d}x$.
+            \item Conclure par unicité que $f_X$ est la densité de $X$ (la positivité et l'intégrale égale à $1$ découlent automatiquement des choix $\varphi = \mathbf{1}_{\{f_X < 0\}}$ et $\varphi \equiv 1$).
+        \end{enumerate}
+    \end{itemize}
 }
 
 \remark{
@@ -233,6 +256,18 @@ En faisant la différence, on obtient :
 }
 
 \remark{Sur un espace de probabilité, les espaces $\mathcal{L}^k(\Omega, \mathcal{F}, \mathbb{P})$ sont emboîtés : si $1 \le p \le q$, alors $\mathcal{L}^q(\Omega, \mathcal{F}, \mathbb{P}) \subset \mathcal{L}^p(\Omega, \mathcal{F}, \mathbb{P})$. En particulier, si $X$ admet un moment d'ordre $k$, alors $X$ admet des moments de tout ordre $j \le k$.}
+
+\theorem{Théorème}{Inégalité de Markov}{false}{
+    Soit $X$ une v.a.r. telle que $\mathbb{E}[|X|] < \infty$. Alors pour tout $a > 0$ :
+    $$\mathbb{P}(|X| \ge a) \le \frac{\mathbb{E}[|X|]}{a}$$
+}
+\ndlr{cf. Laurent pour la preuve}
+
+\theorem{Théorème}{Inégalité de Bienaymé-Tchebychev}{false}{
+    Soit $X$ de variance finie. Alors pour tout $a > 0$ :
+    $$\mathbb{P}(|X - \mathbb{E}[X]| \ge a) \le \frac{\text{Var}(X)}{a^2}$$
+}
+\ndlr{cf. Laurent pour la preuve}
 
 \subsection{Indistinguabilité des variables aléatoires}
 \reminder{$\mathcal{L}^1(\Omega, \mathcal{F}, \mathbb{P}) = \{ X : \Omega \to \mathbb{R} \text{ v.a.r. telle que } \mathbb{E}[|X|] < \infty\}$.}
@@ -398,39 +433,112 @@ $\Gamma(a, \lambda)$ & --- & $\left(\dfrac{\lambda}{\lambda + t}\right)^a \quad 
 \end{tabularx}
 \end{center}
 
-\section{Construction explicite de variables aléatoires}
-\ndlr{revérifier toute cette section. c'est étrange de partir de $F_X$ et pas de $F$ (à vérifier donc).}
-\reminder{
-    La fonction de répartition $F_X$ associée à $\mathbb{P}_X$ est croissante, continue à droite et elle vérifie
+\section{Indépendance de variables aléatoires}
+
+\subsection{Indépendance de deux variables aléatoires}
+
+\definition{
+    Soient $X$ et $Y$ deux variables aléatoires définies sur un même espace de probabilité $(\Omega, \mathcal{F}, \mathbb{P})$, à valeurs respectives dans $(E, \mathcal{E})$ et $(F, \mathcal{G})$.\\
+    On dit que $X$ et $Y$ sont \textbf{indépendantes} (noté $X \perp\!\!\!\perp Y$) si pour tous $A \in \mathcal{E}$ et $B \in \mathcal{G}$ :
     \[
-    \lim_{x \to -\infty} F_X(x) = 0, \qquad \lim_{x \to +\infty} F_X(x) = 1.
+    \mathbb{P}(X \in A, \, Y \in B) = \mathbb{P}(X \in A) \, \mathbb{P}(Y \in B)
+    \]
+    Autrement dit, la loi du couple $(X,Y)$ est la mesure produit : $\mathbb{P}_{(X,Y)} = \mathbb{P}_X \otimes \mathbb{P}_Y$.
+}
+
+\remark{On peut retrouver le cas discret usuel en prenant $E = F = \mathbb{N}$ et $\mathcal{E} = \mathcal{G} = \mathcal{P}(\mathbb{N})$, alors on retrouve la condition $\mathbb{P}(X = k, Y = l) = \mathbb{P}(X = k) \, \mathbb{P}(Y = l)$ pour tous $k, l \in \mathbb{N}$.}
+
+\example{On lance deux dés équilibrés à 6 faces. Soient $X$ le résultat du premier dé et $Y$ celui du second. L'univers est $\Omega = \{1, \ldots, 6\}^2$ muni de la probabilité uniforme $\mathbb{P}(\{(i,j)\}) = \frac{1}{36}$.
+
+Pour tous $i, j \in \{1, \ldots, 6\}$ :
+\[
+\mathbb{P}(X = i, Y = j) = \mathbb{P}(\{(i,j)\}) = \frac{1}{36} = \frac{1}{6} \times \frac{1}{6} = \mathbb{P}(X = i)\mathbb{P}(Y = j)
+\]
+Par linéarité (en sommant sur $A \subset \{1,\ldots,6\}$ et $B \subset \{1,\ldots,6\}$), on obtient $\mathbb{P}(X \in A, Y \in B) = \mathbb{P}(X \in A)\mathbb{P}(Y \in B)$, donc $X \perp\!\!\!\perp Y$.}
+
+\theorem{Proposition}{Caractérisations usuelles (cas réel)}{false}{
+    Soient $X$ et $Y$ deux variables aléatoires réelles sur $(\Omega, \mathcal{F}, \mathbb{P})$. Les assertions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $X$ et $Y$ sont indépendantes ;
+        \item \textbf{Par les fonctions de répartition :} $\forall (x, y) \in \mathbb{R}^2, \quad F_{(X,Y)}(x,y) = F_X(x) \, F_Y(y)$ ;
+        \item \textbf{Par l'espérance :} pour toutes fonctions boréliennes bornées (ou positives) $f, g : \mathbb{R} \to \mathbb{R}$ :
+        \[
+        \mathbb{E}[f(X)g(Y)] = \mathbb{E}[f(X)] \, \mathbb{E}[g(Y)]
+        \]
+    \end{enumerate}
+}
+
+\theorem{Proposition}{Stabilité et conséquences sur les moments}{false}{
+    Soient $X$ et $Y$ deux variables aléatoires réelles indépendantes :
+    \begin{itemize}
+        \item \textbf{Image par des fonctions boréliennes :} Si $f, g : \mathbb{R} \to \mathbb{R}$ sont boréliennes, alors $f(X)$ et $g(Y)$ sont indépendantes.
+        \item \textbf{Produit d'espérances :} Si $X, Y \in \mathcal{L}^1$, alors $XY \in \mathcal{L}^1$ et $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$.
+        \item \textbf{Additivité de la variance :} Si $X, Y \in \mathcal{L}^2$, alors $\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$.
+    \end{itemize}
+}
+
+\remark{Les réciproques des deux derniers points sont fausses en général : $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ (non-corrélation) n'implique pas l'indépendance.}
+
+\subsection{Extension : indépendance mutuelle}
+
+La notion d'indépendance se généralise naturellement à une famille finie ou infinie de variables aléatoires.
+
+\definition{
+    Soient $X_1, \ldots, X_n$ des variables aléatoires définies sur $(\Omega, \mathcal{F}, \mathbb{P})$, à valeurs dans $(E_1, \mathcal{E}_1), \ldots, (E_n, \mathcal{E}_n)$.\\
+    On dit que $X_1, \ldots, X_n$ sont \textbf{mutuellement indépendantes} (ou simplement \textbf{indépendantes}) si pour tous $A_1 \in \mathcal{E}_1, \ldots, A_n \in \mathcal{E}_n$ :
+    \[
+    \mathbb{P}(X_1 \in A_1, \ldots, X_n \in A_n) = \prod_{i=1}^n \mathbb{P}(X_i \in A_i)
+    \]
+    De même, une suite $(X_n)_{n \in \mathbb{N}}$ est dite \textbf{mutuellement indépendante} si toute sous-famille finie de variables aléatoires est mutuellement indépendante.
+}
+
+\remark{L'indépendance mutuelle implique l'indépendance deux à deux, mais la réciproque est fausse dès $n \ge 3$ (par exemple : deux lancers indépendants d'une pièce équilibrée $X_1, X_2 \in \{0,1\}$ et $X_3 = \indic{X_1 = X_2}$ sont indépendants deux à deux, mais pas mutuellement).}
+
+\theorem{Proposition}{Espérance et variance de variables aléatoires indépendantes}{false}{
+    Soient $X_1, \ldots, X_n$ des variables aléatoires réelles mutuellement indépendantes. Alors :
+    \begin{itemize}
+        \item Si $X_1, \ldots, X_n \in \mathcal{L}^1$, alors $X_1 + \cdots + X_n \in \mathcal{L}^1$ et $\mathbb{E}[X_1 + \cdots + X_n] = \mathbb{E}[X_1] + \cdots + \mathbb{E}[X_n]$ ;
+        \item Si $X_1, \ldots, X_n \in \mathcal{L}^2$, alors $\text{Var}(X_1 + \cdots + X_n) = \text{Var}(X_1) + \cdots + \text{Var}(X_n)$.
+    \end{itemize}
+}
+\section{Construction explicite de variables aléatoires}
+
+\reminder{
+    Une fonction de répartition $F : \mathbb{R} \to [0,1]$ est croissante, continue à droite et vérifie
+    \[
+    \lim_{x \to -\infty} F(x) = 0, \qquad \lim_{x \to +\infty} F(x) = 1.
     \]
 }
 
 \definition{
-Soit $X$ une variable aléatoire réelle de loi $\mathbb{P}_X$ et de fonction de répartition $F_X$. Soit $q \in ]0, 1[$.\\
-On appelle \textbf{fonction quantile} de $X$ en $q$ la valeur $H_X(q)$ définie par
-\[
-H_X(q) := \inf\{t \in \mathbb{R} : F_X(t) \geq q\},
-\]
+    Soit $F : \mathbb{R} \to [0,1]$ une fonction de répartition et soit $q \in ]0, 1[$.\\
+    On appelle \textbf{fonction quantile} (ou inverse généralisée) associée à $F$ en $q$ la valeur $H_F(q)$ définie par :
+    \[
+    H_F(q) := \inf\{t \in \mathbb{R} : F(t) \geq q\}
+    \]
 }
 
 \theorem{Propriété}{}{false}{
-    Soit $X$ une variable aléatoire réelle de loi $\mathbb{P}_X$ et de fonction de répartition $F_X$. Alors :
-    $$\forall q \in ]0, 1[, \; \forall t \in \mathbb{R}, \; H_X(q) \leq t \iff F_X(t) \geq q$$
+    Soit $F : \mathbb{R} \to [0,1]$ une fonction de répartition et $H_F$ sa fonction quantile. Alors :
+    \[
+    \forall q \in ]0, 1[, \; \forall t \in \mathbb{R}, \quad H_F(q) \leq t \iff F(t) \geq q
+    \]
 }
 
-\remark{$H$ est borélienne donc c'est une variable aléatoire. En particulier, on peut considérer $F_H$ : $$F_H(t) = \mathbb{P}(H \leq t) = F_X(t)$$}
+\remark{
+    La fonction $H_F$ est croissante sur $]0,1[$, donc borélienne. Sur l'espace de probabilité $(]0,1[, \mathcal{B}(]0,1[), \lambda)$ (où $\lambda$ désigne la mesure de Lebesgue), $H_F$ est ainsi une variable aléatoire réelle dont la fonction de répartition vérifie, pour tout $t \in \mathbb{R}$ :
+    \[
+    F_{H_F}(t) = \lambda\big(\{q \in ]0,1[ : H_F(q) \leq t\}\big) = \lambda\big(\{q \in ]0,1[ : q \leq F(t)\}\big) = \lambda(]0, F(t)]) = F(t)
+    \]
+    En particulier, si $F$ est continue et strictement croissante, alors $H_F = F^{-1}$ est sa bijection réciproque.
+}
 
-- bjection
-- H pas tjrs explicite, mais approchable par F
-
-\theorem{Théorème}{}{false}{
+\theorem{Théorème}{Construction d'une v.a.r. de loi donnée}{false}{
     Soit $F : \mathbb{R} \to \mathbb{R}$ croissante, continue à droite, et telle que
     \[
     \lim_{x \to -\infty} F(x) = 0, \qquad \lim_{x \to +\infty} F(x) = 1.
     \]
-    Alors il existe $X$ v.a.r telle que $F = F_X$.
+    Alors il existe un espace de probabilité $(\Omega, \mathcal{F}, \mathbb{P})$ et une variable aléatoire réelle $X$ sur cet espace telle que $F_X = F$.
 }
 \ndlr{cf. Laurent pour la preuve.}
 \newpage
